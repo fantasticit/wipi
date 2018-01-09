@@ -1,0 +1,31 @@
+@include b($block) {
+  $B: 'fa-' + $block;
+
+  @at-root .#{$B} {
+    @content;
+  }
+}
+
+@include e($element) {
+  $E: $element;
+
+  @at-root #{&}--#{$E} {
+    @content;
+  }
+}
+
+@include m($modifier) {
+  $M: $modifier;
+
+  @at-root #{&}__#{$M} {
+    @content;
+  }
+}
+
+@include when($state) {
+  $S: 'is-' + $state;
+
+  @at-root .#{$S} {
+    @content;
+  }
+}
