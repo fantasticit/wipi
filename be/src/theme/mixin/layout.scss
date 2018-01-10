@@ -1,0 +1,20 @@
+@mixin flexLayout($justify: center, $display: flex) {
+  display: $display;
+  justify-content: $justify;
+}
+
+@mixin center() {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+@mixin clear() {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}

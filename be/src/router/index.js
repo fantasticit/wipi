@@ -1,15 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import routes from './routes'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
+      redirect: '/login',
+    },
+
+    ...routes
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  window.document.title = '码心管理后台'
+  next()
+})
+
+export default router
