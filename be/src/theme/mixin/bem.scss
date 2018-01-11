@@ -1,4 +1,4 @@
-@include b($block) {
+@mixin b($block) {
   $B: 'fa-' + $block;
 
   @at-root .#{$B} {
@@ -6,23 +6,23 @@
   }
 }
 
-@include e($element) {
+@mixin e($element) {
   $E: $element;
 
-  @at-root #{&}--#{$E} {
+  @at-root #{&}__#{$E} {
     @content;
   }
 }
 
-@include m($modifier) {
+@mixin m($modifier) {
   $M: $modifier;
 
-  @at-root #{&}__#{$M} {
+  @at-root #{&}--#{$M} {
     @content;
   }
 }
 
-@include when($state) {
+@mixin when($state) {
   $S: 'is-' + $state;
 
   @at-root .#{$S} {

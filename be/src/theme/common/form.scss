@@ -1,0 +1,17 @@
+@import '../mixin/bem.scss';
+@import '../mixin/layout.scss';
+
+// @include b(form-item) {
+//   position: relative;
+//   margin: 1rem 0;
+
+//   &:first-child {
+//     margin-top: 0;
+//   }
+
+//   @include e(invalid-tip) {
+//     display: none;
+//     margin: .6em;
+//     font-size: .8em;
+//   }
+// }
