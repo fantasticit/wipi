@@ -25,7 +25,7 @@
 @mixin when($state) {
   $S: 'is-' + $state;
 
-  @at-root .#{$S} {
+  @at-root &.#{$S} {
     @content;
   }
 }
