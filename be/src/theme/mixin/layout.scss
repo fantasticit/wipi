@@ -1,3 +1,12 @@
+@mixin placeholder() {
+  &::-webkit-input-placeholder,
+  &:-moz-placeholder,
+  &::-moz-placeholder,
+  &:-ms-input-placeholder { 
+    @content;
+  }
+}
+
 @mixin flexLayout($justify: center, $display: flex) {
   display: $display;
   justify-content: $justify;

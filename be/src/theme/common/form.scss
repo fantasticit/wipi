@@ -1,17 +1,54 @@
 @import '../mixin/bem.scss';
 @import '../mixin/layout.scss';
+@import '../var/color.scss';
 
-// @include b(form-item) {
-//   position: relative;
-//   margin: 1rem 0;
+@include b(form-item) {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 22px;
+  position: relative;
 
-//   &:first-child {
-//     margin-top: 0;
-//   }
+  @include when(invalid) {
+    border-color: $danger;
+  }
 
-//   @include e(invalid-tip) {
-//     display: none;
-//     margin: .6em;
-//     font-size: .8em;
-//   }
-// }
+  @include e(invalid-tip) {
+    position: absolute;
+    margin: 0 0 0 4px;
+    padding-top: 4px;
+    font-size: 12px;
+    color: $danger;
+  }
+}
+
+.slide-down-enter-active {
+  animation: enter ease .3s;
+}
+
+.slide-down-leave-active {
+  animation: leave ease .3s;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes leave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}

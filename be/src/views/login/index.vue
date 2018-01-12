@@ -16,7 +16,7 @@
         trigger="blur"
         v-model="password">
       </fa-form-item>
-      <el-button>登录</el-button>
+      <button>登录</button>
     </div>
   </div>
 </template>
