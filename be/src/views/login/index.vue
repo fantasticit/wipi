@@ -11,6 +11,7 @@
       <fa-form-item
         placeholder="请输入密码"
         invalidTip="密码不得为空"
+        type="password"
         :required="true"
         trigger="blur"
         v-model="password">

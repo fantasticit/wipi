@@ -5,7 +5,7 @@
       :class="{ 'is-invalid': showInvalidTip }"
       :type="type" :placeholder="placeholder"
       :required="required"
-      :value="currentValue" @input="emitInput()"
+      v-model="currentValue" @change="emitInput()"
     >
     <transition name="slide-down">
       <p
@@ -42,7 +42,8 @@ export default {
       this.$emit('input', this.currentValue)
     },
     validate() {
-      if (this.required && !this.currentValue) {
+      console.log(this.currentValue)
+      if (this.required && !this.$props.value) {
         this.showInvalidTip = true
       } else {
         this.showInvalidTip = false
