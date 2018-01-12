@@ -42,8 +42,7 @@ export default {
       this.$emit('input', this.currentValue)
     },
     validate() {
-      console.log(this.currentValue)
-      if (this.required && !this.$props.value) {
+      if (this.required && !this.currentValue) {
         this.showInvalidTip = true
       } else {
         this.showInvalidTip = false
