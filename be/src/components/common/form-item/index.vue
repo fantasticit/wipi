@@ -48,6 +48,8 @@ export default {
         .catch(err => {
           this.showInvalidTip = true
           this.message = err
+          // 验证失败
+          this.$emit('fail', false)
         })
     })
   },

@@ -1,0 +1,30 @@
+@include b(login) {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 100vw;
+  height: 100vh;
+  background-color: #2d3a4b;
+
+  align-items: center;
+  flex-direction: column;
+  @include flexLayout(flex-start);
+
+  @include e(form) {
+    width: 360px;
+    padding: 15px 30px;
+    text-align: center;
+    margin: 180px auto;
+
+    h1 {
+      font-size: 26px;
+      color: #fff;
+      margin-bottom: 40px;
+    }
+  }
+
+  @include e(button) {
+    width: 100%;
+  }
+}

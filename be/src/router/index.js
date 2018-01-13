@@ -27,7 +27,6 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-  console.log(5)
   Loadingbar.finish()
 })
 
