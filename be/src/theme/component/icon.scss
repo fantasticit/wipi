@@ -1,0 +1,6 @@
+@import '../mixin/bem.scss';
+
+@include b(icon) {
+  font-size: 1.2em;
+  color: inherit;
+}

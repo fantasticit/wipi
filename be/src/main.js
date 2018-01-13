@@ -2,9 +2,15 @@ import Vue from 'vue'
 import 'normalize.css'
 import App from './App'
 import router from './router'
-import FaFormItem from './components/common/form-item'
+import './assets/icon/ionicons.scss'
 
+import FaButton from './components/common/button'
+import FaFormItem from './components/common/form-item'
+import FaIcon from './components/common/icon'
+
+Vue.component('faButton', FaButton)
 Vue.component('faFormItem', FaFormItem)
+Vue.component('faIcon', FaIcon)
 Vue.config.productionTip = false
 
 new Vue({

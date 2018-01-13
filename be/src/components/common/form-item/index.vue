@@ -1,17 +1,17 @@
 <template>
-  <div class="fa-form-item" ref="formItem">
+  <div class="fa-form-item">
     <input
       class="fa-input"
       :class="{ 'is-invalid': showInvalidTip }"
       :type="type" :placeholder="placeholder"
-      :required="required"
-      v-model="currentValue" @change="emitInput()"
+      ref="input"
+      v-model="currentValue" @input="emitInput()"
     >
     <transition name="slide-down">
       <p 
         class="fa-form-item__invalid-tip"
         v-if="showInvalidTip">
-        {{ invalidTip }}
+        {{ message }}
       </p>
     </transition>
   </div>
@@ -19,40 +19,71 @@
 
 <script>
 import { on } from '@/util/event'
+import { asyncValidate } from './async-validate'
 
 export default {
   name: 'FaFormItem',
+
   props: {
     value: { type: String, default: '' },
     type: { type: String, default: 'text' },
-    trigger: { type: String, default: 'input' },
-    required: { type: Boolean, default: false },
+    rules: { type: Array, default: () => [] },
     placeholder: { type: String, default: '请输入信息' },
-    invalidTip: { type: String, default: '该项不通过' },
   },
+
   mounted() {
-    on(this.$refs['formItem'].querySelector('input'), this.trigger, this.validate)
+    const trigger = this.$props.rules[0] && this.$props.rules[0].trigger || 'blur'
+    // 依次验证
+    on(this.$refs['input'], trigger, () => {
+      Promise.all(this.$props.rules.reduce((validates, rule) => {
+        validates.push(asyncValidate(rule, this.currentValue))
+        return validates
+      }, []))
+        .then(msg => {
+          this.showInvalidTip = false
+          this.message = ''
+          // 验证通过
+          this.$emit('success', true)
+        })
+        .catch(err => {
+          this.showInvalidTip = true
+          this.message = err
+        })
+    })
   },
+
   data() {
     return {
       currentValue: this.$props.value,
       showInvalidTip: false,
+      message: ''
     }
   },
+
   methods: {
     emitInput() {
       this.$emit('input', this.currentValue)
-    },
-    validate() {
-      if (this.required && !this.currentValue) {
-        this.showInvalidTip = true
-      } else {
-        this.showInvalidTip = false
-      }
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+@include b(form-item) {
+  width: 100%;
+  margin-bottom: 22px;
+  position: relative;
+
+  @include when(invalid) {
+    border-color: $danger;
+  }
+
+  @include e(invalid-tip) {
+    position: absolute;
+    margin: 0 0 0 4px;
+    padding-top: 4px;
+    font-size: 12px;
+    color: $danger;
+  }
+}
 </style>
