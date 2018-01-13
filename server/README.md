@@ -18,3 +18,14 @@ service mongodb stop
 ```
 
 对mongodb进行操作前务必启动mongodb，否则报错。
+
+## 跨域问题
+为解决跨域问题,这里使用了`koa2-cors`,用法如下:
+
+```
+var koa = require('koa');
+var cors = require('koa2-cors');
+
+var app = koa();
+app.use(cors());
+```
