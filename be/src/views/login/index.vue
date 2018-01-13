@@ -10,8 +10,6 @@
         @success="pass(1)">
       </fa-form-item>
       <fa-button class="fa-login__button" type="primary">登录</fa-button>
-
-      <fa-icon name="happy-outline"></fa-icon>
     </div>
   </div>
 </template>
