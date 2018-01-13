@@ -1,7 +1,9 @@
+const cors = require('koa2-cors')
 const bodyParser = require('koa-bodyparser')
-const miSend = require('./mi-send')
+const json = require('./json')
 
 module.exports = (app) => {
+  app.use(cors())
   app.use(bodyParser())
-  app.use(miSend())
+  app.use(json())
 }

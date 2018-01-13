@@ -3,7 +3,9 @@ const UserController = require('../controller/user')
 
 module.exports = (app) => {
   router.post('/user/register', UserController.register)
+  router.post('/user/login', UserController.login)
 
   app.use(router.routes())
     .use(router.allowedMethods())
 }
+
