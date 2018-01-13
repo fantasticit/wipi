@@ -1,5 +1,5 @@
 # 后端管理系统
-使用Vue.js、vue-router、vuex、axios、sass以及element-ui。
+使用Vue.js、vue-router、vuex、axios、sass。
 
 ## 表单验证
 针对`form-itm`开发了组件,用法如下:
@@ -39,3 +39,4 @@ on(this.$refs['input'], trigger, () => {
 })
 ```
 这里借助了`Promise.all`来实现依次验证,其中`asyncValidate(rule, target)`返回的是一个promise对象.
+(这里的`on`其实就是document.addEventListener)
