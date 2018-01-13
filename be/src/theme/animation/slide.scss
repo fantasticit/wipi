@@ -3,7 +3,7 @@
 }
 
 .slide-down-leave-active {
-  animation: leave ease .3s;
+  animation: leave ease .5s;
 }
 
 @keyframes enter {
@@ -29,3 +29,4 @@
     transform: translateY(-100%);
   }
 }
+

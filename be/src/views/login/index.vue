@@ -1,6 +1,7 @@
 <template>
   <div class="fa-login">
     <div class="fa-login__form">
+      <h1>系统登录</h1>
       <fa-form-item 
         placeholder="请输入帐号" v-model="account" :rules="accountRules"
         @success="pass(0)">
@@ -9,7 +10,7 @@
         placeholder="请输入密码" type="password" v-model="password" :rules="passwordRules"
         @success="pass(1)">
       </fa-form-item>
-      <fa-button class="fa-login__button" type="primary">登录</fa-button>
+      <fa-button class="fa-login__button" type="primary" @click="login()">登录</fa-button>
     </div>
   </div>
 </template>
@@ -37,8 +38,11 @@ export default class Login extends Vue {
   }
 
   login() {
-    console.log(this.password)
-    console.log(this.passed)
+    if (this.passed.every(pass => pass)) {
+      this.$message.success('ok')
+    } else {
+      this.$message.error('请完善信息')
+    }
   }
 }
 </script>
@@ -51,13 +55,23 @@ export default class Login extends Vue {
 
   width: 100vw;
   height: 100vh;
+  background-color: #2d3a4b;
 
   align-items: center;
-  @include flexLayout();
+  flex-direction: column;
+  @include flexLayout(flex-start);
 
   @include e(form) {
-    width: 300px;
+    width: 360px;
     padding: 15px 30px;
+    text-align: center;
+    margin: 180px auto;
+
+    h1 {
+      font-size: 26px;
+      color: #fff;
+      margin-bottom: 40px;
+    }
   }
 
   @include e(button) {
