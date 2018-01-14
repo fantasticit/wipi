@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
-
 const url = `mongodb://127.0.0.1/coding-heart`
-
 const options = {
   reconnectTries: Number.MAX_VALUE,
   reconnectInterval: 500
