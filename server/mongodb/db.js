@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 
+const url = `mongodb://127.0.0.1/coding-heart`
+
 const options = {
   reconnectTries: Number.MAX_VALUE,
   reconnectInterval: 500
 }
 
-mongoose.connect('mongodb://127.0.0.1/coding-heart', options)
+mongoose.connect(url, options)
 mongoose.Promise = global.Promise
 
 const db = mongoose.connection
@@ -19,7 +21,7 @@ db.on('error', (err) => {
 
 db.on('close', () => {
   console.log('数据库连接断开，重新连接中...')
-  mongoose.connect(config.url, options)
+  mongoose.connect(url, options)
 })
 
 module.exports = db
