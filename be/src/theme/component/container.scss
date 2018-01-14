@@ -1,0 +1,39 @@
+@import '../mixin/bem.scss';
+@import '../mixin/layout.scss';
+
+@include b(container) {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  padding-left: 180px;
+
+  @include e(aside) {
+    display: inline-flex;
+    box-sizing: border-box;
+    width: 180px;
+    height: 100%;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  @include e(content) {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+
+    flex-direction: column;
+    @include flexLayout(flex-start, inline-flex);
+
+    header {
+      width: 100%;
+      height: 50px;
+    }
+
+    main {
+      flex: 1;
+      overflow: auto;
+    }
+  }
+}

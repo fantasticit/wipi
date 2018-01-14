@@ -1,0 +1,81 @@
+@import '../mixin/bem.scss';
+@import '../mixin/layout.scss';
+@import '../var/color.scss';
+
+@include b(navmenu) {
+  width: 100%;
+  height: 100%;
+
+  background-color: $bg;
+  font-size: 14px;
+
+  li {
+    position: relative;
+    max-height: 56px;
+    overflow: hidden;
+
+    transition: all ease .3s;
+
+    @include when(active) {
+      max-height: 500px;
+    }
+
+    a, p {
+      box-sizing: border-box;
+      width: 100%;
+      height: 56px;
+      padding-left: 20px;
+
+      color: rgb(191, 203, 217);
+
+      align-items: center;
+      @include flexLayout(flex-start, inline-flex);
+
+      transition: all ease .2s;
+
+      &:hover {
+        background-color: rgb(38, 52, 69);
+      }
+
+      .fa-icon {
+        margin-right: 15px;
+      }
+    }
+
+    a.router-link-exact-active {
+      color: $primary;
+    }
+
+    p {
+      position: relative;
+      margin: 0;
+      cursor: pointer;
+
+      .fa-icon__arrow {
+        position: absolute;
+        right: 15px;
+        font-size: 1em;
+
+        transition: all ease .3s;
+
+        @include when(active) {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  @include e(submenu) {
+    background-color: #1f2d3d;
+
+    li {
+      a {
+        padding-left: 30px;
+
+        &:hover {
+          background-color: #001528;
+        }
+      }
+    }
+  }
+}
