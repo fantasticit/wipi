@@ -1,5 +1,5 @@
 /**
- * * 该函数用于返回对应验证规则的promise对象
+ * 该函数用于返回对应验证规则的promise对象
  * @param {*} rule 验证规则
  * @param {*} observe 被验证对象
  */
