@@ -1,0 +1,113 @@
+@import '../mixin/bem.scss';
+@import '../mixin/layout.scss';
+@import '../var/color.scss';
+
+@include b(header) {
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  padding: 0 15px;
+  background-color: #fff;
+  border-bottom: 1px solid $border;
+
+  align-items: center;
+  @include flexLayout(space-between, inline-flex);
+
+  .fa-icon {
+    cursor: pointer;
+    font-size: 1.8em;
+    margin-right: 15px;
+    color: $font;
+  }
+
+  > div {
+    align-items: center;
+    @include flexLayout(center, inline-flex);
+
+    span {
+      font-size: .8em;
+      color: $font;
+      transform: translateY(-1px);
+    }
+  }
+
+  @include e(icon-menu) {
+    color: $primaryFont !important;
+    transition: all ease .3s;
+
+    @include when(rotate) {
+      transform: rotate(90deg);
+    }
+  }
+
+  @include e(avatar) {
+    position: relative;
+    cursor: pointer;
+
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+  }
+
+  @include e(avatar-dropmenu) {
+    position: fixed;
+    right: 15px;
+    top: 58px;
+
+    box-sizing: border-box;
+    width: 90px;
+    padding: 5px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
+    border: 1px solid #ebeef5;
+    border-radius: 4px;
+
+    &::before {
+      display: block;
+      content: '';
+
+      position: absolute;
+      top: -16px;
+      right: 10px;
+      
+      border-top: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #ebeef5;
+      border-left: 8px solid transparent;   
+    }
+
+    &::after {
+      display: block;
+      content: '';
+
+      position: absolute;
+      top: -15px;
+      right: 10px;
+
+      border-top: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #fff;
+      border-left: 8px solid transparent;      
+    }
+
+    li {
+      line-height: 30px;
+      padding: 0 10px;
+      font-size: 14px;
+      color: $font;
+
+      &:hover {
+        background-color: #ecf5ff;
+        color: #66b1ff;
+      }
+    }
+
+    .cut-off {
+      height: 1px;
+      background: #ebeef5;
+      margin: 5px 0;
+    }
+  }
+}

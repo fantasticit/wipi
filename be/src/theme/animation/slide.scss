@@ -1,3 +1,4 @@
+// 向下方进入
 .slide-down-enter-active {
   animation: enter ease .3s;
 }
@@ -30,3 +31,35 @@
   }
 }
 
+// 向左边进入
+.slide-left-enter-active {
+  animation: left-enter ease .3s;
+}
+
+.slide-left-leave-active {
+  animation: left-leave ease .5s;
+}
+
+@keyframes left-enter {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes left-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}

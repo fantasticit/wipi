@@ -40,3 +40,36 @@ on(this.$refs['input'], trigger, () => {
 ```
 这里借助了`Promise.all`来实现依次验证,其中`asyncValidate(rule, target)`返回的是一个promise对象.
 (这里的`on`其实就是document.addEventListener)
+
+## 网页全屏
+控制全屏的代码来自网络,具体如下:
+
+```
+// 全屏
+function fullScreen() {
+  const doc = document.documentElement
+  if (doc.requestFullscreen) {
+    doc.requestFullscreen()
+  } else if (doc.mozRequestFullScreen) {
+    doc.mozRequestFullScreen()
+  } else if (doc.webkitRequestFullScreen) {
+    doc.webkitRequestFullScreen()
+  } else if (doc.msRequestFullScreen) {
+    doc.msRequestFullScreen()
+  }
+}
+
+// 退出全屏
+function exitFullScreen() {
+  const doc = document.documentElement
+  if (document.exitFullscreen) {
+    document.exitFullscreen()
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen()
+  } else if (document.webkitCancelFullScreen) {
+    document.webkitCancelFullScreen()
+  } else if (document.msCancelFullScreen) {
+    document.msCancelFullScreen()
+  }
+}
+```

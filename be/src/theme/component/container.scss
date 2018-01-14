@@ -7,6 +7,12 @@
   height: 100%;
   padding-left: 180px;
 
+  transition: padding ease .3s;
+
+  @include when(fullscreen) {
+    padding-left: 45px;
+  }
+
   @include e(aside) {
     display: inline-flex;
     box-sizing: border-box;
@@ -16,6 +22,12 @@
     position: absolute;
     left: 0;
     top: 0;
+
+    transition: all ease .3s;
+
+    @include when(collapse) {
+      width: 45px;
+    }
   }
 
   @include e(content) {
@@ -26,9 +38,7 @@
     flex-direction: column;
     @include flexLayout(flex-start, inline-flex);
 
-    header {
-      width: 100%;
-      height: 50px;
+    header { 
     }
 
     main {
