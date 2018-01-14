@@ -43,6 +43,7 @@
 <script>
 import { hasClassName } from '@/util/class-name'
 import FaIcon from '../../common/icon'
+import Bus from '../bus'
 
 export default {
   name: 'FaNavmenu',
@@ -70,6 +71,7 @@ export default {
       }
       if (hasClassName(node, 'is-collapse')) {
         this.$emit('show')
+        Bus.$emit('expandMenu')
       }
     }
   }

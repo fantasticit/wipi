@@ -35,12 +35,17 @@
 <script>
 import { on } from '@/util/event'
 import FaIcon from '../../common/icon'
+import Bus from '../bus'
 
 export default {
   name: 'FaHeader',
 
   components: {
     FaIcon
+  },
+
+  mounted() {
+    Bus.$on('expandMenu', () => this.isCollapse = false)
   },
 
   data() {
@@ -61,9 +66,9 @@ export default {
     toggleShow() {
       this.showDropmenu = !this.showDropmenu
 
-      if (this.showDropmenu) {
-        setTimeout(this.toggleShow, 3000)
-      }
+      // if (this.showDropmenu) {
+      //   setTimeout(this.toggleShow, 3000)
+      // }
     },
 
     toggleFullScreen() {
