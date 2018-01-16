@@ -1,5 +1,7 @@
 <template>
-  <fa-container></fa-container>
+  <tz-container>
+    内容待定
+  </tz-container>
 </template>
 
 <script>

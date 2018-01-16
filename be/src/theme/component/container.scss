@@ -42,6 +42,8 @@
     }
 
     main {
+      box-sizing: border-box;
+      padding: 30px;
       flex: 1;
       overflow: auto;
     }

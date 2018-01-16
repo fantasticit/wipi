@@ -12,6 +12,12 @@ const routes = [
     name: 'Dashboard',
     component: views.Dashboard
   },
+
+  {
+    path: '/article/new',
+    name: 'NewArticle',
+    component: views.Article
+  },
 ]
 
 export default routes

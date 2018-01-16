@@ -1,10 +1,10 @@
 <template>
-  <i class="fa-icon" :class="'ion-' + name" @click="emitClick()"></i>
+  <i class="tz-icon" :class="'ion-' + name" @click="emitClick()"></i>
 </template>
 
 <script>
 export default {
-  name: 'FaIcon',
+  name: 'TzIcon',
 
   props: ['name'],
 

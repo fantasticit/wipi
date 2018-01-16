@@ -1,37 +1,32 @@
 <template>
-  <div class="fa-navmenu">
+  <div class="tz-navmenu">
     <ul>
       <li @click="emitShow($event)"> 
         <router-link to="/dashboard" exact>
-          <fa-icon name="ios-speedometer"></fa-icon>
+          <tz-icon name="ios-speedometer"></tz-icon>
           <span>首页</span>
         </router-link>
       </li>
 
       <li :class="{'is-active': isShowSubmenu}" @click="emitShow($event)">
         <p @click="toggleShow()">
-          <fa-icon name="ios-speedometer"></fa-icon>
-          <span>测试1</span>
-          <fa-icon
-            class="fa-icon__arrow"
+          <tz-icon name="ios-speedometer"></tz-icon>
+          <span>文章管理</span>
+          <tz-icon
+            class="tz-icon__arrow"
             :class="{'is-active': isShowSubmenu}"
             name="ios-arrow-down">
-          </fa-icon>
+          </tz-icon>
         </p>
-        <ul class="fa-navmenu__submenu">
+        <ul class="tz-navmenu__submenu">
           <li> 
             <router-link to="/1">
-              <span>测试1-1</span>
+              <span>已发文章</span>
             </router-link>
           </li>
           <li> 
-            <router-link to="/1">
-              <span>测试1-1</span>
-            </router-link>
-          </li>
-          <li> 
-            <router-link to="/1">
-              <span>测试1-1</span>
+            <router-link to="/article/new">
+              <span>新建文章</span>
             </router-link>
           </li>
         </ul>
@@ -42,14 +37,14 @@
 
 <script>
 import { hasClassName } from '@/util/class-name'
-import FaIcon from '../../common/icon'
+import TzIcon from '../../common/icon'
 import Bus from '../bus'
 
 export default {
-  name: 'FaNavmenu',
+  name: 'TzNavmenu',
 
   components: {
-    FaIcon
+    TzIcon
   },
 
   data() {
@@ -66,7 +61,7 @@ export default {
     emitShow(e) {
       const target = e.target || e.srcElement
       let node = target.parentNode.parentNode.parentNode
-      if (!hasClassName(node, 'fa-navmenu')) {
+      if (!hasClassName(node, 'tz-navmenu')) {
         node = node.parentNode
       }
       if (hasClassName(node, 'is-collapse')) {

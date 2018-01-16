@@ -5,15 +5,15 @@ import router from './router'
 import './assets/icon/ionicons.scss'
 import './components/common/message/index'
 import './components/common/loadingbar/index'
-import FaButton from './components/common/button'
-import FaFormItem from './components/common/form-item'
-import FaIcon from './components/common/icon'
-import FaContainer from './components/business/container'
+import TzButton from './components/common/button'
+import TzFormItem from './components/common/form-item'
+import TzIcon from './components/common/icon'
+import TzContainer from './components/business/container'
 
-Vue.component('faButton', FaButton)
-Vue.component('faFormItem', FaFormItem)
-Vue.component('faIcon', FaIcon)
-Vue.component('faContainer', FaContainer)
+Vue.component('tzButton', TzButton)
+Vue.component('tzFormItem', TzFormItem)
+Vue.component('tzIcon', TzIcon)
+Vue.component('tzContainer', TzContainer)
 Vue.config.productionTip = false
 
 new Vue({
