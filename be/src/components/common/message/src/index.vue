@@ -2,21 +2,21 @@
   <transition name="slide-down">
     <div 
       v-if="isShow"
-      class="tz-message" :class="'tz-message--' + type">
-      <tz-icon :name="iconName"></tz-icon>
+      class="ta-message" :class="'ta-message--' + type">
+      <ta-icon :name="iconName"></ta-icon>
       <span>{{ message }}</span>
     </div>
   </transition>
 </template>
 
 <script>
-import TzIcon from '../../icon'
+import TaIcon from '../../icon'
 
 export default {
-  name: 'TzMessage',
+  name: 'TaMessage',
 
   components: {
-    TzIcon
+    TaIcon
   },
 
   data(){

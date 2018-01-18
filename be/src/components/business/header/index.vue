@@ -1,20 +1,20 @@
 <template>
-  <div class="tz-header">
+  <div class="ta-header">
     <div>
-      <tz-icon
-        class="tz-header__icon-menu" name="navicon"
+      <ta-icon
+        class="ta-header__icon-menu" name="navicon"
         :class="{ 'is-rotate': isCollapse }"
         @click="emitMenu()"
-      ></tz-icon>
+      ></ta-icon>
       <span>首页 / 测试</span>
     </div>
 
     <div>
-      <tz-icon :name="toggleScreenIcon" @click="toggleFullScreen()"></tz-icon>
-      <div class="tz-header__avatar" @click="toggleShow">
+      <ta-icon :name="toggleScreenIcon" @click="toggleFullScreen()"></ta-icon>
+      <div class="ta-header__avatar" @click="toggleShow">
         <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" alt="">
         <transition name="slide-left">
-          <ul v-if="showDropmenu" class="tz-header__avatar-dropmenu">
+          <ul v-if="showDropmenu" class="ta-header__avatar-dropmenu">
             <li>
                 <router-link to="/dashboard">首页</router-link>
             </li>
@@ -34,14 +34,14 @@
 
 <script>
 import { on } from '@/util/event'
-import TzIcon from '../../common/icon'
+import TaIcon from '../../common/icon'
 import Bus from '../bus'
 
 export default {
-  name: 'TzHeader',
+  name: 'TaHeader',
 
   components: {
-    TzIcon
+    TaIcon
   },
 
   mounted() {

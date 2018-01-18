@@ -1,5 +1,5 @@
 @mixin b($block) {
-  $B: 'tz-' + $block;
+  $B: 'ta-' + $block;
 
   @at-root .#{$B} {
     @content;

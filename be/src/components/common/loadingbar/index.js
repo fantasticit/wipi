@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import TzLoadingbar from './src/index.vue'
+import TaLoadingbar from './src/index.vue'
 
-const Ctur = Vue.extend(TzLoadingbar)
+const Ctur = Vue.extend(TaLoadingbar)
 const instance = new Ctur().$mount()
 
 const Loadingbar = {}

@@ -38,7 +38,7 @@
         background-color: rgb(38, 52, 69);
       }
 
-      .tz-icon {
+      .ta-icon {
         margin-right: 15px;
       }
     }
@@ -52,7 +52,7 @@
       margin: 0;
       cursor: pointer;
 
-      .tz-icon__arrow {
+      .ta-icon__arrow {
         position: absolute;
         right: 5px;
         font-size: 1em;
@@ -93,12 +93,12 @@
         align-items: center;
         @include flexLayout();
 
-        .tz-icon__arrow {
+        .ta-icon__arrow {
           display: none;
         }
       }
 
-      .tz-icon {
+      .ta-icon {
         margin-right: 0;
       }
 
@@ -134,7 +134,7 @@
         //   p {
         //     padding-left: 10px;
 
-        //     .tz-icon {
+        //     .ta-icon {
         //       display: block;
         //       margin-left: 5px;
         //     }
@@ -145,7 +145,7 @@
         //       justify-content: flex-start;
         //     }
 
-        //     .tz-icon__arrow {
+        //     .ta-icon__arrow {
         //       display: block;
         //       transform: rotate(-90deg);
         //       right: 10px;

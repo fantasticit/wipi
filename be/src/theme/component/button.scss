@@ -22,6 +22,14 @@
 
   transition: all ease .1s;
 
+  :nth-of-type() {
+    margin-left: 15px;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+
   @include flexLayout(center, inline-flex);
 
   i {

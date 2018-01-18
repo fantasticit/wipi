@@ -1,16 +1,16 @@
 <template>
-  <div class="tz-login">
-    <div class="tz-login__form">
+  <div class="ta-login">
+    <div class="ta-login__form">
       <h1>系统登录</h1>
-      <tz-form-item 
+      <ta-form-item 
         placeholder="请输入帐号" v-model="account" :rules="accountRules"
         @success="successPassed(0)" @fail="failPassed(0)">
-      </tz-form-item>
-      <tz-form-item 
+      </ta-form-item>
+      <ta-form-item 
         placeholder="请输入密码" type="password" v-model="password" :rules="passwordRules"
         @success="successPassed(1)" @fail="failPassed(1)">
-      </tz-form-item>
-      <tz-button class="tz-login__button" type="primary" @click="login()">登录</tz-button>
+      </ta-form-item>
+      <ta-button class="ta-login__button" type="primary" @click="login()">登录</ta-button>
     </div>
   </div>
 </template>

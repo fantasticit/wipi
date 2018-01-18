@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import TzMessage from './src'
+import TaMessage from './src'
 
 function message(message, type = 'info') {
-  const Ctur = Vue.extend(TzMessage)
+  const Ctur = Vue.extend(TaMessage)
   const instance = new Ctur({ data: { message, type } }).$mount()
   instance.show()
   document.body.appendChild(instance.$el)

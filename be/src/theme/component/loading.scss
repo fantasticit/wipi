@@ -1,0 +1,27 @@
+@import '../mixin/bem.scss';
+@import '../mixin/layout.scss';
+@import '../var/color.scss';
+
+@include b(loading) {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, .8);
+  text-align: center;
+  color: $primary;
+
+  @include flexLayout(center);
+  align-items: center;
+
+  .ta-icon {
+    font-size: 40px;
+  }
+
+  p {
+    margin: 0;
+  }
+}

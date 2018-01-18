@@ -1,5 +1,5 @@
 <template>
-  <div class="tz-mdeditor">
+  <div class="ta-mdeditor">
     <textarea ref="mdEditor"></textarea>
   </div>
 </template>
@@ -9,7 +9,7 @@ import 'simplemde/dist/simplemde.min.css'
 import SimpleMDE from 'simplemde'
 
 export default {
-  name: 'TzMarkdownEditor',
+  name: 'TaMarkdownEditor',
 
   props: {
     value: String,
@@ -40,10 +40,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-@include b(mdeditor) {
-  height: 500px;
-  max-height: 70%;
-}
-</style>

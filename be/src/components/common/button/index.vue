@@ -1,18 +1,18 @@
 <template>
-  <button class="tz-button" :class="'tz-button--' + type" @click="emitClick()">
-    <tz-icon v-if="loading" name="load-a"></tz-icon>
+  <button class="ta-button" :class="'ta-button--' + type" @click="emitClick()">
+    <ta-icon v-if="loading" name="load-a"></ta-icon>
     <span><slot></slot></span>
   </button>
 </template>
 
 <script>
-import TzIcon from '../icon'
+import TaIcon from '../icon'
 
 export default {
-  name: 'TzButton',
+  name: 'TaButton',
 
   components: {
-    TzIcon
+    TaIcon
   },
 
   props: {

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isShow"
-    class="tz-loadingbar"
+    class="ta-loadingbar"
     :style="{ 'width': w + 'vh' }"
   >
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'TzLoadingbar',
+  name: 'TaLoadingbar',
 
   data() {
     return {

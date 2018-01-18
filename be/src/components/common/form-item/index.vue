@@ -1,7 +1,7 @@
 <template>
-  <div class="tz-form-item">
+  <div class="ta-form-item">
     <input
-      class="tz-input"
+      class="ta-input"
       :class="{ 'is-invalid': showInvalidTip }"
       :type="type" :placeholder="placeholder"
       ref="input"
@@ -9,7 +9,7 @@
     >
     <transition name="slide-down">
       <p 
-        class="tz-form-item__invalid-tip"
+        class="ta-form-item__invalid-tip"
         v-if="showInvalidTip">
         {{ message }}
       </p>
@@ -22,7 +22,7 @@ import { on } from '@/util/event'
 import { asyncValidate } from './async-validate'
 
 export default {
-  name: 'TzFormItem',
+  name: 'TaFormItem',
 
   props: {
     value: { type: String, default: '' },

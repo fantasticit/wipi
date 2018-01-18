@@ -4,16 +4,17 @@ import App from './App'
 import router from './router'
 import './assets/icon/ionicons.scss'
 import './components/common/message/index'
+import './components/common/loading/index'
 import './components/common/loadingbar/index'
-import TzButton from './components/common/button'
-import TzFormItem from './components/common/form-item'
-import TzIcon from './components/common/icon'
-import TzContainer from './components/business/container'
+import TaIcon from './components/common/icon'
+import TaButton from './components/common/button'
+import TaFormItem from './components/common/form-item'
+import TaContainer from './components/business/container'
 
-Vue.component('tzButton', TzButton)
-Vue.component('tzFormItem', TzFormItem)
-Vue.component('tzIcon', TzIcon)
-Vue.component('tzContainer', TzContainer)
+Vue.component('TaIcon', TaIcon)
+Vue.component('TaButton', TaButton)
+Vue.component('TaFormItem', TaFormItem)
+Vue.component('TaContainer', TaContainer)
 Vue.config.productionTip = false
 
 new Vue({

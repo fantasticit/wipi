@@ -6,13 +6,16 @@
 
 @import './var/color.scss';
 
+@import './animation/fade.scss';
 @import './animation/slide.scss';
+@import './animation/loading.scss';
 
 @import './component/input.scss';
 @import './component/button.scss';
 @import './component/icon.scss';
 @import './component/message.scss';
 @import './component/loadingbar.scss';
+@import './component/loading.scss';
 @import './component/container.scss';
 @import './component/nav-menu.scss';
 @import './component/header.scss';

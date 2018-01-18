@@ -1,14 +1,14 @@
 <template>
-  <div class="tz-container" :class="{ 'is-fullscreen': isCollapse }">
-    <nav class="tz-container__aside" :class="{ 'is-collapse': isCollapse }">
-      <tz-navmenu
+  <div class="ta-container" :class="{ 'is-fullscreen': isCollapse }">
+    <nav class="ta-container__aside" :class="{ 'is-collapse': isCollapse }">
+      <ta-navmenu
         :class="{ 'is-collapse': isCollapse }"
         @show="toggleMenu()"
-      ></tz-navmenu>
+      ></ta-navmenu>
     </nav>
-    <div class="tz-container__content">
+    <div class="ta-container__content">
       <header>
-        <tz-header @toggleMenu="toggleMenu()"></tz-header>
+        <ta-header @toggleMenu="toggleMenu()"></ta-header>
       </header>
       <main>
         <slot></slot>
@@ -18,15 +18,15 @@
 </template>
 
 <script>
-import TzNavmenu from '../nav-menu'
-import TzHeader from '../header'
+import TaNavmenu from '../nav-menu'
+import TaHeader from '../header'
 
 export default {
-  name: 'TzContainer',
+  name: 'TaContainer',
 
   components: {
-    TzNavmenu,
-    TzHeader,
+    TaNavmenu,
+    TaHeader,
   },
 
   data() {
