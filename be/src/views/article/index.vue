@@ -6,8 +6,6 @@
     </div>
     <ta-markdown-editor class="ta-editor" v-model="article"></ta-markdown-editor>
   </ta-container>
-
-  
 </template>
 
 <script>
