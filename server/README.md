@@ -29,6 +29,3 @@ var cors = require('koa2-cors');
 var app = koa();
 app.use(cors());
 ```
-
-## 日志中间件
-待添加

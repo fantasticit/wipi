@@ -30,7 +30,7 @@ export default {
       this.mdEditor.value(this.value)
     }
     this.mdEditor.codemirror.on('change', () => {
-      this.hasChange = true
+      // this.hasChange = true
       this.$emit('input', this.mdEditor.value())
     })
   },
