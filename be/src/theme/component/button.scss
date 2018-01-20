@@ -22,6 +22,11 @@
 
   transition: all ease .1s;
 
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
   :nth-of-type() {
     margin-left: 15px;
   }

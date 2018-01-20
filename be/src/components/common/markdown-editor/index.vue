@@ -22,15 +22,18 @@ export default {
     }
   },
 
+  watch: {
+    value(newVal)  {
+      this.mdEditor.value(newVal)
+    }
+  },
+
   mounted() {
     this.mdEditor = new SimpleMDE({
       element: this.$refs['mdEditor']
     })
-    if (this.value) {
-      this.mdEditor.value(this.value)
-    }
+    this.mdEditor.value(this.value)
     this.mdEditor.codemirror.on('change', () => {
-      // this.hasChange = true
       this.$emit('input', this.mdEditor.value())
     })
   },

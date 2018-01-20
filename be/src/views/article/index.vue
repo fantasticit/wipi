@@ -1,14 +1,14 @@
 <template>
   <ta-container>
     <div class="ta-toolbar">
-      <ta-button @click="showHtml()">预览HTML</ta-button>
-      <ta-button type="primary" @click="openPublishArticle()">发布文章</ta-button>
+      <ta-button type="primary" @click="openPublishDialog()">发布文章</ta-button>
     </div>
     <ta-markdown-editor class="ta-editor" v-model="article"></ta-markdown-editor>
-    <ta-publish-dialog 
-      :isShow="isShowDialog" 
-      @cancel="cancelPublish()"
-      @ok="publishArticle()"
+    <ta-publish-dialog
+      :isShow="isShowDialog"
+      :loading="loading" 
+      @cancel="closePublishDialog()"
+      @ok="publishArticle($event)"
     >
     </ta-publish-dialog>
   </ta-container>
@@ -18,6 +18,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import TaMarkdownEditor from '@/components/common/markdown-editor'
+import { ArticleProvider } from '@/provider/article-provider'
 import TaPublishDialog from './dialog.vue'
 
 @Component({
@@ -27,8 +28,9 @@ import TaPublishDialog from './dialog.vue'
   },
 })
 export default class Article extends Vue {
-  article = '# Test'
+  article = ''
   isShowDialog = false
+  loading = false
   
   transfor2Html() {
     return Promise.resolve(import('showdown').then(showdown => {
@@ -38,16 +40,33 @@ export default class Article extends Vue {
     }))
   }
   
-  openPublishArticle() {
+  openPublishDialog() {
     this.isShowDialog = true
   }
 
-  publishArticle() {
-    this.transfor2Html().then(html => console.log(html))
+  closePublishDialog() {
+    this.isShowDialog = false
+    this.article = ''
   }
 
-  cancelPublish() {
-    this.isShowDialog = false
+  publishArticle(info) {
+    this.loading = true
+    this.transfor2Html().then(async (content_html) => {
+      const article = Object.assign({}, info, {
+        content_md: this.article,
+        content_html
+      })
+
+      try {
+        const res = await ArticleProvider.add(article)
+        this.$message.success(res)
+        this.closePublishDialog()
+      } catch (err) {
+        this.$message.error('发表文章失败')
+      } finally {
+        this.loading = false
+      }
+    })
   }
 }
 </script>

@@ -1,25 +1,32 @@
 <template>
-  <ta-dialog v-if="isShow" title="发布文章" @cancel="emitCancel()" @ok="publish()">
+  <ta-dialog 
+    v-if="isShow" title="发布文章"
+    :loading="loading"
+    @cancel="emitCancel()" @ok="publish()"
+  >
     <ta-form-item 
       label="文章标题" placeholder="请输入文章标题" :rules="rules.title"
-      v-model="info.title"
+      v-model="title"
     ></ta-form-item>
     <ta-form-item 
       label="文章作者" placeholder="请输入文章作者" :rules="rules.author"
-      v-model="info.author"
+      v-model="author"
     ></ta-form-item>
     <ta-select
-      v-model="info.classify"
+      v-model="classify"
       label="文章分类"
       placeholder="请选择文章分类"
       :options="options"
     ></ta-select>
     <div>
-      <ta-form-item label="文章标签" placeholder="请输入文章标签" @enter="addTag($event)">
+      <ta-form-item 
+        label="文章标签" placeholder="请输入文章标签" 
+        @enter="addTag($event)"
+      >
       </ta-form-item>
       <div class="tags">
         <ta-tag 
-          v-for="(tag, index) in info.tags" :key="index"
+          v-for="(tag, index) in tags" :key="index"
           :type="tagTypes[index]"
           @close="removeTag(index)"
         >
@@ -36,6 +43,7 @@ export default {
 
   props: {
     isShow: Boolean,
+    loading: Boolean,
   },
 
   data() {
@@ -70,12 +78,10 @@ export default {
           title: '其他',
         },
       ],
-      info: {
-        title: '',
-        author: '',
-        classify: '',
-        tags: [],
-      },
+      title: '',
+      author: '',
+      classify: '',
+      tags: [],
       tagTypes: ['default', 'info', 'success', 'danger'],
       rules: {
         title: [
@@ -93,17 +99,17 @@ export default {
 
   methods: {
     addTag(tag) {
-      if (this.info.tags.length >= 4) {
+      if (this.tags.length >= 4) {
         this.$message.error('最多4个标签')
       } else {
-        this.info.tags.push(tag)
+        this.tags.push(tag)
       }
     },
 
     removeTag(index) {
-      let tags = Array.from(this.info.tags)
+      let tags = Array.from(this.tags)
       tags.splice(index, 1)
-      this.info.tags = tags
+      this.tags = tags
     },
 
     emitCancel() {
@@ -111,8 +117,15 @@ export default {
     },
     
     publish() {
-      if (Object.keys(this.info).every(key => !!this.info[key])) {
-        this.$emit('ok', this.info)
+      const info = Object.assign({}, {
+        title: this.title,
+        author: this.author,
+        classify: this.classify,
+        tags: this.tags,
+      })
+      if (Object.keys(info).every(key => !!info[key])) {
+        this.$emit('ok', info)
+        this.info = ''
       } else {
         this.$message.error('请完善文章信息')
       }

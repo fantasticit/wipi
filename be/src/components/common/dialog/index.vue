@@ -11,7 +11,7 @@
         </div>
         <div class="ta-dialog__footer">
           <ta-button @click="handleCancel()">取消</ta-button>
-          <ta-button type="primary" @click="handleOk()">确定</ta-button>
+          <ta-button type="primary" :loading="loading" @click="handleOk()">确定</ta-button>
         </div>
       </div>
     </div>
@@ -35,6 +35,11 @@ export default {
       type: String,
       default: '标题'
     },
+
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data() {
