@@ -1,0 +1,33 @@
+@import '../mixin/bem.scss';
+@import '../mixin/layout.scss';
+@import '../var/color.scss';
+
+@include b(form-item) {
+  width: 100%;
+  margin-bottom: 22px;
+  position: relative;
+  align-items: center;
+  @include flexLayout();
+
+  label {
+    width: 5em;
+  }
+
+  input, select {
+    flex: 1;
+  }
+
+  @include when(invalid) {
+    border-color: $danger;
+  }
+
+  @include e(invalid-tip) {
+    position: absolute;
+    left: 0;
+    bottom: -50%;
+    margin: 0 0 0 10px;
+    padding-top: 4px;
+    font-size: 12px;
+    color: $danger;
+  }
+}

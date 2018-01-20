@@ -23,7 +23,7 @@ export default {
 
   mounted() {
     this.$refs['form'].onsubmit = () => {
-      const children = this.$refs['form'].querySelectorAll('input')
+      const children = this.$refs['form'].querySelectorAll('input, select')
       Promise.all(Array.from(children).reduce((validates, child) => {
         const rule = child.getAttribute('data-prop')
         this.rules[rule].forEach(rule => {

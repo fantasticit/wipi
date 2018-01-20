@@ -31,6 +31,40 @@
   }
 }
 
+// dialog向下方进入
+.slide-down-dialog-enter-active {
+  animation: dialog-enter ease .3s;
+}
+
+.slide-down-dialog-leave-active {
+  animation: dialog-leave ease .5s;
+}
+
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dialog-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+
 // 向左边进入
 .slide-left-enter-active {
   animation: left-enter ease .3s;

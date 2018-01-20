@@ -1,0 +1,61 @@
+@import '../mixin/bem.scss';
+@import '../mixin/layout.scss';
+@import '../var/color.scss';
+
+@include b(dialog) {
+  position: relative;
+  margin: 15vh auto 50px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+  box-sizing: border-box;
+  max-width: 500px;
+  min-width: 20%;
+
+  @include e(wrapper) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1010;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba($color: #000000, $alpha: .5);
+  }
+
+  @include e(header) {
+    padding: 15px;
+    padding-bottom: 10px;
+    font-size: 18px;
+
+    @include flexLayout(space-between);
+
+    span {
+      align-items: center;
+      @include flexLayout(space-between);
+    }
+
+    .ta-icon {
+      font-size: 30px;
+      cursor: pointer;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  @include e(body) {
+    padding: 30px 20px;
+    color: #606266;
+    line-height: 24px;
+    font-size: 14px;
+  }
+
+  @include e(footer) {
+    padding: 15px;
+    padding-top: 10px;
+    text-align: right;
+    box-sizing: border-box;
+  }
+}

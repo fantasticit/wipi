@@ -1,0 +1,27 @@
+.rotate-out-enter-active {
+  animation: rotate-enter ease .3s;
+}
+
+@keyframes rotate-enter {
+  from {
+    transform: rotateY(180deg);
+  }
+
+  to {
+    transform: rotateY(0deg);
+  }
+}
+
+.rotate-out-leave-active {
+  animation: rotate-leave ease .5s;
+}
+
+@keyframes rotate-leave {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(180deg);
+  }
+}

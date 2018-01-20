@@ -1,16 +1,20 @@
 <template>
   <div class="ta-form-item">
+    <label v-if="label" :for="prop">{{ label }}</label>
     <input
+      :id="prop"
       class="ta-input"
       :class="{ 'is-invalid': showInvalidTip }"
       :type="type" :placeholder="placeholder"
       :data-prop="prop"
       ref="input"
+      @keyup.enter="emitEnter()"
       v-model="currentValue" @input="emitInput()"
     >
     <transition name="slide-down">
-      <p 
+      <p
         class="ta-form-item__invalid-tip"
+        :style="{ left: label ? '5em' : '0' }"
         v-show="showInvalidTip">
         {{ message }}
       </p>
@@ -29,6 +33,7 @@ export default {
     value: { type: String, default: '' },
     type: { type: String, default: 'text' },
     prop: { type: String, default: '' },
+    label: { type: String, default: null },
     rules: { type: Array, default: () => [] },
     placeholder: { type: String, default: '请输入信息' },
   },
@@ -68,26 +73,11 @@ export default {
     emitInput() {
       this.$emit('input', this.currentValue)
     },
+
+    emitEnter() {
+      this.$emit('enter', this.currentValue)
+      this.currentValue = ''
+    },
   },
 }
 </script>
-
-<style lang="scss" scoped>
-@include b(form-item) {
-  width: 100%;
-  margin-bottom: 22px;
-  position: relative;
-
-  @include when(invalid) {
-    border-color: $danger;
-  }
-
-  @include e(invalid-tip) {
-    position: absolute;
-    margin: 0 0 0 4px;
-    padding-top: 4px;
-    font-size: 12px;
-    color: $danger;
-  }
-}
-</style>

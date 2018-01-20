@@ -2,9 +2,15 @@
   <ta-container>
     <div class="ta-toolbar">
       <ta-button @click="showHtml()">预览HTML</ta-button>
-      <ta-button type="primary" @click="publishArticle()">发布文章</ta-button>
+      <ta-button type="primary" @click="openPublishArticle()">发布文章</ta-button>
     </div>
     <ta-markdown-editor class="ta-editor" v-model="article"></ta-markdown-editor>
+    <ta-publish-dialog 
+      :isShow="isShowDialog" 
+      @cancel="cancelPublish()"
+      @ok="publishArticle()"
+    >
+    </ta-publish-dialog>
   </ta-container>
 </template>
 
@@ -12,16 +18,19 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import TaMarkdownEditor from '@/components/common/markdown-editor'
+import TaPublishDialog from './dialog.vue'
 
 @Component({
   components: {
     TaMarkdownEditor,
+    TaPublishDialog,
   },
 })
 export default class Article extends Vue {
   article = '# Test'
-
-  showHtml() {
+  isShowDialog = false
+  
+  transfor2Html() {
     return Promise.resolve(import('showdown').then(showdown => {
       const convert = new showdown.Converter()
       const html = convert.makeHtml(this.article)
@@ -29,8 +38,16 @@ export default class Article extends Vue {
     }))
   }
   
+  openPublishArticle() {
+    this.isShowDialog = true
+  }
+
   publishArticle() {
-    this.showHtml().then(html => alert(html))
+    this.transfor2Html().then(html => console.log(html))
+  }
+
+  cancelPublish() {
+    this.isShowDialog = false
   }
 }
 </script>
