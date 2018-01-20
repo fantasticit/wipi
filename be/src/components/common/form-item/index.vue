@@ -4,13 +4,14 @@
       class="ta-input"
       :class="{ 'is-invalid': showInvalidTip }"
       :type="type" :placeholder="placeholder"
+      :data-prop="prop"
       ref="input"
       v-model="currentValue" @input="emitInput()"
     >
     <transition name="slide-down">
       <p 
         class="ta-form-item__invalid-tip"
-        v-if="showInvalidTip">
+        v-show="showInvalidTip">
         {{ message }}
       </p>
     </transition>
@@ -27,6 +28,7 @@ export default {
   props: {
     value: { type: String, default: '' },
     type: { type: String, default: 'text' },
+    prop: { type: String, default: '' },
     rules: { type: Array, default: () => [] },
     placeholder: { type: String, default: '请输入信息' },
   },
@@ -47,7 +49,7 @@ export default {
         })
         .catch(err => {
           this.showInvalidTip = true
-          this.message = err
+          this.message = err.msg
           // 验证失败
           this.$emit('fail', false)
         })
