@@ -27,5 +27,10 @@ a {
 }
 
 .CodeMirror {
-  height: 100% !important;
+  box-sizing: border-box;
+  height: calc(100% - 51px) !important;
+}
+
+.CodeMirror, .editor-toolbar {
+  border-color: #e9eaec !important;
 }

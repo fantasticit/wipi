@@ -1,0 +1,85 @@
+@mixin border() {
+  border-radius: 4px;
+  background-color: #fff;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 6px;
+    border-color: rgb(238, 238, 238);
+  }
+}
+
+@include b(article) {
+  height: 100%;
+  @include flexLayout(flex-start);
+
+  > div {
+    box-sizing: border-box;
+    width: 30%;
+
+    &:first-child {
+      width: 70%;
+      padding: 30px;
+      margin-right: 15px;
+      @include border;
+      
+      @include flexLayout(flex-start) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  @include e(item) {
+    margin-bottom: 22px;
+    @include flexLayout(flex-start);
+
+    &:last-child {
+      flex: 1;
+    }
+
+    textarea, div {
+      flex: 1;
+    }
+    
+    label {
+      display: inline-flex;
+      width: 5em;
+      margin-top: 1em;
+    }
+  }
+
+  @include e(prop) {
+    margin-bottom: 15px;
+    @include border;
+    
+    .header {
+      padding: 14px 16px;
+      border-bottom: 1px solid $border;
+      font-weight: 500;
+      font-size: 14px;
+
+      .ta-icon::before {
+        transform: translateY(2px);
+      }
+    }
+
+    .body {
+      padding: 14px 16px;
+    }
+
+    .footer {
+      padding: 14px 16px;
+      border-top: 1px solid $border;
+      text-align: right;
+
+      button + button {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.tags {
+  .ta-tag + .ta-tag {
+    margin-left: 10px;
+  }
+}

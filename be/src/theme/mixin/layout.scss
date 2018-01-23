@@ -10,6 +10,8 @@
 @mixin flexLayout($justify: center, $display: flex) {
   display: $display;
   justify-content: $justify;
+
+  @content;
 }
 
 @mixin center() {

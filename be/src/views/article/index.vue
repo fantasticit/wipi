@@ -1,20 +1,87 @@
 <template>
   <ta-container>
-    <div class="ta-toolbar">
-      <ta-button type="primary" @click="openPublishDialog()">发布文章</ta-button>
-    </div>
-    <div>
-      <div class="ta-subcontainer">
-        <label>文章概述</label>
-        <textarea class="ta-textarea" v-model="desc"></textarea>
+    <div class="ta-article">
+      <!-- 左侧文章撰写区 -->
+      <div>
+        <ta-form-item 
+          label="文章标题" 
+          placeholder="请输入文章标题" 
+          v-model="title">
+        </ta-form-item>
+        <div class="ta-article__item">
+          <label>文章概述</label>
+          <textarea class="ta-textarea" v-model="desc"></textarea>
+        </div>
+        <div class="ta-article__item">
+          <label>文章内容</label>
+          <ta-markdown-editor class="editor" ref="editor" v-model="article">
+          </ta-markdown-editor>
+        </div>
       </div>
-      <div class="ta-subcontainer">
-        <label>文章内容</label>
-        <ta-markdown-editor class="ta-editor" v-model="article"></ta-markdown-editor>
+      <!-- 右侧文章属性区 -->
+      <div>
+        <!-- 文章分类 -->
+        <div class="ta-article__prop">
+          <div class="header">
+            <ta-icon name="ios-paper-outline"></ta-icon>
+            <span>文章分类</span>
+          </div>
+          <div class="body">
+            <ta-select
+              placeholder="请选择文章分类"
+              v-model="classify"
+              :options="options">
+            </ta-select>
+          </div>
+        </div>
+        <!-- 文章标签 -->
+        <div class="ta-article__prop">
+          <div class="header">
+            <ta-icon name="ios-pricetags-outline"></ta-icon>
+            <span>文章标签</span>
+          </div>
+          <div class="body">
+            <ta-form-item 
+              placeholder="输入文章标签,回车即可添加" 
+              @enter="addTag($event)">
+            </ta-form-item>
+            <div class="tags">
+              <ta-tag
+                v-for="(tag, index) in tags" :key="index"
+                :type="tagTypes[index]"
+                @close="removeTag(index)"
+              >
+                {{ tag }}
+              </ta-tag>
+            </div>
+          </div>
+        </div>
+        <!-- 文章发布 -->
+        <div class="ta-article__prop">
+          <div class="header">
+            <ta-icon name="ios-book-outline"></ta-icon>
+            <span>文章发布</span>
+          </div>
+          <div class="body">
+            <ta-form-item 
+              label="作者" 
+              placeholder="请输入作者"
+              v-model="author">
+            </ta-form-item>
+            <ta-select
+              label="状态"
+              placeholder="请选择文章状态"
+              v-model="state"
+              :options="states">
+            </ta-select>
+          </div>
+          <div class="footer">
+            <ta-button @click="preview()">预览</ta-button>
+            <ta-button type="primary" @click="publish()">发布</ta-button>
+          </div>
+        </div>
       </div>
     </div>
-    <ta-publish-dialog :isShow="isShowDialog" @ok="publishArticle()" @cancel="closePublishDialog()">
-    </ta-publish-dialog>
   </ta-container>
 </template>
 
@@ -32,11 +99,96 @@ import TaPublishDialog from './dialog.vue'
   },
 })
 export default class Article extends Vue {
-  article = ''
+  title = ''
   desc = ''
-  isShowDialog = false
+  article = ''
+  classify = ''
+  author = ''
+  state = ''
   loading = false
-  
+  options = [
+    {
+      value: 'web_fe',
+      title: '前端',
+    },
+    {
+      value: 'web_be',
+      title: '后端',
+    },
+    {
+      value: 'design',
+      title: '设计',
+    },
+    {
+      value: 'algorithm',
+      title: '算法',
+    },
+    {
+      value: 'data_structor',
+      title: '数据结构',
+    },
+    {
+      value: 'ai',
+      title: '人工智能',
+    },
+    {
+      value: 'other',
+      title: '其他',
+    },
+  ]
+  states = [ { value: 'draft', title: '草稿' }, { value: '', title: '发布' } ]
+  tags = []
+  tagTypes = ['default', 'info', 'success', 'danger']
+
+  addTag(tag) {
+    tag = tag.trim()
+
+    if (tag) {
+      if (this.tags.length == 4) {
+        this.$message.error('最多4个标签')
+      } else {
+        this.tags.push(tag)
+      }
+    }
+  }
+
+  removeTag(index) {
+    this.tags.splice(index, 0)
+  }
+
+  reset() {
+    this.article = ''
+    this.title = ''
+    this.desc = ''
+    this.classify = ''
+    this.tags = []
+    this.author = ''
+    this.state = ''
+  }
+
+  preview() {
+    this.$refs['editor'].$el.querySelector('.fa-eye').click()
+  }
+
+  publish() {
+    const info = Object.assign({}, {
+      title: this.title, 
+      desc: this.desc, 
+      article: this.article, 
+      classify: this.classify, 
+      tags: this.tags, 
+      author: this.author, 
+      state: this.state,
+    })
+    const flag = Object.keys(info).every(key => !!info[key])
+
+    if (!flag) {
+      this.$message.error('请完善文章信息')
+    } else {
+      this.publishArticle(info)
+    }
+  }
+
   transfor2Html() {
     return Promise.resolve(import('showdown').then(showdown => {
       const convert = new showdown.Converter()
@@ -44,38 +196,11 @@ export default class Article extends Vue {
       return html
     }))
   }
-  
-  openPublishDialog() {
-    if (!this.article || !this.desc) {
-      this.$message.error('文章信息为为空')
-      return
-    }
-    this.isShowDialog = true
-  }
-
-  closePublishDialog() {
-    this.isShowDialog = false
-  }
-
-  addTag(tag) {
-    if (this.tags.length >= 4) {
-      this.$message.error('最多4个标签')
-    } else {
-      this.tags.push(tag)
-    }
-  }
-
-  removeTag(index) {
-    let tags = Array.from(this.tags)
-    tags.splice(index, 1)
-    this.tags = tags
-  }
 
   publishArticle(info) {
     this.loading = true
     this.transfor2Html().then(async (content_html) => {
       const article = Object.assign({}, info, {
-        desc: this.desc,
         content_md: this.article,
         content_html
       })
@@ -83,9 +208,7 @@ export default class Article extends Vue {
       try {
         const res = await ArticleProvider.add(article)
         this.$message.success(res)
-        this.closePublishDialog()
-        this.article = ''
-        this.desc = ''
+        this.reset()
       } catch (err) {
         this.$message.error('发表文章失败')
       } finally {
@@ -97,26 +220,5 @@ export default class Article extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@include b(toolbar) {
-  margin-bottom: 15px;
-  text-align: right;
-}
-
-@include b(editor) {
-  height: 80%;
-}
-
-@include b(subcontainer) {
-  margin-bottom: 22px;
-  @include flexLayout(flex-start);
-
-  textarea, div {
-    flex: 1;
-  }
-  
-  label {
-    display: inline-flex;
-    width: 5em;
-  }
-}
+@import './style.scss';
 </style>
