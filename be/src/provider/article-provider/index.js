@@ -2,6 +2,7 @@ import BaseHttp from '../base-http'
 
 class _ArticleProvider extends BaseHttp {
   api = {
+    get: '/article',
     add: '/article/new',
   }
 
@@ -9,26 +10,11 @@ class _ArticleProvider extends BaseHttp {
     super()
   }
 
-  async add({
-    title,
-    author,
-    date,
-    classify,
-    tags,
-    content_md,
-    content_html,
-  }) {
+  async add(article) {
     const req = {
       url: this.api.add,
       method: 'POST',
-      data: { 
-        title,
-        author,
-        classify,
-        tags,
-        content_md,
-        content_html, 
-      },
+      data: article
     }
 
     try {
@@ -36,6 +22,20 @@ class _ArticleProvider extends BaseHttp {
       return `发表文章成功`
     } catch (err) {
       throw new Error(err)
+    }
+  }
+
+  async get() {
+    const req = {
+      url: this.api.get,
+      method: 'GET',
+    }
+
+    try {
+      const res = await this.http(req)
+      return res.data
+    } catch (err) {
+      throw new Error('获取文章失败')
     }
   }
 }

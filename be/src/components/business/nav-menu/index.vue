@@ -20,8 +20,8 @@
         </p>
         <ul class="ta-navmenu__submenu">
           <li> 
-            <router-link to="/1">
-              <span>已发文章</span>
+            <router-link to="/article">
+              <span>文章列表</span>
             </router-link>
           </li>
           <li> 

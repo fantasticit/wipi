@@ -3,6 +3,7 @@ import 'normalize.css'
 import App from './App'
 import router from './router'
 import './assets/icon/ionicons.scss'
+import './directives/upload'
 import './components/common/message/index'
 import './components/common/loading/index'
 import './components/common/loadingbar/index'
@@ -13,6 +14,7 @@ import TaFormItem from './components/common/form-item'
 import TaDialog from './components/common/dialog'
 import TaSelect from './components/common/select'
 import TaTag from './components/common/tag'
+import TaUpload from './components/common/upload'
 import TaContainer from './components/business/container'
 
 Vue.component('TaIcon', TaIcon)
@@ -22,6 +24,7 @@ Vue.component('TaFormItem', TaFormItem)
 Vue.component('TaDialog', TaDialog)
 Vue.component('TaSelect', TaSelect)
 Vue.component('TaTag', TaTag)
+Vue.component('TaUpload', TaUpload)
 Vue.component('TaContainer', TaContainer)
 Vue.config.productionTip = false
 

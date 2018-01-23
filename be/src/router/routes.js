@@ -14,6 +14,12 @@ const routes = [
   },
 
   {
+    path: '/article',
+    name: 'ArticleList',
+    component: views.ArticleList
+  },
+
+  {
     path: '/article/new',
     name: 'NewArticle',
     component: views.Article

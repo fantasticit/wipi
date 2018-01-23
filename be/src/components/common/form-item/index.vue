@@ -14,7 +14,7 @@
     <transition name="slide-down">
       <p
         class="ta-form-item__invalid-tip"
-        :style="{ left: label ? '5em' : '0' }"
+        :style="{ left: label ? '6em' : '0' }"
         v-show="showInvalidTip">
         {{ message }}
       </p>

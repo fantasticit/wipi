@@ -19,11 +19,12 @@ module.exports = {
       }
     })
 
-    try {
-      if (!flag) {
-        throw new Error('接收到错误的参数')
-      }
+    if (!flag) {
+      console.log('接收到错误的参数')
+      return
+    }
 
+    try {
       const date = Date.now()
       const result = await ArticleModel.create({
         title,
@@ -44,4 +45,13 @@ module.exports = {
       console.log(err)
     }
   },
+
+  get: async (ctx, next) => {
+    try {
+      const data = await ArticleModel.find()
+      ctx.send({ status: 'ok', message: '新增文章成功', data })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }

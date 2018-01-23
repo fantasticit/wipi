@@ -3,13 +3,17 @@
     <div class="ta-toolbar">
       <ta-button type="primary" @click="openPublishDialog()">发布文章</ta-button>
     </div>
-    <ta-markdown-editor class="ta-editor" v-model="article"></ta-markdown-editor>
-    <ta-publish-dialog
-      :isShow="isShowDialog"
-      :loading="loading" 
-      @cancel="closePublishDialog()"
-      @ok="publishArticle($event)"
-    >
+    <div>
+      <div class="ta-subcontainer">
+        <label>文章概述</label>
+        <textarea class="ta-textarea" v-model="desc"></textarea>
+      </div>
+      <div class="ta-subcontainer">
+        <label>文章内容</label>
+        <ta-markdown-editor class="ta-editor" v-model="article"></ta-markdown-editor>
+      </div>
+    </div>
+    <ta-publish-dialog :isShow="isShowDialog" @ok="publishArticle()" @cancel="closePublishDialog()">
     </ta-publish-dialog>
   </ta-container>
 </template>
@@ -29,6 +33,7 @@ import TaPublishDialog from './dialog.vue'
 })
 export default class Article extends Vue {
   article = ''
+  desc = ''
   isShowDialog = false
   loading = false
   
@@ -41,18 +46,36 @@ export default class Article extends Vue {
   }
   
   openPublishDialog() {
+    if (!this.article || !this.desc) {
+      this.$message.error('文章信息为为空')
+      return
+    }
     this.isShowDialog = true
   }
 
   closePublishDialog() {
     this.isShowDialog = false
-    this.article = ''
+  }
+
+  addTag(tag) {
+    if (this.tags.length >= 4) {
+      this.$message.error('最多4个标签')
+    } else {
+      this.tags.push(tag)
+    }
+  }
+
+  removeTag(index) {
+    let tags = Array.from(this.tags)
+    tags.splice(index, 1)
+    this.tags = tags
   }
 
   publishArticle(info) {
     this.loading = true
     this.transfor2Html().then(async (content_html) => {
       const article = Object.assign({}, info, {
+        desc: this.desc,
         content_md: this.article,
         content_html
       })
@@ -61,6 +84,8 @@ export default class Article extends Vue {
         const res = await ArticleProvider.add(article)
         this.$message.success(res)
         this.closePublishDialog()
+        this.article = ''
+        this.desc = ''
       } catch (err) {
         this.$message.error('发表文章失败')
       } finally {
@@ -78,6 +103,20 @@ export default class Article extends Vue {
 }
 
 @include b(editor) {
-  height: 70%;
+  height: 80%;
+}
+
+@include b(subcontainer) {
+  margin-bottom: 22px;
+  @include flexLayout(flex-start);
+
+  textarea, div {
+    flex: 1;
+  }
+  
+  label {
+    display: inline-flex;
+    width: 5em;
+  }
 }
 </style>

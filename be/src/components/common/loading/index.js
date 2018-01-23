@@ -16,7 +16,6 @@ class _Loading {
   
   close() {
     this.instance.close()
-    this.instance = null
   }
 }
 

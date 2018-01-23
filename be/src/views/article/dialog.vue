@@ -2,30 +2,18 @@
   <ta-dialog 
     v-if="isShow" title="发布文章"
     :loading="loading"
-    @cancel="emitCancel()" @ok="publish()"
-  >
-    <ta-form-item 
-      label="文章标题" placeholder="请输入文章标题" :rules="rules.title"
-      v-model="title"
-    ></ta-form-item>
-    <ta-form-item 
-      label="文章作者" placeholder="请输入文章作者" :rules="rules.author"
-      v-model="author"
-    ></ta-form-item>
-    <ta-select
-      v-model="classify"
-      label="文章分类"
-      placeholder="请选择文章分类"
-      :options="options"
-    ></ta-select>
+    @cancel="emitCancel()" @ok="publish()">
+    <ta-form-item label="文章标题" placeholder="请输入文章标题" :rules="rules.title" v-model="title">
+    </ta-form-item>
+    <ta-form-item label="文章作者" placeholder="请输入文章作者" :rules="rules.author" v-model="author">
+    </ta-form-item>
+    <ta-select v-model="classify" label="文章分类" placeholder="请选择文章分类" :options="options">
+    </ta-select>
     <div>
-      <ta-form-item 
-        label="文章标签" placeholder="请输入文章标签" 
-        @enter="addTag($event)"
-      >
+      <ta-form-item label="文章标签" placeholder="请输入文章标签" @enter="addTag($event)">
       </ta-form-item>
       <div class="tags">
-        <ta-tag 
+        <ta-tag
           v-for="(tag, index) in tags" :key="index"
           :type="tagTypes[index]"
           @close="removeTag(index)"
@@ -125,7 +113,10 @@ export default {
       })
       if (Object.keys(info).every(key => !!info[key])) {
         this.$emit('ok', info)
-        this.info = ''
+        this.title = ''
+        this.author = ''
+        this.classify = ''
+        this.tags = []
       } else {
         this.$message.error('请完善文章信息')
       }
