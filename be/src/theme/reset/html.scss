@@ -34,3 +34,7 @@ a {
 .CodeMirror, .editor-toolbar {
   border-color: #e9eaec !important;
 }
+
+.ta-icon::before {
+  transform: translateY(2px);
+}

@@ -56,6 +56,16 @@
             </div>
           </div>
         </div>
+        <!-- 文章封面 -->
+        <div class="ta-article__prop">
+          <div class="header">
+            <ta-icon name="ios-cloud-upload-outline"></ta-icon>
+            <span>文章封面</span>
+          </div>
+          <div class="body">
+            <ta-upload></ta-upload>
+          </div>
+        </div>
         <!-- 文章发布 -->
         <div class="ta-article__prop">
           <div class="header">

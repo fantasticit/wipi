@@ -84,3 +84,30 @@ import('showdown').then(showdown => {
   return html
 })
 ```
+
+## 文件上传
+### 文件拖拽
+文件拖拽上传主要用到了事件`dragover`和`drop`.注意调用时,要阻止浏览器的默认事件,即:`e.preventDefault()`,具体文件的信息获取通过`e.dataTransfer.files`:
+
+```
+on(upload, 'drop', e => {
+  e.stopPropagation()
+  e.preventDefault()
+  const file = e.dataTransfer.files[0]
+  this.handleFile(file) // 对file的操作方法
+})
+```
+### 点击上传
+点击上传的原理是:监听点击事件,当某个节点被点击了,则处罚`input[type=file]`的点击:
+
+```
+on(upload, 'click', e => {
+  input.click()
+})
+
+on(input, 'change', e => {
+  this.handleFile(input.files[0])
+})
+```
+
+当然`file`的获取也需要通过`input[type=file]`
