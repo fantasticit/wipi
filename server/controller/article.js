@@ -5,6 +5,7 @@ module.exports = {
     const {
       title,
       author,
+      desc,
       classify,
       tags,
       content_md,
@@ -29,6 +30,7 @@ module.exports = {
       const result = await ArticleModel.create({
         title,
         author,
+        desc,
         date,
         classify,
         tags,

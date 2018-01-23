@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 const articleSchema = new Schema({
   id: Number,
   title: String,
+  desc: String,
   author: String,
   date: Date,
   classify: String,
