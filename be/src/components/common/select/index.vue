@@ -3,13 +3,12 @@
     <label v-if="label">{{ label }}</label>
     <select 
       class="ta-select" ref="select" :value="selected"
-      @change="emitChange($event.target.value)"
-    >
+      :class="{ 'is-selected': hasSelected }"
+      @change="emitChange($event.target.value)">
       <option value="" disabled>{{ placeholder }}</option>
       <option 
         v-for="(option, index) in options" :key="index"
-        :value="option.value"
-      >
+        :value="option.value">
         {{ option.title }}
       </option>
     </select>
@@ -39,7 +38,8 @@ export default {
 
   data() {
     return {
-      currentValue: this.$props.value
+      currentValue: this.$props.value,
+      hasSelected: false,
     }
   },
 
@@ -68,6 +68,7 @@ export default {
 
   methods: {
     emitChange(value) {
+      this.hasSelected = true
       this.$emit('change', value)
     }
   },

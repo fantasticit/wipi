@@ -4,14 +4,12 @@
       <h1>系统登录</h1>
       <ta-form-item 
         prop="account"
-        placeholder="请输入帐号" v-model="account" :rules="rules.account"
-      >
+        placeholder="请输入帐号" v-model="account" :rules="rules.account">
       </ta-form-item>
       <ta-form-item
         prop="password"
         placeholder="请输入密码" type="password" 
-        v-model="password" :rules="rules.password"
-      >
+        v-model="password" :rules="rules.password">
       </ta-form-item>
       <ta-button class="ta-login__button" type="primary">登录</ta-button>
     </ta-form>

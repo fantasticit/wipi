@@ -10,7 +10,11 @@
         </ta-form-item>
         <div class="ta-article__item">
           <label>文章概述</label>
-          <textarea class="ta-textarea" v-model="desc"></textarea>
+          <textarea 
+            class="ta-textarea" 
+            placeholder="请输入文章概述"
+            v-model="desc">
+          </textarea>
         </div>
         <div class="ta-article__item">
           <label>文章内容</label>
@@ -100,12 +104,10 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import TaMarkdownEditor from '@/components/common/markdown-editor'
 import { ArticleProvider } from '@/provider/article-provider'
-import TaPublishDialog from './dialog.vue'
 
 @Component({
   components: {
     TaMarkdownEditor,
-    TaPublishDialog,
   },
 })
 export default class Article extends Vue {
@@ -149,6 +151,17 @@ export default class Article extends Vue {
   states = [ { value: 'draft', title: '草稿' }, { value: '', title: '发布' } ]
   tags = []
   tagTypes = ['default', 'info', 'success', 'danger']
+  rules = {
+    title: [
+      { required: true, message: '标题不得为空', trigger: 'blur' },
+    ],
+    author: [
+      { required: true, message: '作者不得为空', trigger: 'blur' },
+    ],
+    classify: [
+      { required: true, message: '分类不得为空', trigger: 'blur' },
+    ]
+  }
 
   addTag(tag) {
     tag = tag.trim()

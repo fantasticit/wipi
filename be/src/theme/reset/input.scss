@@ -1,15 +1,34 @@
-input::-webkit-input-placeholder { 
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder { 
   font-size: 13px;
 }
 
-input:-moz-placeholder {
+input:-moz-placeholder,
+textarea:-moz-placeholder {
   font-size: 13px;
 }
 
-input::-moz-placeholder {
+input::-moz-placeholder,
+textarea::-moz-placeholder {
   font-size: 13px;
 }
 
-input:-ms-input-placeholder {
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
   font-size: 13px;
+}
+
+select {
+  color: #666;
+  font-size: 13px !important;
+}
+
+select.is-selected {
+  color: #333;
+  font-size: 1em !important;
+}
+
+option {
+  color: #333;
+  font-size: 16px;
 }
