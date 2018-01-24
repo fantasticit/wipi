@@ -1,19 +1,13 @@
 <template>
   <ta-container>
     <div class="ta-article">
-      <!-- 左侧文章撰写区 -->
+      <!-- S 左侧文章撰写区 -->
       <div>
-        <ta-form-item 
-          label="文章标题" 
-          placeholder="请输入文章标题" 
-          v-model="title">
+        <ta-form-item label="文章标题" placeholder="请输入文章标题" v-model="title">
         </ta-form-item>
         <div class="ta-article__item">
           <label>文章概述</label>
-          <textarea 
-            class="ta-textarea" 
-            placeholder="请输入文章概述"
-            v-model="desc">
+          <textarea class="ta-textarea" placeholder="请输入文章概述" v-model="desc">
           </textarea>
         </div>
         <div class="ta-article__item">
@@ -22,7 +16,9 @@
           </ta-markdown-editor>
         </div>
       </div>
-      <!-- 右侧文章属性区 -->
+      <!-- E 左侧文章撰写区 -->
+
+      <!-- S 右侧文章属性区 -->
       <div>
         <!-- 文章分类 -->
         <div class="ta-article__prop">
@@ -31,10 +27,7 @@
             <span>文章分类</span>
           </div>
           <div class="body">
-            <ta-select
-              placeholder="请选择文章分类"
-              v-model="classify"
-              :options="options">
+            <ta-select placeholder="请选择文章分类" v-model="classify" :options="options">
             </ta-select>
           </div>
         </div>
@@ -45,16 +38,11 @@
             <span>文章标签</span>
           </div>
           <div class="body">
-            <ta-form-item 
-              placeholder="输入文章标签,回车即可添加" 
-              @enter="addTag($event)">
+            <ta-form-item placeholder="输入文章标签,回车即可添加" @enter="addTag($event)">
             </ta-form-item>
             <div class="tags">
-              <ta-tag
-                v-for="(tag, index) in tags" :key="index"
-                :type="tagTypes[index]"
-                @close="removeTag(index)"
-              >
+              <ta-tag v-for="(tag, index) in tags" :key="index" :type="tagTypes[index]"
+                @close="removeTag(index)">
                 {{ tag }}
               </ta-tag>
             </div>
@@ -77,15 +65,9 @@
             <span>文章发布</span>
           </div>
           <div class="body">
-            <ta-form-item 
-              label="作者" 
-              placeholder="请输入作者"
-              v-model="author">
+            <ta-form-item label="作者" placeholder="请输入作者" v-model="author">
             </ta-form-item>
-            <ta-select
-              label="状态"
-              placeholder="请选择文章状态"
-              v-model="state"
+            <ta-select label="状态" placeholder="请选择文章状态" v-model="state"
               :options="states">
             </ta-select>
           </div>
@@ -95,6 +77,7 @@
           </div>
         </div>
       </div>
+      <!-- E 右侧文章属性区 -->
     </div>
   </ta-container>
 </template>
