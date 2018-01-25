@@ -134,17 +134,17 @@ export default class Article extends Vue {
   states = [ { value: 'draft', title: '草稿' }, { value: '', title: '发布' } ]
   tags = []
   tagTypes = ['default', 'info', 'success', 'danger']
-  rules = {
-    title: [
-      { required: true, message: '标题不得为空', trigger: 'blur' },
-    ],
-    author: [
-      { required: true, message: '作者不得为空', trigger: 'blur' },
-    ],
-    classify: [
-      { required: true, message: '分类不得为空', trigger: 'blur' },
-    ]
-  }
+  // rules = {
+  //   title: [
+  //     { required: true, message: '标题不得为空', trigger: 'blur' },
+  //   ],
+  //   author: [
+  //     { required: true, message: '作者不得为空', trigger: 'blur' },
+  //   ],
+  //   // classify: [
+  //   //   { required: true, message: '分类不得为空', trigger: 'blur' },
+  //   // ]
+  // }
 
   addTag(tag) {
     tag = tag.trim()
@@ -178,12 +178,12 @@ export default class Article extends Vue {
 
   publish() {
     const info = Object.assign({}, {
-      title: this.title, 
-      desc: this.desc, 
-      article: this.article, 
-      classify: this.classify, 
-      tags: this.tags, 
-      author: this.author, 
+      title: this.title,
+      desc: this.desc,
+      article: this.article,
+      classify: this.classify,
+      tags: this.tags,
+      author: this.author,
       state: this.state,
     })
     const flag = Object.keys(info).every(key => !!info[key])
