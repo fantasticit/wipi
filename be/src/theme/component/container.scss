@@ -47,6 +47,10 @@
       flex: 1;
       overflow: auto;
       background-color: #f0f0f0;
+
+      > div {
+        height: 100%;
+      }
     }
   }
 }
