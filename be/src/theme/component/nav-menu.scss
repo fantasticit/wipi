@@ -84,9 +84,9 @@
   // 当菜单折叠时的样式
   @include when(collapse) {
     li {
-      // position: relative;
-      // max-height: 56px !important;
-      // overflow: visible;
+      position: relative;
+      max-height: 56px !important;
+      overflow: visible;
 
       a, p {
         padding-left: 0;
@@ -102,93 +102,97 @@
         margin-right: 0;
       }
 
-      span {
-        // position: absolute;
-        // left: 47px;
-        // z-index: 1000;
+      > span {
+        position: absolute;
+        left: 37px;
+        z-index: 1000;
 
-        // width: 140px;
-        // height: 100%;
+        width: 140px;
+        height: 100%;
+        padding: 0 10px;
 
-        // align-items: center;
-        // @include flexLayout();
-        // background-color: inherit;
+        align-items: center;
+        @include flexLayout();
+        background-color: inherit;
         display: none;
 
-        // &:hover {
-        //   display: block;
-        // }
+        &:hover {
+          display: block;
+        }
       }
 
       > ul {
         display: none;
-        // position: absolute;
-        // left: 47px;
-        // top: 0;
+        position: absolute;
+        left: 37px;
+        top: 0;
+        background: transparent;
+
+        padding: 0 10px;
   
-        // li {
-        //   width: 140px;
-        //   height: 100%;
-        //   position: relative;
+        li {
+          width: 140px;
+          height: 100%;
+          position: relative;
 
-        //   p {
-        //     padding-left: 10px;
+          p {
+            padding-left: 10px;
 
-        //     .ta-icon {
-        //       display: block;
-        //       margin-left: 5px;
-        //     }
+            .ta-icon {
+              display: block;
+              margin-left: 5px;
+            }
 
-        //     span {
-        //       box-sizing: border-box;              
-        //       padding: 15px;
-        //       justify-content: flex-start;
-        //     }
+            span {
+              box-sizing: border-box;              
+              padding: 15px;
+              justify-content: flex-start;
+            }
 
-        //     .ta-icon__arrow {
-        //       display: block;
-        //       transform: rotate(-90deg);
-        //       right: 10px;
-        //     }
-        //   }
+            .ta-icon__arrow {
+              display: block;
+              transform: rotate(-90deg);
+              right: 10px;
+            }
+          }
 
-        //   > ul {
-        //     display: none;
-        //     left: 142px;
+          > ul {
+            display: none;
+            left: 142px;
 
-        //     &:hover {
-        //       display: block;
-        //     }
-        //   }
+            &:hover {
+              display: block;
+            }
+          }
 
-        //   a {
-        //     padding: 0;
-        //   }
+          a {
+            padding: 0;
+          }
 
-        //   span {
-        //     position: relative;
-        //     left: 0;
-        //   }
-        // }
+          span {
+            position: relative;
+            left: 0;
+          }
+        }
 
-        // li.is-opened {
-        //   display: block;
+        li.is-opened {
+          display: block;
 
-        //   > ul {
-        //     display: block;
-        //   }
-        // }
+          > ul {
+            display: block;
+          }
+        }
       }
     }
 
-    // li.is-opened {
-    //   span {
-    //     display: flex;
-    //   }
+    li {
+      span {
+        display: flex;
+      }
 
-    //   > ul {
-    //     display: block;
-    //   }
-    // }
+      > ul {
+        display: block;
+      }
+    }
   }
 }

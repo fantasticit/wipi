@@ -1,14 +1,14 @@
 <template>
   <div class="ta-navmenu">
     <ul>
-      <li @click="emitShow($event)"> 
+      <li>
+        <ta-icon name="ios-speedometer"></ta-icon>
         <router-link to="/dashboard" exact>
-          <ta-icon name="ios-speedometer"></ta-icon>
           <span>首页</span>
         </router-link>
       </li>
 
-      <li :class="{'is-active': isShowSubmenu}" @click="emitShow($event)">
+      <li>
         <p @click="toggleShow()">
           <ta-icon name="ios-speedometer"></ta-icon>
           <span>文章管理</span>
