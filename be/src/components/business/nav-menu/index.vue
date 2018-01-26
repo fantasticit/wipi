@@ -2,8 +2,8 @@
   <div class="ta-navmenu">
     <ul>
       <li>
-        <ta-icon name="ios-speedometer"></ta-icon>
         <router-link to="/dashboard" exact>
+          <ta-icon name="ios-speedometer"></ta-icon>
           <span>首页</span>
         </router-link>
       </li>

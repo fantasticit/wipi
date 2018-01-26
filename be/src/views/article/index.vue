@@ -1,5 +1,5 @@
 <template>
-  <ta-container>
+  <div>
     <div class="ta-article">
       <!-- S 左侧文章撰写区 -->
       <div>
@@ -79,7 +79,7 @@
       </div>
       <!-- E 右侧文章属性区 -->
     </div>
-  </ta-container>
+  </div>
 </template>
 
 <script>

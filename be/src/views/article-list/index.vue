@@ -1,7 +1,7 @@
 <template>
-  <ta-container>
+  <div>
     <pre>{{ articles }}</pre>
-  </ta-container>
+  </div>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
-  <ta-container>
+  <div>
     内容待定
-  </ta-container>
+  </div>
 </template>
 
 <script>

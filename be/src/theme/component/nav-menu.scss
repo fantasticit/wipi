@@ -104,12 +104,11 @@
 
       > span {
         position: absolute;
-        left: 37px;
+        left: 47px;
         z-index: 1000;
 
         width: 140px;
         height: 100%;
-        padding: 0 10px;
 
         align-items: center;
         @include flexLayout();
@@ -124,11 +123,8 @@
       > ul {
         display: none;
         position: absolute;
-        left: 37px;
+        left: 47px;
         top: 0;
-        background: transparent;
-
-        padding: 0 10px;
   
         li {
           width: 140px;
@@ -185,7 +181,7 @@
       }
     }
 
-    li {
+    li:hover {
       span {
         display: flex;
       }
