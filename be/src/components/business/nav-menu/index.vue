@@ -2,35 +2,69 @@
   <div class="ta-navmenu">
     <ul>
       <li>
-        <router-link to="/dashboard" exact>
+        <div>
+          <router-link to="/dashboard" exact>
+            <span>首页</span>
+          </router-link>
           <ta-icon name="ios-speedometer"></ta-icon>
-          <span>首页</span>
-        </router-link>
+        </div>
       </li>
 
-      <li>
-        <p @click="toggleShow()">
-          <ta-icon name="ios-speedometer"></ta-icon>
-          <span>文章管理</span>
+      <li :class="{'is-active': isShowSubmenu[0]}">
+        <div @click="toggleShow(0)">
           <ta-icon
             class="ta-icon__arrow"
-            :class="{'is-active': isShowSubmenu}"
+            :class="{'is-active': isShowSubmenu[0]}"
             name="ios-arrow-down">
           </ta-icon>
-        </p>
+          <span>文章管理</span>
+          <ta-icon name="ios-speedometer"></ta-icon>
+        </div>
         <ul class="ta-navmenu__submenu">
           <li> 
-            <router-link to="/article">
-              <span>文章列表</span>
-            </router-link>
+            <div>
+              <router-link to="/article">
+                <span>文章列表</span>
+              </router-link>
+            </div>
           </li>
           <li> 
-            <router-link to="/article/new">
-              <span>新建文章</span>
-            </router-link>
+            <div>
+              <router-link to="/article/new">
+                <span>新建文章</span>
+              </router-link>
+            </div>
           </li>
         </ul>
       </li>
+<!-- 
+      <li :class="{'is-active': isShowSubmenu[1]}">
+        <div @click="toggleShow(1)">
+          <ta-icon
+            class="ta-icon__arrow"
+            :class="{'is-active': isShowSubmenu[1]}"
+            name="ios-arrow-down">
+          </ta-icon>
+          <span>文章管理</span>
+          <ta-icon name="ios-speedometer"></ta-icon>
+        </div>
+        <ul class="ta-navmenu__submenu">
+          <li> 
+            <div>
+              <router-link to="/article">
+                <span>文章列表</span>
+              </router-link>
+            </div>
+          </li>
+          <li> 
+            <div>
+              <router-link to="/article/new">
+                <span>新建文章</span>
+              </router-link>
+            </div>
+          </li>
+        </ul>
+      </li> -->
     </ul>
   </div>
 </template>
@@ -49,13 +83,17 @@ export default {
 
   data() {
     return {
-      isShowSubmenu: false
+      isShowSubmenu: [false, false]
     }
   },
 
   methods: {
-    toggleShow() {
-      this.isShowSubmenu = !this.isShowSubmenu
+    toggleShow(i) {
+      if (this.isShowSubmenu[i]) {
+        this.$set(this.isShowSubmenu, i, false)
+      } else {
+        this.$set(this.isShowSubmenu, i, true)
+      }
     },
 
     emitShow(e) {

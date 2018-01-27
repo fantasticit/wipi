@@ -2,7 +2,7 @@
   <div
     v-if="isShow"
     class="ta-loadingbar"
-    :style="{ 'width': w + 'vh' }"
+    :style="{ 'width': w + 'vw' }"
   >
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
           }, 10)
         })
       })()
-        .then(() => setTimeout(() => this.isShow = false, 100))
+        .then(() => setTimeout(() => this.isShow = false, 300))
     },
   },
 }

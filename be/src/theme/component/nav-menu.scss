@@ -3,9 +3,10 @@
 @import '../var/color.scss';
 
 @include b(navmenu) {
-  position: relative;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
+  padding: 52px 0;
 
   background-color: $bg;
   font-size: 14px;
@@ -13,65 +14,65 @@
   li {
     position: relative;
     max-height: 56px;
-    overflow: hidden;
-
     transition: all ease .3s;
+    overflow: hidden;
 
     @include when(active) {
       max-height: 500px;
     }
 
-    a, p {
-      box-sizing: border-box;
+    > div{
       width: 100%;
       height: 56px;
+
+      box-sizing: border-box;
       padding-left: 20px;
 
+      line-height: 56px;
       color: rgb(191, 203, 217);
 
-      align-items: center;
-      @include flexLayout(flex-start, inline-flex);
-
-      transition: all ease .2s;
+      @include flexLayout(flex-end) {
+        flex-direction: row-reverse;
+      };
 
       &:hover {
         background-color: rgb(38, 52, 69);
       }
 
+      a{
+        flex: 1;
+      }
+
       .ta-icon {
         margin-right: 15px;
-      }
-    }
 
-    a.router-link-exact-active {
-      color: $primary;
-    }
+        @include e(arrow) {
+          cursor: pointer;
 
-    p {
-      position: relative;
-      margin: 0;
-      cursor: pointer;
+          position: absolute;
+          right: 15px;
+          transition: all ease .2s;
 
-      .ta-icon__arrow {
-        position: absolute;
-        right: 5px;
-        font-size: 1em;
-
-        transition: all ease .3s;
-
-        @include when(active) {
-          transform: rotate(180deg);
+          @include when(active) {
+            transform: rotate(180deg);
+          }
         }
+      }
+      
+      a.router-link-exact-active,
+      a.router-link-exact-active + .ta-icon {
+        color: $primary;
       }
     }
   }
 
   @include e(submenu) {
+    width: 100%;
     background-color: #1f2d3d;
 
     li {
-      a {
-        padding-left: 30px;
+      > div {
+        padding-left: 60px;
         background-color: #1f2d3d;
 
         &:hover {
@@ -83,111 +84,95 @@
 
   // 当菜单折叠时的样式
   @include when(collapse) {
-    li {
-      position: relative;
-      max-height: 56px !important;
+    > ul > li {
       overflow: visible;
+      max-height: 56px;
 
-      a, p {
-        padding-left: 0;
-        align-items: center;
-        @include flexLayout();
-
-        .ta-icon__arrow {
-          display: none;
+      &:hover {
+        > div > a,
+        > ul {
+          display: block;
         }
       }
 
-      .ta-icon {
-        margin-right: 0;
-      }
-
-      span {
-        position: absolute;
-        left: 47px;
-        z-index: 1000;
-
-        width: 140px;
-        height: 100%;
-
-        align-items: center;
-        @include flexLayout();
-        background-color: inherit;
-        display: none;
+      > div {
+        position: relative;
+        padding-left: 0;
+        justify-content: center;
 
         &:hover {
-          display: block;
+          background-color: $bg;
+        }
+  
+        .ta-icon {
+          margin: 0;
+  
+          @include e(arrow) {
+            display: none;
+          }
+        }
+  
+        > span {
+          display: none;
+        }
+  
+        > a {
+          display: none;
+          position: absolute;
+          left: 45px;
+          z-index: 3000;
+        
+          width: 130px;
+          padding: 0 10px;
+  
+          background: transparent;
+
+          &:hover {
+            span {
+              background-color: #001528;
+            }
+          }
+  
+          span {
+            display: block;
+            text-align: center;
+            border-radius: 4px;
+            background-color: #1f2d3d;
+          }
         }
       }
 
       > ul {
         display: none;
         position: absolute;
-        left: 47px;
         top: 0;
-  
+        left: 45px;
+        z-index: 3000;
+      
+        width: 130px;
+        padding: 0 10px;
+
+        background: transparent;
+
         li {
-          width: 140px;
-          height: 100%;
-          position: relative;
-
-          p {
-            padding-left: 10px;
-
-            .ta-icon {
-              display: block;
-              margin-left: 5px;
-            }
-
-            span {
-              box-sizing: border-box;              
-              padding: 15px;
-              justify-content: flex-start;
-            }
-
-            .ta-icon__arrow {
-              display: block;
-              transform: rotate(-90deg);
-              right: 10px;
-            }
+          &:first-of-type {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
           }
 
-          > ul {
-            display: none;
-            left: 142px;
-
-            &:hover {
-              display: block;
-            }
+          &:last-of-type {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
           }
 
-          a {
+          > div {
             padding: 0;
-          }
-
-          span {
-            position: relative;
-            left: 0;
-          }
-        }
-
-        li.is-opened {
-          display: block;
-
-          > ul {
-            display: block;
+  
+            a {
+              text-align: center;
+            }
           }
         }
-      }
-    }
-
-    li:hover {
-      span {
-        display: flex;
-      }
-
-      > ul {
-        display: block;
       }
     }
   }
