@@ -18,7 +18,7 @@
             name="ios-arrow-down">
           </ta-icon>
           <span>文章管理</span>
-          <ta-icon name="ios-speedometer"></ta-icon>
+          <ta-icon name="ios-paper"></ta-icon>
         </div>
         <ul class="ta-navmenu__submenu">
           <li> 

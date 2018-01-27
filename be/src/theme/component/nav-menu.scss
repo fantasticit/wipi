@@ -10,12 +10,17 @@
 
   background-color: $bg;
   font-size: 14px;
+  cursor: pointer;
 
   li {
     position: relative;
     max-height: 56px;
     transition: all ease .3s;
     overflow: hidden;
+
+    &:hover {
+      background-color: rgb(38, 52, 69);
+    }
 
     @include when(active) {
       max-height: 500px;
@@ -34,10 +39,6 @@
       @include flexLayout(flex-end) {
         flex-direction: row-reverse;
       };
-
-      &:hover {
-        background-color: rgb(38, 52, 69);
-      }
 
       a{
         flex: 1;
@@ -89,6 +90,8 @@
       max-height: 56px;
 
       &:hover {
+        background-color: #1f2d3d;
+        
         > div > a,
         > ul {
           display: block;
@@ -99,10 +102,6 @@
         position: relative;
         padding-left: 0;
         justify-content: center;
-
-        &:hover {
-          background-color: $bg;
-        }
   
         .ta-icon {
           margin: 0;
