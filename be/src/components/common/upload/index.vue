@@ -33,7 +33,9 @@
 
 <script>
 import { on } from '@/util/event'
+import { QiniuProvider } from '@/provider/qiniu-provider'
 import TaIcon from '../icon'
+import message from '../message'
 
 export default {
   name: 'TaUpload',
@@ -49,12 +51,14 @@ export default {
       tipIcon: 'checkmark-circled', // 失败的话就是close-circled
       isUploading: true,            // 正在上传
       isSuccess: true,              // 上传是否成功
+      uploadToken: null,            // 七牛上传token
     }
   },
 
   mounted() {
     const upload = this.$refs['upload']
     const input = upload.querySelector('input')
+    this.getQiniuToken()
 
     on(upload, 'dragover', e => {
       e.stopPropagation()
@@ -88,6 +92,15 @@ export default {
     handleFile(file) {
       this.fileName = file.name
       this.draging = false
+    },
+
+    async getQiniuToken() {
+      try {
+        const uploadToken = await QiniuProvider.getQiniuToken()
+        this.uploadToken = uploadToken
+      } catch (err) {
+        message(err.message, 'error')
+      }
     }
   }
 }
