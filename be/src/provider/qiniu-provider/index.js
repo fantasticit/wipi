@@ -3,6 +3,7 @@ import BaseHttp from '../base-http'
 class _QiniuProvider extends BaseHttp {
   api = {
     token: '/qiniu/token',
+    upload: 'http://upload.qiniu.com/',
   }
 
   constructor() {
@@ -20,6 +21,31 @@ class _QiniuProvider extends BaseHttp {
       return res.data
     } catch (err) {
       throw new Error('获取七牛上传Token失败')
+    }
+  }
+
+  async uploadImage(file, token) {
+    let fileName = file.name
+    let param = new FormData()
+    param.append('chunk', 0)
+    param.append('chunk', 1)
+    param.append('file', file, fileName)
+    param.append('token', token)
+
+    const req = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      url: this.api.upload,
+      method: 'Post',
+      data: param,
+    }
+
+    try {
+      const res = await this.http(req)
+      return res
+    } catch (err) {
+      throw new Error('上传图片到七牛失败')
     }
   }
 }

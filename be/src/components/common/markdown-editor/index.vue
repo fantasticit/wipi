@@ -24,6 +24,9 @@ export default {
 
   watch: {
     value(newVal)  {
+      if (newVal === this.mdEditor.value()) {
+        return
+      }
       this.mdEditor.value(newVal)
     }
   },

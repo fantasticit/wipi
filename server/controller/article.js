@@ -5,11 +5,13 @@ module.exports = {
     const {
       title,
       author,
+      cover,
       desc,
       classify,
       tags,
       content_md,
       content_html,
+      states,
     } = req = ctx.request.body
 
     let flag = true
@@ -27,16 +29,7 @@ module.exports = {
 
     try {
       const date = Date.now()
-      const result = await ArticleModel.create({
-        title,
-        author,
-        desc,
-        date,
-        classify,
-        tags,
-        content_md,
-        content_html,
-      })
+      const result = await ArticleModel.create(req)
 
       if (result !== null) {
         ctx.send({ status: 'ok', message: '新增文章成功' })

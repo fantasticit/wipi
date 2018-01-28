@@ -92,6 +92,8 @@ export default {
     handleFile(file) {
       this.fileName = file.name
       this.draging = false
+
+      this.uploadFile(file)
     },
 
     async getQiniuToken() {
@@ -101,7 +103,22 @@ export default {
       } catch (err) {
         message(err.message, 'error')
       }
-    }
+    },
+
+    async uploadFile(file) {
+      this.isUploading = true
+      try {
+        const res = await QiniuProvider.uploadImage(file, this.uploadToken)
+        message('图片上传成功', 'success')
+        this.isSuccess = true
+        this.$emit('success', res)
+      } catch (err) {
+        message(err.message, 'error')
+        this.isSuccess = false
+      } finally {
+        this.isUploading = false
+      }
+    },
   }
 }
 </script>

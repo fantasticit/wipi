@@ -5,12 +5,14 @@ const articleSchema = new Schema({
   id: Number,
   title: String,
   desc: String,
+  cover: String,
   author: String,
   date: Date,
   classify: String,
   tags: Array,
   content_md: String,
   content_html: String,
+  state: String,
 })
 
 articleSchema.index({ id: 1 })

@@ -27,7 +27,7 @@
             <span>文章分类</span>
           </div>
           <div class="body">
-            <ta-select placeholder="请选择文章分类" v-model="classify" :options="options">
+            <ta-select placeholder="请选择文章分类" v-model="classify" :options="classifies">
             </ta-select>
           </div>
         </div>
@@ -55,7 +55,7 @@
             <span>文章封面</span>
           </div>
           <div class="body">
-            <ta-upload></ta-upload>
+            <ta-upload @success="getImageName($event)"></ta-upload>
           </div>
         </div>
         <!-- 文章发布 -->
@@ -85,6 +85,7 @@
 <script>
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { mapState } from 'vuex'
 import TaMarkdownEditor from '@/components/common/markdown-editor'
 import { ArticleProvider } from '@/provider/article-provider'
 
@@ -92,60 +93,28 @@ import { ArticleProvider } from '@/provider/article-provider'
   components: {
     TaMarkdownEditor,
   },
+
+  computed: {
+    ...mapState('article', {
+      classifies: state => state.classifies,
+      states: state => state.states,
+      coverPrefix: state => state.coverPrefix,
+    })
+  }
 })
 export default class Article extends Vue {
-  title = ''
-  desc = ''
-  article = ''
-  classify = ''
-  author = ''
-  state = ''
+  title = ''                                           // 文章标题
+  desc = ''                                            // 文章描述
+  article = ''                                         // 文章内容
+  classify = ''                                        // 文章分类
+  author = ''                                          // 文章作者
+  state = ''                                           // 文章状态
+  cover = ''                                           // 文章封面
+  tags = []                                            // 文章标签
   loading = false
-  options = [
-    {
-      value: 'web_fe',
-      title: '前端',
-    },
-    {
-      value: 'web_be',
-      title: '后端',
-    },
-    {
-      value: 'design',
-      title: '设计',
-    },
-    {
-      value: 'algorithm',
-      title: '算法',
-    },
-    {
-      value: 'data_structor',
-      title: '数据结构',
-    },
-    {
-      value: 'ai',
-      title: '人工智能',
-    },
-    {
-      value: 'other',
-      title: '其他',
-    },
-  ]
-  states = [ { value: 'draft', title: '草稿' }, { value: '', title: '发布' } ]
-  tags = []
   tagTypes = ['default', 'info', 'success', 'danger']
-  // rules = {
-  //   title: [
-  //     { required: true, message: '标题不得为空', trigger: 'blur' },
-  //   ],
-  //   author: [
-  //     { required: true, message: '作者不得为空', trigger: 'blur' },
-  //   ],
-  //   // classify: [
-  //   //   { required: true, message: '分类不得为空', trigger: 'blur' },
-  //   // ]
-  // }
 
+  // 增加标签
   addTag(tag) {
     tag = tag.trim()
 
@@ -158,10 +127,12 @@ export default class Article extends Vue {
     }
   }
 
+  // 移除标签
   removeTag(index) {
     this.tags.splice(index, 0)
   }
 
+  // 重置文章信息
   reset() {
     this.article = ''
     this.title = ''
@@ -170,16 +141,20 @@ export default class Article extends Vue {
     this.tags = []
     this.author = ''
     this.state = ''
+    this.cover = ''
   }
 
+  // 文章预览
   preview() {
     this.$refs['editor'].$el.querySelector('.fa-eye').click()
   }
 
+  // 发布文章前的转换
   publish() {
     const info = Object.assign({}, {
       title: this.title,
       desc: this.desc,
+      cover: this.cover,
       article: this.article,
       classify: this.classify,
       tags: this.tags,
@@ -195,6 +170,7 @@ export default class Article extends Vue {
     }
   }
 
+  // 转换markdown -> html
   transfor2Html() {
     return Promise.resolve(import('showdown').then(showdown => {
       const convert = new showdown.Converter()
@@ -203,6 +179,13 @@ export default class Article extends Vue {
     }))
   }
 
+  // 获取上传后的封面路径
+  getImageName(res) {
+    this.cover = this.coverPrefix + res.hash
+    console.log(this.cover)
+  }
+
+  // 发布文章
   publishArticle(info) {
     this.loading = true
     this.transfor2Html().then(async (content_html) => {

@@ -40,7 +40,7 @@ export default {
           }, 10)
         })
       })()
-        .then(() => setTimeout(() => this.isShow = false, 300))
+        .then(() => setTimeout(() => this.isShow = false, 200))
     },
   },
 }
