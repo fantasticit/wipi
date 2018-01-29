@@ -1,4 +1,5 @@
 import views from './view'
+import routeConfig from './route-config'
 
 const routes = [
   {
@@ -10,26 +11,19 @@ const routes = [
         name: 'Login',
         component: views.Login
       },
-    
-      {
-        path: 'dashboard',
-        name: 'Dashboard',
-        component: views.Dashboard
-      },
-    
-      {
-        path: 'article',
-        name: 'ArticleList',
-        component: views.ArticleList
-      },
-    
-      {
-        path: 'article/new',
-        name: 'NewArticle',
-        component: views.Article
-      },
     ]
   }
 ]
+
+routeConfig.map(route => {
+  if (!route.children) {
+    routes[0].children.push(route)
+  } else {
+    route.children.map(subRoute => {
+      subRoute.meta.prefix = route.prefix
+      routes[0].children.push(subRoute)
+    })
+  }
+})
 
 export default routes

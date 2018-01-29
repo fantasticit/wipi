@@ -6,26 +6,35 @@
         :class="{ 'is-rotate': isCollapse }"
         @click="emitMenu()"
       ></ta-icon>
-      <span>首页 / 测试</span>
+      <span v-for="(route, i) in routes" :key="i">
+        <template v-if="route.prefix">{{ route.prefix }} /</template>
+        <router-link v-if="i == routes.length - 1" :to="route.path" exact>{{ route.title }}</router-link>
+        <template v-else>{{ route.title }}</template>
+        <template v-if="routes.length > 1 && i < routes.length - 1">/</template>
+      </span>
     </div>
 
     <div>
       <ta-icon :name="toggleScreenIcon" @click="toggleFullScreen()"></ta-icon>
-      <div class="ta-header__avatar" @click="toggleShow">
+      <div class="ta-header__avatar" @mouseenter="show()" @mouseleave="hide()">
         <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" alt="">
         <transition name="slide-left">
-          <ul v-if="showDropmenu" class="ta-header__avatar-dropmenu">
-            <li>
-                <router-link to="/dashboard">首页</router-link>
-            </li>
-            <li>
-              <a href="http://github.com/mvpzx" target="_blank">项目地址</a>
-            </li>
-            <div class="cut-off"></div>
-            <li>
-              <router-link to="/login" replace>退出登录</router-link>
-            </li>
-          </ul>
+          <div 
+            class="ta-header__avatar-dropmenu"
+            v-if="showDropmenu">
+            <ul>
+              <li>
+                  <router-link to="/dashboard">首页</router-link>
+              </li>
+              <li>
+                <a href="http://github.com/mvpzx" target="_blank">项目地址</a>
+              </li>
+              <div class="cut-off"></div>
+              <li>
+                <router-link to="/login" replace>退出登录</router-link>
+              </li>
+            </ul>
+          </div>
         </transition>
       </div>
     </div>
@@ -33,6 +42,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { on } from '@/util/event'
 import TaIcon from '../../common/icon'
 import Bus from '../bus'
@@ -57,18 +67,24 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('route', {
+      routes: state => state.routes
+    }),
+  },
+
   methods: {
     emitMenu() {
       this.isCollapse = !this.isCollapse
       this.$emit('toggleMenu')  
     },
 
-    toggleShow() {
-      this.showDropmenu = !this.showDropmenu
+    show() {
+      this.showDropmenu = true
+    },
 
-      // if (this.showDropmenu) {
-      //   setTimeout(this.toggleShow, 3000)
-      // }
+    hide() {
+      this.showDropmenu = false
     },
 
     toggleFullScreen() {
