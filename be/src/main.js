@@ -14,7 +14,8 @@ import TaFormItem from './components/common/form-item'
 import TaDialog from './components/common/dialog'
 import TaSelect from './components/common/select'
 import TaTag from './components/common/tag'
-import TaUpload from './components/common/upload'
+import TaCollapse from './components/common/collapse'
+import TaUpload from './components/business/upload'
 import TaContainer from './components/business/container'
 
 Vue.component('TaIcon', TaIcon)
@@ -25,6 +26,7 @@ Vue.component('TaDialog', TaDialog)
 Vue.component('TaSelect', TaSelect)
 Vue.component('TaTag', TaTag)
 Vue.component('TaUpload', TaUpload)
+Vue.component('TaCollapse', TaCollapse)
 Vue.component('TaContainer', TaContainer)
 Vue.config.productionTip = false
 

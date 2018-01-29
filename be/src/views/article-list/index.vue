@@ -1,6 +1,15 @@
 <template>
   <div>
-    <pre>{{ articles }}</pre>
+    <ta-collapse>
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+    </ta-collapse>
+    <ta-collapse>
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+    </ta-collapse>
   </div>
 </template>
 

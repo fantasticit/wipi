@@ -1,0 +1,45 @@
+@import '../mixin/bem.scss';
+@import '../mixin/layout.scss';
+@import '../var/color.scss';
+
+@include b(collapse) {
+  height: 48px;
+  padding: 0 15px;
+  background: #fff;
+  overflow: hidden;
+  border-bottom: 1px solid $border;
+
+  will-change: height;
+  transition: all ease .3s;
+
+  &:first-of-type {
+    border-top: 1px solid $border;
+  }
+
+  @include e(header) {
+    line-height: 48px;
+    @include flexLayout(space-between);
+
+    span {
+      @include flexLayout(center) {
+        align-items: center;
+      }
+    }
+
+    .ta-icon {
+      cursor: pointer;
+      transition: all ease .2s;
+
+      @include when(active) {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  @include e(body) {
+    box-sizing: border-box;
+    max-height: 500px;
+    overflow: hidden;
+    padding: 0 15px;
+  }
+}
