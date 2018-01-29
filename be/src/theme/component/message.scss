@@ -1,7 +1,3 @@
-@import '../mixin/bem.scss';
-@import '../mixin/layout.scss';
-@import '../var/color.scss';
-
 @include b(message) {
   position: fixed;
   left: 0;

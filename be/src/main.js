@@ -14,6 +14,7 @@ import TaFormItem from './components/common/form-item'
 import TaDialog from './components/common/dialog'
 import TaSelect from './components/common/select'
 import TaTag from './components/common/tag'
+import TaInput from './components/common/input'
 import TaCollapse from './components/common/collapse'
 import TaUpload from './components/business/upload'
 import TaContainer from './components/business/container'
@@ -25,6 +26,7 @@ Vue.component('TaFormItem', TaFormItem)
 Vue.component('TaDialog', TaDialog)
 Vue.component('TaSelect', TaSelect)
 Vue.component('TaTag', TaTag)
+Vue.component('TaInput', TaInput)
 Vue.component('TaUpload', TaUpload)
 Vue.component('TaCollapse', TaCollapse)
 Vue.component('TaContainer', TaContainer)

@@ -1,11 +1,7 @@
-@import '../mixin/bem.scss';
-@import '../mixin/layout.scss';
-@import '../var/color.scss';
-
 @include b(input) {
   display: inline-block;
   box-sizing: border-box;
-  width: 100%;
+  // width: 100%;
   height: 40px;
   padding: 5px 12px;
 
