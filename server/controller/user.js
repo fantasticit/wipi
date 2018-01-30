@@ -22,10 +22,11 @@ module.exports = {
 
     try {
       const res = await UserModel.findOne({ account, password })
-      if (res !== null) {
+      if (!!res) {
         ctx.send({ status: 'ok', message: `登录成功`, data: res })
       } else {
-        ctx.send({ status: 'no', message: `账号或密码错误` })
+        ctx.throw(400, { message: '账号或密码错误' })
+        // ctx.send({ status: 'no', message: `账号或密码错误` })
       }
     } catch (err) {
       console.log(err)

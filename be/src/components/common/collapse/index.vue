@@ -1,12 +1,14 @@
 <template>
   <div class="ta-collapse" ref="collapse"
     :style="{ height: h + 'px' }">
-    <div class="ta-collapse__header" 
-      @click="toggleShow()">
-      <span>title</span>
+    <div class="ta-collapse__header">
       <span>
+        <slot name="title"></slot>
+      </span>
+      <span @click="toggleShow()">
         <ta-icon 
           name="ios-arrow-forward"
+          v-show="!noIcon"
           :class="{ 'is-active': isShow }">
         </ta-icon>
       </span>
@@ -27,6 +29,13 @@ export default {
     TaIcon,
   },
 
+  props: {
+    noIcon: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   data() {
     return {
       isShow: false,
@@ -45,7 +54,7 @@ export default {
       this.isShow = !this.isShow
 
       if (this.isShow) {
-        this.h = this.bodyHeight + 48
+        this.h = this.bodyHeight + 48 + 1
       } else {
         this.h = 48
       }

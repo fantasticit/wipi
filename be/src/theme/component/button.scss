@@ -22,6 +22,10 @@
     align-items: center;
   }
 
+  @include when(small) {
+    padding: 5px 10px;
+  }
+
   &:disabled {
     opacity: .5;
     cursor: not-allowed;
@@ -80,8 +84,8 @@
     
     &:hover,
     &:focus, {
-      background-color: #a6a9ad;
-      border-color: #a6a9ad;
+      background-color: #66b1ff;
+      border-color: #66b1ff;
       color: #fff;
     }
   }

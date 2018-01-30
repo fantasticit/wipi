@@ -38,3 +38,7 @@ a {
 .ta-icon::before {
   transform: translateY(2px);
 }
+
+table {
+  table-layout: fixed;
+}

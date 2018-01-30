@@ -17,7 +17,7 @@
       <div class="ta-upload__tip" v-if="fileName">
         <p>{{ fileName }}</p>
         <p>
-          <span>
+          <span :class="{ 'is-failed': !isSuccess }">
             {{ isUploading 
                 ? '正在上传中...' 
                 : (isSuccess ? '上传成功' : '上传失败') 
@@ -131,6 +131,7 @@ export default {
         this.isSuccess = false
       } finally {
         this.isUploading = false
+        this.tipIcon = 'close-circled'
       }
     },
   }

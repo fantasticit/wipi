@@ -45,8 +45,9 @@
       box-sizing: border-box;
       padding: 15px;
       flex: 1;
-      overflow: auto;
+      overflow: hidden;
       background-color: #f0f0f0;
+      // @include flexLayout();
 
       > div {
         height: 100%;

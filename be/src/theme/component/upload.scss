@@ -71,6 +71,10 @@
 
     span {
       color: $primary;
+
+      @include when(failed) {
+        color: $danger;
+      }
     }
   }
 

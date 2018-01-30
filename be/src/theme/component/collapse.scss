@@ -8,8 +8,8 @@
   will-change: height;
   transition: all ease .3s;
 
-  &:first-of-type {
-    border-top: 1px solid $border;
+  &:last-of-type {
+    border-bottom: 0;
   }
 
   @include e(header) {
@@ -17,8 +17,16 @@
     @include flexLayout(space-between);
 
     span {
-      @include flexLayout(center) {
+      @include flexLayout(flex-start) {
         align-items: center;
+      }
+
+      &:first-of-type {
+        flex: 1;
+      }
+
+      > * {
+        width: 100%;
       }
     }
 
@@ -33,9 +41,7 @@
   }
 
   @include e(body) {
-    box-sizing: border-box;
-    max-height: 500px;
     overflow: hidden;
-    padding: 0 15px;
+    padding: 15px 0;
   }
 }
