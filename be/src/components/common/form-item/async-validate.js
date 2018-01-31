@@ -1,7 +1,7 @@
 /**
  * 该函数用于返回对应验证规则的promise对象
  * @param {*} rule 验证规则
- * @param {*} vm.currentValue 被验证对象
+ * @param {*} vm 被验证组件
  */
 export function asyncValidate(rule, vm) {
   if (rule.required) {
