@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'notification',
+  name: 'TaNotification',
   data()  {
     return {
       type: '',

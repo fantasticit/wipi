@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Main from './src/main.vue';
+import Main from './src/index.vue';
 const NotificationConstructor = Vue.extend(Main);
 
 let count = 0;
