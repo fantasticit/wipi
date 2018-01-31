@@ -1,93 +1,93 @@
 /**
  * 该函数用于返回对应验证规则的promise对象
  * @param {*} rule 验证规则
- * @param {*} observe 被验证对象
+ * @param {*} vm.currentValue 被验证对象
  */
-export function asyncValidate(rule, observe, dom) {
+export function asyncValidate(rule, vm) {
   if (rule.required) {
-    return validateRequired(rule, observe, dom)
+    return () => validateRequired(rule, vm)
   }
   
   if (rule.type) {
-    return validateType(rule, observe, dom)
+    return () => validateType(rule, vm)
   }
   
   if (rule.min && rule.max) {
-    return validateMinMax(rule, observe, dom)
+    return () => validateMinMax(rule, vm)
   }
   
   if (rule.min) {
-    return validateMin(rule, observe, dom)
+    return () => validateMin(rule, vm)
   }
   
   if (rule.max) {
-    return validateMax(rule, observe, dom)
+    return () => validateMax(rule, vm)
   }
 }
 
-function validateRequired(rule, observe, dom) {
+function validateRequired(rule, vm) {
   return new Promise((resolve, reject) => {
-    if (observe.length > 0) {
-      resolve(dom)
+    if (vm.currentValue.length > 0) {
+      resolve(vm)
     } else {
       reject({
         msg: rule.message,
-        dom,
+        vm,
       })
     }
   })
 }
 
-function validateType(rule, observe, dom) {
+function validateType(rule, vm) {
   return new Promise((resolve, reject) => {
-    if (typeof observe === rule.type) {
-      resolve(dom)
+    if (typeof vm.currentValue === rule.type) {
+      resolve(vm)
     } else {
       reject({
         msg: rule.message,
-        dom,
+        vm,
       })
     }
   })
 }
 
-function validateMin(rule, observe, dom) {
+function validateMin(rule, vm) {
   return new Promise((resolve, reject) => {
-    if (observe.length >= rule.min) {
-      resolve(dom)
+    if (vm.currentValue.length >= rule.min) {
+      resolve(vm)
     } else {
       reject({
         msg: rule.message,
-        dom,
+        vm,
       })
     }
   })
 }
 
-function validateMax(rule, observe, dom) {
+function validateMax(rule, vm) {
   return new Promise((resolve, reject) => {
-    if (observe.length <= rule.max) {
-      resolve(dom)
+    if (vm.currentValue.length <= rule.max) {
+      resolve(vm)
     } else {
       reject({
         msg: rule.message,
-        dom,
+        vm,
       })
     }
   })
 }
 
-function validateMinMax(rule, observe, dom) {
+function validateMinMax(rule, vm) {
   return new Promise((resolve, reject) => {
     if (
-      observe.length >= rule.min
-      && observe.length <= rule.max
+      vm.currentValue.length >= rule.min
+      && vm.currentValue.length <= rule.max
     ) {
-      resolve(dom)
+      resolve(vm)
     } else {
       reject({
         msg: rule.message,
-        dom,
+        vm,
       })
     }
   })

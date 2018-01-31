@@ -24,6 +24,7 @@
 
 <script>
 import { on } from '@/util/event'
+import Store from './store'
 import { asyncValidate } from './async-validate'
 
 export default {
@@ -40,12 +41,16 @@ export default {
 
   mounted() {
     const trigger = this.$props.rules[0] && this.$props.rules[0].trigger || 'blur'
+    const validates = this.$props.rules.reduce((validates, rule) => {
+      const fn = asyncValidate(rule, this)
+      validates.push(fn)
+      return validates
+    }, [])
+
+    Store.set(this.prop, validates)
     // 依次验证
     on(this.$refs['input'], trigger, () => {
-      Promise.all(this.$props.rules.reduce((validates, rule) => {
-        validates.push(asyncValidate(rule, this.currentValue))
-        return validates
-      }, []))
+      Promise.all(validates.map(validate => validate()))
         .then(msg => {
           this.showInvalidTip = false
           this.message = ''

@@ -97,3 +97,37 @@
     transform: translateX(100%);
   }
 }
+
+// 向右边进入
+.slide-right-enter-active {
+  animation: right-enter ease .3s;
+}
+
+.slide-right-leave-active {
+  animation: right-leave ease .5s;
+}
+
+@keyframes right-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes right-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+

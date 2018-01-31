@@ -21,7 +21,4 @@ class _Loading {
 
 const Loading = new _Loading()
 
-Vue.prototype.$loading = Loading
-Vue.component('TaLoading', TaLoading)
-
 export default Loading

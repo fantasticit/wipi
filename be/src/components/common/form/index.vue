@@ -10,44 +10,27 @@ import {
   removeClassName 
 } from '@/util/class-name'
 import { asyncValidate } from '../form-item/async-validate'
+import Store from '../form-item/store'
 
 export default {
   name: 'TaForm',
 
-  props: {
-    rules: {
-      type: Object,
-      default: () => {}
-    },
-  },
-
   mounted() {
     this.$refs['form'].onsubmit = () => {
       const children = this.$refs['form'].querySelectorAll('input, select')
-      Promise.all(Array.from(children).reduce((validates, child) => {
-        const rule = child.getAttribute('data-prop')
-        this.rules[rule].forEach(rule => {
-          validates.push(asyncValidate(rule, child.value, child))
-        })
-
+      const validates = Array.from(children).reduce((validates, child) => {
+        const formItem = child.getAttribute('data-prop')
+        validates.push(...Store.get(formItem))
         return validates
-      }, []))
-      .then(res => {
-        res.forEach(dom => {
-          removeClassName(dom, 'is-invalid')
-          const p = dom.parentNode.querySelector('p')
-          p.innerHTML = ''
-          p.style.display = 'none'
-        })
+      }, [])
 
+      Promise.all(validates.map(validate => validate()))
+      .then(res => {
         this.$emit('submit')
       })
       .catch(err => {
-        console.log(err)
-        addClassName(err.dom, 'is-invalid')
-        const p = err.dom.parentNode.querySelector('p')
-        p.innerHTML = err.msg
-        p.style.display = 'block'
+        err.vm.showInvalidTip = true
+        err.vm.message = err.msg
         return false
       })
 
