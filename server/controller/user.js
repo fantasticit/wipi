@@ -20,16 +20,19 @@ module.exports = {
   login: async (ctx, next) => {
     const { account, password } = ctx.request.body
 
-    try {
-      const res = await UserModel.findOne({ account, password })
-      if (!!res) {
-        ctx.send({ status: 'ok', message: `登录成功`, data: res })
-      } else {
-        ctx.throw(400, { message: '账号或密码错误' })
-        // ctx.send({ status: 'no', message: `账号或密码错误` })
-      }
-    } catch (err) {
-      console.log(err)
+
+    const res = await UserModel.findOne({ account, password }).catch(e => {
+      ctx.throw(500, '服务器错误')
+    })
+
+    console.log(res)
+
+    if (!!res) {
+      ctx.send({ status: 'ok', message: `登录成功`, data: res })
+    } else {
+      ctx.throw(400, 'key is wrong', { status: 'no', message: `账号或密码错误` })
+      // ctx.send({ status: 'no', message: `账号或密码错误` })
     }
+
   }
 }

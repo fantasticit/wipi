@@ -12,8 +12,10 @@
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-logger": "^3.1.0",
+    "koa-morgan": "^1.0.1",
     "koa-router": "^7.3.0",
     "koa2-cors": "^2.0.5",
+    "log4js": "^2.5.2",
     "mongodb": "^3.0.1",
     "mongoose": "^5.0.0-rc2",
     "qiniu": "^7.1.2"
