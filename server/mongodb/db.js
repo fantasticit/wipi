@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
-const url = `mongodb://127.0.0.1/coding-heart`
+const config = require('../config').dbConf
+
+const url = `mongodb://${config.user}:${config.pwd}@${config.host}:${config.port}/${config.db}`
+
 const options = {
   reconnectTries: Number.MAX_VALUE,
   reconnectInterval: 500
