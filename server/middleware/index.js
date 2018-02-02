@@ -5,9 +5,9 @@ const json = require('./json')
 const logger = require('./logger')
 
 module.exports = (app) => {
+  app.use(logger())
   app.use(cors())
   app.use(httpErrorHandler())
-  app.use(logger())
   app.use(bodyParser())
   app.use(json())
 }

@@ -6,7 +6,7 @@ module.exports = {
     const roles = ['admin', 'user']
 
     const result = await UserModel.create({ account, password, roles }).catch(e => {
-      ctx.throw(500, '服务器错误')
+      ctx.throw(500)
     })
 
     if (!!result) {
@@ -20,13 +20,13 @@ module.exports = {
     const { account, password } = ctx.request.body
 
     const res = await UserModel.findOne({ account, password }).catch(e => {
-      ctx.throw(500, '服务器错误')
+      ctx.throw(500)
     })
 
     if (!!res) {
       ctx.send({ message: `登录成功`, data: res })
     } else {
-      ctx.throw(500, { status: 'no', message: `账号或密码错误` })
+      ctx.throw(400, { status: 'no', message: `账号或密码错误` })
     }
   }
 }
