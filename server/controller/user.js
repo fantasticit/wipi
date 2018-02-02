@@ -4,35 +4,29 @@ module.exports = {
   register: async (ctx, next) => {
     const { account, password } = ctx.request.body
     const roles = ['admin', 'user']
-    
-    try {
-      const result = await UserModel.create({ account, password, roles })
-      if (result !== null) {
-        ctx.send({ status: 'ok', message: '注册成功', data: result })
-      } else {
-        ctx.send({ status: 'no', message: '注册失败' })
-      }
-    } catch (err) {
-      console.log(err)
+
+    const result = await UserModel.create({ account, password, roles }).catch(e => {
+      ctx.throw(500, '服务器错误')
+    })
+
+    if (!!result) {
+      ctx.send({ message: '注册成功', data: result })
+    } else {
+      ctx.throw(400, { message: '注册失败' })
     }
   },
 
   login: async (ctx, next) => {
     const { account, password } = ctx.request.body
 
-
     const res = await UserModel.findOne({ account, password }).catch(e => {
       ctx.throw(500, '服务器错误')
     })
 
-    console.log(res)
-
     if (!!res) {
-      ctx.send({ status: 'ok', message: `登录成功`, data: res })
+      ctx.send({ message: `登录成功`, data: res })
     } else {
-      ctx.throw(400, 'key is wrong', { status: 'no', message: `账号或密码错误` })
-      // ctx.send({ status: 'no', message: `账号或密码错误` })
+      ctx.throw(500, { status: 'no', message: `账号或密码错误` })
     }
-
   }
 }

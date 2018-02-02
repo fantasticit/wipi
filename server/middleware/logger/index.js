@@ -4,7 +4,7 @@ const methods = ["trace", "debug", "info", "warn", "error", "fatal", "mark"]
 module.exports = () => {
   const ctxLogger = {}
   log4js.configure({
-    appenders: { cheese: { type: 'file', filename: 'cheese.log' } },
+    appenders: { cheese: { type: 'file', filename: 'log/cheese.log' } },
     categories: { default: { appenders: ['cheese'], level: 'info' } }
   })
 
