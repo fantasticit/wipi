@@ -89,9 +89,7 @@
     <!-- E 内容区 -->
 
     <!-- S 分页 -->
-    <div class="ta-pagination">
-      分页待开发
-    </div>
+    <ta-pagination></ta-pagination>
     <!-- E 分页 -->
   </div>
 </template>
@@ -207,10 +205,5 @@ export default class ArticleList extends Vue {
       padding: 15px;
     }
   }
-}
-
-@include b(pagination) {
-  padding: 15px;
-  background: #fff;
 }
 </style>

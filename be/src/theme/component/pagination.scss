@@ -1,0 +1,36 @@
+@include b(pagination) {
+  font-size: 0;
+  padding: 15px;
+  @include flexLayout(space-between) {
+    align-items: stretch;
+  };
+
+  span {
+    font-size: 12px;
+    padding: 5px;
+
+    @include flexLayout(center, inline-flex) {
+      align-items: center;
+    }
+  }
+
+  @include e(paginator) {
+    @include flexLayout;
+
+    span {
+      cursor: pointer;
+      background: #ccc;
+      color: #fff;
+    }
+
+    span.is-active {
+      background: $primary;
+      color: #fff;
+    }
+  
+    span.is-disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+  }
+}

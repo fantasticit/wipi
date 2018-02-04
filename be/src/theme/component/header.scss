@@ -108,13 +108,19 @@
 
       li {
         line-height: 30px;
-        padding: 0 10px;
         font-size: 14px;
         color: $font;
 
         &:hover {
           background-color: #ecf5ff;
           color: #66b1ff;
+        }
+
+        a {
+          box-sizing: border-box;
+          width: 100%;
+          padding: 0 10px;
+          display: inline-block;
         }
       }
 
