@@ -9,7 +9,8 @@
       :data-prop="prop"
       ref="input"
       @keyup.enter="emitEnter()"
-      v-model="currentValue" @input="emitInput()"
+      v-model="currentValue" 
+      @input="emitInput()"
     >
     <transition name="slide-down">
       <p
@@ -66,16 +67,22 @@ export default {
     })
   },
 
+  watch: {
+    value() {
+      this.currentValue = this.$props.value
+    }
+  },
+
   data() {
     return {
-      currentValue: this.$props.value,
+      currentValue: '',
       showInvalidTip: false,
       message: ''
     }
   },
 
   methods: {
-    emitInput() {
+    emitInput(value) {
       this.$emit('input', this.currentValue)
     },
 

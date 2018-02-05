@@ -101,7 +101,7 @@ import { ArticleProvider } from '@/provider/article-provider'
   }
 })
 export default class Article extends Vue {
-  title = ''                                           // 文章标题
+  title = 'fffffffff'                                           // 文章标题
   desc = ''                                            // 文章描述
   article = ''                                         // 文章内容
   classify = ''                                        // 文章分类
@@ -142,6 +142,10 @@ export default class Article extends Vue {
     this.cover = ''
   }
 
+  created() {
+    console.log(this)
+  }
+
   // 文章预览
   preview() {
     this.$refs['editor'].$el.querySelector('.fa-eye').click()
@@ -159,6 +163,8 @@ export default class Article extends Vue {
       author: this.author,
       state: this.state,
     })
+
+    console.log(info)
     const flag = Object.keys(info).every(key => !!info[key])
 
     if (!flag) {

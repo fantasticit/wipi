@@ -1,6 +1,6 @@
 @include b(pagination) {
   font-size: 0;
-  padding: 15px;
+  padding: 0 15px;
   @include flexLayout(space-between) {
     align-items: stretch;
   };

@@ -53,7 +53,7 @@
           </tr>
         </table>
       </ta-collapse>
-      <div class="ta-content__main">
+      <div class="ta-content__main" ref="content">
         <ta-collapse v-for="(article, i) in [...articles, ...articles]" :key="i">
           <table slot="title">
             <tr>
@@ -89,7 +89,7 @@
     <!-- E 内容区 -->
 
     <!-- S 分页 -->
-    <ta-pagination></ta-pagination>
+    <ta-pagination :total="total"></ta-pagination>
     <!-- E 分页 -->
   </div>
 </template>
@@ -98,6 +98,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { mapState } from 'vuex'
+import { on } from '@/util/event'
 import { ArticleProvider } from '@/provider/article-provider'
 
 @Component({
@@ -113,10 +114,18 @@ export default class ArticleList extends Vue {
   state = ''
   key = ''
   articles = []
+  total = 0
   loading = false
 
   created() {
     this.getArticles()
+  }
+
+  mounted() {
+    on(this.$refs['content'], 'click', function (e) {
+      let scrollTop = this.scrollHeight - this.offsetHeight
+      this.scrollTop = scrollTop > 0 ? scrollTop + 148 : 0
+    })
   }
 
   setClassify(classify) {
@@ -194,10 +203,6 @@ export default class ArticleList extends Vue {
 
     td {
       @include textOverflow();
-    }
-
-    td.gutter {
-      background: #eee;
     }
 
     @include m(sub) {

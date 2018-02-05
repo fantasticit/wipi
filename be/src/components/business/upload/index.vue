@@ -39,6 +39,7 @@ import { on } from '@/util/event'
 import { QiniuProvider } from '@/provider/qiniu-provider'
 import TaIcon from '../../common/icon'
 import message from '../../common/message'
+import Emitter from '../../emitter' 
 
 export default {
   name: 'TaUpload',
@@ -47,6 +48,10 @@ export default {
     TaIcon
   },
 
+  mixins: [
+    Emitter,
+  ],
+
   data() {
     return {
       draging: false,
@@ -54,9 +59,13 @@ export default {
       tipIcon: 'checkmark-circled', // 失败的话就是close-circled
       img: null,                    // 预览图
       isUploading: true,            // 正在上传
-      isSuccess: false,              // 上传是否成功
+      isSuccess: false,             // 上传是否成功
       uploadToken: null,            // 七牛上传token
     }
+  },
+
+  created() {
+    this.dispatch('TaArticle', 'mount.upload', [this])
   },
 
   mounted() {
@@ -129,12 +138,16 @@ export default {
       } catch (err) {
         message(err.message, 'error')
         this.isSuccess = false
+        this.tipIcon = 'close-circled'
       } finally {
         this.isUploading = false
-        this.tipIcon = 'close-circled'
       }
+    },
+
+    reset() {
+      this.isUploading = false
+      this.img = null
     },
   }
 }
 </script>
-

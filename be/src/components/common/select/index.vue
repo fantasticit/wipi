@@ -38,7 +38,6 @@ export default {
 
   data() {
     return {
-      currentValue: this.$props.value,
       hasSelected: false,
     }
   },

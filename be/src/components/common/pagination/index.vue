@@ -37,8 +37,7 @@
       </span>
       <!-- 当前页 -->
       <span 
-        class="is-active" 
-        v-if="currentPage <= totalPage">
+        class="is-active">
         {{ currentPage }}
       </span>
       <!-- 后置页码 -->
@@ -50,7 +49,7 @@
       </span>
       <!-- 最后一页 -->
       <span 
-        v-if="currentPage < totalPage" 
+        v-if="currentPage != totalPage && totalPage > 0" 
         @click="handlePageChange(totalPage)">
         {{ totalPage }}
       </span>
@@ -87,14 +86,14 @@ export default {
 
     total: {
       type: Number,
-      default: 182,
+      default: 1,
     },
   },
 
   data() {
     return {
       totalPage: 0,
-      currentPage: this.$props.page,
+      currentPage: this.page,
       pageSize: 20,
       paginators: [], // 页码选项
     }

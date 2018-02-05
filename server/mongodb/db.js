@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const config = require('../config').dbConf
+const config = require('../config').db
 
-const url = `mongodb://${config.user}:${config.pwd}@${config.host}:${config.port}/${config.db}`
+const url = `mongodb://${config.user}:${config.pwd}@${config.host}:${config.port}/${config.name}`
 
 const options = {
   reconnectTries: Number.MAX_VALUE,
