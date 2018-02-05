@@ -12,7 +12,7 @@
 
   @include e(container) {
     box-sizing: border-box;
-    height: 240px;
+    height: 200px;
     border: 1px dashed #eee;
     border-radius: 4px;
     overflow: hidden;
@@ -78,7 +78,8 @@
   }
 
   img {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     max-height: 100%;
   }
 

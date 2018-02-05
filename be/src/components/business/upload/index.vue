@@ -4,7 +4,7 @@
       ref="upload"
       class="ta-upload__container"
       :class="{ 'is-active': draging, 'is-preview': isSuccess }">
-      <template v-if="!isSuccess">
+      <template v-if="!img">
         <div>
           <ta-icon name="android-upload"></ta-icon>
           <p>将文件拖拽到此处或<span>点击上传</span></p>
@@ -65,7 +65,7 @@ export default {
   },
 
   created() {
-    this.dispatch('TaArticle', 'mount.upload', [this])
+    this.dispatch('mount.upload', [this])
   },
 
   mounted() {
@@ -147,6 +147,8 @@ export default {
     reset() {
       this.isUploading = false
       this.img = null
+      this.fileName = null
+      this.isSuccess = false
     },
   }
 }

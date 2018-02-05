@@ -1,24 +1,19 @@
-function find(parent) {
-  console.log(this._uid)
-  return parent.$children.find(child => {
-    console.log(child)
-    child._uid = this._uid
+function find(parent, target) {
+  return parent.$children.some(child => {
+    return child === target
   })
 }
 
 export default {
   methods: {
-    dispatch(parent, trigger, params) {
+    dispatch(trigger, [vm]) {
       let $parent = this.$parent
-      let finder = find.bind(this)
-
-      console.log(finder($parent))
-
-      while (!finder($parent)) {
+    
+      while ($parent && !find($parent, vm)) {
         $parent = $parent.$parent
       }
       
-      console.log($parent)
+      $parent.$emit(trigger, vm)
     }
   }
 }

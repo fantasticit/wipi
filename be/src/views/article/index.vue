@@ -111,6 +111,13 @@ export default class Article extends Vue {
   tags = []                                            // 文章标签
   loading = false
   tagTypes = ['default', 'info', 'success', 'danger']
+  upload = null
+  
+  created() {
+    this.$on('mount.upload', vm => {
+      this.upload = vm
+    })
+  }
 
   // 增加标签
   addTag(tag) {
@@ -140,10 +147,7 @@ export default class Article extends Vue {
     this.author = ''
     this.state = ''
     this.cover = ''
-  }
-
-  created() {
-    console.log(this)
+    this.upload.reset()
   }
 
   // 文章预览
