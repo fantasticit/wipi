@@ -2,7 +2,7 @@
   <div class="ta-pagination">
     <div class="ta-pagination__info">
       <span>显示</span>
-      <select v-model="pageSize">
+      <select class="ta-select" v-model="pageSize">
         <option 
           v-for="(pageSize, index) in pageSizes" 
           :key="index" 
@@ -26,7 +26,7 @@
       <span 
         @click="decrementPage()" 
         :class="{ 'is-disabled': currentPage === 1 }">
-        上一页
+        <ta-icon name="ios-arrow-back"></ta-icon>
       </span>
       <!-- 前置页码 -->
       <span 
@@ -58,15 +58,21 @@
       <span 
         @click="incrementPage()" 
         :class="{ 'is-disabled': currentPage === totalPage || totalPage < 1 }">
-        下一页
+        <ta-icon name="ios-arrow-forward"></ta-icon>
       </span>
     </div>
   </div>
 </template>
 
 <script>
+import TaIcon from '../icon'
+
 export default {
   name: 'TaPagination',
+
+  components: {
+    TaIcon,
+  },
 
   props: {
     page: {

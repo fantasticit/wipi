@@ -5,9 +5,19 @@
     align-items: stretch;
   };
 
+  select {
+    width: 40px;
+    height: 25px;
+    padding: 0;
+
+    option {
+      font-size: 1em;
+    }
+  }
+
   span {
-    font-size: 12px;
-    padding: 5px;
+    font-size: 13px;
+    padding: 10px 5px;
 
     @include flexLayout(center, inline-flex) {
       align-items: center;
@@ -18,14 +28,29 @@
     @include flexLayout;
 
     span {
+      font-weight: 700;
       cursor: pointer;
-      background: #ccc;
-      color: #fff;
+      color: $primaryFont;
+
+      &:first-of-type {
+        margin-right: 7px;
+      }
+
+      &:last-of-type {
+        margin-left: 7px;
+      }
+
+      &:hover {
+        color: $primary;
+      }
+
+      .ta-icon {
+        transform: translateY(-2px);
+      }
     }
 
     span.is-active {
-      background: $primary;
-      color: #fff;
+      color: $primary;
     }
   
     span.is-disabled {
