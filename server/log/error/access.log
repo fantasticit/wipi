@@ -1,0 +1,20 @@
+[2018-02-06T12:59:35.721] [FATAL] error - 
+    GET /article 500 
+      req: {} 
+      res: {"errMsg":"Cannot read property 'catch' of undefined"}
+  
+[2018-02-06T12:59:39.453] [FATAL] error - 
+    GET /article 500 
+      req: {} 
+      res: {"errMsg":"Cannot read property 'catch' of undefined"}
+  
+[2018-02-06T13:30:48.238] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&page=1&pageSize=20&keyword=kjkj 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T13:36:02.875] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&page=1&pageSize=20&keyword=kjkj 500 
+      req: {} 
+      res: {"errMsg":"reg is not defined"}
+  

@@ -14,39 +14,48 @@ module.exports = {
       states,
     } = req = ctx.request.body
 
-    let flag = true
     Object.keys(req).forEach(key => {
       if (!!!req[key]) {
-        flag = false
-        ctx.send({ status: 'no', message: `键${key}, ${req[key]}值不通过` })
+        ctx.throw(400, { status: 'no', message: `键${key}, ${req[key]}值不通过` })
       }
     })
 
-    if (!flag) {
-      console.log('接收到错误的参数')
-      return
-    }
-
-    try {
-      const date = Date.now()
-      const result = await ArticleModel.create(req)
-
-      if (result !== null) {
-        ctx.send({ status: 'ok', message: '新增文章成功' })
-      } else {
-        ctx.send({ status: 'no', message: '新增文章失败' })
-      }
-    } catch (err) {
-      console.log(err)
-    }
+    const date = Date.now()
+    const result = await ArticleModel.create({...req, date}).catch(e => ctx.throw(500))
+    ctx.send({ status: 'ok', message: '新增文章成功' })
   },
 
   get: async (ctx, next) => {
-    try {
-      const data = await ArticleModel.find()
-      ctx.send({ status: 'ok', message: '新增文章成功', data })
-    } catch (err) {
-      console.log(err)
+    const { classify, state, keyword, page, pageSize } = ctx.query
+
+    const query = {}
+    !!classify && (query.classify = classify)
+    !!state && (query.state = state)
+    // 关键字查询(模糊查询)
+    if (!!keyword) {
+      const reg = new RegExp(keyword, 'i')
+      query.$or = [
+        { tags: { $regex: reg }},
+        { title: { $regex: reg }},
+        { desc: { $regex: reg }},
+      ]
     }
+
+    console.log(query)
+
+    const skip = page === 0 ? 0 : (page - 1) * pageSize
+
+    const articles = await ArticleModel
+                            .find(query)
+                            .limit(pageSize)
+                            .skip(skip)
+                            .catch(e => ctx.throw(500))
+
+    const total = await ArticleModel.find().count().catch(e => ctx.throw(500))
+
+    ctx.send({ status: 'ok', message: '获取文章成功', data: {
+      items: articles,
+      total
+    }})
   }
 }
