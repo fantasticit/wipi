@@ -25,8 +25,9 @@
           </span>
           <ta-icon 
             v-show="!isUploading" 
-            :name="tipIcon" 
-            :class="{ 'is-failed': !isSuccess }">
+            :name="tipIcon"
+            :class="{ 'is-failed': !isSuccess }"
+            @click="check()">
           </ta-icon>
         </p>
       </div>
@@ -134,6 +135,7 @@ export default {
         const res = await QiniuProvider.uploadImage(file, this.uploadToken)
         message('图片上传成功', 'success')
         this.isSuccess = true
+        this.tipIcon = 'checkmark-circled'
         this.$emit('success', res)
       } catch (err) {
         message(err.message, 'error')
@@ -141,6 +143,12 @@ export default {
         this.tipIcon = 'close-circled'
       } finally {
         this.isUploading = false
+      }
+    },
+
+    check() {
+      if (!this.isSuccess) {
+        this.reset()
       }
     },
 

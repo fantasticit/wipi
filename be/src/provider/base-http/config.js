@@ -11,8 +11,7 @@ const instance = axios.create({
 
 instance.interceptors.response.use(
   res => {
-    console.log(res)
-    if (res.data.status === 'ok' || res.status === 200) {
+    if (res.status === 200) {
       return res.data
     } else {
      throw new Error(res.data.message)

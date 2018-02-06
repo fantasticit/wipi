@@ -169,7 +169,12 @@ export default class Article extends Vue {
     })
 
     console.log(info)
-    const flag = Object.keys(info).every(key => !!info[key])
+    const flag = Object.keys(info).every(key => {
+      if (key === 'cover') {
+        return true
+      }
+      return !!info[key]
+    })
 
     if (!flag) {
       this.$message.error('请完善文章信息')

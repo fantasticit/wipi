@@ -27,7 +27,7 @@
       <div class="ta-searcharea__item">
         <span>搜索:</span>
         <ta-input 
-          placeholder="标题,描述" v-model="key"></ta-input>
+          placeholder="标题,描述" v-model="keyword"></ta-input>
         <ta-button 
           type="primary" 
           icon="ios-search-strong"
@@ -41,7 +41,17 @@
     
     <!-- S 内容区 -->
     <div class="ta-content">
-      <ta-collapse :noIcon="true" class="ta-content__title">
+      <ta-table
+        :tableHead="tableHead"
+        :keys="tableKeys"
+        :tableBody="articles"
+        :index="(page - 1) * pageSize">
+        <div v-for="(item, i) in articles" :key="i" :slot="i">
+          <ta-button size='small' type="primary">编辑</ta-button>
+          <ta-button size='small' type="danger">删除</ta-button>
+        </div>
+      </ta-table>
+      <!-- <ta-collapse :noIcon="true" class="ta-content__title">
         <table slot="title">
           <tr>
             <td width="80">编号</td>
@@ -54,7 +64,7 @@
         </table>
       </ta-collapse>
       <div class="ta-content__main" ref="content">
-        <ta-collapse v-for="(article, i) in [...articles, ...articles]" :key="i">
+        <ta-collapse v-for="(article, i) in articles" :key="i">
           <table slot="title">
             <tr>
               <td width="80">{{ i + 1 }}</td>
@@ -84,12 +94,16 @@
             </p>
           </div>
         </ta-collapse>
-      </div>
+      </div> -->
     </div>
     <!-- E 内容区 -->
 
     <!-- S 分页 -->
-    <ta-pagination :total="total"></ta-pagination>
+    <ta-pagination 
+      :total="total"
+      :page="page"
+      @pageChange="handlePageChange($event)"
+      @pageSizeChange="handlePageSizeChange($event)"></ta-pagination>
     <!-- E 分页 -->
   </div>
 </template>
@@ -107,25 +121,39 @@ import { ArticleProvider } from '@/provider/article-provider'
       classifies: state => ([{ value: '', title: '全部' }]).concat(state.classifies),
       states: state => ([{ value: '', title: '全部' }]).concat(state.states),
     })
-  }
+  },
+
+  watch: {
+    page() {
+      this.getArticles()
+    },
+
+    pageSize() {
+      this.getArticles()
+    },
+  },
 })
 export default class ArticleList extends Vue {
-  classify = ''
-  state = ''
-  key = ''
-  articles = []
-  total = 0
-  loading = false
+  articles = []              // 文章
+  total = 0                  // 总数目
+  classify = ''              // 文字分类
+  state = ''                 // 文章状态
+  keyword = ''               // 搜索关键字
+  loading = false            // 是否正在加载中
+  tableHead = ['编号', '标题', '分类', '状态', '创建日期', '操作']
+  tableKeys = ['', 'title', 'classify', 'state', 'date']
+  page = 1                   
+  pageSize = 20
 
   created() {
     this.getArticles()
   }
 
   mounted() {
-    on(this.$refs['content'], 'click', function (e) {
-      let scrollTop = this.scrollHeight - this.offsetHeight
-      this.scrollTop = scrollTop > 0 ? scrollTop + 148 : 0
-    })
+    // on(this.$refs['content'], 'click', function (e) {
+    //   let scrollTop = this.scrollHeight - this.offsetHeight
+    //   this.scrollTop = scrollTop > 0 ? scrollTop + 148 : 0
+    // })
   }
 
   setClassify(classify) {
@@ -134,6 +162,14 @@ export default class ArticleList extends Vue {
 
   setState(state) {
     this.state = state
+  }
+
+  handlePageChange(page) {
+    this.page = page
+  }
+
+  handlePageSizeChange(pageSize) {
+    this.pageSize = pageSize
   }
 
   async search() {
@@ -146,9 +182,16 @@ export default class ArticleList extends Vue {
     this.$loading.start()
 
     try {
-      const artiles = await ArticleProvider.get()
-      this.articles = artiles
-      console.log(this.articles)
+      const query = { 
+        classify: this.classify, 
+        state: this.state,
+        keyword: this.keyword,
+        page: this.page,
+        pageSize: this.pageSize
+      }
+      const res = await ArticleProvider.get(query)
+      this.articles = res.items
+      this.total = res.total
     } catch (err) {
       this.$message.error(err)
     } finally {
@@ -159,6 +202,13 @@ export default class ArticleList extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@mixin common() {
+  padding: 0 15px;
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 22px;
+}
+
 @include b(article-list) {
   @include flexLayout(flex-start) {
     flex-direction: column;
@@ -166,10 +216,7 @@ export default class ArticleList extends Vue {
 }
 
 @include b(searcharea) {
-  padding: 0 15px;
-  background: #fff;
-  border-radius: 5px;
-  margin-bottom: 22px;
+  @include common;
 
   @include e(item) {
     padding: 10px 0;
@@ -191,7 +238,8 @@ export default class ArticleList extends Vue {
 
 @include b(content) {
   flex: 1;
-  margin-bottom: 22px;
+  @include common;
+  padding: 15px;
 
   @include flexLayout(flex-start) {
     flex-direction: column;

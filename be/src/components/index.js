@@ -8,6 +8,7 @@ import TaSelect from './common/select'
 import TaTag from './common/tag'
 import TaInput from './common/input'
 import TaCollapse from './common/collapse'
+import TaTable from './common/table'
 import TaPagination from './common/pagination'
 import TaUpload from './business/upload'
 import TaContainer from './business/container'
@@ -29,6 +30,7 @@ const components = [
   TaPagination,
   TaContainer,
   TaInput,
+  TaTable,
 ]
 
 const install = Vue => {

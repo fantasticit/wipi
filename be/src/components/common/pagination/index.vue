@@ -13,7 +13,15 @@
       <span>
         条记录，
         当前显示
-          {{ currentPage == 1 ? '1' : (pageSize > total ? total : pageSize * (currentPage - 1)) }}
+          {{ 
+            currentPage == 1 
+            ? '1' 
+            : (pageSize > total 
+              ? total 
+              : pageSize * (currentPage - 1) > total 
+                ? total
+                : pageSize * (currentPage - 1)) 
+          }}
         到
           {{ total > currentPage * pageSize ? currentPage * pageSize : total }}
         条，
@@ -31,7 +39,7 @@
       <!-- 前置页码 -->
       <span 
         v-for="(paginator, i) in paginators" :key="i"
-        v-if="paginator < currentPage"
+        v-if="paginator > 0 && paginator < currentPage"
         @click="handlePageChange(paginator)">
         {{ paginator }}
       </span>
@@ -81,7 +89,7 @@ export default {
 
     pageSizes: {
       type: Array,
-      default: () => [20, 25, 30],
+      default: () => [7, 10, 15, 20, 25, 30, 35],
     },
 
     total: {
@@ -101,13 +109,22 @@ export default {
 
   watch: {
     pageSize(newPageSize, oldPageSize) {
-      this.setTotalPage(oldPageSize)
+      this.setTotalPage(newPageSize, oldPageSize)
+      this.setPaginators()
+      this.$emit('pageSizeChange', newPageSize)
     },
 
     currentPage(page) {
-      console.log('page -> ', page)
       this.setPaginators()
       this.$emit('pageChange', page)
+    },
+
+    total() {
+      this.setTotalPage()
+    },
+
+    totalPage() {
+      this.setPaginators()
     },
   },
 
@@ -117,9 +134,9 @@ export default {
   },
 
   methods: {
-    setTotalPage(oldPageSize) {
+    setTotalPage(newPageSize, oldPageSize) {
       if (oldPageSize) {
-        this.currentPage = Math.ceil((oldPageSize * this.currentPage) / this.pageSize)
+        this.currentPage = ~~((oldPageSize * (this.currentPage - 1)) / newPageSize)
       }
 
       this.totalPage = Math.ceil(this.total / this.pageSize)
@@ -136,6 +153,8 @@ export default {
         num2 < this.totalPage && this.paginators.push(++num2)
         --count
       }
+
+      this.paginators = [...new Set(this.paginators)]
     },
 
     handlePageChange(page) {

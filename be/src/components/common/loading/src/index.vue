@@ -36,6 +36,10 @@ export default {
     close() {
       this.isShow = false
     },
+
+    show() {
+      this.isShow = true
+    }
   },
 }
 </script>

@@ -2,16 +2,21 @@ import Vue from 'vue'
 import TaLoading from './src/'
 
 const Ctor = Vue.extend(TaLoading)
+let hasInserted = false
 
 class _Loading {
-  instance = null
-
   constructor(options) {
-    this.instance = new Ctor(options).$mount()
+    this.options = options
+    this.instance = new Ctor(this.options).$mount()
   }
 
   start() {
-    document.body.appendChild(Loading.instance.$el)
+    if (hasInserted) {
+      this.instance.show()
+    } else {
+      document.body.appendChild(this.instance.$el)
+      hasInserted = true
+    }
   }
   
   close() {

@@ -25,15 +25,22 @@ class _ArticleProvider extends BaseHttp {
     }
   }
 
-  async get() {
+  async get(query) {
+    query = Object.keys(query).map(key => `${key}=${query[key]}`).join('&')
+
     const req = {
       url: this.api.get,
       method: 'GET',
     }
 
+    req.url += '?'+ query
+
     try {
       const res = await this.http(req)
-      return res.data
+      return {
+        items: res.data.items,
+        total: res.data.total
+      }
     } catch (err) {
       throw new Error('获取文章失败')
     }

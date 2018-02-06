@@ -18,3 +18,98 @@
       req: {} 
       res: {"errMsg":"reg is not defined"}
   
+[2018-02-06T19:41:54.075] [FATAL] error - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:49:10.061] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:49:23.370] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=uat&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:50:35.745] [FATAL] error - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:51:29.240] [FATAL] error - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:51:45.273] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:52:30.052] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:53:26.935] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:54:31.345] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:55:06.596] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Internal Server Error"}
+  
+[2018-02-06T19:55:22.292] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Assignment to constant variable."}
+  
+[2018-02-06T19:55:30.691] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Assignment to constant variable."}
+  
+[2018-02-06T19:55:48.725] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Assignment to constant variable."}
+  
+[2018-02-06T19:55:58.983] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Assignment to constant variable."}
+  
+[2018-02-06T19:56:04.079] [FATAL] error - 
+    GET /article?classify=web_fe&state=draft&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Assignment to constant variable."}
+  
+[2018-02-06T19:58:37.708] [FATAL] error - 
+    GET /article?classify=web_be&state=&keyword=&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"pageYOffset is not defined"}
+  
+[2018-02-06T20:05:40.521] [ERROR] error - 
+    POST /article/new 400 
+      req: {"title":"dasdas","desc":"dasdasd","cover":"","article":"dsadsdsad","classify":"web_fe","tags":["asds"],"author":"asdsa","state":"draft","content_md":"dsadsdsad","content_html":"<p>dsadsdsad</p>"} 
+      res: {"errMsg":"键cover, 值不通过"}
+  
+[2018-02-06T20:12:25.898] [ERROR] error - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 404 
+      req: {} 
+      res: 
+  
+[2018-02-06T20:33:27.518] [ERROR] error - 
+    POST /article/new 400 
+      req: {"title":"weaqszxdrcftvyguoijkml.;","desc":"cftvghnjkml,;.'/\\dfctgvhyjbnklm,;","cover":"","article":"edr5ftyguoijkml[.p;/\n|}dxcftvgybuhnjimko,lo","classify":"web_fe","tags":["dfctghyjnkill"],"author":"dcftrvygujik","state":"draft","content_md":"edr5ftyguoijkml[.p;/\n|}dxcftvgybuhnjimko,lo","content_html":"<p>edr5ftyguoijkml[.p;/\n|}dxcftvgybuhnjimko,lo</p>"} 
+      res: {"errMsg":"键cover, 值不通过"}
+  
