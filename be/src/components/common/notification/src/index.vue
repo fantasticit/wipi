@@ -3,9 +3,7 @@
     <div class="ta-notification" v-if="show">
       <ta-icon class="btn-close" name="close-round" @click="close()">
       </ta-icon>
-      <div>
-        <ta-icon :name="icon" :class="'is-' + type"></ta-icon>
-      </div>
+      <ta-icon :name="icon" :class="'is-' + type"></ta-icon>
       <div>
         <h2 class="title">{{ title }}</h2>
         <p>{{ msg }}</p>

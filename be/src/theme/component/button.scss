@@ -14,16 +14,24 @@
   text-align: center;
   font-weight: 500;
   font-size: 14px;
+  line-height: 1;
   white-space: nowrap;
 
   transition: all ease .1s;
 
-  @include flexLayout() {
-    align-items: center;
+  span {
+    @include flexLayout() {
+      align-items: center;
+    }
   }
 
+  // @include flexLayout() {
+  //   align-items: center;
+  // }
+
   @include when(small) {
-    padding: 5px 10px;
+    padding: 9px 15px;
+    font-size: 12px;
   }
 
   &:disabled {
@@ -31,8 +39,8 @@
     cursor: not-allowed;
   }
 
-  :nth-of-type() {
-    margin-left: 15px;
+  + .ta-button {
+    margin-left: 10px;
   }
 
   &:first-child {
@@ -43,6 +51,7 @@
 
   i {
     margin-right: 6px;
+    transform: translateY(-2px);
   }
 
   &:hover,

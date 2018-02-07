@@ -31,6 +31,40 @@
   }
 }
 
+// 向上方进入
+// 向下方进入
+.slide-up-enter-active {
+  animation: up-enter ease .3s;
+}
+
+.slide-up-leave-active {
+  animation: up-leave ease .5s;
+}
+
+@keyframes up-enter {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes up-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
 // dialog向下方进入
 .slide-down-dialog-enter-active {
   animation: dialog-enter ease .3s;
@@ -71,7 +105,7 @@
 }
 
 .slide-left-leave-active {
-  animation: left-leave ease .5s;
+  animation: left-leave ease .8s;
 }
 
 @keyframes left-enter {

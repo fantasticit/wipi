@@ -5,7 +5,7 @@
   z-index: 1000;
 
   width: 300px;
-  padding: 14px -10px 14px 13px;
+  padding: 20px 10px;
   border-radius: 8px;
   border: 1px solid #e6ebf5;
   background-color: #fff;
@@ -35,12 +35,14 @@
     cursor: pointer;
   }
 
+
   i {
-    font-size: 4em;
+    font-size: 24px;
+    transform: translateY(-10%);
   }
 
   i.is-success {
-    color: $primary;
+    color: $success;
   }
 
   i.is-error {
@@ -71,9 +73,11 @@
     }
 
     P {
+      margin: 6px 0 0;
       font-size: 14px;
-      color: #5a5e66;
+      color: #606266;
       text-align: justify;
     }
   }
+  
 }

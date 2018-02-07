@@ -16,7 +16,7 @@ import TaContainer from './business/container'
 import Message from './common/message'
 import Loading from './common/loading'
 import Notification from './common/notification'
-import Confirm from './common/confirm'
+import { confirm, prompt } from './common/messagebox/index'
 
 const components = [
   TaTag,
@@ -43,6 +43,7 @@ const install = Vue => {
   Vue.prototype.$message.error = msg => Message(msg, 'error')
   Vue.prototype.$message.success = msg => Message(msg, 'success')
   Vue.prototype.$message.warning = msg => Message(msg, 'warning')
+  Vue.prototype.$message.info = msg => Message(msg, 'info')
 
   Vue.prototype.$loading = Loading
 
@@ -52,6 +53,7 @@ const install = Vue => {
   Vue.prototype.$notify.warning = (title, msg) => Notification({ type: 'info', title, msg })
 
   Vue.prototype.$confirm = confirm
+  Vue.prototype.$prompt = prompt
 }
 
 if (typeof window !== 'undefined') {

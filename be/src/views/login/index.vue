@@ -44,7 +44,7 @@ export default class Login extends Vue {
 
     try {
       const res = await UserProvider.login(user)
-      this.$message.success(`欢迎您, ${this.account}`)
+      this.$notify.success('欢迎登录', this.account)
       this.$router.replace('/dashboard')
     } catch (err) {
       this.$message.error(err.message)

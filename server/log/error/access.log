@@ -153,3 +153,33 @@
       req: {"title":"\\\\ahjsjdhaskfkashk123","desc":"afsf","cover":"http//p39p1kvxnbktclouddncom/FlLx9lLCilNm05AcWi1RlBzVENTj","article":"afffffffffff","classify":"web_fe","tags":["sffs"],"author":"4535","state":"draft","content_md":"afffffffffff","content_html":"<p>afffffffffff</p>"} 
       res: {"errMsg":"req[key].replace is not a function"}
   
+[2018-02-07T23:18:17.335] [ERROR] error - 
+    POST /user/login 400 
+      req: {"account":"mvpzx","password":"KBen2015"} 
+      res: {"errMsg":"账号或密码错误"}
+  
+[2018-02-07T23:18:36.504] [ERROR] error - 
+    POST /user/login 400 
+      req: {"account":"mvpzx","password":"KBen2016"} 
+      res: {"errMsg":"账号或密码错误"}
+  
+[2018-02-07T23:18:55.319] [ERROR] error - 
+    POST /user/login 400 
+      req: {"account":"mvpzx","password":"KBen2016"} 
+      res: {"errMsg":"账号或密码错误"}
+  
+[2018-02-07T23:19:24.489] [ERROR] error - 
+    POST /user/login 400 
+      req: {"account":"mvpzx","password":"KBen2015"} 
+      res: {"errMsg":"账号或密码错误"}
+  
+[2018-02-07T23:19:30.827] [ERROR] error - 
+    POST /user/login 400 
+      req: {"account":"mvpzx","password":"KBen2017"} 
+      res: {"errMsg":"账号或密码错误"}
+  
+[2018-02-07T23:21:09.207] [ERROR] error - 
+    POST /user/login 400 
+      req: {"account":"mvpzx","password":"KBen2017"} 
+      res: {"errMsg":"账号或密码错误"}
+  

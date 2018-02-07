@@ -27,7 +27,10 @@
       <div class="ta-searcharea__item">
         <span>搜索:</span>
         <ta-input 
-          placeholder="标题,描述" v-model="keyword"></ta-input>
+          placeholder="标题,描述" 
+          v-model="keyword"
+          @enter="search()">
+        </ta-input>
         <ta-button 
           type="primary" 
           icon="ios-search-strong"
@@ -127,11 +130,11 @@ import { ArticleProvider } from '@/provider/article-provider'
 
   watch: {
     page() {
-      this.getArticles()
+      this.fetchArticles()
     },
 
     pageSize() {
-      this.getArticles()
+      this.fetchArticles()
     },
   },
 })
@@ -143,19 +146,12 @@ export default class ArticleList extends Vue {
   keyword = ''               // 搜索关键字
   loading = false            // 是否正在加载中
   tableHead = ['编号', '标题', '分类', '状态', '创建日期', '操作']
-  tableKeys = ['', 'title', 'classify', 'state', 'date']
+  tableKeys = ['', 'title', 'classify', 'state', 'createDate']
   page = 1                   
   pageSize = 20
 
   created() {
     this.fetchArticles()
-  }
-
-  mounted() {
-    // on(this.$refs['content'], 'click', function (e) {
-    //   let scrollTop = this.scrollHeight - this.offsetHeight
-    //   this.scrollTop = scrollTop > 0 ? scrollTop + 148 : 0
-    // })
   }
 
   setClassify(classify) {
@@ -176,7 +172,7 @@ export default class ArticleList extends Vue {
 
   async search() {
     this.loading = true
-    await this.getArticles()
+    await this.fetchArticles()
     this.loading = false
   }
 
@@ -202,13 +198,17 @@ export default class ArticleList extends Vue {
   }
 
   async deleteArticle(id) {
-    try {
-      const res = await ArticleProvider.deleteArticle(id)
-      this.$message.success(res)
-      this.fetchArticles()
-    } catch (err) {
-      this.$message.error(err)
-    }
+    this.$confirm('此操作将删除文章，是否继续？', '提示', {})
+      .then(async () => {
+        try {
+          const res = await ArticleProvider.deleteArticle(id)
+          this.$message.success(res)
+          this.fetchArticles()
+        } catch (err) {
+          this.$message.error(err)
+        }
+      })
+      .catch(e => this.$message.info('取消删除'))
   }
 }
 </script>

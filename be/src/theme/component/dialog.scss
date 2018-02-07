@@ -54,4 +54,53 @@
     text-align: right;
     box-sizing: border-box;
   }
+
+  @include m(messagebox) {
+    width: 420px;
+    border-radius: 5px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+
+    @include e(body) {
+      padding: 8px 20px;
+      @include flexLayout(flex-start) {
+        align-items: center;
+      }
+
+      > div {
+        width: 100%;
+        margin-bottom: 15px;
+        
+        p {
+          margin-top: 0;
+        }
+
+        .ta-form-item__invalid-tip {
+          margin-left: 2px !important;
+        }
+      }
+
+      .ta-icon {
+        font-size: 24px !important;
+        margin-right: 10px;
+
+        &::before {
+          transform: translateY(0px);
+        }
+      }
+
+      .ta-icon--success {
+        color: $success;
+      }
+
+      .ta-icon--info {
+        color: $info;
+      }
+
+      .ta-icon--warning {
+        color: $warning;
+      }
+    }
+  }
 }
+
+// 以下样式是messagebox 样式
