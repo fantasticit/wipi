@@ -1,5 +1,8 @@
+@import './config.scss';
+@import './func.scss';
+
 @mixin b($block) {
-  $B: 'ta-' + $block;
+  $B: $namespace + '-' + $block;
 
   @at-root .#{$B} {
     @content;
@@ -7,50 +10,39 @@
 }
 
 @mixin e($element) {
-  $E: $element;
+  $E: $element-separator + $element !global;
+  $selector: &;  // & 可以取到父选择器类名
+  
+  @if containSpecialLabel($selector) {
+    $currentSelector: #{extractBlock($selector) + $element-separator + $element };
 
-  @at-root #{&}__#{$E} {
-    @content;
+    @at-root #{$selector}{
+      #{$currentSelector} {
+        @content;
+      }
+    }
+  }
+  @else {
+    @at-root &#{$E} {
+      @content;
+    }
   }
 }
 
 @mixin m($modifier) {
-  $M: $modifier;
+  $M: $modifier-separator + $modifier;
 
-  @at-root #{&}--#{$M} {
+  @at-root #{&}#{$M} {
     @content;
   }
 }
 
 @mixin when($state) {
-  $S: 'is-' + $state;
+  $S: $state-prefix + $state;
 
-  @at-root &.#{$S} {
+  @at-root #{&}.#{$S} {
     @content;
   }
 }
 
-
-// @include b(table) {
-//   width: 100%;
-//   height: 100%;
-//   // @include flexLayout() {
-//   //   flex-direction: column;
-//   // }
-
-//   @include when(bottom-border) {
-//     position: relative;
-
-//     &::after {
-//       content: '';
-//       display: block;
-//       width: 100%;
-//       height: 1px;
-//       background: pink;
-//     }
-
-//     @include e(body) {
-//       background: red;
-//     }
-//   }
-// }
+// 使用示例见`README.md`

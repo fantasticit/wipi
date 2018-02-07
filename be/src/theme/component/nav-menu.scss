@@ -98,8 +98,12 @@
         position: relative;
         padding-left: 0;
         justify-content: center;
-  
+        
         .ta-icon {
+          margin: 0;
+        }
+
+        @include b(icon){
           margin: 0;
   
           @include e(arrow) {

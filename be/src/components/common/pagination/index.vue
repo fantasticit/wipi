@@ -38,7 +38,7 @@
       </span>
       <!-- 前置页码 -->
       <span 
-        v-for="(paginator, i) in paginators" :key="i"
+        v-for="(paginator, i) in [currentPage - 3, currentPage - 2, currentPage - 1]" :key="'pre' + i"
         v-if="paginator > 0 && paginator < currentPage"
         @click="handlePageChange(paginator)">
         {{ paginator }}
@@ -50,8 +50,8 @@
       </span>
       <!-- 后置页码 -->
       <span 
-        v-for="(paginator, i) in paginators" :key="i"
-        v-if="paginator > currentPage && paginator < totalPage"
+        v-for="(paginator, i) in [currentPage + 1, currentPage + 2, currentPage + 3]" :key="'las' + i"
+        v-if="paginator > 1 && paginator > currentPage && paginator < totalPage"
         @click="handlePageChange(paginator)">
         {{ paginator }}
       </span>
@@ -103,58 +103,38 @@ export default {
       totalPage: 0,
       currentPage: this.page,
       pageSize: 20,
-      paginators: [], // 页码选项
     }
   },
 
   watch: {
     pageSize(newPageSize, oldPageSize) {
       this.setTotalPage(newPageSize, oldPageSize)
-      this.setPaginators()
       this.$emit('pageSizeChange', newPageSize)
     },
 
     currentPage(page) {
-      this.setPaginators()
+      page = page > 0 ? page : 1
+      this.currentPage = page
       this.$emit('pageChange', page)
     },
 
     total() {
       this.setTotalPage()
-    },
-
-    totalPage() {
-      this.setPaginators()
-    },
+    }
   },
 
   created() {
     this.setTotalPage()
-    this.setPaginators()
   },
 
   methods: {
     setTotalPage(newPageSize, oldPageSize) {
       if (oldPageSize) {
         this.currentPage = ~~((oldPageSize * (this.currentPage - 1)) / newPageSize)
+        this.currentPage = this.currentPage > 0 ? this.currentPage : 1
       }
 
       this.totalPage = Math.ceil(this.total / this.pageSize)
-    },
-
-    setPaginators() {
-      let count = 3
-      let num1 = this.currentPage
-      let num2 = num1
-      this.paginators = []
-
-      while (count > 0) {
-        num1 > 1 && this.paginators.unshift(--num1)
-        num2 < this.totalPage && this.paginators.push(++num2)
-        --count
-      }
-
-      this.paginators = [...new Set(this.paginators)]
     },
 
     handlePageChange(page) {

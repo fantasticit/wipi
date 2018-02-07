@@ -1,4 +1,5 @@
 const ArticleModel = require('../models/article')
+const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字符
 
 module.exports = {
   add: async (ctx, next) => {
@@ -8,10 +9,12 @@ module.exports = {
       if (!!!req[key]) {
         ctx.throw(400, { status: 'no', message: `键${key}, ${req[key]}值不通过` })
       }
+
+      // req[key] = req[key].replace(filter, '')
     })
 
-    const date = Date.now()
-    const result = await ArticleModel.create({...req, date}).catch(e => ctx.throw(500))
+    const createDate = Date.now()
+    const result = await ArticleModel.create({...req, createDate}).catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '新增文章成功' })
   },
 
@@ -29,6 +32,7 @@ module.exports = {
     
     // 关键字查询(模糊查询)
     if (!!keyword) {
+      keyword = keyword.replace(filter, '')
       const reg = new RegExp(keyword, 'i')
       query.$or = [
         { tags: { $regex: reg }},
@@ -51,5 +55,19 @@ module.exports = {
       items: articles,
       total
     }})
-  }
+  },
+
+  delete: async (ctx, next) => {
+    const id = ctx.params.id
+    const article = await ArticleModel
+                            .findByIdAndRemove(id)
+                            .catch(e => {
+                              if (e.name === 'CastError') {
+                                ctx.throw(400, { status: 'no', message: `文章不存在` })
+                              } else {
+                                ctx.throw(500)
+                              }
+                            })
+    ctx.send({ status: 'ok', message: '删除文章成功'})                
+  },
 }

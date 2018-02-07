@@ -7,7 +7,7 @@ const articleSchema = new Schema({
   desc: String,
   cover: String,
   author: String,
-  date: Date,
+  createDate: Date,
   classify: String,
   tags: Array,
   content_md: String,

@@ -42,15 +42,17 @@
     <!-- S 内容区 -->
     <div class="ta-content">
       <ta-table
+        v-if="articles.length > 0"
         :tableHead="tableHead"
         :keys="tableKeys"
         :tableBody="articles"
         :index="(page - 1) * pageSize">
         <div v-for="(item, i) in articles" :key="i" :slot="i">
           <ta-button size='small' type="primary">编辑</ta-button>
-          <ta-button size='small' type="danger">删除</ta-button>
+          <ta-button size='small' type="danger" @click="deleteArticle(item._id)">删除</ta-button>
         </div>
       </ta-table>
+      <p v-else>暂无结果</p>
       <!-- <ta-collapse :noIcon="true" class="ta-content__title">
         <table slot="title">
           <tr>
@@ -146,7 +148,7 @@ export default class ArticleList extends Vue {
   pageSize = 20
 
   created() {
-    this.getArticles()
+    this.fetchArticles()
   }
 
   mounted() {
@@ -178,7 +180,7 @@ export default class ArticleList extends Vue {
     this.loading = false
   }
 
-  async getArticles() {
+  async fetchArticles() {
     this.$loading.start()
 
     try {
@@ -189,13 +191,23 @@ export default class ArticleList extends Vue {
         page: this.page,
         pageSize: this.pageSize
       }
-      const res = await ArticleProvider.get(query)
+      const res = await ArticleProvider.fetchArticles(query)
       this.articles = res.items
       this.total = res.total
     } catch (err) {
       this.$message.error(err)
     } finally {
       this.$loading.close()
+    }
+  }
+
+  async deleteArticle(id) {
+    try {
+      const res = await ArticleProvider.deleteArticle(id)
+      this.$message.success(res)
+      this.fetchArticles()
+    } catch (err) {
+      this.$message.error(err)
     }
   }
 }
@@ -205,7 +217,7 @@ export default class ArticleList extends Vue {
 @mixin common() {
   padding: 0 15px;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 2px;
   margin-bottom: 22px;
 }
 

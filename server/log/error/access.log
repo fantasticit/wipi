@@ -113,3 +113,43 @@
       req: {"title":"weaqszxdrcftvyguoijkml.;","desc":"cftvghnjkml,;.'/\\dfctgvhyjbnklm,;","cover":"","article":"edr5ftyguoijkml[.p;/\n|}dxcftvgybuhnjimko,lo","classify":"web_fe","tags":["dfctghyjnkill"],"author":"dcftrvygujik","state":"draft","content_md":"edr5ftyguoijkml[.p;/\n|}dxcftvgybuhnjimko,lo","content_html":"<p>edr5ftyguoijkml[.p;/\n|}dxcftvgybuhnjimko,lo</p>"} 
       res: {"errMsg":"键cover, 值不通过"}
   
+[2018-02-07T12:52:26.406] [FATAL] error - 
+    GET /article?classify=&state=&keyword=io[opo[&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Invalid regular expression: /io[opo[/: Unterminated character class"}
+  
+[2018-02-07T12:52:29.763] [FATAL] error - 
+    GET /article?classify=&state=&keyword=io[opo[jppppppjk&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Invalid regular expression: /io[opo[jppppppjk/: Unterminated character class"}
+  
+[2018-02-07T12:53:54.616] [FATAL] error - 
+    GET /article?classify=&state=&keyword=io[opo[jppppppjk&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Invalid regular expression: /io[opo[jppppppjk/: Unterminated character class"}
+  
+[2018-02-07T12:54:24.641] [FATAL] error - 
+    GET /article?classify=&state=&keyword=io[opo[jppppppjk&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Invalid regular expression: /io[opo[jppppppjk/: Unterminated character class"}
+  
+[2018-02-07T13:00:46.602] [FATAL] error - 
+    GET /article?classify=&state=&keyword=io[opo[jppppppjk&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Invalid regular expression: /ioopo[jppppppjk/: Unterminated character class"}
+  
+[2018-02-07T13:00:48.682] [FATAL] error - 
+    GET /article?classify=&state=&keyword=io[opo[jppppppjk&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Invalid regular expression: /ioopo[jppppppjk/: Unterminated character class"}
+  
+[2018-02-07T13:01:42.937] [FATAL] error - 
+    GET /article?classify=&state=&keyword=io[opo[jppppppjk&page=1&pageSize=20 500 
+      req: {} 
+      res: {"errMsg":"Invalid regular expression: /io[opo[jppppppjk/: Unterminated character class"}
+  
+[2018-02-07T13:05:53.447] [FATAL] error - 
+    POST /article/new 500 
+      req: {"title":"\\\\ahjsjdhaskfkashk123","desc":"afsf","cover":"http//p39p1kvxnbktclouddncom/FlLx9lLCilNm05AcWi1RlBzVENTj","article":"afffffffffff","classify":"web_fe","tags":["sffs"],"author":"4535","state":"draft","content_md":"afffffffffff","content_html":"<p>afffffffffff</p>"} 
+      res: {"errMsg":"req[key].replace is not a function"}
+  

@@ -4,6 +4,7 @@ class _ArticleProvider extends BaseHttp {
   api = {
     get: '/article',
     add: '/article/new',
+    delete: '/article/',
   }
 
   constructor() {
@@ -25,7 +26,7 @@ class _ArticleProvider extends BaseHttp {
     }
   }
 
-  async get(query) {
+  async fetchArticles(query) {
     query = Object.keys(query).map(key => `${key}=${query[key]}`).join('&')
 
     const req = {
@@ -43,6 +44,17 @@ class _ArticleProvider extends BaseHttp {
       }
     } catch (err) {
       throw new Error('获取文章失败')
+    }
+  }
+
+  async deleteArticle(id) {
+    const req = { url: this.api.delete + id, method: 'delete' }
+
+    try {
+      const res = await this.http(req)
+      return res.message
+    } catch (err) {
+      throw new Error('删除文章失败')
     }
   }
 }
