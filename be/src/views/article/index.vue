@@ -257,7 +257,6 @@ export default class Article extends Vue {
   async updateArticle(article) {
     this.loading = true
     this.handleArticle(article).then(async article => {
-      console.log(article)
       try {
         const res = await ArticleProvider.updateArticle(article, this.articleId)
         this.$message.success(res)
