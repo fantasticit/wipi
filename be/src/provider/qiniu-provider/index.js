@@ -20,7 +20,7 @@ class _QiniuProvider extends BaseHttp {
       const res = await this.http(req)
       return res.data
     } catch (err) {
-      throw new Error('获取七牛上传Token失败')
+      throw new Error(err)
     }
   }
 
@@ -45,7 +45,7 @@ class _QiniuProvider extends BaseHttp {
       const res = await this.http(req)
       return res
     } catch (err) {
-      throw new Error('上传图片到七牛失败')
+      throw new Error(err)
     }
   }
 }

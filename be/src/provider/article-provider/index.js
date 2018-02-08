@@ -5,13 +5,14 @@ class _ArticleProvider extends BaseHttp {
     get: '/article',
     add: '/article/new',
     delete: '/article/',
+    update: '/article/',
   }
 
   constructor() {
     super()
   }
 
-  async add(article) {
+  async addArticle(article) {
     const req = {
       url: this.api.add,
       method: 'POST',
@@ -43,7 +44,17 @@ class _ArticleProvider extends BaseHttp {
         total: res.data.total
       }
     } catch (err) {
-      throw new Error('获取文章失败')
+      throw new Error(err)
+    }
+  }
+
+  async fetchArticle(id) {
+    const req = { url: this.api.get + '/' + id, method: 'get' }
+    try {
+      const res = await this.http(req)
+      return res.data.article
+    } catch (err) {
+      throw new Error(err)
     }
   }
 
@@ -54,7 +65,22 @@ class _ArticleProvider extends BaseHttp {
       const res = await this.http(req)
       return res.message
     } catch (err) {
-      throw new Error('删除文章失败')
+      throw new Error(err)
+    }
+  }
+
+  async updateArticle(article, articleId) {
+    const req = {
+      url: this.api.update + articleId,
+      method: 'PATCH',
+      data: article
+    }
+
+    try {
+      const res = await this.http(req)
+      return `更新文章成功`
+    } catch (err) {
+      throw new Error(err)
     }
   }
 }

@@ -15,11 +15,14 @@ import { domContentLoaded } from './dom-content-loaded'
     let endTime = + new Date                                                     // 结束时间
     if (imgs.length > 0) {
       imgs.forEach(img => {
-        if (!img) {
+        if (!img || img.complete) {
           return
         }
-        img.onload = () => imgsLoadedTime.push(+ new Date)
-        img.onerror = () => imgsLoadedTime.push(+ new Date)
+
+        const image = new Image()
+        image.src = img.src
+        image.onload = () => imgsLoadedTime.push(+ new Date)
+        image.onerror = () => imgsLoadedTime.push(+ new Date)
       })
     } else {
       endTime = + new Date
@@ -27,7 +30,6 @@ import { domContentLoaded } from './dom-content-loaded'
 
     // load 应该仅用于检测一个完全加载的页面。 
     window.onload = () => {
-      console.log(imgsLoadedTime)
       if (imgsLoadedTime.length > 0) {
         endTime = Math.max.apply(null, imgsLoadedTime)
       }

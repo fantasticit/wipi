@@ -15,7 +15,7 @@
         当前显示
           {{ 
             currentPage == 1 
-            ? '1' 
+            ? (total > 0 ? 1 : 0)
             : (pageSize > total 
               ? total 
               : pageSize * (currentPage - 1) > total 

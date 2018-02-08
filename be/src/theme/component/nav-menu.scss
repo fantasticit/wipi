@@ -42,17 +42,18 @@
 
       .ta-icon {
         margin-right: 15px;
+      }
 
-        @include e(arrow) {
-          cursor: pointer;
+      .ta-icon__arrow {
+        display: block;
+        cursor: pointer;
 
-          position: absolute;
-          right: 15px;
-          transition: all ease .2s;
+        position: absolute;
+        right: 15px;
+        transition: all ease .2s;
 
-          @include when(active) {
-            transform: rotate(180deg);
-          }
+        @include when(active) {
+          transform: rotate(180deg);
         }
       }
       

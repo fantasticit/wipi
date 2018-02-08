@@ -26,4 +26,16 @@ routeConfig.map(route => {
   }
 })
 
+routes[0].children.push(
+  {
+    path: 'article/:articleId',
+    name: 'EditArticle',
+    component: views.Article,
+    meta: {
+      prefix: '文章管理',
+      title: '编辑文章',
+    },
+  },
+)
+
 export default routes

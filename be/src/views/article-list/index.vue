@@ -51,55 +51,11 @@
         :tableBody="articles"
         :index="(page - 1) * pageSize">
         <div v-for="(item, i) in articles" :key="i" :slot="i">
-          <ta-button size='small' type="primary">编辑</ta-button>
+          <ta-button size='small' type="primary" @click="editArticle(item._id)">编辑</ta-button>
           <ta-button size='small' type="danger" @click="deleteArticle(item._id)">删除</ta-button>
         </div>
       </ta-table>
-      <p v-else>暂无结果</p>
-      <!-- <ta-collapse :noIcon="true" class="ta-content__title">
-        <table slot="title">
-          <tr>
-            <td width="80">编号</td>
-            <td>标题</td>
-            <td>分类</td>
-            <td>状态</td>
-            <td>创建日期</td>
-            <td>操作</td>
-          </tr>
-        </table>
-      </ta-collapse>
-      <div class="ta-content__main" ref="content">
-        <ta-collapse v-for="(article, i) in articles" :key="i">
-          <table slot="title">
-            <tr>
-              <td width="80">{{ i + 1 }}</td>
-              <td>{{ article.title }}</td>
-              <td>{{ article.classify }}</td>
-              <td>{{ article.state || '未设定' }}</td>
-              <td>{{ article.date }}</td>
-              <td>
-                <ta-button size='small' type="primary">编辑</ta-button>
-                <ta-button size='small' type="danger">删除</ta-button>
-              </td>
-            </tr>
-          </table>
-
-          <div class="ta-content__main--sub">
-            <p>
-              <span>作者:</span>
-              <span>{{ article.author }}</span>
-            </p>
-            <p>
-              <span>概述:</span>
-              <span>{{ article.desc || '未设定' }}</span>
-            </p>
-            <p>
-              <span>标签:</span>
-              <span>{{ article.tags.join('、') }}</span>
-            </p>
-          </div>
-        </ta-collapse>
-      </div> -->
+      <p class="text-center" v-else>暂无数据</p>
     </div>
     <!-- E 内容区 -->
 
@@ -191,7 +147,7 @@ export default class ArticleList extends Vue {
       this.articles = res.items
       this.total = res.total
     } catch (err) {
-      this.$message.error(err)
+      this.$message.error(err.message)
     } finally {
       this.$loading.close()
     }
@@ -205,10 +161,14 @@ export default class ArticleList extends Vue {
           this.$message.success(res)
           this.fetchArticles()
         } catch (err) {
-          this.$message.error(err)
+          this.$message.error(err.message)
         }
       })
       .catch(e => this.$message.info('取消删除'))
+  }
+
+  editArticle(articleId) {
+    this.$router.push(`/article/${articleId}`)
   }
 }
 </script>

@@ -11,7 +11,7 @@
       </div>
       <div class="ta-article__item">
         <label>文章内容</label>
-        <ta-markdown-editor class="editor" ref="editor" v-model="article">
+        <ta-markdown-editor class="editor" ref="editor" v-model="content">
         </ta-markdown-editor>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <span>文章封面</span>
         </div>
         <div class="body">
-          <ta-upload @success="getImageName($event)"></ta-upload>
+          <ta-upload :image="cover" @success="getImageName($event)"></ta-upload>
         </div>
       </div>
       <!-- 文章发布 -->
@@ -101,9 +101,10 @@ import { ArticleProvider } from '@/provider/article-provider'
   }
 })
 export default class Article extends Vue {
-  title = 'fffffffff'                                           // 文章标题
+  articleId = null                                     // 文章ID
+  title = ''                                           // 文章标题
   desc = ''                                            // 文章描述
-  article = ''                                         // 文章内容
+  content = ''                                         // 文章内容
   classify = ''                                        // 文章分类
   author = ''                                          // 文章作者
   state = ''                                           // 文章状态
@@ -111,12 +112,16 @@ export default class Article extends Vue {
   tags = []                                            // 文章标签
   loading = false
   tagTypes = ['default', 'info', 'success', 'danger']
-  upload = null
+  upload = null                                        // 上传组件(VNode)
   
   created() {
     this.$on('mount.upload', vm => {
       this.upload = vm
     })
+
+    const articleId = this.$route.params['articleId'] || null
+    this.articleId = articleId
+    !!this.articleId && this.fetchArticle()
   }
 
   // 增加标签
@@ -139,8 +144,8 @@ export default class Article extends Vue {
 
   // 重置文章信息
   reset() {
-    this.article = ''
     this.title = ''
+    this.content = ''
     this.desc = ''
     this.classify = ''
     this.tags = []
@@ -155,31 +160,59 @@ export default class Article extends Vue {
     this.$refs['editor'].$el.querySelector('.fa-eye').click()
   }
 
+   // 获取上传后的封面路径
+  getImageName(res) {
+    this.cover = this.coverPrefix + res.hash
+  }
+
+  // 获取文章
+  async fetchArticle() {
+    this.$loading.start()
+    try {
+      const article = await ArticleProvider.fetchArticle(this.articleId)
+      this.title = article.title
+      this.desc = article.desc
+      this.content = article['content_md']
+      this.classify = article.classify
+      this.tags = article.tags
+      this.cover = article.cover
+      this.author = article.author
+      this.state = article.state
+    } catch (err) {
+      this.$message.error(err.message)
+    } finally {
+      this.$loading.close()
+    }
+  }
+
   // 发布文章前的转换
   publish() {
-    const info = Object.assign({}, {
+    const article = Object.assign({}, {
       title: this.title,
       desc: this.desc,
       cover: this.cover,
-      article: this.article,
+      content: this.content,
       classify: this.classify,
       tags: this.tags,
       author: this.author,
       state: this.state,
     })
 
-    console.log(info)
-    const flag = Object.keys(info).every(key => {
+    const flag = Object.keys(article).every(key => {
       if (key === 'cover') {
         return true
       }
-      return !!info[key]
+      return !!article[key]
     })
 
     if (!flag) {
       this.$message.error('请完善文章信息')
     } else {
-      this.publishArticle(info)
+      if (this.articleId) {
+        this.updateArticle(article)
+      } else {
+        this.publishArticle(article)
+      }
     }
   }
 
@@ -187,34 +220,53 @@ export default class Article extends Vue {
   transfor2Html() {
     return Promise.resolve(import('showdown').then(showdown => {
       const convert = new showdown.Converter()
-      const html = convert.makeHtml(this.article)
+      const html = convert.makeHtml(this.content)
       return html
     }))
   }
 
-  // 获取上传后的封面路径
-  getImageName(res) {
-    this.cover = this.coverPrefix + res.hash
-    console.log(this.cover)
+   // 转换文章结构
+  handleArticle(article) {
+    return Promise.resolve(
+      this.transfor2Html().then(content_html => {
+        return Object.assign({}, article, {
+          content_md: this.content,
+          content_html
+        })
+      })
+    )
   }
 
   // 发布文章
-  publishArticle(info) {
+  publishArticle(article) {
     this.loading = true
-    this.transfor2Html().then(async (content_html) => {
-      const article = Object.assign({}, info, {
-        content_md: this.article,
-        content_html
-      })
-
+    this.handleArticle(article).then(async article => {
       try {
-        const res = await ArticleProvider.add(article)
+        const res = await ArticleProvider.addArticle(article)
         this.$message.success(res)
         this.reset()
       } catch (err) {
-        this.$message.error('发表文章失败')
+        this.$message.error(err.message)
       } finally {
         this.loading = false
+      }
+    })
+  }
+
+  // 更新文章
+  async updateArticle(article) {
+    this.loading = true
+    this.handleArticle(article).then(async article => {
+      console.log(article)
+      try {
+        const res = await ArticleProvider.updateArticle(article, this.articleId)
+        this.$message.success(res)
+        this.reset()
+      } catch (err) {
+        this.$message.error(err.message)
+      } finally {
+        this.loading = false
+        this.$router.replace('/article')
       }
     })
   }

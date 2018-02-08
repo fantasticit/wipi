@@ -7,9 +7,10 @@
         @click="emitMenu()"
       ></ta-icon>
       <span v-for="(route, i) in routes" :key="i">
+        <router-link v-if="routes.length > 1 && i == 0" :to="routes[0].path">{{ routes[0].title }}</router-link>
         <template v-if="route.prefix">{{ route.prefix }} /</template>
         <router-link v-if="i == routes.length - 1" :to="route.path" exact>{{ route.title }}</router-link>
-        <template v-else>{{ route.title }}</template>
+        <template v-else-if="i !== 0 || routes.length <= 1">{{ route.title }}</template>
         <template v-if="routes.length > 1 && i < routes.length - 1">/</template>
       </span>
     </div>

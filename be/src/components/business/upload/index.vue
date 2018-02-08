@@ -9,9 +9,9 @@
           <ta-icon name="android-upload"></ta-icon>
           <p>将文件拖拽到此处或<span>点击上传</span></p>
         </div>
-        <input type="file" multiple>
       </template>
       <img v-else :src="img">
+      <input type="file" multiple>
     </div>
     <transition name="slide-down">
       <div class="ta-upload__tip" v-if="fileName">
@@ -53,6 +53,8 @@ export default {
     Emitter,
   ],
 
+  props: ['image'],
+
   data() {
     return {
       draging: false,
@@ -62,6 +64,16 @@ export default {
       isUploading: true,            // 正在上传
       isSuccess: false,             // 上传是否成功
       uploadToken: null,            // 七牛上传token
+    }
+  },
+
+  watch: {
+    image(newImage) {
+      if (newImage) {
+        this.img = newImage
+        this.isUploading = false
+        this.isSuccess = true
+      }
     }
   },
 
