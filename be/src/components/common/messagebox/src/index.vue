@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-down-dialog">
-    <div class="ta-dialog__wrapper" v-if="isShow">
+    <div class="ta-dialog__wrapper" v-if="visible">
       <div class="ta-dialog ta-dialog--messagebox">
         <div class="ta-dialog__header">
           <span>{{ title }}</span>
@@ -8,23 +8,27 @@
         </div>
         <div class="ta-dialog__body">
           <div v-if="showInput">
-            <p>{{ label }}</p>
+            <p>{{ tip }}</p>
             <ta-form-item
               :rules="rules"
               @success="pass"
               @fail="fail"
               ref="input"
-              v-model="value">
+              v-model="inputValue">
             </ta-form-item>
           </div>
           <template v-else>
             <ta-icon :name="iconName" :class="'ta-icon--' + type"></ta-icon>
-            <span>{{ label }}</span>
+            <span>{{ tip }}</span>
           </template>
         </div>
         <div class="ta-dialog__footer">
-          <ta-button size="small" @click="onCancel()">{{ cancelButtonText }}</ta-button>
-          <ta-button type="primary" size="small" @click="onOk()">{{ confirmButtonText }}</ta-button>
+          <ta-button size="small" @click="onCancel()">
+            {{ cancelButtonText }}
+          </ta-button>
+          <ta-button type="primary" size="small" @click="onConfirm()">
+            {{ confirmButtonText }}
+          </ta-button>
         </div>
       </div>
     </div>
@@ -66,7 +70,7 @@ export default {
       default: false
     },
 
-    label: {
+    tip: {
       type: String,
       default: '提示'
     },
@@ -84,8 +88,8 @@ export default {
 
   data() {
     return {
-      isShow: true,
-      value: '',
+      visible: true,
+      inputValue: '',
       passed: false,
     }
   },
@@ -105,15 +109,21 @@ export default {
     }
   },
 
+  mounted() {
+    if (this.showInput) {
+      this.$refs['input'].$el.querySelector('input').setAttribute('autofocus', true)
+    }
+  },
+
   methods: {
     onCancel() {
-      this.isShow = false
-      this.$emit('cancel')
+      this.visible = false
+      this.callback && (this.callback.call(this, 'cancel'))
     },
 
-    onOk() {
-      this.isShow = true
-      this.$emit('ok')
+    onConfirm() {
+      this.visible = false
+      this.callback && (this.callback.call(this, 'confirm'))
     },
 
     pass() {
