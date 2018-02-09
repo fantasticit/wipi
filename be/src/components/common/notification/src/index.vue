@@ -27,7 +27,7 @@ export default {
       type: '',
       title: '',
       msg: '',
-      show: true,
+      show: false,
     }
   },
 

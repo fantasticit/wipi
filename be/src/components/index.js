@@ -15,7 +15,7 @@ import TaContainer from './business/container'
 
 import Message from './common/message'
 import Loading from './common/loading'
-import Notification from './common/notification'
+import notification from './common/notification'
 import { confirm, prompt } from './common/messagebox/index'
 
 const components = [
@@ -47,10 +47,10 @@ const install = Vue => {
 
   Vue.prototype.$loading = Loading
 
-  Vue.prototype.$notify = Notification
-  Vue.prototype.$notify.success = (title, msg) => Notification({ type: 'success', title, msg })
-  Vue.prototype.$notify.error = (title, msg) => Notification({ type: 'error', title, msg })
-  Vue.prototype.$notify.warning = (title, msg) => Notification({ type: 'info', title, msg })
+  Vue.prototype.$notify = notification
+  Vue.prototype.$notify.success = (title, msg) => notification({ type: 'success', title, msg })
+  Vue.prototype.$notify.error = (title, msg) => notification({ type: 'error', title, msg })
+  Vue.prototype.$notify.warning = (title, msg) => notification({ type: 'info', title, msg })
 
   Vue.prototype.$confirm = confirm
   Vue.prototype.$prompt = prompt

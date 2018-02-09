@@ -15,6 +15,7 @@ class _Loading {
       this.instance.show()
     } else {
       document.body.appendChild(this.instance.$el)
+      Vue.nextTick(() => this.instance.inShow = true)
       hasInserted = true
     }
   }

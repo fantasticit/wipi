@@ -7,6 +7,7 @@
       :class="{ 'is-invalid': showInvalidTip }"
       :type="type" :placeholder="placeholder"
       :data-prop="prop"
+      autocomplete="false"
       ref="input"
       @keyup.enter="emitEnter()"
       v-model="currentValue" 

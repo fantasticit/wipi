@@ -3,7 +3,7 @@ import Main from './src/index.vue'
 const NotificationConstructor = Vue.extend(Main)
 
 let count = 0
-const Notification = function (options, delay) {
+const notification = function (options, delay) {
   count++ // 计数器加一
 
   options = options || {}
@@ -16,6 +16,7 @@ const Notification = function (options, delay) {
 
   // 挂载 通知dom
   document.body.appendChild(instance.vm.$el)
+  Vue.nextTick(() => instance.show = true)
 
   // 定时移除
   setTimeout(() => {
@@ -24,4 +25,4 @@ const Notification = function (options, delay) {
   }, delay)
 }
 
-export default Notification
+export default notification

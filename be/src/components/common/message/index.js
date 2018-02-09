@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import TaMessage from './src'
 
+let count = 0
+let delay = 2400
+
 export default function Message(message, type = 'info') {
   const Ctur = Vue.extend(TaMessage)
   const instance = new Ctur({ data: { message, type } }).$mount()
-  instance.show()
-  document.body.appendChild(instance.$el)
 
-  setTimeout(() => instance.close(), 3000)
+  document.body.appendChild(instance.$el)
+  Vue.nextTick(() => instance.show())
+  count++
+  
+  setTimeout(() => instance.close(), delay + 600 * count)
 }
