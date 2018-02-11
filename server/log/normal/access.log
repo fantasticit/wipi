@@ -629,3 +629,17 @@
 [2018-02-09T16:40:49.623] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.001s
 [2018-02-09T16:41:08.588] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.004s
 [2018-02-09T16:42:06.126] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.003s
+[2018-02-09T16:44:21.305] [INFO] normal - GET /qiniu/token 响应时间为: 0s
+[2018-02-09T16:44:21.307] [INFO] normal - GET /article/5a7a8951829b854771197e8f 响应时间为: 0.003s
+[2018-02-09T16:44:25.554] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.004s
+[2018-02-09T16:44:26.916] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
+[2018-02-09T16:44:26.917] [INFO] normal - GET /article/5a7a8951829b854771197e8f 响应时间为: 0.003s
+[2018-02-09T16:44:29.018] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.003s
+[2018-02-09T16:45:18.694] [INFO] normal - GET /article/5a7a8951829b854771197e8f 响应时间为: 0.002s
+[2018-02-09T16:45:18.695] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
+[2018-02-09T16:45:22.419] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.006s
+[2018-02-09T16:45:23.629] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
+[2018-02-09T16:45:23.633] [INFO] normal - GET /article/5a7a8951829b854771197e8f 响应时间为: 0.006s
+[2018-02-09T16:45:26.243] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.003s
+[2018-02-09T16:45:29.145] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
+[2018-02-09T16:45:32.791] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.002s
