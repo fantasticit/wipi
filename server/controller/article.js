@@ -20,6 +20,7 @@ class ArticleController {
         //   article[key] = article[key].replace(filter, '')
         // }
         console.log(key + '-' + article[key])
+        console.log(xssFilters.inHTMLData(article[key]))
       }
     })
   }

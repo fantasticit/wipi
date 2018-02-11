@@ -3,3 +3,6 @@
 [2018-02-11T11:00:47.340] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
 [2018-02-11T11:00:55.801] [INFO] normal - OPTIONS /article/new 响应时间为: 0s
 [2018-02-11T11:00:55.894] [INFO] normal - POST /article/new 响应时间为: 0.085s
+[2018-02-11T12:39:37.867] [INFO] normal - GET /qiniu/token 响应时间为: 0.119s
+[2018-02-11T12:39:45.835] [INFO] normal - OPTIONS /article/new 响应时间为: 0.001s
+[2018-02-11T12:39:45.941] [INFO] normal - POST /article/new 响应时间为: 0.099s
