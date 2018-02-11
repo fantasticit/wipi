@@ -8,6 +8,10 @@ const articleSchema = new Schema({
   cover: String,
   author: String,
   createDate: Date,
+  updateDate: {
+    type: Date,
+    default: Date.now()
+  },
   classify: String,
   tags: Array,
   content_md: String,

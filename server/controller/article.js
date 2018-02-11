@@ -1,3 +1,4 @@
+const xssFilters = require('xss-filters')
 const ArticleModel = require('../models/article')
 const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字符
 
@@ -13,12 +14,13 @@ class ArticleController {
         // 非跳过字段且该字段键值为空
         ctx.throw(400, { status: 'no', message: `键${key}, ${req[key]}值不通过` })
       }
-      // } else {
-      //   // 过滤敏感字符
-      //   if (key !== 'content_md' || key !== 'content_html') {
-      //     article[key] = article[key].replace(filter, '')
-      //   }
-      // }
+      else {
+        // 过滤敏感字符
+        // if (key !== 'content_md' || key !== 'content_html') {
+        //   article[key] = article[key].replace(filter, '')
+        // }
+        console.log(key + '-' + article[key])
+      }
     })
   }
 
@@ -81,12 +83,10 @@ class ArticleController {
     const { id } = ctx.params
     const req = ctx.request.body
 
-    // 检查并过滤字段
     ArticleController.checkArticle(req, ['cover'], ctx)
-    // 更新创建日期
-    // # Todo 改为：更新日期（updateDate）
-    const createDate = Date.now()
-    const result = await ArticleModel.findByIdAndUpdate(id, {...req, createDate})
+    
+    const updateDate = Date.now()
+    const result = await ArticleModel.findByIdAndUpdate(id, {...req, updateDate})
       .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '更新文章成功' })
   }

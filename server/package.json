@@ -21,6 +21,7 @@
     "mongodb": "^3.0.1",
     "mongoose": "^5.0.0-rc2",
     "nodemon": "^1.14.12",
-    "qiniu": "^7.1.2"
+    "qiniu": "^7.1.2",
+    "xss-filters": "^1.2.7"
   }
 }
