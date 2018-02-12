@@ -173,3 +173,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.hover {
+  background: #f5faf7;
+}
+</style>
