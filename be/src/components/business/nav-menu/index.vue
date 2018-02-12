@@ -3,9 +3,8 @@
     <ul>
       <li
         v-for="(route, i) in routeConfig" :key="i"
-        :ref="i"
-        @click="toggleShow(i)"
-        :style="{ height: activeIndex === i ? h + 'px': '' }">
+        :ref="'li' + (i + 1)"
+        @click="toggleShow(i + 1)">
         <template v-if="!route.children">
           <div>
             <router-link :to="'/' + route.path" exact>
@@ -56,26 +55,25 @@ export default {
   data() {
     return {
       isShowSubmenu: [false, false],
-      activeIndex: 0,
-      h: 56,
       routeConfig,
     }
   },
 
   methods: {
     toggleShow(i) {
-      let oLi = this.$refs[i]
+      let oLi = this.$refs['li' + i]
       if (!oLi) {
         return
       }
       oLi = oLi[0]
       const oUl = oLi.querySelector('ul')
-      if (this.h <= 56) {
-        this.h += oUl.offsetHeight
+      let h = oLi.offsetHeight
+      if (h <= 56) {
+        h += oUl.offsetHeight
       } else {
-        this.h = 56
+        h = 56
       }
-      this.activeIndex = i
+      oLi.style.height = h + 'px'
       toggleClassName(oLi.querySelector('.ta-icon__arrow'), 'is-active')
     },
 

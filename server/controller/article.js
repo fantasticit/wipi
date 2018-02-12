@@ -10,17 +10,11 @@ class ArticleController {
   // skips接受一个数组，用于指定不进行非空检查的字段
   static checkArticle(article, skips, ctx) {
     Object.keys(article).forEach(key => {
-      if (skips.indexOf(key) == -1 && !Boolean(article[key])) {
-        // 非跳过字段且该字段键值为空
+      if (skips.indexOf(key) == -1 && !Boolean(article[key])) { // 非跳过字段且该字段键值为空
         ctx.throw(400, { status: 'no', message: `键${key}, ${req[key]}值不通过` })
       }
       else {
-        // 过滤敏感字符
-        // if (key !== 'content_md' || key !== 'content_html') {
-        //   article[key] = article[key].replace(filter, '')
-        // }
-        console.log(key + '-' + article[key])
-        console.log(xssFilters.inHTMLData(article[key]))
+        article[key] = xssFilters.inHTMLData(article[key])
       }
     })
   }
@@ -28,7 +22,9 @@ class ArticleController {
   // 新增文章
   static async addArticle(ctx, next) {
     const req = ctx.request.body
+
     ArticleController.checkArticle(req, ['cover'], ctx)
+    
     const createDate = Date.now()
     const result = await ArticleModel.create({...req, createDate})
       .catch(e => ctx.throw(500))

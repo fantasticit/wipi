@@ -154,7 +154,7 @@ export default class ArticleList extends Vue {
   }
 
   async deleteArticle(id) {
-    this.$confirm('此操作将删除文章，是否继续？', '提示', {})
+    this.$confirm('此操作将删除文章，是否继续？', '提示', { type: 'warning' })
       .then(async () => {
         try {
           const res = await ArticleProvider.deleteArticle(id)

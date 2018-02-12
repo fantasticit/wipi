@@ -34,6 +34,54 @@ const routeConfig = [
       },
     ],
   },
+
+  {
+    prefix: '性能分析',
+    icon: 'compass',
+    children: [
+      {
+        path: 'article',
+        name: 'ArticleList',
+        component: views.ArticleList,
+        meta: {
+          title: '前端性能',
+        },
+      },
+    
+      {
+        path: 'article/new',
+        name: 'NewArticle',
+        component: views.Article,
+        meta: {
+          title: '接口性能',
+        },
+      },
+    ],
+  },
+
+  {
+    prefix: '错误日志',
+    icon: 'bug',
+    children: [
+      {
+        path: 'article',
+        name: 'ArticleList',
+        component: views.ArticleList,
+        meta: {
+          title: '前端日志',
+        },
+      },
+    
+      {
+        path: 'article/new',
+        name: 'NewArticle',
+        component: views.Article,
+        meta: {
+          title: '接口日志',
+        },
+      },
+    ],
+  },
 ]
 
 export default routeConfig
