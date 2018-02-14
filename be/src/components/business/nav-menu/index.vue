@@ -3,8 +3,7 @@
     <ul>
       <li
         v-for="(route, i) in routeConfig" :key="i"
-        :ref="'li' + (i + 1)"
-        @click="toggleShow(i + 1)">
+        :ref="'li' + (i + 1)">
         <template v-if="!route.children">
           <div>
             <router-link :to="'/' + route.path" exact>
@@ -15,7 +14,7 @@
         </template>
 
         <template v-else>
-          <div>
+          <div @click="toggleShow(i + 1, $event.target)">
             <ta-icon
               class="ta-icon__arrow"
               name="ios-arrow-down">
@@ -60,7 +59,7 @@ export default {
   },
 
   methods: {
-    toggleShow(i) {
+    toggleShow(i, target) {
       let oLi = this.$refs['li' + i]
       if (!oLi) {
         return

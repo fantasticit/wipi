@@ -1,64 +1,108 @@
-[2018-02-12T11:24:04.406] [INFO] normal - GET /qiniu/token 响应时间为: 0.159s
-[2018-02-12T11:24:30.871] [INFO] normal - OPTIONS /article/new 响应时间为: 0.001s
-[2018-02-12T11:24:31.016] [INFO] normal - POST /article/new 响应时间为: 0.14s
-[2018-02-12T11:25:01.843] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.012s
-[2018-02-12T11:25:03.713] [INFO] normal - GET /qiniu/token 响应时间为: 0s
-[2018-02-12T11:25:03.715] [INFO] normal - GET /article/5a8108eebaa5f423476e516a 响应时间为: 0.005s
-[2018-02-12T11:26:06.598] [INFO] normal - OPTIONS /article/5a8108eebaa5f423476e516a 响应时间为: 0.029s
-[2018-02-12T11:26:06.626] [INFO] normal - PATCH /article/5a8108eebaa5f423476e516a 响应时间为: 0.024s
-[2018-02-12T11:26:06.662] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.009s
-[2018-02-12T11:26:29.120] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:26:29.122] [INFO] normal - GET /article/5a7fb1e7c76e8a374213dfec 响应时间为: 0.006s
-[2018-02-12T11:26:35.738] [INFO] normal - GET /qiniu/token 响应时间为: 0.002s
-[2018-02-12T11:26:36.616] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.004s
-[2018-02-12T11:26:38.168] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:26:38.172] [INFO] normal - GET /article/5a7fb1e7c76e8a374213dfec 响应时间为: 0.006s
-[2018-02-12T11:26:42.907] [INFO] normal - OPTIONS /article/5a7fb1e7c76e8a374213dfec 响应时间为: 0.002s
-[2018-02-12T11:26:42.916] [INFO] normal - PATCH /article/5a7fb1e7c76e8a374213dfec 响应时间为: 0.005s
-[2018-02-12T11:26:42.949] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.002s
-[2018-02-12T11:26:44.844] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:26:44.846] [INFO] normal - GET /article/5a8108eebaa5f423476e516a 响应时间为: 0.005s
-[2018-02-12T11:26:49.567] [INFO] normal - OPTIONS /article/5a8108eebaa5f423476e516a 响应时间为: 0.001s
-[2018-02-12T11:26:49.577] [INFO] normal - PATCH /article/5a8108eebaa5f423476e516a 响应时间为: 0.006s
-[2018-02-12T11:26:49.609] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.002s
-[2018-02-12T11:26:50.873] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:26:50.874] [INFO] normal - GET /article/5a8108eebaa5f423476e516a 响应时间为: 0.003s
-[2018-02-12T11:26:56.327] [INFO] normal - OPTIONS /article/5a8108eebaa5f423476e516a 响应时间为: 0.001s
-[2018-02-12T11:26:56.335] [INFO] normal - PATCH /article/5a8108eebaa5f423476e516a 响应时间为: 0.005s
-[2018-02-12T11:26:56.378] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.004s
-[2018-02-12T11:26:57.599] [INFO] normal - GET /qiniu/token 响应时间为: 0s
-[2018-02-12T11:26:57.600] [INFO] normal - GET /article/5a8108eebaa5f423476e516a 响应时间为: 0.002s
-[2018-02-12T11:27:04.187] [INFO] normal - OPTIONS /article/5a8108eebaa5f423476e516a 响应时间为: 0.001s
-[2018-02-12T11:27:04.193] [INFO] normal - PATCH /article/5a8108eebaa5f423476e516a 响应时间为: 0.003s
-[2018-02-12T11:27:04.223] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.002s
-[2018-02-12T11:27:05.496] [INFO] normal - GET /qiniu/token 响应时间为: 0.002s
-[2018-02-12T11:27:05.497] [INFO] normal - GET /article/5a8108eebaa5f423476e516a 响应时间为: 0.004s
-[2018-02-12T11:27:08.794] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.005s
-[2018-02-12T11:27:13.117] [INFO] normal - OPTIONS /article/5a8108eebaa5f423476e516a 响应时间为: 0s
-[2018-02-12T11:27:13.122] [INFO] normal - DELETE /article/5a8108eebaa5f423476e516a 响应时间为: 0.003s
-[2018-02-12T11:27:13.130] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.002s
-[2018-02-12T11:27:42.043] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.003s
-[2018-02-12T11:29:12.506] [INFO] normal - GET /qiniu/token 响应时间为: 0.002s
-[2018-02-12T11:29:12.508] [INFO] normal - GET /article/5a7fc91193e73e550824345e 响应时间为: 0.006s
-[2018-02-12T11:29:18.501] [INFO] normal - OPTIONS /article/5a7fc91193e73e550824345e 响应时间为: 0.001s
-[2018-02-12T11:29:18.510] [INFO] normal - PATCH /article/5a7fc91193e73e550824345e 响应时间为: 0.006s
-[2018-02-12T11:29:18.554] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.003s
-[2018-02-12T11:29:20.254] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:29:20.255] [INFO] normal - GET /article/5a7fc91193e73e550824345e 响应时间为: 0.004s
-[2018-02-12T11:29:28.232] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.006s
-[2018-02-12T11:29:33.721] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:29:40.199] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.008s
-[2018-02-12T11:29:42.519] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:29:44.247] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.007s
-[2018-02-12T11:29:46.206] [INFO] normal - GET /qiniu/token 响应时间为: 0.002s
-[2018-02-12T11:29:48.683] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.005s
-[2018-02-12T11:29:51.063] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:29:53.874] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.006s
-[2018-02-12T11:29:56.323] [INFO] normal - GET /qiniu/token 响应时间为: 0s
-[2018-02-12T11:31:23.870] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:31:54.879] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:31:59.688] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.002s
-[2018-02-12T11:32:00.443] [INFO] normal - GET /qiniu/token 响应时间为: 0.002s
-[2018-02-12T11:32:17.525] [INFO] normal - GET /qiniu/token 响应时间为: 0.001s
-[2018-02-12T11:33:55.194] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.002s
-[2018-02-12T11:37:17.635] [INFO] normal - GET /article?classify=&state=&keyword=&page=1&pageSize=20 响应时间为: 0.002s
+[2018-02-13T18:38:38.960] [INFO] normal - 
+    GET /feperformence 
+    响应时间为: 0.065s
+    
+[2018-02-13T18:38:38.980] [INFO] normal - 
+    OPTIONS /feperformence 
+    响应时间为: 0.001s
+    
+[2018-02-13T18:38:39.163] [INFO] normal - 
+    POST /feperformence 
+    响应时间为: 0.024s
+    
+[2018-02-13T18:38:40.910] [INFO] normal - 
+    GET /feperformence 
+    响应时间为: 0.02s
+    
+[2018-02-13T18:38:42.912] [INFO] normal - 
+    GET /feperformence 
+    响应时间为: 0.02s
+    
+[2018-02-13T18:39:26.616] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0.03s
+    
+[2018-02-13T18:40:31.327] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0.042s
+    
+[2018-02-13T18:40:31.362] [INFO] normal - 
+    OPTIONS /feperformence 
+    响应时间为: 0.002s
+    
+[2018-02-13T18:40:31.383] [INFO] normal - 
+    POST /feperformence 
+    响应时间为: 0.014s
+    
+[2018-02-13T18:41:38.288] [INFO] normal - 
+    GET /feperformence 
+    响应时间为: 0.043s
+    
+[2018-02-13T18:41:40.256] [INFO] normal - 
+    GET /feperformence 
+    响应时间为: 0.017s
+    
+[2018-02-13T18:45:06.195] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0.007s
+    
+[2018-02-13T18:45:07.549] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 0.003s
+    
+[2018-02-13T18:45:08.741] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0.003s
+    
+[2018-02-13T18:45:10.221] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 0.001s
+    
+[2018-02-13T18:45:11.266] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0.003s
+    
+[2018-02-13T18:45:12.567] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 0.001s
+    
+[2018-02-13T18:45:13.292] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0.004s
+    
+[2018-02-13T18:45:14.310] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 0.001s
+    
+[2018-02-13T18:45:14.875] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0.004s
+    
+[2018-02-13T18:45:17.061] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 0.001s
+    
+[2018-02-13T18:45:17.862] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0.003s
+    
+[2018-02-13T18:45:19.396] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 0.001s
+    
+[2018-02-13T18:45:20.183] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0.004s
+    
+[2018-02-13T18:45:21.564] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 0s
+    
+[2018-02-13T18:45:22.969] [INFO] normal - 
+    GET /feperformence 
+    响应时间为: 0.022s
+    
+[2018-02-13T18:45:24.962] [INFO] normal - 
+    GET /feperformence 
+    响应时间为: 0.016s
+    

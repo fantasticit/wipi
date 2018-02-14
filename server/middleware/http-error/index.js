@@ -7,6 +7,7 @@ module.exports = () => {
     try {
       await next()
     } catch (err) {
+      console.log(err)
       const statusCode = err.statusCode || err.status || 500
       const errMsg = err.message || '服务器错误'
       ctx.response.status = statusCode

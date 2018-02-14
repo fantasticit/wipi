@@ -33,6 +33,7 @@
 }
 
 @include b(content) {
+  position: relative;
   flex: 1;
   @include common;
   padding: 15px;
@@ -40,6 +41,11 @@
   @include flexLayout(flex-start) {
     flex-direction: column;
   };
+
+  > p {
+    position: absolute;
+    @include center;
+  }
 
   @include e(main) {
     flex: 1;

@@ -40,9 +40,9 @@ const routeConfig = [
     icon: 'compass',
     children: [
       {
-        path: 'article',
-        name: 'ArticleList',
-        component: views.ArticleList,
+        path: 'performence/fe',
+        name: 'FePerformence',
+        component: views.FePerformence,
         meta: {
           title: '前端性能',
         },

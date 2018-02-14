@@ -1,6 +1,7 @@
 const log4js = require('log4js')
+const ApiPerformenceController = require('../../controller/apiPerformence')
 
-module.exports = (ctx, status, start = 0) => {
+module.exports = async (ctx, status, start = 0) => {
   log4js.configure(
     {
       appenders: { normal: { type: 'dateFile', filename: 'log/normal/access.log', keepFileExt: true } },
@@ -18,5 +19,17 @@ module.exports = (ctx, status, start = 0) => {
   ctx.logger.info = message => logger['info'](message)
   
   const responseTime = (Date.now() - start) / 1000
-  logger.info(`${method} ${url} 响应时间为: ${responseTime}s`)
+  logger.info(
+    `
+    ${method} ${url} 
+    响应时间为: ${responseTime}s
+    `
+  )
+
+  await ApiPerformenceController.addRecord({
+    statusCode: status,
+    method,
+    requestUrl: url,
+    responseTime
+  })
 }

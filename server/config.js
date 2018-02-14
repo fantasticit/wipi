@@ -3,10 +3,10 @@ const config = {
     port: 3000,
 
     db: {
-      name: 'coding-heart',
+      name: 'elapse',
       host: '127.0.0.1',
       port: 27017,
-      user: 'zx',
+      user: 'zxx',
       pwd:  'zx123',
     },
   },

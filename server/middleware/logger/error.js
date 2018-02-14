@@ -3,8 +3,9 @@
  * 用于响应码大于399情况
  */
 const log4js = require('log4js')
+const ApiPerformenceController = require('../../controller/apiPerformence')
 
-module.exports = (ctx, status) => {
+module.exports = async (ctx, status, start = 0) => {
   log4js.configure(
     {
       appenders: { error: { type: 'dateFile', filename: 'log/error/access.log', keepFileExt: true } },
@@ -26,9 +27,20 @@ module.exports = (ctx, status) => {
   if (status[0] > 4) {
     level = 'fatal'
   }
+
+  const responseTime = (Date.now() - start) / 1000
+
   ctx.logger[level](`
     ${method} ${url} ${status} 
       req: ${JSON.stringify(ctx.request.body) || ''} 
       res: ${JSON.stringify(ctx.response.body) || ''}
+      响应时间为: ${responseTime}s
   `)
+
+  await ApiPerformenceController.addRecord({
+    statusCode: status,
+    method,
+    requestUrl: url,
+    responseTime
+  })
 }

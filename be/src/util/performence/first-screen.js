@@ -1,3 +1,4 @@
+import { ReportProvider } from '@/provider/report-provider'
 import { domContentLoaded } from './dom-content-loaded'
 
 ~function (){
@@ -35,6 +36,16 @@ import { domContentLoaded } from './dom-content-loaded'
       }
       const firstScreenTime = endTime - loadStartTime
       console.log('首屏时间: ', firstScreenTime)
+      const allLoadedTime = + new Date() - loadStartTime
+
+      ReportProvider.reportPerformence({
+        firstScreenTime,
+        allLoadedTime,
+        appName: 'Elapse-Admin-v1.0.0',
+      }).then()
+        .catch(e => {
+          throw new Error('report fe performence failed')
+        })
     }
   })
 }()

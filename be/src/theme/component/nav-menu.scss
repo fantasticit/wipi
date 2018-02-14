@@ -70,11 +70,16 @@
 
     li {
       > div {
-        padding-left: 60px;
+        padding: 0;
         background-color: #1f2d3d;
 
         &:hover {
           background-color: #001528;
+        }
+
+        a {
+          display: block;
+          padding-left: 60px;
         }
       }
     }

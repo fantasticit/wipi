@@ -10,7 +10,7 @@ module.exports = () => {
     if (status >= 200 & status <= 399) {
       normalLogger(ctx, status, start)
     } else {
-      errorLogger(ctx, status)
+      errorLogger(ctx, status, start)
     }
   }
 }
