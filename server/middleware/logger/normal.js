@@ -18,7 +18,7 @@ module.exports = async (ctx, status, start = 0) => {
   !ctx.logger && (ctx.logger ={})
   ctx.logger.info = message => logger['info'](message)
   
-  const responseTime = (Date.now() - start) / 1000
+  const responseTime = (Date.now() - start)
   logger.info(
     `
     ${method} ${url} 

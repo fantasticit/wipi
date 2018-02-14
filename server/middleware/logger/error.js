@@ -28,7 +28,7 @@ module.exports = async (ctx, status, start = 0) => {
     level = 'fatal'
   }
 
-  const responseTime = (Date.now() - start) / 1000
+  const responseTime = (Date.now() - start)
 
   ctx.logger[level](`
     ${method} ${url} ${status} 

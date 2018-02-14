@@ -1,108 +1,172 @@
-[2018-02-13T18:38:38.960] [INFO] normal - 
-    GET /feperformence 
-    响应时间为: 0.065s
-    
-[2018-02-13T18:38:38.980] [INFO] normal - 
+[2018-02-15T00:01:42.579] [INFO] normal - 
     OPTIONS /feperformence 
-    响应时间为: 0.001s
-    
-[2018-02-13T18:38:39.163] [INFO] normal - 
-    POST /feperformence 
-    响应时间为: 0.024s
-    
-[2018-02-13T18:38:40.910] [INFO] normal - 
-    GET /feperformence 
-    响应时间为: 0.02s
-    
-[2018-02-13T18:38:42.912] [INFO] normal - 
-    GET /feperformence 
-    响应时间为: 0.02s
-    
-[2018-02-13T18:39:26.616] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0.03s
-    
-[2018-02-13T18:40:31.327] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0.042s
-    
-[2018-02-13T18:40:31.362] [INFO] normal - 
-    OPTIONS /feperformence 
-    响应时间为: 0.002s
-    
-[2018-02-13T18:40:31.383] [INFO] normal - 
-    POST /feperformence 
-    响应时间为: 0.014s
-    
-[2018-02-13T18:41:38.288] [INFO] normal - 
-    GET /feperformence 
-    响应时间为: 0.043s
-    
-[2018-02-13T18:41:40.256] [INFO] normal - 
-    GET /feperformence 
-    响应时间为: 0.017s
-    
-[2018-02-13T18:45:06.195] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0.007s
-    
-[2018-02-13T18:45:07.549] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 0.003s
-    
-[2018-02-13T18:45:08.741] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0.003s
-    
-[2018-02-13T18:45:10.221] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 0.001s
-    
-[2018-02-13T18:45:11.266] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0.003s
-    
-[2018-02-13T18:45:12.567] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 0.001s
-    
-[2018-02-13T18:45:13.292] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0.004s
-    
-[2018-02-13T18:45:14.310] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 0.001s
-    
-[2018-02-13T18:45:14.875] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0.004s
-    
-[2018-02-13T18:45:17.061] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 0.001s
-    
-[2018-02-13T18:45:17.862] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0.003s
-    
-[2018-02-13T18:45:19.396] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 0.001s
-    
-[2018-02-13T18:45:20.183] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0.004s
-    
-[2018-02-13T18:45:21.564] [INFO] normal - 
-    GET /qiniu/token 
     响应时间为: 0s
     
-[2018-02-13T18:45:22.969] [INFO] normal - 
-    GET /feperformence 
-    响应时间为: 0.022s
+[2018-02-15T00:01:42.498] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 88s
     
-[2018-02-13T18:45:24.962] [INFO] normal - 
-    GET /feperformence 
-    响应时间为: 0.016s
+[2018-02-15T00:01:42.559] [INFO] normal - 
+    GET /performence/api/res/time/avarage 
+    响应时间为: 140s
+    
+[2018-02-15T00:01:42.575] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 154s
+    
+[2018-02-15T00:01:42.780] [INFO] normal - 
+    POST /feperformence 
+    响应时间为: 24s
+    
+[2018-02-15T00:04:36.905] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 31s
+    
+[2018-02-15T00:04:36.940] [INFO] normal - 
+    GET /performence/api/res/time/avarage 
+    响应时间为: 33s
+    
+[2018-02-15T00:04:36.969] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 61s
+    
+[2018-02-15T00:04:36.991] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 82s
+    
+[2018-02-15T00:04:43.970] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 25s
+    
+[2018-02-15T00:04:44.003] [INFO] normal - 
+    GET /performence/api/res/time/avarage 
+    响应时间为: 29s
+    
+[2018-02-15T00:04:44.029] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 53s
+    
+[2018-02-15T00:04:44.032] [INFO] normal - 
+    OPTIONS /feperformence 
+    响应时间为: 1s
+    
+[2018-02-15T00:04:44.047] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 13s
+    
+[2018-02-15T00:04:44.179] [INFO] normal - 
+    POST /feperformence 
+    响应时间为: 4s
+    
+[2018-02-15T00:06:09.928] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 67s
+    
+[2018-02-15T00:06:10.006] [INFO] normal - 
+    GET /performence/api/res/time/avarage 
+    响应时间为: 136s
+    
+[2018-02-15T00:06:10.063] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 51s
+    
+[2018-02-15T00:06:10.079] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 65s
+    
+[2018-02-15T00:06:10.082] [INFO] normal - 
+    OPTIONS /feperformence 
+    响应时间为: 1s
+    
+[2018-02-15T00:06:10.278] [INFO] normal - 
+    POST /feperformence 
+    响应时间为: 17s
+    
+[2018-02-15T00:06:56.068] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 80s
+    
+[2018-02-15T00:06:56.147] [INFO] normal - 
+    GET /performence/api/res/time/avarage 
+    响应时间为: 149s
+    
+[2018-02-15T00:06:56.186] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 187s
+    
+[2018-02-15T00:06:56.191] [INFO] normal - 
+    OPTIONS /feperformence 
+    响应时间为: 1s
+    
+[2018-02-15T00:06:56.210] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 208s
+    
+[2018-02-15T00:06:56.293] [INFO] normal - 
+    POST /feperformence 
+    响应时间为: 20s
+    
+[2018-02-15T00:08:02.121] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 76s
+    
+[2018-02-15T00:08:02.214] [INFO] normal - 
+    GET /performence/api/res/time/avarage 
+    响应时间为: 59s
+    
+[2018-02-15T00:08:02.250] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 94s
+    
+[2018-02-15T00:08:02.254] [INFO] normal - 
+    OPTIONS /feperformence 
+    响应时间为: 1s
+    
+[2018-02-15T00:08:02.269] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 112s
+    
+[2018-02-15T00:08:02.366] [INFO] normal - 
+    POST /feperformence 
+    响应时间为: 16s
+    
+[2018-02-15T00:09:09.885] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 51s
+    
+[2018-02-15T00:09:09.927] [INFO] normal - 
+    GET /performence/api/res/time/avarage 
+    响应时间为: 92s
+    
+[2018-02-15T00:09:09.960] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 71s
+    
+[2018-02-15T00:09:09.977] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 14s
+    
+[2018-02-15T00:09:20.327] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 27s
+    
+[2018-02-15T00:09:20.358] [INFO] normal - 
+    GET /performence/api/res/time/avarage 
+    响应时间为: 58s
+    
+[2018-02-15T00:09:20.391] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 90s
+    
+[2018-02-15T00:09:20.405] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 104s
+    
+[2018-02-15T00:09:20.409] [INFO] normal - 
+    OPTIONS /feperformence 
+    响应时间为: 0s
+    
+[2018-02-15T00:09:20.604] [INFO] normal - 
+    POST /feperformence 
+    响应时间为: 6s
     

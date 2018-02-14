@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import TaAlert from './common/alert'
 import TaIcon from './common/icon'
 import TaButton from './common/button'
 import TaForm from './common/form'
@@ -19,6 +20,7 @@ import notification from './common/notification'
 import { confirm, prompt } from './common/messagebox/index'
 
 const components = [
+  TaAlert,
   TaTag,
   TaIcon,
   TaButton,

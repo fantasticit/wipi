@@ -1,26 +1,44 @@
 <template>
-  <div class="page">
-    <h1>Fe Performence</h1>
-    <div ref="chart" class="ta-chart"></div>
-    <ta-select
-      label="Project"
-      placeholder="select project">
-    </ta-select>
+  <div class="ta-page">
+    <ta-alert>前端页面性能记录取最接近当前时间的30条，每一分钟更新一次</ta-alert>
+    <div class="ta-page__head">
+      <div>
+        <ta-button
+          v-for="(project, i) in projects"
+          :key="i"
+          type="small"
+          :class="{'is-active': selectedProject === project}"
+          @click="setProject(project)">
+          {{ project }}
+        </ta-button>
+      </div>
+    </div>
+    <div ref="chart" class="ta-page__chart"></div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { formatTime } from '@/util/format-time'
 import { ReportProvider } from '@/provider/report-provider'
 
 const echarts = require('echarts')
 
 @Component({
   watch: {
+    selectedProject() {
+      this.fetchPerformences()
+    },
+
     chartOption() {
       this.renderChart()
     }
+  },
+
+  routeBeforeLeave(to, from, next) {
+    console.log(to)
+    console.log(this)
   }
 })
 export default class FePerformence extends Vue {
@@ -30,7 +48,8 @@ export default class FePerformence extends Vue {
   recordDates = []
   timer = null
   chartOption = {}
-
+  projects = ['Elapse-Admin', 'Elapse-Front']
+  selectedProject = 'Elapse-Admin'
 
   mounted() {
     const oChart = this.$refs['chart']
@@ -40,32 +59,32 @@ export default class FePerformence extends Vue {
     this.fetchPerformences()
     this.$loading.close()
 
-    this.timer = setInterval(this.fetchPerformences, 2000)
+    this.timer = setInterval(this.fetchPerformences, 60000)
+  }
+
+  setProject(project) {
+    this.selectedProject = project
   }
 
   async fetchPerformences() {
-    try {
-      const res = await ReportProvider.getPerformences()
+    try { 
+      const res = await ReportProvider.getPerformences(this.selectedProject)
 
-      const firstScreenTimes = []
-      const allLoadedTimes = []
-      const recordDates = []
+      this.firstScreenTimes = []
+      this.allLoadedTimes = []
+      this.recordDates = []
+
+      if (res.items.length <= 0) {
+        this.$message.info('暂无数据')
+      }
 
       res.items.map(performance => {
-        firstScreenTimes.push(performance.firstScreenTime)
-        allLoadedTimes.push(performance.allLoadedTime)
-        recordDates.push(performance.visitDateTime)
+        this.firstScreenTimes.push(performance.firstScreenTime)
+        this.allLoadedTimes.push(performance.allLoadedTime)
+        this.recordDates.push(formatTime(performance.visitDateTime))
       })
 
-      if (firstScreenTimes.length === this.firstScreenTimes.length) {
-        this.timer && clearInterval(this.timer)
-        return
-      } else {
-        this.firstScreenTimes = firstScreenTimes
-        this.allLoadedTimes = allLoadedTimes
-        this.recordDates = recordDates
-        this.getChartOption()
-      }
+      this.getChartOption()
     } catch (err) {
       this.$message.error(err.message)
     }
@@ -85,7 +104,7 @@ export default class FePerformence extends Vue {
         }
       },
       legend: {
-        data: ['FirstScreenTime', 'AllLoadedTime']
+        data: ['首屏耗时', '加载耗时']
       },
       toolbox: {
         show: true,
@@ -115,15 +134,15 @@ export default class FePerformence extends Vue {
       ],
       series: [
         {
-            name: 'FirstScreenTime',
-            type: 'bar',
-            barGap: 0,
-            data: this.firstScreenTimes
+          name: '首屏耗时',
+          type: 'bar',
+          barGap: 0,
+          data: this.firstScreenTimes
         },
         {
-            name: 'AllLoadedTime',
-            type: 'bar',
-            data: [...this.allLoadedTimes]
+          name: '加载耗时',
+          type: 'bar',
+          data: this.allLoadedTimes
         },
       ]
     }
@@ -132,12 +151,27 @@ export default class FePerformence extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.page {
+@include b(page) {
   background: #fff;
   padding: 15px;
-}
 
-@include b(chart) {
-  height: 600px;
+  @include flexLayout(flex-start) {
+    flex-direction: column;
+  }
+
+  @include e(head) {
+    padding: 15px  0;
+    text-align: center;
+
+    button.is-active {
+      background: $primary;
+      color: #fff;
+    }
+  }
+
+  @include e(chart) {
+    flex: 1;
+    min-height: 500px;
+  }
 }
 </style>

@@ -41,7 +41,7 @@ import { domContentLoaded } from './dom-content-loaded'
       ReportProvider.reportPerformence({
         firstScreenTime,
         allLoadedTime,
-        appName: 'Elapse-Admin-v1.0.0',
+        appName: 'Elapse-Admin',
       }).then()
         .catch(e => {
           throw new Error('report fe performence failed')

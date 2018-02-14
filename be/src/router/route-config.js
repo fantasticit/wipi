@@ -49,9 +49,9 @@ const routeConfig = [
       },
     
       {
-        path: 'article/new',
-        name: 'NewArticle',
-        component: views.Article,
+        path: 'performence/api',
+        name: ' ApiPerformence',
+        component: views.ApiPerformence,
         meta: {
           title: '接口性能',
         },

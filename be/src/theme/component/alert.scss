@@ -1,0 +1,55 @@
+@include b(alert) {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 13px;
+
+  @include flexLayout(flex-start);
+
+  @include m(success) {
+    background-color: #f0f9eb;
+    border-color: #e1f3d8;
+    color: $success;
+  }
+
+  @include m(warning) {
+    background-color: #fdf6ec;
+    border-color: #faecd8;
+    color: $warning;
+  }
+
+  @include m(info) {
+    color: $info;
+    background-color: #f4f4f5;
+  }
+
+  @include m(error) {
+    background-color: #fef0f0;
+    border-color: #fde2e2;
+    color: $danger;
+  }
+
+  > .ta-icon {
+    &::before {
+      transform: translateY(1px);
+    }
+  }
+
+  @include e(content) {
+    flex: 1;
+    display: table-cell;
+    padding: 0 8px;
+    
+    @include flexLayout(space-between) {
+      align-items: center;
+    };
+
+    > .ta-icon {
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+}
