@@ -64,18 +64,18 @@ const routeConfig = [
     icon: 'bug',
     children: [
       {
-        path: 'article',
-        name: 'ArticleList',
-        component: views.ArticleList,
+        path: 'log/fe',
+        name: 'FeLogger',
+        component: views.FeLogger,
         meta: {
           title: '前端日志',
         },
       },
     
       {
-        path: 'article/new',
-        name: 'NewArticle',
-        component: views.Article,
+        path: 'log/api',
+        name: 'ApiLog',
+        component: views.ApiLogger,
         meta: {
           title: '接口日志',
         },

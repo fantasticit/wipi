@@ -46,6 +46,7 @@
     <div class="ta-content">
       <ta-table
         v-if="articles.length > 0"
+        :needIndex="true"
         :tableHead="tableHead"
         :keys="tableKeys"
         :tableBody="articles"
@@ -101,8 +102,8 @@ export default class ArticleList extends Vue {
   state = ''                 // 文章状态
   keyword = ''               // 搜索关键字
   loading = false            // 是否正在加载中
-  tableHead = ['编号', '标题', '分类', '状态', '创建日期', '操作']
-  tableKeys = ['', 'title', 'classify', 'state', 'createDate']
+  tableHead = ['标题', '分类', '状态', '创建日期', '操作']
+  tableKeys = ['title', 'classify', 'state', 'createDate']
   page = 1                   
   pageSize = 20
 

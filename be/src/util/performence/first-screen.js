@@ -38,7 +38,7 @@ import { domContentLoaded } from './dom-content-loaded'
       console.log('首屏时间: ', firstScreenTime)
       const allLoadedTime = + new Date() - loadStartTime
 
-      ReportProvider.reportPerformence({
+      ReportProvider.reportFePerformence({
         firstScreenTime,
         allLoadedTime,
         appName: 'Elapse-Admin',

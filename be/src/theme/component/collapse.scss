@@ -16,6 +16,10 @@
     line-height: 48px;
     @include flexLayout(space-between);
 
+    > * {
+      @include textOverflow;
+    }
+
     span {
       @include flexLayout(flex-start) {
         align-items: center;
@@ -42,6 +46,6 @@
 
   @include e(body) {
     overflow: hidden;
-    padding: 15px 0;
+    padding: 15px;
   }
 }

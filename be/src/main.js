@@ -6,7 +6,7 @@ import store from './store'
 import './assets/icon/ionicons.scss'
 import './components/index'
 import './util/performence/first-screen'
-import { on } from './util/event'
+import './util/performence/error'
 
 Vue.config.productionTip = false
 

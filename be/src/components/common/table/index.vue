@@ -1,14 +1,15 @@
 <template>
   <div 
     class="ta-table" 
-    :class="{'is-bottom-border': showGutter}">
+    :class="{'is-bottom-border': showGutter && tableBody.length > 0}">
     <div class="ta-table__head">
       <table>
         <tbody>
           <tr>
+            <td v-if="needIndex" width="60">编号</td>
             <td 
               v-for="(head, i) in tableHead" :key="i"
-              :width="i === 0 ? 60 : ''">
+              >
               {{ head }}
             </td>
             <td v-if="showGutter" class="gutter" width="14"></td>
@@ -21,18 +22,21 @@
       class="ta-table__body" 
       ref="tableBody" 
       :class="{'is-no-bottom-border': showGutter}">
-      <table ref="table">
+      <table ref="table" v-if="tableBody.length > 0">
         <tbody>
           <tr v-for="(body, i) in tableBody" :key="i">
-            <td v-for="(key, j) in keys" :key="j" :width="!key ? 60 : ''">
-              {{ !key ? index + i + 1 : body[key] }}
+            <td v-if="needIndex" width="60">{{ index + i + 1 }}</td>  
+            <td v-for="(key, j) in keys" :key="'k' + i + j">
+              {{ body[key] }}
             </td>
-            <td v-if="keys.length < tableHead.length">
+            <td>
               <slot :name="i"></slot>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <p v-else>暂无数据</p>
     </div>
   </div>
 </template>
@@ -61,6 +65,11 @@ export default {
       type: Number,
       default: 0
     },
+
+    needIndex: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data() {

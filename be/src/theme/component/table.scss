@@ -17,7 +17,6 @@
     }
 
     @include e(body) {
-      background: red;
     }
   }
 
@@ -32,6 +31,8 @@
       border: 1px solid $border;
       text-align: center;
       padding: 5px;
+
+      @include textOverflow;
     }
 
     td.gutter {
@@ -50,6 +51,11 @@
   @include e(body) {
     flex: 1;
     overflow: auto;
+
+    p {
+      margin: 1em;
+      text-align: center;
+    }
 
     tr:first-of-type {
       td {

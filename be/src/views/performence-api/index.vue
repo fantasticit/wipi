@@ -4,7 +4,7 @@
     <div class="ta-page__charts">
       <div class="ta-page__chart">
         <div class="head">
-          <ta-icon></ta-icon>
+          <ta-icon name="pie-graph"></ta-icon>
           <span>接口调用次数</span>
         </div>
         <div class="body" ref="callTimeChart"></div>
@@ -12,7 +12,7 @@
 
       <div class="ta-page__chart">
         <div class="head">
-          <ta-icon></ta-icon>
+          <ta-icon name="stats-bars"></ta-icon>
           <span>接口平均响应时间（/ms）</span>
         </div>
         <div class="body" ref="avarageChart">1</div>
@@ -21,7 +21,7 @@
     <div class="ta-page__charts">
       <div class="ta-page__chart ta-page__chart--full">
         <div class="head">
-          <ta-icon></ta-icon>
+          <ta-icon name="arrow-graph-down-right"></ta-icon>
           <ta-select label="具体接口分析" :options="apiList" v-model="selectedApi"></ta-select>
         </div>
         <div class="body" ref="chart"></div>
@@ -66,7 +66,7 @@ const echarts = require('echarts')
     console.log(this)
   }
 })
-export default class FePerformence extends Vue {
+export default class ApiPerformence extends Vue {
   timer = null
   
   apiList = []
@@ -83,8 +83,8 @@ export default class FePerformence extends Vue {
 
   created() {
     this.fecthApiList()
+    this.fetchApiCallTimes()
     this.fetchApiAvarageResTime()
-    this.fetchApiCallTime()
   }
 
   mounted() {
@@ -101,7 +101,11 @@ export default class FePerformence extends Vue {
     this.fetchPerformences()
     this.$loading.close()
 
-    // this.timer = setInterval(this.fetchPerformences, 60000)
+    this.timer = setInterval(() => {
+      this.fetchPerformences()
+      this.fetchApiCallTimes()
+      this.fetchApiAvarageResTime()
+    }, 60000)
   }
 
   async fecthApiList() {
@@ -128,9 +132,9 @@ export default class FePerformence extends Vue {
     }
   }
 
-  async fetchApiCallTime() {
+  async fetchApiCallTimes() {
     try { 
-      const res = await ReportProvider.getApiCallTime()
+      const res = await ReportProvider.getApiCallTimes()
       this.getCallTimeChartOption(res)
     } catch (err) {
       this.$message.error(err.message)
@@ -144,83 +148,6 @@ export default class FePerformence extends Vue {
     } catch (err) {
       this.$message.error(err.message)
     }
-  }
-
-  getAvarageChartOption(data) {
-    this.avarageChartOption = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'shadow'
-        }
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      xAxis: {
-        type: 'value',
-        boundaryGap: [0, 0.01]
-      },
-      yAxis: {
-        type: 'category',
-        data: Object.keys(data)
-      },
-      series: [
-        {
-          name: '平均响应时间',
-          type: 'bar',
-          data: Object.keys(data).map(key => data[key])
-        },
-      ]
-    }
-  }
-
-  getCallTimeChartOption(data) {
-    console.log(data)
-    this.callTimeChartOption = {
-      tooltip : {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-      },
-      series : [
-        {
-          name: '访问接口',
-          type: 'pie',
-          radius : '60%',
-          center: ['50%', '60%'],
-          data: Object.keys(data).reduce((records, key) => {
-            records.push({
-              name: key,
-              value: data[key]
-            })
-
-            return records
-          }, []),
-          itemStyle: {
-            emphasis: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }
-      ]
-    }
-  }
-
-  renderChart() {
-    this.chart.setOption(this.chartOption, false, false)
-  }
-
-  renderAvarageChart() {
-    this.avarageChart.setOption(this.avarageChartOption, false, false);
-  }
-
-  renderCallTimeChart() {
-    this.callTimeChart.setOption(this.callTimeChartOption, false, false);
   }
 
   getOption(data) {
@@ -293,61 +220,85 @@ export default class FePerformence extends Vue {
       }
     }
   }
+
+  getAvarageChartOption(data) {
+    this.avarageChartOption = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+      },
+      yAxis: {
+        type: 'category',
+        data: Object.keys(data)
+      },
+      series: [
+        {
+          name: '平均响应时间',
+          type: 'bar',
+          data: Object.keys(data).map(key => data[key])
+        },
+      ]
+    }
+  }
+
+  getCallTimeChartOption(data) {
+    this.callTimeChartOption = {
+      tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      series : [
+        {
+          name: '访问接口',
+          type: 'pie',
+          radius : '60%',
+          center: ['50%', '60%'],
+          data: Object.keys(data).reduce((records, key) => {
+            records.push({
+              name: key,
+              value: data[key]
+            })
+
+            return records
+          }, []),
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    }
+  }
+
+  renderChart() {
+    this.chart.setOption(this.chartOption, false, false)
+  }
+
+  renderAvarageChart() {
+    this.avarageChart.setOption(this.avarageChartOption, false, false);
+  }
+
+  renderCallTimeChart() {
+    this.callTimeChart.setOption(this.callTimeChartOption, false, false);
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-@include b(page) {
-  background: #fff;
-  padding: 15px;
-
-  @include flexLayout(flex-start) {
-    flex-direction: column;
-  }
-
-  @include e(head) {
-    padding: 15px  0;
-    text-align: center;
-
-    button.is-active {
-      background: $primary;
-      color: #fff;
-    }
-  }
-
-  @include e(charts) {
-    margin-top: 15px;
-    @include flexLayout(space-between);
-
-    &:first-of-type {
-      margin-top: 0;
-    }
-  }
-
-  @include e(chart) {
-    flex: 1;
-    background: #fff;
-    border: 1px solid $border;
-    border-radius: 5px;
-    margin-left: 15px;
-
-    &:first-of-type {
-      margin-left: 0;
-    }
-
-    @include m(full) {
-      width: 100%;
-    }
-    
-    .head {
-      padding: 15px;
-      border-bottom: 1px solid $border;
-    }
-
-    .body {
-      padding: 15px 0;
-      min-height: 300px;
-    }
-  }
-}
+@import './style.scss';
 </style>

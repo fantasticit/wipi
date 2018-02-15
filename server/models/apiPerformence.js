@@ -10,7 +10,9 @@ const apiPerformenceSchema = new Schema({
   dateTime: {
     type: Date,
     default: Date.now()
-  }
+  },
+  errMsg: String,
+  errStack: String,
 })
 
 apiPerformenceSchema.index({ id: 1 })

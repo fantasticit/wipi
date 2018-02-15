@@ -2,22 +2,26 @@ import BaseHttp from '../base-http'
 
 class _ReportProvider extends BaseHttp {
   api = {
-    getPerformences: '/feperformence',
-    getApiPerformences: '/performence/api',
+    addFeError: '/performence/error/fe',
+    getFePerformences: '/performence/fe',
+    getFeStatics: '/performence/fe/statics',
+    addFePerformence: '/performence/fe',
+
     getApiList: '/performence/api/list',
-    getApiAvarageResTime: '/performence/api/res/time/avarage',
-    getApiCallTime: '/performence/api/calltime',
-    getStatics: '/feperformence/statics',
-    addPerformence: '/feperformence',
+    getApiPerformences: '/performence/api',
+    getApiCallTimes: '/performence/api/calltime',
+    getApiAvarageResTime: '/performence/api/avaragerestime',
+    getApiErrorLog: '/performence/api/log/error',
   }
 
   constructor() {
     super()
   }
 
-  async reportPerformence(report) {
+  // 报告前端性能（首屏耗时与加载耗时）
+  async reportFePerformence(report) {
     const req = {
-      url: this.api.addPerformence,
+      url: this.api.addFePerformence,
       method: 'POST',
       data: report
     }
@@ -30,9 +34,53 @@ class _ReportProvider extends BaseHttp {
     }
   }
 
-  async getPerformences(appName) {
+  // 报告前端错误
+  async reportFeError({error, vm, info, appName}) {
+    const errMsg = error.message
+    const errStack = error.stack
+
     const req = {
-      url: this.api.getPerformences + `?appName=${appName}`,
+      url: this.api.addFeError,
+      method: 'POST',
+      data: {
+        vm,
+        info,
+        errMsg,
+        errStack,
+        appName
+      }
+    }
+
+    try {
+      const res = await this.http(req)
+      return `成功`
+    } catch (err) {
+      console.log(err)
+      throw new Error(err)
+    }
+  }
+
+  // 获取前端性能
+  async getFePerformences(appName) {
+    const req = {
+      url: this.api.getFePerformences + `?appName=${appName}`,
+      method: 'get'
+    }
+
+    try {
+      const res = await this.http(req)
+      return res.data
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  // 获取前端错误
+  async getFeErrors(query) {
+    query = Object.keys(query).map(key => `${key}=${query[key]}`).join('&')
+
+    const req = {
+      url: this.api.addFeError + `?${query}`,
       method: 'get'
     }
 
@@ -75,9 +123,9 @@ class _ReportProvider extends BaseHttp {
   }
 
   // 获取接口调用次数
-  async getApiCallTime() {
+  async getApiCallTimes() {
     const req = {
-      url: this.api.getApiCallTime,
+      url: this.api.getApiCallTimes,
       method: 'get'
     }
 
@@ -89,6 +137,7 @@ class _ReportProvider extends BaseHttp {
     }
   }
 
+  // 获取接口性能（接口响应时间）
   async getApiPerformences(requestUrl) {
     const req = {
       url: this.api.getApiPerformences + `?requestUrl=${requestUrl}`,
@@ -103,8 +152,25 @@ class _ReportProvider extends BaseHttp {
     }
   }
 
+  // 获取接口错误日志
+  async getApiErrorLog(query) {
+    query = Object.keys(query).map(key => `${key}=${query[key]}`).join('&')
+
+    const req = {
+      url: this.api.getApiErrorLog + `?${query}`,
+      method: 'get'
+    }
+
+    try {
+      const res = await this.http(req)
+      return res.data
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
   async getStatics() {
-    const req = { url: this.api.getStatics, method: 'get' }
+    const req = { url: this.api.getFeStatics, method: 'get' }
 
     try {
       const res = await this.http(req)

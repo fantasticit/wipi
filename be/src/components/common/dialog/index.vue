@@ -9,7 +9,7 @@
         <div class="ta-dialog__body">
           <slot></slot>
         </div>
-        <div class="ta-dialog__footer">
+        <div class="ta-dialog__footer" v-if="showFooter">
           <ta-button @click="handleCancel()">取消</ta-button>
           <ta-button type="primary" :loading="loading" @click="handleOk()">确定</ta-button>
         </div>
@@ -39,6 +39,11 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+
+    showFooter: {
+      type: Boolean,
+      default: true
     }
   },
 

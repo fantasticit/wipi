@@ -1,0 +1,63 @@
+@include b(page) {
+  background: #fff;
+  padding: 15px;
+
+  @include flexLayout(flex-start) {
+    flex-direction: column;
+  }
+
+  @include e(head) {
+    padding: 15px  0;
+    text-align: center;
+  }
+
+  @include e(charts) {
+    margin-top: 15px;
+    @include flexLayout(space-between);
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  @include e(chart) {
+    flex: 1;
+    background: #fff;
+    border: 1px solid $border;
+    border-radius: 5px;
+    margin-left: 15px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    @include m(full) {
+      width: 100%;
+    }
+    
+    .head {
+      padding: 15px;
+      border-bottom: 1px solid $border;
+      @include flexLayout(flex-start) {
+        align-items: center;
+      };
+
+      > .ta-icon {
+        margin-right: 6px;
+
+        &::before {
+          transform: translateY(0px);
+        }
+      }
+    
+      > .ta-select {
+        flex: 1;
+      }
+    }
+
+    .body {
+      padding: 15px 0;
+      min-height: 300px;
+    }
+  }
+}

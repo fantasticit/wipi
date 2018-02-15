@@ -3,7 +3,6 @@
  * 用于响应码大于399情况
  */
 const log4js = require('log4js')
-const ApiPerformenceController = require('../../controller/apiPerformence')
 
 module.exports = async (ctx, status, start = 0) => {
   log4js.configure(
@@ -36,11 +35,4 @@ module.exports = async (ctx, status, start = 0) => {
       res: ${JSON.stringify(ctx.response.body) || ''}
       响应时间为: ${responseTime}s
   `)
-
-  await ApiPerformenceController.addRecord({
-    statusCode: status,
-    method,
-    requestUrl: url,
-    responseTime
-  })
 }

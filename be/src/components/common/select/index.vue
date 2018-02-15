@@ -1,10 +1,12 @@
 <template>
-  <div class="ta-form-item">
+  <div class="ta-select__container">
     <label v-if="label">{{ label }}</label>
     <select 
       class="ta-select" ref="select" :value="selected"
       :class="{ 'is-selected': hasSelected }"
-      @change="emitChange($event.target.value)">
+      @change="emitChange($event.target.value)"
+      @blur="emitBlur()"
+      @focus="emitFocus()">
       <option value="" disabled>{{ placeholder }}</option>
       <option 
         v-for="(option, index) in options" :key="index"
@@ -69,7 +71,15 @@ export default {
     emitChange(value) {
       this.hasSelected = true
       this.$emit('change', value)
-    }
+    },
+
+    emitFocus() {
+      this.$emit('focus')
+    },
+
+    emitBlur() {
+      this.$emit('blur')
+    },
   },
 }
 </script>

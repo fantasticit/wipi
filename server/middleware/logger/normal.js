@@ -26,7 +26,7 @@ module.exports = async (ctx, status, start = 0) => {
     `
   )
 
-  await ApiPerformenceController.addRecord({
+  await ApiPerformenceController.addApiRecord({
     statusCode: status,
     method,
     requestUrl: url,

@@ -68,7 +68,7 @@ export default class FePerformence extends Vue {
 
   async fetchPerformences() {
     try { 
-      const res = await ReportProvider.getPerformences(this.selectedProject)
+      const res = await ReportProvider.getFePerformences(this.selectedProject)
 
       this.firstScreenTimes = []
       this.allLoadedTimes = []
@@ -88,10 +88,6 @@ export default class FePerformence extends Vue {
     } catch (err) {
       this.$message.error(err.message)
     }
-  }
-
-  renderChart() {
-    this.chart.setOption(this.chartOption, false, false);
   }
 
   getChartOption() {
@@ -146,6 +142,10 @@ export default class FePerformence extends Vue {
         },
       ]
     }
+  }
+
+  renderChart() {
+    this.chart.setOption(this.chartOption, false, false);
   }
 }
 </script>

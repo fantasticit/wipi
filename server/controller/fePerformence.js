@@ -1,20 +1,5 @@
 const FePerformence = require('../models/fePeformence')
 
-// function getClientIp (req) {
-//   let ip = req.header['x-forwarded-for']
-//           || req.ip
-//           || req.connection.remoteAddress
-//           || req.socket.remoteAddress
-//           || req.connection.socket.remoteAddress
-//           || ''
-  
-//   if (ip.split(',').length > 0) {
-//     ip = ip[0]
-//   }
-
-//   return ip
-// }
-
 class FePerformenceController {
   static constructor() {}
 

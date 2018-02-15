@@ -4,8 +4,10 @@ const views = {
   Dashboard: () => import(/* webpackChunkName: "dashboard" */'@/views/dashboard'),
   Article: () => import(/* webpackChunkName: "article" */'@/views/article'),
   ArticleList: () => import(/* webpackChunkName: "article-list" */'@/views/article-list'),
-  FePerformence: () => import(/* webpackChunkName: "fe-performence" */'@/views/fe-performence'),
+  FePerformence: () => import(/* webpackChunkName: "fe-performence" */'@/views/performence-fe'),
   ApiPerformence: () => import(/* webpackChunkName: "api-performence" */'@/views/performence-api'),
+  ApiLogger: () => import(/* webpackChunkName: "api-logger" */'@/views/logger-api'),
+  FeLogger: () => import(/* webpackChunkName: "fe-logger" */'@/views/logger-fe'),
 }
 
 export default views

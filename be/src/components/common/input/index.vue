@@ -3,6 +3,8 @@
     class="ta-input"
     :type="type" :placeholder="placeholder"
     @keyup.enter="emitEnter()"
+    @blur="emitBlur()"
+    @focus="emitFocus()"
     v-model="currentValue" @input="emitInput()"
   >
 </template>
@@ -30,6 +32,14 @@ export default {
 
     emitEnter() {
       this.$emit('enter', this.currentValue)
+    },
+
+    emitFocus() {
+      this.$emit('focus')
+    },
+
+    emitBlur() {
+      this.$emit('blur')
     },
   },
 }

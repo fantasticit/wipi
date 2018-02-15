@@ -54,7 +54,7 @@ export default {
       this.isShow = !this.isShow
 
       if (this.isShow) {
-        this.h = this.bodyHeight + 48 + 1
+        this.h = this.bodyHeight + 48 + 30
       } else {
         this.h = 48
       }
