@@ -89,7 +89,7 @@ export default {
 
     pageSizes: {
       type: Array,
-      default: () => [7, 10, 15, 20, 25, 30, 35],
+      default: () => [20, 25, 30, 35],
     },
 
     total: {

@@ -12,7 +12,7 @@ module.exports = async (ctx, status, start = 0) => {
   const logger = log4js.getLogger('normal')
 
   const method = ctx.request.method
-  const url = ctx.request.url
+  let url = ctx.request.url
 
   // 为ctx绑定info级别logger
   !ctx.logger && (ctx.logger ={})
@@ -25,6 +25,10 @@ module.exports = async (ctx, status, start = 0) => {
     响应时间为: ${responseTime}s
     `
   )
+
+  if (/article/ig.test(url)) { // article系列接口只存储/article路径
+    url = '/article'
+  }
 
   await ApiPerformenceController.addApiRecord({
     statusCode: status,

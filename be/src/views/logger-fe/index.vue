@@ -45,7 +45,7 @@
       <table>
         <tbody>
           <tr v-for="(key, i) in Object.keys(selectedError)" :key="i">
-            <td>{{ key }}</td>
+            <td width="100">{{ key }}</td>
             <td>{{ selectedError[key] }}</td>
           </tr>
         </tbody>
@@ -152,6 +152,7 @@ export default class ApiError extends Vue {
       border-radius: 0;
       
       select {
+        border-radius: 0;
         border-color: transparent !important; 
       }
     }
@@ -166,11 +167,27 @@ export default class ApiError extends Vue {
 
   @include e(content) {
     box-sizing: border-box;
+    border: 1px solid transparent;
     flex: 1;
     overflow: auto;
     background: #fff;
     padding: 15px;
     margin-bottom: 15px;
+  }
+
+  /deep/ .ta-dialog__body table {
+    width: 100%;
+
+    tr {
+      &:hover {
+        background: #f7f5fa;
+      }
+    }
+
+    td {
+      padding: 10px;
+      border: 1px solid $border;
+    }
   }
 }
 </style>

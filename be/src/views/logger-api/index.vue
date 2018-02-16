@@ -38,7 +38,7 @@
       <table>
         <tbody>
           <tr v-for="(key, i) in Object.keys(selectedLog)" :key="i">
-            <td>{{ key }}</td>
+            <td width="100">{{ key }}</td>
             <td>{{ selectedLog[key] }}</td>
           </tr>
         </tbody>
@@ -142,23 +142,36 @@ export default class ApiError extends Vue {
     flex: 1;
     margin-bottom: 15px;
     overflow: auto;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 15px;
+    border: 1px solid transparent;
     @include flexLayout(flex-start) {
       flex-direction: column;
     }
 
     .head {
-      border-color: red;
       height: 50px;
-
-      table {
-        border: 0;
-        border-color: pink;
-      }
     }
 
     .body {
       flex: 1;
       overflow: auto;
+    }
+  }
+
+  /deep/ .ta-dialog__body table {
+    width: 100%;
+
+    tr {
+      &:hover {
+        background: #f7f5fa;
+      }
+    }
+
+    td {
+      padding: 10px;
+      border: 1px solid $border;
     }
   }
 

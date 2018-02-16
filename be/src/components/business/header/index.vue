@@ -25,14 +25,14 @@
             v-if="showDropmenu">
             <ul>
               <li>
-                  <router-link to="/dashboard">首页</router-link>
+                <router-link to="/dashboard">首页</router-link>
               </li>
               <li>
                 <a href="http://github.com/mvpzx" target="_blank">项目地址</a>
               </li>
               <div class="cut-off"></div>
               <li>
-                <router-link to="/login" replace>退出登录</router-link>
+                <a href="javascript: void(0)" @click="logout()">退出登录</a> 
               </li>
             </ul>
           </div>
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import router from '@/router'
+import store from '@/store'
 import { mapState } from 'vuex'
 import { on } from '@/util/event'
 import TaIcon from '../../common/icon'
@@ -98,6 +100,11 @@ export default {
         exitFullScreen()
         this.toggleScreenIcon = 'arrow-expand'
       }
+    },
+
+    logout() {
+      store.dispatch('logout')
+        .then(() => router.replace('/login'))
     }
   },
 }

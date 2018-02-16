@@ -1,5 +1,7 @@
 const UserModel = require('../models/user')
 
+// UserModel.create({ account: 'zx', password: 'zx123'})
+
 module.exports = {
   register: async (ctx, next) => {
     const { account, password } = ctx.request.body

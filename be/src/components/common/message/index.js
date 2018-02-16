@@ -12,5 +12,8 @@ export default function Message(message, type = 'info') {
   Vue.nextTick(() => instance.show())
   count++
   
-  setTimeout(() => instance.close(), delay + 600 * count)
+  setTimeout(() => {
+    instance.close()
+    count--
+  }, delay + 600 * count)
 }

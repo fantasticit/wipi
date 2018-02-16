@@ -10,16 +10,27 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/login',
+      redirect: '/dashboard'
     },
 
-    ...routes
+    ...routes,
   ]
 })
 
 router.beforeEach((to, from, next) => {
   window.document.title = '管理后台'
   next()
+})
+
+// 登录拦截
+router.beforeEach((to, from, next) => {
+  const hasLogined = JSON.parse(window.sessionStorage.getItem('hasLogined'))
+
+  if (!hasLogined && to.path !== '/login') {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 // 面包屑设置

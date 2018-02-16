@@ -88,8 +88,12 @@ export default {
 
   methods: {
     calculateHeight() {
-      const totalHeight = this.$refs['tableBody'].offsetHeight
-      const tableHeight = this.$refs['table'].offsetHeight
+      const totalHeight = this.$refs['tableBody'] 
+                          && this.$refs['tableBody'].offsetHeight
+                          || 0
+      const tableHeight = this.$refs['table'] 
+                          && this.$refs['table'].offsetHeight
+                          || 0
 
       if (tableHeight > totalHeight) {
         this.showGutter = true
