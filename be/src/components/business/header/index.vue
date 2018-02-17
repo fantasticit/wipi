@@ -17,7 +17,7 @@
 
     <div>
       <ta-icon :name="toggleScreenIcon" @click="toggleFullScreen()"></ta-icon>
-      <div class="ta-header__avatar" @mouseenter="show" @mouseleave="hide">
+      <div class="ta-header__avatar" @click="toggleDropMenu()">
         <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" alt="">
         <transition name="slide-left">
           <div 
@@ -80,6 +80,10 @@ export default {
     emitMenu() {
       this.isCollapse = !this.isCollapse
       this.$emit('toggleMenu')  
+    },
+
+    toggleDropMenu() {
+      this.showDropmenu = !this.showDropmenu
     },
 
     show() {

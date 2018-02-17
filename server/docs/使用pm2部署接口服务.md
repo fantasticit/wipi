@@ -1,0 +1,47 @@
+# 使用pm2部署接口服务
+## 安装`pm2`
+
+`npm install pm2 -g`
+
+## 编写配置文件
+在nodejs项目下新建配置文件，假设取名为：`pm2.conf.json`，内容如下：
+
+```
+{
+  "name": "elapse-server",             // 应用名称
+  "script": "./app.js",                // 启动脚本
+  "cwd": "./",                         // 当前工作路径
+  "watch": [                           // 监控的目录，一旦变化，自动重启
+    "controller",
+    "routes",
+    "middleware"
+  ],
+  "ignore_watch": [                    // 不监控的目录
+    "node_modules",
+    "log"的
+  ],
+  "error_file": "./log/pm2/error.log"   // 错误日志路径
+}
+```
+
+## 配置启动命令
+在`package.json`的`scripts`部分新增一条：
+
+```
+"pm2": "pm2 start pm2.conf.json --watch"
+```
+
+`--watch`是自动重启。
+
+## 管理和监控
+1.打开命令行，输入：`pm2 list`,即可查看pm2集成的nodejs服务。
+2.如若查看某个服务详情，可通过这条命令：`pm2 show [服务的Id或者服务的App name]`查看。
+3.停止、重启等命令：
+
+```
+pm2 stop [app name | id]    # 停止某个进程
+pm2 stop all                # 停止所有进程
+pm2 restart all             # 重启所有进程
+pm2 delete [app name | id]  # 删除并停止进程
+pm2 delete all              # 删除并停止所有进程
+``` 
