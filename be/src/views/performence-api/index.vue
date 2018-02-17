@@ -101,11 +101,11 @@ export default class ApiPerformence extends Vue {
     this.fetchPerformences()
     this.$loading.close()
 
-    this.timer = setInterval(() => {
-      this.fetchPerformences()
-      this.fetchApiCallTimes()
-      this.fetchApiAvarageResTime()
-    }, 60000)
+    // this.timer = setInterval(() => {
+    //   this.fetchPerformences()
+    //   this.fetchApiCallTimes()
+    //   this.fetchApiAvarageResTime()
+    // }, 60000)
   }
 
   async fecthApiList() {

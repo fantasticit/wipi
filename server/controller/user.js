@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+const secret = require('../config').secret
 const UserModel = require('../models/user')
 
 // UserModel.create({ account: 'zx', password: 'zx123'})
@@ -26,7 +28,8 @@ module.exports = {
     })
 
     if (!!res) {
-      ctx.send({ message: `登录成功`, data: res })
+      const token = jwt.sign({ account, roles: res.roles }, secret, { expiresIn: '1h' })
+      ctx.send({ message: `登录成功`, data: token })
     } else {
       ctx.throw(400, { status: 'no', message: `账号或密码错误` })
     }

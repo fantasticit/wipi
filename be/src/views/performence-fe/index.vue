@@ -59,7 +59,7 @@ export default class FePerformence extends Vue {
     this.fetchPerformences()
     this.$loading.close()
 
-    this.timer = setInterval(this.fetchPerformences, 60000)
+    // this.timer = setInterval(this.fetchPerformences, 60000)
   }
 
   setProject(project) {

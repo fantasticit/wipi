@@ -1,4 +1,7 @@
 import axios from 'axios'
+import store from '@/store'
+import router from '@/router';
+import { confirm } from '@/components/common/messagebox/index'
 
 const baseURL = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3000'
@@ -8,6 +11,25 @@ const instance = axios.create({
   timeout: 5000,
   baseURL,
 })
+
+instance.interceptors.request.use(
+  config => {
+    const token = JSON.parse(window.sessionStorage.getItem('token'))
+
+    if (
+      config.url !== '/user/loin'
+      || config.url !== '/user/register'
+    ) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+
+    return config
+  },
+
+  err => {
+    throw new Error('发起请求出错')
+  }
+)
 
 instance.interceptors.response.use(
   res => {
@@ -26,7 +48,21 @@ instance.interceptors.response.use(
   },
   err => {
     if (err.response) {
-      throw new Error(err.response.data.errMsg || '服务器错误')
+      if (err.response.status == 401) {
+        confirm('您需要重新登录以获取token，是否继续？', '提示', {})
+          .then(() => {
+            store.dispatch('logout')
+              .then(() => {
+                router.replace({
+                  path: '/login',
+                  query: { redirect: router.currentRoute.fullPath }
+                })
+              })
+            })
+          .catch(err => console.log('拒绝'))
+      } else {
+        throw new Error(err.response.data.errMsg || '服务器错误')
+      }
     }else if (err.request) {
       throw new Error('网络环境太差，请稍后再试')
     }

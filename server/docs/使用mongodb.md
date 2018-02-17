@@ -20,3 +20,4 @@ service mongodb stop
 ## 其他文档
   - [跨域问题](./跨域问题.md)
   - [日志中间件](./日志中间件.md)
+  - [jwt签发与认证](docs/jwt签发与认证.md)

@@ -7,13 +7,12 @@ Vue.use(Vuex)
 
 const state = {
   hasLogined: JSON.parse(window.sessionStorage.getItem('hasLogined')),
-  userInfo: JSON.parse(window.sessionStorage.getItem('userInfo'))
-            || {}
+  token: JSON.parse(window.sessionStorage.getItem('token')),
 }
 
 const actions = {
-  login({ commit }, userInfo) {
-    commit('LOG_IN', userInfo)
+  login({ commit }, token) {
+    commit('LOG_IN', token)
   },
 
   logout({ commit }) {
@@ -22,14 +21,13 @@ const actions = {
 }
 
 const mutations = {
-  LOG_IN(state, userInfo) {
+  LOG_IN(state, token) {
     window.sessionStorage.setItem('hasLogined', true)
-    window.sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+    window.sessionStorage.setItem('token', JSON.stringify(token))
   },
 
   LOG_OUT(state) {
-    window.sessionStorage.setItem('hasLogined', false)
-    window.sessionStorage.setItem('userInfo', JSON.stringify({}))
+    window.sessionStorage.clear()
   }
 }
 

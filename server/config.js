@@ -9,6 +9,7 @@ const config = {
       user: 'zxx',
       pwd:  'zx123',
     },
+    secret: 'elapse'
   },
 
   prod: {

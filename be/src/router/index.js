@@ -27,7 +27,10 @@ router.beforeEach((to, from, next) => {
   const hasLogined = JSON.parse(window.sessionStorage.getItem('hasLogined'))
 
   if (!hasLogined && to.path !== '/login') {
-    next('/login')
+    next({
+      path: '/login',
+      query: { redirect: router.currentRoute.fullPath }
+    })
   } else {
     next()
   }

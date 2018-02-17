@@ -47,7 +47,12 @@ export default class Login extends Vue {
       this.$store.dispatch('login', res.data)
         .then(() => {
           this.$notify.success('欢迎登录', this.account)
-          this.$router.replace('/dashboard')
+          const redirect = this.$route.query && this.$route.query.redirect || ''
+          if (!!redirect) {
+            this.$router.replace(redirect)
+          } else {
+            this.$router.replace('/dashboard')
+          }
         })
     } catch (err) {
       this.$message.error(err.message)

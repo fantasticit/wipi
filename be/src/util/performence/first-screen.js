@@ -44,7 +44,7 @@ import { domContentLoaded } from './dom-content-loaded'
         appName: 'Elapse-Admin',
       }).then()
         .catch(e => {
-          throw new Error('report fe performence failed')
+          console.log('report fe performence failed')
         })
     }
   })
