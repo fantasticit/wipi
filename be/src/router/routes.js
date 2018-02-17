@@ -6,13 +6,14 @@ const routes = [
     path: '/',
     component: views.Home,
     children: [
-      {
-        path: 'login',
-        name: 'Login',
-        component: views.Login
-      },
     ]
-  }
+  },
+
+  {
+    path: '/login',
+    name: 'Login',
+    component: views.Login
+  },
 ]
 
 routeConfig.map(route => {

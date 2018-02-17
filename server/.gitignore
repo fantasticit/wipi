@@ -1,2 +1,4 @@
 /node_modules/
-/log/
+log/
+/log/error/
+/log/normal/
