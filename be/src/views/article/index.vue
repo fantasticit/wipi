@@ -160,7 +160,7 @@ export default class Article extends Vue {
     this.$refs['editor'].$el.querySelector('.fa-eye').click()
   }
 
-   // 获取上传后的封面路径
+  // 获取上传后的封面路径
   getImageName(res) {
     this.cover = this.coverPrefix + res.hash
   }

@@ -12,10 +12,10 @@ import { ReportProvider } from '@/provider/report-provider'
 
 
 Vue.config.errorHandler = (error, vm, info) => {
+  console.log(vm)
+  console.log(error)
   const appName = 'Elapse-Admin'
-  ReportProvider.reportFeError({error, vm: vm.$route.fullPath, info, appName})
+  ReportProvider.reportFeError({error, vm: vm.$route && vm.$route.fullPath || vm.$options.name, info, appName})
     .then(() => console.log('已记录页面错误'))
     .catch(() => console.log('记录页面错误失败'))
 }
-
-// console.log(n)

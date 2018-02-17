@@ -1,7 +1,8 @@
 <template>
   <input
     class="ta-input"
-    :type="type" :placeholder="placeholder"
+    :type="type" 
+    :placeholder="placeholder"
     @keyup.enter="emitEnter()"
     @blur="emitBlur()"
     @focus="emitFocus()"

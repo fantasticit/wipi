@@ -14,6 +14,8 @@
               @success="pass"
               @fail="fail"
               ref="input"
+              :focus="true"
+              :placeholder="tip"
               v-model="inputValue">
             </ta-form-item>
           </div>
@@ -110,9 +112,12 @@ export default {
   },
 
   mounted() {
-    if (this.showInput) {
-      this.$refs['input'].$el.querySelector('input').setAttribute('autofocus', true)
-    }
+    // if (this.showInput) {
+    //   console.log(this.$refs)
+    //   // this.$refs['input']
+
+    //   this.$refs['input'].$el.querySelector('input').setAttribute('autofocus', true)
+    // }
   },
 
   methods: {
@@ -122,8 +127,12 @@ export default {
     },
 
     onConfirm() {
-      this.visible = false
-      this.callback && (this.callback.call(this, 'confirm'))
+      if (this.showInput && !this.passed) {
+        return
+      } else {
+        this.visible = false
+        this.callback && (this.callback.call(this, 'confirm'))
+      }
     },
 
     pass() {

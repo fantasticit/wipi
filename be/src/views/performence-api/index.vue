@@ -1,6 +1,6 @@
 <template>
   <div class="ta-page">
-    <ta-alert>接口性能记录取全部，每一分钟更新一次</ta-alert>
+    <ta-alert>接口性能记录取全部数据（具体接口分析取最近的300条）</ta-alert>
     <div class="ta-page__charts">
       <div class="ta-page__chart">
         <div class="head">

@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 const state = {
   hasLogined: JSON.parse(window.sessionStorage.getItem('hasLogined')),
-  token: JSON.parse(window.sessionStorage.getItem('token')),
+  token: window.sessionStorage.getItem('token'),
 }
 
 const actions = {
@@ -23,7 +23,7 @@ const actions = {
 const mutations = {
   LOG_IN(state, token) {
     window.sessionStorage.setItem('hasLogined', true)
-    window.sessionStorage.setItem('token', JSON.stringify(token))
+    window.sessionStorage.setItem('token', token)
   },
 
   LOG_OUT(state) {

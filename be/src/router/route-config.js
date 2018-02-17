@@ -12,6 +12,16 @@ const routeConfig = [
   },
 
   {
+    icon: 'person',
+    path: 'ownspace',
+    name: 'Ownspace',
+    component: views.Ownspace,
+    meta: {
+      title: '个人中心',
+    },
+  },
+
+  {
     prefix: '文章管理',
     icon: 'ios-paper',
     children: [

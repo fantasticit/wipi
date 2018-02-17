@@ -45,7 +45,6 @@
     <!-- S 内容区 -->
     <div class="ta-content">
       <ta-table
-        v-if="articles.length > 0"
         :needIndex="true"
         :tableHead="tableHead"
         :keys="tableKeys"
@@ -56,7 +55,6 @@
           <ta-button size='small' type="danger" @click="deleteArticle(item._id)">删除</ta-button>
         </div>
       </ta-table>
-      <p class="text-center" v-else>暂无数据</p>
     </div>
     <!-- E 内容区 -->
 
@@ -74,7 +72,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { mapState } from 'vuex'
-import { on } from '@/util/event'
+import { formatTime } from '@/util/format-time'
 import { ArticleProvider } from '@/provider/article-provider'
 
 @Component({
@@ -102,8 +100,8 @@ export default class ArticleList extends Vue {
   state = ''                 // 文章状态
   keyword = ''               // 搜索关键字
   loading = false            // 是否正在加载中
-  tableHead = ['标题', '分类', '状态', '创建日期', '操作']
-  tableKeys = ['title', 'classify', 'state', 'createDate']
+  tableHead = ['标题', '分类', '状态', '创建日期', '更新日期', '操作']
+  tableKeys = ['title', 'classify', 'state', 'createDate', 'updateDate']
   page = 1                   
   pageSize = 20
 
@@ -145,7 +143,11 @@ export default class ArticleList extends Vue {
         pageSize: this.pageSize
       }
       const res = await ArticleProvider.fetchArticles(query)
-      this.articles = res.items
+      this.articles = res.items.map(item => {
+        item.createDate = formatTime(item.createDate)
+        item.updateDate = formatTime(item.updateDate)
+        return item
+      })
       this.total = res.total
     } catch (err) {
       this.$message.error(err.message)

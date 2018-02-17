@@ -60,7 +60,7 @@ export default {
       draging: false,
       fileName: '',
       tipIcon: 'checkmark-circled', // 失败的话就是close-circled
-      img: null,                    // 预览图
+      img: this.image,                    // 预览图
       isUploading: true,            // 正在上传
       isSuccess: false,             // 上传是否成功
       uploadToken: null,            // 七牛上传token

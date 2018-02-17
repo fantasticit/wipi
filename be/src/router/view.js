@@ -8,6 +8,7 @@ const views = {
   ApiPerformence: () => import(/* webpackChunkName: "api-performence" */'@/views/performence-api'),
   ApiLogger: () => import(/* webpackChunkName: "api-logger" */'@/views/logger-api'),
   FeLogger: () => import(/* webpackChunkName: "fe-logger" */'@/views/logger-fe'),
+  Ownspace: () => import(/* webpackChunkName: "ownspace" */'@/views/ownspace'),
 }
 
 export default views

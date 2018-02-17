@@ -7,7 +7,10 @@ const articleSchema = new Schema({
   desc: String,
   cover: String,
   author: String,
-  createDate: Date,
+  createDate: {
+    type: Date,
+    default: Date.now()
+  },
   updateDate: {
     type: Date,
     default: Date.now()

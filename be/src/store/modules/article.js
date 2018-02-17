@@ -1,11 +1,11 @@
 const state = {
   classifies: [
     {
-      value: 'web_fe',
+      value: '前端',
       title: '前端',
     },
     {
-      value: 'web_be',
+      value: '后端',
       title: '后端',
     },
     // {
@@ -30,8 +30,8 @@ const state = {
     // },
   ],                     // 文章分类
   states: [
-    { value: 'draft', title: '草稿' }, 
-    { value: 'publish', title: '发布' },
+    { value: '草稿', title: '草稿' }, 
+    { value: '发布', title: '发布' },
   ],                     // 文章状态
   coverPrefix: 'http://p39p1kvxn.bkt.clouddn.com/', // 上传图片网址前缀
 }

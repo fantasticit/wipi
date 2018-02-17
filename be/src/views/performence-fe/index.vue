@@ -1,6 +1,6 @@
 <template>
   <div class="ta-page">
-    <ta-alert>前端页面性能记录取最接近当前时间的30条，每一分钟更新一次</ta-alert>
+    <ta-alert>前端页面性能记录取最接近当前时间的300条</ta-alert>
     <div class="ta-page__head">
       <div>
         <ta-button

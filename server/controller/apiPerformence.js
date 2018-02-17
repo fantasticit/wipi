@@ -15,7 +15,11 @@ class ApiPerformenceController {
     query.$or = [
       { requestUrl: { $regex: new RegExp(requestUrl, 'g') }},
     ]
-    const data = await ApiPerformenceModel.find(query).catch(e => ctx.throw(500))
+    const data = await ApiPerformenceModel
+      .find(query)
+      .sort({dateTime:-1})
+      .limit(300) 
+      .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '成功', data })
   }
 

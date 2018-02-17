@@ -14,7 +14,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-    const token = JSON.parse(window.sessionStorage.getItem('token'))
+    const token = window.sessionStorage.getItem('token')
 
     if (
       config.url !== '/user/loin'

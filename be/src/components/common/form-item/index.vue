@@ -38,6 +38,7 @@ export default {
     prop: { type: String, default: '' },
     label: { type: String, default: null },
     rules: { type: Array, default: () => [] },
+    focus: { type: Boolean, default: false },
     placeholder: { type: String, default: '请输入信息' },
   },
 
@@ -66,6 +67,10 @@ export default {
           this.$emit('fail', false)
         })
     })
+
+    if (this.focus) {
+      this.$refs['input'].focus()
+    }
   },
 
   watch: {

@@ -4,6 +4,7 @@ class _UserProvider extends BaseHttp {
   api = {
     register: '/user/register',
     login: '/user/login',
+    update: '/user/',
   }
 
   constructor() {
@@ -35,6 +36,21 @@ class _UserProvider extends BaseHttp {
     try {
       const res = await this.http(req)
       return res
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  async update(id, {account, password, avatar}) {
+    const req = {
+      url: this.api.update + id,
+      method: 'POST',
+      data: { account, password, avatar },
+    }
+
+    try {
+      const res = await this.http(req)
+      return res.message
     } catch (err) {
       throw new Error(err)
     }

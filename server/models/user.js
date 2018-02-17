@@ -8,7 +8,9 @@ const userSchema = new Schema({
   roles: {
     type: Array,
     default: []
-  }
+  },
+  lastLoginTime: Date,
+  avatar: String,
 })
 
 userSchema.index({ id: 1 })

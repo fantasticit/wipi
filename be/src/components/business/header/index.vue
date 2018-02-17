@@ -18,17 +18,18 @@
     <div>
       <ta-icon :name="toggleScreenIcon" @click="toggleFullScreen()"></ta-icon>
       <div class="ta-header__avatar" @click="toggleDropMenu()">
-        <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" alt="">
-        <transition name="slide-left">
+        <p>{{ userInfo.account }}</p>
+        <img :src="userInfo.avatar" alt="">
+        <transition name="slide-down-dialog">
           <div 
             class="ta-header__avatar-dropmenu"
             v-if="showDropmenu">
             <ul>
               <li>
-                <router-link to="/dashboard">首页</router-link>
+                <router-link to="/ownspace">个人中心</router-link>
               </li>
               <li>
-                <a href="http://github.com/mvpzx" target="_blank">项目地址</a>
+                <a href="http://github.com/mvpzx/elapse" target="_blank">项目地址</a>
               </li>
               <div class="cut-off"></div>
               <li>
@@ -74,6 +75,10 @@ export default {
     ...mapState('route', {
       routes: state => state.routes
     }),
+
+    userInfo() {
+      return JSON.parse(window.sessionStorage.getItem('userInfo'))
+    },
   },
 
   methods: {

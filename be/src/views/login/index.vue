@@ -21,6 +21,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { UserProvider } from '@/provider/user-provider'
 
+const jwtDecode = require('jwt-decode')
+
 @Component({
 })
 export default class Login extends Vue {
@@ -46,6 +48,8 @@ export default class Login extends Vue {
       const res = await UserProvider.login(user)
       this.$store.dispatch('login', res.data)
         .then(() => {
+          const userInfo = jwtDecode(res.data)
+          window.sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
           this.$notify.success('欢迎登录', this.account)
           const redirect = this.$route.query && this.$route.query.redirect || ''
           if (!!redirect) {

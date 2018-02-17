@@ -1,644 +1,1996 @@
-[2018-02-17T20:34:17.728] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 2s
-    
-[2018-02-17T20:34:39.823] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 2s
-    
-[2018-02-17T20:34:57.207] [INFO] normal - 
-    OPTIONS /performence/fe 
+[2018-02-18T00:00:34.502] [INFO] normal - 
+    OPTIONS /performence/error/fe 
     响应时间为: 1s
     
-[2018-02-17T20:35:10.113] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T20:57:38.921] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 2s
-    
-[2018-02-17T20:59:00.074] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T20:59:09.189] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T20:59:21.796] [INFO] normal - 
-    OPTIONS /user/login 
-    响应时间为: 1s
-    
-[2018-02-17T20:59:21.825] [INFO] normal - 
-    POST /user/login 
-    响应时间为: 24s
-    
-[2018-02-17T21:03:53.343] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 23s
-    
-[2018-02-17T21:04:24.688] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 2s
-    
-[2018-02-17T21:05:05.304] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:09:22.776] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:10:01.571] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:10:13.572] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 0s
-    
-[2018-02-17T21:10:24.623] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:12:12.569] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:14:07.794] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 0s
-    
-[2018-02-17T21:25:06.206] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:25:28.898] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 0s
-    
-[2018-02-17T21:27:03.814] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 35s
-    
-[2018-02-17T21:27:16.222] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:27:37.177] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 23s
-    
-[2018-02-17T21:27:37.225] [INFO] normal - 
-    POST /performence/fe 
-    响应时间为: 18s
-    
-[2018-02-17T21:27:40.564] [INFO] normal - 
-    POST /performence/fe 
-    响应时间为: 6s
-    
-[2018-02-17T21:27:54.999] [INFO] normal - 
-    OPTIONS /user/login 
-    响应时间为: 1s
-    
-[2018-02-17T21:27:55.016] [INFO] normal - 
-    POST /user/login 
-    响应时间为: 13s
-    
-[2018-02-17T21:29:15.357] [INFO] normal - 
-    OPTIONS /user/login 
-    响应时间为: 0s
-    
-[2018-02-17T21:29:15.366] [INFO] normal - 
-    POST /user/login 
+[2018-02-18T00:00:34.512] [INFO] normal - 
+    POST /performence/error/fe 
     响应时间为: 4s
     
-[2018-02-17T21:29:15.461] [INFO] normal - 
-    OPTIONS /performence/fe/statics 
+[2018-02-18T00:00:51.925] [INFO] normal - 
+    OPTIONS /performence/error/fe 
     响应时间为: 1s
     
-[2018-02-17T21:29:15.464] [INFO] normal - 
-    OPTIONS /performence/api/calltime 
-    响应时间为: 1s
-    
-[2018-02-17T21:29:15.519] [INFO] normal - 
-    GET /performence/fe/statics 
-    响应时间为: 6s
-    
-[2018-02-17T21:29:16.100] [INFO] normal - 
-    GET /performence/api/calltime 
-    响应时间为: 584s
-    
-[2018-02-17T21:29:26.312] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:31:54.877] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:31:54.969] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:31:54.986] [INFO] normal - 
-    POST /performence/fe 
+[2018-02-18T00:00:51.937] [INFO] normal - 
+    POST /performence/error/fe 
     响应时间为: 4s
     
-[2018-02-17T21:32:40.467] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0s
+[2018-02-18T00:00:54.630] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 5s
     
-[2018-02-17T21:32:40.476] [INFO] normal - 
+[2018-02-18T00:01:27.990] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:01:28.023] [INFO] normal - 
     OPTIONS /performence/fe 
-    响应时间为: 0s
+    响应时间为: 1s
     
-[2018-02-17T21:32:40.508] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 16s
+[2018-02-18T00:01:28.039] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 22s
     
-[2018-02-17T21:32:40.513] [INFO] normal - 
+[2018-02-18T00:01:28.051] [INFO] normal - 
     POST /performence/fe 
     响应时间为: 3s
     
-[2018-02-17T21:32:55.686] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:32:55.722] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 4s
-    
-[2018-02-17T21:32:55.863] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:32:55.884] [INFO] normal - 
-    POST /performence/fe 
-    响应时间为: 4s
-    
-[2018-02-17T21:32:59.424] [INFO] normal - 
-    OPTIONS /qiniu/token 
-    响应时间为: 1s
-    
-[2018-02-17T21:32:59.441] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 1s
-    
-[2018-02-17T21:33:01.173] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:33:01.187] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 4s
-    
-[2018-02-17T21:33:40.235] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 0s
-    
-[2018-02-17T21:33:40.284] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 4s
-    
-[2018-02-17T21:33:40.301] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:33:40.353] [INFO] normal - 
-    POST /performence/fe 
-    响应时间为: 3s
-    
-[2018-02-17T21:33:41.767] [INFO] normal - 
-    OPTIONS /performence/fe/statics 
-    响应时间为: 0s
-    
-[2018-02-17T21:33:41.770] [INFO] normal - 
-    OPTIONS /performence/api/calltime 
-    响应时间为: 1s
-    
-[2018-02-17T21:33:41.793] [INFO] normal - 
-    GET /performence/fe/statics 
-    响应时间为: 2s
-    
-[2018-02-17T21:33:42.313] [INFO] normal - 
-    GET /performence/api/calltime 
-    响应时间为: 518s
-    
-[2018-02-17T21:33:51.907] [INFO] normal - 
-    OPTIONS /performence/fe?appName=Elapse-Admin 
-    响应时间为: 1s
-    
-[2018-02-17T21:33:51.957] [INFO] normal - 
-    GET /performence/fe?appName=Elapse-Admin 
-    响应时间为: 37s
-    
-[2018-02-17T21:33:57.349] [INFO] normal - 
-    OPTIONS /performence/api/list 
-    响应时间为: 0s
-    
-[2018-02-17T21:33:57.353] [INFO] normal - 
-    OPTIONS /performence/api/calltime 
-    响应时间为: 2s
-    
-[2018-02-17T21:33:57.356] [INFO] normal - 
-    OPTIONS /performence/api/avaragerestime 
-    响应时间为: 0s
-    
-[2018-02-17T21:33:57.359] [INFO] normal - 
-    OPTIONS /performence/api?requestUrl=/feperformence 
-    响应时间为: 0s
-    
-[2018-02-17T21:33:57.714] [INFO] normal - 
-    GET /performence/api?requestUrl=/feperformence 
-    响应时间为: 314s
-    
-[2018-02-17T21:33:58.184] [INFO] normal - 
-    GET /performence/api/list 
-    响应时间为: 807s
-    
-[2018-02-17T21:33:58.482] [INFO] normal - 
-    GET /performence/api/calltime 
-    响应时间为: 1093s
-    
-[2018-02-17T21:33:58.854] [INFO] normal - 
-    GET /performence/api/avaragerestime 
-    响应时间为: 1455s
-    
-[2018-02-17T21:34:07.453] [INFO] normal - 
+[2018-02-18T00:01:30.814] [INFO] normal - 
     OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
     响应时间为: 1s
     
-[2018-02-17T21:34:07.523] [INFO] normal - 
+[2018-02-18T00:01:30.836] [INFO] normal - 
     GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
-    响应时间为: 17s
-    
-[2018-02-17T21:34:08.564] [INFO] normal - 
-    OPTIONS /performence/api/log/error?page=1&pageSize=20&keyword= 
-    响应时间为: 1s
-    
-[2018-02-17T21:34:08.622] [INFO] normal - 
-    GET /performence/api/log/error?page=1&pageSize=20&keyword= 
-    响应时间为: 14s
-    
-[2018-02-17T21:34:19.513] [INFO] normal - 
-    OPTIONS /performence/api/log/error?page=3&pageSize=20&keyword= 
-    响应时间为: 10s
-    
-[2018-02-17T21:34:19.528] [INFO] normal - 
-    GET /performence/api/log/error?page=3&pageSize=20&keyword= 
-    响应时间为: 10s
-    
-[2018-02-17T21:34:34.627] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:34:34.640] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 4s
-    
-[2018-02-17T21:35:46.868] [INFO] normal - 
-    OPTIONS /user/login 
-    响应时间为: 1s
-    
-[2018-02-17T21:35:50.650] [INFO] normal - 
-    POST /user/login 
-    响应时间为: 4s
-    
-[2018-02-17T21:35:53.527] [INFO] normal - 
-    OPTIONS /user/login 
-    响应时间为: 1s
-    
-[2018-02-17T21:35:53.534] [INFO] normal - 
-    POST /user/login 
-    响应时间为: 4s
-    
-[2018-02-17T21:35:53.562] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:35:53.575] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
     响应时间为: 5s
     
-[2018-02-17T21:36:06.005] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+[2018-02-18T00:02:24.319] [INFO] normal - 
+    OPTIONS /performence/error/fe 
     响应时间为: 1s
     
-[2018-02-17T21:36:06.144] [INFO] normal - 
+[2018-02-18T00:02:24.340] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 12s
+    
+[2018-02-18T00:02:51.265] [INFO] normal - 
     OPTIONS /performence/fe 
     响应时间为: 0s
     
-[2018-02-17T21:36:06.160] [INFO] normal - 
+[2018-02-18T00:02:51.283] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:07:18.408] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T00:07:18.433] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 6s
+    
+[2018-02-18T00:07:44.947] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:07:44.962] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:08:37.042] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:08:37.057] [INFO] normal - 
     POST /performence/fe 
     响应时间为: 4s
     
-[2018-02-17T21:36:24.324] [INFO] normal - 
-    OPTIONS /user/login 
+[2018-02-18T00:08:49.281] [INFO] normal - 
+    OPTIONS /performence/fe 
     响应时间为: 1s
     
-[2018-02-17T21:36:24.333] [INFO] normal - 
-    POST /user/login 
+[2018-02-18T00:08:49.298] [INFO] normal - 
+    POST /performence/fe 
     响应时间为: 3s
     
-[2018-02-17T21:36:24.368] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+[2018-02-18T00:09:13.055] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
     响应时间为: 1s
     
-[2018-02-17T21:36:40.824] [INFO] normal - 
-    OPTIONS /user/login 
-    响应时间为: 1s
-    
-[2018-02-17T21:36:40.832] [INFO] normal - 
-    POST /user/login 
-    响应时间为: 3s
-    
-[2018-02-17T21:36:40.860] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:37:05.357] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 2s
-    
-[2018-02-17T21:37:05.404] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+[2018-02-18T00:09:13.083] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
     响应时间为: 5s
     
-[2018-02-17T21:37:05.464] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
+[2018-02-18T00:09:42.390] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 0s
     
-[2018-02-17T21:37:05.479] [INFO] normal - 
-    POST /performence/fe 
-    响应时间为: 3s
-    
-[2018-02-17T21:37:22.756] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:37:22.862] [INFO] normal - 
-    OPTIONS /performence/fe 
-    响应时间为: 1s
-    
-[2018-02-17T21:37:22.884] [INFO] normal - 
-    POST /performence/fe 
-    响应时间为: 3s
-    
-[2018-02-17T21:37:28.555] [INFO] normal - 
-    OPTIONS /user/login 
-    响应时间为: 2s
-    
-[2018-02-17T21:37:28.562] [INFO] normal - 
-    POST /user/login 
-    响应时间为: 2s
-    
-[2018-02-17T21:37:28.594] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 2s
-    
-[2018-02-17T21:38:00.308] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:00.360] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 3s
-    
-[2018-02-17T21:38:00.400] [INFO] normal - 
+[2018-02-18T00:09:42.420] [INFO] normal - 
     OPTIONS /performence/fe 
     响应时间为: 0s
     
-[2018-02-17T21:38:00.416] [INFO] normal - 
+[2018-02-18T00:09:42.449] [INFO] normal - 
     POST /performence/fe 
+    响应时间为: 7s
+    
+[2018-02-18T00:09:42.453] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 20s
+    
+[2018-02-18T00:11:05.340] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:11:05.356] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:11:35.111] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:11:35.125] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:11:36.273] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:11:36.285] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:12:23.331] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:12:23.343] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:12:24.432] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:12:24.448] [INFO] normal - 
+    POST /performence/error/fe 
     响应时间为: 5s
     
-[2018-02-17T21:38:07.899] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:08.002] [INFO] normal - 
+[2018-02-18T00:13:41.252] [INFO] normal - 
     OPTIONS /performence/fe 
     响应时间为: 1s
     
-[2018-02-17T21:38:08.018] [INFO] normal - 
+[2018-02-18T00:13:41.300] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 12s
+    
+[2018-02-18T00:13:42.592] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:13:42.604] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:13:46.851] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:14:29.864] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 0s
+    
+[2018-02-18T00:14:29.878] [INFO] normal - 
     POST /performence/fe 
     响应时间为: 3s
     
-[2018-02-17T21:38:13.277] [INFO] normal - 
-    OPTIONS /user/login 
+[2018-02-18T00:14:30.685] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 0s
+    
+[2018-02-18T00:14:30.696] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:15:22.713] [INFO] normal - 
+    OPTIONS /performence/fe 
     响应时间为: 1s
     
-[2018-02-17T21:38:13.284] [INFO] normal - 
-    POST /user/login 
+[2018-02-18T00:15:22.726] [INFO] normal - 
+    POST /performence/fe 
     响应时间为: 3s
     
-[2018-02-17T21:38:13.316] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+[2018-02-18T00:15:23.729] [INFO] normal - 
+    OPTIONS /performence/error/fe 
     响应时间为: 1s
     
-[2018-02-17T21:38:13.362] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 33s
+[2018-02-18T00:15:23.741] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 4s
     
-[2018-02-17T21:38:29.864] [INFO] normal - 
+[2018-02-18T00:15:43.663] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:15:43.678] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:15:44.719] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:15:44.734] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:16:07.118] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 0s
+    
+[2018-02-18T00:16:07.148] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:16:08.162] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:16:08.175] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:16:24.736] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:16:24.752] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:16:25.681] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:16:25.692] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:17:19.858] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:17:19.873] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:17:29.651] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:17:29.662] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:17:51.284] [INFO] normal - 
     OPTIONS /performence/fe 
     响应时间为: 2s
     
-[2018-02-17T21:38:29.892] [INFO] normal - 
+[2018-02-18T00:17:51.299] [INFO] normal - 
     POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:18:50.070] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:18:50.083] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:19:56.939] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 0s
+    
+[2018-02-18T00:19:56.972] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:20:07.948] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:20:07.971] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:22:19.124] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:22:19.136] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:24:35.272] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:24:35.286] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:26:27.748] [INFO] normal - 
+    OPTIONS /performence/fe 
     响应时间为: 2s
     
-[2018-02-17T21:38:37.489] [INFO] normal - 
+[2018-02-18T00:26:27.766] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 6s
+    
+[2018-02-18T00:26:32.779] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:26:32.793] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:26:37.976] [INFO] normal - 
     OPTIONS /user/login 
     响应时间为: 1s
     
-[2018-02-17T21:38:37.497] [INFO] normal - 
+[2018-02-18T00:26:37.983] [INFO] normal - 
     POST /user/login 
     响应时间为: 3s
     
-[2018-02-17T21:38:37.582] [INFO] normal - 
+[2018-02-18T00:26:38.109] [INFO] normal - 
     OPTIONS /performence/fe/statics 
-    响应时间为: 2s
+    响应时间为: 1s
     
-[2018-02-17T21:38:37.591] [INFO] normal - 
+[2018-02-18T00:26:38.113] [INFO] normal - 
     OPTIONS /performence/api/calltime 
     响应时间为: 1s
     
-[2018-02-17T21:38:37.612] [INFO] normal - 
+[2018-02-18T00:26:38.146] [INFO] normal - 
     GET /performence/fe/statics 
     响应时间为: 2s
     
-[2018-02-17T21:38:38.098] [INFO] normal - 
+[2018-02-18T00:26:38.867] [INFO] normal - 
     GET /performence/api/calltime 
-    响应时间为: 487s
+    响应时间为: 717s
     
-[2018-02-17T21:38:41.331] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 2s
-    
-[2018-02-17T21:38:41.365] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 10s
-    
-[2018-02-17T21:38:42.494] [INFO] normal - 
-    OPTIONS /qiniu/token 
-    响应时间为: 0s
-    
-[2018-02-17T21:38:42.508] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:45.028] [INFO] normal - 
-    OPTIONS /performence/fe?appName=Elapse-Admin 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:45.048] [INFO] normal - 
-    GET /performence/fe?appName=Elapse-Admin 
-    响应时间为: 8s
-    
-[2018-02-17T21:38:46.931] [INFO] normal - 
-    OPTIONS /performence/api/list 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:46.937] [INFO] normal - 
-    OPTIONS /performence/api/calltime 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:46.940] [INFO] normal - 
-    OPTIONS /performence/api/avaragerestime 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:46.942] [INFO] normal - 
-    OPTIONS /performence/api?requestUrl=/feperformence 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:47.216] [INFO] normal - 
-    GET /performence/api?requestUrl=/feperformence 
-    响应时间为: 233s
-    
-[2018-02-17T21:38:47.673] [INFO] normal - 
-    GET /performence/api/calltime 
-    响应时间为: 715s
-    
-[2018-02-17T21:38:48.072] [INFO] normal - 
-    GET /performence/api/avaragerestime 
-    响应时间为: 1112s
-    
-[2018-02-17T21:38:48.383] [INFO] normal - 
-    GET /performence/api/list 
-    响应时间为: 1426s
-    
-[2018-02-17T21:38:48.387] [INFO] normal - 
-    OPTIONS /qiniu/token 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:48.405] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 4s
-    
-[2018-02-17T21:38:49.013] [INFO] normal - 
-    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:49.029] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 6s
-    
-[2018-02-17T21:38:50.426] [INFO] normal - 
-    OPTIONS /article/5a850d1e42cb304e59bf5588 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:50.429] [INFO] normal - 
-    GET /qiniu/token 
-    响应时间为: 1s
-    
-[2018-02-17T21:38:50.469] [INFO] normal - 
-    GET /article/5a850d1e42cb304e59bf5588 
-    响应时间为: 6s
-    
-[2018-02-17T21:38:53.558] [INFO] normal - 
-    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
-    响应时间为: 3s
-    
-[2018-02-17T21:39:06.580] [INFO] normal - 
-    OPTIONS /performence/fe?appName=Elapse-Admin 
-    响应时间为: 1s
-    
-[2018-02-17T21:39:06.595] [INFO] normal - 
-    GET /performence/fe?appName=Elapse-Admin 
-    响应时间为: 7s
-    
-[2018-02-17T21:39:07.792] [INFO] normal - 
-    OPTIONS /performence/api/list 
-    响应时间为: 1s
-    
-[2018-02-17T21:39:07.799] [INFO] normal - 
-    OPTIONS /performence/api/calltime 
-    响应时间为: 0s
-    
-[2018-02-17T21:39:07.805] [INFO] normal - 
-    OPTIONS /performence/api/avaragerestime 
-    响应时间为: 1s
-    
-[2018-02-17T21:39:07.807] [INFO] normal - 
-    OPTIONS /performence/api?requestUrl=/feperformence 
-    响应时间为: 1s
-    
-[2018-02-17T21:39:08.052] [INFO] normal - 
-    GET /performence/api?requestUrl=/feperformence 
-    响应时间为: 195s
-    
-[2018-02-17T21:39:08.475] [INFO] normal - 
-    GET /performence/api/list 
-    响应时间为: 666s
-    
-[2018-02-17T21:39:08.827] [INFO] normal - 
-    GET /performence/api/calltime 
-    响应时间为: 1007s
-    
-[2018-02-17T21:39:09.174] [INFO] normal - 
-    GET /performence/api/avaragerestime 
-    响应时间为: 1364s
-    
-[2018-02-17T21:53:11.615] [INFO] normal - 
-    OPTIONS /performence/api/list 
-    响应时间为: 31s
-    
-[2018-02-17T21:53:11.650] [INFO] normal - 
-    OPTIONS /performence/api/calltime 
-    响应时间为: 2s
-    
-[2018-02-17T21:53:11.656] [INFO] normal - 
-    OPTIONS /performence/api/avaragerestime 
-    响应时间为: 1s
-    
-[2018-02-17T21:53:11.678] [INFO] normal - 
-    OPTIONS /performence/api?requestUrl=/feperformence 
-    响应时间为: 1s
-    
-[2018-02-17T21:53:11.682] [INFO] normal - 
+[2018-02-18T00:28:38.589] [INFO] normal - 
     OPTIONS /performence/fe 
     响应时间为: 1s
     
-[2018-02-17T21:53:11.842] [INFO] normal - 
+[2018-02-18T00:28:38.603] [INFO] normal - 
     POST /performence/fe 
-    响应时间为: 56s
+    响应时间为: 4s
     
-[2018-02-17T21:53:12.075] [INFO] normal - 
-    GET /performence/api?requestUrl=/feperformence 
-    响应时间为: 316s
+[2018-02-18T00:28:39.228] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
     
-[2018-02-17T21:53:12.682] [INFO] normal - 
-    GET /performence/api/list 
-    响应时间为: 1024s
+[2018-02-18T00:28:39.242] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 3s
     
-[2018-02-17T21:53:12.977] [INFO] normal - 
+[2018-02-18T00:28:43.428] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:29:27.699] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:29:27.708] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:30:26.018] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:30:26.026] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:30:29.003] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:30:32.046] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:30:32.050] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T00:30:32.070] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 4s
+    
+[2018-02-18T00:30:32.723] [INFO] normal - 
     GET /performence/api/calltime 
-    响应时间为: 1304s
+    响应时间为: 651s
     
-[2018-02-17T21:53:13.325] [INFO] normal - 
+[2018-02-18T00:30:38.634] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:30:38.639] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T00:30:38.649] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 3s
+    
+[2018-02-18T00:30:39.246] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 599s
+    
+[2018-02-18T00:30:43.248] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:30:43.257] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:30:53.135] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:30:53.142] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:31:00.508] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:31:00.516] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:31:04.543] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:31:56.686] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:31:56.708] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:31:58.306] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:31:58.325] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 8s
+    
+[2018-02-18T00:32:19.118] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 0s
+    
+[2018-02-18T00:32:19.140] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:32:33.414] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:32:33.432] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:32:43.308] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:32:43.327] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:32:43.907] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:32:43.917] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:32:48.056] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:32:51.898] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:32:51.912] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 2s
+    
+[2018-02-18T00:34:16.809] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:34:16.823] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:34:17.864] [INFO] normal - 
+    OPTIONS /performence/error/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:34:17.874] [INFO] normal - 
+    POST /performence/error/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:34:32.175] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:34:32.190] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:36:21.803] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:36:21.806] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T00:36:21.824] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:36:22.517] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 691s
+    
+[2018-02-18T00:38:43.312] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 17s
+    
+[2018-02-18T00:38:43.359] [INFO] normal - 
+    POST /user/login 
+    响应时间为: 28s
+    
+[2018-02-18T00:38:43.387] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:38:43.391] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T00:38:43.415] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 9s
+    
+[2018-02-18T00:38:44.042] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 633s
+    
+[2018-02-18T00:45:36.975] [INFO] normal - 
+    OPTIONS /user/5a883a37c50b723079e04d02 
+    响应时间为: 31s
+    
+[2018-02-18T00:45:37.036] [INFO] normal - 
+    POST /user/5a883a37c50b723079e04d02 
+    响应时间为: 38s
+    
+[2018-02-18T00:47:35.868] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:47:35.937] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:47:45.555] [INFO] normal - 
+    OPTIONS /user/5a883a37c50b723079e04d02 
+    响应时间为: 1s
+    
+[2018-02-18T00:47:45.566] [INFO] normal - 
+    POST /user/5a883a37c50b723079e04d02 
+    响应时间为: 4s
+    
+[2018-02-18T00:48:15.259] [INFO] normal - 
+    OPTIONS /user/5a883a37c50b723079e04d02 
+    响应时间为: 2s
+    
+[2018-02-18T00:48:15.268] [INFO] normal - 
+    POST /user/5a883a37c50b723079e04d02 
+    响应时间为: 3s
+    
+[2018-02-18T00:52:59.195] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 19s
+    
+[2018-02-18T00:53:09.234] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 1s
+    
+[2018-02-18T00:53:28.231] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 1s
+    
+[2018-02-18T00:53:28.243] [INFO] normal - 
+    POST /user/login 
+    响应时间为: 9s
+    
+[2018-02-18T00:53:28.309] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:53:28.312] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T00:53:28.344] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 6s
+    
+[2018-02-18T00:53:28.960] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 619s
+    
+[2018-02-18T00:54:17.107] [INFO] normal - 
+    OPTIONS /user/5a883a37c50b723079e04d02 
+    响应时间为: 2s
+    
+[2018-02-18T00:54:17.127] [INFO] normal - 
+    POST /user/5a883a37c50b723079e04d02 
+    响应时间为: 15s
+    
+[2018-02-18T00:54:42.030] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 0s
+    
+[2018-02-18T00:54:42.042] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 5s
+    
+[2018-02-18T00:54:54.647] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 1s
+    
+[2018-02-18T00:54:54.655] [INFO] normal - 
+    POST /user/login 
+    响应时间为: 5s
+    
+[2018-02-18T00:54:54.740] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:54:54.743] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T00:54:54.770] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 2s
+    
+[2018-02-18T00:54:55.261] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 487s
+    
+[2018-02-18T00:55:05.397] [INFO] normal - 
+    OPTIONS /user/5a883a37c50b723079e04d02 
+    响应时间为: 1s
+    
+[2018-02-18T00:55:05.411] [INFO] normal - 
+    POST /user/5a883a37c50b723079e04d02 
+    响应时间为: 5s
+    
+[2018-02-18T00:55:13.882] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 1s
+    
+[2018-02-18T00:55:13.890] [INFO] normal - 
+    POST /user/login 
+    响应时间为: 3s
+    
+[2018-02-18T00:55:18.393] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:55:18.398] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T00:55:18.405] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 3s
+    
+[2018-02-18T00:55:18.860] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 451s
+    
+[2018-02-18T00:55:37.830] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:55:37.835] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T00:55:37.842] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 2s
+    
+[2018-02-18T00:55:38.253] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 413s
+    
+[2018-02-18T00:56:09.189] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:56:09.221] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 13s
+    
+[2018-02-18T00:56:15.007] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:56:15.044] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:56:26.493] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T00:56:26.497] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T00:56:26.523] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 2s
+    
+[2018-02-18T00:56:27.015] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 488s
+    
+[2018-02-18T00:56:50.942] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T00:56:50.957] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 4s
+    
+[2018-02-18T00:57:13.059] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:57:13.079] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:57:32.247] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 0s
+    
+[2018-02-18T00:57:32.269] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T00:57:34.917] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T00:57:34.947] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 11s
+    
+[2018-02-18T01:00:02.016] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:02.026] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 4s
+    
+[2018-02-18T01:00:06.823] [INFO] normal - 
+    OPTIONS /article/5a883620e4fbca2d7193e17b 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:06.827] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:06.865] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:00:06.869] [INFO] normal - 
+    GET /article/5a883620e4fbca2d7193e17b 
+    响应时间为: 8s
+    
+[2018-02-18T01:00:11.910] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:11.921] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 4s
+    
+[2018-02-18T01:00:13.777] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:13.791] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:14.847] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 3s
+    
+[2018-02-18T01:00:15.937] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:16.807] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 3s
+    
+[2018-02-18T01:00:18.420] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:00:19.597] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 2s
+    
+[2018-02-18T01:00:19.611] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 3s
+    
+[2018-02-18T01:00:20.626] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:20.635] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:21.556] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 3s
+    
+[2018-02-18T01:00:22.799] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:00:23.663] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 4s
+    
+[2018-02-18T01:00:24.645] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:25.685] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:25.697] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 4s
+    
+[2018-02-18T01:00:26.959] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:00:26.973] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:00:28.942] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 3s
+    
+[2018-02-18T01:00:30.130] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:31.245] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:31.259] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 3s
+    
+[2018-02-18T01:00:32.676] [INFO] normal - 
+    OPTIONS /article/5a883620e4fbca2d7193e17b 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:32.681] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:32.699] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:00:32.692] [INFO] normal - 
+    GET /article/5a883620e4fbca2d7193e17b 
+    响应时间为: 3s
+    
+[2018-02-18T01:00:40.431] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:40.444] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 4s
+    
+[2018-02-18T01:00:41.721] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:41.729] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:00:46.038] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:46.045] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:00:46.085] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 21s
+    
+[2018-02-18T01:00:46.608] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 541s
+    
+[2018-02-18T01:07:31.060] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 21s
+    
+[2018-02-18T01:07:31.149] [INFO] normal - 
+    POST /user/login 
+    响应时间为: 70s
+    
+[2018-02-18T01:07:31.180] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T01:07:31.187] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:07:31.199] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 3s
+    
+[2018-02-18T01:07:31.799] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 597s
+    
+[2018-02-18T01:08:06.013] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 1s
+    
+[2018-02-18T01:08:06.027] [INFO] normal - 
+    POST /user/login 
+    响应时间为: 6s
+    
+[2018-02-18T01:08:06.051] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T01:08:06.054] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:08:06.086] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 24s
+    
+[2018-02-18T01:08:06.582] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 518s
+    
+[2018-02-18T01:10:17.652] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T01:10:17.659] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 0s
+    
+[2018-02-18T01:10:17.668] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 6s
+    
+[2018-02-18T01:10:18.169] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 503s
+    
+[2018-02-18T01:13:22.258] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:13:22.276] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 4s
+    
+[2018-02-18T01:16:17.892] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 0s
+    
+[2018-02-18T01:16:17.901] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:18:07.614] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 0s
+    
+[2018-02-18T01:18:07.624] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:18:13.159] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:18:13.234] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:18:13.295] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T01:18:13.314] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 5s
+    
+[2018-02-18T01:20:43.972] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 20s
+    
+[2018-02-18T01:20:43.996] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 5s
+    
+[2018-02-18T01:20:52.006] [INFO] normal - 
+    OPTIONS /user/5a883a37c50b723079e04d02 
+    响应时间为: 1s
+    
+[2018-02-18T01:20:52.039] [INFO] normal - 
+    POST /user/5a883a37c50b723079e04d02 
+    响应时间为: 28s
+    
+[2018-02-18T01:21:01.756] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 2s
+    
+[2018-02-18T01:21:01.772] [INFO] normal - 
+    POST /user/login 
+    响应时间为: 11s
+    
+[2018-02-18T01:21:01.803] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:21:01.813] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 3s
+    
+[2018-02-18T01:21:38.241] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:21:38.250] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:21:44.332] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:21:44.387] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:21:44.393] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T01:21:44.410] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 4s
+    
+[2018-02-18T01:22:25.240] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 0s
+    
+[2018-02-18T01:22:25.252] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:22:28.496] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:22:28.586] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T01:22:28.604] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T01:22:30.877] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:22:30.907] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:22:30.978] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 3s
+    
+[2018-02-18T01:22:40.664] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:22:40.705] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 9s
+    
+[2018-02-18T01:22:42.101] [INFO] normal - 
+    OPTIONS /article/5a883620e4fbca2d7193e17b 
+    响应时间为: 1s
+    
+[2018-02-18T01:22:42.104] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:22:42.129] [INFO] normal - 
+    GET /article/5a883620e4fbca2d7193e17b 
+    响应时间为: 5s
+    
+[2018-02-18T01:22:42.136] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:22:45.083] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:23:39.137] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:23:39.143] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:23:44.173] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:23:44.210] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:23:44.357] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T01:23:44.379] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 8s
+    
+[2018-02-18T01:23:53.641] [INFO] normal - 
+    OPTIONS /user/5a883a37c50b723079e04d02 
+    响应时间为: 1s
+    
+[2018-02-18T01:23:53.649] [INFO] normal - 
+    POST /user/5a883a37c50b723079e04d02 
+    响应时间为: 3s
+    
+[2018-02-18T01:24:00.424] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 0s
+    
+[2018-02-18T01:24:00.433] [INFO] normal - 
+    POST /user/login 
+    响应时间为: 6s
+    
+[2018-02-18T01:24:00.464] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:24:00.475] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:25:02.345] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:25:02.355] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:25:06.937] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 2s
+    
+[2018-02-18T01:25:06.944] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:25:06.971] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 5s
+    
+[2018-02-18T01:25:07.566] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 598s
+    
+[2018-02-18T01:25:10.134] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:25:10.177] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 11s
+    
+[2018-02-18T01:25:11.625] [INFO] normal - 
+    OPTIONS /article/5a883620e4fbca2d7193e17b 
+    响应时间为: 1s
+    
+[2018-02-18T01:25:11.627] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 0s
+    
+[2018-02-18T01:25:11.682] [INFO] normal - 
+    GET /article/5a883620e4fbca2d7193e17b 
+    响应时间为: 3s
+    
+[2018-02-18T01:25:11.685] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:25:14.484] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:25:24.394] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:25:24.406] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:25:30.218] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:25:30.227] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:26:38.660] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T01:26:38.664] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 0s
+    
+[2018-02-18T01:26:38.675] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 7s
+    
+[2018-02-18T01:26:39.208] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 535s
+    
+[2018-02-18T01:28:41.135] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 2s
+    
+[2018-02-18T01:28:41.142] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:28:41.154] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 5s
+    
+[2018-02-18T01:28:41.664] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 506s
+    
+[2018-02-18T01:30:22.446] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:22.463] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 5s
+    
+[2018-02-18T01:30:24.095] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:24.111] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:26.757] [INFO] normal - 
+    OPTIONS /performence/fe?appName=Elapse-Admin 
+    响应时间为: 0s
+    
+[2018-02-18T01:30:26.798] [INFO] normal - 
+    GET /performence/fe?appName=Elapse-Admin 
+    响应时间为: 11s
+    
+[2018-02-18T01:30:33.884] [INFO] normal - 
+    OPTIONS /performence/api/list 
+    响应时间为: 0s
+    
+[2018-02-18T01:30:33.886] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:33.888] [INFO] normal - 
+    OPTIONS /performence/api/avaragerestime 
+    响应时间为: 0s
+    
+[2018-02-18T01:30:33.891] [INFO] normal - 
+    OPTIONS /performence/api?requestUrl=/feperformence 
+    响应时间为: 0s
+    
+[2018-02-18T01:30:34.011] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 99s
+    
+[2018-02-18T01:30:34.627] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 732s
+    
+[2018-02-18T01:30:35.050] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 1143s
+    
+[2018-02-18T01:30:35.413] [INFO] normal - 
     GET /performence/api/avaragerestime 
-    响应时间为: 1651s
+    响应时间为: 1503s
+    
+[2018-02-18T01:30:37.694] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 2s
+    
+[2018-02-18T01:30:37.718] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 11s
+    
+[2018-02-18T01:30:38.110] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 414s
+    
+[2018-02-18T01:30:39.942] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 2s
+    
+[2018-02-18T01:30:39.956] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 5s
+    
+[2018-02-18T01:30:41.697] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:41.707] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:30:42.746] [INFO] normal - 
+    OPTIONS /performence/fe?appName=Elapse-Admin 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:42.760] [INFO] normal - 
+    GET /performence/fe?appName=Elapse-Admin 
+    响应时间为: 9s
+    
+[2018-02-18T01:30:43.407] [INFO] normal - 
+    OPTIONS /performence/api/list 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:43.410] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:43.414] [INFO] normal - 
+    OPTIONS /performence/api/avaragerestime 
+    响应时间为: 0s
+    
+[2018-02-18T01:30:43.417] [INFO] normal - 
+    OPTIONS /performence/api?requestUrl=/feperformence 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:43.542] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 93s
+    
+[2018-02-18T01:30:44.071] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 638s
+    
+[2018-02-18T01:30:44.497] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 1052s
+    
+[2018-02-18T01:30:44.898] [INFO] normal - 
+    GET /performence/api/avaragerestime 
+    响应时间为: 1450s
+    
+[2018-02-18T01:30:44.906] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:44.964] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 11s
+    
+[2018-02-18T01:30:46.975] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=2&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:30:46.987] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=2&pageSize=20 
+    响应时间为: 5s
+    
+[2018-02-18T01:30:55.555] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 0s
+    
+[2018-02-18T01:30:55.568] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 6s
+    
+[2018-02-18T01:31:01.531] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 0s
+    
+[2018-02-18T01:31:01.569] [INFO] normal - 
+    GET /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 12s
+    
+[2018-02-18T01:31:04.781] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=3&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:31:04.802] [INFO] normal - 
+    GET /performence/api/log/error?page=3&pageSize=20&keyword= 
+    响应时间为: 13s
+    
+[2018-02-18T01:31:10.160] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=2&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:31:10.179] [INFO] normal - 
+    GET /performence/api/log/error?page=2&pageSize=20&keyword= 
+    响应时间为: 13s
+    
+[2018-02-18T01:31:11.231] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:31:11.254] [INFO] normal - 
+    GET /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 14s
+    
+[2018-02-18T01:31:13.419] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:31:13.430] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:31:17.488] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:31:17.513] [INFO] normal - 
+    GET /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 12s
+    
+[2018-02-18T01:31:18.857] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 0s
+    
+[2018-02-18T01:31:18.860] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 0s
+    
+[2018-02-18T01:31:18.873] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 2s
+    
+[2018-02-18T01:31:19.461] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 584s
+    
+[2018-02-18T01:35:04.451] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T01:35:04.461] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 0s
+    
+[2018-02-18T01:35:04.464] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 4s
+    
+[2018-02-18T01:35:05.040] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 568s
+    
+[2018-02-18T01:36:39.972] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:36:39.987] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 9s
+    
+[2018-02-18T01:36:41.280] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 1s
+    
+[2018-02-18T01:36:41.288] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:36:41.312] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 3s
+    
+[2018-02-18T01:36:41.879] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 564s
+    
+[2018-02-18T01:38:09.269] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:09.286] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 9s
+    
+[2018-02-18T01:38:10.377] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:10.389] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:11.440] [INFO] normal - 
+    OPTIONS /performence/fe?appName=Elapse-Admin 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:11.459] [INFO] normal - 
+    GET /performence/fe?appName=Elapse-Admin 
+    响应时间为: 13s
+    
+[2018-02-18T01:38:14.907] [INFO] normal - 
+    OPTIONS /performence/api/list 
+    响应时间为: 0s
+    
+[2018-02-18T01:38:14.915] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:14.918] [INFO] normal - 
+    OPTIONS /performence/api/avaragerestime 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:14.921] [INFO] normal - 
+    OPTIONS /performence/api?requestUrl=/feperformence 
+    响应时间为: 0s
+    
+[2018-02-18T01:38:15.022] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 96s
+    
+[2018-02-18T01:38:15.725] [INFO] normal - 
+    GET /performence/api/avaragerestime 
+    响应时间为: 800s
+    
+[2018-02-18T01:38:16.115] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 1191s
+    
+[2018-02-18T01:38:16.442] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 1519s
+    
+[2018-02-18T01:38:17.885] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:17.955] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 59s
+    
+[2018-02-18T01:38:20.209] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=2&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:20.221] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=2&pageSize=20 
+    响应时间为: 6s
+    
+[2018-02-18T01:38:42.918] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:42.932] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 7s
+    
+[2018-02-18T01:38:43.180] [INFO] normal - 
+    OPTIONS /performence/fe 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:43.215] [INFO] normal - 
+    POST /performence/fe 
+    响应时间为: 4s
+    
+[2018-02-18T01:38:51.539] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:51.560] [INFO] normal - 
+    GET /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 12s
+    
+[2018-02-18T01:38:53.500] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=3&pageSize=20&keyword= 
+    响应时间为: 2s
+    
+[2018-02-18T01:38:53.518] [INFO] normal - 
+    GET /performence/api/log/error?page=3&pageSize=20&keyword= 
+    响应时间为: 13s
+    
+[2018-02-18T01:38:58.210] [INFO] normal - 
+    OPTIONS /performence/fe?appName=Elapse-Admin 
+    响应时间为: 1s
+    
+[2018-02-18T01:38:58.229] [INFO] normal - 
+    GET /performence/fe?appName=Elapse-Admin 
+    响应时间为: 11s
+    
+[2018-02-18T01:39:02.698] [INFO] normal - 
+    OPTIONS /performence/api/list 
+    响应时间为: 1s
+    
+[2018-02-18T01:39:02.703] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:39:02.706] [INFO] normal - 
+    OPTIONS /performence/api/avaragerestime 
+    响应时间为: 1s
+    
+[2018-02-18T01:39:02.709] [INFO] normal - 
+    OPTIONS /performence/api?requestUrl=/feperformence 
+    响应时间为: 1s
+    
+[2018-02-18T01:39:02.810] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 88s
+    
+[2018-02-18T01:39:03.443] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 728s
+    
+[2018-02-18T01:39:03.791] [INFO] normal - 
+    GET /performence/api/avaragerestime 
+    响应时间为: 1073s
+    
+[2018-02-18T01:39:04.182] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 1466s
+    
+[2018-02-18T01:39:07.315] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:39:07.326] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 5s
+    
+[2018-02-18T01:39:09.443] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:39:09.475] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:39:19.136] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:39:19.148] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:39:35.536] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 0s
+    
+[2018-02-18T01:39:35.538] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 0s
+    
+[2018-02-18T01:39:35.551] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 2s
+    
+[2018-02-18T01:39:36.025] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 472s
+    
+[2018-02-18T01:40:26.298] [INFO] normal - 
+    OPTIONS /user/login 
+    响应时间为: 1s
+    
+[2018-02-18T01:40:26.309] [INFO] normal - 
+    POST /user/login 
+    响应时间为: 6s
+    
+[2018-02-18T01:40:26.336] [INFO] normal - 
+    OPTIONS /performence/fe/statics 
+    响应时间为: 3s
+    
+[2018-02-18T01:40:26.341] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:40:26.347] [INFO] normal - 
+    GET /performence/fe/statics 
+    响应时间为: 2s
+    
+[2018-02-18T01:40:26.907] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 558s
+    
+[2018-02-18T01:40:58.815] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 2s
+    
+[2018-02-18T01:40:58.833] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 12s
+    
+[2018-02-18T01:41:00.176] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 2s
+    
+[2018-02-18T01:41:00.188] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:01.297] [INFO] normal - 
+    OPTIONS /performence/fe?appName=Elapse-Admin 
+    响应时间为: 2s
+    
+[2018-02-18T01:41:01.315] [INFO] normal - 
+    GET /performence/fe?appName=Elapse-Admin 
+    响应时间为: 11s
+    
+[2018-02-18T01:41:08.754] [INFO] normal - 
+    OPTIONS /performence/api/list 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:08.758] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:08.761] [INFO] normal - 
+    OPTIONS /performence/api/avaragerestime 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:08.773] [INFO] normal - 
+    OPTIONS /performence/api?requestUrl=/feperformence 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:08.916] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 82s
+    
+[2018-02-18T01:41:09.584] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 817s
+    
+[2018-02-18T01:41:09.963] [INFO] normal - 
+    GET /performence/api/avaragerestime 
+    响应时间为: 1192s
+    
+[2018-02-18T01:41:10.369] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 1600s
+    
+[2018-02-18T01:41:16.615] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:16.635] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 9s
+    
+[2018-02-18T01:41:19.172] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=2&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:19.185] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=2&pageSize=20 
+    响应时间为: 5s
+    
+[2018-02-18T01:41:22.726] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:22.747] [INFO] normal - 
+    GET /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 13s
+    
+[2018-02-18T01:41:39.503] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=2&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:39.527] [INFO] normal - 
+    GET /performence/api/log/error?page=2&pageSize=20&keyword= 
+    响应时间为: 14s
+    
+[2018-02-18T01:41:40.751] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=3&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:40.769] [INFO] normal - 
+    GET /performence/api/log/error?page=3&pageSize=20&keyword= 
+    响应时间为: 14s
+    
+[2018-02-18T01:41:41.908] [INFO] normal - 
+    GET /performence/api/log/error?page=2&pageSize=20&keyword= 
+    响应时间为: 16s
+    
+[2018-02-18T01:41:49.569] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:41:49.585] [INFO] normal - 
+    GET /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 13s
+    
+[2018-02-18T01:42:06.839] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:06.845] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:25.277] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:25.290] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 5s
+    
+[2018-02-18T01:42:30.176] [INFO] normal - 
+    OPTIONS /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:30.187] [INFO] normal - 
+    GET /qiniu/token 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:33.083] [INFO] normal - 
+    OPTIONS /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 0s
+    
+[2018-02-18T01:42:33.093] [INFO] normal - 
+    GET /article?classify=&state=&keyword=&page=1&pageSize=20 
+    响应时间为: 4s
+    
+[2018-02-18T01:42:40.330] [INFO] normal - 
+    OPTIONS /performence/fe?appName=Elapse-Admin 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:40.350] [INFO] normal - 
+    GET /performence/fe?appName=Elapse-Admin 
+    响应时间为: 14s
+    
+[2018-02-18T01:42:41.272] [INFO] normal - 
+    OPTIONS /performence/api/list 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:41.281] [INFO] normal - 
+    OPTIONS /performence/api/calltime 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:41.288] [INFO] normal - 
+    OPTIONS /performence/api/avaragerestime 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:41.291] [INFO] normal - 
+    OPTIONS /performence/api?requestUrl=/feperformence 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:41.477] [INFO] normal - 
+    GET /performence/api?requestUrl=/feperformence 
+    响应时间为: 92s
+    
+[2018-02-18T01:42:42.282] [INFO] normal - 
+    GET /performence/api/list 
+    响应时间为: 984s
+    
+[2018-02-18T01:42:42.812] [INFO] normal - 
+    GET /performence/api/calltime 
+    响应时间为: 1511s
+    
+[2018-02-18T01:42:43.316] [INFO] normal - 
+    GET /performence/api/avaragerestime 
+    响应时间为: 1984s
+    
+[2018-02-18T01:42:43.347] [INFO] normal - 
+    OPTIONS /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 2s
+    
+[2018-02-18T01:42:43.357] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 5s
+    
+[2018-02-18T01:42:45.088] [INFO] normal - 
+    OPTIONS /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 1s
+    
+[2018-02-18T01:42:45.108] [INFO] normal - 
+    GET /performence/api/log/error?page=1&pageSize=20&keyword= 
+    响应时间为: 14s
+    
+[2018-02-18T01:42:46.240] [INFO] normal - 
+    GET /performence/error/fe?appName=Elapse-Admin&keyword=&page=1&pageSize=20 
+    响应时间为: 6s
     

@@ -4,7 +4,7 @@
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
   box-sizing: border-box;
-  max-width: 80%;
+  max-width: 60%;
   min-width: 20%;
 
   @include e(wrapper) {
@@ -72,12 +72,14 @@
         width: 100%;
         margin-bottom: 15px;
         
-        p {
+        > p {
           margin-top: 0;
+          margin-bottom: 10px;
         }
 
         .ta-form-item__invalid-tip {
           margin-left: 2px !important;
+          transform: translateY(2px);
         }
       }
 

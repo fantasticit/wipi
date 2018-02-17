@@ -14,10 +14,11 @@ const callback = action => {
   } else {
     instance.reject(action)
   }
+
+  instance = null
 }
 
 const showMessageBox = (tip, title, opts) => new Promise((resolve, reject) => {
-  instance && (instance.visible = false)
   const propsData = { tip, title, ...opts }
   instance = new Ctur({ propsData }).$mount()
   instance.reject = reject

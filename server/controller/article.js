@@ -24,9 +24,8 @@ class ArticleController {
     const req = ctx.request.body
 
     ArticleController.checkArticle(req, ['cover'], ctx)
-    
-    const createDate = Date.now()
-    const result = await ArticleModel.create({...req, createDate})
+
+    const result = await ArticleModel.create({...req})
       .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '新增文章成功' })
   }
