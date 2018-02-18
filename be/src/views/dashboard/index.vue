@@ -1,43 +1,67 @@
 <template>
   <div class="ta-page">
-    <div>
-      <div class="ta-page__userinfo">
-        <div class="head">
-          <img :src="userInfo.avatar" alt="avatar" class="avatar">
-          <div>
-            <div>
-              <p class="account">{{ userInfo.account }}</p>
-              <p>{{ userInfo.roles.join('、') }}</p>
+    <div class="row">
+      <div class="col-md-12 col-lg-6">
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <div class="ta-page__statics is-success">
+            <div class="col-3 icon-message">
+              <ta-icon name="person-stalker"></ta-icon>
+            </div>
+            <div class="col-9 info">
+              <p>{{ apiCallTimes }}</p>
+              <p>用户注册数</p>
             </div>
           </div>
         </div>
-        <div class="footer">
-          <p>
-            <span>上次登录时间：</span>
-            <span>{{ userInfo.lastLoginTime }}</span>
-          </p>
+
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <div class="ta-page__statics is-primary">
+            <div class="col-3 icon-message">
+              <ta-icon name="ios-paper"></ta-icon>
+            </div>
+            <div class="col-9 info">
+              <p>{{ statics.pv }}</p>
+              <p>页面浏览量</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <div class="ta-page__statics is-danger">
+            <div class="col-3 icon-message">
+              <ta-icon name="shuffle"></ta-icon>
+            </div>
+            <div class="col-9 info">
+              <p>{{ apiCallTimes }}</p>
+              <p>接口调用量</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div>
-      <ul class="ta-statics">
-        <li class="is-primary">
-          <div class="icon-message"><ta-icon name="ios-paper"></ta-icon></div>
-          <div class="info">
-            <p>{{ statics.pv }}</p>
-            <p>页面浏览量</p>
+    <div class="row">
+      <div class="col-md-12 col-lg-6">
+        <div class="ta-page__userInfo">
+          <div class="row head">
+            <div class="col-3">
+              <img :src="userInfo.avatar" alt="avatar" class="avatar">
+            </div>
+            <div class="col-9">
+              <div>
+                <p class="account">{{ userInfo.account }}</p>
+                <p>{{ userInfo.roles.join('、') }}</p>
+              </div>
+            </div>
           </div>
-        </li>
-
-        <li class="is-danger">
-          <div class="icon-message"><ta-icon name="shuffle"></ta-icon></div>
-          <div class="info">
-            <p>{{ apiCallTimes }}</p>
-            <p>接口调用量</p>
+          <div class="footer">
+            <p>
+              <span>上次登录时间：</span>
+              <span>{{ userInfo.lastLoginTime }}</span>
+            </p>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -83,135 +107,5 @@ export default class Dashboard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@include b(statics) {
-  li {
-    height: 80px;
-    font-size: 12px;
-    color: #666;
-    background: #fff;
-    box-shadow: 4px 4px 4px rgba(0,0,0,.05);
-    cursor: pointer;
-    display: inline-block;
-    overflow: hidden;
-    @include clear;
-
-    + li {
-      margin-left: 40px;
-    }
-  }
-
-  @each $key, $val in ('primary': $primary, 'danger': $danger) {
-    li.is-#{$key} {
-      .icon-message {
-        background: $val;
-        color: #fff;
-      }
-
-      .info {
-        color: $val;
-        border: 1px solid $val;
-      }
-    }
-  }
-
-  .icon-message {
-    float: left;
-    height: 100%;
-    padding: 0 16px;
-    
-
-    @include flexLayout {
-      align-items: center;
-    };
-
-    .ta-icon {
-      font-size: 36px;
-    }
-  }
-
-  .info {
-    box-sizing: border-box;
-    float: right;
-    font-weight: bold;
-    padding: 0 20px;
-    height: 100%;
-    @include flexLayout {
-      align-items: center;
-      flex-direction: column;
-    };
-
-    p {
-      text-align: center;
-      margin: 0;
-
-      &:first-child {
-        margin-bottom: .5em;
-        font-size: 20px;
-        color: inherit;
-        
-      }
-
-      &:last-child {
-        font-size: 14px;
-        font-weight: normal;
-        color: #c8c8c8;
-      }
-    }
-  }
-}
-
-@include b(page) {
-  > div {
-    &:first-of-type {
-      float: left;
-      width: 30%;
-    }
-
-    &:last-of-type {
-      box-sizing: border-box;
-      padding: 0 15px;
-      float: right;
-      width: 70%;
-    }
-  }
-
-  @include clear();
-
-  @include e(userinfo) {
-    padding: 15px;
-    border-radius: 5px;
-    background: #fff;
-
-    .head {
-      padding: 15px;
-      border-bottom: 1px solid $border;
-      @include flexLayout(space-between);
-      
-      .avatar {
-        width: 120px;
-        height: 120px;
-      }
-
-      > div {
-        margin-left: 20px;
-        flex: 1;
-        font-size: 1em;
-        color: $primaryFont;
-        @include flexLayout(flex-start) {
-          align-items: center;
-        };
-
-        .account {
-          font-size: 2em;
-          color: $primary;
-          margin-bottom: 10px;
-        }
-      }
-    }
-
-    .footer {
-      padding: 10px;
-    }
-  }
-}
+@import './style.scss';
 </style>

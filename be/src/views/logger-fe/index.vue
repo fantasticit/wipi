@@ -132,6 +132,7 @@ export default class ApiError extends Vue {
 
 <style lang="scss" scoped>
 @include b(page) {
+  height: 100%;
   @include flexLayout(flex-start) {
     flex-direction: column;
   }

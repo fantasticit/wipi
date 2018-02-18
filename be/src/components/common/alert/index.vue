@@ -3,7 +3,7 @@
     <div 
       class="ta-alert" :class="'ta-alert--' + type"
       v-if="visible">
-      <ta-icon v-if="showIcon" :name="iconName"></ta-icon>
+      <ta-icon v-if="!showIcon" :name="iconName"></ta-icon>
       <div class="ta-alert__content">
         <slot></slot>
         <ta-icon name="ios-close-empty" @click="close"></ta-icon>

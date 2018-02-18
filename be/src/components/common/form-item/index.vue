@@ -94,7 +94,6 @@ export default {
 
     emitEnter() {
       this.$emit('enter', this.currentValue)
-      this.currentValue = ''
     },
   },
 }

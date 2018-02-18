@@ -10,7 +10,9 @@
           <p>将文件拖拽到此处或<span>点击上传</span></p>
         </div>
       </template>
-      <img v-else :src="img">
+      <template v-else>
+        <img :src="img">
+      </template>
       <input type="file" multiple>
     </div>
     <transition name="slide-down">

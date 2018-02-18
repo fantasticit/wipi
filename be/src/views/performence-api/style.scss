@@ -2,38 +2,22 @@
   background: #fff;
   padding: 15px;
 
-  @include flexLayout(flex-start) {
-    flex-direction: column;
-  }
-
-  @include e(head) {
-    padding: 15px  0;
-    text-align: center;
-  }
-
-  @include e(charts) {
+  .row {
     margin-top: 15px;
-    @include flexLayout(space-between);
+  }
 
-    &:first-of-type {
-      margin-top: 0;
+  @include smScreen {
+    .col-md-6 {
+      &:last-of-type {
+        margin-top: 15px;
+      }
     }
   }
 
   @include e(chart) {
-    flex: 1;
     background: #fff;
     border: 1px solid $border;
     border-radius: 5px;
-    margin-left: 15px;
-
-    &:first-of-type {
-      margin-left: 0;
-    }
-
-    @include m(full) {
-      width: 100%;
-    }
     
     .head {
       padding: 15px;
@@ -50,9 +34,9 @@
         }
       }
     
-      > .ta-select {
-        flex: 1;
-      }
+      // > .ta-select {
+      //   flex: 1;
+      // }
     }
 
     .body {

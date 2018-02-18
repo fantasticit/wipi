@@ -5,6 +5,7 @@
         <p>
           4<ta-icon name="flash-off"></ta-icon>3
         </p>
+        <p>您没有权限访问该页面</p>
       </div>
       <div class="body">
         <ta-button type="text" @click="goback2home">返回首页</ta-button>
@@ -52,6 +53,14 @@ export default class NotFound extends Vue {
       font-weight: 700;
       color: $primary;
 
+      p {
+        &:last-of-type {
+          font-size: 20px;
+          color: $primaryFont;
+          text-align: center;
+        }
+      }
+
       .ta-icon {
         font-size: 220px;
         color: $danger;
@@ -59,6 +68,7 @@ export default class NotFound extends Vue {
     }
 
     .body {
+      margin-top: 40px;
       text-align: center;
     }
   }

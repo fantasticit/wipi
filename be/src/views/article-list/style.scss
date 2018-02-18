@@ -6,6 +6,7 @@
 }
 
 @include b(article-list) {
+  height: 100%;
   @include flexLayout(flex-start) {
     flex-direction: column;
   };

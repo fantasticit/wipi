@@ -8,48 +8,80 @@
   }
 }
 
-@include b(article) {
-  height: 100%;
-  @include flexLayout(flex-start);
+// @include b(article) {
+//   height: 100%;
+//   @include flexLayout(flex-start);
 
-  > div {
-    box-sizing: border-box;
-    width: 30%;
+//   > div {
+//     box-sizing: border-box;
+//     width: 30%;
 
-    &:first-child {
-      width: 70%;
-      padding: 30px;
-      margin-right: 15px;
-      @include border;
+//     &:first-child {
+//       width: 70%;
+//       padding: 30px;
+//       margin-right: 15px;
+//       @include border;
       
-      @include flexLayout(flex-start) {
-        flex-direction: column;
-      }
-    }
+//       @include flexLayout(flex-start) {
+//         flex-direction: column;
+//       }
+//     }
+//   }
+
+//   @include e(item) {
+//     margin-bottom: 22px;
+//     @include flexLayout(flex-start);
+
+//     &:last-child {
+//       flex: 1;
+//     }
+
+//     textarea, div {
+//       flex: 1;
+//     }
+
+//     div {
+//       overflow: hidden;
+//       overflow-x: auto;
+//       padding-bottom: 22px;
+//     }
+    
+//     label {
+//       display: inline-flex;
+//       width: 5em;
+//       margin-top: 1em;
+//     }
+//   }
+
+
+
+// .tags {
+//   .ta-tag + .ta-tag {
+//     margin-left: 10px;
+//   }
+// }
+
+@include b(article) {
+  @include e(container) {
+    background: #fff;
+    padding: 15px;
+    @include border;
   }
 
   @include e(item) {
-    margin-bottom: 22px;
-    @include flexLayout(flex-start);
+    margin-top: 15px;
 
-    &:last-child {
-      flex: 1;
+    &:first-of-type {
+      margin-top: 0;
     }
 
-    textarea, div {
-      flex: 1;
-    }
-
-    div {
-      overflow: hidden;
-      overflow-x: auto;
-      padding-bottom: 22px;
-    }
-    
     label {
-      display: inline-flex;
-      width: 5em;
-      margin-top: 1em;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
     }
   }
 
@@ -71,6 +103,11 @@
         width: 100%;
         margin-bottom: 15px;
       }
+
+      img {
+        width: 100%;
+        max-height: 200px;
+      }
     }
 
     .footer {
@@ -83,10 +120,17 @@
       }
     }
   }
-}
 
-.tags {
-  .ta-tag + .ta-tag {
-    margin-left: 10px;
+  @media (max-width: $screen-md-min) {
+    @include e(prop) {
+      &:first-of-type {
+        margin-top: 15px;
+      }
+    }
+
+    img {
+      height: auto;
+      max-height: 400px !important;
+    }
   }
 }

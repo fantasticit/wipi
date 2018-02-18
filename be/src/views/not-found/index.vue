@@ -5,6 +5,7 @@
         <p>
           4<ta-icon name="compass"></ta-icon>4
         </p>
+        <p>访问的页面不存在</p>
       </div>
       <div class="body">
         <ta-button type="text" @click="goback2home">返回首页</ta-button>
@@ -82,9 +83,18 @@ export default class NotFound extends Vue {
           }
         }
       }
+
+       p {
+        &:last-of-type {
+          font-size: 20px;
+          color: $primaryFont;
+          text-align: center;
+        }
+      }
     }
 
     .body {
+      margin-top: 40px;
       text-align: center;
     }
   }

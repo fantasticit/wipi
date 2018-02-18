@@ -1,6 +1,6 @@
 <template>
-  <div class="ta-header">
-    <div>
+  <div class="row ta-header">
+    <div class="col-sm-6 col-md-6 col-lg-6">
       <ta-icon
         class="ta-header__icon-menu" name="navicon"
         :class="{ 'is-rotate': isCollapse }"
@@ -15,7 +15,7 @@
       </span>
     </div>
 
-    <div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
       <ta-icon :name="toggleScreenIcon" @click="toggleFullScreen()"></ta-icon>
       <div class="ta-header__avatar" @click="toggleDropMenu()">
         <p>{{ userInfo.account }}</p>

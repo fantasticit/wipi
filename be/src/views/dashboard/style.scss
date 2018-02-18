@@ -1,0 +1,139 @@
+@include b(page) {
+  // @include mdScreen {
+  //   @include e(userInfo) {
+  //     margin-top: 15px;
+  //   }
+  // }
+
+  // @include smScreen {
+  //   @include e(userInfo) {
+  //     margin-top: 15px;
+  //   }
+  // }
+
+  // @include smScreen {
+  //   .col-sm-12 {
+  //     margin-top: 15px;
+
+  //     &:first-of-type {
+  //       margin-top: 0;
+  //     }
+  //   }
+  // }
+
+  @include e(userInfo) {
+    background: #fff;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 15px;
+
+    .head {
+      padding: 10px 0;
+      margin-bottom: 10px;
+      border-bottom: 1px solid $border;
+      @include flexLayout(flex-start) {
+        align-items: stretch;
+      };
+
+      .avatar {
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+      }
+
+      .col-9 {
+        @include flexLayout(flex-start) {
+          align-items: center;
+        };
+
+        p {
+          font-size: 14px;
+        }
+
+        .account {
+          font-size: 2em;
+          color: $primary;
+          margin-bottom: .5em;
+        }
+      }
+    }
+
+    .footer {
+      padding: 10px;
+    }
+  }
+
+  @include e(statics) {
+    width: 100%;
+    height: 91px;
+    font-size: 12px;
+    color: #666;
+    background: #fff;
+    border-radius: 4px;
+    // box-shadow: 4px 4px 4px rgba(0,0,0,.05);
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    @include clear;
+
+    @each $key, $val in ('primary': $primary, 'danger': $danger, 'success': $success) {
+      @include when($key) {
+        border: 1px solid $val;
+
+        .icon-message {
+          background: $val;
+          color: #fff;
+        }
+
+        .info {
+          color: $val;
+        }
+      }
+    }
+
+    .icon-message {
+      float: left;
+      height: 100%;
+      padding: 0 16px;
+      
+
+      @include flexLayout {
+        align-items: center;
+      };
+
+      .ta-icon {
+        font-size: 36px;
+      }
+    }
+
+    .info {
+      box-sizing: border-box;
+      float: right;
+      font-weight: bold;
+      padding: 0 20px;
+      height: 100%;
+      @include flexLayout {
+        align-items: center;
+        flex-direction: column;
+      };
+
+      p {
+        &:first-of-type {
+          font-size: 20px;
+          margin-bottom: .5em;
+        }
+
+        &:last-of-type {
+          color: $primaryFont;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+
+  @include lgScreen {
+    @include e(statics) {
+      height: 87px;
+    }
+  }
+}

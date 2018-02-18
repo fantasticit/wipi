@@ -24,11 +24,12 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
+  overflow: auto;
 }
 
 .CodeMirror {
   box-sizing: border-box;
-  height: calc(100% - 51px) !important;
+  height: 450px !important;
 }
 
 .CodeMirror, .editor-toolbar {
@@ -42,6 +43,10 @@ a {
 table {
   table-layout: fixed;
   border-collapse: collapse;
+
+  td {
+    word-break: break-all;
+  }
 }
 
 h1, p {

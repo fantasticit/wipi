@@ -1,30 +1,41 @@
 <template>
   <div class="ta-page">
     <ta-alert>接口性能记录取全部数据（具体接口分析取最近的300条）</ta-alert>
-    <div class="ta-page__charts">
-      <div class="ta-page__chart">
-        <div class="head">
-          <ta-icon name="pie-graph"></ta-icon>
-          <span>接口调用次数</span>
+    <div class="row">
+      <div class="col-md-6 col-lg-6">
+        <div class="ta-page__chart">
+          <div class="head">
+            <ta-icon name="pie-graph"></ta-icon>
+            <span>接口调用次数</span>
+          </div>
+          <div class="body" ref="callTimeChart"></div>
         </div>
-        <div class="body" ref="callTimeChart"></div>
       </div>
 
-      <div class="ta-page__chart">
-        <div class="head">
-          <ta-icon name="stats-bars"></ta-icon>
-          <span>接口平均响应时间（/ms）</span>
+      <div class="col-md-6 col-lg-6">
+        <div class="ta-page__chart">
+          <div class="head">
+            <ta-icon name="stats-bars"></ta-icon>
+            <span>接口平均响应时间（/ms）</span>
+          </div>
+          <div class="body" ref="avarageChart">1</div>
         </div>
-        <div class="body" ref="avarageChart">1</div>
       </div>
     </div>
-    <div class="ta-page__charts">
-      <div class="ta-page__chart ta-page__chart--full">
-        <div class="head">
-          <ta-icon name="arrow-graph-down-right"></ta-icon>
-          <ta-select label="具体接口分析" :options="apiList" v-model="selectedApi"></ta-select>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ta-page__chart">
+          <div class="head">
+            <ta-icon name="arrow-graph-down-right"></ta-icon>
+            <ta-select
+              placeholder="请选择接口"
+              label="具体接口分析" 
+              :options="apiList" 
+              v-model="selectedApi">
+            </ta-select>
+          </div>
+          <div class="body" ref="chart"></div>
         </div>
-        <div class="body" ref="chart"></div>
       </div>
     </div>
   </div>

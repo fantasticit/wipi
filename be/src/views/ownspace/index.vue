@@ -16,7 +16,8 @@
         </div>
         <div>
           <label>用户头像</label>
-          <ta-upload :image="avatar" @success="getAvatar($event)">
+          <img :src="avatar" alt="">
+          <ta-upload @success="getAvatar($event)">
           </ta-upload>
         </div>
         <div>
@@ -137,7 +138,6 @@ export default class Ownspace extends Vue {
     background: #fff;
     border: 1px solid $border;
     border-radius: 5px;
-    margin-left: 15px;
     
     .head {
       padding: 15px;
@@ -170,12 +170,6 @@ export default class Ownspace extends Vue {
         }
 
         &:nth-of-type(3)  {
-          > label {
-            @include flexLayout() {
-              align-items: center;
-            };
-          }
-
           > button {
             padding-left: 0;
             padding-right: 0;
@@ -189,6 +183,15 @@ export default class Ownspace extends Vue {
 
       label {
         margin-right: 1em;
+        @include flexLayout() {
+          align-items: center;
+        };
+      }
+
+      img {
+        width: 210px;
+        height: 200px;
+        margin-right: 15px;
       }
 
       .button-group {

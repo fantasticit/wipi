@@ -1,24 +1,31 @@
 <template>
-  <div class="ta-article">
+  <div class="row ta-article">
     <!-- S 左侧文章撰写区 -->
-    <div>
-      <ta-form-item label="文章标题" placeholder="请输入文章标题" v-model="title">
-      </ta-form-item>
-      <div class="ta-article__item">
-        <label>文章概述</label>
-        <textarea class="ta-textarea" placeholder="请输入文章概述" v-model="desc">
-        </textarea>
-      </div>
-      <div class="ta-article__item">
-        <label>文章内容</label>
-        <ta-markdown-editor class="editor" ref="editor" v-model="content">
-        </ta-markdown-editor>
+    <div class="col-md-8 col-lg-8">
+      <div class="ta-article__container">
+        <div class="ta-article__item">
+          <label>文章标题</label>
+          <ta-input
+            placeholder="请输入文章标题"
+            v-model="title">
+          </ta-input>
+        </div>
+        <div class="ta-article__item">
+          <label>文章概述</label>
+          <textarea class="ta-textarea" placeholder="请输入文章概述" v-model="desc">
+          </textarea>
+        </div>
+        <div class="ta-article__item">
+          <label>文章内容</label>
+          <ta-markdown-editor class="editor" ref="editor" v-model="content">
+          </ta-markdown-editor>
+        </div>
       </div>
     </div>
     <!-- E 左侧文章撰写区 -->
 
     <!-- S 右侧文章属性区 -->
-    <div>
+    <div class="col-md-4 col-lg-4">
       <!-- 文章分类 -->
       <div class="ta-article__prop">
         <div class="header">
@@ -54,7 +61,7 @@
           <span>文章封面</span>
         </div>
         <div class="body">
-          <ta-upload :image="cover" @success="getImageName($event)"></ta-upload>
+          <ta-upload :imgae="cover" @success="getImageName($event)"></ta-upload>
         </div>
       </div>
       <!-- 文章发布 -->

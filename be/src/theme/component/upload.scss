@@ -11,11 +11,11 @@
   width: 100%;
 
   @include e(container) {
+    position: relative;
     box-sizing: border-box;
     height: 200px;
     border: 1px dashed #eee;
     border-radius: 4px;
-    overflow: hidden;
 
     @include flexLayout() {
       align-items: center;
@@ -43,6 +43,7 @@
       font-size: 5em;
     }
   }
+
 
   @include e(tip) {
     padding: 10px 0;

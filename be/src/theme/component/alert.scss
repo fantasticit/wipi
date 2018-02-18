@@ -7,7 +7,7 @@
   overflow: hidden;
   font-size: 13px;
 
-  @include flexLayout(flex-start);
+  @include clear();
 
   @include m(success) {
     background-color: #f0f9eb;
@@ -33,13 +33,14 @@
   }
 
   > .ta-icon {
+    float: left;
+    
     &::before {
       transform: translateY(1px);
     }
   }
 
   @include e(content) {
-    flex: 1;
     display: table-cell;
     padding: 0 8px;
     

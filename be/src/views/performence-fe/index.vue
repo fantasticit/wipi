@@ -1,7 +1,7 @@
 <template>
   <div class="ta-page">
-    <ta-alert>前端页面性能记录取最接近当前时间的300条</ta-alert>
-    <div class="ta-page__head">
+    <ta-alert>前端页面性能记录取最接近当前时间的50条</ta-alert>
+    <div class="row">
       <div>
         <ta-button
           v-for="(project, i) in projects"
@@ -159,14 +159,14 @@ export default class FePerformence extends Vue {
     flex-direction: column;
   }
 
-  @include e(head) {
-    padding: 15px  0;
+  .row {
     text-align: center;
+    margin: 15px 0;
+  }
 
-    button.is-active {
-      background: $primary;
-      color: #fff;
-    }
+  button.is-active {
+    background: $primary;
+    color: #fff;
   }
 
   @include e(chart) {

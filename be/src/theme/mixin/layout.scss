@@ -21,9 +21,13 @@
 }
 
 @mixin clear() {
-  &::after {
+  &::before,
+  &::after, {
     content: '';
     display: table;
+  }
+
+  &::after, {
     clear: both;
   }
 }
@@ -32,4 +36,25 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+// 小屏幕
+@mixin smScreen () {
+  @media (max-width: $screen-md-min) {
+    @content;
+  }
+}
+
+// 中屏幕
+@mixin mdScreen () {
+  @media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {
+    @content;
+  }
+}
+
+// 大屏幕
+@mixin lgScreen () {
+  @media (min-width: $screen-lg-min) {
+    @content;
+  }
 }

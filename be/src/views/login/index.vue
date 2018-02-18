@@ -34,7 +34,8 @@
             :focus="showRegisterPanel" 
             placeholder="用户账户" 
             v-model="newAccount"
-            @blur="checkAccountExist()">
+            @blur="checkAccountExist()"
+            :class="{'is-invalid': accountMessage}">
           </ta-input>
           <transition name="slide-down">
             <p v-if="!!accountMessage">{{ accountMessage }}</p>
@@ -42,19 +43,23 @@
         </div>
         <div class="form-group">
           <ta-input 
+            type="password"
             placeholder="用户密码" 
             v-model="newPassword"
-            @blur="checkPassword">
+            @blur="checkPassword"
+            :class="{'is-invalid': passwordMessage}">
           </ta-input>
           <transition name="slide-down">
             <p v-if="!!passwordMessage">{{ passwordMessage }}</p>
           </transition>
         </div>
         <div class="form-group">
-          <ta-input 
+          <ta-input
+            type="password"
             placeholder="请再次输入用户密码" 
             v-model="newPassword2"
-            @blur="checkPassword2">
+            @blur="checkPassword2"
+            :class="{'is-invalid': passwordMessage2}">
           </ta-input>
           <transition name="slide-down">
             <p v-if="!!passwordMessage2">{{ passwordMessage2 }}</p>
@@ -96,6 +101,12 @@ export default class Login extends Vue {
 
   toggleRegisterPanel() {
     this.showRegisterPanel = !this.showRegisterPanel
+
+    if (!this.showRegisterPanel) {
+      this.accountMessage = ''
+      this.passwordMessage = ''
+      this.passwordMessage2 = ''
+    }
   }
 
   async login() {
