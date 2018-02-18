@@ -28,6 +28,8 @@ module.exports = async (ctx, status, start = 0) => {
 
   if (/article/ig.test(url)) { // article系列接口只存储/article路径
     url = '/article'
+  } else if (/user/ig.test(url)) {
+    url = '/user'
   }
 
   await ApiPerformenceController.addApiRecord({

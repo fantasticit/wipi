@@ -11,21 +11,58 @@
   flex-direction: column;
   @include flexLayout(flex-start);
 
-  @include e(form) {
+  @include e(container) {
     width: 420px;
     padding: 15px 30px;
     text-align: center;
     margin: 180px auto;
+    background: #fff;
+    border-radius: 5px;
 
     h1 {
       font-size: 26px;
-      color: #fff;
-      margin-bottom: 40px;
+      font-weight: normal;
+      // margin-bottom: 40px;
+      padding: 15px 0;
     }
-  }
 
-  @include e(button) {
-    width: 100%;
-    margin-top: 22px;
+    button {
+      width: 100%;
+      margin-top: 22px;
+    }
+
+    .register {
+      margin: 22px 0;
+      padding: 10px 0 15px;
+      color: #999;
+      font-size: 14px;
+      border-top: 1px solid $border;
+
+      button {
+        margin-top: 10px;
+      }
+    }
+
+    .form-group {
+      position: relative;
+      width: 100%;
+      margin: 22px 0;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+  
+      input {
+        width: 100%;
+      }
+
+      p {
+        position: absolute;
+        text-align: left;
+        color: $danger;
+        font-size: 12px;
+        left: 2px;
+      }
+    }
   }
 }

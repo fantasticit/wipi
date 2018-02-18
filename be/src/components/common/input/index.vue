@@ -1,7 +1,8 @@
 <template>
   <input
     class="ta-input"
-    :type="type" 
+    :type="type"
+    ref="input"
     :placeholder="placeholder"
     @keyup.enter="emitEnter()"
     @blur="emitBlur()"
@@ -17,12 +18,25 @@ export default {
   props: {
     value: { type: String, default: '' },
     type: { type: String, default: 'text' },
+    focus: { type: Boolean, default: false },
     placeholder: { type: String, default: '请输入信息' },
+  },
+
+  watch: {
+    value() {
+      this.currentValue = this.$props.value
+    }
   },
 
   data() {
     return {
       currentValue: this.$props.value,
+    }
+  },
+
+  mounted() {
+    if (this.focus) {
+      this.$refs['input'].focus()
     }
   },
 

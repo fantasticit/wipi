@@ -11,6 +11,10 @@
           <ta-input v-model="account"></ta-input>
         </div>
         <div>
+          <label>用户角色</label>
+          <span>{{ roles.join('、') }}</span>
+        </div>
+        <div>
           <label>用户头像</label>
           <ta-upload :image="avatar" @success="getAvatar($event)">
           </ta-upload>
@@ -53,6 +57,10 @@ export default class Ownspace extends Vue {
   password = ''
   avatar = ''
 
+  oldAccount = ''
+  oldPassword = ''
+  oldAvatar = ''
+
   created() {
     const userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
     this.userId = userInfo.id
@@ -60,6 +68,10 @@ export default class Ownspace extends Vue {
     this.avatar = userInfo.avatar
     this.roles = userInfo.roles
     this.password = userInfo.password
+
+    this.oldAccount = this.account
+    this.oldPassword = this.password
+    this.oldAvatar = this.avatar
   }
 
   cancel() {
@@ -85,6 +97,15 @@ export default class Ownspace extends Vue {
   }
 
   async updateInfo() {
+    if (
+      this.account === this.oldAccount
+      && this.password === this.oldPassword
+      && this.avatar === this.oldAvatar
+    ) {
+      this.$message.info('未作任何修改')
+      return
+    }
+
     this.loading = true
     
     try {
@@ -148,9 +169,17 @@ export default class Ownspace extends Vue {
           margin-top: 1em;
         }
 
-        &:nth-of-type(2) > button {
-          padding-left: 0;
-          padding-right: 0;
+        &:nth-of-type(3)  {
+          > label {
+            @include flexLayout() {
+              align-items: center;
+            };
+          }
+
+          > button {
+            padding-left: 0;
+            padding-right: 0;
+          }
         }
 
         /deep/ .ta-upload {

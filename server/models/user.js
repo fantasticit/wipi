@@ -9,8 +9,14 @@ const userSchema = new Schema({
     type: Array,
     default: []
   },
-  lastLoginTime: Date,
-  avatar: String,
+  lastLoginTime: {
+    type: Date,
+    default: Date.now()
+  },
+  avatar: {
+    type: String,
+    default: 'http://p39p1kvxn.bkt.clouddn.com/FiziGBuQNJpp75oAOYtwLyru9Yph'
+  },
 })
 
 userSchema.index({ id: 1 })

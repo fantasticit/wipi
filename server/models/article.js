@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const articleSchema = new Schema({
   id: Number,
+  userId: String,
   title: String,
   desc: String,
   cover: String,

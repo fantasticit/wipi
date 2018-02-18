@@ -25,7 +25,7 @@ class FePerformenceController {
     // 按时间降序查找最近的30条记录
     const result = await FePerformence.find({appName})
       .sort({visitDateTime:-1})
-      .limit(50)    
+      .limit(30)    
       .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '成功', data: {
         items: result,

@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-down-dialog">
     <div class="ta-dialog__wrapper" v-if="isShow">
-      <div class="ta-dialog">
+      <div class="ta-dialog" :style="{ width: width > 0 ? width + 'px' : '100%'}">
         <div class="ta-dialog__header">
           <span>{{ title }}</span>
           <ta-icon name="ios-close-empty" @click="handleCancel()"></ta-icon>
@@ -44,6 +44,11 @@ export default {
     showFooter: {
       type: Boolean,
       default: true
+    },
+
+    width: {
+      type: Number,
+      default: 0
     }
   },
 

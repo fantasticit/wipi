@@ -9,6 +9,9 @@ const views = {
   ApiLogger: () => import(/* webpackChunkName: "api-logger" */'@/views/logger-api'),
   FeLogger: () => import(/* webpackChunkName: "fe-logger" */'@/views/logger-fe'),
   Ownspace: () => import(/* webpackChunkName: "ownspace" */'@/views/ownspace'),
+  UserManagement: () => import(/* webpackChunkName: "user-management" */'@/views/user-management'),
+  Forbidden: () => import(/* webpackChunkName: "forbidden" */'@/views/forbidden'),
+  NotFound: () => import(/* webpackChunkName: "not-found" */'@/views/not-found'),
 }
 
 export default views

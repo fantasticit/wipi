@@ -14,6 +14,18 @@ const routes = [
     name: 'Login',
     component: views.Login
   },
+
+  {
+    path: '/forbidden',
+    name: 'Forbidden',
+    component: views.Forbidden
+  },
+
+  {
+    path: '*',
+    name: 'NotFound',
+    component: views.NotFound
+  },
 ]
 
 routeConfig.map(route => {

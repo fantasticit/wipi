@@ -22,6 +22,16 @@ const routeConfig = [
   },
 
   {
+    icon: 'person-stalker',
+    path: 'user-managemt',
+    name: 'UserManagement',
+    component: views.UserManagement,
+    meta: {
+      title: '用户管理',
+    },
+  },
+
+  {
     prefix: '文章管理',
     icon: 'ios-paper',
     children: [

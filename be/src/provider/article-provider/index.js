@@ -12,11 +12,11 @@ class _ArticleProvider extends BaseHttp {
     super()
   }
 
-  async addArticle(article) {
+  async addArticle(userId, article) {
     const req = {
       url: this.api.add,
       method: 'POST',
-      data: article
+      data: { userId, ...article }
     }
 
     try {
@@ -27,7 +27,8 @@ class _ArticleProvider extends BaseHttp {
     }
   }
 
-  async fetchArticles(query) {
+  async fetchArticles(query, userId) {
+    console.log(userId)
     query = Object.keys(query).map(key => `${key}=${query[key]}`).join('&')
 
     const req = {
@@ -35,7 +36,7 @@ class _ArticleProvider extends BaseHttp {
       method: 'GET',
     }
 
-    req.url += '?'+ query
+    req.url += '?'+ query + '&userId=' + userId
 
     try {
       const res = await this.http(req)

@@ -5,6 +5,9 @@ class _UserProvider extends BaseHttp {
     register: '/user/register',
     login: '/user/login',
     update: '/user/',
+    getUsers: '/user/',
+    deleteUser: '/user/',
+    check: '/user/checkaccount',
   }
 
   constructor() {
@@ -46,6 +49,53 @@ class _UserProvider extends BaseHttp {
       url: this.api.update + id,
       method: 'POST',
       data: { account, password, avatar },
+    }
+
+    try {
+      const res = await this.http(req)
+      return res.message
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  async checkAccountExist(account) {
+    const req = {
+      url: this.api.check,
+      method: 'POST',
+      data: { account },
+    }
+
+    try {
+      const res = await this.http(req)
+      return res
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  async getUsers(query) {
+    console.log(query)
+    query = Object.keys(query).map(key => `${key}=${query[key]}`).join('&')
+
+    const req = {
+      url: this.api.getUsers + '?' + query,
+      method: 'get',
+    }
+
+    try {
+      const res = await this.http(req)
+      return res.data
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  async deleteUser(userId, deletedUserId) {
+    const req = {
+      url: this.api.deleteUser,
+      method: 'delete',
+      data: { userId, deletedUserId }
     }
 
     try {

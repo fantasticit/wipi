@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.use(logger())
   app.use(cors())
   app.use(httpErrorHandler())
-  app.use(koaJwt({secret}).unless({path: [/^\/user\/login/, /^\/performence/]}))
+  app.use(koaJwt({secret}).unless({path: [/^\/user/, /^\/performence/]}))
   app.use(bodyParser())
   app.use(json())
 }

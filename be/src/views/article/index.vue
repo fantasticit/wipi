@@ -64,9 +64,9 @@
           <span>文章发布</span>
         </div>
         <div class="body">
-          <ta-form-item label="作者" placeholder="请输入作者" v-model="author">
-          </ta-form-item>
-          <ta-select label="状态" placeholder="请选择文章状态" v-model="state"
+          <ta-input placeholder="请输入作者" v-model="author">
+          </ta-input>
+          <ta-select placeholder="请选择文章状态" v-model="state"
             :options="states">
           </ta-select>
         </div>
@@ -92,6 +92,15 @@ import { ArticleProvider } from '@/provider/article-provider'
     TaMarkdownEditor,
   },
 
+  watch: {
+    '$route'() {
+      const articleId = this.$route.params['articleId'] || null
+      if (!articleId) {
+        this.reset()
+      }
+    }
+  },
+
   computed: {
     ...mapState('article', {
       classifies: state => state.classifies,
@@ -101,6 +110,7 @@ import { ArticleProvider } from '@/provider/article-provider'
   }
 })
 export default class Article extends Vue {
+  userId = ''                                          // 用户Id
   articleId = null                                     // 文章ID
   title = ''                                           // 文章标题
   desc = ''                                            // 文章描述
@@ -121,7 +131,12 @@ export default class Article extends Vue {
 
     const articleId = this.$route.params['articleId'] || null
     this.articleId = articleId
-    !!this.articleId && this.fetchArticle()
+    if (!!this.articleId) {
+      this.fetchArticle()
+    } else {
+      this.author = JSON.parse(window.sessionStorage.getItem('userInfo')).account
+      this.userId = JSON.parse(window.sessionStorage.getItem('userInfo')).id
+    }
   }
 
   // 增加标签
@@ -169,7 +184,7 @@ export default class Article extends Vue {
   async fetchArticle() {
     this.$loading.start()
     try {
-      const article = await ArticleProvider.fetchArticle(this.articleId)
+      const article = await ArticleProvider.fetchArticle(this.articleId, this.userId)
       this.title = article.title
       this.desc = article.desc
       this.content = article['content_md']
@@ -242,7 +257,7 @@ export default class Article extends Vue {
     this.loading = true
     this.handleArticle(article).then(async article => {
       try {
-        const res = await ArticleProvider.addArticle(article)
+        const res = await ArticleProvider.addArticle(this.userId, article)
         this.$message.success(res)
         this.reset()
       } catch (err) {

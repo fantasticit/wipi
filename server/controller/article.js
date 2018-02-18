@@ -1,6 +1,18 @@
 const xssFilters = require('xss-filters')
 const ArticleModel = require('../models/article')
+const UserModel = require('../models/user')
 const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字符
+
+async function judgeIsAdmin(userId) {
+  const userInfo = await UserModel.findById(userId).catch(e => ctx.throw(500))
+  const roles = userInfo.roles
+
+  if (roles.indexOf('admin') > -1) {
+    return true
+  } else {
+    return false
+  }
+}
 
 class ArticleController {
   static constructor() {}
@@ -22,6 +34,7 @@ class ArticleController {
   // 新增文章
   static async addArticle(ctx, next) {
     const req = ctx.request.body
+    console.log(req)
 
     ArticleController.checkArticle(req, ['cover'], ctx)
 
@@ -33,7 +46,7 @@ class ArticleController {
   // 根据query参数获取文章
   // 形式上更像是 listArticles
   static async getArticle(ctx, next) {
-    let { classify, state, keyword, page = 1, pageSize = 20 } = ctx.query
+    let { userId, classify, state, keyword, page = 1, pageSize = 20 } = ctx.query
     page = +page
     pageSize = +pageSize
     const query = {}
@@ -51,9 +64,34 @@ class ArticleController {
       ]
     }
     const skip = page === 0 ? 0 : (page - 1) * pageSize
-    const articles = await ArticleModel.find(query).limit(pageSize).skip(skip)
-      .catch(e => ctx.throw(500))
-    const total = await ArticleModel.find(query).count().catch(e => ctx.throw(500))
+    const isAdmin = await judgeIsAdmin(userId)
+
+    let articles = []
+    let total = 0
+
+    if (isAdmin) {
+      articles = await ArticleModel
+        .find(query)
+        .limit(pageSize)
+        .skip(skip)
+        .catch(e => ctx.throw(500))
+      total = await ArticleModel
+        .find(query)
+        .count()
+        .catch(e => ctx.throw(500))
+    } else {
+      articles = await ArticleModel
+        .find(query)
+        .where('userId').equals(userId)
+        .limit(pageSize)
+        .skip(skip)
+        .catch(e => ctx.throw(500))
+      total = await ArticleModel
+        .find(query)
+        .where('userId').equals(userId)
+        .count()
+        .catch(e => ctx.throw(500))
+    }
 
     ctx.send({ status: 'ok', message: '获取文章成功', data: {
         items: articles,

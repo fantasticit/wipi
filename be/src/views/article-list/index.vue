@@ -104,8 +104,10 @@ export default class ArticleList extends Vue {
   tableKeys = ['title', 'classify', 'state', 'createDate', 'updateDate']
   page = 1                   
   pageSize = 20
+  userId = ''
 
   created() {
+    this.userId = JSON.parse(window.sessionStorage.getItem('userInfo')).id
     this.fetchArticles()
   }
 
@@ -142,7 +144,7 @@ export default class ArticleList extends Vue {
         page: this.page,
         pageSize: this.pageSize
       }
-      const res = await ArticleProvider.fetchArticles(query)
+      const res = await ArticleProvider.fetchArticles(query, this.userId)
       this.articles = res.items.map(item => {
         item.createDate = formatTime(item.createDate)
         item.updateDate = formatTime(item.updateDate)
