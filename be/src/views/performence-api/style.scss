@@ -7,7 +7,7 @@
   }
 
   @include smScreen {
-    .col-md-6 {
+    .ta-col-6 {
       &:last-of-type {
         margin-top: 15px;
       }
@@ -18,6 +18,7 @@
     background: #fff;
     border: 1px solid $border;
     border-radius: 5px;
+    overflow: hidden;
     
     .head {
       padding: 15px;
@@ -33,10 +34,6 @@
           transform: translateY(0px);
         }
       }
-    
-      // > .ta-select {
-      //   flex: 1;
-      // }
     }
 
     .body {

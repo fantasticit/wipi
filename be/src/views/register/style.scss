@@ -1,0 +1,73 @@
+@include b(register) {
+  position: relative;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  padding: 40px 0;
+  background-color: #efefef;
+
+  @include e(head) {
+    max-width: 992px;
+    margin: 40px auto 0;
+    text-align: center;
+  }
+
+  @include e(form-container) {
+    max-width: 992px;
+    margin: 40px auto 0;
+    
+    .panel {
+      background: #fff;
+      padding: 40px 45px;
+      text-align: center;
+
+      h2 {
+        border-bottom: 1px solid $border;
+        margin: 0;
+        font-size: 24px;
+        text-align: left;
+        color: #333;
+        padding-bottom: 10px;
+        font-weight: 400;
+  
+        .ta-icon {
+          color: $primary;
+        }
+      }
+    }
+
+    .other {
+      margin-top: 20px;
+      text-align: center;
+
+      a {
+        color: $primary;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @include e(form) {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 40px;
+
+    button {
+      margin-top: 22px;
+      width: 100%;
+    }
+  }
+}
+
+@include b(logo) {
+  font-size: 40px;
+  font-weight: normal;
+  text-align: center;
+
+  span + span {
+    margin-left: 10px;
+  }
+}

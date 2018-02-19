@@ -1,4 +1,68 @@
 @include b(page) {
+  // @include e(container) {
+  //   max-width: 1200px;
+  //   margin: 0 auto;
+  //   @include flexLayout(flex-start);
+  // }
+
+  @include e(statics) {
+    flex: 1;
+    padding: 0;
+    @include flexLayout(space-between) {
+      flex-wrap: wrap;
+    };
+
+    > div {
+      width: 100%;
+      height: 80px;
+      font-size: 12px;
+      color: #666;
+      background: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-block;
+      overflow: hidden;
+      @include clear;
+      @include flexLayout(flex-start);
+
+      > div {
+        float: left;
+        box-sizing: border-box;
+        height: 100%;
+      }
+
+      .icon {
+        line-height: 36px;
+        font-size: 40px;
+        padding: 15px;
+      }
+
+      .info {
+        flex: 1;
+        font-weight: bold;
+        padding: 0 20px;
+        overflow: hidden;
+        @include flexLayout {
+          align-items: center;
+          flex-direction: column;
+        };
+
+        p {
+          &:first-of-type {
+            font-size: 20px;
+            margin-bottom: .5em;
+          }
+
+          &:last-of-type {
+            color: $primaryFont;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+
+
   // @include mdScreen {
   //   @include e(userInfo) {
   //     margin-top: 15px;
@@ -22,10 +86,13 @@
   // }
 
   @include e(userInfo) {
+    box-sizing: border-box;
+    height: 220px;
+    min-width: 300px;
     background: #fff;
     border-radius: 4px;
     padding: 15px;
-    margin-top: 15px;
+    margin-right: 15px;
 
     .head {
       padding: 10px 0;
@@ -36,9 +103,8 @@
       };
 
       .avatar {
-        max-width: 100%;
-        max-height: 100%;
-        height: auto;
+       width: 120px;
+       height: 120px;
       }
 
       .col-9 {
@@ -63,73 +129,43 @@
     }
   }
 
-  @include e(statics) {
-    width: 100%;
-    height: 91px;
-    font-size: 12px;
-    color: #666;
-    background: #fff;
-    border-radius: 4px;
-    // box-shadow: 4px 4px 4px rgba(0,0,0,.05);
-    cursor: pointer;
-    display: inline-block;
-    overflow: hidden;
-    @include clear;
+  // @include e(statics) {
+  //   width: 100%;
+  //   height: 91px;
+  
 
-    @each $key, $val in ('primary': $primary, 'danger': $danger, 'success': $success) {
-      @include when($key) {
-        border: 1px solid $val;
+  //   @each $key, $val in ('primary': $primary, 'danger': $danger, 'success': $success) {
+  //     @include when($key) {
+  //       border: 1px solid $val;
 
-        .icon-message {
-          background: $val;
-          color: #fff;
-        }
+  //       .icon-message {
+  //         background: $val;
+  //         color: #fff;
+  //       }
 
-        .info {
-          color: $val;
-        }
-      }
-    }
+  //       .info {
+  //         color: $val;
+  //       }
+  //     }
+  //   }
 
-    .icon-message {
-      float: left;
-      height: 100%;
-      padding: 0 16px;
+  //   .icon-message {
+  //     float: left;
+  //     height: 100%;
+  //     padding: 0 16px;
       
 
-      @include flexLayout {
-        align-items: center;
-      };
+  //     @include flexLayout {
+  //       align-items: center;
+  //     };
 
-      .ta-icon {
-        font-size: 36px;
-      }
-    }
+  //     .ta-icon {
+  //       font-size: 36px;
+  //     }
+  //   }
 
-    .info {
-      box-sizing: border-box;
-      float: right;
-      font-weight: bold;
-      padding: 0 20px;
-      height: 100%;
-      @include flexLayout {
-        align-items: center;
-        flex-direction: column;
-      };
-
-      p {
-        &:first-of-type {
-          font-size: 20px;
-          margin-bottom: .5em;
-        }
-
-        &:last-of-type {
-          color: $primaryFont;
-          font-weight: normal;
-        }
-      }
-    }
-  }
+ 
+  // }
 
   @include lgScreen {
     @include e(statics) {

@@ -12,6 +12,7 @@
       @keyup.enter="emitEnter()"
       v-model="currentValue" 
       @input="emitInput()"
+      @blur="emitBlur()"
     >
     <transition name="slide-down">
       <p
@@ -38,6 +39,7 @@ export default {
     prop: { type: String, default: '' },
     label: { type: String, default: null },
     rules: { type: Array, default: () => [] },
+    validator: { type: Function, default: () => [] },
     focus: { type: Boolean, default: false },
     placeholder: { type: String, default: '请输入信息' },
   },
@@ -49,6 +51,19 @@ export default {
       validates.push(fn)
       return validates
     }, [])
+
+    validates.push(() => new Promise(async (resolve, reject) => {
+      const err = await this.validator(null)
+
+      if (err.message) {
+        reject({
+          msg: err.message,
+          vm: this,
+        })
+      } else {
+        resolve(this)
+      }
+    }))
 
     Store.set(this.prop, validates)
     // 依次验证
@@ -94,6 +109,10 @@ export default {
 
     emitEnter() {
       this.$emit('enter', this.currentValue)
+    },
+
+    emitBlur() {
+      this.$emit('blur', this.currentValue)
     },
   },
 }

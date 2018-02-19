@@ -1,6 +1,6 @@
 <template>
   <div class="row ta-header">
-    <div class="col-sm-6 col-md-6 col-lg-6">
+    <div class="ta-col-6">
       <ta-icon
         class="ta-header__icon-menu" name="navicon"
         :class="{ 'is-rotate': isCollapse }"
@@ -15,7 +15,7 @@
       </span>
     </div>
 
-    <div class="col-sm-6 col-md-6 col-lg-6">
+    <div class="ta-col-6">
       <ta-icon :name="toggleScreenIcon" @click="toggleFullScreen()"></ta-icon>
       <div class="ta-header__avatar" @click="toggleDropMenu()">
         <p>{{ userInfo.account }}</p>
@@ -72,13 +72,10 @@ export default {
   },
 
   computed: {
-    ...mapState('route', {
-      routes: state => state.routes
+    ...mapState({
+      routes: state => state.route.routes,
+      userInfo: state => state.userInfo
     }),
-
-    userInfo() {
-      return JSON.parse(window.sessionStorage.getItem('userInfo'))
-    },
   },
 
   methods: {

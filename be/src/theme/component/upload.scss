@@ -8,84 +8,35 @@
 
 @include b(upload) {
   box-sizing: border-box;
-  width: 100%;
 
   @include e(container) {
     position: relative;
     box-sizing: border-box;
-    height: 200px;
-    border: 1px dashed #eee;
     border-radius: 4px;
+    @include clear();
 
-    @include flexLayout() {
-      align-items: center;
+    .img {
+      min-width: 80px;
+      height: 80px;
+      float: left;
     }
-  
-    &:hover {
-      @include active;
-    }
-  
-    @include when(active) {
-      @include active;
-    }
+    
+    .upload {
+      float: left;
+      margin-left: 30px;
+      height: 80px;
+      @include flexLayout(space-around) {
+        flex-direction: column;
+      }
 
-    @include when(preview) {
-      @include preview;
-    }
-  
-    > div {
-      text-align: center;
-      padding-bottom: 1.5em;
-    }
-  
-    .ta-icon {
-      color: $primary;
-      font-size: 5em;
-    }
-  }
+      p {
+        color: #909090;
+        font-size: 12px;
+      }
 
-
-  @include e(tip) {
-    padding: 10px 0;
-    box-sizing: border-box;
-    @include flexLayout(space-between) {
-      align-items: center;
-    }
-
-    .ta-icon {
-      color: $success;
-
-      @include when(failed) {
-        color: $danger;
-        cursor: pointer;
+      button {
+        width: 80px;
       }
     }
-  }
-  
-
-  p {
-    margin: 0;
-    font-size: 14px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    span {
-      color: $primary;
-
-      @include when(failed) {
-        color: $danger;
-      }
-    }
-  }
-
-  img {
-    width: auto;
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  input {
-    display: none;
   }
 }

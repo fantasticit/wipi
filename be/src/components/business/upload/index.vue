@@ -1,39 +1,17 @@
 <template>
   <div class="ta-upload">
-    <div
-      ref="upload"
-      class="ta-upload__container"
-      :class="{ 'is-active': draging, 'is-preview': isSuccess }">
-      <template v-if="!img">
-        <div>
-          <ta-icon name="android-upload"></ta-icon>
-          <p>将文件拖拽到此处或<span>点击上传</span></p>
-        </div>
-      </template>
-      <template v-else>
-        <img :src="img">
-      </template>
-      <input type="file" multiple>
-    </div>
-    <transition name="slide-down">
-      <div class="ta-upload__tip" v-if="fileName">
-        <p>{{ fileName }}</p>
-        <p>
-          <span :class="{ 'is-failed': !isSuccess }">
-            {{ isUploading 
-                ? '正在上传中...' 
-                : (isSuccess ? '上传成功' : '上传失败') 
-            }}
-          </span>
-          <ta-icon 
-            v-show="!isUploading" 
-            :name="tipIcon"
-            :class="{ 'is-failed': !isSuccess }"
-            @click="check()">
-          </ta-icon>
-        </p>
+    <div class="ta-upload__container">
+      <img :src="img" class="img">
+      <div class="upload">
+        <p>支持大小5M以内的图片</p>
+        <ta-button 
+          size="small" type="primary" @click="upload()"
+          :loading="isUploading">
+          {{ isUploading ? '正在上传' : '点击上传' }}
+        </ta-button>
+        <input ref="uploadInput" type="file" v-show="false">
       </div>
-    </transition>
+    </div>
   </div>
 </template>
 
@@ -55,27 +33,25 @@ export default {
     Emitter,
   ],
 
-  props: ['image'],
+  props: {
+    cover: {
+      type: String,
+      default: ''
+    },
+  },
 
   data() {
     return {
-      draging: false,
-      fileName: '',
-      tipIcon: 'checkmark-circled', // 失败的话就是close-circled
-      img: this.image,                    // 预览图
-      isUploading: true,            // 正在上传
-      isSuccess: false,             // 上传是否成功
-      uploadToken: null,            // 七牛上传token
+      img: this.cover,                    // 预览图
+      uploadToken: null,                  // 七牛上传token
+      input: '',
+      isUploading: false,
     }
   },
 
   watch: {
-    image(newImage) {
-      if (newImage) {
-        this.img = newImage
-        this.isUploading = false
-        this.isSuccess = true
-      }
+    cover(cover) {
+      this.img = cover
     }
   },
 
@@ -84,44 +60,36 @@ export default {
   },
 
   mounted() {
-    const upload = this.$refs['upload']
-    const input = upload.querySelector('input')
     this.getQiniuToken()
-
-    on(upload, 'dragover', e => {
-      e.stopPropagation()
-      e.preventDefault()
-      this.draging = true
-    })
-    on(upload, 'dragleave', e => {
-      e.stopPropagation()
-      e.preventDefault()
-      this.draging = false
-    })
-    // drop
-    on(upload, 'drop', e => {
-      e.stopPropagation()
-      e.preventDefault()
-      const file = e.dataTransfer.files[0]
+    this.input = this.$refs['uploadInput']
+    
+    on(this.input, 'change', e => {
+      const file = this.input.files[0]
       this.handleFile(file)
-    })
-    // 模拟点击了input
-    on(upload, 'click', e => {
-      input.click()
-    })
-
-    on(input, 'change', e => {
-      this.handleFile(input.files[0])
     })
   },
 
 
   methods: {
+    upload() {
+      this.input.click()
+    },
+
     handleFile(file) {
+      if (file.size > 5000000) {
+        message('图片大小不得超过5M', 'error')
+        return
+      }
+
+      if (!file.type || !/image/.test(file.type)) {
+        message('只允许上传图片', 'error')
+        return
+      }
+
       this.fileName = file.name
       this.draging = false
 
-      this.preview(file)
+      
       this.uploadFile(file)
     },
 
@@ -148,13 +116,10 @@ export default {
       try {
         const res = await QiniuProvider.uploadImage(file, this.uploadToken)
         message('图片上传成功', 'success')
-        this.isSuccess = true
-        this.tipIcon = 'checkmark-circled'
         this.$emit('success', res)
+        this.preview(file)
       } catch (err) {
         message(err.message, 'error')
-        this.isSuccess = false
-        this.tipIcon = 'close-circled'
       } finally {
         this.isUploading = false
       }
@@ -169,8 +134,6 @@ export default {
     reset() {
       this.isUploading = false
       this.img = null
-      this.fileName = null
-      this.isSuccess = false
     },
   }
 }

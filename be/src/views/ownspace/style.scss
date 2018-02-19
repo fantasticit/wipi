@@ -1,0 +1,75 @@
+@include b(page) {
+  text-align: center;
+
+  @include e(info) {
+    max-width: 992px;
+    background: #fff;
+    border: 1px solid $border;
+    border-radius: 5px;
+    margin: 0 auto;
+    
+    .head {
+      padding: 15px;
+      border-bottom: 1px solid $border;
+      @include flexLayout(flex-start) {
+        align-items: center;
+      };
+
+      > .ta-icon {
+        margin-right: 6px;
+
+        &::before {
+          transform: translateY(0px);
+        }
+      }
+    
+      > .ta-select {
+        flex: 1;
+      }
+    }
+
+    .body {
+      padding: 25px;
+      padding-top: 0;
+    }
+  }
+
+  @include e(info-item) {
+    padding: 22px 0;
+    border-top: 1px solid $border;
+    @include flexLayout(flex-start) {
+      align-items: center;
+    };
+
+    &:first-of-type {
+      margin-top: 0;
+      border: 0;
+    }
+
+    label {
+      display: inline-block;
+      margin-right: 3em;
+      color: #888;
+    }
+
+    span + button,
+    input + button  {
+      margin-left: 15px;
+    }
+  }
+
+  @include e(form-container) {
+    position: relative;
+    margin-bottom: -32px;
+
+    .btn-cancel {
+      transform: translate(-60%, -100%);
+    }
+  }
+
+  @include e(form) {
+    button {
+      transform: translate(60%, 0);
+    }
+  }
+}

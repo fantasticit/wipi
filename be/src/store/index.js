@@ -8,6 +8,7 @@ Vue.use(Vuex)
 const state = {
   hasLogined: JSON.parse(window.sessionStorage.getItem('hasLogined')),
   token: window.sessionStorage.getItem('token'),
+  userInfo: JSON.parse(window.sessionStorage.getItem('userInfo'))
 }
 
 const actions = {
@@ -17,6 +18,10 @@ const actions = {
 
   logout({ commit }) {
     commit('LOG_OUT')
+  },
+
+  setUserInfo({commit}, userInfo) {
+    commit('SET_USERINFO', userInfo)
   },
 }
 
@@ -28,6 +33,11 @@ const mutations = {
 
   LOG_OUT(state) {
     window.sessionStorage.clear()
+  },
+
+  SET_USERINFO(state, userInfo) {
+    state.userInfo = userInfo
+    window.sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
   }
 }
 

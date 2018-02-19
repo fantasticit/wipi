@@ -1,50 +1,11 @@
 <template>
   <div class="ta-page">
-    <div class="row">
-      <div class="col-md-12 col-lg-6">
-        <div class="col-sm-12 col-md-4 col-lg-4">
-          <div class="ta-page__statics is-success">
-            <div class="col-3 icon-message">
-              <ta-icon name="person-stalker"></ta-icon>
-            </div>
-            <div class="col-9 info">
-              <p>{{ apiCallTimes }}</p>
-              <p>用户注册数</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-12 col-md-4 col-lg-4">
-          <div class="ta-page__statics is-primary">
-            <div class="col-3 icon-message">
-              <ta-icon name="ios-paper"></ta-icon>
-            </div>
-            <div class="col-9 info">
-              <p>{{ statics.pv }}</p>
-              <p>页面浏览量</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-12 col-md-4 col-lg-4">
-          <div class="ta-page__statics is-danger">
-            <div class="col-3 icon-message">
-              <ta-icon name="shuffle"></ta-icon>
-            </div>
-            <div class="col-9 info">
-              <p>{{ apiCallTimes }}</p>
-              <p>接口调用量</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12 col-lg-6">
+    <ta-row>
+      <!-- 用户登录信息 -->
+      <ta-col :span="4" :sm="12">
         <div class="ta-page__userInfo">
-          <div class="row head">
-            <div class="col-3">
+          <div class="head">
+            <div>
               <img :src="userInfo.avatar" alt="avatar" class="avatar">
             </div>
             <div class="col-9">
@@ -61,8 +22,22 @@
             </p>
           </div>
         </div>
-      </div>
-    </div>
+      </ta-col>
+
+      <ta-col :span="8" :sm="12">
+          <ta-col :span="3" class="ta-page__statics" v-for="(info, i) in infos" :key="i">
+            <div :class="'is-'+ info['type']">
+              <div class="icon">
+                <ta-icon :name="info['icon']"></ta-icon>
+              </div>
+              <div class="info">
+                <p>{{ statics.pv }}</p>
+                <p>{{ info['title'] }}</p>
+              </div>
+            </div>
+          </ta-col>
+      </ta-col>
+    </ta-row>  
   </div>
 </template>
 
@@ -77,7 +52,36 @@ import { ReportProvider } from '@/provider/report-provider'
 export default class Dashboard extends Vue {
   statics = {}
   apiCallTimes = 0
-  userInfo = {}       
+  userInfo = {}     
+  infos = [
+    {
+      icon: 'person-stalker',
+      title: '用户注册数',
+      value: 'pv',
+      type: 'success'
+    },
+
+    {
+      icon: 'ios-paper',
+      title: '页面浏览量',
+      value: 'pv',
+      type: 'primary'
+    },
+
+    {
+      icon: 'shuffle',
+      title: '接口调用量',
+      value: 'pv',
+      type: 'danger'
+    },
+
+    {
+      icon: 'shuffle',
+      title: '接口调用量',
+      value: 'pv',
+      type: 'warning'
+    },
+  ]
 
   created() {
     this.userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))

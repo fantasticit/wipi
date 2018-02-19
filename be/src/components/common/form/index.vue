@@ -25,14 +25,14 @@ export default {
       }, [])
 
       Promise.all(validates.map(validate => validate()))
-      .then(res => {
-        this.$emit('submit')
-      })
-      .catch(err => {
-        err.vm.showInvalidTip = true
-        err.vm.message = err.msg
-        return false
-      })
+        .then(res => {
+          this.$emit('submit')
+        })
+        .catch(err => {
+          err.vm.showInvalidTip = true
+          err.vm.message = err.msg
+          return false
+        })
 
       return false
     }

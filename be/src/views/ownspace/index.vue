@@ -6,31 +6,61 @@
         <span>个人信息</span>
       </div>
       <div class="body">
-        <div>
-          <label>用户账户</label>
-          <ta-input v-model="account"></ta-input>
+        <!-- 用户账户 -->
+        <div class="ta-page__info-item">
+          <label>用户账户：</label>
+          <template v-if="!showModifyAccount">
+            <span>{{ account }}</span>
+            <ta-button @click="showModifyAccount = true">修改</ta-button>
+          </template>
+          <template v-else>
+            <ta-input  :focus="showModifyAccount" v-model="account"></ta-input>
+            <ta-button :loading="accountModifying" @click="modifyAccount()">保存</ta-button>
+            <ta-button @click="showModifyAccount = false">取消</ta-button>
+          </template>
         </div>
-        <div>
-          <label>用户角色</label>
-          <span>{{ roles.join('、') }}</span>
+        
+        <!-- 用户头像 -->
+        <div class="ta-page__info-item">
+          <label>用户头像：</label>
+          <ta-upload :cover="userInfo.avatar" @success="getAvatar($event)"></ta-upload>
         </div>
-        <div>
-          <label>用户头像</label>
-          <img :src="avatar" alt="">
-          <ta-upload @success="getAvatar($event)">
-          </ta-upload>
+
+        <!-- 修改密码 -->
+        <div class="ta-page__info-item">
+          <label>登录密码：</label>
+          <ta-button v-if="!showForm" @click="showForm = true">修改密码</ta-button>
+          <div v-else class="ta-page__form-container">
+            <ta-form class="ta-page__form" :rules="rules" @submit="updatePwd">
+              <ta-form-item
+                prop="account"
+                type="password"
+                placeholder="请输入原密码" v-model="oldPasswd" :rules="rules.passwd">
+              </ta-form-item>
+              <ta-form-item
+                prop="password"
+                placeholder="请输入密码" type="password" 
+                v-model="newPasswd" :rules="rules.passwd">
+              </ta-form-item>
+              <ta-form-item
+                prop="passwordConfirm"
+                :validator="checkSamePasswd"
+                placeholder="请再次输入密码" type="password" 
+                v-model="newPasswdConfirm" :rules="rules.passwd">
+              </ta-form-item>
+              
+              <div>
+                <ta-button size="small" :loading="loading" type="primary">确认</ta-button>
+              </div>
+            </ta-form>
+            <ta-button class="btn-cancel" size="small" @click="closeDialog">取消</ta-button>
+          </div>
         </div>
-        <div>
-          <label>登录密码</label>
-          <ta-button type="text" @click="updatePwd()">修改密码</ta-button>
-        </div>
-        <div class="button-group">
-          <ta-button size="small" @click="cancel()">取消</ta-button>
-          <ta-button 
-            size="small" :loading="loading" type="primary"
-            @click="updateInfo()">
-            保存
-          </ta-button>
+        
+        <!-- 用户角色 -->
+        <div class="ta-page__info-item">
+          <label>用户角色：</label>
+          <span>{{ userInfo.roles.join('、') }}</span>
         </div>
       </div>
     </div>
@@ -45,160 +75,112 @@ import { UserProvider } from '@/provider/user-provider'
 
 @Component({
   computed: {
-    ...mapState('article', {
-      coverPrefix: state => state.coverPrefix,
+    ...mapState({
+      coverPrefix: state => state.article.coverPrefix,
+      userInfo: state => state.userInfo,
     })
   }
 })
 export default class Ownspace extends Vue {
   userId = ''
   account = ''
-  roles = []
+  // 修改账户
+  showModifyAccount = false
+  accountModifying = false
+  // 修改头像
+  uploadToken = ''
+  // 修改密码
   loading = false
-  password = ''
-  avatar = ''
+  showForm = false
+  oldPasswd = ''
+  newPasswd = ''
+  newPasswdConfirm = ''
 
-  oldAccount = ''
-  oldPassword = ''
-  oldAvatar = ''
+  rules = {
+    passwd: [
+      { required: true, message: '密码不得为空', trigger: 'blur' },
+      { min: 5, max: 16, message: '密码长度应在5到16之间', trigger: 'blur' }
+    ],
+  }
 
   created() {
-    const userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
-    this.userId = userInfo.id
-    this.account = userInfo.account
-    this.avatar = userInfo.avatar
-    this.roles = userInfo.roles
-    this.password = userInfo.password
-
-    this.oldAccount = this.account
-    this.oldPassword = this.password
-    this.oldAvatar = this.avatar
+    this.userId = this.userInfo.id
+    this.account = this.userInfo.account
   }
 
-  cancel() {
-    this.$router.go(-1)
-  }
-
-  // 获取上传后的封面路径
-  getAvatar(res) {
-    this.avatar = this.coverPrefix + res.hash
-  }
-
-  updatePwd() {
-    this.$prompt('请输入新密码', '修改密码', {
-      rules: [
-        { required: true, message: '密码不得为空', trigger: 'blur' },
-        { min: 5, max: 16, message: '密码长度应在5到16之间', trigger: 'blur' }
-      ]
-    })
-      .then(async ({ value }) => {
-        this.password = value
-      })
-      .catch(err => this.$message.info('取消修改'))
-  }
-
-  async updateInfo() {
-    if (
-      this.account === this.oldAccount
-      && this.password === this.oldPassword
-      && this.avatar === this.oldAvatar
-    ) {
-      this.$message.info('未作任何修改')
-      return
+  checkSamePasswd() {
+    if (this.newPasswd !== this.newPasswdConfirm) {
+      return new Error('两次输入密码不一致')
+    } else {
+      return ''
     }
+  }
 
-    this.loading = true
-    
+  // 修改账户
+  async modifyAccount() {
+    this.accountModifying = true
     try {
-      const res = await UserProvider.update(this.userId, {
+      await UserProvider.update(this.userId, {
         account: this.account,
-        password: this.password,
-        avatar: this.avatar,
+        action: 'modifyAccount'
       })
+      this.showModifyAccount = false
+    } catch (err) {
+      this.$message.error(err.message)
+    } finally {
+      this.accountModifying = false
+    }
+  }
 
-      this.$message.success(res)
-      this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.replace({
-            path: '/login',
-            query: { redirect: this.$router.currentRoute.fullPath }
-          })
-        })
+  // 上传新头像
+  getAvatar(hash) {
+    this.avatar = this.coverPrefix + hash
+  }
+
+  // 修改头像
+  async modifyAvatar(avatar) {
+    try {
+      await UserProvider.update(this.userId, {
+        avatar,
+        action: 'modifyAvatar'
+      })
+      this.$notify.success('头像已更新')
     } catch (err) {
       this.$message.error(err.message)
     }
+  }
+
+
+  // 关闭弹窗
+  closeDialog() {
+    this.showForm = false
+    this.oldPasswd = ''
+    this.newPasswd = ''
+    this.newPasswdConfirm = ''
+  }
+
+  // 更新密码
+  async updatePwd() {
+    this.loading = true
+    try {
+      await UserProvider.update(this.userId, {
+        oldPasswd: this.oldPasswd,
+        newPasswd: this.newPasswd,
+        action: 'modifyPasswd'
+      })
+      this.$notify.success('密码修改成功，请重新登录')
+      this.$store.dispatch('logout')
+        .then(() => this.$router.replace('/login'))
+    } catch (err) {
+      this.$message.error(err.message)
+    } finally {
+      this.loading = false
+    }    
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@include b(page) {
-  @include e(info) {
-    flex: 1;
-    background: #fff;
-    border: 1px solid $border;
-    border-radius: 5px;
-    
-    .head {
-      padding: 15px;
-      border-bottom: 1px solid $border;
-      @include flexLayout(flex-start) {
-        align-items: center;
-      };
-
-      > .ta-icon {
-        margin-right: 6px;
-
-        &::before {
-          transform: translateY(0px);
-        }
-      }
-    
-      > .ta-select {
-        flex: 1;
-      }
-    }
-
-    .body {
-      padding: 25px;
-
-      > div {
-        @include flexLayout(flex-start);
-
-        + div {
-          margin-top: 1em;
-        }
-
-        &:nth-of-type(3)  {
-          > button {
-            padding-left: 0;
-            padding-right: 0;
-          }
-        }
-
-        /deep/ .ta-upload {
-          width: 217px; 
-        }
-      }
-
-      label {
-        margin-right: 1em;
-        @include flexLayout() {
-          align-items: center;
-        };
-      }
-
-      img {
-        width: 210px;
-        height: 200px;
-        margin-right: 15px;
-      }
-
-      .button-group {
-        padding-left: 5em;
-      }
-    }
-  }
-}
+@import './style.scss';
 </style>
 

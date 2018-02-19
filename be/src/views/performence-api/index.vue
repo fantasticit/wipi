@@ -1,8 +1,8 @@
 <template>
   <div class="ta-page">
     <ta-alert>接口性能记录取全部数据（具体接口分析取最近的300条）</ta-alert>
-    <div class="row">
-      <div class="col-md-6 col-lg-6">
+    <ta-row>
+      <ta-col :span="6" :sm="12" :md="6">
         <div class="ta-page__chart">
           <div class="head">
             <ta-icon name="pie-graph"></ta-icon>
@@ -10,9 +10,9 @@
           </div>
           <div class="body" ref="callTimeChart"></div>
         </div>
-      </div>
+      </ta-col>
 
-      <div class="col-md-6 col-lg-6">
+      <ta-col :span="6" :sm="12" :md="6">
         <div class="ta-page__chart">
           <div class="head">
             <ta-icon name="stats-bars"></ta-icon>
@@ -20,24 +20,20 @@
           </div>
           <div class="body" ref="avarageChart">1</div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="ta-page__chart">
+      </ta-col>
+    </ta-row>
+
+    <ta-row>
+      <ta-col :span="12">
+        <div class="ta-page__chart ta-page__chart--full">
           <div class="head">
             <ta-icon name="arrow-graph-down-right"></ta-icon>
-            <ta-select
-              placeholder="请选择接口"
-              label="具体接口分析" 
-              :options="apiList" 
-              v-model="selectedApi">
-            </ta-select>
+            <ta-select label="具体接口分析" :options="apiList" v-model="selectedApi"></ta-select>
           </div>
           <div class="body" ref="chart"></div>
         </div>
-      </div>
-    </div>
+      </ta-col>
+    </ta-row>
   </div>
 </template>
 
@@ -79,7 +75,6 @@ const echarts = require('echarts')
 })
 export default class ApiPerformence extends Vue {
   timer = null
-  
   apiList = []
   selectedApi = '/feperformence'
 
@@ -103,10 +98,10 @@ export default class ApiPerformence extends Vue {
     const oCallTimeChart = this.$refs['callTimeChart']
     const oAvarageChart = this.$refs['avarageChart']
 
-
     this.chart = echarts.init(oChart)
     this.avarageChart = echarts.init(oAvarageChart)
     this.callTimeChart = echarts.init(oCallTimeChart)
+
 
     this.$loading.start()
     this.fetchPerformences()

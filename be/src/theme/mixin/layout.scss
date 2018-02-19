@@ -58,3 +58,34 @@
     @content;
   }
 }
+
+div.form-group {
+  position: relative;
+  margin-top: 22px;
+  @include flexLayout(flex-start);
+  
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  label {
+    margin-left: 1em;
+  }
+
+  select, input {
+    flex: 1,
+  }
+
+  input.is-invalid {
+    border-color: $danger;
+  }
+
+  p.invalid-tip {
+    position: absolute;
+    left: 2px;
+    top: 100%;
+    text-align: left;
+    color: $danger;
+    font-size: 12px;
+  }
+}

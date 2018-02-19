@@ -24,8 +24,8 @@
   @include e(invalid-tip) {
     position: absolute;
     left: 0;
-    bottom: -50%;
-    margin: 0 0 0 10px;
+    top: 100%;
+    margin: 0 0 0 8px;
     padding-top: 4px;
     font-size: 12px;
     color: $danger;

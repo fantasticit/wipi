@@ -3,16 +3,16 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
   id: Number,
-  account: String,                   // 账户
+  name: String,                      // 账户
   passwd: String,                    // 密码
   avatar: {                          // 头像
     type: String,
     default: 'http://p39p1kvxn.bkt.clouddn.com/'
               + 'FrgZ2d6bbj7Th1w3m7lD7cCLBcBj'
   },
-  roles: {                           // 角色（默认user）
+  roles: {                           // 角色
     type: Array,
-    default: ['user']
+    default: []
   },
   lastLoginTime: {                   // 上次登录时间
     type: Date,

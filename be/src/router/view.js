@@ -1,5 +1,6 @@
 const views = {
   Login: () => import(/* webpackChunkName: "login" */'@/views/login'),
+  Register: () => import(/* webpackChunkName: "login" */'@/views/register'),
   Home: () => import(/* webpackChunkName: "home" */'@/views/home'),
   Dashboard: () => import(/* webpackChunkName: "dashboard" */'@/views/dashboard'),
   Article: () => import(/* webpackChunkName: "article" */'@/views/article'),

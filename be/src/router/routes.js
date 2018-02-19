@@ -16,6 +16,12 @@ const routes = [
   },
 
   {
+    path: '/register',
+    name: 'Register',
+    component: views.Register
+  },
+
+  {
     path: '/forbidden',
     name: 'Forbidden',
     component: views.Forbidden

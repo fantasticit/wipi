@@ -9,7 +9,8 @@ const config = {
       user: 'zxx',
       pwd:  'zx123',
     },
-    secret: 'elapse'
+    secret: 'elapse',         // jwt生成token
+    salt: 'elapse-server2018' // md5加密盐值
   },
 
   prod: {

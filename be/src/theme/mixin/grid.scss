@@ -1,15 +1,13 @@
 .row {
   box-sizing: border-box;
+  width: 100%;
   margin-left: -5px;
   margin-right: -5px;
   @include clear;
 }
 
 @for $i from 1 through 12 {
-  .col-sm-#{$i},
-  .col-md-#{$i},
-  .col-lg-#{$i},
-  .col-#{$i} {
+  .ta-col-#{$i} {
     box-sizing: border-box;
     position: relative;
     min-height: 1px;
@@ -17,14 +15,18 @@
     padding-right: 5px;
   }
 
-  .col-#{$i} {
+  .ta-col-#{$i} {
     width: $i / 12 * 100%;
     float: left;
   }
 
+  .ta-col-offset-#{$i} {
+    margin-left: $i / 12 * 100%;
+  }
+
   // 小屏幕
   @include smScreen {
-    .col-sm-#{$i} {
+    .ta-col-sm-#{$i} {
       width: $i / 12 * 100%;
       float: left;
     } 
@@ -32,7 +34,7 @@
 
   // 中等屏幕
   @include mdScreen {
-    .col-md-#{$i} {
+    .ta-col-md-#{$i} {
       width: $i / 12 * 100%;
       float: left;
     }  
@@ -40,7 +42,7 @@
 
   // 大屏幕
   @include lgScreen {
-    .col-lg-#{$i} {
+    .ta-col-lg-#{$i} {
       width: $i / 12 * 100%;
       float: left;
     } 

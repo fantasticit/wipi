@@ -1,110 +1,177 @@
+const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 const secret = require('../config').secret
+const salt = require('../config').salt
 const UserModel = require('../models/user')
 
-// UserModel.create({ account: 'zx', password: 'zx123', roles: ['admin', 'user']})
+/**
+ * 用户密码加密
+ * @param  {String} password 
+ * @return {String} encryptedPasswd
+ */
+function encryptPwd(passwd) {
+  const saltPasswd = passwd + ':' + salt
+  const md5 = crypto.createHash('md5')       // md5加密
+  const encryptedPasswd = md5.update(saltPasswd).digest('hex')
 
-async function checkAccount(ctx) {
-  const { account } = ctx.request.body
-
-  const res = await UserModel.findOne({ account }).catch(e => {
-    ctx.throw(500)
-  })
-
-  return !!res
+  return encryptedPasswd
 }
 
-async function judgeIsAdmin(userId) {
-  const userInfo = await UserModel.findById(userId).catch(e => ctx.throw(500))
-  const roles = userInfo.roles
 
-  if (roles.indexOf('admin') > -1) {
-    return true
-  } else {
-    return false
+class UserController {
+  static constructor() {}
+
+  /**
+   * 检查用户名是否已存在
+   */
+  static async checkAccountExist (ctx) {
+    const { account } = ctx.request.body
+    let isExisted = await UserModel.findOne({ account }).catch(e=> ctx.throw(500))
+    isExisted = !!isExisted
+
+    if (isExisted) {
+      ctx.send({code: 'no', message: '账户已存在'})
+    } else {
+      ctx.send({code: 'ok', message: '可以注册' })
+    }
   }
-}
 
-module.exports = {
-  checkAccountExsit: async (ctx, next) => {
-    const res = await checkAccount(ctx)
+  /** 
+   * 用户注册
+   */
+  static async register(ctx) {
+    let { account, passwd } = ctx.request.body
 
-    if (res) {
-      ctx.send({status: 'no', message: '用户已存在'})
-    } else {
-      ctx.send({status: 'ok', message: '可以注册' })
+    if (!passwd) {
+      ctx.throw(400, { message: '请输入密码' })
     }
-  },
 
-  register: async (ctx, next) => {
-    const { account, password } = ctx.request.body
-    const userExist = await checkAccount(ctx)
+    let isExisted = await UserModel.findOne({ account }).catch(e=> ctx.throw(500))
+    isExisted = !!isExisted
 
-    if (userExist) {
-      ctx.send({status: 'no', message: '用户已存在'})
+    if (isExisted) {
+      ctx.send({ code: 'no', message: '用户已存在'})
     } else {
-      const roles = ['user']
-      const result = await UserModel.create({ account, password, roles }).catch(e => {
-        ctx.throw(500)
-      })
+      passwd = encryptPwd(passwd)
+      const result = await UserModel.create({ account, passwd }).catch(e => ctx.throw(500))
 
-      if (!!result) {
-        ctx.send({ message: '注册成功', data: result })
-      } else {
-        ctx.throw(400, { message: '注册失败' })
-      }
+      ctx.send({ code: 'ok', message: '注册成功', data: result })
     }
-  },
+  }
 
-  login: async (ctx, next) => {
-    const { account, password } = ctx.request.body
+  /** 
+   * 用户登录
+   */
+  static async login(ctx) {
+    let { account, passwd } = ctx.request.body
+    passwd = encryptPwd(passwd)
 
-    const res = await UserModel.findOne({ account, password }).catch(e => {
-      ctx.throw(500)
-    })
+    const user = await UserModel.findOne({ account, passwd }).catch(e => ctx.throw(500))
 
-    if (!!res) {
+    if (!!user) {
+      // 生成token
       const token = jwt.sign(
         { 
-          id: res._id,
-          account, 
-          password, 
-          avatar: res.avatar,
-          roles: res.roles, 
-          lastLoginTime: res.lastLoginTime
+          id: user._id,
+          account,
+          avatar: user.avatar,
+          roles: user.roles, 
+          lastLoginTime: user.lastLoginTime
         }, 
-        secret, 
+        secret,
         { expiresIn: '1h' }
       )
-      ctx.send({ message: `登录成功`, data: token })
+      ctx.send({ code: 'ok', message: `登录成功`, data: token })
 
       // 更新最后登录时间
-      await UserModel.findOneAndUpdate({ account, password }, { lastLoginTime: Date.now() })
+      await UserModel.findByIdAndUpdate(user._id, { lastLoginTime: Date.now() })
     } else {
-      ctx.throw(400, { status: 'no', message: `账号或密码错误` })
+      ctx.throw(400, { message: `账号或密码错误` })
     }
-  },
+  }
 
-  update: async (ctx, next) => {
+  /** 
+   * 用户信息更新
+   */
+  static async update(ctx) {
     const { id } = ctx.params
-    const { account, password, avatar } = ctx.request.body
-
+    let { action } = ctx.request.body
+    
     if (!id) {
       ctx.throw(400, { message: '修改失败' })
     }
 
-    await UserModel.findByIdAndUpdate(id, { account, password, avatar })
-      .catch(e => e.throw(500))
-    ctx.send({ status: 'ok', message: '修改成功，请重新登录' })
-  },
+    switch (action) {
+      // 修改头像
+      case 'modifyAvatar': 
+        let { avatar } = ctx.request.body
+        await UserModel.findByIdAndUpdate(id, { avatar })
+          .catch(e => e.throw(500))
+        ctx.send({ code: 'ok', message: '头像已修改' })
+        break
+      
+      // 修改密码
+      case 'modifyPasswd':
+        let { oldPasswd, newPasswd, } = ctx.request.body
+          
+        if (!oldPasswd || !newPasswd) {
+          ctx.throw(400, { message: '请输入密码' })
+        }
+    
+        oldPasswd = encryptPwd(oldPasswd)
+        const user = await UserModel.findById(id).catch(e => ctx.throw(500))
+    
+        if (user.passwd !== oldPasswd) {
+          ctx.throw(400, { message: '原密码错误' })
+        } else {
+          newPasswd = encryptPwd(newPasswd)
+          await UserModel.findByIdAndUpdate(id, { passwd: newPasswd })
+          .catch(e => e.throw(500))
+          ctx.send({ code: 'ok', message: '修改成功，请重新登录' })
+        }
+        break
+      
+      // 修改账户
+      case 'modifyAccount':
+        let { account } = ctx.request.body
+        let isExisted = await UserModel.findOne({ account }).where('_id').ne(id).catch(e=> ctx.throw(500))
+        isExisted = !!isExisted
+        if (isExisted) {
+          ctx.throw(400, { message: '用户已存在' })
+        } else {
+          await UserModel.findByIdAndUpdate(id, { account }).catch(e => e.throw(500))
+          ctx.send({ code: 'ok', message: '账户已修改' })
+        }
+        break
+      
+      default: 
+        ctx.throw(400, { message: '未作修改' })
+    }
+  }
 
-  getUsers: async (ctx, next) => {
+  /**
+   * 获取用户信息
+   * 只有管理员可获取
+   */
+  static async getUsers(ctx) {
+    console.log(1)
     let { userId, page, pageSize } = ctx.query
     page = +page
     pageSize = +pageSize
     const skip = page === 0 ? 0 : (page - 1) * pageSize
 
     const isAdmin = judgeIsAdmin(userId)
+
+    async function judgeIsAdmin(userId) {
+      const userInfo = await UserModel.findById(userId).catch(e => ctx.throw(500))
+      const roles = userInfo.roles
+    
+      if (roles.indexOf('admin') > -1) {
+        return true
+      } else {
+        return false
+      }
+    }
 
     if (isAdmin) {
       const users = await UserModel.find().limit(pageSize).skip(skip)
@@ -117,12 +184,22 @@ module.exports = {
     } else {
       ctx.send(403, { message: '非管理员禁止查看用户列表' })
     }
-  },
+  }
 
-  deleteUser: async (ctx, next) => {
+  static async deleteUser(ctx, next) {
     let { userId, deletedUserId } = ctx.request.body
 
     const isAdmin = judgeIsAdmin(userId)
+    async function judgeIsAdmin(userId) {
+      const userInfo = await UserModel.findById(userId).catch(e => ctx.throw(500))
+      const roles = userInfo.roles
+    
+      if (roles.indexOf('admin') > -1) {
+        return true
+      } else {
+        return false
+      }
+    }
 
     if (isAdmin) {
       await UserModel.findByIdAndRemove(deletedUserId)
@@ -134,3 +211,5 @@ module.exports = {
     }
   }
 }
+
+module.exports = UserController
