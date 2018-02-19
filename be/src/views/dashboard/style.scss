@@ -146,7 +146,7 @@
 
   @include e(chart) {
     background: #fff;
-    height: 400px;
+    height: 398px;
     border: 1px solid $border;
     border-radius: 5px;
     overflow: hidden;
@@ -168,7 +168,9 @@
     }
 
     .body {
+      box-sizing: border-box;
       padding: 15px 0;
+      height: 344px;
     }
   }
 }

@@ -198,7 +198,9 @@ export default class Dashboard extends Vue {
           ]
         }
       ]
-    };
+    }
+
+    this.renderStaticChart()
   }
 
   renderStaticChart() {
