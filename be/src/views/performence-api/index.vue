@@ -67,11 +67,6 @@ const echarts = require('echarts')
       this.renderCallTimeChart()
     }
   },
-
-  routeBeforeLeave(to, from, next) {
-    console.log(to)
-    console.log(this)
-  }
 })
 export default class ApiPerformence extends Vue {
   timer = null

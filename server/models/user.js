@@ -18,6 +18,10 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now()
   },
+  createdTime: {                      // 注册日期
+    type: Date,
+    default: Date.now()
+  },
 })
 
 userSchema.index({ id: 1 })

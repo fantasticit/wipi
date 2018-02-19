@@ -133,8 +133,17 @@ export default class Ownspace extends Vue {
   }
 
   // 上传新头像
-  getAvatar(hash) {
-    this.avatar = this.coverPrefix + hash
+  async getAvatar(res) {
+    const userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
+    const avatar = this.coverPrefix + res.hash
+
+    userInfo.avatar = avatar
+    
+    this.$store.dispatch('setUserInfo', userInfo)
+      .then(async () => {
+        await this.modifyAvatar(avatar)
+        this.avatar = avatar
+      })
   }
 
   // 修改头像

@@ -34,11 +34,6 @@ const echarts = require('echarts')
     chartOption() {
       this.renderChart()
     }
-  },
-
-  routeBeforeLeave(to, from, next) {
-    console.log(to)
-    console.log(this)
   }
 })
 export default class FePerformence extends Vue {

@@ -76,7 +76,8 @@ class UserController {
           account,
           avatar: user.avatar,
           roles: user.roles, 
-          lastLoginTime: user.lastLoginTime
+          lastLoginTime: user.lastLoginTime,
+          createdTime: user.createdTime
         }, 
         secret,
         { expiresIn: '1h' }

@@ -28,7 +28,6 @@ class _ArticleProvider extends BaseHttp {
   }
 
   async fetchArticles(query, userId) {
-    console.log(userId)
     query = Object.keys(query).map(key => `${key}=${query[key]}`).join('&')
 
     const req = {

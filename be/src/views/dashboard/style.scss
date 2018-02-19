@@ -1,29 +1,51 @@
 @include b(page) {
-  // @include e(container) {
-  //   max-width: 1200px;
-  //   margin: 0 auto;
-  //   @include flexLayout(flex-start);
-  // }
+  @include smScreen {
+    .row > div {
+      margin-top: 15px;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .row > div {
+    overflow: hidden;
+  }
 
   @include e(statics) {
-    flex: 1;
     padding: 0;
-    @include flexLayout(space-between) {
-      flex-wrap: wrap;
-    };
 
-    > div {
-      width: 100%;
-      height: 80px;
+    > li  {
+      height: 90.5px;
       font-size: 12px;
       color: #666;
       background: #fff;
       border-radius: 4px;
       cursor: pointer;
-      display: inline-block;
       overflow: hidden;
       @include clear;
       @include flexLayout(flex-start);
+      margin-top: 10px;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+
+      @each $key, $val in ('primary': $primary, 'danger': $danger, 'success': $success) {
+        @include when($key) {
+          border: 1px solid $val;
+
+          .icon {
+            background: $val;
+            color: #fff;
+          }
+
+          .info {
+            color: $val;
+          }
+        }
+      }
 
       > div {
         float: left;
@@ -32,9 +54,11 @@
       }
 
       .icon {
+        width: 80px;
         line-height: 36px;
         font-size: 40px;
         padding: 15px;
+        text-align: center;
       }
 
       .info {
@@ -62,29 +86,6 @@
     }
   }
 
-
-  // @include mdScreen {
-  //   @include e(userInfo) {
-  //     margin-top: 15px;
-  //   }
-  // }
-
-  // @include smScreen {
-  //   @include e(userInfo) {
-  //     margin-top: 15px;
-  //   }
-  // }
-
-  // @include smScreen {
-  //   .col-sm-12 {
-  //     margin-top: 15px;
-
-  //     &:first-of-type {
-  //       margin-top: 0;
-  //     }
-  //   }
-  // }
-
   @include e(userInfo) {
     box-sizing: border-box;
     height: 220px;
@@ -92,7 +93,8 @@
     background: #fff;
     border-radius: 4px;
     padding: 15px;
-    margin-right: 15px;
+    height: 400px;
+    border: 1px solid $border;
 
     .head {
       padding: 10px 0;
@@ -108,6 +110,7 @@
       }
 
       .col-9 {
+        margin-left: 10px;
         @include flexLayout(flex-start) {
           align-items: center;
         };
@@ -126,50 +129,46 @@
 
     .footer {
       padding: 10px;
+
+      p {
+        margin-top: 10px;
+
+        span:first-child {
+          color: #666;
+        }
+
+        &:first-of-type {
+          margin-top: 0;
+        }
+      }
     }
   }
 
-  // @include e(statics) {
-  //   width: 100%;
-  //   height: 91px;
-  
+  @include e(chart) {
+    background: #fff;
+    height: 400px;
+    border: 1px solid $border;
+    border-radius: 5px;
+    overflow: hidden;
+    
+    .head {
+      padding: 15px;
+      border-bottom: 1px solid $border;
+      @include flexLayout(flex-start) {
+        align-items: center;
+      };
 
-  //   @each $key, $val in ('primary': $primary, 'danger': $danger, 'success': $success) {
-  //     @include when($key) {
-  //       border: 1px solid $val;
+      > .ta-icon {
+        margin-right: 6px;
 
-  //       .icon-message {
-  //         background: $val;
-  //         color: #fff;
-  //       }
+        &::before {
+          transform: translateY(0px);
+        }
+      }
+    }
 
-  //       .info {
-  //         color: $val;
-  //       }
-  //     }
-  //   }
-
-  //   .icon-message {
-  //     float: left;
-  //     height: 100%;
-  //     padding: 0 16px;
-      
-
-  //     @include flexLayout {
-  //       align-items: center;
-  //     };
-
-  //     .ta-icon {
-  //       font-size: 36px;
-  //     }
-  //   }
-
- 
-  // }
-
-  @include lgScreen {
-    @include e(statics) {
-      height: 87px;
+    .body {
+      padding: 15px 0;
     }
   }
 }

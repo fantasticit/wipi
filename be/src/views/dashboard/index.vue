@@ -2,7 +2,7 @@
   <div class="ta-page">
     <ta-row>
       <!-- 用户登录信息 -->
-      <ta-col :span="4" :sm="12">
+      <ta-col :span="3" :sm="12">
         <div class="ta-page__userInfo">
           <div class="head">
             <div>
@@ -20,22 +20,63 @@
               <span>上次登录时间：</span>
               <span>{{ userInfo.lastLoginTime }}</span>
             </p>
+            <p>
+              <span>您的注册日期：</span>
+              <span>{{ userInfo.createdTime }}</span>
+            </p>
           </div>
         </div>
       </ta-col>
 
-      <ta-col :span="8" :sm="12">
-          <ta-col :span="3" class="ta-page__statics" v-for="(info, i) in infos" :key="i">
-            <div :class="'is-'+ info['type']">
-              <div class="icon">
-                <ta-icon :name="info['icon']"></ta-icon>
-              </div>
-              <div class="info">
-                <p>{{ statics.pv }}</p>
-                <p>{{ info['title'] }}</p>
-              </div>
+      <ta-col :span="6" :sm="12">
+        <div class="ta-page__chart">
+          <div class="head">接口数目统计</div>
+          <div class="body" ref="staticChart"></div>
+        </div>
+      </ta-col>
+
+      <ta-col :span="3" :sm="12">
+        <ul class="ta-page__statics">
+          <li class="is-primary">
+            <div class="icon">
+              <ta-icon name="ios-paper"></ta-icon>
             </div>
-          </ta-col>
+            <div class="info">
+              <p>{{ statics.pv }}</p>
+              <p>页面浏览量</p>
+            </div>
+          </li>
+
+          <li class="is-danger">
+            <div class="icon">
+              <ta-icon name="shuffle"></ta-icon>
+            </div>
+            <div class="info">
+              <p>{{ apiCallTimes }}</p>
+              <p>接口调用量</p>
+            </div>
+          </li>
+
+          <li class="is-primary">
+            <div class="icon">
+              <ta-icon name="ios-paper"></ta-icon>
+            </div>
+            <div class="info">
+              <p>{{ statics.pv }}</p>
+              <p>页面浏览量</p>
+            </div>
+          </li>
+
+          <li class="is-danger">
+            <div class="icon">
+              <ta-icon name="shuffle"></ta-icon>
+            </div>
+            <div class="info">
+              <p>{{ apiCallTimes }}</p>
+              <p>接口调用量</p>
+            </div>
+          </li>
+        </ul>
       </ta-col>
     </ta-row>  
   </div>
@@ -47,7 +88,14 @@ import Component from 'vue-class-component'
 import { formatTime } from '@/util/format-time'
 import { ReportProvider } from '@/provider/report-provider'
 
+const echarts = require('echarts')
+
 @Component({
+   watch: {
+    staticChartOpt() {
+      this.renderStaticChart()
+    },
+  },
 })
 export default class Dashboard extends Vue {
   statics = {}
@@ -83,11 +131,22 @@ export default class Dashboard extends Vue {
     },
   ]
 
+  staticChart = ''
+  staticChartOpt = ''
+
   created() {
     this.userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
     this.userInfo.lastLoginTime = formatTime(this.userInfo.lastLoginTime)
+    this.userInfo.createdTime = formatTime(this.userInfo.createdTime)
     this.fetchPerformenceStatics()
     this.fetchApiCallTimes()
+  }
+
+  mounted() {
+    const oStaticChart = this.$refs['staticChart']
+    this.staticChart = echarts.init(oStaticChart)
+
+    this.getStaticChartOpt()
   }
 
   async fetchPerformenceStatics() {
@@ -106,6 +165,44 @@ export default class Dashboard extends Vue {
     } catch (err) {
       this.$message.error(err.message)
     }
+  }
+
+  getStaticChartOpt() {
+    this.staticChartOpt = {
+      tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+        x : 'center',
+        y : 'bottom',
+        data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+      },
+      calculable : true,
+      series : [
+        {
+          name:'面积模式',
+          type:'pie',
+          radius : [30, 110],
+          center : ['50%', '50%'],
+          roseType : 'area',
+          data:[
+            {value:10, name:'rose1'},
+            {value:5, name:'rose2'},
+            {value:15, name:'rose3'},
+            {value:25, name:'rose4'},
+            {value:20, name:'rose5'},
+            {value:35, name:'rose6'},
+            {value:30, name:'rose7'},
+            {value:40, name:'rose8'}
+          ]
+        }
+      ]
+    };
+  }
+
+  renderStaticChart() {
+    this.staticChart.setOption(this.staticChartOpt, false, false);
   }
 }
 </script>
