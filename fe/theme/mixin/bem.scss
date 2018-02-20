@@ -1,0 +1,48 @@
+@import './config.scss';
+@import './func.scss';
+
+@mixin b($block) {
+  $B: $namespace + '-' + $block;
+
+  @at-root :global(.#{$B}) {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $E: $element-separator + $element !global;
+  $selector: &;  // & 可以取到父选择器类名
+  
+  @if containSpecialLabel($selector) {
+    $currentSelector: #{extractBlock($selector) + $element-separator + $element };
+
+    @at-root #{$selector} {
+      #{')'+ $currentSelector} {
+        @content;
+      }
+    }
+  }
+  @else {
+    @at-root &#{$E} {
+      @content;
+    }
+  }
+}
+
+@mixin m($modifier) {
+  $M: $modifier-separator + $modifier;
+
+  @at-root #{&}#{$M} {
+    @content;
+  }
+}
+
+@mixin when($state) {
+  $S: $state-prefix + $state;
+
+  @at-root #{&}.#{$S} {
+    @content;
+  }
+}
+
+// 使用示例见`README.md`

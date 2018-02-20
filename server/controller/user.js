@@ -4,6 +4,8 @@ const secret = require('../config').secret
 const salt = require('../config').salt
 const UserModel = require('../models/user')
 
+
+
 /**
  * 用户密码加密
  * @param  {String} password 

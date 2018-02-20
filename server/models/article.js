@@ -18,8 +18,7 @@ const articleSchema = new Schema({
   },
   classify: String,
   tags: Array,
-  content_md: String,
-  content_html: String,
+  content: String,
   state: String,
 })
 

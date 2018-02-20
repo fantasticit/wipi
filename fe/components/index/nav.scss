@@ -1,0 +1,42 @@
+@import '../../theme/global.scss';
+
+@include b(nav) {
+  position: fixed;
+  left: 0;
+  top: 5rem;
+
+  width: 100%;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+  background: #fff;
+
+  font-size: px2rem(14);
+  color: #71777c;
+  
+  @include e(menu) {
+    height: px2rem(45);  
+    display: flex;
+  }
+
+  @include e(menu-item) {
+    position: relative;
+    padding: 0 1rem;
+    @include flexLayout(center) {
+      align-items: center;
+    };
+    
+    @include when(active) {
+      color: $primary;
+    }
+
+    a {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+}

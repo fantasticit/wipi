@@ -1,0 +1,51 @@
+@include b(message) {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: 0 auto;
+
+  z-index: 2000;
+
+  width: 340px;
+  height: 44px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #ebeef5;
+  
+  background-color: #edf2fc;
+  transition: opacity .3s,transform .4s;
+  overflow: hidden;
+  padding: 10px 15px 10px 20px;
+
+  @include flexLayout(flex-start);
+  align-items: center;
+  font-size: 14px;
+
+  span {
+    margin-left: 10px;
+    line-height: 1.4;
+  }
+
+  @include m(success) {
+    background-color: #f0f9eb;
+    border-color: #e1f3d8;
+    color: $success;
+  }
+
+  @include m(warning) {
+    background-color: #fdf6ec;
+    border-color: #faecd8;
+    color: $warning;
+  }
+
+  @include m(info) {
+    color: $info;
+  }
+
+  @include m(error) {
+    background-color: #fef0f0;
+    border-color: #fde2e2;
+    color: $danger;
+  }
+}

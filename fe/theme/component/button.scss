@@ -1,0 +1,141 @@
+
+  @include b(button) {
+    display: inline-block;
+    box-sizing: border-box;
+    cursor: pointer;
+  
+    padding: .6rem .9rem;
+  
+    background-color: #fff;
+    border: 1px solid $border;
+    border-radius: 2px;
+    outline: none;
+  
+    color: $font;
+    text-align: center;
+    font-weight: 500;
+    font-size: px2rem(14);
+    line-height: 1;
+    white-space: nowrap;
+  
+    transition: all ease .1s;
+  
+    span {
+      @include flexLayout() {
+        align-items: center;
+      }
+    }
+  
+    // @include flexLayout() {
+    //   align-items: center;
+    // }
+  
+    @include when(small) {
+      padding: 9px 15px;
+      font-size: 12px;
+    }
+  
+    &:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+  
+    + .ta-button {
+      margin-left: 10px;
+    }
+  
+    &:first-child {
+      margin-left: 0;
+    }
+  
+    @include flexLayout(center, inline-flex);
+  
+    i {
+      margin-right: 6px;
+      transform: translateY(-2px);
+    }
+  
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: #ecf5ff;
+      border-color: #c6e2ff;
+      color: $primary;
+    }
+  
+    @include m(primary) {
+      background-color: $primary;
+      border-color: $primary;
+      color: #fff;
+  
+      &:hover,
+      &:focus, {
+        background-color: #0371df;
+        border-color: #66b1ff;
+        color: #fff;
+      }
+    }
+  
+    @include m(info) {
+      background-color: $info;
+      border-color: $info;
+      color: #fff;
+  
+      &:hover,
+      &:focus, {
+        background-color: #a6a9ad;
+        border-color: #a6a9ad;
+        color: #fff;
+      }
+    }
+  
+    @include m(text) {
+      border-color: transparent;
+      
+      &:hover,
+      &:focus, {
+        background-color: #fff;
+        border-color: #fff;
+        color: $primary;
+      }
+    }
+  
+    @include m(success) {
+      background-color: $success;
+      border-color: $success;
+      color: #fff;
+  
+      &:hover,
+      &:focus, {
+        background-color: #85ce61;
+        border-color: #85ce61;
+        color: #fff;
+      }
+    }
+  
+    @include m(warning) {
+      background-color: $warning;
+      border-color: $warning;
+      color: #fff;
+  
+      &:hover,
+      &:focus, {
+        background-color: #ebb563;
+        border-color: #ebb563;
+        color: #fff;
+      }
+    }
+  
+    @include m(danger) {
+      background-color: $danger;
+      border-color: $danger;
+      color: #fff;
+  
+      &:hover,
+      &:focus, {
+        background-color: #f78989;
+        border-color: #f78989;
+        color: #fff;
+      }
+    }
+  }  

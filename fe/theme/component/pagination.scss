@@ -1,0 +1,61 @@
+@include b(pagination) {
+  font-size: 0;
+  padding: 0 15px;
+  @include flexLayout(space-between) {
+    align-items: stretch;
+  };
+
+  select {
+    width: 40px;
+    height: 25px;
+    padding: 0;
+
+    option {
+      font-size: 1em;
+    }
+  }
+
+  span {
+    font-size: 13px;
+    padding: 10px 5px;
+
+    @include flexLayout(center, inline-flex) {
+      align-items: center;
+    }
+  }
+
+  @include e(paginator) {
+    @include flexLayout;
+
+    span {
+      font-weight: 700;
+      cursor: pointer;
+      color: $primaryFont;
+
+      &:first-of-type {
+        margin-right: 7px;
+      }
+
+      &:last-of-type {
+        margin-left: 7px;
+      }
+
+      &:hover {
+        color: $primary;
+      }
+
+      .ta-icon {
+        transform: translateY(-2px);
+      }
+    }
+
+    span.is-active {
+      color: $primary;
+    }
+  
+    span.is-disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+  }
+}

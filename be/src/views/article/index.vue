@@ -252,8 +252,7 @@ export default class Article extends Vue {
     return Promise.resolve(
       this.transfor2Html().then(content_html => {
         return Object.assign({}, article, {
-          content_md: this.content,
-          content_html
+          content: this.content,
         })
       })
     )
@@ -266,7 +265,7 @@ export default class Article extends Vue {
       try {
         const res = await ArticleProvider.addArticle(this.userId, article)
         this.$message.success(res)
-        this.reset()
+        // this.reset()
       } catch (err) {
         this.$message.error(err.message)
       } finally {

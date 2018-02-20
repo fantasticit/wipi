@@ -1,0 +1,56 @@
+@import '../../theme/global.scss';
+
+@include b(article-list) {
+  position: relative;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #f0f0f0;
+
+  @include e(cover) {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 8rem;
+    height: 8rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 3px;
+      border: 1px solid #f0f0f0;
+    }
+  }
+
+  @include e(content) {
+    word-wrap: break-word;
+    padding-right: 9rem;
+
+    .title {
+      margin: -7px 0 4px;
+      display: inherit;
+      font-size: px2rem(16);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+  
+    .desc {
+      font-size: px2rem(14);
+    }
+
+    .meta {
+      
+      .meta-classify {
+        display: inline-block;
+        padding: .4rem .8rem;
+
+        border: 1px solid $primary;
+        
+        color: $primary;
+        font-size: px2rem(12);
+        vertical-align: middle;
+        line-height: px2rem(12);
+      }
+    }
+  }
+}

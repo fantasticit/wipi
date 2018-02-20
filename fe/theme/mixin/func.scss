@@ -1,0 +1,47 @@
+// 将传入的选择器转换为字符串
+@function selector2str($selector) {
+  $selector: inspect($selector);
+  @return str-slice($selector, 2, -2);
+}
+
+// 是否包含'--'
+@function containsModifier($selector) {
+  $selector: selector2str($selector);
+  @if str-index($selector, $modifier-separator) {
+    @return true;
+  }
+  @else {
+    @return false;
+  }
+}
+
+// 是否包含'.is'
+@function containsWhen($selector) {
+  $selector: selector2str($selector);
+  @if str-index($selector, '.' + $state-prefix) {
+    @return true;
+  }
+  @else {
+    @return false;
+  }
+}
+
+// 以上两种是否
+@function containSpecialLabel($selector) {
+  @return containsModifier($selector) or containsWhen($selector);
+}
+
+// 抽离以上两种是否来获取公共前缀（即$B）
+@function extractBlock($selector) {
+  @if containsModifier($selector) {
+    $selector: selector2str($selector);
+    @return str-slice($selector, 0, str-index($selector, $modifier-separator) - 1);
+  } 
+  @else if containsWhen($selector) {
+    $selector: selector2str($selector);
+    @return str-slice($selector, 0, str-index($selector, '.' + $state-prefix) - 1);
+  }
+  @else {
+    @return $selector;
+  }
+}

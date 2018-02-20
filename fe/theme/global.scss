@@ -1,0 +1,31 @@
+@import 'normalize.scss';
+@import './common/index.scss';
+@import './mixin/index.scss';
+
+@import './component/button.scss';
+@import './component/input.scss';
+
+:global {
+  html {
+    font-size: 12px;
+  }
+
+  .container {
+    max-width: 992px;
+    margin: 0 auto;
+  }
+
+  .container-fluid {
+    width: 100%;
+  }
+
+  @media (max-width: 998px) {
+    .container {
+      width: 96%;
+    }
+  }
+
+  .form-control {
+    display: inline-block;
+  }
+}

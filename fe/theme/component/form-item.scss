@@ -1,0 +1,33 @@
+@include b(form-item) {
+  width: 100%;
+  margin-bottom: 23px;
+  position: relative;
+  align-items: center;
+  @include flexLayout();
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  label {
+    margin-right: 1em;
+  }
+
+  input, select {
+    flex: 1;
+  }
+
+  @include when(invalid) {
+    border-color: $danger;
+  }
+
+  @include e(invalid-tip) {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin: 0 0 0 8px;
+    padding-top: 4px;
+    font-size: 12px;
+    color: $danger;
+  }
+}

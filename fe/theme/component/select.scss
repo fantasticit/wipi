@@ -1,0 +1,46 @@
+@include b(select) {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 40px;
+  
+  font-size: inherit;
+  line-height: 1;
+
+  background-image: none;
+  background-color: #fff;
+
+  border-radius: 4px;
+  border: 1px solid $border;
+  outline: none;
+
+  transition: border-color .2s cubic-bezier(.645,.045, .355, 1);
+
+  &:focus,
+  &:active {
+    border-color: $primary;
+  }
+
+  @include when(invalid) {
+    border-color: $danger;
+  }
+
+  @include e(container) {
+    width: 100%;
+    @include flexLayout() {
+      align-items: center;
+    };
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    label {
+      margin-right: 1em;
+    }
+
+    select {
+      flex: 1;
+      padding: 5px;
+    }
+  }
+}

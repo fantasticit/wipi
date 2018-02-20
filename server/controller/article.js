@@ -3,6 +3,21 @@ const ArticleModel = require('../models/article')
 const UserModel = require('../models/user')
 const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字符
 
+var marked = require('marked');
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  xhtml: false
+});
+
+
+
 async function judgeIsAdmin(userId) {
   const userInfo = await UserModel.findById(userId).catch(e => ctx.throw(500))
   const roles = userInfo.roles
@@ -64,12 +79,12 @@ class ArticleController {
       ]
     }
     const skip = page === 0 ? 0 : (page - 1) * pageSize
-    const isAdmin = await judgeIsAdmin(userId)
+    // const isAdmin = await judgeIsAdmin(userId)
 
     let articles = []
     let total = 0
 
-    if (isAdmin) {
+    // if (isAdmin) {
       articles = await ArticleModel
         .find(query)
         .limit(pageSize)
@@ -79,19 +94,24 @@ class ArticleController {
         .find(query)
         .count()
         .catch(e => ctx.throw(500))
-    } else {
-      articles = await ArticleModel
-        .find(query)
-        .where('userId').equals(userId)
-        .limit(pageSize)
-        .skip(skip)
-        .catch(e => ctx.throw(500))
-      total = await ArticleModel
-        .find(query)
-        .where('userId').equals(userId)
-        .count()
-        .catch(e => ctx.throw(500))
-    }
+    // } else {
+    //   articles = await ArticleModel
+    //     .find(query)
+    //     .where('userId').equals(userId)
+    //     .limit(pageSize)
+    //     .skip(skip)
+    //     .catch(e => ctx.throw(500))
+    //   total = await ArticleModel
+    //     .find(query)
+    //     .where('userId').equals(userId)
+    //     .count()
+    //     .catch(e => ctx.throw(500))
+    // }
+
+    articles.map(article => {
+      article.content = marked(article.content)
+      return article
+    })
 
     ctx.send({ status: 'ok', message: '获取文章成功', data: {
         items: articles,

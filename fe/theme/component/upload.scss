@@ -1,0 +1,42 @@
+@mixin active {
+  border: 1.2px dashed $primary;
+}
+
+@mixin preview {
+  border: 1.2px solid $primary;
+}
+
+@include b(upload) {
+  box-sizing: border-box;
+
+  @include e(container) {
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 4px;
+    @include clear();
+
+    .img {
+      min-width: 80px;
+      height: 80px;
+      float: left;
+    }
+    
+    .upload {
+      float: left;
+      margin-left: 30px;
+      height: 80px;
+      @include flexLayout(space-around) {
+        flex-direction: column;
+      }
+
+      p {
+        color: #909090;
+        font-size: 12px;
+      }
+
+      button {
+        width: 80px;
+      }
+    }
+  }
+}

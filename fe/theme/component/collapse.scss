@@ -1,0 +1,51 @@
+@include b(collapse) {
+  height: 48px;
+  padding: 0 15px;
+  background: #fff;
+  overflow: hidden;
+  border-bottom: 1px solid $border;
+
+  will-change: height;
+  transition: all ease .3s;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  @include e(header) {
+    line-height: 48px;
+    @include flexLayout(space-between);
+
+    > * {
+      @include textOverflow;
+    }
+
+    span {
+      @include flexLayout(flex-start) {
+        align-items: center;
+      }
+
+      &:first-of-type {
+        flex: 1;
+      }
+
+      > * {
+        width: 100%;
+      }
+    }
+
+    .ta-icon {
+      cursor: pointer;
+      transition: all ease .2s;
+
+      @include when(active) {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  @include e(body) {
+    overflow: hidden;
+    padding: 15px;
+  }
+}

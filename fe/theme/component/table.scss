@@ -1,0 +1,74 @@
+@include b(table) {
+  width: 100%;
+  height: 100%;
+  @include flexLayout() {
+    flex-direction: column;
+  }
+
+  @include when(bottom-border) {
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: $border;
+    }
+
+    @include e(body) {
+    }
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+    background: #fff;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    td {
+      border: 1px solid $border;
+      text-align: center;
+      padding: 5px;
+
+      @include textOverflow;
+    }
+
+    td.gutter {
+      border-color: $border;
+      padding: 0;
+    }
+  }
+
+  @include e(head) {
+    // height: 40px;
+    table {
+      height: 100%;
+    }
+  }
+
+  @include e(body) {
+    flex: 1;
+    overflow: auto;
+
+    p {
+      margin: 1em;
+      text-align: center;
+    }
+
+    tr:first-of-type {
+      td {
+        border-top: 0;
+      }
+    }
+
+    @include when (no-bottom-border) {
+      tr:last-of-type {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+@include b(notification) {
+  position: fixed;
+  top: 5px;
+  right: 10px;
+  z-index: 1000;
+
+  width: 300px;
+  padding: 20px 10px;
+  border-radius: 8px;
+  border: 1px solid #e6ebf5;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  transition: opacity .3s,transform .3s,left .3s,right .3s,top .4s,bottom .3s;
+  overflow: hidden;
+
+  @include flexLayout(flex-start);
+  align-items: stretch;
+
+  @for $i from 2 through 100 {
+    &:nth-of-type(#{$i}) {
+      top: ($i - 2)*85px;
+      margin-top: 10px;
+    }
+  }
+
+  .btn-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #999;
+    font-weight: normal;
+
+    font-size: 14px;
+
+    cursor: pointer;
+  }
+
+
+  i {
+    font-size: 24px;
+    transform: translateY(-10%);
+  }
+
+  i.is-success {
+    color: $success;
+  }
+
+  i.is-error {
+    color: $danger;
+  }
+
+  i.is-info {
+    color: $info;
+  }
+
+  > div {
+    box-sizing: border-box;
+    margin-left: 15px;
+
+    flex-direction: column;
+    @include flexLayout(space-around);
+    align-items: flex-start;
+
+    h2, p {
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 16px;
+      color: #2d2f33;
+    }
+
+    P {
+      margin: 6px 0 0;
+      font-size: 14px;
+      color: #606266;
+      text-align: justify;
+    }
+  }
+  
+}

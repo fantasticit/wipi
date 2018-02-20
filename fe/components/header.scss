@@ -1,0 +1,60 @@
+@import '../theme/global.scss';
+
+@include b(header) {
+  position: relative;
+  height: 5rem;
+  font-size: px2rem(16);
+
+  > header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all .2s;
+    height: 5rem;
+    color: #909090;
+    border-bottom: 1px solid $border;
+    background: #fff;
+  }
+
+  > header > .container {
+    display: flex;
+    align-items: center;
+  }
+
+  nav {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @include e(logo) {
+    margin-right: 2rem;
+  }
+
+  @include e(menu-item) {
+    height: 5rem;
+    cursor: pointer;
+  
+    display: inline-flex;
+    align-items: center;
+
+    a {
+      display: block;
+      padding: 0 20px;
+      height: 100%;
+      line-height: 5rem;
+    }
+  }
+
+  @include e(search) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      margin-left: 1rem;
+    }
+  }
+}
