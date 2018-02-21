@@ -1,7 +1,7 @@
 import { Component } from 'react'
-import Header from '../components/header'
+import Header from './header'
 
-class App extends Component {
+class Layout extends Component {
   constructor() {
     super()
   }
@@ -18,4 +18,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default Layout

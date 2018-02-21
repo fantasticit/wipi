@@ -6,25 +6,23 @@ import withRedux from 'next-redux-wrapper'
 
 import ArticleService from '../service/article'
 
-import App from '../container/app'
-import Nav from '../components/index/nav'
-import ArticleList from '../components/index/article-list'
+import Layout from '../components/common/layout'
+import Nav from '../components/post/nav'
+import ArticleList from '../components/post/article-list'
 
-class Index extends Component {
+class Post extends Component {
   static async getInitialProps({ query }) {
     const classify = query.id
     const articles = await ArticleService.fetchArticles()
 
-    return {
-      articles
-    }
+    return { articles }
   }
 
   render() {
     const { dispatch, selectedClassify } = this.props
 
     return(
-      <App>
+      <Layout>
         <Nav />
         <div className="container articles">
           <div>
@@ -40,12 +38,10 @@ class Index extends Component {
             padding: 5rem 0;
           }
         `}</style>
-      </App>
+      </Layout>
     )
   }
 }
-
-{/* <div key={i} dangerouslySetInnerHTML={{__html: article.content}}></div> */}
 
 const mapStateToProps = ({ classifies, selectedClassify }) => ({ classifies, selectedClassify })
 
@@ -55,4 +51,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index)
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Post)

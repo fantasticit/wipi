@@ -11,14 +11,24 @@ app.prepare().then(() => {
   const server = new Koa()
   const router = new KoaRouter()
 
+  router.get('/', async ctx => {
+    await app.render(ctx.req, ctx.res, '/post', ctx.query)
+    ctx.respond = false
+  })
+
   router.get('/p', async ctx => {
     await app.render(ctx.req, ctx.res, '/post', ctx.query)
     ctx.respond = false
   })
 
   router.get('/p/:id', async ctx => {
-    console.log(ctx.query)
-    await app.render(ctx.req, ctx.res, '/post', ctx.query)
+    await app.render(ctx.req, ctx.res, '/post', ctx.params)
+    ctx.respond = false
+  })
+
+
+  router.get('/article/:id', async ctx => {
+    await app.render(ctx.req, ctx.res, '/article', ctx.params)
     ctx.respond = false
   })
 

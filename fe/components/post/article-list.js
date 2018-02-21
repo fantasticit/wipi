@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import Link from 'next/link'
-import './article-list.scss'
+import './styles/article-list.scss'
 
 class ArticleList extends Component {
   render() {
@@ -20,9 +20,11 @@ class ArticleList extends Component {
             <a>{ article.author }</a>
             <span>{ article.createdTime }</span>
           </div>
-          <a className="title" href="/">
-            <h2>{article.title}</h2>
-          </a>
+          <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
+            <a className="title">
+              <h2>{article.title}</h2>
+            </a>
+          </Link>
           <p className="desc">{ article.desc }</p>
           <div className="meta">
             <a className="meta-classify">{ article.classify }</a>

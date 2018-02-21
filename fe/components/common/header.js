@@ -1,22 +1,22 @@
 import { Component } from 'react';
 import Link from 'next/link';
-import './header.scss';
+import './styles/header.scss';
 
 const links = [
   {
     title: '首页',
-    path: '/',
+    path: '/p',
   },
 
-  {
-    title: '前端',
-    path: '/fe',
-  },
+  // {
+  //   title: '前端',
+  //   path: '/fe',
+  // },
 
-  {
-    title: '关于',
-    path: '/about',
-  },
+  // {
+  //   title: '关于',
+  //   path: '/about',
+  // },
 
 ]
 
@@ -26,7 +26,7 @@ class Header extends Component {
       <div className='el-header'>
         <header>
           <div className="container">
-            <Link href="/">
+            <Link href="/p">
               <a className="el-header__logo">Logo</a>
             </Link>
             <nav>

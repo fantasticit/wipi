@@ -109,7 +109,7 @@ class ArticleController {
     // }
 
     articles.map(article => {
-      article.content = marked(article.content)
+      article.htmlContent = marked(article.content)
       return article
     })
 
@@ -128,7 +128,11 @@ class ArticleController {
     if(!article) {
       ctx.send({ status: 'no', message: '该ID下暂无文章'})
     } else {
-      ctx.send({ status: 'ok', message: '获取文章成功', data: { article }})
+      const resArticle = { ...article, htmlContent: '' }
+      resArticle.htmlContent = marked(article.content)
+
+      console.log(resArticle)
+      ctx.send({ status: 'ok', message: '获取文章成功', data: { article: resArticle }})
     }
   }
 
