@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "pm2": "pm2 start pm2.conf.json --watch"
   },
   "keywords": [],
   "author": "",

@@ -17,7 +17,7 @@ class ApiPerformenceController {
     ]
     const data = await ApiPerformenceModel
       .find(query)
-      .sort({dateTime:-1})
+      .sort({dateTime:1})
       .limit(300) 
       .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '成功', data })
@@ -103,7 +103,9 @@ class ApiPerformenceController {
   // 获取各个接口调用次数
   static async getApiCallTime(ctx) {
     const data = {}
-    const records = await ApiPerformenceModel.find().catch(e => ctx.throw(500))
+    const records = await ApiPerformenceModel
+      .find().where('statusCode').lte(400)
+      .catch(e => ctx.throw(500))
 
     records.map(record => {
       const requestUrl = record.requestUrl.split('?')[0]

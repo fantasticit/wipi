@@ -16,7 +16,7 @@ class _ArticleProvider extends BaseHttp {
     const req = {
       url: this.api.add,
       method: 'POST',
-      data: { userId, ...article }
+      data: { author: userId, ...article }
     }
 
     try {
@@ -58,8 +58,12 @@ class _ArticleProvider extends BaseHttp {
     }
   }
 
-  async deleteArticle(id) {
-    const req = { url: this.api.delete + id, method: 'delete' }
+  async deleteArticle(id, userId) {
+    const req = { 
+      url: this.api.delete + id, 
+      method: 'delete',
+      data: { userId } 
+    }
 
     try {
       const res = await this.http(req)
@@ -69,11 +73,14 @@ class _ArticleProvider extends BaseHttp {
     }
   }
 
-  async updateArticle(article, articleId) {
+  async updateArticle(article, articleId, userId) {
     const req = {
       url: this.api.update + articleId,
       method: 'PATCH',
-      data: article
+      data: {
+        ...article,
+        userId
+      }
     }
 
     try {

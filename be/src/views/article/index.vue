@@ -70,8 +70,8 @@
             <span>文章发布</span>
           </div>
           <div class="body">
-            <ta-input placeholder="请输入作者" v-model="author">
-            </ta-input>
+            <!-- <ta-input placeholder="请输入作者" v-model="author"> -->
+            <!-- </ta-input> -->
             <ta-select placeholder="请选择文章状态" v-model="state"
               :options="states">
             </ta-select>
@@ -123,7 +123,7 @@ export default class Article extends Vue {
   desc = ''                                            // 文章描述
   content = ''                                         // 文章内容
   classify = ''                                        // 文章分类
-  author = ''                                          // 文章作者
+  // author = ''                                          // 文章作者
   state = ''                                           // 文章状态
   cover = ''                                           // 文章封面
   tags = []                                            // 文章标签
@@ -132,18 +132,13 @@ export default class Article extends Vue {
   upload = null                                        // 上传组件(VNode)
   
   created() {
-    this.$on('mount.upload', vm => {
-      this.upload = vm
-    })
-
     const articleId = this.$route.params['articleId'] || null
     this.articleId = articleId
     if (!!this.articleId) {
       this.fetchArticle()
-    } else {
-      this.author = JSON.parse(window.sessionStorage.getItem('userInfo')).account
-      this.userId = JSON.parse(window.sessionStorage.getItem('userInfo')).id
     }
+
+    this.userId = JSON.parse(window.sessionStorage.getItem('userInfo')).id
   }
 
   // 增加标签
@@ -161,7 +156,9 @@ export default class Article extends Vue {
 
   // 移除标签
   removeTag(index) {
-    this.tags.splice(index, 0)
+    const tags = [...this.tags]
+    tags.splice(index, 1)
+    this.tags = tags
   }
 
   // 重置文章信息
@@ -171,10 +168,8 @@ export default class Article extends Vue {
     this.desc = ''
     this.classify = ''
     this.tags = []
-    this.author = ''
     this.state = ''
     this.cover = ''
-    this.upload.reset()
   }
 
   // 文章预览
@@ -194,11 +189,10 @@ export default class Article extends Vue {
       const article = await ArticleProvider.fetchArticle(this.articleId, this.userId)
       this.title = article.title
       this.desc = article.desc
-      this.content = article['content_md']
+      this.content = article['content']
       this.classify = article.classify
       this.tags = article.tags
       this.cover = article.cover
-      this.author = article.author
       this.state = article.state
     } catch (err) {
       this.$message.error(err.message)
@@ -216,7 +210,6 @@ export default class Article extends Vue {
       content: this.content,
       classify: this.classify,
       tags: this.tags,
-      author: this.author,
       state: this.state,
     })
 
@@ -265,7 +258,6 @@ export default class Article extends Vue {
       try {
         const res = await ArticleProvider.addArticle(this.userId, article)
         this.$message.success(res)
-        // this.reset()
       } catch (err) {
         this.$message.error(err.message)
       } finally {
@@ -279,14 +271,13 @@ export default class Article extends Vue {
     this.loading = true
     this.handleArticle(article).then(async article => {
       try {
-        const res = await ArticleProvider.updateArticle(article, this.articleId)
+        const res = await ArticleProvider.updateArticle(article, this.articleId, this.userId)
         this.$message.success(res)
         this.reset()
       } catch (err) {
         this.$message.error(err.message)
       } finally {
         this.loading = false
-        this.$router.replace('/article')
       }
     })
   }

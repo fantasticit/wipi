@@ -1,6 +1,6 @@
-import { Component } from 'react';
-import Link from 'next/link';
-import './styles/header.scss';
+import { Component } from 'react'
+import Link from 'next/link'
+import './styles/header.scss'
 
 const links = [
   {
@@ -54,4 +54,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default Header

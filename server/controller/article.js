@@ -1,9 +1,8 @@
-const xssFilters = require('xss-filters')
 const ArticleModel = require('../models/article')
 const UserModel = require('../models/user')
+const marked = require('marked')
 const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字符
 
-var marked = require('marked');
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,
@@ -14,19 +13,15 @@ marked.setOptions({
   smartLists: true,
   smartypants: false,
   xhtml: false
-});
+})
 
-
-
-async function judgeIsAdmin(userId) {
-  const userInfo = await UserModel.findById(userId).catch(e => ctx.throw(500))
+async function isAdmin(userId) {
+  const userInfo = await UserModel
+                          .findById(userId)
+                          .catch(e => ctx.throw(500))
   const roles = userInfo.roles
 
-  if (roles.indexOf('admin') > -1) {
-    return true
-  } else {
-    return false
-  }
+  return roles.indexOf('admin') > -1
 }
 
 class ArticleController {
@@ -37,11 +32,14 @@ class ArticleController {
   // skips接受一个数组，用于指定不进行非空检查的字段
   static checkArticle(article, skips, ctx) {
     Object.keys(article).forEach(key => {
-      if (skips.indexOf(key) == -1 && !Boolean(article[key])) { // 非跳过字段且该字段键值为空
-        ctx.throw(400, { status: 'no', message: `键${key}, ${req[key]}值不通过` })
-      }
-      else {
-        article[key] = xssFilters.inHTMLData(article[key])
+      if (
+        skips.indexOf(key) == -1 
+        && !Boolean(article[key])
+      ) { // 非跳过字段且该字段键值为空
+        ctx.throw(400, { 
+          status: 'no', 
+          message: `键${key}, ${req[key]}值不通过` 
+        })
       }
     })
   }
@@ -49,11 +47,12 @@ class ArticleController {
   // 新增文章
   static async addArticle(ctx, next) {
     const req = ctx.request.body
-    console.log(req)
+    req.htmlContent = marked(req.content)
 
     ArticleController.checkArticle(req, ['cover'], ctx)
 
-    const result = await ArticleModel.create({...req})
+    const createdDate = new Date()
+    const result = await ArticleModel.create({...req, createdDate})
       .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '新增文章成功' })
   }
@@ -67,6 +66,7 @@ class ArticleController {
     const query = {}
     !!classify && (query.classify = classify)
     !!state && (query.state = state)
+    !!userId && !isAdmin(userId) && (query.author = userId)
     
     // 关键字查询(模糊查询)
     if (!!keyword) {
@@ -79,39 +79,22 @@ class ArticleController {
       ]
     }
     const skip = page === 0 ? 0 : (page - 1) * pageSize
-    // const isAdmin = await judgeIsAdmin(userId)
 
-    let articles = []
-    let total = 0
+    const articles = await ArticleModel
+                            .find(query)
+                            .limit(pageSize)
+                            .skip(skip)
+                            .populate({        // 连表查询作者信息
+                              path: 'author', 
+                              select: 'account avatar _id' 
+                            })
+                            .exec()
+                            .catch(e => ctx.throw(500))
 
-    // if (isAdmin) {
-      articles = await ArticleModel
-        .find(query)
-        .limit(pageSize)
-        .skip(skip)
-        .catch(e => ctx.throw(500))
-      total = await ArticleModel
-        .find(query)
-        .count()
-        .catch(e => ctx.throw(500))
-    // } else {
-    //   articles = await ArticleModel
-    //     .find(query)
-    //     .where('userId').equals(userId)
-    //     .limit(pageSize)
-    //     .skip(skip)
-    //     .catch(e => ctx.throw(500))
-    //   total = await ArticleModel
-    //     .find(query)
-    //     .where('userId').equals(userId)
-    //     .count()
-    //     .catch(e => ctx.throw(500))
-    // }
-
-    articles.map(article => {
-      article.htmlContent = marked(article.content)
-      return article
-    })
+    const total = await ArticleModel
+                          .find(query)
+                          .count()
+                          .catch(e => ctx.throw(500))
 
     ctx.send({ status: 'ok', message: '获取文章成功', data: {
         items: articles,
@@ -123,16 +106,19 @@ class ArticleController {
   // 获取指定Id的文章
   static async getArticleById(ctx, next) {
     const { id } = ctx.params
-    const article = await ArticleModel.findById(id).catch(e => ctx.throw(500))
+    const article = await ArticleModel
+                            .findById(id)
+                            .populate({        // 连表查询作者信息
+                              path: 'author', 
+                              select: 'account avatar' 
+                            })
+                            .exec()
+                            .catch(e => ctx.throw(500))
     
     if(!article) {
       ctx.send({ status: 'no', message: '该ID下暂无文章'})
     } else {
-      const resArticle = { ...article, htmlContent: '' }
-      resArticle.htmlContent = marked(article.content)
-
-      console.log(resArticle)
-      ctx.send({ status: 'ok', message: '获取文章成功', data: { article: resArticle }})
+      ctx.send({ status: 'ok', message: '获取文章成功', data: { article }})
     }
   }
 
@@ -140,11 +126,20 @@ class ArticleController {
   static async updateArticle(ctx, next) {
     const { id } = ctx.params
     const req = ctx.request.body
+    const userId = req.userId
+    const targetArticle = await ArticleModel.findById(id)
+
+    if (
+      !userId
+      || targetArticle.author != userId
+    ) {
+      ctx.throw(400, { message: '非文章作者' })
+    }
 
     ArticleController.checkArticle(req, ['cover'], ctx)
     
-    const updateDate = Date.now()
-    const result = await ArticleModel.findByIdAndUpdate(id, {...req, updateDate})
+    const updatedDate = Date.now()
+    const result = await ArticleModel.findByIdAndUpdate(id, {...req, updatedDate})
       .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '更新文章成功' })
   }
@@ -152,6 +147,17 @@ class ArticleController {
   // 删除指定Id的文章
   static async deleteArticle(ctx, next) {
     const id = ctx.params.id
+    const { userId } = ctx.request.body
+    const targetArticle = await ArticleModel.findById(id)
+
+    if (
+      !userId
+      || targetArticle.author != userId
+      || !isAdmin(userId)
+    ) {
+      ctx.throw(400, { message: '没有权限删除' })
+    }
+
     const article = await ArticleModel.findByIdAndRemove(id)
       .catch(e => {
         if (e.name === 'CastError') {

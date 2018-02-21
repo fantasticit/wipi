@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const baseURL = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:3002'
+  ? 'http://localhost:3000'
   : 'http://193.112.102.204:3000'
 
 const instance = axios.create({
@@ -11,6 +11,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
+    config.headers = {
+      'accept-encoding': 'gzip',
+    }
     return config
   },
 
@@ -36,6 +39,7 @@ instance.interceptors.response.use(
     }
   },
   err => {
+    console.log(err)
     console.log('获取数据失败')
     // if (err.response) {
     //   if (err.response.status == 401) {

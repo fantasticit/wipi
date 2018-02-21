@@ -8,7 +8,6 @@ class ArticlerService {
 
     try {
       const res = await axios(req)
-
       return res && res.data && res.data.items || []
     } catch (err) {
       throw new Error(err)

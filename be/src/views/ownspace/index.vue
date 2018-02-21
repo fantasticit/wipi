@@ -126,6 +126,7 @@ export default class Ownspace extends Vue {
       })
       this.showModifyAccount = false
     } catch (err) {
+      this.account = this.userInfo.account
       this.$message.error(err.message)
     } finally {
       this.accountModifying = false

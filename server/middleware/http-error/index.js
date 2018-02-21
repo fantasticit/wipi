@@ -15,7 +15,7 @@ module.exports = () => {
 
       if (statusCode === 401) {
         ctx.status = 401
-        ctx.response.body = { status: 'no', message: `token不存在或已过期` }
+        ctx.response.body = { code: 'no', message: `token不存在或已过期` }
       } else  {
         ctx.response.body = { errMsg }
       }

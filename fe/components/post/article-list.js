@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { formatTime } from '../../util/format-time'
 import Link from 'next/link'
 import './styles/article-list.scss'
 
@@ -15,10 +16,17 @@ class ArticleList extends Component {
               </a> 
             : ''
         }
-        <div className="el-article-list__content">
+        <div className={
+          article.cover
+            ? 'el-article-list__content'
+            : 'el-article-list__content is-full'
+        }>
           <div className="author">
-            <a>{ article.author }</a>
-            <span>{ article.createdTime }</span>
+            <a>
+              <img className="avatar" src={article.author.avatar} />
+              <span>{ article.author.account }</span>
+            </a>
+            <span>{ formatTime(article.createdDate) }</span>
           </div>
           <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
             <a className="title">

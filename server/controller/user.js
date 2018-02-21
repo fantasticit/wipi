@@ -4,8 +4,6 @@ const secret = require('../config').secret
 const salt = require('../config').salt
 const UserModel = require('../models/user')
 
-
-
 /**
  * 用户密码加密
  * @param  {String} password 
@@ -19,6 +17,24 @@ function encryptPwd(passwd) {
   return encryptedPasswd
 }
 
+/**
+ * 判断用户是不是admin
+ * @param {*} userId 
+ */
+async function isAdmin(userId) {
+  const userInfo = await UserModel
+                          .findById(userId)
+                          .catch(e => ctx.throw(500))
+  const roles = userInfo.roles
+
+  return roles.indexOf('admin') > -1
+}
+
+// UserModel.create({
+//   account: 'admin',
+//   passwd: encryptPwd('123456'),
+//   roles: ['admin', 'user']
+// })
 
 class UserController {
   static constructor() {}
@@ -26,7 +42,7 @@ class UserController {
   /**
    * 检查用户名是否已存在
    */
-  static async checkAccountExist (ctx) {
+  static async checkAccountExist(ctx) {
     const { account } = ctx.request.body
     let isExisted = await UserModel.findOne({ account }).catch(e=> ctx.throw(500))
     isExisted = !!isExisted
@@ -148,7 +164,7 @@ class UserController {
         break
       
       default: 
-        ctx.throw(400, { message: '未作修改' })
+        ctx.send({ code: 'ok', message: '未作修改' })
     }
   }
 
@@ -163,20 +179,7 @@ class UserController {
     pageSize = +pageSize
     const skip = page === 0 ? 0 : (page - 1) * pageSize
 
-    const isAdmin = judgeIsAdmin(userId)
-
-    async function judgeIsAdmin(userId) {
-      const userInfo = await UserModel.findById(userId).catch(e => ctx.throw(500))
-      const roles = userInfo.roles
-    
-      if (roles.indexOf('admin') > -1) {
-        return true
-      } else {
-        return false
-      }
-    }
-
-    if (isAdmin) {
+    if (isAdmin(userId)) {
       const users = await UserModel.find().limit(pageSize).skip(skip)
         .catch(e => ctx.throw(500))
       const total = await UserModel.find().count().catch(e => ctx.throw(500))
@@ -192,19 +195,7 @@ class UserController {
   static async deleteUser(ctx, next) {
     let { userId, deletedUserId } = ctx.request.body
 
-    const isAdmin = judgeIsAdmin(userId)
-    async function judgeIsAdmin(userId) {
-      const userInfo = await UserModel.findById(userId).catch(e => ctx.throw(500))
-      const roles = userInfo.roles
-    
-      if (roles.indexOf('admin') > -1) {
-        return true
-      } else {
-        return false
-      }
-    }
-
-    if (isAdmin) {
+    if (isAdmin(userId)) {
       await UserModel.findByIdAndRemove(deletedUserId)
         .catch(e => ctx.throw(500))
 

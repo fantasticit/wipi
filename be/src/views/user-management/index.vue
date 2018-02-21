@@ -61,8 +61,8 @@ export default class UserManagement extends Vue {
   total = 0
   page = 1
   pageSize = 20
-  tableHead = ['Id','账户', '角色', '上次登录时间', '操作']
-  tableKeys = ['_id', 'account', 'roles', 'lastLoginTime']
+  tableHead = ['Id','账户', '角色', '注册日期', '上次登录时间', '操作']
+  tableKeys = ['_id', 'account', 'roles', 'createdTime', 'lastLoginTime']
 
   created() {
     const userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
@@ -83,6 +83,8 @@ export default class UserManagement extends Vue {
       this.users = res.items.map(user => {
         user.roles = user.roles.join('、')
         user.lastLoginTime = formatTime(user.lastLoginTime) 
+        user.createdTime = formatTime(user.createdTime) 
+
         return user
       })
       this.total = res.total      

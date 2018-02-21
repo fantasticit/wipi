@@ -14,6 +14,7 @@ class Post extends Component {
   static async getInitialProps({ query }) {
     const classify = query.id
     const articles = await ArticleService.fetchArticles()
+      .catch(e => console.log('获取数据失败'))
 
     return { articles }
   }

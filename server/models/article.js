@@ -5,9 +5,9 @@ const articleSchema = new Schema({
   id: Number,
   title: String,                        // 标题
   desc: String,                         // 描述
-  author: String,                       // 作者
   cover: String,                        // 封面
   content: String,                      // 内容
+  htmlContent: String,                  // HTML内容
   classify: String,                     // 分类
   tags: Array,                          // 标签
   state: {                              // 状态（‘草稿‘或者’发布‘）
@@ -18,7 +18,7 @@ const articleSchema = new Schema({
           : '草稿'
     }
   },
-  likes: {                              // 被喜欢数
+  readingQuantity: {                    // 阅读量
     type: Number,
     default: 0,
   },
@@ -30,11 +30,16 @@ const articleSchema = new Schema({
     type: Date,
     default: Date.now()
   },
-  userId: {                             // 用户Id
+  author: {                             // 作者
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  canPublish: {                         // 是否可以发布
+    type: Boolean,
+    default: false
   }
 })
+
 
 articleSchema.index({ id: 1 })
 

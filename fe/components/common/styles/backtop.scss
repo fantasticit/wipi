@@ -1,0 +1,26 @@
+@import '../../../theme/global.scss';
+
+@include b(backtop) {
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+  z-index: 300;
+  cursor: pointer;
+  background: #fff;
+  
+  @include when(hide) {
+    display: none;
+  }
+
+  @include when(visible) {
+    display: block;
+    animation: slideDown ease-in-out .2s;
+    @keyframes slideDown {
+      from {
+        transform: translateY(-.6rem)
+      } to {
+        transform: translateY(0)
+      }
+    }
+  }
+}

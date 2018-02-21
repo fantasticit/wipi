@@ -10,6 +10,7 @@
     top: 0;
     left: 0;
     right: 0;
+    z-index: 250;
     transition: all .2s;
     height: 5rem;
     color: #909090;
@@ -31,6 +32,10 @@
 
   @include e(logo) {
     margin-right: 2rem;
+  }
+
+  @include e(menu) {
+    list-style: none;
   }
 
   @include e(menu-item) {

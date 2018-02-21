@@ -2,7 +2,8 @@
 
 @include b(article-list) {
   position: relative;
-  padding: 1.5rem 2rem;
+  list-style: none;
+  padding: 1.5rem;
   border-bottom: 1px solid #f0f0f0;
 
   @include e(cover) {
@@ -25,6 +26,33 @@
   @include e(content) {
     word-wrap: break-word;
     padding-right: 9rem;
+
+    @include when(full) {
+      padding-right: 0;
+    }
+    
+    .author {
+      @include flexLayout(center, inline-flex) {
+        align-items: center;
+      }
+
+      > a {
+        display: inline-block;
+        height: px2rem(32);
+        margin-right: px2rem(15);
+
+        @include flexLayout(center, inline-flex) {
+          align-items: center;
+        }
+      }
+
+      .avatar {
+        width: px2rem(32);
+        height: 100%;
+        border-radius: 50%;
+        margin-right: 1rem;
+      }
+    }
 
     .title {
       margin: -7px 0 4px;

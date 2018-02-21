@@ -100,8 +100,8 @@ export default class ArticleList extends Vue {
   state = ''                 // 文章状态
   keyword = ''               // 搜索关键字
   loading = false            // 是否正在加载中
-  tableHead = ['标题', '分类', '状态', '创建日期', '更新日期', '操作']
-  tableKeys = ['title', 'classify', 'state', 'createDate', 'updateDate']
+  tableHead = ['标题', '分类', '作者', '状态', '创建日期', '更新日期', '操作']
+  tableKeys = ['title', 'classify', 'author', 'state', 'createdDate', 'updatedDate']
   page = 1                   
   pageSize = 20
   userId = ''
@@ -146,8 +146,10 @@ export default class ArticleList extends Vue {
       }
       const res = await ArticleProvider.fetchArticles(query, this.userId)
       this.articles = res.items.map(item => {
-        item.createDate = formatTime(item.createDate)
-        item.updateDate = formatTime(item.updateDate)
+        item.createdDate = formatTime(item.createdDate)
+        item.updatedDate = formatTime(item.updatedDate)
+        item.author = item.author.account
+
         return item
       })
       this.total = res.total
@@ -162,7 +164,7 @@ export default class ArticleList extends Vue {
     this.$confirm('此操作将删除文章，是否继续？', '提示', { type: 'warning' })
       .then(async () => {
         try {
-          const res = await ArticleProvider.deleteArticle(id)
+          const res = await ArticleProvider.deleteArticle(id, this.userId)
           this.$message.success(res)
           this.fetchArticles()
         } catch (err) {

@@ -1,0 +1,12 @@
+{
+  "name": "elapse-fe",
+  "script": "./server.js",
+  "cwd": "./",
+  "watch": [
+    "pages",
+    "redux",
+    "components",
+    "server.js"
+  ],
+  "error_file": "./log/pm2/error.log"
+}
