@@ -22,12 +22,14 @@ function encryptPwd(passwd) {
  * @param {*} userId 
  */
 async function isAdmin(userId) {
-  const userInfo = await UserModel
-                          .findById(userId)
-                          .catch(e => ctx.throw(500))
-  const roles = userInfo.roles
+  if (!userId) return false
 
-  return roles.indexOf('admin') > -1
+  const userInfo = await UserModel
+    .findById(userId)
+    .catch(e => ctx.throw(500))
+  const roles = userInfo && userInfo.roles || false
+
+  return roles && roles.indexOf('admin') > -1 || false
 }
 
 // UserModel.create({
@@ -179,7 +181,7 @@ class UserController {
     pageSize = +pageSize
     const skip = page === 0 ? 0 : (page - 1) * pageSize
 
-    if (isAdmin(userId)) {
+    if (await isAdmin(userId)) {
       const users = await UserModel.find().limit(pageSize).skip(skip)
         .catch(e => ctx.throw(500))
       const total = await UserModel.find().count().catch(e => ctx.throw(500))
@@ -195,7 +197,7 @@ class UserController {
   static async deleteUser(ctx, next) {
     let { userId, deletedUserId } = ctx.request.body
 
-    if (isAdmin(userId)) {
+    if (await isAdmin(userId)) {
       await UserModel.findByIdAndRemove(deletedUserId)
         .catch(e => ctx.throw(500))
 

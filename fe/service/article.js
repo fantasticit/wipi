@@ -25,6 +25,19 @@ class ArticlerService {
       throw new Error(err)
     }
   }
+
+  // 获取文章分类
+  static async fetchArticleClassifies() {
+    const req = { url: '/article/meta/classifies', method: 'get' }
+
+    try {
+      const res = await axios(req)
+
+      return res.data
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
 }
 
 export default ArticlerService

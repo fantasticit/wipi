@@ -7,9 +7,9 @@ const bodyParser = require('koa-bodyparser')
 const httpErrorHandler = require('./http-error')
 
 module.exports = (app) => {
+  app.use(httpErrorHandler())
   app.use(logger())
   app.use(cors())
-  app.use(httpErrorHandler())
   app.use(koaJwt({secret}).unless({path: [/^\/user/, /^\/performence/, /^\/article/]}))
   app.use(bodyParser())
   app.use(json())

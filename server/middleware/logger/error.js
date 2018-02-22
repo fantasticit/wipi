@@ -4,7 +4,7 @@
  */
 const log4js = require('log4js')
 
-module.exports = async (ctx, status, start = 0) => {
+module.exports = async (ctx, status, start = 0, e) => {
   log4js.configure(
     {
       appenders: { error: { type: 'dateFile', filename: 'log/error/access.log', keepFileExt: true } },
@@ -29,10 +29,14 @@ module.exports = async (ctx, status, start = 0) => {
 
   const responseTime = (Date.now() - start)
 
+  
+
   ctx.logger[level](`
     ${method} ${url} ${status} 
       req: ${JSON.stringify(ctx.request.body) || ''} 
       res: ${JSON.stringify(ctx.response.body) || ''}
+      errMsg: ${e.message},
+      errStack: ${e.stack}
       响应时间为: ${responseTime}s
   `)
 }

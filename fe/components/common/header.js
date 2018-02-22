@@ -5,7 +5,7 @@ import './styles/header.scss'
 const links = [
   {
     title: '首页',
-    path: '/p',
+    path: '/p/',
   },
 
   // {

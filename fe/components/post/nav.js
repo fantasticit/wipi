@@ -1,12 +1,18 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { fecthClassifies } from '../../redux/store'
 import Link from 'next/link'
 import './styles/nav.scss'
 
 class Nav extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+  }
+
+  componentWillMount() {
+    const { classifies = [] } = this.props
+    if (classifies.length <= 0) this.props.fecthClassifies()
   }
 
   render() {
@@ -32,4 +38,10 @@ class Nav extends Component {
 
 const mapStateToProps = ({ classifies }) => ({ classifies })
 
-export default connect(mapStateToProps, null)(Nav)
+const mapDispatchToProps = dispatch => {
+  return {
+    fecthClassifies: bindActionCreators(fecthClassifies, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

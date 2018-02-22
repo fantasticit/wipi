@@ -12,7 +12,7 @@ class ArticleList extends Component {
         {
           article.cover 
             ? <a className="el-article-list__cover">
-                <img src={article.cover} />
+                {/* <img src={article.cover} /> */}
               </a> 
             : ''
         }
@@ -23,7 +23,7 @@ class ArticleList extends Component {
         }>
           <div className="author">
             <a>
-              <img className="avatar" src={article.author.avatar} />
+              {/* <img className="avatar" src={article.author.avatar} /> */}
               <span>{ article.author.account }</span>
             </a>
             <span>{ formatTime(article.createdDate) }</span>

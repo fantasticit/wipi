@@ -1,19 +1,19 @@
 import { createStore, applyMiddleware } from 'redux'
+import ArticleService from '../service/article'
 import thunkMiddleware from 'redux-thunk'
 
 const initialState = {
-  classifies: [
-    { title: '全部', value: '', },
-    { title: '前端', value: 'fe', },
-    { title: '后端', value: 'be', },
-  ],
+  classifies: [],
   selectedClassify: { title: '前端', value: '前端', },
 }
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_CLASSIFIES":
-      return state.classifies
+      return {
+        ...state,
+        classifies: action.data
+      }
     
     case 'CHANGE_CLASSIFY':
       let newState = { ...state }
@@ -25,14 +25,25 @@ export const reducer = (state = initialState, action) => {
   }
 }
 
-const fecthClassifies = (response) => ({
-  type: 'FETCH_CLASSIFIES'
+const setClassifies = data => ({
+  type: 'FETCH_CLASSIFIES',
+  data,
 })
 
 export const changeClassify = (classify) => ({
   type: 'CHANGE_CLASSIFY',
   classify
 })
+
+export const fecthClassifies = () => async (dispatch, getStats) => {
+  console.log('调用嗯')
+  try {
+    const data = await ArticleService.fetchArticleClassifies()
+    await dispatch(setClassifies(data)) 
+  } catch (err) {
+    console.log('获取文章分类失败')
+  }
+}
 
 export const initStore = (initialState = initialState) => {
   return createStore(reducer, initialState, applyMiddleware(thunkMiddleware))
