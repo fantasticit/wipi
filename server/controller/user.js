@@ -23,10 +23,9 @@ function encryptPwd(passwd) {
  */
 async function isAdmin(userId) {
   if (!userId) return false
-
   const userInfo = await UserModel
-    .findById(userId)
-    .catch(e => ctx.throw(500))
+                          .findById(userId)
+                          .catch(e => ctx.throw(500))
   const roles = userInfo && userInfo.roles || false
 
   return roles && roles.indexOf('admin') > -1 || false
@@ -175,7 +174,6 @@ class UserController {
    * 只有管理员可获取
    */
   static async getUsers(ctx) {
-    console.log(1)
     let { userId, page, pageSize } = ctx.query
     page = +page
     pageSize = +pageSize
@@ -197,7 +195,7 @@ class UserController {
   static async deleteUser(ctx, next) {
     let { userId, deletedUserId } = ctx.request.body
 
-    if (await isAdmin(userId)) {
+    if (isAdmin(userId)) {
       await UserModel.findByIdAndRemove(deletedUserId)
         .catch(e => ctx.throw(500))
 

@@ -23,15 +23,14 @@ class UserService {
    * @param {*} userId 
    */
   static async isAdmin(userId) {
-    // if (!userId) return false
+    if (!userId) return false
 
-    // const userInfo = await UserModel
-    //   .findById(userId)
-    //   .catch(e => ctx.throw(500))
-    // const roles = userInfo && userInfo.roles || false
+    const userInfo = await UserModel
+      .findById(userId)
+      .catch(e => ctx.throw(500))
+    const roles = userInfo && userInfo.roles || false
 
-    // return roles && roles.indexOf('admin') > -1 || false
-    throw new Error('4')
+    return roles && roles.indexOf('admin') > -1 || false
   }
 
   /**

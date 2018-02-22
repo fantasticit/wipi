@@ -1,28 +1,13 @@
-const normalLogger = require('./normal')
-const errorLogger = require('./error')
+const logNormal = require('./normal')
 
-module.exports = () => {
+module.exports = () =>  {
   return async (ctx, next) => {
     const start = Date.now()
-    try {
-      await next()
-      const status = JSON.stringify(ctx.response.status || ctx.response.statusCode || 500)
 
-      if (status >= 200 & status <= 399) {
-        normalLogger(ctx, status, start)
-      }
-    } catch (e) {
-      
-      const status = JSON.stringify(ctx.response.status || ctx.response.statusCode || 500)
+    await next()
 
-      if (status >= 200 & status <= 399) {
-        normalLogger(ctx, status, start)
-      } else {
-        errorLogger(ctx, status, start, e)
-      }
-    }
-    
-    
-    
+    const method = ctx.request.method
+    const url = ctx.request.url
+    logNormal(method, url, start)
   }
 }
