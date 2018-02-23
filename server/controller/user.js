@@ -24,15 +24,15 @@ function encryptPwd(passwd) {
 async function isAdmin(userId) {
   if (!userId) return false
   const userInfo = await UserModel
-                          .findById(userId)
-                          .catch(e => ctx.throw(500))
+    .findById(userId)
+    .catch(e => ctx.throw(500))
   const roles = userInfo && userInfo.roles || false
 
   return roles && roles.indexOf('admin') > -1 || false
 }
 
 // UserModel.create({
-//   account: 'admin',
+//   account: 'zx',
 //   passwd: encryptPwd('123456'),
 //   roles: ['admin', 'user']
 // })
@@ -59,8 +59,9 @@ class UserController {
    * 用户注册
    */
   static async register(ctx) {
+    console.log(ctx)
     let { account, passwd } = ctx.request.body
-
+    console.log(account, '-', passwd)
     if (!passwd) {
       ctx.throw(400, { message: '请输入密码' })
     }
@@ -72,7 +73,13 @@ class UserController {
       ctx.send({ code: 'no', message: '用户已存在'})
     } else {
       passwd = encryptPwd(passwd)
-      const result = await UserModel.create({ account, passwd }).catch(e => ctx.throw(500))
+      const result = await UserModel.create({ account, passwd }).catch(e => {
+        if (e.code === 11000) {
+          ctx.send({ code: 'no', message: '用户已存在'})
+        } else {
+          ctx.throw(500)
+        }
+      })
 
       ctx.send({ code: 'ok', message: '注册成功', data: result })
     }
@@ -99,7 +106,7 @@ class UserController {
           createdTime: user.createdTime
         }, 
         secret,
-        { expiresIn: '1h' }
+        { expiresIn: '4h' }
       )
       ctx.send({ code: 'ok', message: `登录成功`, data: token })
 
@@ -195,7 +202,7 @@ class UserController {
   static async deleteUser(ctx, next) {
     let { userId, deletedUserId } = ctx.request.body
 
-    if (isAdmin(userId)) {
+    if (await isAdmin(userId)) {
       await UserModel.findByIdAndRemove(deletedUserId)
         .catch(e => ctx.throw(500))
 

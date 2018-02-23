@@ -15,14 +15,20 @@ marked.setOptions({
   xhtml: false
 })
 
+/**
+ * 判断用户是不是admin
+ * @param {*} userId 
+ */
 async function isAdmin(userId) {
+  if (!userId) return false
   const userInfo = await UserModel
-                          .findById(userId)
-                          .catch(e => ctx.throw(500))
-  const roles = userInfo.roles
+    .findById(userId)
+    .catch(e => ctx.throw(500))
+  const roles = userInfo && userInfo.roles || false
 
-  return roles.indexOf('admin') > -1
+  return roles && roles.indexOf('admin') > -1 || false
 }
+
 
 class ArticleController {
   static constructor() {}
@@ -60,13 +66,15 @@ class ArticleController {
   // 根据query参数获取文章
   // 形式上更像是 listArticles
   static async getArticle(ctx, next) {
+    ctx.throw(500)
+
     let { userId, classify, state, keyword, page = 1, pageSize = 20 } = ctx.query
     page = +page
     pageSize = +pageSize
     const query = {}
     !!classify && (query.classify = classify)
     !!state && (query.state = state)
-    !!userId && !isAdmin(userId) && (query.author = userId)
+    !!userId && !await isAdmin(userId) && (query.author = userId)
     
     // 关键字查询(模糊查询)
     if (!!keyword) {
@@ -81,20 +89,20 @@ class ArticleController {
     const skip = page === 0 ? 0 : (page - 1) * pageSize
 
     const articles = await ArticleModel
-                            .find(query)
-                            .limit(pageSize)
-                            .skip(skip)
-                            .populate({        // 连表查询作者信息
-                              path: 'author', 
-                              select: 'account avatar _id' 
-                            })
-                            .exec()
-                            .catch(e => ctx.throw(500))
+      .find(query)
+      .limit(pageSize)
+      .skip(skip)
+      .populate({        // 连表查询作者信息
+        path: 'author', 
+        select: 'account avatar _id' 
+      })
+      .exec()
+      .catch(e => ctx.throw(500))
 
     const total = await ArticleModel
-                          .find(query)
-                          .count()
-                          .catch(e => ctx.throw(500))
+      .find(query)
+      .count()
+      .catch(e => ctx.throw(500))
 
     ctx.send({ status: 'ok', message: '获取文章成功', data: {
         items: articles,
@@ -107,13 +115,13 @@ class ArticleController {
   static async getArticleById(ctx, next) {
     const { id } = ctx.params
     const article = await ArticleModel
-                            .findById(id)
-                            .populate({        // 连表查询作者信息
-                              path: 'author', 
-                              select: 'account avatar' 
-                            })
-                            .exec()
-                            .catch(e => ctx.throw(500))
+      .findById(id)
+      .populate({        // 连表查询作者信息
+        path: 'author', 
+        select: 'account avatar' 
+      })
+      .exec()
+      .catch(e => ctx.throw(500))
     
     if(!article) {
       ctx.send({ status: 'no', message: '该ID下暂无文章'})
@@ -153,9 +161,9 @@ class ArticleController {
     if (
       !userId
       || targetArticle.author != userId
-      || !isAdmin(userId)
+      || !await isAdmin(userId)
     ) {
-      ctx.throw(400, { message: '没有权限删除' })
+      ctx.throw(403, { message: '没有权限删除' })
     }
 
     const article = await ArticleModel.findByIdAndRemove(id)

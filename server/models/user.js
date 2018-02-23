@@ -3,7 +3,10 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
   id: Number,
-  account: String,                   // 账户
+  account: {                         // 账户
+    type:String,
+    unique: true
+  },                   
   passwd: String,                    // 密码
   avatar: {                          // 头像
     type: String,

@@ -1,5 +1,7 @@
 const ApiPerformenceController = require('../../controller/apiPerformence')
 const logError = require('../logger/error')
+const sendAlarmEmail = require('../mailer')
+
 /**
  * 错误处理中间件
  * @returns function
@@ -17,6 +19,8 @@ module.exports = () => {
       if (statusCode === 401) {
         ctx.status = 401
         ctx.response.body = { code: 'no', message: `token不存在或已过期` }
+      } else if (statusCode === 500) {
+        sendAlarmEmail(ctx.request.url, err)
       } else  {
         ctx.response.body = { errMsg }
       }
