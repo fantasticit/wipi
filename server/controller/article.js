@@ -170,7 +170,6 @@ class ArticleController {
   }
 
   static async getArticleClassifies(ctx, next) {
-    console.log(1)
     ctx.send({ 
       status: 'ok', 
       message: '获取文章分类成功',
@@ -178,7 +177,6 @@ class ArticleController {
         { title: '全部', value: '', },
         { title: '前端', value: 'fe', },
         { title: '后端', value: 'be', },
-        { title: '人工智能', value: 'ai', },
       ]
     }) 
   }

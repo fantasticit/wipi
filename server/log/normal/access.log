@@ -65,3 +65,4 @@
 [2018-02-23T10:11:35.506] [INFO] normal - GET /user 响应时间为: 0.059s
 [2018-02-23T10:12:21.180] [INFO] normal - GET /article 响应时间为: 0.007s
 [2018-02-23T10:12:36.968] [INFO] normal - GET /user 响应时间为: 0.001s
+[2018-02-23T11:15:09.511] [INFO] normal - GET /article 响应时间为: 0.022s
