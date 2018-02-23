@@ -1,34 +1,8 @@
 const ArticleModel = require('../../models/article')
 const UserModel = require('../../models/user')
-const marked = require('marked')
-const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字符
-
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  xhtml: false
-})
-
-/**
- * 判断用户是不是admin
- * @param {*} userId 
- */
-async function isAdmin(userId) {
-  if (!userId) return false
-  const userInfo = await UserModel
-    .findById(userId)
-    .catch(e => ctx.throw(500))
-  const roles = userInfo && userInfo.roles || false
-
-  return roles && roles.indexOf('admin') > -1 || false
-}
-
+const marked = require('../util/markdown')
+const isAdmin = require('../util/is-admin')
+const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字
 
 class ArticleController {
   static constructor() {}

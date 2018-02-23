@@ -1,35 +1,7 @@
-const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
-const secret = require('../config').secret
-const salt = require('../config').salt
 const UserModel = require('../models/user')
-
-/**
- * 用户密码加密
- * @param  {String} password 
- * @return {String} encryptedPasswd
- */
-function encryptPwd(passwd) {
-  const saltPasswd = passwd + ':' + salt
-  const md5 = crypto.createHash('md5')       // md5加密
-  const encryptedPasswd = md5.update(saltPasswd).digest('hex')
-
-  return encryptedPasswd
-}
-
-/**
- * 判断用户是不是admin
- * @param {*} userId 
- */
-async function isAdmin(userId) {
-  if (!userId) return false
-  const userInfo = await UserModel
-    .findById(userId)
-    .catch(e => ctx.throw(500))
-  const roles = userInfo && userInfo.roles || false
-
-  return roles && roles.indexOf('admin') > -1 || false
-}
+const encryptPwd = require('./util/encrypt')
+const isAdmin = require('./util/is-admin')
 
 // UserModel.create({
 //   account: 'zx',
