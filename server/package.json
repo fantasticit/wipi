@@ -24,6 +24,7 @@
     "marked": "^0.3.15",
     "mongodb": "^3.0.2",
     "mongoose": "^5.0.0-rc2",
+    "nodemailer": "^4.6.0",
     "nodemon": "^1.14.12",
     "qiniu": "^7.1.2",
     "xss-filters": "^1.2.7"
