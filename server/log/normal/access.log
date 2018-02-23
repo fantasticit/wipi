@@ -77,3 +77,4 @@
 [2018-02-23T16:46:17.503] [INFO] normal - GET /article/classify 响应时间为: 0.021s
 [2018-02-23T16:46:51.464] [INFO] normal - GET /article 响应时间为: 0.023s
 [2018-02-23T16:47:52.647] [INFO] normal - GET /article 响应时间为: 0.002s
+[2018-02-23T17:02:45.021] [INFO] normal - GET /article 响应时间为: 0.025s

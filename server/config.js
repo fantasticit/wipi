@@ -1,6 +1,6 @@
 const config = {
   dev: {
-    port: 3002,
+    port: 3003,
 
     db: {
       name: 'elapse',

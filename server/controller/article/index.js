@@ -1,5 +1,5 @@
-const ArticleModel = require('../models/article')
-const UserModel = require('../models/user')
+const ArticleModel = require('../../models/article')
+const UserModel = require('../../models/user')
 const marked = require('marked')
 const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字符
 
@@ -173,18 +173,6 @@ class ArticleController {
         }
       })
     ctx.send({ status: 'ok', message: '删除文章成功'}) 
-  }
-
-  static async getArticleClassifies(ctx, next) {
-    ctx.send({ 
-      status: 'ok', 
-      message: '获取文章分类成功',
-      data: [
-        { title: '全部', value: '', },
-        { title: '前端', value: 'fe', },
-        { title: '后端', value: 'be', },
-      ]
-    }) 
   }
 }
 
