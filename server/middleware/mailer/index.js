@@ -5,8 +5,8 @@ let transporter = nodemailer.createTransport(
     host: 'smtp.163.com',
     port: 465,
     auth: {
-      user: 'bken2016@163.com',
-      pass: 'ben123456'
+      user: '',
+      pass: ''
     }
   }
 )
