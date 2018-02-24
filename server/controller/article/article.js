@@ -40,7 +40,6 @@ class ArticleController {
   // 根据query参数获取文章
   // 形式上更像是 listArticles
   static async getArticle(ctx, next) {
-    ctx.throw(500)
     let { userId, classify, state, keyword, page = 1, pageSize = 20 } = ctx.query
     page = +page
     pageSize = +pageSize

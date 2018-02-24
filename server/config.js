@@ -12,7 +12,7 @@ const config = {
     secret: 'elapse',          // jwt生成token
     salt: 'elapse-server2018', // md5加密盐值
     mail: {
-      user: 'elapser_alarmer@163.com',
+      user: 'elapse_alarmer@163.com',
       pass: 'EAlarmer2018',
     }
   },

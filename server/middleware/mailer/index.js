@@ -2,27 +2,29 @@ const nodemailer = require('nodemailer')
 const config = require('../../config')
 const ErrorController = require('../../controller/error').api
 
+console.log(config.mail)
+
 let transporter = nodemailer.createTransport(
   {
     host: 'smtp.163.com',
     port: 465,
     auth: {
-      user: "'" + config.mail.user + "'",
-      pass: "'" + config.mail.pass + "'"
+      user: config.mail.user,
+      pass: config.mail.pass,
     }
   }
 )
 
 module.exports = function sendAlarmEmail(method, requestUrl, err) {
   message = {
-    from: '<config.mail.user>',
+    from: '<' + config.mail.user + '>',
     // Comma separated list of recipients
     to: '"zhaoxu" <zhaoxu@rawstonedu.com>',
     subject: 'Elapse Server has occurred an error!',
     text: 'Error Occurred',
     // HTML body
     html: `
-  <p style="font-size: 18px">An error occurred on request: <strong>${method}<em>${requestUrl}</em></strong></p>
+      <p style="font-size: 18px">An error occurred on request: <strong>${method}<em>${requestUrl}</em></strong></p>
       <table style="border: 1px solid #f1f1f1; table-layout: fixed; border-collapse: collapse">
         <tbody>
           <tr>
@@ -40,10 +42,12 @@ module.exports = function sendAlarmEmail(method, requestUrl, err) {
 
   transporter.sendMail(message, async (error, info) => {
     if (error) {
+      console.log(error)
+
       await ErrorController.addRecord({
         statusCode: 500,
         method: method,
-        requestUrl: requestUrl,
+        requestUrl,
         responseTime: 0,
         errMsg: err.message,
         errStack: err.stack
@@ -55,7 +59,7 @@ module.exports = function sendAlarmEmail(method, requestUrl, err) {
     await ErrorController.addRecord({
       statusCode: 500,
       method: method,
-      requestUrl: questUrl,
+      requestUrl,
       responseTime: 0,
       errMsg: err.message,
       errStack: err.stack,
