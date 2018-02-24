@@ -33,7 +33,7 @@ const routeConfig = [
 
   {
     prefix: '文章管理',
-    icon: 'ios-paper',
+    icon: 'ios-book',
     children: [
       {
         path: 'article',
@@ -50,6 +50,54 @@ const routeConfig = [
         component: views.Article,
         meta: {
           title: '新建文章',
+        },
+      },
+    ],
+  },
+
+  {
+    prefix: '分类管理',
+    icon: 'ios-paper',
+    children: [
+      {
+        path: 'classify',
+        name: 'ClassifyList',
+        component: views.ClassifyList,
+        meta: {
+          title: '分类列表',
+        },
+      },
+    
+      {
+        path: 'classify/new',
+        name: 'NewClasify',
+        component: views.Classify,
+        meta: {
+          title: '添加分类',
+        },
+      },
+    ],
+  },
+
+  {
+    prefix: '标签管理',
+    icon: 'ios-pricetags',
+    children: [
+      {
+        path: 'tag',
+        name: 'TagList',
+        component: views.TagList,
+        meta: {
+          title: '标签列表',
+        },
+      },
+    
+      {
+        path: 'tag/new',
+        name: 'Newtag',
+        component: views.Tag,
+        meta: {
+          title: '添加标签',
         },
       },
     ],
