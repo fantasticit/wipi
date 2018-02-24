@@ -88,11 +88,11 @@ export default router
 //     rewrite ^(.+)$ /index.html last;
 //   }
 
-//   location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
-//     # Some basic cache-control for static files to be sent to the browser
-//     expires max;
-//     add_header Pragma public;
-//     add_header Cache-Control "public, must-revalidate, proxy-revalidate";
-//   }
+  // location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
+  //   # Some basic cache-control for static files to be sent to the browser
+  //   expires max;
+  //   add_header Pragma public;
+  //   add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+  // }
 
 // }

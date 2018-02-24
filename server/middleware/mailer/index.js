@@ -49,6 +49,7 @@ module.exports = function sendAlarmEmail(method, requestUrl, err) {
         method: method,
         requestUrl,
         responseTime: 0,
+        dateTime: Date.now(),
         errMsg: err.message,
         errStack: err.stack
       })
@@ -63,6 +64,7 @@ module.exports = function sendAlarmEmail(method, requestUrl, err) {
       responseTime: 0,
       errMsg: err.message,
       errStack: err.stack,
+      dateTime: Date.now(),
       isSendMail: true
     })
   
