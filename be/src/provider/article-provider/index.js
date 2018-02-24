@@ -6,10 +6,27 @@ class _ArticleProvider extends BaseHttp {
     add: '/article/new',
     delete: '/article/',
     update: '/article/',
+
+    getTag: '/article/tag',
   }
 
   constructor() {
     super()
+  }
+
+  async getTags() {
+    const req = {
+      url: this.api.getTag,
+      method: 'get',
+    }
+
+    try {
+      const res = await this.http(req)
+      console.log(res)
+      return res.data.items
+    } catch (err) {
+      throw new Error(err)
+    }
   }
 
   async addArticle(userId, article) {

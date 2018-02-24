@@ -43,10 +43,12 @@
             <span>文章标签</span>
           </div>
           <div class="body">
-            <ta-form-item placeholder="输入文章标签,回车即可添加" @enter="addTag($event)">
+            <ta-select placeholder="请选择文章标签" :options="tags">
+            </ta-select>
+            <!-- <ta-form-item placeholder="输入文章标签,回车即可添加" @enter="addTag($event)"> -->
             </ta-form-item>
             <div class="tags">
-              <ta-tag v-for="(tag, index) in tags" :key="index" :type="tagTypes[index]"
+              <ta-tag v-for="(tag, index) in selectedTags" :key="index" :type="tagTypes[index]"
                 @close="removeTag(index)">
                 {{ tag }}
               </ta-tag>
@@ -113,6 +115,7 @@ import { ArticleProvider } from '@/provider/article-provider'
       classifies: state => state.classifies,
       states: state => state.states,
       coverPrefix: state => state.coverPrefix,
+      tags: state => state.tags
     })
   }
 })
@@ -126,7 +129,7 @@ export default class Article extends Vue {
   // author = ''                                          // 文章作者
   state = ''                                           // 文章状态
   cover = ''                                           // 文章封面
-  tags = []                                            // 文章标签
+  selectedTags = []                                            // 文章标签
   loading = false
   tagTypes = ['default', 'info', 'success', 'danger']
   upload = null                                        // 上传组件(VNode)

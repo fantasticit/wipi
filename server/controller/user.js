@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const UserModel = require('../models/user')
 const encryptPwd = require('./util/encrypt')
 const isAdmin = require('./util/is-admin')
+const secret = require('../config').secret
 
 // UserModel.create({
 //   account: 'zx',
@@ -31,9 +32,8 @@ class UserController {
    * 用户注册
    */
   static async register(ctx) {
-    console.log(ctx)
     let { account, passwd } = ctx.request.body
-    console.log(account, '-', passwd)
+
     if (!passwd) {
       ctx.throw(400, { message: '请输入密码' })
     }
@@ -158,7 +158,10 @@ class UserController {
     pageSize = +pageSize
     const skip = page === 0 ? 0 : (page - 1) * pageSize
 
-    if (await isAdmin(userId)) {
+    const can = await isAdmin(userId)
+    console.log(can)
+
+    if (can) {
       const users = await UserModel.find().limit(pageSize).skip(skip)
         .catch(e => ctx.throw(500))
       const total = await UserModel.find().count().catch(e => ctx.throw(500))
@@ -167,20 +170,23 @@ class UserController {
         total
       }})
     } else {
-      ctx.send(403, { message: '非管理员禁止查看用户列表' })
+      ctx.throw(403, { message: '非管理员禁止查看用户列表' })
     }
   }
 
   static async deleteUser(ctx, next) {
     let { userId, deletedUserId } = ctx.request.body
 
-    if (await isAdmin(userId)) {
+    const can = await isAdmin(userId)
+    console.log(can)
+
+    if (can) {
       await UserModel.findByIdAndRemove(deletedUserId)
         .catch(e => ctx.throw(500))
 
       ctx.send({ status: 'ok', message: '删除用户成功'})
     } else {
-      ctx.send(403, { message: '非管理员禁止删除用户' })
+      ctx.throw(403, { message: '非管理员禁止删除用户' })
     }
   }
 }

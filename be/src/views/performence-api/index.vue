@@ -71,7 +71,7 @@ const echarts = require('echarts')
 export default class ApiPerformence extends Vue {
   timer = null
   apiList = []
-  selectedApi = '/feperformence'
+  selectedApi = ''
 
   chart = null
   chartOption = {}
@@ -99,7 +99,6 @@ export default class ApiPerformence extends Vue {
 
 
     this.$loading.start()
-    this.fetchPerformences()
     this.$loading.close()
 
     // this.timer = setInterval(() => {
@@ -119,6 +118,9 @@ export default class ApiPerformence extends Vue {
 
         return item
       })
+
+      this.selectedApi = this.apiList[0].value
+      this.fetchPerformences()
     } catch (err) {
       this.$message.error(err.message)
     }
@@ -152,6 +154,8 @@ export default class ApiPerformence extends Vue {
   }
 
   getOption(data) {
+    console.log(data)
+
     this.chartOption = {
       tooltip: {
         trigger: 'axis'

@@ -1,14 +1,17 @@
-const ApiPerformenceController = require('../../controller/apiPerformence')
-const FePerformenceController = require('../../controller/fePerformence')
+const PerformenceContoller = require('../../controller/performence')
 
 module.exports = router => {
-  router.get('/performence/api', ApiPerformenceController.getApiRecords)
-  router.get('/performence/api/list', ApiPerformenceController.getApiList)
-  router.get('/performence/api/calltime', ApiPerformenceController.getApiCallTime)
-  router.get('/performence/api/avaragerestime', ApiPerformenceController.getApiAvarageResTime)
-  router.get('/performence/api/log/error', ApiPerformenceController.getApiErrorLog)
+  /**
+   * 接口性能记录
+   */
+  router.get('/performence/api', PerformenceContoller.api.getRecords)
+  router.get('/performence/api/list', PerformenceContoller.api.getApiList)
+  router.get('/performence/api/list/restime', PerformenceContoller.api.getApiAvarageResTime)
+  router.get('/performence/api/list/calltime', PerformenceContoller.api.getApiCallTime)
 
-  router.get('/performence/fe', FePerformenceController.getRecords)
-  router.post('/performence/fe', FePerformenceController.addRecord)
-  router.get('/performence/fe/statics', FePerformenceController.getPerformenceStatics)
+  /**
+   * 前端页面性能记录
+   */
+  router.get('/performence/webpage', PerformenceContoller.webpage.getRecords)
+  router.post('/performence/webpage', PerformenceContoller.webpage.addRecord)
 }

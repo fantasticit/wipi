@@ -1,26 +1,28 @@
 const nodemailer = require('nodemailer')
+const config = require('../../config')
+const ErrorController = require('../../controller/error').api
 
 let transporter = nodemailer.createTransport(
   {
     host: 'smtp.163.com',
     port: 465,
     auth: {
-      user: 'bken2016@163.com',
-      pass: 'ben123456'
+      user: "'" + config.mail.user + "'",
+      pass: "'" + config.mail.pass + "'"
     }
   }
 )
 
-module.exports = function sendAlarmEmail(requestUrl, err) {
+module.exports = function sendAlarmEmail(method, requestUrl, err) {
   message = {
-    from: '<bken2016@163.com>',
+    from: '<config.mail.user>',
     // Comma separated list of recipients
     to: '"zhaoxu" <zhaoxu@rawstonedu.com>',
     subject: 'Elapse Server has occurred an error!',
     text: 'Error Occurred',
     // HTML body
     html: `
-      <p style="font-size: 18px">An error occurred on request: <strong><em>${requestUrl}</em></strong></p>
+  <p style="font-size: 18px">An error occurred on request: <strong>${method}<em>${requestUrl}</em></strong></p>
       <table style="border: 1px solid #f1f1f1; table-layout: fixed; border-collapse: collapse">
         <tbody>
           <tr>
@@ -36,15 +38,29 @@ module.exports = function sendAlarmEmail(requestUrl, err) {
     `
   }
 
-  transporter.sendMail(message, (error, info) => {
+  transporter.sendMail(message, async (error, info) => {
     if (error) {
-      console.log('Error occurred');
-      console.log(error.message);
+      await ErrorController.addRecord({
+        statusCode: 500,
+        method: method,
+        requestUrl: requestUrl,
+        responseTime: 0,
+        errMsg: err.message,
+        errStack: err.stack
+      })
       return
     }
   
     console.log('Message sent successfully!');
-    console.log(nodemailer.getTestMessageUrl(info));
+    await ErrorController.addRecord({
+      statusCode: 500,
+      method: method,
+      requestUrl: questUrl,
+      responseTime: 0,
+      errMsg: err.message,
+      errStack: err.stack,
+      isSendMail: true
+    })
   
     transporter.close();
   })

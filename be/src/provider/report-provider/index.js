@@ -2,16 +2,16 @@ import BaseHttp from '../base-http'
 
 class _ReportProvider extends BaseHttp {
   api = {
-    addFeError: '/performence/error/fe',
-    getFePerformences: '/performence/fe',
+    addFeError: '/error/webpage',
+    getFePerformences: '/performence/webpage',
     getFeStatics: '/performence/fe/statics',
-    addFePerformence: '/performence/fe',
+    addFePerformence: '/performence/webpage',
 
     getApiList: '/performence/api/list',
     getApiPerformences: '/performence/api',
-    getApiCallTimes: '/performence/api/calltime',
-    getApiAvarageResTime: '/performence/api/avaragerestime',
-    getApiErrorLog: '/performence/api/log/error',
+    getApiCallTimes: '/performence/api/list/calltime',
+    getApiAvarageResTime: '/performence/api/list/restime',
+    getApiErrorLog: '/error/api',
   }
 
   constructor() {

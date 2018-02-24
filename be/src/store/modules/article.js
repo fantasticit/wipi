@@ -1,3 +1,5 @@
+import { ArticleProvider } from '@/provider/article-provider'
+
 const state = {
   classifies: [
     {
@@ -34,8 +36,28 @@ const state = {
     { value: '发布', title: '发布' },
   ],                     // 文章状态
   coverPrefix: 'http://p39p1kvxn.bkt.clouddn.com/', // 上传图片网址前缀
+  tags: [{ value: '草稿', title: '草稿' },]
+}
+
+const actions = {
+  async getTags({ commit }) {
+    console.log('获取')
+    const tags = await ArticleProvider.getTags()
+    console.log(tags)
+
+    commit('SET_TAGS', tags)
+  },
+}
+
+const mutations = {
+  SET_TAGS(state, tags) {
+    state.tags = tags
+    console.log(tags)
+  }
 }
 
 export default {
   state,
+  actions,
+  mutations,
 }

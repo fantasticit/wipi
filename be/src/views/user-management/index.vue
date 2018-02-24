@@ -80,6 +80,8 @@ export default class UserManagement extends Vue {
         pageSize: this.pageSize
       })
 
+      console.log(res)
+
       this.users = res.items.map(user => {
         user.roles = user.roles.join('、')
         user.lastLoginTime = formatTime(user.lastLoginTime) 
@@ -102,7 +104,10 @@ export default class UserManagement extends Vue {
         this.$message.success(res)
         this.fetchUsers()
       })
-      .catch(e => this.$message.info('取消删除'))
+      .catch(e => {
+        console.log(e)
+        this.$message.info('删除失败')
+      })
   }
 
   handlePageChange(page) {

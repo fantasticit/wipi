@@ -8,35 +8,9 @@ const router = require('./router')
 middleWare(app)
 router(app)
 
-
 app.listen(port, () => {
   console.log('server is running at http://localhost:', port)
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Todo: 前台设置
 //        1. SEO信息（基本信息）

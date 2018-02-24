@@ -4,7 +4,12 @@
   width: 100vw;
   height: 100vh;
   padding: 40px 0;
-  background-color: #efefef;
+  background-color: $bg;
+
+  @include flexLayout(center) {
+    align-items: center;
+    flex-direction: column;
+  }
 
   @include e(head) {
     max-width: 992px;

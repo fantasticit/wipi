@@ -67,8 +67,8 @@ import { ReportProvider } from '@/provider/report-provider'
 export default class ApiError extends Vue {
   logs = []
   selectedLog = ''
-  tableHead = ['请求地址', 'Http动作', '响应码', '日期', '操作']
-  tableKeys = ['requestUrl', 'method', 'statusCode', 'dateTime']
+  tableHead = ['请求地址', 'Http动作', '响应码', '邮件通知', '日期', '操作']
+  tableKeys = ['requestUrl', 'method', 'statusCode', 'isSendMail', 'dateTime']
   total = 0
   keyword = ''
   page = 1
@@ -92,6 +92,7 @@ export default class ApiError extends Vue {
         delete log.__v
         delete log.responseTime
         log.dateTime = formatTime(log.dateTime)
+        log.isSendMail = !!log.isSendMail ? '已发送' : '未发送'
         return log
       })
       this.total = res.total

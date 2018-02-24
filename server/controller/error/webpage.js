@@ -1,14 +1,14 @@
-const FeErrorModel = require('../models/error-fe')
+const WebpageErrorModel = require('../../models/error/webpage')
 const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字符
 
-class FeErrorController {
+class WebpageErrorController {
   static constructor() {}
 
   // 记录错误
   static async addRecord(ctx, next) {
     let { errMsg, errStack, vm, info, appName } = ctx.request.body
 
-    await FeErrorModel.create({ errMsg, errStack, vm, info, appName })
+    await WebpageErrorModel.create({ errMsg, errStack, vm, info, appName })
       .catch(e => ctx.throw(500))
     
     ctx.send({ status: 'ok', message: '成功' })
@@ -30,13 +30,13 @@ class FeErrorController {
       ]
     }
 
-    const records = await FeErrorModel
+    const records = await WebpageErrorModel
       .find(query)
       .limit(pageSize)
       .skip(skip)
       .catch(e => ctx.throw(500))
     
-    const total = await FeErrorModel
+    const total = await WebpageErrorModel
       .find(query)
       .count()
       .catch(e => ctx.throw(500))
@@ -44,4 +44,4 @@ class FeErrorController {
   }
 }
 
-module.exports = FeErrorController
+module.exports = WebpageErrorController

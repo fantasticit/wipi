@@ -8,6 +8,8 @@ module.exports = () =>  {
 
     const method = ctx.request.method
     const url = ctx.request.url
-    logNormal(method, url, start)
+    const status = ctx.response.status
+    
+    logNormal(method, url, status, start)
   }
 }

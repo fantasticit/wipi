@@ -13,11 +13,11 @@ const tagSchema = new Schema({
   },
   createdDate: {                        // 创建日期
     type: Date,
-    default: Date.now
+    default: Date.now()
   },
   updatedDate: {                        // 更新日期
     type: Date,
-    default: Date.now
+    default: Date.now()
   },
 })
 

@@ -1,14 +1,13 @@
 const ArticleController = require('../../controller/article')
-const TagController = require('../../controller/article/tag')
-const ClassifyController = require('../../controller/article/classify')
 
 module.exports = router => {
-  router.get('/article', ArticleController.getArticle)
-  router.get('/article/tag', TagController.getTags)
-  router.get('/article/classify', ClassifyController.getClassifies)
-  router.get('/article/meta/classifies', ArticleController.getArticleClassifies)
-  router.post('/article/new', ArticleController.addArticle)
-  router.get('/article/:id', ArticleController.getArticleById)
-  router.patch('/article/:id', ArticleController.updateArticle)
-  router.delete('/article/:id', ArticleController.deleteArticle)
+  router.get('/article', ArticleController.article.getArticle)              // 获取文章
+  router.post('/article/new', ArticleController.article.addArticle)         // 新增文章
+
+  router.get('/article/tag', ArticleController.tag.getTags)                 // 获取文章标签
+  router.get('/article/classify', ArticleController.classify.getClassifies) // 获取文章分类
+
+  router.get('/article/:id', ArticleController.article.getArticleById)      // 获取指定文章
+  router.patch('/article/:id', ArticleController.article.updateArticle)     // 更新文章
+  router.delete('/article/:id', ArticleController.article.deleteArticle)    // 删除文章
 }

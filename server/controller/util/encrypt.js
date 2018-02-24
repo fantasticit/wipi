@@ -1,5 +1,4 @@
 const crypto = require('crypto')
-const secret = require('../../config').secret
 const salt = require('../../config').salt
 
 /**

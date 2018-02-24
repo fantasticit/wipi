@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const feErrorSchema = new Schema({
+const webpageSchema = new Schema({
   id: Number,
   errMsg: String,
   errStack: String,
@@ -14,8 +14,8 @@ const feErrorSchema = new Schema({
   },
 })
 
-feErrorSchema.index({ id: 1 })
+webpageSchema.index({ id: 1 })
 
-const FeError = mongoose.model('FeError', feErrorSchema)
+const Webpage = mongoose.model('Error_Webpage', webpageSchema)
 
-module.exports = FeError
+module.exports = Webpage

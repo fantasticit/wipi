@@ -1,4 +1,4 @@
-const ApiPerformenceController = require('../../controller/apiPerformence')
+const ErrorController = require('../../controller/error').api
 const logError = require('../logger/error')
 const sendAlarmEmail = require('../mailer')
 
@@ -20,21 +20,12 @@ module.exports = () => {
         ctx.status = 401
         ctx.response.body = { code: 'no', message: `token不存在或已过期` }
       } else if (statusCode === 500) {
-        sendAlarmEmail(ctx.request.url, err)
+        sendAlarmEmail(ctx.request.method, ctx.request.url, err)
       } else  {
         ctx.response.body = { errMsg }
       }
 
       logError(ctx, statusCode, err)
-
-      await ApiPerformenceController.addApiRecord({
-        statusCode,
-        method: ctx.request.method,
-        requestUrl: ctx.request.url,
-        responseTime: 0,            // 出错，不记录响应时间
-        errMsg: err.message,
-        errStack: err.stack
-      })
     }
   }
 }

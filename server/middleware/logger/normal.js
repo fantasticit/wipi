@@ -1,6 +1,7 @@
 const log4js = require('log4js')
-// const ApiPerformenceController = require('../../controller/apiPerformence')
-module.exports = async (method, url, start = 0) => {
+const PerformenceContoller = require('../../controller/performence').api
+
+module.exports = async (method, url, status, start = 0) => {
   log4js.configure(
     {
       appenders: { 
@@ -12,17 +13,15 @@ module.exports = async (method, url, start = 0) => {
   const logger = log4js.getLogger('normal')
   const responseTime = (Date.now() - start)
   logger.info(`${method} ${url} 响应时间为: ${responseTime / 1000}s`)
+
+  /**
+   * 记录访问记录
+   */
+  url = url.split('/')[1]
+  await PerformenceContoller.addRecord({
+    statusCode: status,
+    method,
+    requestUrl: url,
+    responseTime
+  })
 }
-
-  // if (/article/ig.test(url)) { // article系列接口只存储/article路径
-  //   url = '/article'
-  // } else if (/user/ig.test(url)) {
-  //   url = '/user'
-  // }
-
-  // await ApiPerformenceController.addApiRecord({
-  //   statusCode: status,
-  //   method,
-  //   requestUrl: url,
-  //   responseTime
-  // })

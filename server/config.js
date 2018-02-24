@@ -1,6 +1,6 @@
 const config = {
   dev: {
-    port: 3003,
+    port: 3000,
 
     db: {
       name: 'elapse',
@@ -9,8 +9,12 @@ const config = {
       user: 'zxx',
       pwd:  'zx123',
     },
-    secret: 'elapse',         // jwt生成token
-    salt: 'elapse-server2018' // md5加密盐值
+    secret: 'elapse',          // jwt生成token
+    salt: 'elapse-server2018', // md5加密盐值
+    mail: {
+      user: 'elapser_alarmer@163.com',
+      pass: 'EAlarmer2018',
+    }
   },
 
   prod: {

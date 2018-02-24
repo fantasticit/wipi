@@ -7,26 +7,26 @@
   height: 100vh;
   background-color: $bg;
 
-  align-items: center;
-  flex-direction: column;
-  @include flexLayout(flex-start);
+  @include flexLayout(center) {
+    align-items: center;
+    flex-direction: column;
+  }
 
   @include e(container) {
     width: 420px;
     padding: 15px 30px;
     text-align: center;
-    margin: 180px auto;
-    background: #fff;
     border-radius: 5px;
+    margin: 0 auto;
 
     h1 {
       font-size: 26px;
+      color: #fff;
       font-weight: normal;
-      // margin-bottom: 40px;
-      padding: 15px 0;
+      padding: 30px 0;
     }
 
-    button {
+    .btn-login {
       width: 100%;
       margin-top: 22px;
     }
@@ -36,10 +36,14 @@
       padding: 10px 0 15px;
       color: #999;
       font-size: 14px;
-      border-top: 1px solid $border;
+      text-align: right;
 
-      button {
-        margin-top: 10px;
+      a {
+        color: #fff;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 

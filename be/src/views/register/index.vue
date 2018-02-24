@@ -34,7 +34,7 @@
         </ta-form>
       </div>
       <div class="other">
-        <span>已有帐号</span>
+        <span>已有帐号？</span>
         <router-link to="/login">立即登录</router-link>
       </div>
     </div>

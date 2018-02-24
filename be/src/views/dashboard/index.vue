@@ -36,47 +36,6 @@
       </ta-col>
 
       <ta-col :span="3" :sm="12">
-        <ul class="ta-page__statics">
-          <li class="is-primary">
-            <div class="icon">
-              <ta-icon name="ios-paper"></ta-icon>
-            </div>
-            <div class="info">
-              <p>{{ statics.pv }}</p>
-              <p>页面浏览量</p>
-            </div>
-          </li>
-
-          <li class="is-danger">
-            <div class="icon">
-              <ta-icon name="shuffle"></ta-icon>
-            </div>
-            <div class="info">
-              <p>{{ apiCallTimes }}</p>
-              <p>接口调用量</p>
-            </div>
-          </li>
-
-          <li class="is-primary">
-            <div class="icon">
-              <ta-icon name="ios-paper"></ta-icon>
-            </div>
-            <div class="info">
-              <p>{{ statics.pv }}</p>
-              <p>页面浏览量</p>
-            </div>
-          </li>
-
-          <li class="is-danger">
-            <div class="icon">
-              <ta-icon name="shuffle"></ta-icon>
-            </div>
-            <div class="info">
-              <p>{{ apiCallTimes }}</p>
-              <p>接口调用量</p>
-            </div>
-          </li>
-        </ul>
       </ta-col>
     </ta-row>  
   </div>
@@ -86,7 +45,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { formatTime } from '@/util/format-time'
-import { ReportProvider } from '@/provider/report-provider'
 
 const echarts = require('echarts')
 
@@ -138,8 +96,6 @@ export default class Dashboard extends Vue {
     this.userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
     this.userInfo.lastLoginTime = formatTime(this.userInfo.lastLoginTime)
     this.userInfo.createdTime = formatTime(this.userInfo.createdTime)
-    this.fetchPerformenceStatics()
-    this.fetchApiCallTimes()
   }
 
   mounted() {
@@ -147,24 +103,6 @@ export default class Dashboard extends Vue {
     this.staticChart = echarts.init(oStaticChart)
 
     this.getStaticChartOpt()
-  }
-
-  async fetchPerformenceStatics() {
-    try {
-      const res =  await ReportProvider.getStatics()
-      this.$set(this.statics, 'pv', res.pv)
-    } catch (err) {
-      this.$message.error(err.message)
-    }
-  }
-
-  async fetchApiCallTimes() {
-    try { 
-      const res = await ReportProvider.getApiCallTimes()
-      this.apiCallTimes = Object.keys(res).reduce((num, key) => num += res[key], 0)
-    } catch (err) {
-      this.$message.error(err.message)
-    }
   }
 
   getStaticChartOpt() {

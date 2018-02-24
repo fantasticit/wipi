@@ -15,7 +15,6 @@ module.exports = () => {
       acceptEncoding 
       && acceptEncoding.indexOf('gzip') > -1
     ) {
-      console.log('gzip')
       if (isJSON(body)) body = JSON.stringify(body)
       // gzip body并设置 gzip 响应头
       ctx.set('Content-Encoding', 'gzip')

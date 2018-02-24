@@ -41,7 +41,7 @@ const mutations = {
   }
 }
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state,
   actions,
   mutations,
@@ -50,3 +50,15 @@ export default new Vuex.Store({
     route: { namespaced: true, ...route },
   }
 })
+
+
+// store.watch(state => state.article.tags, () => {
+//   console.log('vuex tags')
+
+//   if (state.article.tags.length <= 0) {
+    
+//   }
+// })
+store.dispatch('article/getTags')
+
+export default store

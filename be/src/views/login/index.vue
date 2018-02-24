@@ -12,15 +12,13 @@
           placeholder="请输入密码" type="password" 
           v-model="password" :rules="rules.password">
         </ta-form-item>
-        <ta-button class="ta-login__button" type="primary">
+        <ta-button class="btn-login" type="primary">
           登录
         </ta-button>
       </ta-form>
       <div class="register">
-        <p>没有帐号？</p>
-        <ta-button @click="register()">
-          立即注册
-        </ta-button>
+        <span>没有帐号？</span>
+        <router-link to="/register">立即注册</router-link>
       </div>
     </div>
   </div>
@@ -68,31 +66,6 @@ export default class Login extends Vue {
             this.$router.replace('/dashboard')
           }
         })
-    } catch (err) {
-      this.$message.error(err.message)
-    }
-  }
-
-
-  register() {
-    this.$router.replace('/register')
-  }
-
-  async checkAccountExist() {
-    if (!this.newAccount) {
-      this.accountMessage = '请输入用户账户'
-      return false
-    }
-
-    try {
-      const res = await UserProvider.checkAccountExist(this.newAccount)
-      if (res.code === 'no') {
-        this.accountMessage = res.message
-        return false
-      } else {
-        this.accountMessage = ''
-        return true
-      }
     } catch (err) {
       this.$message.error(err.message)
     }

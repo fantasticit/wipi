@@ -1,22 +1,25 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const apiPerformenceSchema = new Schema({
+const apiErrorSchema = new Schema({
   id: Number,
   statusCode: Number,
   requestUrl: String,
   method: String,
-  responseTime: Number,
   dateTime: {
     type: Date,
     default: Date.now()
   },
   errMsg: String,
   errStack: String,
+  isSendMail: {
+    type: Boolean,
+    default: false
+  }
 })
 
-apiPerformenceSchema.index({ id: 1 })
+apiErrorSchema.index({ id: 1 })
 
-const ApiPerformence = mongoose.model('ApiPerformence', apiPerformenceSchema)
+const ApiError = mongoose.model('Error_Api', apiErrorSchema)
 
-module.exports = ApiPerformence
+module.exports = ApiError

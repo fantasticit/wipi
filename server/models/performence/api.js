@@ -9,14 +9,12 @@ const apiSchema = new Schema({
   responseTime: Number,
   dateTime: {
     type: Date,
-    default: Date.now
+    default: Date.now()
   },
-  errMsg: String,
-  errStack: String,
 })
 
 apiSchema.index({ id: 1 })
 
-const Api = mongoose.model('Api', apiSchema)
+const Api = mongoose.model('Performence_Api', apiSchema)
 
 module.exports = Api

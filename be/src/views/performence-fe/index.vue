@@ -76,7 +76,7 @@ export default class FePerformence extends Vue {
       res.items.map(performance => {
         this.firstScreenTimes.push(performance.firstScreenTime)
         this.allLoadedTimes.push(performance.allLoadedTime)
-        this.recordDates.push(formatTime(performance.visitDateTime))
+        this.recordDates.push(formatTime(performance.createdDateTime))
       })
 
       this.getChartOption()

@@ -1,15 +1,15 @@
-const ApiPerformenceModel = require('../models/apiPerformence')
+const ApiPerformenceModel = require('../../models/performence/api')
 const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字符
 
 class ApiPerformenceController {
   static constructor() {}
 
-  static async addApiRecord(data) {
+  static async addRecord(data) {
     await ApiPerformenceModel.create(data).catch(e => ctx.throw(500))
   }
 
   // 获取接口调用记录
-  static async getApiRecords(ctx, next) {
+  static async getRecords(ctx, next) {
     const { requestUrl } = ctx.query
     const query = {}
     query.$or = [
@@ -21,43 +21,6 @@ class ApiPerformenceController {
       .limit(300) 
       .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '成功', data })
-  }
-
-  // 获取接口错误记录（状态码大于399）
-  static async getApiErrorLog(ctx) {
-    let { keyword, page = 1, pageSize = 20 } = ctx.query
-    page = +page
-    pageSize = +pageSize
-    const query = {}
-    
-    // 关键字查询(模糊查询)
-    if (!!keyword && keyword !== 'undefined' && keyword !== 'null') {
-      keyword = keyword.replace(filter, '')
-      const reg = new RegExp(keyword, 'i')
-      query.$or = [
-        { method: { $regex: reg }},
-        { requestUrl: { $regex: reg }},
-      ]
-    }
-    const skip = page === 0 ? 0 : (page - 1) * pageSize
-  
-    const records = await ApiPerformenceModel
-      .find(query)
-      .limit(pageSize)
-      .skip(skip)
-      .where('statusCode').gte(399)
-      .catch(e => {
-        console.log(e)
-        ctx.throw(500)
-      })
-    
-    const total = await ApiPerformenceModel
-      .find(query)
-      .where('statusCode').gte(399)
-      .count()
-      .catch(e => ctx.throw(500))
-
-    ctx.send({ status: 'ok', message: '成功', data: { items: records, total } })
   }
 
   // 获取所有接口（即具体接口列表）
