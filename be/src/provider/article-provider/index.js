@@ -6,27 +6,11 @@ class _ArticleProvider extends BaseHttp {
     add: '/article/new',
     delete: '/article/',
     update: '/article/',
-
-    getTag: '/article/tag',
+    recent: '/article/publish/recent'
   }
 
   constructor() {
     super()
-  }
-
-  async getTags() {
-    const req = {
-      url: this.api.getTag,
-      method: 'get',
-    }
-
-    try {
-      const res = await this.http(req)
-      console.log(res)
-      return res.data.items
-    } catch (err) {
-      throw new Error(err)
-    }
   }
 
   async addArticle(userId, article) {
@@ -39,6 +23,20 @@ class _ArticleProvider extends BaseHttp {
     try {
       const res = await this.http(req)
       return `发表文章成功`
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  async fetchRecentPublishedArticle() {
+    const req = {
+      url: this.api.recent,
+      method: 'GET',
+    }
+
+    try {
+      const res = await this.http(req)
+      return res.data.article
     } catch (err) {
       throw new Error(err)
     }

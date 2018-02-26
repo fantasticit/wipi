@@ -12,7 +12,7 @@
           placeholder="请输入密码" type="password" 
           v-model="password" :rules="rules.password">
         </ta-form-item>
-        <ta-button class="btn-login" type="primary">
+        <ta-button class="btn-login">
           登录
         </ta-button>
       </ta-form>
@@ -21,6 +21,10 @@
         <router-link to="/register">立即注册</router-link>
       </div>
     </div>
+
+    <ul class="ta-bubbles">
+      <li v-for="(i, j) in Array(10)" :key="i"></li>
+    </ul>
   </div>
 </template>
 

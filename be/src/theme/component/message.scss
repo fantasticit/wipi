@@ -27,6 +27,10 @@
     line-height: 1.4;
   }
 
+  .ta-icon {
+    transform: translateY(-2px);
+  }
+
   @include m(success) {
     background-color: #f0f9eb;
     border-color: #e1f3d8;

@@ -55,6 +55,26 @@ routes[0].children.push(
       title: '编辑文章',
     },
   },
+
+  {
+    path: 'tag/:tagId',
+    name: 'EditTag',
+    component: views.Tag,
+    meta: {
+      prefix: '标签管理',
+      title: '编辑标签',
+    },
+  },
+
+  {
+    path: 'classify/:classifyId',
+    name: 'EditClassify',
+    component: views.Classify,
+    meta: {
+      prefix: '分类管理',
+      title: '编辑分类',
+    },
+  },
 )
 
 export default routes

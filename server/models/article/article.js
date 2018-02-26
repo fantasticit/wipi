@@ -9,13 +9,13 @@ const articleSchema = new Schema({
   content: String,                      // 内容
   htmlContent: String,                  // HTML内容
   classify: String,                     // 分类
-  tags: Array,                          // 标签
+  tags: Array,                       // 标签
   state: {                              // 状态（‘草稿‘或者’发布‘）
     type: String,
     set: function (state) {
-      return ['草稿', '发布'].indexOf(state) > -1
+      return ['draft', 'publish'].indexOf(state) > -1
           ? state
-          : '草稿'
+          : 'draft'
     }
   },
   readingQuantity: {                    // 阅读量

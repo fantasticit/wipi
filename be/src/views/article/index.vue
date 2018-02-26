@@ -43,15 +43,18 @@
             <span>文章标签</span>
           </div>
           <div class="body">
-            <ta-select placeholder="请选择文章标签" :options="tags">
-            </ta-select>
-            <!-- <ta-form-item placeholder="输入文章标签,回车即可添加" @enter="addTag($event)"> -->
-            </ta-form-item>
+            <span class="tip">请选择文章标签：</span>
+            <div class="selected-tags">
+              {{ selectedTags.map(tag => tag.title).join('、') }}
+            </div>
             <div class="tags">
-              <ta-tag v-for="(tag, index) in selectedTags" :key="index" :type="tagTypes[index]"
-                @close="removeTag(index)">
-                {{ tag }}
-              </ta-tag>
+              <div 
+                class="tag" 
+                v-for="(tag, i) in tags" :key="i"
+                :class="{ 'is-selected': selectedTags.some(item => item.value === tag.value) }"
+                @click="toggleSelectedTag(tag)">
+                {{ tag.title }}
+              </div>
             </div>
           </div>
         </div>
@@ -92,6 +95,7 @@
 <script>
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import store from '@/store'
 import { mapState } from 'vuex'
 import TaMarkdownEditor from '@/components/common/markdown-editor'
 import { ArticleProvider } from '@/provider/article-provider'
@@ -112,10 +116,24 @@ import { ArticleProvider } from '@/provider/article-provider'
 
   computed: {
     ...mapState('article', {
-      classifies: state => state.classifies,
+      classifies: state => {
+        if (state.classifies.length <= 0) {
+          store.dispatch('article/getClassifies')
+            .then(_ => state.classifies)
+        } else {
+          return state.classifies
+        }
+      },
       states: state => state.states,
       coverPrefix: state => state.coverPrefix,
-      tags: state => state.tags
+      tags: state => {
+        if (state.tags.length <= 0) {
+          store.dispatch('article/getTags')
+            .then(_ => state.tags)
+        } else {
+          return state.tags
+        }
+      },
     })
   }
 })
@@ -144,6 +162,16 @@ export default class Article extends Vue {
     this.userId = JSON.parse(window.sessionStorage.getItem('userInfo')).id
   }
 
+  toggleSelectedTag(tag) {
+    const index = this.selectedTags.indexOf(this.selectedTags.find(item => item.value === tag.value))
+
+    if (index > -1) {
+      this.selectedTags.splice(index, 1)
+    } else {
+      this.selectedTags.push(tag)
+    }
+  }
+
   // 增加标签
   addTag(tag) {
     tag = tag.trim()
@@ -159,9 +187,7 @@ export default class Article extends Vue {
 
   // 移除标签
   removeTag(index) {
-    const tags = [...this.tags]
-    tags.splice(index, 1)
-    this.tags = tags
+    this.selectedTags.splice(index, 1)
   }
 
   // 重置文章信息
@@ -170,7 +196,7 @@ export default class Article extends Vue {
     this.content = ''
     this.desc = ''
     this.classify = ''
-    this.tags = []
+    this.selectedTags = []
     this.state = ''
     this.cover = ''
   }
@@ -194,7 +220,7 @@ export default class Article extends Vue {
       this.desc = article.desc
       this.content = article['content']
       this.classify = article.classify
-      this.tags = article.tags
+      this.selectedTags = article.tags.map(tag => ({ title: tag.title, value: tag.value }))
       this.cover = article.cover
       this.state = article.state
     } catch (err) {
@@ -212,7 +238,7 @@ export default class Article extends Vue {
       cover: this.cover,
       content: this.content,
       classify: this.classify,
-      tags: this.tags,
+      tags: this.selectedTags,
       state: this.state,
     })
 
@@ -261,6 +287,7 @@ export default class Article extends Vue {
       try {
         const res = await ArticleProvider.addArticle(this.userId, article)
         this.$message.success(res)
+        this.reset()
       } catch (err) {
         this.$message.error(err.message)
       } finally {

@@ -28,15 +28,19 @@
             placeholder="请再次输入密码" type="password" 
             v-model="passwdConfirm" :rules="rules.passwd">
           </ta-form-item>
-          <ta-button class="ta-register__button" type="primary">
+          <ta-button class="ta-register__button">
             注册
           </ta-button>
         </ta-form>
+        <div class="other">
+          <span>已有帐号？</span>
+          <router-link to="/login">立即登录</router-link>
+        </div>
       </div>
-      <div class="other">
-        <span>已有帐号？</span>
-        <router-link to="/login">立即登录</router-link>
-      </div>
+      
+      <ul class="ta-bubbles">
+        <li v-for="(i, j) in Array(10)" :key="i"></li>
+      </ul>
     </div>
   </div>
 </template>

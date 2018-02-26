@@ -59,6 +59,6 @@ const store = new Vuex.Store({
     
 //   }
 // })
-store.dispatch('article/getTags')
+// store.dispatch('article/getTags')
 
 export default store

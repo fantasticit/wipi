@@ -121,6 +121,53 @@
     }
   }
 
+  span.tip {
+    color: $font;
+    font-size: 12px;
+  }
+
+  .selected-tags {
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid $border;
+    font-size: 14px;
+
+    @include textOverflow();
+  }
+
+  .tags {
+    box-sizing: border-box;
+    max-height: 120px;
+    border: 1px solid $border;
+    border-radius: 5px;
+    padding: 5px  0;
+
+    .tag {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 8px 15px;
+      font-size: 14px;
+      cursor: pointer;
+
+      + .tag {
+        margin-top: 3px;
+      }
+
+      &:hover {
+        background: #f5f7fa;
+      }
+    }
+
+    .tag.is-selected {
+      color: $primary;
+      background: #f5f7fa;
+    }
+  }
+
   @media (max-width: $screen-md-min) {
     @include e(prop) {
       &:first-of-type {

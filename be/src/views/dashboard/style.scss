@@ -169,8 +169,12 @@
 
     .body {
       box-sizing: border-box;
-      padding: 15px 0;
+      padding: 15px;
       height: 344px;
+
+      /deep/ .ta-collapse__body {
+        background: #f1f2f6;
+      }
     }
   }
 }

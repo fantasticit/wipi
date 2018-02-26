@@ -2,16 +2,15 @@
   <div class="ta-collapse" ref="collapse"
     :style="{ height: h + 'px' }">
     <div class="ta-collapse__header">
-      <span>
+      <div>
         <slot name="title"></slot>
-      </span>
-      <span @click="toggleShow()">
-        <ta-icon 
-          name="ios-arrow-forward"
-          v-show="!noIcon"
-          :class="{ 'is-active': isShow }">
-        </ta-icon>
-      </span>
+      </div>
+      <ta-icon 
+        name="ios-arrow-forward"
+        v-show="!noIcon"
+        :class="{ 'is-active': isShow }"
+        @click="toggleShow()">
+      </ta-icon>
     </div>
     <div class="ta-collapse__body">
       <slot></slot>

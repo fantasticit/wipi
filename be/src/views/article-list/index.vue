@@ -5,7 +5,7 @@
       <div class="ta-searcharea__item">
         <span>分类:</span>
         <ta-button 
-          v-for="(item, i) in classifies"
+          v-for="(item, i) in [{ title: '全部', value: '' }, ...classifies]"
           :key="i"
           :type="item.value === classify ? 'primary' : 'text'"
           @click="setClassify(item.value)">
@@ -16,7 +16,7 @@
       <div class="ta-searcharea__item">
         <span>状态:</span>
         <ta-button 
-          v-for="(item, i) in states"
+          v-for="(item, i) in [{ title: '全部', value: '' }, ...states]"
           :key="i"
           :type="item.value === state ? 'primary' : 'text'"
           @click="setState(item.value)">
@@ -78,8 +78,8 @@ import { ArticleProvider } from '@/provider/article-provider'
 @Component({
   computed: {
     ...mapState('article', {
-      classifies: state => ([{ value: '', title: '全部' }]).concat(state.classifies),
-      states: state => ([{ value: '', title: '全部' }]).concat(state.states),
+      classifies: state => state.classifies,
+      states: state => state.states,
     })
   },
 
@@ -108,14 +108,17 @@ export default class ArticleList extends Vue {
 
   created() {
     this.userId = JSON.parse(window.sessionStorage.getItem('userInfo')).id
-    this.fetchArticles()
+    this.$store.dispatch('article/getClassifies')
+      .then(_ => this.fetchArticles())
   }
 
   setClassify(classify) {
+    console.log(classify)
     this.classify = classify
   }
 
   setState(state) {
+    console.log(state)
     this.state = state
   }
 
@@ -149,6 +152,13 @@ export default class ArticleList extends Vue {
         item.createdDate = formatTime(item.createdDate)
         item.updatedDate = formatTime(item.updatedDate)
         item.author = item.author.account
+
+        item.classify = JSON.parse(JSON.stringify(this.classifies)).find(num => {
+          return num.value = item.classify
+        }).title
+        item.state = JSON.parse(JSON.stringify(this.states)).find(num => {
+          return num.value = item.state
+        }).title
 
         return item
       })

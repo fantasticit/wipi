@@ -102,6 +102,22 @@ class ArticleController {
     }
   }
 
+  // 获取指定Id的文章
+  static async getRecentPublishedArticle(ctx, next) {
+    const article = await ArticleModel
+      .find({ state: 'publish' })
+      .sort({ updatedDate: -1 })
+      .populate({        // 连表查询作者信息
+        path: 'author', 
+        select: 'account avatar' 
+      })
+      .limit(10)
+      .catch(e => ctx.throw(500))
+    
+   
+    ctx.send({ status: 'ok', message: '获取文章成功', data: { article }})
+  }
+
   // 更新指定Id的文章
   static async updateArticle(ctx, next) {
     const { id } = ctx.params
