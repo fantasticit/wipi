@@ -13,8 +13,7 @@ class About extends Component {
     return {}
   }
 
-
-  render() {
+  render() 
     const { slogan, contacts } = this.props
 
     return(

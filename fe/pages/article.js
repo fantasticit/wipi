@@ -49,6 +49,10 @@ class Article extends Component {
           </div>
           <div className="aside">
             <p>文章目录</p>
+            <div 
+              className="toc"
+              dangerouslySetInnerHTML={{__html: article.toc}}>
+            </div>
           </div>
           <Backtop />
         </div>
