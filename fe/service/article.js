@@ -3,8 +3,13 @@ import axios from './config'
 class ArticlerService {
   static constructor() {}
 
-  static async fetchArticles() {
-    const req = { url: '/article', method: 'get' }
+  static async fetchArticles(classify) {
+    const query = `classify=${classify}`
+
+    const req = { 
+      url: `/article?${query}`, 
+      method: 'get' 
+    }
 
     try {
       const res = await axios(req)
@@ -28,12 +33,12 @@ class ArticlerService {
 
   // 获取文章分类
   static async fetchArticleClassifies() {
-    const req = { url: '/article/meta/classifies', method: 'get' }
+    const req = { url: '/classify', method: 'get' }
 
     try {
       const res = await axios(req)
 
-      return res.data
+      return res.data.items
     } catch (err) {
       throw new Error(err)
     }

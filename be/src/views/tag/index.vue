@@ -66,7 +66,7 @@ export default class Tag extends Vue {
   isLetter() {
     if (
       !this.newTagValue 
-      || !(/^[a-zA-Z]*$/g).test(this.newTagValue)
+      || !(/^[a-zA-Z0-9]+[_|-]?[a-zA-Z0-9]*$/g).test(this.newTagValue)
     ) {
       return new Error('标签值仅接受英文')
     } else {

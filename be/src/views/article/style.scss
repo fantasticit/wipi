@@ -145,6 +145,7 @@
     border: 1px solid $border;
     border-radius: 5px;
     padding: 5px  0;
+    overflow: auto;
 
     .tag {
       box-sizing: border-box;

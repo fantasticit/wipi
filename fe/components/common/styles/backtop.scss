@@ -5,8 +5,17 @@
   right: 3rem;
   bottom: 3rem;
   z-index: 300;
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid #f1f1f1;
+  box-shadow: 0 0 5px rgba(0,0,0,.05);
   cursor: pointer;
   background: #fff;
+
+  text-align: center;
+  line-height: 3rem;
   
   @include when(hide) {
     display: none;

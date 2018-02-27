@@ -12,7 +12,14 @@ module.exports = (app) => {
   app.use(logger())
   app.use(gzip())
   app.use(cors())
-  app.use(koaJwt({secret}).unless({path: [/^\/user/, /^\/performence/, /^\/article/, /^\/error/]}))
+  app.use(koaJwt({secret}).unless({path: [
+    /^\/user/, 
+    /^\/performence/,
+     /^\/article/, 
+     /^\/error/,
+     /^\/classify$/,
+     /^\/tag$/,
+  ]}))
   app.use(bodyParser())
   app.use(json())
 }

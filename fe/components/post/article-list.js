@@ -1,18 +1,34 @@
 import { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fecthClassifies } from '../../redux/reducers/classify'
 import { formatTime } from '../../util/format-time'
 import Link from 'next/link'
 import './styles/article-list.scss'
 
 class ArticleList extends Component {
+  translate(classify) {
+    const classifies = JSON.parse(JSON.stringify(this.props.classifies)) || []
+
+    if (classifies.length <= 0) {
+      return classify
+    } else {
+      return classifies.find(item => item.value === classify).title
+    }
+  }
+
   render() {
     const { article } = this.props
+    const { classifies = [] } = this.props
+
+    if (classifies.length <= 0) this.props.fecthClassifies()
 
     return(
       <li className="el-article-list">
         {
           article.cover 
             ? <a className="el-article-list__cover">
-                {/* <img src={article.cover} /> */}
+                <img src={article.cover} />
               </a> 
             : ''
         }
@@ -23,10 +39,15 @@ class ArticleList extends Component {
         }>
           <div className="author">
             <a>
-              {/* <img className="avatar" src={article.author.avatar} /> */}
+              <img className="avatar" src={article.author.avatar} />
               <span>{ article.author.account }</span>
             </a>
-            <span>{ formatTime(article.createdDate) }</span>
+            <span>
+              <span className="dot">●</span> 
+              { formatTime(article.createdDate) }
+              <span className="dot">●</span> 
+              { this.translate(article.classify) }
+            </span>
           </div>
           <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
             <a className="title">
@@ -35,7 +56,11 @@ class ArticleList extends Component {
           </Link>
           <p className="desc">{ article.desc }</p>
           <div className="meta">
-            <a className="meta-classify">{ article.classify }</a>
+            <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
+              <a className="more">
+                继续阅读 »
+              </a>
+            </Link>
           </div>
         </div>
       </li>
@@ -43,4 +68,12 @@ class ArticleList extends Component {
   }
 }
 
-export default ArticleList
+const mapStateToProps = ({ classify }) => ({ classifies: classify.classifies })
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fecthClassifies: bindActionCreators(fecthClassifies, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleList)

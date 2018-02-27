@@ -2,8 +2,6 @@ const nodemailer = require('nodemailer')
 const config = require('../../config')
 const ErrorController = require('../../controller/error').api
 
-console.log(config.mail)
-
 let transporter = nodemailer.createTransport(
   {
     host: 'smtp.163.com',
@@ -15,7 +13,7 @@ let transporter = nodemailer.createTransport(
   }
 )
 
-module.exports = function sendAlarmEmail(method, requestUrl, err) {
+module.exports = function sendAlarmEmail(cb) {
   message = {
     from: '<' + config.mail.user + '>',
     // Comma separated list of recipients
@@ -42,32 +40,12 @@ module.exports = function sendAlarmEmail(method, requestUrl, err) {
 
   transporter.sendMail(message, async (error, info) => {
     if (error) {
-      console.log(error)
-
-      await ErrorController.addRecord({
-        statusCode: 500,
-        method: method,
-        requestUrl,
-        responseTime: 0,
-        dateTime: Date.now(),
-        errMsg: err.message,
-        errStack: err.stack
-      })
+      cb(error, null)
       return
     }
   
     console.log('Message sent successfully!');
-    await ErrorController.addRecord({
-      statusCode: 500,
-      method: method,
-      requestUrl,
-      responseTime: 0,
-      errMsg: err.message,
-      errStack: err.stack,
-      dateTime: Date.now(),
-      isSendMail: true
-    })
-  
+    cb(bull, info)
     transporter.close();
   })
 }

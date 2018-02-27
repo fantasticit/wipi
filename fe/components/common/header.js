@@ -5,7 +5,7 @@ import './styles/header.scss'
 const links = [
   {
     title: '首页',
-    path: '/p/',
+    path: '/p',
   },
 
   // {
@@ -13,10 +13,10 @@ const links = [
   //   path: '/fe',
   // },
 
-  // {
-  //   title: '关于',
-  //   path: '/about',
-  // },
+  {
+    title: '关于',
+    path: '/about',
+  },
 
 ]
 
@@ -44,7 +44,7 @@ class Header extends Component {
                   <input className="el-input" placeholder="搜索文章"/>
                   <span></span>
                 </div>
-                <button className="el-button el-button--primary">写文章</button>
+                {/* <button className="el-button el-button--primary">写文章</button> */}
               </div>
             </nav>
           </div>

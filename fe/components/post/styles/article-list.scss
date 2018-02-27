@@ -12,8 +12,10 @@
     top: 50%;
     transform: translateY(-50%);
 
-    width: 8rem;
-    height: 8rem;
+    box-sizing: border-box;
+    width: 15rem;
+    height: 100%;
+    padding: 1.5rem 0;
 
     img {
       width: 100%;
@@ -25,13 +27,14 @@
 
   @include e(content) {
     word-wrap: break-word;
-    padding-right: 9rem;
+    padding-right: 16rem;
 
     @include when(full) {
       padding-right: 0;
     }
     
     .author {
+      color: #909090;
       @include flexLayout(center, inline-flex) {
         align-items: center;
       }
@@ -39,7 +42,6 @@
       > a {
         display: inline-block;
         height: px2rem(32);
-        margin-right: px2rem(15);
 
         @include flexLayout(center, inline-flex) {
           align-items: center;
@@ -50,7 +52,12 @@
         width: px2rem(32);
         height: 100%;
         border-radius: 50%;
-        margin-right: 1rem;
+        margin-right: 5px;
+      }
+
+      .dot {
+        margin: 0 5px;
+        font-size: 10px;
       }
     }
 
@@ -67,18 +74,20 @@
     }
 
     .meta {
-      
-      .meta-classify {
-        display: inline-block;
-        padding: .4rem .8rem;
-
-        border: 1px solid $primary;
-        
-        color: $primary;
-        font-size: px2rem(12);
-        vertical-align: middle;
-        line-height: px2rem(12);
+      .more {
+        color: #b3b3b3;
+        text-decoration: none;
       }
+    }
+  }
+
+  @media (max-width: 768px) {
+    @include e(cover) {
+      display: none;
+    }
+
+    @include e(content) {
+      padding-right: 0;
     }
   }
 }

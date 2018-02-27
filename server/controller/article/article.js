@@ -4,6 +4,14 @@ const marked = require('../util/markdown')
 const isAdmin = require('../util/is-admin')
 const filter = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]", 'g') // 过滤敏感字
 
+const isBlank = str => {
+  if (!str || str === '' || str === 'undefined' || str === 'null') {
+    return true
+  } else {
+    return false
+  }
+}
+
 class ArticleController {
   static constructor() {}
 
@@ -44,10 +52,10 @@ class ArticleController {
     page = +page
     pageSize = +pageSize
     const query = {}
-    !!classify && (query.classify = classify)
-    !!state && (query.state = state)
-    !!userId && !await isAdmin(userId) && (query.author = userId)
-    
+    !isBlank(classify) && (query.classify = classify)
+    !isBlank(state) && (query.state = state)
+    !isBlank(userId) && !await isAdmin(userId) && (query.author = userId)
+
     // 关键字查询(模糊查询)
     if (!!keyword) {
       keyword = keyword.replace(filter, '')
@@ -60,6 +68,8 @@ class ArticleController {
     }
     const skip = page === 0 ? 0 : (page - 1) * pageSize
 
+    console.log(query)
+
     const articles = await ArticleModel
       .find(query)
       .limit(pageSize)
@@ -68,6 +78,7 @@ class ArticleController {
         path: 'author', 
         select: 'account avatar _id' 
       })
+      .sort({ createdDate: -1 })
       .exec()
       .catch(e => ctx.throw(500))
 

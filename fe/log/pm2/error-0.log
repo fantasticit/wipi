@@ -209,3 +209,106 @@ Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
     at Generator.invoke [as _invoke] (/home/elapse/repo/elapse/fe/node_modules/regenerator-runtime/runtime.js:296:22)
     at Generator.prototype.(anonymous function) [as next] (/home/elapse/repo/elapse/fe/node_modules/regenerator-runtime/runtime.js:114:21)
     at step (/home/elapse/repo/elapse/fe/node_modules/babel-runtime/helpers/asyncToGenerator.js:17:30) name: 'Invariant Violation', framesToPop: 1 }
+Error: listen EADDRINUSE :::3002
+    at Object._errnoException (util.js:1024:11)
+    at _exceptionWithHostPort (util.js:1046:20)
+    at Server.setupListenHandle [as _listen2] (net.js:1351:14)
+    at listenInCluster (net.js:1392:12)
+    at Server.listen (net.js:1476:7)
+    at Application.listen (/home/elapse/repo/elapse-master/fe/node_modules/_koa@2.5.0@koa/lib/application.js:64:19)
+    at app.prepare.then (/home/elapse/repo/elapse-master/fe/server.js:46:10)
+    at <anonymous>
+    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
+Error: listen EADDRINUSE :::3002
+    at Object._errnoException (util.js:1024:11)
+    at _exceptionWithHostPort (util.js:1046:20)
+    at Server.setupListenHandle [as _listen2] (net.js:1351:14)
+    at listenInCluster (net.js:1392:12)
+    at Server.listen (net.js:1476:7)
+    at Application.listen (/home/elapse/repo/elapse-master/fe/node_modules/_koa@2.5.0@koa/lib/application.js:64:19)
+    at app.prepare.then (/home/elapse/repo/elapse-master/fe/server.js:46:10)
+    at <anonymous>
+    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
+Error: listen EADDRINUSE :::3002
+    at Object._errnoException (util.js:1024:11)
+    at _exceptionWithHostPort (util.js:1046:20)
+    at Server.setupListenHandle [as _listen2] (net.js:1351:14)
+    at listenInCluster (net.js:1392:12)
+    at Server.listen (net.js:1476:7)
+    at Application.listen (/home/elapse/repo/elapse-master/fe/node_modules/_koa@2.5.0@koa/lib/application.js:64:19)
+    at app.prepare.then (/home/elapse/repo/elapse-master/fe/server.js:46:10)
+    at <anonymous>
+    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Client pings, but there's no entry for page: /post
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Client pings, but there's no entry for page: /article
+Client pings, but there's no entry for page: /post
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Client pings, but there's no entry for page: /post
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Client pings, but there's no entry for page: /post
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Client pings, but there's no entry for page: /post
+Client pings, but there's no entry for page: /post
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument

@@ -6,7 +6,7 @@ import Layout from '../components/common/layout'
 import Backtop from '../components/common/backtop'
 import '../theme/markdown.scss'
 
-class About extends Component {
+class Article extends Component {
   static async getInitialProps({ query }) {
     const articleId = query.id
     const article = await ArticleService.fetchArticleById(articleId)
@@ -29,7 +29,7 @@ class About extends Component {
           <div className="content">
             { article.cover 
                 ? <div className="cover">
-                    <img src="article.cover" />
+                    <img src={article.cover} />
                   </div>
                 : ''
             }
@@ -47,12 +47,40 @@ class About extends Component {
               dangerouslySetInnerHTML={{__html: article.htmlContent}}>
             </div>
           </div>
+          <div className="aside">
+            <p>文章目录</p>
+          </div>
           <Backtop />
         </div>
         <style jsx>{`
+          .container {
+            position: relative;
+          }
+            
+          .cover {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+          }
+
+          .cover img {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+          }
+
           .content {
-            padding: 5rem 1.5rem;
+            max-width: 700px;
+            padding: 1.5rem;
             font-size: 1.34rem;
+            background: #fff;
+          }
+
+          .aside {
+            width: 240px;
+            position: absolute;
+            right: 0;
+            top: 0;
           }
 
           .author-info {
@@ -74,4 +102,4 @@ class About extends Component {
   }
 }
 
-export default About
+export default Article

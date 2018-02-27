@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev nodemon app.js",
-    "pm2": "cross-env NODE_ENV=dev pm2 start pm2.conf.json --watch"
+    "pm2": "cross-env NODE_ENV=prod pm2 start pm2.conf.json --watch"
   },
   "author": "",
   "license": "ISC",

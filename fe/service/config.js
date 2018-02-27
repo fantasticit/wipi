@@ -11,9 +11,6 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-    config.headers = {
-      'accept-encoding': 'gzip',
-    }
     return config
   },
 
