@@ -75,8 +75,6 @@ class ArticleController {
     }
     const skip = page === 0 ? 0 : (page - 1) * pageSize
 
-    console.log(query)
-
     const articles = await ArticleModel
       .find(query)
       .limit(pageSize)

@@ -75,12 +75,3 @@ const EProgress = function eProgress() {
 }()
 
 export { EProgress }
-
-
-
-
-
-// (function(global, EProgress){
-//   console.log(global)
-//   global.EProgress = EProgress
-// }(this, ))

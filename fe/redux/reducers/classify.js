@@ -16,8 +16,6 @@ export const changeClassify = (classify) => ({
 })
 
 export const fecthClassifies = () => async (dispatch, getStats) => {
-  console.log('fecth')
-
   try {
     const data = await ArticleService.fetchArticleClassifies()
     await dispatch(setClassifies(data)) 
@@ -29,11 +27,6 @@ export const fecthClassifies = () => async (dispatch, getStats) => {
 export const classify = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_CLASSIFIES":
-      console.log(action.data)
-      console.log({
-        ...state,
-        classifies: action.data
-      })
       return {
         ...state,
         classifies: action.data
