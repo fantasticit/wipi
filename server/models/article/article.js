@@ -8,8 +8,9 @@ const articleSchema = new Schema({
   cover: String,                        // 封面
   content: String,                      // 内容
   htmlContent: String,                  // HTML内容
+  toc: String,                          // TOC
   classify: String,                     // 分类
-  tags: Array,                       // 标签
+  tags: Array,                          // 标签
   state: {                              // 状态（‘草稿‘或者’发布‘）
     type: String,
     set: function (state) {

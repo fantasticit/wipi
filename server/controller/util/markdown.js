@@ -1,4 +1,4 @@
-const marked = require('marked')
+const marked = require('markedtoc')
 const renderer = new marked.Renderer()
 
 renderer.heading = function (text, level) {
@@ -12,8 +12,6 @@ renderer.heading = function (text, level) {
       ${text}
     </h${level}>
   `
-  console.log(head)
-
   return head
 }
 

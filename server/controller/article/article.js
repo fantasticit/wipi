@@ -19,6 +19,8 @@ class ArticleController {
   // 首先进行非空检查，然后过滤字段
   // skips接受一个数组，用于指定不进行非空检查的字段
   static checkArticle(article, skips, ctx) {
+    console.log(article)
+
     Object.keys(article).forEach(key => {
       if (
         skips.indexOf(key) == -1 
@@ -35,12 +37,17 @@ class ArticleController {
   // 新增文章
   static async addArticle(ctx, next) {
     const req = ctx.request.body
-    req.htmlContent = marked(req.content)
 
     ArticleController.checkArticle(req, ['cover'], ctx)
 
     const createdDate = new Date()
-    const result = await ArticleModel.create({...req, createdDate})
+    
+    const html = marked('<TOC/> \n\n' + '<!-- more --> \n\n' + req.content)
+    const i = html.indexOf('<!-- more -->')
+    const toc = html.slice(0, i)
+    const htmlContent = html.slice(i + 13)
+
+    const result = await ArticleModel.create({...req, htmlContent, toc, createdDate})
       .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '新增文章成功' })
   }

@@ -249,15 +249,15 @@ export default class Article extends Vue {
       return !!article[key]
     })
 
-    if (!flag) {
-      this.$message.error('请完善文章信息')
-    } else {
+    // if (!flag) {
+    //   this.$message.error('请完善文章信息')
+    // } else {
       if (this.articleId) {
         this.updateArticle(article)
       } else {
         this.publishArticle(article)
       }
-    }
+    // }
   }
 
   // 转换markdown -> html
@@ -281,35 +281,35 @@ export default class Article extends Vue {
   }
 
   // 发布文章
-  publishArticle(article) {
+  async publishArticle(article) {
     this.loading = true
-    this.handleArticle(article).then(async article => {
+    // this.handleArticle(article).then(async article => {
       try {
         const res = await ArticleProvider.addArticle(this.userId, article)
         this.$message.success(res)
-        this.reset()
+        // this.reset()
       } catch (err) {
         this.$message.error(err.message)
       } finally {
         this.loading = false
       }
-    })
+    // })
   }
 
   // 更新文章
   async updateArticle(article) {
     this.loading = true
-    this.handleArticle(article).then(async article => {
+    // this.handleArticle(article).then(async article => {
       try {
         const res = await ArticleProvider.updateArticle(article, this.articleId, this.userId)
         this.$message.success(res)
-        this.reset()
+        // this.reset()
       } catch (err) {
         this.$message.error(err.message)
       } finally {
         this.loading = false
       }
-    })
+    // })
   }
 }
 </script>

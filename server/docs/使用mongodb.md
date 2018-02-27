@@ -1,6 +1,7 @@
-## 安装与使用mongodb
+# 安装与使用mongodb
 > 数据库使用`mongodb`。
 
+## 安装与使用
 ### 1. 安装mongodb
 打开命令行键入`sudo apt-get install mongodb`。
 安装完成后，在命令行输入`mongo -version`即可查看mongodb版本。

@@ -13,7 +13,7 @@ let transporter = nodemailer.createTransport(
   }
 )
 
-module.exports = function sendAlarmEmail(cb) {
+module.exports = function sendAlarmEmail(method, requestUrl, err, cb) {
   message = {
     from: '<' + config.mail.user + '>',
     // Comma separated list of recipients

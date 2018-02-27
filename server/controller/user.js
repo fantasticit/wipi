@@ -159,7 +159,6 @@ class UserController {
     const skip = page === 0 ? 0 : (page - 1) * pageSize
 
     const can = await isAdmin(userId)
-    console.log(can)
 
     if (can) {
       const users = await UserModel.find().limit(pageSize).skip(skip)
@@ -178,7 +177,6 @@ class UserController {
     let { userId, deletedUserId } = ctx.request.body
 
     const can = await isAdmin(userId)
-    console.log(can)
 
     if (can) {
       await UserModel.findByIdAndRemove(deletedUserId)

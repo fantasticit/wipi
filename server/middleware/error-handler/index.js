@@ -20,7 +20,7 @@ module.exports = () => {
         ctx.status = 401
         ctx.response.body = { code: 'no', message: `token不存在或已过期` }
       } else if (statusCode === 500) {
-        sendAlarmEmail((err, info) => {
+        sendAlarmEmail(ctx.request.method, ctx.request.url, err, (err, info) => {
           if (err) {
             addRecord()
           } else {
