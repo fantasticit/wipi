@@ -2,8 +2,8 @@ const marked = require('markedtoc')
 const renderer = new marked.Renderer()
 
 renderer.heading = function (text, level) {
-  const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-')
-
+  const escapedText = text.toLowerCase()
+  // .replace(/[^\w]+/g, '-')
   const head = `
     <h${level}>
       <a name="${escapedText}" href="#${escapedText}">
