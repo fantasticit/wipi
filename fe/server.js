@@ -11,6 +11,15 @@ app.prepare().then(() => {
   const server = new Koa()
   const router = new KoaRouter()
 
+  // give all Nextjs's request to Nextjs before anything else
+  router.get('/_next/*', (req, res) => {
+    handle(req, res);
+  })
+
+  router.get('/static/*', (req, res) => {
+    handle(req, res);
+  })
+
   router.get('/', async ctx => {
     await app.render(ctx.req, ctx.res, '/post', ctx.query)
     ctx.respond = false
