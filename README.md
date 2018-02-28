@@ -1,4 +1,4 @@
-# Elapse (个人)
+# Elapse
 > 流水衷曲，韶华飞逝
 
 前后端分离 + 服务端渲染的博客系统。其中：
@@ -6,8 +6,34 @@
   - 前端页面使用React服务端渲染框架`nextjs`
   - 接口服务使用Koa2 + mongodb + mongoose
 
-## 效果预览
+## 1. 效果预览
+### 1.1. 后端管理页面
+后端管理页面使用了vue、vuex、sass以及axios，其中模仿ElementUI的样式开发了`dialog`、`loading`、`confirm`、`notofication`、`messgae`等等组件，（感觉自己对vue组件的开发姿势又稍微深入了一点点，毕竟学无止境）。以下为部分页面截图：
+
+  - 登录
+  ![]()
+
+  - 个人中心
+  ![]()
+
+  - 文章管理
+  ![]()
+
+  - 新建文章
+  ![]()
+
+  - ECharts结合
+  ![]()
   
+### 2. 前端页面渲染
+借此机会想学习一下`React`，于是前端页面使用了React服务端渲染框架`nextjs`，并使用了`Redux`、`axios`以及`koa`(自定义服务所用)。前端页面目前比较简单，主要就是文章的读取和渲染。以下为截图：
+
+  - 首页
+  ![]()
+
+  - 文章详情
+  ![]()
+
 
 ## 模块文档
 - [后端管理系统开发](https://github.com/mvpzx/elapse/tree/master/be)
