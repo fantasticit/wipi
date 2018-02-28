@@ -1,10 +1,12 @@
 import { Component } from 'react'
-import { highlight } from '../util/highlight'
-import { formatTime } from '../util/format-time'
 import ArticleService from '../service/article'
 import Layout from '../components/common/layout'
 import Backtop from '../components/common/backtop'
-import '../theme/markdown.scss'
+import Cover from '../components/article/cover'
+import Author from '../components/article/author'
+import Markdown from '../components/article/markdown'
+import Tags from '../components/article/tags'
+import Comment from '../components/article/comment'
 
 class Article extends Component {
   static async getInitialProps({ query }) {
@@ -14,93 +16,23 @@ class Article extends Component {
     return { article }
   }
 
-  componentDidMount() {
-    const oContent = this.refs.content
-
-    highlight(oContent)
-  }
-
   render() {
     const { article } = this.props
 
     return(
       <Layout>
         <div className="container">
-          <div className="content">
-            { article.cover 
-                ? <div className="cover">
-                    <img src={article.cover} />
-                  </div>
-                : ''
-            }
-            <div className="author-info">
-              <p>
-                <span>{ article.author.account }</span>
-                <span>{ formatTime(article.createdDate) }</span>
-                <span>|</span>
-                <span>阅读量{ article.readingQuantity }</span>
-              </p>
-            </div>
-            <div
-              ref="content"
-              className="markdown-body"
-              dangerouslySetInnerHTML={{__html: article.htmlContent}}>
-            </div>
-          </div>
-          <div className="aside">
-            <p>文章目录</p>
-            <div 
-              className="toc"
-              dangerouslySetInnerHTML={{__html: article.toc}}>
-            </div>
-          </div>
-          <Backtop />
+          { article.cover ? <Cover cover={article.cover} />: ''}
+          <Author author={{
+            account: article.author.account,
+            createdDate: article.createdDate,
+            readingQuantity: article.readingQuantity,
+          }} />
+          <Markdown content={article.htmlContent} />
+          <Tags tags={article.tags} />
+          <Comment />
         </div>
-        <style jsx>{`
-          .container {
-            position: relative;
-          }
-            
-          .cover {
-            width: 100%;
-            height: 320px;
-            overflow: hidden;
-          }
-
-          .cover img {
-            display: inline-block;
-            width: 100%;
-            height: 100%;
-          }
-
-          .content {
-            max-width: 700px;
-            padding: 1.5rem;
-            font-size: 1.34rem;
-            background: #fff;
-          }
-
-          .aside {
-            width: 240px;
-            position: absolute;
-            right: 0;
-            top: 0;
-          }
-
-          .author-info {
-            text-align: center;
-          }
-          
-          .author-info span {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .author-info span + span {
-            margin-left: .5rem;
-          }
-        `}</style>
+        <Backtop />
       </Layout>
     )
   }

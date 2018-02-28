@@ -3,14 +3,14 @@ const initialState = {
   contactMe: [
     {
       title: 'github',
-      icon: '',
+      icon: 'github',
       name: 'github/mvpzx',
       path: ''
     },
 
     {
       title: 'Email',
-      icon: '',
+      icon: 'envelope-o',
       name: 'bken2016@163.com',
       path: '',
     }

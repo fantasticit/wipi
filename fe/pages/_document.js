@@ -9,6 +9,7 @@ export default class MyDocument extends Document {
           <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover" />
           <link rel="stylesheet"
       href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/default.min.css" />
+          <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
           <link rel="stylesheet" href="/_next/static/style.css" />
 
         </Head>

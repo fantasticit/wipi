@@ -3,8 +3,13 @@
 @include b(article-list) {
   position: relative;
   list-style: none;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #f0f0f0;
   border-bottom: 1px solid #f0f0f0;
+
+  // &:last-of-type {
+  //   border-bottom: 0;
+  // }
 
   @include e(cover) {
     position: absolute;

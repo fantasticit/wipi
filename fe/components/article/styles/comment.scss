@@ -1,0 +1,47 @@
+@import '../../../theme/global.scss';
+
+@include b(comment) {
+  padding: 3rem 0;
+
+  @include e(title) {
+    position: relative;
+    z-index: 3;
+    margin-bottom: 2.5rem;
+    height: 22px;
+
+    .comment-num {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 1;
+    
+      font-weight: 600;
+      padding-right: 16px;
+      background: #fbfcfc;
+    }
+    
+    .comment-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+    
+      width: 100%;
+      border-bottom: 1px solid #f0f0f0;
+    }
+  }
+
+  @include e(editor) {
+    input {
+      width: 100%;
+      min-height: px2rem(38);
+      padding: .6rem .8rem;
+    }
+
+    .btn-group {
+      margin-top: 20px;
+      text-align: right;
+    }
+  }
+}
+

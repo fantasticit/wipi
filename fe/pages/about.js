@@ -7,28 +7,24 @@ import { formatTime } from '../util/format-time'
 import ArticleService from '../service/article'
 import Layout from '../components/common/layout'
 import Backtop from '../components/common/backtop'
+import Contact from '../components/about/contact'
 
 class About extends Component {
   static async getInitialProps() {
     return {}
   }
 
-  render() 
+  render() {
     const { slogan, contacts } = this.props
 
     return(
-      <Layout>
+      <Layout activeRoute={'/about'}>
         <div className="container">
-          <h1>关于我</h1>
+          <h2>关于作者</h2>
           <p>{ slogan }</p>
+          <h2>联系作者</h2>
           {contacts.map((contact, i) => (
-            <div className="contact" key={i}>
-              <a href={contact.path} target="blank">
-                <div>{ contact.title }</div>
-                <div>{ contact.icon }</div>
-                <div>{ contact.name }</div>
-              </a>
-            </div>
+            <Contact key={i} info={contact} />
           ))}
           <Backtop />
         </div>

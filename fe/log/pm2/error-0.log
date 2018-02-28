@@ -312,3 +312,23 @@ Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
     in Head (at _document.js:7)
     in html (at _document.js:6)
     in MyDocument
+Client pings, but there's no entry for page: /post
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument
+Client pings, but there's no entry for page: /post
+Warning: Invalid DOM property `http-equiv`. Did you mean `httpEquiv`?
+    in meta (at _document.js:8)
+    in head
+    in Head (at _document.js:7)
+    in html (at _document.js:6)
+    in MyDocument

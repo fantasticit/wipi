@@ -8,11 +8,6 @@ const links = [
     path: '/p',
   },
 
-  // {
-  //   title: '前端',
-  //   path: '/fe',
-  // },
-
   {
     title: '关于',
     path: '/about',
@@ -21,18 +16,28 @@ const links = [
 ]
 
 class Header extends Component {
+  constructor() {
+    super()
+  }
+
   render() {
+    const { activeRoute } = this.props
+
     return(
       <div className='el-header'>
         <header>
           <div className="container">
             <Link href="/p">
-              <a className="el-header__logo">Logo</a>
+              <a className="el-header__logo">Elapse</a>
             </Link>
             <nav>
               <ul className="el-header__menu">
                 {links.map((link, i) => (
-                  <li className="el-header__menu-item" key={i}>
+                  <li className={
+                    activeRoute == link.path
+                    ? 'el-header__menu-item is-active'
+                    : 'el-header__menu-item'
+                  } key={i}>
                     <Link href={link.path}>
                       <a>{ link.title }</a>
                     </Link>
@@ -44,7 +49,6 @@ class Header extends Component {
                   <input className="el-input" placeholder="搜索文章"/>
                   <span></span>
                 </div>
-                {/* <button className="el-button el-button--primary">写文章</button> */}
               </div>
             </nav>
           </div>

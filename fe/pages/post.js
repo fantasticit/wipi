@@ -22,10 +22,10 @@ class Post extends Component {
     const { dispatch, selectedClassify } = this.props
 
     return(
-      <Layout>
+      <Layout activeRoute={'/p'}>
         <div className="page">
-          <Nav />
           <div className="container">
+            <Nav />
             <div className="articles">
               <ul>
                 {this.props.articles.map((article, i) => (
@@ -46,7 +46,6 @@ class Post extends Component {
           .articles {
             box-sizing: border-box;
             background: #fff;
-            padding: 0 1.5rem;
           }
         `}</style>
       </Layout>

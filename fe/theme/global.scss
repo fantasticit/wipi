@@ -4,6 +4,7 @@
 
 @import './component/button.scss';
 @import './component/input.scss';
+@import './component/tag.scss';
 
 :global {
   html {
@@ -11,7 +12,7 @@
   }
 
   .container {
-    max-width: 992px;
+    max-width: 810px;
     margin: 0 auto;
   }
 

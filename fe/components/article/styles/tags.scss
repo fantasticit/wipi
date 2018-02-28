@@ -1,0 +1,9 @@
+@import '../../../theme/global.scss';
+
+@include b(tags) {
+  padding: 1.5rem 0;
+
+  div + div {
+    margin-left: 1.33rem;
+  }
+}

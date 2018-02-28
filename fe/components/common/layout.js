@@ -4,19 +4,9 @@ import Header from './header'
 import Footer from './footer'
 import { EProgress } from '../../util/eprogress'
 
-Router.onRouteChangeStart = () => {
-  console.log(1)
-  EProgress.start()
-}
-Router.onRouteChangeComplete = () => {
-  console.log(2)
-  EProgress.close()
-}
-
-Router.onRouteChangeError = () => {
-  console.log(3)
-  EProgress.close()
-}
+Router.onRouteChangeStart = () => EProgress.start()
+Router.onRouteChangeComplete = () => EProgress.close()
+Router.onRouteChangeError = () => EProgress.close()
 
 class Layout extends Component {
   constructor() {
@@ -24,9 +14,11 @@ class Layout extends Component {
   }
 
   render() {
+    const { activeRoute } = this.props
+
     return (
       <div className="view-page">
-        <Header />
+        <Header activeRoute={activeRoute} />
         <main>
         { this.props.children }
         </main>
@@ -41,7 +33,6 @@ class Layout extends Component {
         main {
           flex: 1;
           position: relative;
-          background: #f5f5f5;
           overflow: auto;
           padding: 3rem 0;
         }

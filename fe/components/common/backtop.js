@@ -46,7 +46,7 @@ class Bccktop extends Component {
         className={visible ? 'el-backtop is-visible' : 'el-backtop is-hide'}
         onClick={() => this.backTop()}
       >
-        Top
+        <i className="fa fa-chevron-up"></i>
       </div>
     )
   }
