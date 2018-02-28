@@ -5,8 +5,9 @@
   - 后端管理使用Vue开发
   - 前端页面使用React服务端渲染框架`nextjs`
   - 接口服务使用Koa2 + mongodb + mongoose
-  
-此外，为了更好的体验效果，可以点击访问<a href="" target="_blank">后端管理系统</a>，在注册用户后，即可登录体验，同时也可以发布文章，然后在<a  href="" target="_blank">前端页面</a>就可以看到发布的文章。
+
+
+此外，为了更好的体验效果，可以点击访问<a href="http://193.112.102.204" target="_blank">后端管理系统</a>，在注册用户后，即可登录体验，同时也可以发布文章，然后在<a href="http://193.112.102.204:4000/p" target="_blank">前端页面</a>就可以看到发布的文章。(目前（2018-02-28）未备案，就简单通过ip访问即可)
 
 ## 1. 效果预览
 ### 1.1. 后端管理页面
@@ -37,7 +38,7 @@
   ![]()
 
 
-## 模块文档
+## 2. 模块文档
 - [后端管理系统开发](https://github.com/mvpzx/elapse/tree/master/be)
 - [服务端API接口开发](https://github.com/mvpzx/elapse/tree/master/server)
 - [页面部署与接口服务](https://github.com/mvpzx/elapse/tree/master/server/docs/页面部署与接口服务.md)
