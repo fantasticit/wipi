@@ -14,28 +14,28 @@
 后端管理页面使用了vue、vuex、sass以及axios，其中模仿ElementUI的样式开发了`dialog`、`loading`、`confirm`、`notofication`、`messgae`等等组件，（感觉自己对vue组件的开发姿势又稍微深入了一点点，毕竟学无止境）。以下为部分页面截图：
 
   - 登录
-  ![]()
+  [登录预览](http://ownsprds9.bkt.clouddn.com/be-login.JPG)
 
   - 个人中心
-  ![]()
+  [个人中心](http://ownsprds9.bkt.clouddn.com/be-ownspace.JPG)
 
   - 文章管理
-  ![]()
+  [文章管理](http://ownsprds9.bkt.clouddn.com/be-articlelist.JPG)
 
   - 新建文章
-  ![]()
+  [新建文章](http://ownsprds9.bkt.clouddn.com/be-article.JPG)
 
   - ECharts结合
-  ![]()
+  [Echart](http://ownsprds9.bkt.clouddn.com/be-echarts.JPG)
   
 ### 1.2 前端页面渲染
 借此机会想学习一下`React`，于是前端页面使用了React服务端渲染框架`nextjs`，并使用了`Redux`、`axios`以及`koa`(自定义服务所用)。前端页面目前比较简单，主要就是文章的读取和渲染。以下为截图：
 
   - 首页
-  ![]()
+  [前端首页](http://ownsprds9.bkt.clouddn.com/fe-home.JPG)
 
   - 文章详情
-  ![]()
+  [文章详情](http://ownsprds9.bkt.clouddn.com/fe-article.JPG)
 
 
 ## 2. 模块文档
