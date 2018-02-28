@@ -13,20 +13,8 @@ class Nav extends Component {
     super(props)
   }
 
-  componentWillMount() {
-    const { classifies = [] } = this.props
-    if (classifies.length <= 0) {
-      console.log(1)
-      this.props.fecthClassifies()
-    }
-  }
-
   render() {
     const { classifies = {}, selectedClassify, changeClassify } = this.props
-
-    if (classifies.length <= 0) {
-      this.props.fecthClassifies()
-    }
     
     return(
       <nav className="el-nav">
@@ -54,7 +42,6 @@ class Nav extends Component {
 }
 
 const mapStateToProps = ({ classify }) => ({  
-  classifies: classify.classifies,
   selectedClassify: classify.selectedClassify 
 })
 

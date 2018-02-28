@@ -3,6 +3,8 @@ import { initStore } from '../redux/store'
 import { bindActionCreators } from 'redux'
 import withRedux from 'next-redux-wrapper'
 import ArticleService from '../service/article'
+import { fecthClassifies } from '../redux/reducers/classify'
+
 import Layout from '../components/common/layout'
 import Nav from '../components/post/nav'
 import ArticleList from '../components/post/article-list'
@@ -19,13 +21,17 @@ class Post extends Component {
   }
 
   render() {
-    const { dispatch, selectedClassify } = this.props
+    const { classifies = [] } = this.props
+    if (classifies.length <= 0) {
+      console.log('post')
+      this.props.fecthClassifies()
+    }
 
     return(
       <Layout activeRoute={'/p'}>
         <div className="page">
           <div className="container">
-            <Nav />
+            <Nav classifies={classifies}/>
             <div className="articles">
               <ul>
                 {this.props.articles.map((article, i) => (
@@ -53,11 +59,15 @@ class Post extends Component {
   }
 }
 
-const mapStateToProps = ({ classifies, selectedClassify }) => ({ classifies, selectedClassify })
+const mapStateToProps = ({ classify }) => ({  
+  classifies: classify.classifies,
+  selectedClassify: classify.selectedClassify 
+})
+
 
 const mapDispatchToProps = dispatch => {
   return {
-    // changeClassify: bindActionCreators(changeClassify, dispatch)
+    fecthClassifies: bindActionCreators(fecthClassifies, dispatch),
   }
 }
 
