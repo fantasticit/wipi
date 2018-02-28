@@ -4,6 +4,8 @@ const KoaRouter = require('koa-router')
 
 const port = parseInt(process.env.PORT, 10) || 4000
 const dev = process.env.NODE_ENV !== 'production'
+console.log('dev: ', dev)
+
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
@@ -12,12 +14,12 @@ app.prepare().then(() => {
   const router = new KoaRouter()
 
   // give all Nextjs's request to Nextjs before anything else
-  router.get('/_next/*', (req, res) => {
-    handle(req, res);
+  router.get('/_next/*', async ctx => {
+    await handle(ctx.req, ctx.res);
   })
 
-  router.get('/static/*', (req, res) => {
-    handle(req, res);
+  router.get('/static/*', async ctx => {
+    await handle(ctx.req, ctx.res);
   })
 
   router.get('/', async ctx => {
