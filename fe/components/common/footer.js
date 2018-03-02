@@ -9,7 +9,8 @@ class Footer extends Component {
     return (
       <div>
         <footer>
-          <p>&copy; {new Date().getFullYear()} - Mvpzx 的小站 - 皖 ICP 备 15896352 号</p>
+          {/* - 皖 ICP 备 15896352 号 */}
+          <p>&copy; {new Date().getFullYear()} - Mvpzx 的小站</p>
           <p>
             Powered by 
             <a href="http://www.baidu.com"> Koa </a>

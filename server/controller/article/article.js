@@ -149,9 +149,11 @@ class ArticleController {
     }
 
     ArticleController.checkArticle(req, ['cover'], ctx)
+
+    const htmlContent = marked(req.content)
     
     const updatedDate = Date.now()
-    const result = await ArticleModel.findByIdAndUpdate(id, {...req, updatedDate})
+    const result = await ArticleModel.findByIdAndUpdate(id, {...req, htmlContent, updatedDate})
       .catch(e => ctx.throw(500))
     ctx.send({ status: 'ok', message: '更新文章成功' })
   }
@@ -163,22 +165,21 @@ class ArticleController {
     const targetArticle = await ArticleModel.findById(id)
 
     if (
-      !userId
-      || targetArticle.author != userId
-      || !await isAdmin(userId)
+      targetArticle.author == userId 
+      || await isAdmin(userId)
     ) {
+      const article = await ArticleModel.findByIdAndRemove(id)
+        .catch(e => {
+          if (e.name === 'CastError') {
+            ctx.throw(400, { status: 'no', message: `文章不存在` })
+          } else {
+            ctx.throw(500)
+          }
+        })
+      ctx.send({ status: 'ok', message: '删除文章成功'}) 
+    } else {
       ctx.throw(403, { message: '没有权限删除' })
     }
-
-    const article = await ArticleModel.findByIdAndRemove(id)
-      .catch(e => {
-        if (e.name === 'CastError') {
-          ctx.throw(400, { status: 'no', message: `文章不存在` })
-        } else {
-          ctx.throw(500)
-        }
-      })
-    ctx.send({ status: 'ok', message: '删除文章成功'}) 
   }
 }
 

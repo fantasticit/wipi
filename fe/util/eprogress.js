@@ -32,7 +32,6 @@ const EProgress = function eProgress() {
   }
 
   EProgress.close = function () {
-    console.log('end call')
     let timer = null
     const remove = () => {
       try {

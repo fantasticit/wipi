@@ -4,7 +4,7 @@ class ArticlerService {
   static constructor() {}
 
   static async fetchArticles(classify) {
-    const query = `classify=${classify}`
+    const query = `classify=${classify}&state=publish`
 
     const req = { 
       url: `/article?${query}`, 

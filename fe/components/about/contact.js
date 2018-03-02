@@ -8,8 +8,6 @@ class Contact extends Component {
   render() {
     const { path, title, icon, name } = this.props.info
 
-    console.log(this.props.info)
-
     return (
       <div className="contact-box">
         <a href={path} target="_blank">

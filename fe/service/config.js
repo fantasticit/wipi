@@ -37,7 +37,6 @@ instance.interceptors.response.use(
   },
   err => {
     console.log(err)
-    console.log('获取数据失败')
     // if (err.response) {
     //   if (err.response.status == 401) {
     //     console.log('出左，401')

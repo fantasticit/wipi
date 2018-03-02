@@ -5,14 +5,14 @@ const initialState = {
       title: 'github',
       icon: 'github',
       name: 'github/mvpzx',
-      path: ''
+      path: 'https://github.com/mvpzx'
     },
 
     {
       title: 'Email',
       icon: 'envelope-o',
       name: 'bken2016@163.com',
-      path: '',
+      path: 'mailto:bken2016@163.com',
     }
   ]
 }

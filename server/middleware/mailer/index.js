@@ -45,7 +45,7 @@ module.exports = function sendAlarmEmail(method, requestUrl, err, cb) {
     }
   
     console.log('Message sent successfully!');
-    cb(bull, info)
+    cb(null, info)
     transporter.close();
   })
 }

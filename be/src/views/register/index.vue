@@ -59,6 +59,7 @@ export default class Register extends Vue {
   rules = {
     account:[
       { required: true, message: '账号不得为空', trigger: 'blur' },
+      { min: 5, max: 16, message: '帐号长度应在5到16之间', trigger: 'blur' }
     ],
     passwd: [
       { required: true, message: '密码不得为空', trigger: 'blur' },

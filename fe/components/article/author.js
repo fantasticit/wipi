@@ -18,7 +18,7 @@ class Author extends Component {
         <p>
           <span>{ account }</span>
           <span>{ formatTime(createdDate) }</span>
-          <span>阅读量{ readingQuantity }</span>
+          {/* <span>阅读量{ readingQuantity }</span> */}
         </p>
         <style jsx>{`
         .author-info {

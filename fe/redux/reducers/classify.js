@@ -18,11 +18,8 @@ export const changeClassify = (classify) => {
 }
 
 export const fecthClassifies = () => async (dispatch, getStats) => {
-  console.log(2)
   try {
-    console.log(3)
     const data = await ArticleService.fetchArticleClassifies()
-    console.log(data)
     await dispatch(setClassifies(data)) 
   } catch (err) {
     console.log('获取文章分类失败')

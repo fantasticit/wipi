@@ -2,11 +2,11 @@ import { Component } from 'react'
 import Router from 'next/router'
 import Header from './header'
 import Footer from './footer'
-import { EProgress } from '../../util/eprogress'
+// import { EProgress } from '../../util/eprogress'
 
-Router.onRouteChangeStart = () => EProgress.start()
-Router.onRouteChangeComplete = () => EProgress.close()
-Router.onRouteChangeError = () => EProgress.close()
+// Router.onRouteChangeStart = () => EProgress.start()
+// Router.onRouteChangeComplete = () => EProgress.close()
+// Router.onRouteChangeError = () => EProgress.close()
 
 class Layout extends Component {
   constructor() {

@@ -30,7 +30,7 @@ class Article extends Component {
           }} />
           <Markdown content={article.htmlContent} />
           <Tags tags={article.tags} />
-          <Comment />
+          {/* <Comment /> */}
         </div>
         <Backtop />
       </Layout>

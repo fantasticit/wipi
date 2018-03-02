@@ -154,10 +154,10 @@ export default class ArticleList extends Vue {
         item.author = item.author.account
 
         item.classify = JSON.parse(JSON.stringify(this.classifies)).find(num => {
-          return num.value = item.classify
+          return num.value === item.classify
         }).title
         item.state = JSON.parse(JSON.stringify(this.states)).find(num => {
-          return num.value = item.state
+          return num.value === item.state
         }).title
 
         return item

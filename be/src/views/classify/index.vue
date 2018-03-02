@@ -7,13 +7,13 @@
       <ta-form-item
         prop="name"
         v-model="title"
-        placeholder="请输入标签名"
+        placeholder="请输入分类名"
         :rules="rules.name">
       </ta-form-item>
       <ta-form-item
         prop="value"
         v-model="value"
-        placeholder="请输入标签值，仅接受英文"
+        placeholder="请输入分类值，仅接受英文"
         :rules="rules.value"
         :validator="isLetter">
       </ta-form-item>
@@ -48,10 +48,10 @@ export default class Tag extends Vue {
   loading = false
   rules = {
     name:[
-      { required: true, message: '标签名不得为空', trigger: 'blur' },
+      { required: true, message: '分类名不得为空', trigger: 'blur' },
     ],
     value: [
-      { required: true, message: '标签值不得为空', trigger: 'blur' },
+      { required: true, message: '分类值不得为空', trigger: 'blur' },
     ]
   }
   userId = ''

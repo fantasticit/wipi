@@ -11,8 +11,6 @@ import ArticleList from '../components/post/article-list'
 
 class Post extends Component {
   static async getInitialProps({ query }) {
-    console.log(query)
-
     const classify = query.id
     const articles = await ArticleService.fetchArticles(classify)
       .catch(e => console.log('获取数据失败'))
@@ -23,7 +21,6 @@ class Post extends Component {
   render() {
     const { classifies = [] } = this.props
     if (classifies.length <= 0) {
-      console.log('post')
       this.props.fecthClassifies()
     }
 
