@@ -12,9 +12,9 @@ class Footer extends Component {
           <p>&copy; {new Date().getFullYear()} - Mvpzx 的小站 - 皖 ICP 备 15896352 号</p>
           <p>
             Powered by 
-            <a href="http://www.baidu.com"> Koa </a>
+            <a href="https://koa.bootcss.com"> Koa </a>
             &
-            <a href="http://www.baidu.com"> React</a>
+            <a href="http://www.css88.com/react/"> React</a>
           </p>
         </footer>
         <style jsx>{`
