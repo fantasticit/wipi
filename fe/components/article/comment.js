@@ -8,8 +8,9 @@ class Comment extends Component {
 
   render() {
     return (
-      <div className="el-comment">
-        <div className="el-comment__title">
+      <div className="comment">
+        <div id="uyan_frame"></div>
+        {/* <div className="el-comment__title">
           <span className="comment-num">0 条评论</span>
           <span className="comment-line"></span>
         </div>
@@ -21,8 +22,11 @@ class Comment extends Component {
             <button className="el-button el-button--text">取消</button>
             <button className="el-button">评论</button>
           </div>
-        </div>
+        </div> */}
         <style jsx>{`
+        .comment {
+          min-height: 1px;
+        }
         `}</style>
       </div>
     )

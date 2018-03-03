@@ -23,6 +23,12 @@
     align-items: center;
   }
 
+  @media (max-width: 768px) {
+    > header > .container {
+      padding: 0 15px;
+    }
+  }
+
   nav {
     flex: 1 0 auto;
     display: flex;

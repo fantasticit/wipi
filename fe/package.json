@@ -14,7 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "@zeit/next-sass": "^0.1.1",
-    "antd": "^3.2.3",
     "axios": "^0.18.0",
     "highlightjs": "^9.10.0",
     "koa": "^2.5.0",
@@ -25,6 +24,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
+    "react-swipe": "^5.1.1",
+    "react-tabs": "^2.2.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   }

@@ -4,7 +4,7 @@ import ReactSwipe from 'react-swipe'
 const swipeOptions = {
   startSlide: 0,
   auto: 3,
-  speed: 12000,
+  speed: 5000,
   disableScroll: true,
   continuous: true,
 }

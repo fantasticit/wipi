@@ -44,7 +44,7 @@ class Banner extends Component {
 
         .wrapper {
           z-index: 1;
-          background: hsla(0,0%,71%,.2);
+          background: rgba(250, 189, 61, .8);
         }
 
         .info {
@@ -60,6 +60,15 @@ class Banner extends Component {
 
         .info i {
           margin-right: 1rem;
+        }
+
+        @media (max-width: 768px) {
+          .container,
+          .bg, 
+          .wrapper, 
+          .info {
+            border-radius: 0;
+          }
         }
         `}</style>
       </div>

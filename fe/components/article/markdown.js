@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import { highlight } from '../../util/highlight'
-import './styles/tags.scss'
 import './styles/markdown.scss'
 
 class Markdown extends Component {
@@ -21,6 +20,7 @@ class Markdown extends Component {
       <div
         ref="content"
         className="markdown-body"
+        style={{'marginTop': '1rem'}}
         dangerouslySetInnerHTML={{__html: content}}>
       </div>
     )

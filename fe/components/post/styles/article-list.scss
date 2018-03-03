@@ -3,7 +3,6 @@
 @include b(article-list) {
   position: relative;
   list-style: none;
-  width: 96%;
   margin: 0 auto;
   padding: 1.5rem 0;
   border-bottom: 1px solid #f0f0f0;
@@ -37,34 +36,6 @@
 
     @include when(full) {
       padding-right: 0;
-    }
-    
-    .author {
-      color: #909090;
-      @include flexLayout(center, inline-flex) {
-        align-items: center;
-      }
-
-      > a {
-        display: inline-block;
-        height: px2rem(32);
-
-        @include flexLayout(center, inline-flex) {
-          align-items: center;
-        }
-      }
-
-      .avatar {
-        width: px2rem(32);
-        height: 100%;
-        border-radius: 50%;
-        margin-right: 5px;
-      }
-
-      .dot {
-        margin: 0 5px;
-        font-size: 10px;
-      }
     }
 
     .title {

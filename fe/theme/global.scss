@@ -12,19 +12,28 @@
   }
 
   .container {
-    max-width: 810px;
-    margin: 0 auto;
+    margin-right: auto;
+    margin-left: auto;
   }
 
-  .container-fluid {
-    width: 100%;
-  }
-
-  @media (max-width: 998px) {
+  @media (min-width: 768px) {
     .container {
-      width: 96%;
+      width: 750px;
     }
   }
+
+  @media (min-width: 992px) {
+    .container {
+      width: 960px;
+    }
+  }
+
+  @media (min-width: 1081px) {
+    .container {
+      width: 960px;
+    }
+  }
+  
 
   .form-control {
     display: inline-block;

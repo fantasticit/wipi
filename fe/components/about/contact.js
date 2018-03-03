@@ -24,6 +24,11 @@ class Contact extends Component {
           font-size: 1.4rem;
           background: #f7f7f7;
           border: 1px solid #eee;
+          transition: all ease .2s;
+        }
+
+        .contact-box:hover {
+          box-shadow: 0 5px 20px rgba(0,0,0,.1);
         }
 
         .contact-box + .contact-box {

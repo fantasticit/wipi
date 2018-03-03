@@ -22,17 +22,23 @@ class Article extends Component {
     return(
       <Layout>
         <div className="container">
-          { article.cover ? <Cover cover={article.cover} />: ''}
           <Author author={{
+            avatar: article.author.avatar,
             account: article.author.account,
             createdDate: article.createdDate,
             readingQuantity: article.readingQuantity,
           }} />
+          { article.cover ? <Cover cover={article.cover} />: ''}
           <Markdown content={article.htmlContent} />
           <Tags tags={article.tags} />
-          {/* <Comment /> */}
+          <Comment />
         </div>
         <Backtop />
+        <style jsx>{`
+        .container {
+          padding: 2rem 15px 3rem 15px;
+        }
+        `}</style>
       </Layout>
     )
   }

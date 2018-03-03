@@ -33,6 +33,12 @@ class Demo extends Component {
           box-sizing: border-box;
           display: inline-block;
           border: 1px solid #eee;
+
+          transition: all ease .2s;
+        }
+
+        .demo:hover {
+          box-shadow: 0 5px 20px rgba(0,0,0,.1);
         }
 
         .demo + .demo {

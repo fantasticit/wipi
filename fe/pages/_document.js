@@ -11,11 +11,11 @@ export default class MyDocument extends Document {
       href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/default.min.css" />
           <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
           <link rel="stylesheet" href="/_next/static/style.css" />
-
         </Head>
         <body>
           <Main />
           <NextScript />
+          <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146070"></script>
         </body>
       </html>
     )

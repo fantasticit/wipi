@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { fecthClassifies } from '../../redux/reducers/classify'
 import { formatTime } from '../../util/format-time'
 import Link from 'next/link'
+import Author from '../article/author'
 import './styles/article-list.scss'
 
 class ArticleList extends Component {
@@ -37,18 +38,12 @@ class ArticleList extends Component {
             ? 'el-article-list__content'
             : 'el-article-list__content is-full'
         }>
-          <div className="author">
-            <a>
-              <img className="avatar" src={article.author.avatar} />
-              <span>{ article.author.account }</span>
-            </a>
-            <span>
-              <span className="dot">●</span> 
-              { formatTime(article.createdDate) }
-              <span className="dot">●</span> 
-              { this.translate(article.classify) }
-            </span>
-          </div>
+          <Author author={{
+            avatar: article.author.avatar,
+            account: article.author.account,
+            createdDate: article.createdDate,
+            readingQuantity: article.readingQuantity,
+          }} />
           <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
             <a className="title">
               <h2>{article.title}</h2>

@@ -34,20 +34,34 @@ class About extends Component {
             </TabList>
         
             <TabPanel>
-              {contacts.map((contact, i) => (
-                <Contact key={i} info={contact} />
-              ))}
+              <div className="box">
+                {contacts.map((contact, i) => (
+                  <Contact key={i} info={contact} />
+                ))}
+              </div>
             </TabPanel>
             <TabPanel>
-              {demos.map((demo, i) => (
-                <Demo key={i} demo={demo} />
-              ))}
+              <div className="box">
+                {demos.map((demo, i) => (
+                  <Demo key={i} demo={demo} />
+                ))}
+              </div>
             </TabPanel>
           </Tabs>
         </div>
         <style jsx>{`
           .container {
             padding-bottom: 3rem;
+          }
+
+          @media (max-width: 768px) {
+            .container {
+              padding: 0 15px 3rem 15px;
+            }
+          }
+
+          .box {
+            padding: 1rem 0;
           }
         `}</style>
       </Layout>

@@ -47,6 +47,12 @@ class Post extends Component {
             padding-bottom: 3rem;
           }
 
+          @media (max-width: 768px) {
+            .container {
+              padding: 0 15px 3rem 15px;
+            }
+          }
+
           .articles {
             box-sizing: border-box;
             background: #fff;

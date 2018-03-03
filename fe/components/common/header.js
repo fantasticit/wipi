@@ -44,11 +44,11 @@ class Header extends Component {
                   </li>
                 ))}
               </ul>
-              <div className="el-header__search">
+              {/* <div className="el-header__search">
                 <div className="form-control form-control--icon">
                   <input className="el-input" placeholder="搜索文章"/>
                 </div>
-              </div>
+              </div> */}
             </nav>
           </div>
         </header>
