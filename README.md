@@ -38,7 +38,17 @@
   ![文章详情](http://ownsprds9.bkt.clouddn.com/fe-article.JPG)
 
 
-## 2. 模块文档
+## 2. 笔记总结
+
+<details>
+  <summary>Vue.js 篇</summary>
+  <ul>
+    <li><a>Vue组件开发总结</a></li>
+  </ul>
+</details> 
+  
+
+## 3. 模块文档
 - [后端管理系统开发](https://github.com/mvpzx/elapse/tree/master/be)
 - [服务端API接口开发](https://github.com/mvpzx/elapse/tree/master/server)
 - [页面部署与接口服务](https://github.com/mvpzx/elapse/tree/master/server/docs/页面部署与接口服务.md)
