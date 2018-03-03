@@ -14,51 +14,47 @@
 ### 1.1 后端管理页面
 后端管理页面使用了vue、vuex、sass以及axios，其中模仿ElementUI的样式开发了`dialog`、`loading`、`confirm`、`notofication`、`messgae`等等组件，（感觉自己对vue组件的开发姿势又稍微深入了一点点，毕竟学无止境）。以下为部分页面截图：
 
-  <details>
-    <summary>后台界面预览图（点击展开）</summary>
-    <ul>
-      <li>
-        <p>登录预览</p>
-        <img src="http://ownsprds9.bkt.clouddn.com/be-login.JPG" />
-      </li>
-      <li>
-        <p>个人中心</p>
-        <img src="http://ownsprds9.bkt.clouddn.com/be-ownspace.JPG" />
-      </li>
-      <li>
-        <p>文章管理</p>
-        <img src="http://ownsprds9.bkt.clouddn.com/be-articlelist.JPG" />
-      </li>
-      <li>
-        <p>ECharts结合</p>
-        <img src="http://ownsprds9.bkt.clouddn.com/be-echarts.JPG" />
-      </li>
-    </ul>
-  </details>
+<ul>
+  <li>
+    <p>登录预览</p>
+    <img src="http://ownsprds9.bkt.clouddn.com/be-login.JPG" />
+  </li>
+  <li>
+    <p>个人中心</p>
+    <img src="http://ownsprds9.bkt.clouddn.com/be-ownspace.JPG" />
+  </li>
+  <li>
+    <p>文章管理</p>
+    <img src="http://ownsprds9.bkt.clouddn.com/be-articlelist.JPG" />
+  </li>
+  <li>
+    <p>ECharts结合</p>
+    <img src="http://ownsprds9.bkt.clouddn.com/be-echarts.JPG" />
+  </li>
+</ul>
+
   
 ### 1.2 前端页面渲染
 借此机会想学习一下`React`，于是前端页面使用了React服务端渲染框架`nextjs`，并使用了`Redux`、`axios`以及`koa`(自定义服务所用)。前端页面目前比较简单，主要就是文章的读取和渲染。以下为截图：
 
-  <details>
-    <summary>前台界面预览图（点击展开）</summary>
-    <ul>
-      <li>
-        <p>前端首页</p>
-        <img src="http://ownsprds9.bkt.clouddn.com/fe-home.JPG" />
-      </li>
-      <li>
-        <p>文章详情</p>
-        <img src="http://ownsprds9.bkt.clouddn.com/fe-article.JPG" />
-      </li>
-    </ul>
-  </details>
+ 
+<ul>
+  <li>
+    <p>前端首页</p>
+    <img src="http://ownsprds9.bkt.clouddn.com/fe-home.JPG" />
+  </li>
+  <li>
+    <p>文章详情</p>
+    <img src="http://ownsprds9.bkt.clouddn.com/fe-article.JPG" />
+  </li>
+</ul>
 
 ## 2. 笔记总结
 
   <details>
     <summary>Vue.js 篇</summary>
     <ul>
-      <li><a>Vue组件开发总结</a></li>
+      <li><a href="https://github.com/mvpzx/elapse/blob/master/be/src/docs/Vue%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%E5%A7%BF%E5%8A%BF%E6%80%BB%E7%BB%93.md" target="_blank">Vue组件开发总结</a></li>
     </ul>
   </details> 
   
