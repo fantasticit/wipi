@@ -5,8 +5,12 @@ import withRedux from 'next-redux-wrapper'
 import ArticleService from '../service/article'
 import { fecthClassifies } from '../redux/reducers/classify'
 
+import LinePanel from '../components/common/line-panel'
+import Carousel from '../components/common/carousel'
 import Layout from '../components/common/layout'
 import Nav from '../components/post/nav'
+
+
 import ArticleList from '../components/post/article-list'
 
 class Post extends Component {
@@ -19,36 +23,37 @@ class Post extends Component {
   }
 
   render() {
-    const { classifies = [] } = this.props
+    const { classifies = [], selectedClassify } = this.props
     if (classifies.length <= 0) {
       this.props.fecthClassifies()
     }
 
     return(
       <Layout activeRoute={'/p'}>
-        <div className="page">
-          <div className="container">
-            <Nav classifies={classifies}/>
-            <div className="articles">
-              <ul>
-                {this.props.articles.map((article, i) => (
-                  <ArticleList article={article} key={i}/>
-                ))}
-              </ul>
-            </div>
+        <Carousel />
+        <div className="container">
+          <Nav classifies={classifies}/>
+          <div className="articles">
+            <LinePanel title={selectedClassify.title} />
+            <ul>
+              {this.props.articles.map((article, i) => (
+                <ArticleList article={article} key={i}/>
+              ))}
+            </ul>
           </div>
         </div>
         <style jsx>{`
-          .page {
-            margin: -3rem 0 0 0;
-          }
-
           .container {
+            padding-bottom: 3rem;
           }
 
           .articles {
             box-sizing: border-box;
             background: #fff;
+          }
+
+          .articles > div {
+            position: relative;
           }
         `}</style>
       </Layout>

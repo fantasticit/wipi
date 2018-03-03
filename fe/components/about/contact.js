@@ -46,13 +46,13 @@ class Contact extends Component {
 
         @media (max-width: 768px) {
           .contact-box {
-            width: 96%;
-            margin-left: 2%;
+            width: 98%;
+            margin-left: 1%;
           }
 
           .contact-box + .contact-box {
             margin-top: 1.5rem;
-            margin-left: 2%;
+            margin-left: 1%;
           }
         }
         `}</style>

@@ -13,9 +13,9 @@ class Footer extends Component {
           <p>&copy; {new Date().getFullYear()} - Mvpzx 的小站</p>
           <p>
             Powered by 
-            <a href="https://koa.bootcss.com"> Koa </a>
+            <a href="https://koa.bootcss.com" target="_blank"> Koa </a>
             &
-            <a href="http://www.css88.com/react/"> React</a>
+            <a href="http://www.css88.com/react/" target="_blank"> React</a>
           </p>
         </footer>
         <style jsx>{`
@@ -23,6 +23,14 @@ class Footer extends Component {
           text-align: center;
           padding: 2rem 0;
           border-top: 1px solid #ebf2f6;
+        }
+
+        a {
+          color: #409efe;
+        }
+
+        a:hover {
+          text-decoration: underline;
         }
         `}</style>
       </div>

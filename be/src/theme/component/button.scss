@@ -20,7 +20,7 @@
   transition: all ease .1s;
 
   span {
-    @include flexLayout() {
+    @include flexLayout(center) {
       align-items: center;
     }
   }
@@ -51,7 +51,7 @@
 
   i {
     margin-right: 6px;
-    transform: translateY(-2px);
+    // transform: translateY(-2px);
   }
 
   &:hover,

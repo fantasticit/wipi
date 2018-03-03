@@ -34,7 +34,6 @@ class Layout extends Component {
           flex: 1;
           position: relative;
           overflow: auto;
-          padding: 3rem 0;
         }
         `}</style>
       </div>

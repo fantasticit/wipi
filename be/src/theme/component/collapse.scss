@@ -8,10 +8,6 @@
   will-change: height;
   transition: all ease .3s;
 
-  &:last-of-type {
-    border-bottom: 0;
-  }
-
   @include e(header) {
     box-sizing: border-box;
     padding: 0 5px;

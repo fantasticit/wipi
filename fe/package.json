@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@zeit/next-sass": "^0.1.1",
+    "antd": "^3.2.3",
     "axios": "^0.18.0",
     "highlightjs": "^9.10.0",
     "koa": "^2.5.0",

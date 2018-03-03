@@ -2,21 +2,21 @@
 
 @include b(nav) {
   width: 100%;
-  padding: 1rem 0;
-
   font-size: px2rem(14);
+  margin: 20px 0;
   color: #71777c;
   
   @include e(menu) {
     display: flex;
+    justify-content: center;
   }
 
   @include e(menu-item) {
     position: relative;
     padding: .5rem 1rem;
     border-radius: 4px;
-    border: 1px solid #dcdcdc;
-    background: #f7f7f7;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 15px;
     margin-left: 1.3rem;
 
     &:first-of-type {

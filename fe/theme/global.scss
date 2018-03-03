@@ -29,4 +29,56 @@
   .form-control {
     display: inline-block;
   }
+
+  .react-tabs__tab-list {
+    border-bottom: 1px solid #f0f0f0;
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #969696
+  }
+
+  .react-tabs__tab-list i {
+    margin-right: 5px;
+  }
+  
+  .react-tabs__tab {
+    display: inline-block;
+    border: 1px solid transparent;
+    border-bottom: none;
+    bottom: -1px;
+    position: relative;
+    list-style: none;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
+  .react-tabs__tab--selected {
+    color: #646464;
+    border-bottom: 2px solid #646464;
+  }
+  
+  .react-tabs__tab--disabled {
+    color: GrayText;
+    cursor: default;
+  }
+  
+  .react-tabs__tab:focus:after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    left: -4px;
+    right: -4px;
+    bottom: -5px;
+    background: #fff;
+  }
+  
+  .react-tabs__tab-panel {
+    display: none;
+  }
+  
+  .react-tabs__tab-panel--selected {
+    display: block;
+  }
 }

@@ -3,11 +3,10 @@
   width: 100%;
   height: 100%;
   // padding: 52px 0;
-  overflow: auto;
-
   background-color: $bg;
   font-size: 14px;
   cursor: pointer;
+  overflow: auto;
 
   li {
     position: relative;
@@ -88,6 +87,8 @@
 
   // 当菜单折叠时的样式
   @include when(collapse) {
+    overflow: visible;
+
     > ul > li {
       overflow: visible;
       max-height: 56px;
@@ -110,12 +111,8 @@
           margin: 0;
         }
 
-        @include b(icon){
-          margin: 0;
-  
-          @include e(arrow) {
-            display: none;
-          }
+        .ta-icon__arrow {
+          display: none;
         }
   
         > span {

@@ -152,7 +152,7 @@ const routeConfig = [
   },
 
   {
-    icon: 'person-stalker',
+    icon: 'cube',
     path: 'components',
     name: 'Components',
     component: views.Components,
