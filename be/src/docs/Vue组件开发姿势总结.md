@@ -23,7 +23,7 @@ new Vue({
 ## Dialog
 目标对话框组件的基本样式如图：
 
-![dialog基本样式](https://user-gold-cdn.xitu.io/2018/3/3/161eac09b777d4d9?w=815&h=373&f=png&s=5988)
+[dialog基本样式](https://user-gold-cdn.xitu.io/2018/3/3/161eac09b777d4d9?w=815&h=373&f=png&s=5988)
 
 根据目标样式，可以总结出：
 
