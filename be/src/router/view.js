@@ -17,6 +17,7 @@ const views = {
   UserManagement: () => import(/* webpackChunkName: "user-management" */'@/views/user-management'),
   Forbidden: () => import(/* webpackChunkName: "forbidden" */'@/views/forbidden'),
   NotFound: () => import(/* webpackChunkName: "not-found" */'@/views/not-found'),
+  Components: () => import(/* webpackChunkName: "components" */'@/views/components'),
 }
 
 export default views

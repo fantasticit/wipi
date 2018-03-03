@@ -150,6 +150,16 @@ const routeConfig = [
       },
     ],
   },
+
+  {
+    icon: 'person-stalker',
+    path: 'components',
+    name: 'Components',
+    component: views.Components,
+    meta: {
+      title: '组件一览',
+    },
+  },
 ]
 
 export default routeConfig
