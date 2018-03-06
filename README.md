@@ -52,9 +52,8 @@
 ## 2. 笔记总结
 ### 2.1 Vue.js 篇
 
-  - [Vue组件开发总结](https://github.com/mvpzx/elapse/blob/master/be/src/docs/Vue%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%E5%A7%BF%E5%8A%BF%E6%80%BB%E7%BB%93.md)
-  
-  - [上传组件开发以及上传到七牛云](https://github.com/mvpzx/elapse/blob/master/be/src/docs/%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6.md)
+- [Vue组件开发总结](https://github.com/mvpzx/elapse/blob/master/be/src/docs/Vue%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%E5%A7%BF%E5%8A%BF%E6%80%BB%E7%BB%93.md)
+- [上传组件开发以及上传到七牛云](https://github.com/mvpzx/elapse/blob/master/be/src/docs/%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6.md)
 
 ## 3. 模块文档
 - [后端管理系统开发](https://github.com/mvpzx/elapse/tree/master/be)
