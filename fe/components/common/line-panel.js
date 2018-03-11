@@ -10,16 +10,17 @@ class LinePanel extends Component {
 
     return (
       <div className="line-panel">
-        <span className="line-panel__title">{ title }</span>
+        {
+          title ? <span className="line-panel__title">{ title }</span> : ''
+        }
         <span className="line-panel__line"></span>
         <style jsx>{`
         .line-panel {
           position: relative;
           z-index: 3;
-          margin: 1rem 0;
           height: 22px;
 
-          font-size: 1.3rem;
+          font-size: 1rem;
         }
     
         .line-panel__title {

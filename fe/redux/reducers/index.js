@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import { author } from './author'
-import { classify } from './classify'
+import { tags } from './tags'
 
 export const reducers = combineReducers({
   author,
-  classify
+  tags,
 })

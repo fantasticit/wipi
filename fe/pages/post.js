@@ -3,47 +3,55 @@ import { initStore } from '../redux/store'
 import { bindActionCreators } from 'redux'
 import withRedux from 'next-redux-wrapper'
 import ArticleService from '../service/article'
-import { fecthClassifies } from '../redux/reducers/classify'
+import { fetchTags } from '../redux/reducers/tags'
 
 import LinePanel from '../components/common/line-panel'
-import Carousel from '../components/common/carousel'
 import Layout from '../components/common/layout'
 import Nav from '../components/post/nav'
+import Other from '../components/post/other'
 
 
 import ArticleList from '../components/post/article-list'
 
 class Post extends Component {
   static async getInitialProps({ query }) {
-    const classify = query.id
-    const articles = await ArticleService.fetchArticles(classify)
+    const tag = query.id
+
+    const articles = await ArticleService.fetchArticles(tag)
       .catch(e => console.log('获取数据失败'))
 
     return { articles }
   }
 
   render() {
-    const { classifies = [], selectedClassify } = this.props
-    if (classifies.length <= 0) {
-      this.props.fecthClassifies()
+    const { tags = [], selectedTag } = this.props
+
+    if (tags.length <= 0) {
+      this.props.fetchTags()
     }
 
     return(
       <Layout activeRoute={'/p'}>
-        <Carousel />
+        {/* <Carousel /> */}
         <div className="container">
-          <Nav classifies={classifies}/>
           <div className="articles">
-            <LinePanel title={selectedClassify.title} />
+            <LinePanel title={selectedTag.tag.title} />
             <ul>
               {this.props.articles.map((article, i) => (
                 <ArticleList article={article} key={i}/>
               ))}
             </ul>
           </div>
+          <aside>
+            <Nav />
+            {/* <Other /> */}
+          </aside>
         </div>
         <style jsx>{`
           .container {
+            position: relative;
+            margin: 20px auto;
+            padding-right: 22rem;
             padding-bottom: 3rem;
           }
 
@@ -58,8 +66,12 @@ class Post extends Component {
             background: #fff;
           }
 
-          .articles > div {
-            position: relative;
+          aside {
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            width: 18rem;
           }
         `}</style>
       </Layout>
@@ -67,15 +79,17 @@ class Post extends Component {
   }
 }
 
-const mapStateToProps = ({ classify }) => ({  
-  classifies: classify.classifies,
-  selectedClassify: classify.selectedClassify 
+const mapStateToProps = ({ tags }) => ({
+  tags: tags.tags,
+  selectedTag: tags.selectedTag
+  // classifies: classify.classifies,
+  // selectedClassify: classify.selectedClassify 
 })
 
 
 const mapDispatchToProps = dispatch => {
   return {
-    fecthClassifies: bindActionCreators(fecthClassifies, dispatch),
+    fetchTags: bindActionCreators(fetchTags, dispatch),
   }
 }
 

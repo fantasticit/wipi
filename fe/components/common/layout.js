@@ -1,12 +1,13 @@
 import { Component } from 'react'
 import Router from 'next/router'
+import NProgress from 'nprogress'
 import Header from './header'
 import Footer from './footer'
 // import { EProgress } from '../../util/eprogress'
 
-// Router.onRouteChangeStart = () => EProgress.start()
-// Router.onRouteChangeComplete = () => EProgress.close()
-// Router.onRouteChangeError = () => EProgress.close()
+Router.onRouteChangeStart = () => NProgress.start()
+Router.onRouteChangeComplete = () => NProgress.done()
+Router.onRouteChangeError = () => NProgress.done()
 
 class Layout extends Component {
   constructor() {
@@ -18,7 +19,7 @@ class Layout extends Component {
 
     return (
       <div className="view-page">
-        <Header activeRoute={activeRoute} />
+        {/* <Header activeRoute={activeRoute} /> */}
         <main>
         { this.props.children }
         </main>

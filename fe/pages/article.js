@@ -12,7 +12,8 @@ class Article extends Component {
   static async getInitialProps({ query }) {
     const articleId = query.id
     const article = await ArticleService.fetchArticleById(articleId)
-
+    // 更新文章阅读量
+    await ArticleService.updateArticleREadingQuantity(articleId)
     return { article }
   }
 
@@ -43,7 +44,7 @@ class Article extends Component {
         h1 {
           word-break: break-all;
           font-family: -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
-          font-size: 34px;
+          font-size: 1.6rem;
           font-weight: 700;
           line-height: 1.3;
         }

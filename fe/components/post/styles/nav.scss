@@ -7,8 +7,6 @@
   color: #71777c;
   
   @include e(menu) {
-    display: flex;
-    justify-content: center;
   }
 
   @include e(menu-item) {
@@ -17,7 +15,6 @@
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, .1);
     border-radius: 15px;
-    margin-left: 1.3rem;
 
     &:first-of-type {
       margin-left: 0;

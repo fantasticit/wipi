@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fecthClassifies } from '../../redux/reducers/classify'
+// import { fecthClassifies } from '../../redux/reducers/classify'
 import { formatTime } from '../../util/format-time'
 import Link from 'next/link'
 import Author from '../article/author'
@@ -22,7 +22,7 @@ class ArticleList extends Component {
     const { article } = this.props
     const { classifies = [] } = this.props
 
-    if (classifies.length <= 0) this.props.fecthClassifies()
+    // if (classifies.length <= 0) this.props.fecthClassifies()
 
     return(
       <li className="el-article-list">
@@ -63,11 +63,11 @@ class ArticleList extends Component {
   }
 }
 
-const mapStateToProps = ({ classify }) => ({ classifies: classify.classifies })
+const mapStateToProps = ({  }) => ({  })
 
 const mapDispatchToProps = dispatch => {
   return {
-    fecthClassifies: bindActionCreators(fecthClassifies, dispatch)
+    // fecthClassifies: bindActionCreators(fecthClassifies, dispatch)
   }
 }
 

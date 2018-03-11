@@ -3,8 +3,8 @@ import axios from './config'
 class ArticlerService {
   static constructor() {}
 
-  static async fetchArticles(classify) {
-    const query = `classify=${classify}&state=publish`
+  static async fetchArticles(tag) {
+    const query = `tag=${tag}&state=publish`
 
     const req = { 
       url: `/article?${query}`, 
@@ -31,14 +31,25 @@ class ArticlerService {
     }
   }
 
-  // 获取文章分类
-  static async fetchArticleClassifies() {
-    const req = { url: '/classify', method: 'get' }
+  // 更新文章阅读量
+  static async updateArticleREadingQuantity(id) {
+    const req = {
+      url: `/article/readingQuantity/${id}`,
+      method: 'patch',
+    }
+
+    // 只需要发出请求
+    await axios(req)
+  }
+
+  // 获取文章标签
+  static async fetchArticleTags() {
+    const req = { url: '/article/tags', method: 'get' }
 
     try {
       const res = await axios(req)
-
-      return res.data.items
+      
+      return res.data
     } catch (err) {
       throw new Error(err)
     }

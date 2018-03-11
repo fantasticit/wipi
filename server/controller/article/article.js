@@ -1,4 +1,5 @@
 const ArticleModel = require('../../models/article/article')
+const TagModel = require('../../models/article/tag')
 const UserModel = require('../../models/user')
 const marked = require('../util/markdown')
 const isAdmin = require('../util/is-admin')
@@ -56,10 +57,33 @@ class ArticleController {
     ctx.send({ status: 'ok', message: '新增文章成功' })
   }
 
+  static async getArticleTags(ctx) {
+    let articles = await ArticleModel.find().catch(e => ctx.throw(500))
+    const tags = await TagModel.find().catch(e => ctx.throw(500))
+    const data = tags.map(tag => {
+      let count = articles.map(article => {
+        const is = article.tags.some(articleTag => articleTag.value === tag.value)
+
+        if (is) {
+          return article
+        } else {
+          return ''
+        }
+      }).filter(article => Boolean(article)).length
+      
+      return {
+        tag,
+        count
+      }
+    })
+
+    ctx.send({ status: 'ok', message: '获取文章标签成功', data })
+  }
+
   // 根据query参数获取文章
   // 形式上更像是 listArticles
   static async getArticle(ctx, next) {
-    let { userId, classify, state, keyword, page = 1, pageSize = 20 } = ctx.query
+    let { userId, classify, state, keyword, page = 1, pageSize = 20, tag } = ctx.query
     page = +page
     pageSize = +pageSize
     const query = {}
@@ -78,8 +102,8 @@ class ArticleController {
       ]
     }
     const skip = page === 0 ? 0 : (page - 1) * pageSize
-
-    const articles = await ArticleModel
+  
+    let articles = await ArticleModel
       .find(query)
       .limit(pageSize)
       .skip(skip)
@@ -90,11 +114,35 @@ class ArticleController {
       .sort({ createdDate: -1 })
       .exec()
       .catch(e => ctx.throw(500))
-
-    const total = await ArticleModel
+    
+    let total = await ArticleModel
       .find(query)
       .count()
       .catch(e => ctx.throw(500))
+    
+    if (!isBlank(tag)) {
+      articles = articles.map(article => {
+        const is = article.tags.some(articleTag => articleTag.value === tag)
+
+        if (is) {
+          return article
+        } else {
+          return ''
+        }
+      }).filter(article => Boolean(article))
+
+      // 重新计算总数
+      let totalArtciles = await ArticleModel.find()
+      total = totalArtciles.map(article => {
+        const is = article.tags.some(articleTag => articleTag.value === tag)
+
+        if (is) {
+          return article
+        } else {
+          return ''
+        }
+      }).filter(article => Boolean(article)).length
+    }
 
     ctx.send({ status: 'ok', message: '获取文章成功', data: {
         items: articles,
@@ -122,7 +170,7 @@ class ArticleController {
     }
   }
 
-  // 获取指定Id的文章
+  // 获取最新发布的10篇文章
   static async getRecentPublishedArticle(ctx, next) {
     const article = await ArticleModel
       .find({ state: 'publish' })
@@ -135,6 +183,27 @@ class ArticleController {
       .catch(e => ctx.throw(500))
    
     ctx.send({ status: 'ok', message: '获取文章成功', data: { article }})
+  }
+
+  // 更新文章阅读量
+  static async updateArticleReadingQuantity(ctx, next) {
+    const { id } = ctx.params
+
+    if (!id) {
+      ctx.throw(400, { message: '未指定文章' })
+    }
+
+    const article = await ArticleModel.findById(id).catch(e => ctx.throw(500))
+    if (!article) {
+      ctx.throw(404, { message: '该ID下无文章' })
+    }
+
+    let { readingQuantity } = article
+
+    await ArticleModel.findByIdAndUpdate(id, { readingQuantity: readingQuantity + 1 })
+    .catch(e => ctx.throw(500))
+
+    ctx.send({ status: 'ok', message: '获取文章阅读量成功', data: readingQuantity })
   }
 
   // 更新指定Id的文章
