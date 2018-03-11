@@ -1,15 +1,1 @@
-[2018-03-01T21:17:38.233] [INFO] normal - OPTIONS /performence/webpage 响应时间为: 0.028s
-[2018-03-01T21:17:38.314] [INFO] normal - POST /performence/webpage 响应时间为: 0.054s
-[2018-03-01T21:18:23.108] [INFO] normal - OPTIONS /user/check/account 响应时间为: 0.001s
-[2018-03-01T21:18:23.135] [INFO] normal - POST /user/check/account 响应时间为: 0.022s
-[2018-03-01T21:18:24.383] [INFO] normal - POST /user/check/account 响应时间为: 0.004s
-[2018-03-01T21:18:24.746] [INFO] normal - POST /user/check/account 响应时间为: 0.003s
-[2018-03-01T21:18:40.552] [INFO] normal - OPTIONS /user/check/account 响应时间为: 0.001s
-[2018-03-01T21:18:40.560] [INFO] normal - POST /user/check/account 响应时间为: 0.002s
-[2018-03-01T21:18:43.310] [INFO] normal - POST /user/check/account 响应时间为: 0.002s
-[2018-03-01T21:23:42.089] [INFO] normal - OPTIONS /user/login 响应时间为: 0.001s
-[2018-03-01T21:23:42.126] [INFO] normal - POST /user/login 响应时间为: 0.034s
-[2018-03-01T21:23:42.705] [INFO] normal - OPTIONS /article/publish/recent 响应时间为: 0.001s
-[2018-03-01T21:23:42.832] [INFO] normal - GET /article/publish/recent 响应时间为: 0.038s
-[2018-03-01T21:23:46.320] [INFO] normal - OPTIONS /classify 响应时间为: 0.001s
-[2018-03-01T21:23:46.386] [INFO] normal - GET /classify 响应时间为: 0.008s
+[2018-03-11T11:05:31.184] [INFO] normal - GET /article 响应时间为: 0.078s

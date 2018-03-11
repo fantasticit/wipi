@@ -1,6 +1,3 @@
-const zlib = require('zlib')
-
-
 module.exports = () => {
   function render(jsonData) {
     this.set('Content-Type', 'application/json')

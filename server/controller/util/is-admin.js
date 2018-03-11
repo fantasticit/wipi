@@ -13,8 +13,6 @@ async function isAdmin(userId) {
     .catch(e => ctx.throw(500))
   const roles = userInfo && userInfo.roles || false
 
-  console.log(userInfo)
-
   return roles && roles.indexOf('admin') > -1 || false
 }
 

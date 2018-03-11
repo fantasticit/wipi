@@ -15,10 +15,10 @@ module.exports = (app) => {
   app.use(koaJwt({secret}).unless({path: [
     /^\/user/, 
     /^\/performence/,
-     /^\/article/, 
-     /^\/error/,
-     /^\/classify$/,
-     /^\/tag$/,
+    /^\/article/, 
+    /^\/error/,
+    /^\/classify$/,
+    /^\/tag$/,
   ]}))
   app.use(bodyParser())
   app.use(json())

@@ -14,8 +14,6 @@ class ClassifyController {
     if (!await isAdmin(userId)) {
       ctx.throw(403, { message: '非管理员无法进行此操作' })
     }
-
-    console.log(await isAdmin(userId))
  
     await ClassifyModel.create({ title, value }).catch(e => {
       if (e.code === 11000) {

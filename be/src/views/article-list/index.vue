@@ -149,6 +149,10 @@ export default class ArticleList extends Vue {
       }
       const res = await ArticleProvider.fetchArticles(query, this.userId)
       this.articles = res.items.map(item => {
+        if (!item.author) {
+          return ''
+        }
+
         item.createdDate = formatTime(item.createdDate)
         item.updatedDate = formatTime(item.updatedDate)
         item.author = item.author.account
@@ -161,7 +165,7 @@ export default class ArticleList extends Vue {
         }).title
 
         return item
-      })
+      }).filter(item => Boolean(item))
       this.total = res.total
     } catch (err) {
       this.$message.error(err.message)
