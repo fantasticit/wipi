@@ -42,6 +42,25 @@ class Post extends Component {
     return { articles, recentArticles }
   }
 
+  componentDidMount() {
+    const isMobile = (/mobile/ig).test(window.navigator.userAgent)
+
+    if (isMobile) {
+      return
+    }
+
+    const oAside = this.refs.aside
+
+    window.addEventListener('scroll', function () {
+      const scrollTop = this.scrollY
+      if (scrollTop > 200) {
+        oAside.classList.add('is-fix')
+      } else {
+        oAside.classList.remove('is-fix')
+      }
+    }, false)
+  }
+
   toggleAside = () => {
     const isMobile = (/mobile/ig).test(window.navigator.userAgent)
 
@@ -78,9 +97,11 @@ class Post extends Component {
             className={ showAside ? 'is-active' : '' }
             onClick={() => this.toggleAside()}
           >
-            <RecentArricles articles={recentArticles} />
-            <ArticleTags />
-            <Other />
+            <div ref="aside">
+              <RecentArricles articles={recentArticles} />
+              <ArticleTags />
+              <Other />
+            </div>
           </aside>
           <div
             className={ showAside ? 'm-fbtn is-close' : 'm-fbtn' }
@@ -106,6 +127,12 @@ class Post extends Component {
             right: 0;
             top: 0;
 
+            width: 18rem;
+          }
+
+          aside > div.is-fix {
+            position: fixed;
+            top: 5rem;
             width: 18rem;
           }
 
