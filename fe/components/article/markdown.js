@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import { highlight } from '../../util/highlight'
-import './styles/markdown.scss'
 
 class Markdown extends Component {
   constructor() {

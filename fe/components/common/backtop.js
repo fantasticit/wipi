@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import Link from 'next/link'
 import { on } from '../../util/evt'
-import './styles/backtop.scss'
 
 class Bccktop extends Component {
   constructor() {
@@ -43,10 +42,51 @@ class Bccktop extends Component {
     return(
       <div
         ref="backtop"
-        className={visible ? 'el-backtop is-visible' : 'el-backtop is-hide'}
+        className={visible ? 'is-visible' : 'is-hide'}
         onClick={() => this.backTop()}
       >
         <i className="ion-jet"></i>
+        <style jsx>{`
+        div {
+          position: fixed;
+          right: 3rem;
+          bottom: 3rem;
+          z-index: 300;
+        
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+          border: 1px solid #f1f1f1;
+          box-shadow: 0 0 5px rgba(0,0,0,.05);
+          cursor: pointer;
+          background: #fff;
+        
+          text-align: center;
+          line-height: 3rem;
+        }
+        
+        .is-hide {
+          display: none;
+        }
+      
+        .is-visible {
+          display: block;
+          animation: slideDown ease-in-out .2s;
+        }
+      
+        i {
+          color: #909090;
+          font-size: 18px;
+        }
+
+        @keyframes slideDown {
+          from {
+            transform: translateY(-.6rem)
+          } to {
+            transform: translateY(0)
+          }
+        }
+        `}</style>
       </div>
     )
   }

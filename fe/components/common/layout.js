@@ -3,7 +3,9 @@ import Router from 'next/router'
 import NProgress from 'nprogress'
 import Header from './header'
 import Footer from './footer'
-// import { EProgress } from '../../util/eprogress'
+import '../../theme/global.scss'
+
+NProgress.configure({ showSpinner: false })
 
 Router.onRouteChangeStart = () => NProgress.start()
 Router.onRouteChangeComplete = () => NProgress.done()
@@ -19,7 +21,7 @@ class Layout extends Component {
 
     return (
       <div className="view-page">
-        {/* <Header activeRoute={activeRoute} /> */}
+        <Header activeRoute={activeRoute} />
         <main>
         { this.props.children }
         </main>
@@ -32,6 +34,7 @@ class Layout extends Component {
         }
 
         main {
+          margin-top: 5rem;
           flex: 1;
           position: relative;
           overflow: auto;

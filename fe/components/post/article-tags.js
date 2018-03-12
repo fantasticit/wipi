@@ -28,7 +28,7 @@ class ArticleTags extends Component {
               ? 'is-active'
               : ''
             }>
-            <Link as={`/p/`} href={`/post`}>
+            <Link href={`/post`}>
               <a>
                 <span>全部文章</span>
               </a>
@@ -43,7 +43,7 @@ class ArticleTags extends Component {
                   : ''
               }>
               <Link 
-                as={`/p/${tag.tag.value}`} 
+                as={`/post/${tag.tag.value}`} 
                 href={`/post?id=${tag.tag.value}`}
                 >
                 <a>

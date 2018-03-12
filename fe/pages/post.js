@@ -11,6 +11,8 @@ import RecentArricles from '../components/post/recent-articles'
 import Other from '../components/post/other'
 import ArticleList from '../components/post/article-list'
 
+let isSerach = false
+
 class Post extends Component {
   constructor() {
     super()
@@ -21,9 +23,18 @@ class Post extends Component {
 
   static async getInitialProps({ query }) {
     const tag = query.id
+    const keyword = query.keyword
+    let articles = []
 
-    const articles = await ArticleService.fetchArticles(tag)
-      .catch(e => console.log('获取数据失败'))
+    if (keyword) {
+      articles = await ArticleService.fetchArticles(null, keyword)
+        .catch(e => console.log('获取数据失败'))
+      isSerach = true
+    } else {
+      articles = await ArticleService.fetchArticles(tag, null)
+        .catch(e => console.log('获取数据失败'))
+        isSerach = false
+    }
     
     const recentArticles = await ArticleService.fetchRecentArticles()
       .catch(e => console.log('获取数据失败'))
@@ -56,7 +67,7 @@ class Post extends Component {
         {/* <Carousel /> */}
         <div className="container">
           <div className="articles">
-            <LinePanel title={selectedTag.tag.title} />
+            <LinePanel title={isSerach ? '文章搜索' : selectedTag.tag.title} />
             <ul>
               {articles.map((article, i) => (
                 <ArticleList article={article} key={i}/>
@@ -141,8 +152,8 @@ class Post extends Component {
             }
 
             aside.is-active {
-              top: 0;
-              height: calc(100vh - 10rem);
+              top: 5rem;
+              height: calc(100vh - 15rem);
               overflow: auto;
               padding: 20px 15px 0 15px;
             }
@@ -156,10 +167,7 @@ class Post extends Component {
 const mapStateToProps = ({ tags }) => ({
   tags: tags.tags,
   selectedTag: tags.selectedTag
-  // classifies: classify.classifies,
-  // selectedClassify: classify.selectedClassify 
 })
-
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -13,7 +13,7 @@ class Other extends Component {
     return (
       <div>
         <span>
-          <Link href="/p">
+          <Link href="/about">
             <a >关于</a>
           </Link>
         </span>

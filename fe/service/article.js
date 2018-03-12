@@ -3,8 +3,14 @@ import axios from './config'
 class ArticlerService {
   static constructor() {}
 
-  static async fetchArticles(tag) {
-    const query = `tag=${tag}&state=publish`
+  static async fetchArticles(tag, keyword) {
+    let query = ''
+
+    if (keyword) {
+      query = `keyword=${keyword}&state=publish`
+    } else {
+      query = `tag=${tag}&state=publish`
+    }
 
     const req = { 
       url: `/article?${query}`, 

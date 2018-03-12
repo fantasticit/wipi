@@ -25,12 +25,13 @@ app.prepare().then(() => {
     ctx.respond = false
   })
 
-  router.get('/p', async ctx => {
+  router.get('/post', async ctx => {
+    console.log(ctx.query)
     await app.render(ctx.req, ctx.res, '/post', ctx.query)
     ctx.respond = false
   })
 
-  router.get('/p/:id', async ctx => {
+  router.get('/post/:id', async ctx => {
     await app.render(ctx.req, ctx.res, '/post', ctx.params)
     ctx.respond = false
   })

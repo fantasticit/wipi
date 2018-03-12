@@ -32,7 +32,7 @@ class LinePanel extends Component {
         
           font-weight: 500;
           padding-right: 16px;
-          background: #fbfcfc;
+          background: #fff;
         }
         
         .line-panel__line {
@@ -50,6 +50,3 @@ class LinePanel extends Component {
 }
 
 export default LinePanel
-
-
-// http://op2clp53n.bkt.clouddn.com/banner.png

@@ -1,21 +1,16 @@
 import { Component } from 'react'
 import LinePanel from '../common/line-panel'
 
-class Demo extends Component {
-  constructor() {
-    super()
-  }
-
+class Site extends Component {
   render() {
-    const { demos } = this.props
-
     return (
       <div>
-        <LinePanel title={'一些练习'} />
+        <LinePanel title={'关于本站'} />
         <ul>
-          {demos.map((demo, i) => (
-            <li key={i}><a href={demo.url} target="_blank">{demo.title}</a></li>
-          ))}
+          <li>前台：React.js + Redux + next.js</li>
+          <li>后台：Vue.js</li>
+          <li>服务：koa + mongodb</li>
+          <li>主题：模仿或参考了知乎、简书以及掘金等等</li>
         </ul>
         <style jsx>{`
         ul {
@@ -31,4 +26,4 @@ class Demo extends Component {
   }
 }
 
-export default Demo
+export default Site

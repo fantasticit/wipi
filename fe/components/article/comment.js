@@ -1,5 +1,4 @@
 import { Component } from 'react'
-import './styles/comment.scss'
 
 class Comment extends Component {
   constructor() {

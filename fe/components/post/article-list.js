@@ -1,42 +1,26 @@
 import { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-// import { fecthClassifies } from '../../redux/reducers/classify'
 import { formatTime } from '../../util/format-time'
 import Link from 'next/link'
 import Author from '../article/author'
-import './styles/article-list.scss'
 
 class ArticleList extends Component {
-  translate(classify) {
-    const classifies = JSON.parse(JSON.stringify(this.props.classifies)) || []
-
-    if (classifies.length <= 0) {
-      return classify
-    } else {
-      return classifies.find(item => item.value === classify).title
-    }
-  }
-
   render() {
     const { article } = this.props
     const { classifies = [] } = this.props
 
-    // if (classifies.length <= 0) this.props.fecthClassifies()
-
     return(
-      <li className="el-article-list">
+      <li>
         {
-          article.cover 
-            ? <a className="el-article-list__cover">
+          article.cover
+            ? <a className="cover">
                 <img src={article.cover} />
               </a> 
             : ''
         }
         <div className={
           article.cover
-            ? 'el-article-list__content'
-            : 'el-article-list__content is-full'
+            ? 'content'
+            : 'content is-full'
         }>
           <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
             <a className="title">{article.title}</a>
@@ -54,17 +38,99 @@ class ArticleList extends Component {
             </div>
           </div>
         </div>
+        <style jsx>{`
+        li {
+          position: relative;
+          list-style: none;
+          margin: 0 auto;
+          padding: 1.5rem 0;
+          border-bottom: 1px solid #f0f0f0;
+        }
+        
+        li:last-of-type {
+          border-bottom: 0;
+        }
+      
+        .cover {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+      
+          box-sizing: border-box;
+          width: 15rem;
+          height: 100%;
+          padding: 1.5rem 0;
+        }
+
+        .cover img {
+          width: 100%;
+          height: 100%;
+          border-radius: 3px;
+        }
+
+        .content {
+          word-wrap: break-word;
+          padding-right: 16rem;
+        }
+
+        @media (max-width: 768px) { {
+          .cover {
+            display: none !important;
+          }
+      
+          .content {
+            padding-right: 0 !important;
+          }
+        }
+
+        .content.is-full {
+          padding-right: 0;
+        }
+
+        .title {
+          display: block;
+          margin: -7px 0 4px;
+          display: inherit;
+          font-size: px2rem(18);
+          font-weight: 700;
+          line-height: 1.5;
+        }
+      
+        .desc {
+          font-size: px2rem(14);
+          margin: 0 0 8px;
+          line-height: 24px;
+        }
+    
+        .meta span {
+          display: inline-block;
+          font-size: .8rem;
+          color: #969696;
+          
+          line-height: 1.4;
+          vertical-align: middle;
+        }
+  
+        .meta span.is-border {
+          border: 1px solid #b3b3b3;
+          border-radius: 2px;
+          padding: .2rem .5rem;
+          margin-right: .8rem;
+        }
+  
+        .meta .meta-info {
+          display: inline-block;
+        }
+  
+        .meta .more {
+          color: #b3b3b3;
+          text-decoration: none;
+        }
+        `}</style>
       </li>
     )
   }
 }
 
-const mapStateToProps = ({  }) => ({  })
-
-const mapDispatchToProps = dispatch => {
-  return {
-    // fecthClassifies: bindActionCreators(fecthClassifies, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleList)
+export default ArticleList

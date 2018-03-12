@@ -11,7 +11,6 @@ export default class MyDocument extends Document {
       href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/default.min.css" />
           <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" />
           <link rel="stylesheet" href="/_next/static/style.css" />
-          <link rel="stylesheet" href=" https://unpkg.com/nprogress@0.2.0/nprogress.css" />
         </Head>
         <body>
           <Main />
