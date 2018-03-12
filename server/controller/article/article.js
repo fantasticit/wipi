@@ -20,6 +20,12 @@ class ArticleController {
   // 首先进行非空检查，然后过滤字段
   // skips接受一个数组，用于指定不进行非空检查的字段
   static checkArticle(article, skips, ctx) {
+    ['author', 'classify', 'content', 'desc', 'state', 'title'].forEach(key => {
+      if (!article[key]) {
+        ctx.throw(400, { message: '存在未填写字段' })
+      }
+    })
+
     Object.keys(article).forEach(key => {
       if (
         skips.indexOf(key) == -1 
@@ -36,12 +42,6 @@ class ArticleController {
   // 新增文章
   static async addArticle(ctx, next) {
     const req = ctx.request.body
-    // 检查必须字段是否存在
-    ['author', 'classify', 'content', 'desc', 'state', 'title'].map(key => {
-      if (!req[key]) {
-        ctx.throw(400, { message: '存在未填写字段' })
-      }
-    })
 
     ArticleController.checkArticle(req, ['cover'], ctx)
 
@@ -54,7 +54,8 @@ class ArticleController {
 
     const result = await ArticleModel.create({...req, htmlContent, toc, createdDate})
       .catch(e => ctx.throw(500))
-    ctx.send({ status: 'ok', message: '新增文章成功' })
+    ctx.send({ status: 'ok', message: 'success' })
+
   }
 
   static async getArticleTags(ctx) {

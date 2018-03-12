@@ -4,7 +4,7 @@ import router from '@/router';
 import { confirm } from '@/components/common/messagebox/index'
 
 const baseURL = process.env.NODE_ENV === 'development'
-  ? 'http://193.112.102.204:3000'
+  ? 'http://localhost:3000'
   : 'http://193.112.102.204:3000'
 
 const instance = axios.create({
