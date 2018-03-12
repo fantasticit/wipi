@@ -59,7 +59,7 @@
 ### 2.2 Koa2 篇
 
 - [一文入门koa2接口开发](https://github.com/mvpzx/elapse/blob/master/server/docs/koa2%E6%8E%A5%E5%8F%A3%E5%BC%80%E5%8F%91.md)
-- [使用koa2签发认证token]()
+- [使用koa2签发认证token](https://github.com/mvpzx/elapse/blob/master/server/docs/jwt%E7%AD%BE%E5%8F%91%E4%B8%8E%E8%AE%A4%E8%AF%81.md)
 - [使用log4js为koa2增加日志记录]()
 
 ### 2.3 部署篇
