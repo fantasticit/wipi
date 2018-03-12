@@ -74,15 +74,7 @@ class ArticleList extends Component {
           padding-right: 16rem;
         }
 
-        @media (max-width: 768px) { {
-          .cover {
-            display: none !important;
-          }
-      
-          .content {
-            padding-right: 0 !important;
-          }
-        }
+        
 
         .content.is-full {
           padding-right: 0;
@@ -112,7 +104,7 @@ class ArticleList extends Component {
           vertical-align: middle;
         }
   
-        .meta span.is-border {
+        .meta .is-border {
           border: 1px solid #b3b3b3;
           border-radius: 2px;
           padding: .2rem .5rem;
@@ -126,6 +118,16 @@ class ArticleList extends Component {
         .meta .more {
           color: #b3b3b3;
           text-decoration: none;
+        }
+
+        @media (max-width: 768px) { {
+          .cover {
+            display: none !important;
+          }
+      
+          .content {
+            padding-right: 0 !important;
+          }
         }
         `}</style>
       </li>
