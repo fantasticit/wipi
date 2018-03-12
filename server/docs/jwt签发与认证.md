@@ -68,8 +68,3 @@ axios.interceptors.request.use(
 ```
 
 至此，token签发与验证结束。
-
-## 其他文档
-  - [使用mongodb](./使用mongodb.md)
-  - [跨域问题](./跨域问题.md)
-  - [日志中间件](./日志中间件.md)
