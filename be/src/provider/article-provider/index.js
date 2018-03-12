@@ -36,7 +36,7 @@ class _ArticleProvider extends BaseHttp {
 
     try {
       const res = await this.http(req)
-      return res.data.article
+      return res.data
     } catch (err) {
       throw new Error(err)
     }
