@@ -84,13 +84,13 @@ class ArticleList extends Component {
           display: block;
           margin: -7px 0 4px;
           display: inherit;
-          font-size: px2rem(18);
+          font-size: 1.5rem;
           font-weight: 700;
           line-height: 1.5;
         }
       
         .desc {
-          font-size: px2rem(14);
+          font-size: 1.18rem;
           margin: 0 0 8px;
           line-height: 24px;
         }
