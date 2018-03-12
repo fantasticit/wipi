@@ -39,18 +39,41 @@
     }
 
     .title {
+      display: block;
       margin: -7px 0 4px;
       display: inherit;
-      font-size: px2rem(16);
+      font-size: px2rem(18);
       font-weight: 700;
       line-height: 1.5;
     }
   
     .desc {
       font-size: px2rem(14);
+      margin: 0 0 8px;
+      line-height: 24px;
     }
 
     .meta {
+      span {
+        display: inline-block;
+        font-size: .8rem;
+        color: #969696;
+        
+        line-height: 1.4;
+        vertical-align: middle;
+      }
+
+      span.is-border {
+        border: 1px solid #b3b3b3;
+        border-radius: 2px;
+        padding: .2rem .5rem;
+        margin-right: .8rem;
+      }
+
+      .meta-info {
+        display: inline-block;
+      }
+
       .more {
         color: #b3b3b3;
         text-decoration: none;

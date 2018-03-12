@@ -38,24 +38,20 @@ class ArticleList extends Component {
             ? 'el-article-list__content'
             : 'el-article-list__content is-full'
         }>
-          <Author author={{
-            avatar: article.author.avatar,
-            account: article.author.account,
-            createdDate: article.createdDate,
-            readingQuantity: article.readingQuantity,
-          }} />
           <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
-            <a className="title">
-              <h2>{article.title}</h2>
-            </a>
+            <a className="title">{article.title}</a>
           </Link>
           <p className="desc">{ article.desc }</p>
           <div className="meta">
-            <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
-              <a className="more">
-                继续阅读 »
-              </a>
-            </Link>
+            <span className="is-border">{ article.classify }</span>
+            <div className="meta-info">
+              <Author author={{
+                avatar: article.author.avatar,
+                account: article.author.account,
+                createdDate: article.createdDate,
+                readingQuantity: article.readingQuantity,
+              }} />
+            </div>
           </div>
         </div>
       </li>

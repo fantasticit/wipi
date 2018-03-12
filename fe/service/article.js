@@ -31,6 +31,21 @@ class ArticlerService {
     }
   }
 
+  // 最新文章
+  static async fetchRecentArticles() {
+    const req = { 
+      url: `/article/publish/recent`, 
+      method: 'get' 
+    }
+
+    try {
+      const res = await axios(req)
+      return res && res.data && res.data
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
   // 更新文章阅读量
   static async updateArticleREadingQuantity(id) {
     const req = {

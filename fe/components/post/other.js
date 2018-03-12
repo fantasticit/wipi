@@ -12,7 +12,6 @@ class Other extends Component {
 
     return (
       <div>
-        <LinePanel />
         <span>
           <Link href="/p">
             <a >关于</a>
@@ -20,7 +19,7 @@ class Other extends Component {
         </span>
         <span className="dot">●</span>
         <span>
-          归档
+          <a href="http://193.112.102.204" target="_blank">管理后台</a>
         </span>
         <style jsx>{`
         div {

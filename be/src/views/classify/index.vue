@@ -14,8 +14,7 @@
         prop="value"
         v-model="value"
         placeholder="请输入分类值，仅接受英文"
-        :rules="rules.value"
-        :validator="isLetter">
+        :rules="rules.value">
       </ta-form-item>
       <ta-button 
         type="primary" 
@@ -69,9 +68,9 @@ export default class Tag extends Vue {
   isLetter() {
     if (
       !this.value 
-      || !(/^[a-zA-Z]+[_|-]?[a-zA-Z]*$/g).test(this.value)
+      || !(/\w/g).test(this.value) // [a-zA-Z]+[_|-]?[a-zA-Z]
     ) {
-      return new Error('标签值仅接受英文')
+      return new Error('标签值不得为空')
     } else {
       return ''
     }

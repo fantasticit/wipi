@@ -39,6 +39,7 @@ class Article extends Component {
         <style jsx>{`
         .container {
           padding: 2rem 15px 3rem 15px;
+          max-width: 660px;
         }
 
         h1 {

@@ -172,7 +172,7 @@ class ArticleController {
 
   // 获取最新发布的10篇文章
   static async getRecentPublishedArticle(ctx, next) {
-    const article = await ArticleModel
+    const articles = await ArticleModel
       .find({ state: 'publish' })
       .sort({ updatedDate: -1 })
       .populate({        // 连表查询作者信息
@@ -182,7 +182,7 @@ class ArticleController {
       .limit(10)
       .catch(e => ctx.throw(500))
    
-    ctx.send({ status: 'ok', message: '获取文章成功', data: { article }})
+    ctx.send({ status: 'ok', message: '获取文章成功', data: articles })
   }
 
   // 更新文章阅读量

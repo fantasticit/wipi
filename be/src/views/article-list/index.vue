@@ -157,9 +157,10 @@ export default class ArticleList extends Vue {
         item.updatedDate = formatTime(item.updatedDate)
         item.author = item.author.account
 
-        item.classify = JSON.parse(JSON.stringify(this.classifies)).find(num => {
-          return num.value === item.classify
-        }).title
+        // 分类转换
+        // item.classify = JSON.parse(JSON.stringify(this.classifies)).find(num => {
+        //   return num.value === item.classify
+        // }).title
         item.state = JSON.parse(JSON.stringify(this.states)).find(num => {
           return num.value === item.state
         }).title

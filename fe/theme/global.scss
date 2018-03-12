@@ -7,11 +7,16 @@
 @import './component/tag.scss';
 
 :global {
+  *, *:hover {
+    transition: all ease  .3s;
+  }
+
   html {
     font-size: 12px;
   }
 
   .container {
+    box-sizing: border-box;
     margin-right: auto;
     margin-left: auto;
   }

@@ -20,7 +20,9 @@ class Footer extends Component {
         </footer>
         <style jsx>{`
         footer {
+          box-sizing: border-box;
           text-align: center;
+          height: 10rem;
           padding: 2rem 0;
           border-top: 1px solid #ebf2f6;
         }

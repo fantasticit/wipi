@@ -19,8 +19,8 @@ class LinePanel extends Component {
           position: relative;
           z-index: 3;
           height: 22px;
-
-          font-size: 1rem;
+          color: #24292e;
+          font-size: 1.2rem;
         }
     
         .line-panel__title {
@@ -30,7 +30,7 @@ class LinePanel extends Component {
           transform: translateY(-50%);
           z-index: 1;
         
-          font-weight: 600;
+          font-weight: 500;
           padding-right: 16px;
           background: #fbfcfc;
         }

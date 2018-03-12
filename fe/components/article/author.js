@@ -17,7 +17,7 @@ class Author extends Component {
     return (
       <div className="author">
         <span>{ formatTime(createdDate) }</span>
-        <span>阅读量 { readingQuantity }</span>
+        <span>阅读 { readingQuantity }</span>
         <style jsx>{`
         .author {
           color: #909090;
