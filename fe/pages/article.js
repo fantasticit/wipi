@@ -23,6 +23,7 @@ class Article extends Component {
     return(
       <Layout>
         <div className="container">
+          { article.cover ? <Cover cover={article.cover} />: ''}
           <h1>{ article.title }</h1>
           <Author author={{
             avatar: article.author.avatar,
@@ -30,7 +31,6 @@ class Article extends Component {
             createdDate: article.createdDate,
             readingQuantity: article.readingQuantity,
           }} />
-          { article.cover ? <Cover cover={article.cover} />: ''}
           <Markdown content={article.htmlContent} />
           <Tags tags={article.tags} />
           <Comment />
@@ -45,9 +45,9 @@ class Article extends Component {
         h1 {
           word-break: break-all;
           font-family: -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
-          font-size: 1.6rem;
-          font-weight: 700;
-          line-height: 1.3;
+          font-size: 1.8rem;
+          font-weight: 600;
+   
         }
         `}</style>
       </Layout>

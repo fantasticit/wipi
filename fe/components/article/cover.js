@@ -13,11 +13,15 @@ class Cover extends Component {
         <img src={cover} />
         <style jsx>{`
         .cover {
+          position: relative;
+          width: 100%;
           overflow: hidden;
         }
 
         .cover img {
-          max-width: 100%;
+          width: 100%;
+          height: auto;
+          max-height: 80vh;
         }
         `}</style>
       </div>

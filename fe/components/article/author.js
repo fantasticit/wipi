@@ -21,8 +21,8 @@ class Author extends Component {
         <style jsx>{`
         .author {
           color: #909090;
-          margin-bottom: 1rem;
-          font-size: 1rem;
+          margin: 1.5rem 0;
+          font-size: 1.3rem;
         }
   
         span {

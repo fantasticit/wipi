@@ -62,7 +62,7 @@ class Header extends Component {
             onKeyUp={e => this.handleEnter(e)}
           />
           <i
-            className="ion-ios-search"
+            className="ion-android-search"
             onClick={() => this.toggleShowInput()}
           />
         </div>

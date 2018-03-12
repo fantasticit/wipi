@@ -45,7 +45,7 @@ class Bccktop extends Component {
         className={visible ? 'is-visible' : 'is-hide'}
         onClick={() => this.backTop()}
       >
-        <i className="ion-jet"></i>
+        <i className="ion-android-arrow-dropup"></i>
         <style jsx>{`
         div {
           position: fixed;

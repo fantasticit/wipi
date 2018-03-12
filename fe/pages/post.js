@@ -113,7 +113,7 @@ class Post extends Component {
             display: none;
             position: fixed;
             right: 2rem;
-            bottom: 11rem;
+            bottom: 5rem;
             z-index: 1000;
 
             width: 2.67rem;
@@ -137,6 +137,7 @@ class Post extends Component {
 
             .m-fbtn {
               display: block;
+              transition: all ease  .3s;
             }
 
             aside {
@@ -149,11 +150,12 @@ class Post extends Component {
 
               width: 100vw;
               height: 0;
+              transition: all ease  .3s;
             }
 
             aside.is-active {
               top: 5rem;
-              height: calc(100vh - 15rem);
+              height: calc(100vh - 5rem);
               overflow: auto;
               padding: 20px 15px 0 15px;
             }

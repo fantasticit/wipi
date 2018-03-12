@@ -56,7 +56,8 @@ class ArticleList extends Component {
           right: 0;
           top: 50%;
           transform: translateY(-50%);
-      
+          
+          display: block;
           box-sizing: border-box;
           width: 15rem;
           height: 100%;
@@ -74,8 +75,6 @@ class ArticleList extends Component {
           padding-right: 16rem;
         }
 
-        
-
         .content.is-full {
           padding-right: 0;
         }
@@ -85,7 +84,7 @@ class ArticleList extends Component {
           margin: -7px 0 4px;
           display: inherit;
           font-size: 1.5rem;
-          font-weight: 700;
+          font-weight: 600;
           line-height: 1.5;
         }
       
@@ -93,6 +92,7 @@ class ArticleList extends Component {
           font-size: 1.18rem;
           margin: 0 0 8px;
           line-height: 24px;
+          color: #666;
         }
     
         .meta span {
@@ -122,7 +122,12 @@ class ArticleList extends Component {
 
         @media (max-width: 768px) { {
           .cover {
-            display: none !important;
+            position: relative;
+            right: 0;
+            top: 0;
+            transform: translateY(0);
+            width: 100%;
+            padding: 0 0 1rem 0;
           }
       
           .content {
