@@ -1,4 +1,4 @@
-*.css linguist-language=html
-*.less linguist-language=html
-*.js linguist-language=html
+*.scss linguist-language=sass
+*.js linguist-language=javascript
+*.vue linguist-language=javascript
 *.html linguist-language=html
