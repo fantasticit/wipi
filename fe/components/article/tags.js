@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import Link from 'next/link'
 
 class Tags extends Component {
   constructor() {
@@ -10,23 +11,49 @@ class Tags extends Component {
 
     return (
       <div>
+        <i className="ion-ios-pricetags" />
         {tags.map((tag, i) => {
-          return <div className="tag" key={i}>{ tag.title }</div>
+          return <Link 
+                  as={`/post/${tag.value}`} 
+                  href={`/post?id=${tag.value}`}
+                  >
+                  <a>
+                    <span>{ tag.title }</span>
+                  </a>
+                </Link>
         })}
         <style jsx>{`
-        .tag {
-          display: inline-block;
-          margin: 0 16px 16px 0;
-          padding: 0 15px;
-          height: 30px;
-          line-height: 30px;
-          max-width: 100%;
-          background: #000;
-          background: rgba(0,0,0,.06);
-          color: #666768;
-          border-radius: 15px;
-          text-align: center;
-          font-size: 14px;
+        div {
+          color: #666;
+          font-size: 16px;
+          margin-top: 2rem;
+        }
+
+        a {
+          margin-left: 8px;
+          position: relative;
+        }
+
+        a::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          transform: scaleX(0);
+          height: 2px;
+          bottom: -1px;
+          left: 0;
+          background-color: #333;
+          transform-origin: bottom right;
+          transition: transform 0.25s ease-out;
+        }
+        
+        a:hover {
+          color: #333;
+        }
+
+        a:hover::after {
+          transform: scaleX(1);
+          transform-origin: center center;
         }
         `}</style>
       </div>

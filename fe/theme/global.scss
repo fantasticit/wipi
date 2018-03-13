@@ -12,8 +12,8 @@
   }
 
   ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -23,9 +23,9 @@
   }
 
   ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    -webkit-box-shadow: inset 0 0 5px rgba(255,255,255,1);
     border-radius: 0;
-    background: rgba(0,0,0,0.1);
+    background: rgba(255,255,255,1);
   }
 
   .container {
@@ -62,10 +62,5 @@
     border: 1px solid #eee;
     outline: none;
     transition: border-color .2s cubic-bezier(.645,.045, .355, 1);
-
-    &:focus,
-    &:active {
-      border-color: #78dcfd;
-    }
   }
 }

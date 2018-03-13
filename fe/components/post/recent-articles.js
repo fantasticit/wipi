@@ -41,6 +41,10 @@ class RecentArticles extends Component {
           border-radius: 4px;
           border-radius: 15px;
           cursor: pointer;
+
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
 
         li.is-active {

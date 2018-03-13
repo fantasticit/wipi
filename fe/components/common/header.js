@@ -58,11 +58,12 @@ class Header extends Component {
         <div className="search">
           <input
             ref="input"
+            placeholder="Search..."
             className={ showInput ? 'is-active' : '' }
             onKeyUp={e => this.handleEnter(e)}
           />
           <i
-            className="ion-android-search"
+            className={ showInput ? 'ion-android-done' : 'ion-android-search' }
             onClick={() => this.toggleShowInput()}
           />
         </div>
@@ -98,11 +99,11 @@ class Header extends Component {
 
         .search {
           position: relative;
-          width: 12rem;
+          width: 15rem;
           height: 2rem;
           line-height: 2rem;
           overflow: hidden;
-          font-size: 1rem;
+          font-size: 1.2rem;
         }
 
         .search i {
@@ -121,6 +122,9 @@ class Header extends Component {
           width: 100%;
           height: 100%;
           transition: all ease .3s;
+          border: 0;
+          border-bottom: 1px solid #eee;
+          padding: 8px 1px;
         }
 
         .search input.is-active {

@@ -22,7 +22,7 @@ class Author extends Component {
         .author {
           color: #909090;
           margin: 1.5rem 0;
-          font-size: 1.3rem;
+          font-size: 1em;
         }
   
         span {

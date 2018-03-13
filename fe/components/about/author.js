@@ -25,9 +25,6 @@ class Author extends Component {
         li + li {
           margin-top: 1rem;
         }
-
-        @media (max-width: 768px) {
-        }
         `}</style>
       </div>
     )

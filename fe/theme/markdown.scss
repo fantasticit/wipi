@@ -695,5 +695,59 @@
   
   .markdown-body hr {
     border-bottom-color: #eee;
-  }  
+  }
+
+  .markdown-body {
+    pre {
+      color: #525252;
+      padding: 1.2em 1.4em;
+      line-height: 1.5em
+    }
+    
+    a {
+      text-decoration: none;
+      color: #34495e;
+    }
+
+    img {
+      border: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    strong {
+      color: #2c3e50;
+  
+      code {
+        color: #e96900;
+      }
+    }
+    code,
+    pre {
+      font-family: "Roboto Mono", Monaco, courier, monospace;
+      font-size: 0.8em;
+      background-color: #f8f8f8 !important;
+      -webkit-font-smoothing: initial;
+      -moz-osx-font-smoothing: initial;
+  
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+    
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 5px rgba(248,248,248,.5);
+        background: rgba(0,0,0,0.2);
+      }
+    
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 5px rgba(248,248,248,.5);
+        border-radius: 0;
+        background: #f8f8f8;
+      }
+    }
+  }
 }

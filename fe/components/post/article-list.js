@@ -45,6 +45,9 @@ class ArticleList extends Component {
           margin: 0 auto;
           padding: 1.5rem 0;
           border-bottom: 1px solid #f0f0f0;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
         
         li:last-of-type {
