@@ -19,7 +19,7 @@ class Article extends Component {
 
   componentDidMount() {
     const { article } = this.props
-    window.title = `${article.title} | Mvpzx`
+    document.title = `${article.title} | Mvpzx`
   }
 
   render() {

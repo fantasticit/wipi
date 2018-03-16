@@ -43,7 +43,7 @@ class Post extends Component {
   }
 
   componentDidMount() {
-    window.title = '首页 | Mvpzx'
+    document.title = '首页 | Mvpzx'
     const isMobile = (/mobile/ig).test(window.navigator.userAgent)
 
     if (isMobile) {
@@ -183,7 +183,7 @@ class Post extends Component {
 
             aside.is-active {
               top: 5rem;
-              z-index: -100;
+              z-index: 100;
               height: calc(100vh - 5rem);
               overflow: auto;
               padding: 20px 15px 0 15px;

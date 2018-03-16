@@ -14,7 +14,7 @@ class About extends Component {
   }
 
   componentDidMount() {
-    window.title = `关于 | Mvpzx`
+    document.title = `关于 | Mvpzx`
   }
 
   render() {
