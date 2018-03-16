@@ -93,23 +93,6 @@ class ArticleList extends Component {
         .title span {
           position: relative;
         }
-
-        .title span::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: -1px;
-          width: 100%;
-          height: 2px;
-          background: #000;
-          transform: scaleX(0); 
-          transform-origin: center;
-          transition: transform 0.25s ease-out;
-        }
-
-        .title:hover span::after {
-          transform: scaleX(1); 
-        }
       
         .desc {
           font-size: 1.18rem;
