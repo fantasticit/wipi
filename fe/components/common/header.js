@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
+import ClickOutside from './click-outside'
 
 class Header extends Component {
   constructor() {
@@ -23,8 +24,18 @@ class Header extends Component {
   
       if (!this.state.showInput) {
         node.focus()
+      } else {
+        node.blur()
       }
     }
+  }
+
+  hide = () => {
+    this.setState({
+      showInput: false
+    })
+    const node = this.refs.input
+    node.blur()
   }
 
   handleEnter = (e) => {
@@ -74,10 +85,12 @@ class Header extends Component {
               className={ showInput ? 'is-active' : '' }
               onKeyUp={e => this.handleEnter(e)}
             />
-            <i
-              className={ showInput ? 'ion-android-done' : 'ion-android-search' }
-              onClick={() => this.toggleShowInput()}
-            />
+            <ClickOutside className="click-outside" onClickOutside={this.hide}>
+              <i
+                className={ showInput ? 'ion-android-done' : 'ion-android-search' }
+                onClick={this.toggleShowInput}
+              />
+            </ClickOutside>
           </div>
         </div>
         <style jsx>{`
@@ -129,6 +142,7 @@ class Header extends Component {
           overflow: hidden;
           font-size: 1.2rem;
         }
+
 
         .search i {
           font-size: 1.3em;

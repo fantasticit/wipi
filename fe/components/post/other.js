@@ -24,7 +24,7 @@ class Other extends Component {
         <style jsx>{`
         div {
           color: #555;
-          font-size: .8rem;
+          font-size: 1.1rem;
         }
         
         .dot {
