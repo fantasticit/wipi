@@ -13,6 +13,10 @@ class About extends Component {
     return {}
   }
 
+  componentDidMount() {
+    window.title = `关于 | Mvpzx`
+  }
+
   render() {
     const { slogan, contacts, demos } = this.props
 

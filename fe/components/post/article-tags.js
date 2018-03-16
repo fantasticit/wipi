@@ -56,7 +56,7 @@ class ArticleTags extends Component {
         </ul>
         <style jsx>{`
         ul {
-          color: #71777c;
+          color: #333;
           font-size: 1.15rem;
           list-style: none;
           padding: 1.5rem 0;

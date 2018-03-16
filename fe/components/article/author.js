@@ -20,13 +20,14 @@ class Author extends Component {
         <span>阅读 { readingQuantity }</span>
         <style jsx>{`
         .author {
-          color: #909090;
+          font-size: 1rem;
+          color: rgb(153, 153, 153);
           margin: 1.5rem 0;
-          font-size: 1em;
+          text-align: center;
         }
-  
-        span {
-          margin-right: .5rem;
+
+        span + span {
+          margin-left: 8px;
         }
         `}</style>
       </div>

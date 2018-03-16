@@ -23,7 +23,9 @@ class ArticleList extends Component {
             : 'content is-full'
         }>
           <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
-            <a className="title">{article.title}</a>
+            <a className="title">
+              <span>{article.title}</span>
+            </a>
           </Link>
           <p className="desc">{ article.desc }</p>
           <div className="meta">
@@ -45,9 +47,6 @@ class ArticleList extends Component {
           margin: 0 auto;
           padding: 1.5rem 0;
           border-bottom: 1px solid #f0f0f0;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
         }
         
         li:last-of-type {
@@ -83,19 +82,46 @@ class ArticleList extends Component {
         }
 
         .title {
-          display: block;
-          margin: -7px 0 4px;
+          margin: -7px 0 10px;
           display: inherit;
           font-size: 1.5rem;
-          font-weight: 600;
+          font-weight: 500;
           line-height: 1.5;
+          color: rgb(0, 0, 0);
+        }
+
+        .title span {
+          position: relative;
+        }
+
+        .title span::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -1px;
+          width: 100%;
+          height: 2px;
+          background: #000;
+          transform: scaleX(0); 
+          transform-origin: center;
+          transition: transform 0.25s ease-out;
+        }
+
+        .title:hover span::after {
+          transform: scaleX(1); 
         }
       
         .desc {
           font-size: 1.18rem;
           margin: 0 0 8px;
           line-height: 24px;
-          color: #666;
+          color: #333;
+        }
+
+        .meta {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
         }
     
         .meta span {

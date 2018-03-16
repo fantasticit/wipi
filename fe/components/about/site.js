@@ -10,7 +10,7 @@ class Site extends Component {
           <li>前台：React.js + Redux + next.js</li>
           <li>后台：Vue.js</li>
           <li>服务：koa + mongodb</li>
-          <li>主题：模仿或参考了知乎、简书以及掘金等等</li>
+          <li>主题：模仿或参考了nextjs官网、知乎、简书以及掘金等等</li>
         </ul>
         <style jsx>{`
         ul {

@@ -17,6 +17,11 @@ class Article extends Component {
     return { article }
   }
 
+  componentDidMount() {
+    const { article } = this.props
+    window.title = `${article.title} | Mvpzx`
+  }
+
   render() {
     const { article } = this.props
 
@@ -38,16 +43,25 @@ class Article extends Component {
         <Backtop />
         <style jsx>{`
         .container {
-          padding: 2rem 15px 3rem 15px;
-          max-width: 660px;
+          padding: 2rem 0 3rem 0;
           font-size: 16px;
         }
 
         h1 {
-          word-break: break-all;
-          font-family: -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
-          font-size: 1.8rem;
-          font-weight: 600;
+          color: rgb(0, 0, 0);
+          font-weight: 200;
+          font-size: 32px;
+          margin-top: 22px;
+          margin-bottom: 30px;
+          text-align: center;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        @media (max-width: 768px) {
+          .container {
+            padding: 2rem 15px 3rem 15px;
+          }
         }
         `}</style>
       </Layout>

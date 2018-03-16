@@ -43,6 +43,7 @@ class Post extends Component {
   }
 
   componentDidMount() {
+    window.title = '首页 | Mvpzx'
     const isMobile = (/mobile/ig).test(window.navigator.userAgent)
 
     if (isMobile) {
@@ -146,7 +147,7 @@ class Post extends Component {
             width: 2.67rem;
             height: 2.67rem;
             border-radius: 50%;
-            background: #0080ff;
+            background: #000;
             color: #fff;
             font-size: 16px;
             text-align: center;
@@ -172,7 +173,7 @@ class Post extends Component {
               position: fixed;
               left: 0;
               top: -100%;
-              z-index: 100;
+              z-index: -100;
               background: #fff;
 
               width: 100vw;
@@ -182,6 +183,7 @@ class Post extends Component {
 
             aside.is-active {
               top: 5rem;
+              z-index: -100;
               height: calc(100vh - 5rem);
               overflow: auto;
               padding: 20px 15px 0 15px;

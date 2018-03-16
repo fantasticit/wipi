@@ -49,47 +49,71 @@ class Header extends Component {
 
     return(
       <header>
-        <Link href={'/post'}>
-          <a className="logo">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" alt="" height="20" />
-            <span>Elapse</span>
-          </a>
-        </Link>
-        <div className="search">
-          <input
-            ref="input"
-            placeholder="Search..."
-            className={ showInput ? 'is-active' : '' }
-            onKeyUp={e => this.handleEnter(e)}
-          />
-          <i
-            className={ showInput ? 'ion-android-done' : 'ion-android-search' }
-            onClick={() => this.toggleShowInput()}
-          />
+        <div className="container">
+          <Link href={'/post'}>
+            <a className="logo">
+            <svg version="1.1" viewBox="0 0 226 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient x1="196.572434%" y1="228.815483%" x2="50%" y2="50%" id="l1">
+                  <stop offset="0%"></stop>
+                  <stop offset="100%"></stop>
+                </linearGradient>
+              </defs>
+                <g transform="translate(-141.000000, -156.000000)">
+                  <polygon fill="url(#l1)" points="254 156.459299 367 356 141 356 ">
+                  </polygon>
+                </g>
+              </svg>
+              {/* <span>Elapse</span> */}
+            </a>
+          </Link>
+          <div className="search">
+            <input
+              ref="input"
+              placeholder="Search..."
+              className={ showInput ? 'is-active' : '' }
+              onKeyUp={e => this.handleEnter(e)}
+            />
+            <i
+              className={ showInput ? 'ion-android-done' : 'ion-android-search' }
+              onClick={() => this.toggleShowInput()}
+            />
+          </div>
         </div>
         <style jsx>{`
         header {
-          box-sizing: border-box;
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
           z-index: 250;
-          height: 5rem;
           color: #909090;
           background: #fff;
-          
+          padding: 2rem 0;
+        }
+
+        .container {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 0 1rem;
           overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+          .container {
+            padding: 0 1rem;
+          }
         }
 
         .logo {
           display: flex;
           justify-content: center;
           align-items: center;
+        }
+
+        .logo svg {
+          width: 32px;
+          height: 32px;
         }
         
         .logo span {
@@ -119,7 +143,7 @@ class Header extends Component {
           position: absolute;
           top: 0%;
           right: -100%;
-          width: 100%;
+          width: 0;
           height: 100%;
           transition: all ease .3s;
           border: 0;
@@ -128,6 +152,7 @@ class Header extends Component {
         }
 
         .search input.is-active {
+          width: 100%;
           right: 0;
         }
         `}</style>

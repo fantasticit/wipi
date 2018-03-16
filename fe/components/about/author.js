@@ -9,7 +9,7 @@ class Author extends Component {
         <ul>
           <li>汉子，安徽人，在武汉读书（18年读完）</li>
           <li>兴趣不广不泛，只想活得豁达有意义</li>
-          <li>想做后端，不爱做前端，但是还是前端</li>
+          <li>想做后端，想做前端，想。。。</li>
           <li>
             <span>Gayhub: </span>
             <a href="https://github.com/mvpzx">

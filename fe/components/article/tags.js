@@ -16,6 +16,7 @@ class Tags extends Component {
           return <Link 
                   as={`/post/${tag.value}`} 
                   href={`/post?id=${tag.value}`}
+                  key={i}
                   >
                   <a>
                     <span>{ tag.title }</span>
@@ -43,7 +44,7 @@ class Tags extends Component {
           bottom: -1px;
           left: 0;
           background-color: #333;
-          transform-origin: bottom right;
+          transform-origin: center;
           transition: transform 0.25s ease-out;
         }
         
@@ -53,7 +54,6 @@ class Tags extends Component {
 
         a:hover::after {
           transform: scaleX(1);
-          transform-origin: center center;
         }
         `}</style>
       </div>
