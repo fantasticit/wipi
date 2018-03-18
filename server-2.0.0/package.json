@@ -1,0 +1,20 @@
+{
+  "name": "server-2.0.0",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon app.js",
+    "prod": "cross-env NODE_ENV=production node app.js"
+  },
+  "dependencies": {
+    "cross-env": "^5.1.4",
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.5",
+    "mongoose": "^5.0.10",
+    "nodemon": "^1.17.2",
+    "qiniu": "^7.1.3"
+  }
+}
