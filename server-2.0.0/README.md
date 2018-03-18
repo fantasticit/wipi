@@ -34,11 +34,11 @@
 
 其中：
 
-- app.js 程序入口
-- config 相关配置，配置将挂载到`app.config`
-- connection 导出函数，主要用于连接数据库，可能需要读取`app.config`
-- controllers 导出控制器函数将挂载到`app.controller`，同样可能需要读取`app.config`,其中`actions.js`将生成通用函数，可覆盖
-- middlewares 导出中间件函数
+- app.js： 程序入口
+- config： 相关配置，配置将挂载到`app.config`
+- connection： 导出函数，主要用于连接数据库，可能需要读取`app.config`
+- controllers： 导出控制器函数将挂载到`app.controller`，同样可能需要读取`app.config`,其中`actions.js`将生成通用函数，可覆盖
+- middlewares： 导出中间件函数
 - models: mongodb数据模型定义,将挂载到`app.model`
 - router: 路由配置，其中`generateRoutes`将读取`app.model`和`app.controller`完成通用路由配置
 - service: 服务代码（可以理解成`util`），将挂载到`app.service`
