@@ -1,6 +1,7 @@
 const zlib = require('zlib');
 
 module.exports = () => async (ctx, next) => {
+
   await next();
 
   let body = ctx.body;

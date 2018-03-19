@@ -5,7 +5,7 @@ class _UserProvider extends BaseHttp {
     basic: '/user',
     register: '/register',
     login: '/login',
-    checkAccountExist: '/check/account',
+    checkAccountExist: '/check',
   }
 
   constructor() {

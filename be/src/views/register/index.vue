@@ -1,10 +1,5 @@
 <template>
   <div class="ta-register">
-    <!-- <div class="ta-register__head">
-      <div class="ta-logo">
-        <span>Elapse Admin</span>
-      </div> -->
-    <!-- </div> -->
     <div class="ta-register__form-container">
       <div class="panel">
         <h2>
@@ -59,7 +54,7 @@ export default class Register extends Vue {
   rules = {
     account:[
       { required: true, message: '账号不得为空', trigger: 'blur' },
-      { min: 5, max: 16, message: '帐号长度应在5到16之间', trigger: 'blur' }
+      { min: 4, max: 16, message: '帐号长度应在4到16之间', trigger: 'blur' }
     ],
     passwd: [
       { required: true, message: '密码不得为空', trigger: 'blur' },
@@ -76,6 +71,14 @@ export default class Register extends Vue {
   }
 
   async checkAccountExist() {
+    if (
+      !this.account ||
+      this.account.length < 4 ||
+      this.account.length > 16
+    ) {
+      return ''
+    }
+
     return UserProvider.checkAccountExist(this.account)
       .then(res => {
         if (res.code === 'no') {

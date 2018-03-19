@@ -32,10 +32,7 @@ const mutations = {
   },
 
   SET_CLASSIFIES(state, classifies) {
-    console.log(classifies)
     state.classifies = classifies
-
-    console.log(state.classifies)
   }
 }
 

@@ -16,13 +16,14 @@ const articleSchema = new Schema({
   html: String,                        // HTML内容
   toc: Array,                          // TOC
   classify: {                          // 分类
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'Classify',
     required: true
   },
-  tags: {                              // 标签
-    type: Array,
-    required: true
-  },
+  tags: [{                              // 标签
+    type: Schema.Types.ObjectId,
+    ref: 'Tag'
+  }],
   state: {                             // 状态（‘草稿‘或者’发布‘）
     type: String,
     default: 'draft',

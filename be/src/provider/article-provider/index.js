@@ -3,7 +3,7 @@ import BaseHttp from '../base-http'
 class _ArticleProvider extends BaseHttp {
   api = {
     get: '/article',
-    add: '/article/new',
+    add: '/article',
     delete: '/article/',
     update: '/article/',
     recent: '/article/publish/recent'
@@ -42,21 +42,26 @@ class _ArticleProvider extends BaseHttp {
     }
   }
 
-  async fetchArticles(query, userId) {
-    query = Object.keys(query).map(key => `${key}=${query[key]}`).join('&')
+  async fetchArticles(query, page, pageSize, userId) {
+    const conditions = {}
+    Object.keys(query).map(key => {
+      query[key] && (conditions[key] = query[key])
+    })
 
     const req = {
-      url: this.api.get,
+      url: this.api.get + 
+            `?conditions=${JSON.stringify(conditions)}` + 
+            `&page=${page}` + 
+            `&pageSize=${pageSize}` + 
+            `&embedded={"author": 1, "classify": 1, "tags": 1}`,
       method: 'GET',
     }
-
-    req.url += '?'+ query + '&userId=' + userId
 
     try {
       const res = await this.http(req)
       return {
-        items: res.data.items,
-        total: res.data.total
+        items: res.data,
+        total: res.total
       }
     } catch (err) {
       throw new Error(err)
@@ -67,7 +72,7 @@ class _ArticleProvider extends BaseHttp {
     const req = { url: this.api.get + '/' + id, method: 'get' }
     try {
       const res = await this.http(req)
-      return res.data.article
+      return res.data
     } catch (err) {
       throw new Error(err)
     }
@@ -97,6 +102,8 @@ class _ArticleProvider extends BaseHttp {
         userId
       }
     }
+
+    console.log(req)
 
     try {
       const res = await this.http(req)

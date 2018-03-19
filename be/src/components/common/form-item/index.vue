@@ -57,7 +57,7 @@ export default {
 
       if (err.message) {
         reject({
-          msg: err.message,
+          msg: err && err.message || '发生错误',
           vm: this,
         })
       } else {

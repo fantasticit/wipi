@@ -16,5 +16,5 @@ export function formatTime(date) {
           + ' ' + n(hour) 
           + ':' + n(minute) 
           + ':' + n(seconds) 
-          + '.' + n(milliSeconds)
+          // + '.' + n(milliSeconds)
 }

@@ -8,5 +8,4 @@ module.exports = function withRouter(app) {
   generateRoutes(app, router);
   user(app, router);
   app.use(router.routes()).use(router.allowedMethods());
-  console.log(router);
 };

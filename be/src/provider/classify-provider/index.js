@@ -11,7 +11,7 @@ class _ClassifyProvider extends BaseHttp {
 
   async getClassifies() {
     const req = {
-      url: this.api.classify,
+      url: this.api.classify + '?select={"title": 1, "value": 1}',
       method: 'get',
     }
 
@@ -19,8 +19,7 @@ class _ClassifyProvider extends BaseHttp {
 
     try {
       const res = await this.http(req)
-      console.log(res)
-      return res.data.items
+      return res.data
     } catch (err) {
       throw new Error(err)
     }

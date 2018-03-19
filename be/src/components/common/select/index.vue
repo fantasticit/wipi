@@ -10,7 +10,7 @@
       <option value="" disabled>{{ placeholder }}</option>
       <option 
         v-for="(option, index) in options" :key="index"
-        :value="option.value">
+        :value="option[value]">
         {{ option.title }}
       </option>
     </select>
@@ -30,6 +30,7 @@ export default {
   },
 
   props: {
+    value: { type: String, default: 'value' },
     selected: [String, Number],
     options: { type: Array, default: () => []},
     prop: { type: String, default: '' },

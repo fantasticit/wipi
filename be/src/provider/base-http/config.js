@@ -4,7 +4,7 @@ import router from '@/router';
 import { confirm } from '@/components/common/messagebox/index'
 
 const baseURL = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:3000'
+  ? 'http://localhost:3000/api/v1/'
   : 'http://193.112.102.204:3000'
 
 const instance = axios.create({
@@ -61,7 +61,7 @@ instance.interceptors.response.use(
             })
           .catch(err => console.log('拒绝'))
       } else {
-        throw new Error(err.response.data.errMsg || '服务器错误')
+        throw new Error(err.response.data.message || '服务器错误')
       }
     }else if (err.request) {
       throw new Error('网络环境太差，请稍后再试')

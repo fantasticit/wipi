@@ -16,7 +16,7 @@ module.exports = {
   token: {
     secret: 'elapse',
     expires: '4h',
-    unlesses: [/^\/api\/v1\/user/]
+    unlesses: [/^\/api\/v1\/user/, /^\/api\/v1\/article/]
   },
   router: {
     prefix: '/api/v1/'

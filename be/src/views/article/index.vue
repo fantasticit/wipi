@@ -32,7 +32,7 @@
             <span>文章分类</span>
           </div>
           <div class="body">
-            <ta-select placeholder="请选择文章分类" v-model="classify" :options="classifies">
+            <ta-select placeholder="请选择文章分类" v-model="classify" :options="classifies" value="_id">
             </ta-select>
           </div>
         </div>
@@ -238,12 +238,12 @@ export default class Article extends Vue {
       cover: this.cover,
       content: this.content,
       classify: this.classify,
-      tags: this.selectedTags,
+      tags: this.selectedTags.map(tag => tag._id),
       state: this.state,
     })
 
     const flag = Object.keys(article).every(key => {
-      if (key === 'cover') {
+      if (key === 'cover' || key === 'tags') {
         return true
       }
       return !!article[key]

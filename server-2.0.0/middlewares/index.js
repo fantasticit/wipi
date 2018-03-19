@@ -5,8 +5,8 @@ const gzip = require('./gzip');
 const verify = require('./verify');
 
 module.exports = app => {
-  app.use(gzip());
   app.use(error());
+  app.use(gzip());
   app.use(cors());
   app.use(verify(app));
   app.use(bodyParser());

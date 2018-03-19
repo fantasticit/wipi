@@ -30,7 +30,7 @@ export default {
         })
         .catch(err => {
           err.vm.showInvalidTip = true
-          err.vm.message = err.msg
+          err.vm && (err.vm.message = err.msg)
           return false
         })
 

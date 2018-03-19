@@ -11,14 +11,14 @@ class _TagProvider extends BaseHttp {
 
   async getTags() {
     const req = {
-      url: this.api.tag,
+      url: this.api.tag + `?select={"title": 1, "value": 1}`,
       method: 'get',
     }
 
     try {
       const res = await this.http(req)
       console.log(res)
-      return res.data.items
+      return res.data
     } catch (err) {
       throw new Error(err)
     }

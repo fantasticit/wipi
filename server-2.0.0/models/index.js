@@ -1,7 +1,11 @@
 const article = require('./article');
-const user = require('./user');
+const classify = require('./classify');
+const tag = require('./tag')
+;const user = require('./user');
 
 module.exports = {
   article,
+  classify,
+  tag,
   user,
 };

@@ -18,11 +18,11 @@
           <div class="footer">
             <p>
               <span>上次登录时间：</span>
-              <span>{{ userInfo.lastLoginTime }}</span>
+              <span>{{ userInfo.lastLoginAt }}</span>
             </p>
             <p>
               <span>您的注册日期：</span>
-              <span>{{ userInfo.createdTime }}</span>
+              <span>{{ userInfo.createAt }}</span>
             </p>
           </div>
         </div>
@@ -70,8 +70,8 @@ export default class Dashboard extends Vue {
 
   created() {
     this.userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
-    this.userInfo.lastLoginTime = formatTime(this.userInfo.lastLoginTime)
-    this.userInfo.createdTime = formatTime(this.userInfo.createdTime)
+    this.userInfo.lastLoginAt = formatTime(this.userInfo.lastLoginAt)
+    this.userInfo.createAt = formatTime(this.userInfo.createAt)
 
     this.fetchRecentArticles()
   }
@@ -82,7 +82,6 @@ export default class Dashboard extends Vue {
     try {
       const res = await ArticleProvider.fetchRecentPublishedArticle()
       this.recentArticles = res
-      console.log(res)
     } catch (err) {
       this.$message.error(err.message)
     } finally {

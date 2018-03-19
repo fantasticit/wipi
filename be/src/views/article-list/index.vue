@@ -101,7 +101,7 @@ export default class ArticleList extends Vue {
   keyword = ''               // 搜索关键字
   loading = false            // 是否正在加载中
   tableHead = ['标题', '分类', '作者', '状态', '创建日期', '更新日期', '操作']
-  tableKeys = ['title', 'classify', 'author', 'state', 'createdDate', 'updatedDate']
+  tableKeys = ['title', 'classify', 'author', 'state', 'createAt', 'updateAt']
   page = 1                   
   pageSize = 20
   userId = ''
@@ -144,26 +144,24 @@ export default class ArticleList extends Vue {
         classify: this.classify, 
         state: this.state,
         keyword: this.keyword,
-        page: this.page,
-        pageSize: this.pageSize
       }
-      const res = await ArticleProvider.fetchArticles(query, this.userId)
+      const res = await ArticleProvider.fetchArticles(query, this.page, this.pageSize, this.userId)
       this.articles = res.items.map(item => {
         if (!item.author) {
           return ''
         }
 
-        item.createdDate = formatTime(item.createdDate)
-        item.updatedDate = formatTime(item.updatedDate)
+        item.createAt = formatTime(item.createAt)
+        item.updateAt = formatTime(item.updateAt)
         item.author = item.author.account
 
-        // 分类转换
-        // item.classify = JSON.parse(JSON.stringify(this.classifies)).find(num => {
-        //   return num.value === item.classify
+        // // 分类转换
+        // // item.classify = JSON.parse(JSON.stringify(this.classifies)).find(num => {
+        // //   return num.value === item.classify
+        // // }).title
+        // item.state = JSON.parse(JSON.stringify(this.states)).find(num => {
+        //   return num.value === item.state
         // }).title
-        item.state = JSON.parse(JSON.stringify(this.states)).find(num => {
-          return num.value === item.state
-        }).title
 
         return item
       }).filter(item => Boolean(item))

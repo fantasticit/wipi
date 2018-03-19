@@ -1,3 +1,4 @@
+const ObjectID = require("bson-objectid");
 const withActions = require('./common-actions');
 
 module.exports = app => {
@@ -6,42 +7,33 @@ module.exports = app => {
   const ArticleController = withActions(model)({})
 
   ArticleController.create = async ctx => {
-    try {
-      const req = ctx.request.body;
-      const { html, toc } = app.service.marked(req.content)
-      const result = await model.create({...req, html, toc, createAt: Date.now()})
-      return ctx.body = result;
-    } catch (err) {
-      ctx.body = err;
-      throw new Error(err);
-    }
+    const req = ctx.request.body;
+    console.log(req.tags)
+    const { html, toc } = app.service.marked(req.content)
+    const result = await model.create({...req, html, toc, createAt: Date.now()})
+    return ctx.body = result;
   }
 
   // 更新文章
   ArticleController.updateById = async ctx => {
-    try {
-      const { id } = ctx.params
-      const req = ctx.request.body
-      const userId = req.userId || ''
-      const targetArticle = await model.findById(id)
+    const { id } = ctx.params;
+    const req = ctx.request.body;
 
-      if (
-        !userId
-        || targetArticle.author != userId
-      ) {
-        ctx.throw(400, { message: '非文章作者' })
-      }
+    // req.tags = [...JSON.parse(req.tags)].map(tag => new ObjectID(tag))
+    
+    const userId = req.userId || ''
+    const targetArticle = await model.findById(id)
 
-      const result = await model.findByIdAndUpdate(ctx.params.id, {
-        ...req,
-        updatedDate: Date.now()
-      }).exec();
-
-      return ctx.body = result;
-    } catch (err) {
-      ctx.body = err;
-      throw new Error(err);
+    if (
+      !userId
+      || targetArticle.author != userId
+    ) {
+      ctx.throw(400, { message: '非文章作者' })
     }
+    delete req.userId
+    console.log(req)
+    const result = await model.findByIdAndUpdate(id, {...req}).catch(e => ctx.throw(500));
+    ctx.body = { status: 'ok', data: result };
   }
 
   return ArticleController
