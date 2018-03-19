@@ -7,7 +7,10 @@ const userSchema = new Schema({
     type:String,
     unique: true
   },                   
-  passwd: String,                    // 密码
+  passwd: {                          // 密码    
+    type: String,
+    required: true
+  },  
   avatar: {                          // 头像
     type: String,
     default: 'http://p39p1kvxn.bkt.clouddn.com/'
@@ -17,11 +20,11 @@ const userSchema = new Schema({
     type: Array,
     default: ['user']
   },
-  lastLoginTime: {                   // 上次登录时间
+  lastLoginAt: {                     // 上次登录时间
     type: Date,
     default: Date.now()
   },
-  createdTime: {                      // 注册日期
+  createAt: {                        // 注册日期
     type: Date,
     default: Date.now()
   },

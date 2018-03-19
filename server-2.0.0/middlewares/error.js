@@ -3,6 +3,12 @@ module.exports = () => async (ctx, next) => {
     await next()
   } catch (err) {
     console.log('中间件捕捉到错误');
-    console.log(err)
+    ctx.status = err.statusCode || err.status || 500;
+
+    console.log(ctx.status)
+
+    ctx.body = {
+      message: ctx.status === 401 ? '鉴权失败，请检查token' : err.message
+    };
   }
 }

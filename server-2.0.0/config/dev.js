@@ -14,10 +14,11 @@ module.exports = {
     salt: '',
   },
   token: {
-    secret: '',
-    expires: ''
+    secret: 'elapse',
+    expires: '4h',
+    unlesses: [/^\/api\/v1\/user/]
   },
   router: {
-    prefix: '/api/v1'
+    prefix: '/api/v1/'
   },
 }

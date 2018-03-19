@@ -84,7 +84,7 @@ module.exports = model => (controller = {}) => {
       try {
         const result = await model.findByIdAndUpdate(ctx.params.id, {
           ...ctx.request.body,
-          updatedDate: Date.now() 
+          updateAt: Date.now() 
         }).exec();
 
         return ctx.body = result;

@@ -1,9 +1,21 @@
-const withActions = require('./actions');
+const withActions = require('./common-actions');
 
 module.exports = app => {
   const model = app.model['article']
 
   const ArticleController = withActions(model)({})
+
+  ArticleController.create = async ctx => {
+    try {
+      const req = ctx.request.body;
+      const { html, toc } = app.service.marked(req.content)
+      const result = await model.create({...req, html, toc, createAt: Date.now()})
+      return ctx.body = result;
+    } catch (err) {
+      ctx.body = err;
+      throw new Error(err);
+    }
+  }
 
   // 更新文章
   ArticleController.updateById = async ctx => {

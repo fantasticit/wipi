@@ -3,18 +3,18 @@ module.exports = (app, router) => {
 
   Object.keys(app.controller).forEach(key => {
     if (!app.model[key]) {
-      throw new Error(`未找到与 ${key} Controller 对应的 ${key} Model`)
+      console.info(`未找到与 ${key} Controller 对应的 ${key} Model`)
+    } else {
+      const modelUrl = `/${key}`;
+      const itemUrl = `/${key}/:id`;
+      const controller = app.controller[key];
+
+      controller.findAll && router.get(modelUrl, controller.findAll);
+      controller.create && router.post(modelUrl, controller.create);
+      controller.findById && router.get(itemUrl, controller.findById);
+      controller.updateById && router.patch(itemUrl, controller.updateById);
+      controller.replaceById && router.put(itemUrl, controller.replaceById);
+      controller.deleteById && router.delete(itemUrl, controller.deleteById);
     }
-
-    const modelUrl = !!prefix ? `${prefix}/${key}` : `${key}`;
-    const itemUrl = !!prefix ? `${prefix}/${key}/:id` : `${key}/:id`;
-    const controller = app.controller[key];
-
-    router.get(modelUrl, controller.findAll);
-    router.post(modelUrl, controller.create);
-    router.get(itemUrl, controller.findById);
-    router.patch(itemUrl, controller.updateById);
-    router.put(itemUrl, controller.replaceById);
-    router.delete(itemUrl, controller.deleteById);
   })
 };

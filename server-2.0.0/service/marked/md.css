@@ -1,0 +1,388 @@
+.content {
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+}
+
+pre {
+  color: #525252;
+}
+pre .function .keyword,
+pre .constant {
+  color: #0092db;
+}
+pre .keyword,
+pre .attribute {
+  color: #e96900;
+}
+pre .number,
+pre .literal {
+  color: #ae81ff;
+}
+pre .tag,
+pre .tag .title,
+pre .change,
+pre .winutils,
+pre .flow,
+pre .lisp .title,
+pre .clojure .built_in,
+pre .nginx .title,
+pre .tex .special {
+  color: #2973b7;
+}
+pre .class .title {
+  color: #fff;
+}
+pre .symbol,
+pre .symbol .string,
+pre .value,
+pre .regexp {
+  color: #42b983;
+}
+pre .title {
+  color: #a6e22e;
+}
+pre .tag .value,
+pre .string,
+pre .subst,
+pre .haskell .type,
+pre .preprocessor,
+pre .ruby .class .parent,
+pre .built_in,
+pre .sql .aggregate,
+pre .django .template_tag,
+pre .django .variable,
+pre .smalltalk .class,
+pre .javadoc,
+pre .django .filter .argument,
+pre .smalltalk .localvars,
+pre .smalltalk .array,
+pre .attr_selector,
+pre .pseudo,
+pre .addition,
+pre .stream,
+pre .envvar,
+pre .apache .tag,
+pre .apache .cbracket,
+pre .tex .command,
+pre .prompt {
+  color: #42b983;
+}
+pre .comment,
+pre .java .annotation,
+pre .python .decorator,
+pre .template_comment,
+pre .pi,
+pre .doctype,
+pre .deletion,
+pre .shebang,
+pre .apache .sqbracket,
+pre .tex .formula {
+  color: #b3b3b3;
+}
+
+a {
+  text-decoration: none;
+  color: #34495e;
+}
+img {
+  border: none;
+}
+h1,
+h2,
+h3,
+h4,
+strong {
+  font-weight: 600;
+  color: #2c3e50;
+}
+code,
+pre {
+  font-family: "Roboto Mono", Monaco, courier, monospace;
+  font-size: 0.8em;
+  background-color: #f8f8f8;
+  -webkit-font-smoothing: initial;
+  -moz-osx-font-smoothing: initial;
+}
+code {
+  color: #e96900;
+  padding: 3px 5px;
+  margin: 0 2px;
+  border-radius: 2px;
+}
+em {
+  color: #7f8c8d;
+}
+p {
+  word-spacing: 0.05em;
+}
+a.button {
+  padding: 0.75em 2em;
+  border-radius: 2em;
+  display: inline-block;
+  color: #fff;
+  background-color: #4fc08d;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+  border: 1px solid #4fc08d;
+}
+
+
+sup.beta.beta {
+  font-size: 0.6em;
+  margin-left: 0.7em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+@media print {
+  body {
+    color: #000;
+  }
+  .highlight {
+    padding: 0;
+    page-break-inside: avoid;
+  }
+  .highlight .code pre {
+    color: #000;
+    background-color: #fff;
+    border-style: solid;
+    border-width: 2px 2px 2px 2px;
+    border-color: #e8e8e8;
+    page-break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: #000;
+    page-break-after: avoid;
+    page-break-before: avoid;
+  }
+  img {
+    page-break-inside: avoid;
+  }
+  h2+p {
+    page-break-before: avoid;
+  }
+  a:link:after,
+  a:visited:after {
+    content: " [" attr(href) "] ";
+  }
+}
+
+.content {
+  position: relative;
+  padding: 2.2em 0;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 50px;
+}
+
+.content img {
+  max-width: 100%;
+}
+.content span.light {
+  color: #7f8c8d;
+}
+.content span.info {
+  font-size: 0.85em;
+  display: inline-block;
+  vertical-align: middle;
+  width: 280px;
+  margin-left: 20px;
+}
+.content h1 {
+  margin: 0 0 1em;
+}
+.content h2,
+.content h3 {
+  pointer-events: none;
+}
+.content h2 a,
+.content h3 a,
+.content h2 button,
+.content h3 button {
+  pointer-events: auto;
+  color: #2c3e50;
+}
+.content h2:before,
+.content h3:before {
+  content: "";
+  display: block;
+  margin-top: -91px;
+  height: 91px;
+  visibility: hidden;
+}
+.content h2 {
+  margin: 45px 0 0.8em;
+  padding-bottom: 0.7em;
+  border-bottom: 1px solid #ddd;
+}
+.content h3 {
+  margin: 52px 0 1.2em;
+  line-height: 1.2;
+  position: relative;
+}
+.content h3 > a:before {
+  content: "#";
+  color: #42b983;
+  position: absolute;
+  left: -0.7em;
+  margin-top: -0.05em;
+  padding-right: 0.5em;
+  font-size: 1.2em;
+  line-height: 1;
+  font-weight: bold;
+}
+.content figure {
+  margin: 1.2em 0;
+}
+.content p,
+.content ul,
+.content ol {
+  line-height: 1.6em;
+  margin: 1.2em 0 -1.2em;
+  padding-bottom: 1.2em;
+  position: relative;
+  z-index: 1;
+}
+.content ul,
+.content ol {
+  padding-left: 1.5em;
+  position: inherit;
+}
+.content a {
+  color: #42b983;
+  font-weight: 600;
+}
+
+
+blockquote p {
+  padding: 12px 24px 12px 30px;
+  margin: 2em 0;
+  border-left-width: 4px;
+  border-left-style: solid;
+  background-color: #f8f8f8;
+  position: relative;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  border-left-color: #f66;
+}
+
+blockquote p:before{
+  position: absolute;
+  top: 14px;
+  left: -12px;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+
+  content: "!";
+  background-color: #f66;
+}
+
+pre {
+  position: relative;
+  font-family: "Roboto Mono", Monaco, courier, monospace;
+  font-size: 0.8em;
+  background-color: #f8f8f8;
+  -webkit-font-smoothing: initial;
+  padding: 1.2em 1.4em;
+}
+
+code.lang-go:before,
+code.lang-css:before,
+code.lang-sql:before,
+code.lang-php:before,
+code.lang-html:before,
+code.lang-json:before,
+code.lang-bash:before,
+code.lang-less:before,
+code.lang-scss:before,
+code.lang-nginx:before,
+code.lang-javascript:before,
+code.lang-typescript:before,
+code.lang-shell:before,
+code.lang-stylus:before,
+code.lang-python:before,
+code.lang-nginx:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #ccc;
+  text-align: right;
+  font-size: 0.75em;
+  padding: 5px 10px 0;
+  line-height: 15px;
+  height: 15px;
+  font-weight: 600;
+}
+
+code.lang-go:before {
+  content: "go";
+}
+
+code.lang-css:before {
+  content: "css";
+}
+
+code.lang-sql:before {
+  content: "sql";
+}
+
+code.lang-php:before {
+  content: "php";
+}
+
+code.lang-bash:before {
+  content: "bash";
+}
+
+code.lang-less:before {
+  content: "less";
+}
+
+code.lang-scss:before {
+  content: "scss";
+}
+
+code.lang-shell:before {
+  content: "shell";
+}
+
+code.lang-nginx:before {
+  content: "nginx";
+}
+
+code.lang-stylus:before {
+  content: "stylus";
+}
+
+code.lang-python:before {
+  content: "python";
+}
+
+code.lang-html:before {
+  content: "HTML";
+}
+
+code.lang-javascript:before {
+  content: "JS";
+}
+
+code.lang-typescript:before {
+  content: "TS";
+}
+
+code.lang-bash:before {
+  content: "Shell";
+}
+
+code.lang-css:before {
+  content: "CSS";
+}
