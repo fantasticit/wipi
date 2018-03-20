@@ -1,8 +1,8 @@
 #!/bin/bash
-echo "正在拉取"
+echo -e "\033[32m 正在拉取... \033[0m"
 git pull
 
-echo "提交"
+echo -e "\033[32m 正在提交... \033[0m"
 git status
 git add .
 DATE=$(date +%Y%m%d)
