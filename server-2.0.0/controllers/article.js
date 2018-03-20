@@ -1,4 +1,3 @@
-const ObjectID = require("bson-objectid");
 const withActions = require('./common-actions');
 
 module.exports = app => {
@@ -18,11 +17,8 @@ module.exports = app => {
   ArticleController.updateById = async ctx => {
     const { id } = ctx.params;
     const req = ctx.request.body;
-
-    // req.tags = [...JSON.parse(req.tags)].map(tag => new ObjectID(tag))
-    
-    const userId = req.userId || ''
-    const targetArticle = await model.findById(id)
+    const userId = req.userId || '';
+    const targetArticle = await model.findById(id);
 
     if (
       !userId
@@ -30,9 +26,18 @@ module.exports = app => {
     ) {
       ctx.throw(400, { message: '非文章作者' })
     }
-    delete req.userId
-    console.log(req)
-    const result = await model.findByIdAndUpdate(id, {...req}).catch(e => ctx.throw(500));
+    delete req.userId;
+
+    req.tags && (req.tags = req.tags.split(','));
+
+    if (req.content) {
+      const { html, toc } = app.service.marked(req.content);
+      req.html = html;
+      req.toc = toc;
+    }
+    
+    await model.update({_id: id}, {...req});
+    const result = await model.findById(id);
     ctx.body = { status: 'ok', data: result };
   }
 

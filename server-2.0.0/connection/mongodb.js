@@ -10,7 +10,7 @@ module.exports = app => {
   };
 
   mongoose.connect(url, options);
-  mongoose.Promise = global.Promise;
+  mongoose.Promise = require('bluebird');
 
   const db = mongoose.connection;
 

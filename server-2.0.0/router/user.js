@@ -7,5 +7,5 @@ module.exports = (app, router) => {
   router.post('/user/check', controller.checkAccountExist);
   router.post(`/user/register`, controller.register);
   router.post(`/user/login`, controller.login);
-  router.patch('/user/:id', controller.update);
+  router.patch('/user/:id', controller.updateById);
 }

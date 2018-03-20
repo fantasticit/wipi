@@ -28,10 +28,11 @@ module.exports = app => {
         ctx.throw(500);
       }
     })
+    ctx.status = 201;
     ctx.body = { code: 'ok', message: '注册成功', data: result };
   }
 
-  UserController.update = async ctx => {
+  UserController.updateById = async ctx => {
     const { id } = ctx.params
     let { action } = ctx.request.body
     
@@ -44,7 +45,6 @@ module.exports = app => {
       case 'modifyAvatar': 
         let { avatar } = ctx.request.body
         await model.findByIdAndUpdate(id, { avatar })
-          .catch(e => e.throw(500))
         ctx.body = ({ code: 'ok', message: '头像已修改' })
         break
       
@@ -56,15 +56,14 @@ module.exports = app => {
           ctx.throw(400, { message: '请输入密码' })
         }
     
-        oldPasswd = encryptPwd(oldPasswd)
-        const user = await model.findById(id).catch(e => ctx.throw(500))
+        oldPasswd = app.service.encrypt(oldPasswd)
+        const user = await model.findById(id)
     
         if (user.passwd !== oldPasswd) {
           ctx.throw(400, { message: '原密码错误' })
         } else {
-          newPasswd = encryptPwd(newPasswd)
+          newPasswd = app.service.encrypt(newPasswd)
           await model.findByIdAndUpdate(id, { passwd: newPasswd })
-          .catch(e => e.throw(500))
           ctx.body = ({ code: 'ok', message: '修改成功，请重新登录' })
         }
         break
@@ -72,12 +71,12 @@ module.exports = app => {
       // 修改账户
       case 'modifyAccount':
         let { account } = ctx.request.body
-        let isExisted = await model.findOne({ account }).where('_id').ne(id).catch(e=> ctx.throw(500))
+        let isExisted = await model.findOne({ account }).where('_id').ne(id)
         isExisted = !!isExisted
         if (isExisted) {
           ctx.throw(400, { message: '用户已存在' })
         } else {
-          await model.findByIdAndUpdate(id, { account }).catch(e => e.throw(500))
+          await model.findByIdAndUpdate(id, { account })
           ctx.body = ({ code: 'ok', message: '账户已修改' })
         }
         break
@@ -92,7 +91,7 @@ module.exports = app => {
     !passwd ? ctx.throw(400, { message: '请输入密码' }) : '';
     passwd = app.service.encrypt(passwd);
 
-    const user = await model.findOne({ account, passwd }).catch(e => ctx.throw(500))
+    const user = await model.findOne({ account, passwd })
 
     if (!!user) {
       // 生成token
@@ -125,8 +124,7 @@ module.exports = app => {
 
     if (can) {
       const users = await model.find().limit(pageSize).skip(skip)
-        .catch(e => ctx.throw(500))
-      const total = await model.find().count().catch(e => ctx.throw(500))
+      const total = await model.find().count()
       ctx.body = ({ status: 'ok', message: '获取用户列表成功', data: { 
         items: users,
         total
@@ -137,14 +135,11 @@ module.exports = app => {
   }
 
   UserController.deleteUser = async (ctx, next) => {
-    let { userId, deletedUserId } = ctx.request.body
-
+    let { userId, deleteUserId } = ctx.request.body
     const can = await app.service.isAdmin(userId)
 
     if (can) {
-      await model.findByIdAndRemove(deletedUserId)
-        .catch(e => ctx.throw(500))
-
+      await model.findByIdAndRemove(deleteUserId)
       ctx.body = ({ status: 'ok', message: '删除用户成功'})
     } else {
       ctx.throw(403, { message: '非管理员禁止删除用户' })

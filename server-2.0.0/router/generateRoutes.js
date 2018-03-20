@@ -12,9 +12,9 @@ module.exports = (app, router) => {
       controller.findAll && router.get(modelUrl, controller.findAll);
       controller.create && router.post(modelUrl, controller.create);
       controller.findById && router.get(itemUrl, controller.findById);
-      controller.updateById && router.patch(itemUrl, controller.updateById);
-      controller.replaceById && router.put(itemUrl, controller.replaceById);
       controller.deleteById && router.delete(itemUrl, controller.deleteById);
+      controller.replaceById && router.put(itemUrl, controller.replaceById);
+      controller.updateById && router.patch(itemUrl, controller.updateById);
     }
   })
 };

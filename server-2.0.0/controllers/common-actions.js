@@ -49,6 +49,7 @@ module.exports = model => (controller = {}) => {
         
         // 展开字段
         let embedded = query.embedded && JSON.parse(query.embedded)
+
         if (embedded) {
           Object.keys(embedded).forEach(key => {
             builder.populate(key)
@@ -73,6 +74,14 @@ module.exports = model => (controller = {}) => {
           }
         });
 
+        let embedded = query.embedded && JSON.parse(query.embedded)
+
+        if (embedded) {
+          Object.keys(embedded).forEach(key => {
+            builder.populate(key)
+          })
+        }
+
         const result = await builder.exec();
         return ctx.body = { status: 'ok', data: result }
       } catch (err) {
@@ -82,10 +91,11 @@ module.exports = model => (controller = {}) => {
 
     updateById: async (ctx) => {
       try {
-        const result = await model.findByIdAndUpdate(ctx.params.id, {
+        await model.update({_id: ctx.params.id}, {
           ...ctx.request.body,
           updateAt: Date.now() 
-        }).exec();
+        });
+        const result = await model.findById(id);
 
         return ctx.body = result;
       } catch (err) {
