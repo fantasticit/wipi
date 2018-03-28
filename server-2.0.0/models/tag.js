@@ -21,7 +21,6 @@ const tagSchema = new Schema({
   },
 })
 
-
 tagSchema.index({ id: 1 })
 // 时间更新
 tagSchema.pre('findOneAndUpdate', function (next) {

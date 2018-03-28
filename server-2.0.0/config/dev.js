@@ -4,7 +4,7 @@ module.exports = {
     name: 'elapse',
     host: '127.0.0.1',
     port: 27017,
-    user: 'zxx',
+    user: 'zx',
     pwd:  'zx123'
   },
   mailer: {
