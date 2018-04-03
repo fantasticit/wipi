@@ -73,6 +73,7 @@ class RecentArticles extends Component {
 
         p.date {
           font-size: .8em;
+          margin-top: 4px;
           color: #666;
         }
         `}</style>
