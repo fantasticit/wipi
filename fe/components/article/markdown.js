@@ -18,7 +18,7 @@ class Markdown extends Component {
     return (
       <div
         ref="content"
-        className="markdown-body"
+        className="markdown"
         style={{'marginTop': '1rem'}}
         dangerouslySetInnerHTML={{__html: content}}>
       </div>

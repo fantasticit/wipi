@@ -21,34 +21,14 @@ class ArticleTags extends Component {
       <div>
         <LinePanel title={'文章标签'} />
         <ul>
-          <li
-            onClick={() => changeTag({ tag: { title: '全部文章', value: '' } })}
-            className={
-              selectedTag.tag.value === ''
-              ? 'is-active'
-              : ''
-            }>
-            <Link href={`/post`}>
-              <a>
-                <span>全部文章</span>
-              </a>
-            </Link>
-          </li>
-          {tags.filter(tag => tag.count > 0).map((tag, i) => (
-            <li key={i}
-              onClick={() => changeTag(tag)}
-              className={
-                selectedTag.tag.value === tag.tag.value
-                  ? 'is-active'
-                  : ''
-              }>
+          {tags.filter(tag => tag && tag.value).map((tag, i) => (
+            <li key={i}>
               <Link 
-                as={`/post/${tag.tag.value}`} 
-                href={`/post?id=${tag.tag.value}`}
+                as={`/post/${tag.value}`} 
+                href={`/post?id=${tag.value}`}
                 >
                 <a>
-                  <span>{ tag.tag.title }</span>
-                  <span> ({ tag.count })</span>
+                  <span>{ tag.title }</span>
                 </a>
               </Link>
             </li>
@@ -59,24 +39,31 @@ class ArticleTags extends Component {
           color: #333;
           font-size: 1.15rem;
           list-style: none;
-          padding: 1.5rem 0;
+          padding-left: 16px;
+        }
+
+        ul::after {
+          content: '';
+          display: table;
+          clear: both;
         }
 
         li {
+          float: left;
+          list-style: none;
+          margin-right: 10px;
+          margin-top: 5px;
+        }
+
+        a {
           position: relative;
-          display: inline-block;
-          padding: .5rem 1rem;
-          border-radius: 4px;
-          border-radius: 15px;
-          cursor: pointer;
-        }
-
-        li.is-active {
-          background: rgba(0,0,0,.06)
-        }
-
-        li + li {
-          margin: .5rem .8rem;
+          display: block;
+          border: 1px solid #e5e5e5;
+          border-radius: 34px;
+          font-size: 1rem;
+          color: #242f35;
+          padding: 8px 10px;
+          transition: all ease .3s;
         }
 
   

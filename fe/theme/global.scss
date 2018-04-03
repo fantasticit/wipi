@@ -3,10 +3,6 @@
 @import 'nprogress.scss';
 
 :global {
-  // *, *:hover {
-  //   transition: all ease  .3s;
-  // }
-
   html {
     font-size: 12px;
   }
@@ -46,7 +42,7 @@
 
   @media (min-width: 992px) {
     .container {
-      width: 784px;
+      width: 960px;
     }
   }
   

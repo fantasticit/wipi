@@ -6,7 +6,7 @@ class _ArticleProvider extends BaseHttp {
     add: '/article',
     delete: '/article/',
     update: '/article/',
-    recent: '/article??page=1&pageSize=10&sort={"createAt": -1}'
+    recent: '/article?page=1&pageSize=10&sort={"createAt": -1}'
   }
 
   constructor() {

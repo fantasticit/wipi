@@ -20,13 +20,13 @@ module.exports = app => {
     const userId = req.userId || '';
     const targetArticle = await model.findById(id);
 
-    if (
-      !userId
-      || targetArticle.author != userId
-    ) {
-      ctx.throw(400, { message: '非文章作者' })
-    }
-    delete req.userId;
+    // if (
+    //   !userId
+    //   || targetArticle.author != userId
+    // ) {
+    //   ctx.throw(400, { message: '非文章作者' })
+    // }
+    // delete req.userId;
 
     if (req.tags && (req.tags.length > 0)) {
       req.tags = [...req.tags].filter(Boolean)
@@ -41,6 +41,24 @@ module.exports = app => {
     await model.update({_id: id}, {...req});
     const result = await model.findById(id);
     ctx.body = { status: 'ok', data: result };
+  }
+
+  ArticleController.getClassifyStats = async ctx => {
+    let articles = await model.find().populate('classify');
+    let data = {};
+
+    articles.forEach(article => {
+      if (!data[article.classify.title]) {
+        data[article.classify.title] = {
+          classify: article.classify,
+          count: 0
+        };
+      }
+
+      data[article.classify.title].count += 1;
+    })
+
+    ctx.body = { status: 'ok', data };
   }
 
   return ArticleController

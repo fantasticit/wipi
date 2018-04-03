@@ -1,8 +1,8 @@
-import ArticleService from '../../service/article'
+import TagService from '../../service/tag'
 
 const initialState = {
   tags: [],
-  selectedTag: { tag: { title: '全部文章', value: '' } },
+  selectedTag: {},
 }
 
 const setTags = data => ({
@@ -19,10 +19,10 @@ export const changeTag = (tag) => {
 
 export const fetchTags = () => async (dispatch, getStats) => {
   try {
-    const data = await ArticleService.fetchArticleTags()
+    const data = await TagService.fetchTags()
     await dispatch(setTags(data))
   } catch (err) {
-    console.log('获取文章分类失败')
+    console.log('获取标签失败')
   }
 }
 

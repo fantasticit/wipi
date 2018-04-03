@@ -9,42 +9,34 @@ class LinePanel extends Component {
     const { title } = this.props
 
     return (
-      <div className="line-panel">
-        {
-          title ? <span className="line-panel__title">{ title }</span> : ''
-        }
-        <span className="line-panel__line"></span>
+      <h3>
+        { title }
         <style jsx>{`
-        .line-panel {
+        h3 {
           position: relative;
-          z-index: 3;
-          height: 22px;
-          color: #24292e;
-          font-size: 1.2rem;
-        }
-    
-        .line-panel__title {
-          position: absolute;
-          top: 50%;
-          left: 0;
-          transform: translateY(-50%);
-          z-index: 1;
-        
-          font-weight: 500;
-          padding-right: 16px;
-          background: #fff;
+          color: #242f35;
+          font-size: 1.333rem;
+          padding-left: 1.333rem;
+          margin: 30px auto 20px;
+          font-weight: 400;
+          height: 20px;
+          line-height: 20px;
         }
         
-        .line-panel__line {
+        h3::before {
+          content: '';
           position: absolute;
-          top: 50%;
+          width: 4px;
+          height:  100%;
+
+          position: absolute;
+          top: 0;
           left: 0;
-        
-          width: 100%;
-          border-bottom: 1px solid #f0f0f0;
+          background: linear-gradient(to bottom,#1a1818 35%,#353030 100%) left center no-repeat;
+          background-size: 100%;
         }
         `}</style>
-      </div>
+      </h3>
     )
   }
 }

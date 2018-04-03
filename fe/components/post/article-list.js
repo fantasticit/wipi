@@ -10,36 +10,34 @@ class ArticleList extends Component {
 
     return(
       <li>
-        {
-          article.cover
-            ? <a className="cover">
-                <img src={article.cover} />
-              </a> 
-            : ''
-        }
-        <div className={
-          article.cover
-            ? 'content'
-            : 'content is-full'
-        }>
-          <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
-            <a className="title">
-              <span>{article.title}</span>
-            </a>
-          </Link>
-          <p className="desc">{ article.desc }</p>
-          <div className="meta">
-            <span className="is-border">{ article.classify }</span>
-            <div className="meta-info">
-              <Author author={{
-                avatar: article.author.avatar,
-                account: article.author.account,
-                createdDate: article.createdDate,
-                readingQuantity: article.readingQuantity,
-              }} />
+        <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
+          <a>
+            {
+              article.cover
+                ? <div className="cover">
+                    <img src={article.cover} />
+                  </div> 
+                : ''
+            }
+            <div className="content">
+              <h2 className="title">
+                <span>{article.title}</span>
+              </h2>
+              <p className="desc">{ article.desc }</p>
+              <div className="meta">
+                <span className="is-border">{ article.classify.title }</span>
+                <div className="meta-info">
+                  <Author author={{
+                    avatar: article.author.avatar,
+                    account: article.author.account,
+                    createAt: article.createAt,
+                    readingQuantity: article.readingQuantity,
+                  }} />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </a>
+        </Link>
         <style jsx>{`
         li {
           position: relative;
@@ -54,16 +52,8 @@ class ArticleList extends Component {
         }
       
         .cover {
-          position: absolute;
-          right: 0;
-          top: 50%;
-          transform: translateY(-50%);
-          
-          display: block;
-          box-sizing: border-box;
-          width: 15rem;
-          height: 100%;
-          padding: 1.5rem 0;
+          height: 180px;
+          margin-bottom: 22px;
         }
 
         .cover img {
@@ -74,11 +64,6 @@ class ArticleList extends Component {
 
         .content {
           word-wrap: break-word;
-          padding-right: 16rem;
-        }
-
-        .content.is-full {
-          padding-right: 0;
         }
 
         .title {

@@ -29,6 +29,11 @@ module.exports = model => (controller = {}) => {
         pageSize = +pageSize;
         const skip = page === 0 ? 0 : (page - 1) * pageSize;
 
+        if (conditions.keyword) {
+          keyword = conditions.keyword
+          delete conditions.keyword
+        }
+
         // 关键字查询
         if (!!keyword) {
           keyword = keyword.replace(filter, '');

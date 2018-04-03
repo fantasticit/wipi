@@ -1,0 +1,92 @@
+.container.page {
+  position: relative;
+  margin: 20px auto;
+  padding-right: 22rem;
+  padding-bottom: 3rem;
+}
+
+.search-key {
+  margin-top: 40px;
+  font-size: 32px;
+  color: #2d2d2f;
+  height: 45px;
+  line-height: 45px;
+}
+
+.tip {
+  font-size: 32px;
+  color: #666;
+  text-align: center;
+}
+
+.articles {
+  box-sizing: border-box;
+  background: #fff;
+}
+
+aside {
+  position: absolute;
+  right: 0;
+  top: -10px;
+
+  width: 240px;
+}
+
+aside > div.is-fix {
+  position: fixed;
+  top: 5rem;
+  width: 240px;
+}
+
+.m-fbtn {
+  display: none;
+  position: fixed;
+  right: 2rem;
+  bottom: 5rem;
+  z-index: 1000;
+
+  width: 2.67rem;
+  height: 2.67rem;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  line-height: 2.84rem;
+}
+
+.m-fbtn.is-close {
+  transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+  .container.page {
+    padding: 0 15px 3rem 15px;
+  }
+
+  .m-fbtn {
+    display: block;
+    transition: all ease  .3s;
+  }
+
+  aside {
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    top: -100%;
+    z-index: -100;
+    background: #fff;
+
+    width: 100vw;
+    height: 0;
+    transition: all ease  .3s;
+  }
+
+  aside.is-active {
+    top: 5rem;
+    z-index: 100;
+    height: calc(100vh - 5rem);
+    overflow: auto;
+    padding: 20px 15px 0 15px;
+  }
+}

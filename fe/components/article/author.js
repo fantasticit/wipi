@@ -10,13 +10,13 @@ class Author extends Component {
     const { 
       avatar,
       account, 
-      createdDate,
+      createAt,
       readingQuantity,
     } = this.props.author
 
     return (
       <div className="author">
-        <span>{ formatTime(createdDate) }</span>
+        <span>{ formatTime(createAt) }</span>
         <span>阅读 { readingQuantity }</span>
         <style jsx>{`
         .author {

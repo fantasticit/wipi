@@ -2,16 +2,19 @@ import { Component } from 'react'
 import { initStore } from '../redux/store'
 import { bindActionCreators } from 'redux'
 import withRedux from 'next-redux-wrapper'
-import ArticleService from '../service/article'
-import { fetchTags } from '../redux/reducers/tags'
-import LinePanel from '../components/common/line-panel'
-import Layout from '../components/common/layout'
-import ArticleTags from '../components/post/article-tags'
-import RecentArricles from '../components/post/recent-articles'
-import Other from '../components/post/other'
-import ArticleList from '../components/post/article-list'
 
-let isSerach = false
+import ArticleService from '../service/article';
+import ClassifyService from '../service/classify';
+import TagService from '../service/tag';
+
+import LinePanel from '../components/common/line-panel';
+import Layout from '../components/common/layout';
+import ArticleTags from '../components/post/article-tags';
+import RecentArricles from '../components/post/recent-articles';
+import ArticleClassify from '../components/post/article-classify';
+import ArticleList from '../components/post/article-list';
+
+import '../theme/pages/post.scss';
 
 class Post extends Component {
   constructor() {
@@ -22,77 +25,91 @@ class Post extends Component {
   }
 
   static async getInitialProps({ query }) {
-    const tag = query.id
-    const keyword = query.keyword
-    let articles = []
+    let tag = query.id;
+    let classify = query.classify;
+    let keyword = query.keyword;
+    let conditions = {};
+    let articles = [];
 
-    if (keyword) {
-      articles = await ArticleService.fetchArticles(null, keyword)
-        .catch(e => console.log('获取数据失败'))
-      isSerach = true
-    } else {
-      articles = await ArticleService.fetchArticles(tag, null)
-        .catch(e => console.log('获取数据失败'))
-        isSerach = false
+    if (!!tag) {
+      tag = await TagService.fetchTagByValue(tag);
+      conditions.tag = tag._id;
     }
-    
-    const recentArticles = await ArticleService.fetchRecentArticles()
-      .catch(e => console.log('获取数据失败'))
 
-    return { articles, recentArticles }
+    if (!!classify) {
+      conditions.classify = classify._id;
+    }
+
+    if (!!keyword) {
+      conditions.keyword = keyword;
+    }
+
+    articles = await ArticleService.fetchArticles(conditions);
+    const recentArticles = await ArticleService.fetchRecentArticles();
+    const classifies = await ArticleService.fetchArticleClassifies();
+
+    return { articles, tag, recentArticles, classifies };
   }
 
   componentDidMount() {
-    document.title = '首页 | Mvpzx'
-    const isMobile = (/mobile/ig).test(window.navigator.userAgent)
+    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | CodingFun`;
+    const isMobile = (/mobile/ig).test(window.navigator.userAgent);
 
     if (isMobile) {
       return
     }
 
-    const oAside = this.refs.aside
+    const oAside = this.refs.aside;
 
     window.addEventListener('scroll', function () {
-      const scrollTop = this.scrollY
+      const scrollTop = this.scrollY;
+
       if (scrollTop > 200) {
-        oAside.classList.add('is-fix')
+        oAside.classList.add('is-fix');
       } else {
-        oAside.classList.remove('is-fix')
+        oAside.classList.remove('is-fix');
       }
     }, false)
   }
 
+  componentDidUpdate() {
+    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | CodingFun`;
+  }
+
   toggleAside = () => {
-    const isMobile = (/mobile/ig).test(window.navigator.userAgent)
+    const isMobile = (/mobile/ig).test(window.navigator.userAgent);
 
     if (!isMobile) {
-      return
+      return;
     }
 
     this.setState({
       showAside: !this.state.showAside
-    })
+    });
   }
 
   render() {
-    const { showAside } = this.state
-    const { tags = [], selectedTag, articles = [], recentArticles } = this.props
-
-    if (tags.length <= 0) {
-      this.props.fetchTags()
-    }
+    const { showAside } = this.state;
+    const { articles = [], tag, recentArticles, classifies } = this.props;
 
     return(
-      <Layout activeRoute={'/p'}>
-        {/* <Carousel /> */}
-        <div className="container">
+      <Layout activeRoute={'/post'}>
+        <div className="container page">
           <div className="articles">
-            <LinePanel title={isSerach ? '文章搜索' : selectedTag.tag.title} />
-            <ul>
-              {articles.map((article, i) => (
-                <ArticleList article={article} key={i}/>
-              ))}
-            </ul>
+            {
+              tag && tag.title 
+                ? <div className="search-key">{ tag.title } 相关的文章</div> 
+                : ''
+            }
+            {
+              articles && articles.length > 0
+                ? <ul>
+                    {articles.map((article, i) => (
+                      <ArticleList article={article} key={i}/>
+                    ))}
+                  </ul>
+                : <p className="tip">暂无文章</p>
+            }  
           </div>
           <aside
             className={ showAside ? 'is-active' : '' }
@@ -100,8 +117,8 @@ class Post extends Component {
           >
             <div ref="aside">
               <RecentArricles articles={recentArticles} />
+              <ArticleClassify classifies={classifies} />
               <ArticleTags />
-              <Other />
             </div>
           </aside>
           <div
@@ -110,100 +127,9 @@ class Post extends Component {
             <i className='ion-plus-round' />
           </div>
         </div>
-        <style jsx>{`
-          .container {
-            position: relative;
-            margin: 20px auto;
-            padding-right: 22rem;
-            padding-bottom: 3rem;
-          }
-
-          .articles {
-            box-sizing: border-box;
-            background: #fff;
-          }
-
-          aside {
-            position: absolute;
-            right: 0;
-            top: 0;
-
-            width: 18rem;
-          }
-
-          aside > div.is-fix {
-            position: fixed;
-            top: 5rem;
-            width: 18rem;
-          }
-
-          .m-fbtn {
-            display: none;
-            position: fixed;
-            right: 2rem;
-            bottom: 5rem;
-            z-index: 1000;
-
-            width: 2.67rem;
-            height: 2.67rem;
-            border-radius: 50%;
-            background: #000;
-            color: #fff;
-            font-size: 16px;
-            text-align: center;
-            line-height: 2.84rem;
-          }
-
-          .m-fbtn.is-close {
-            transform: rotate(45deg);
-          }
-
-          @media (max-width: 768px) {
-            .container {
-              padding: 0 15px 3rem 15px;
-            }
-
-            .m-fbtn {
-              display: block;
-              transition: all ease  .3s;
-            }
-
-            aside {
-              box-sizing: border-box;
-              position: fixed;
-              left: 0;
-              top: -100%;
-              z-index: -100;
-              background: #fff;
-
-              width: 100vw;
-              height: 0;
-              transition: all ease  .3s;
-            }
-
-            aside.is-active {
-              top: 5rem;
-              z-index: 100;
-              height: calc(100vh - 5rem);
-              overflow: auto;
-              padding: 20px 15px 0 15px;
-            }
-          }
-        `}</style>
       </Layout>
     )
   }
 }
 
-const mapStateToProps = ({ tags }) => ({
-  tags: tags.tags,
-  selectedTag: tags.selectedTag
-})
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchTags: bindActionCreators(fetchTags, dispatch),
-  }
-}
-
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Post)
+export default withRedux(initStore)(Post)

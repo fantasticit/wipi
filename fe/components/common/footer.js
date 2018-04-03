@@ -9,8 +9,7 @@ class Footer extends Component {
     return (
       <div>
         <footer>
-          {/* - 皖 ICP 备 15896352 号 */}
-          <p>&copy; {new Date().getFullYear()} - Coding Age ( Elapse )</p>
+          <p>&copy; {new Date().getFullYear()} CodingFun 皖ICP备18005737号</p>
           <p>
             Powered by 
             <a href="https://koa.bootcss.com" target="_blank"> Koa </a>

@@ -1,35 +1,30 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { changeTag, fetchTags } from '../../redux/reducers/tags'
 import Link from 'next/link'
-import { formatTime } from '../../util/format-time'
 import LinePanel from '../common/line-panel'
 
-class RecentArticles extends Component {
+class ArticleClassify extends Component {
   constructor(props) {
     super(props)
   }
 
   render() {
-    const { articles = [] } = this.props
+    const { classifies = [] } = this.props
 
     return(
       <div>
-        <LinePanel title={'最新文章'} />
+        <LinePanel title={'文章分类'} />
         <ul>
-          {articles.map((article, i) => (
-            <li key={i}>
-              <Link 
-                as={`/article/${article._id}`} 
-                href={`/article?id=${article._id}`}
-                >
-                <a>
-                  <p className="title">{ article.title }</p>
-                  <p className="date">{ formatTime(article.createAt) }</p>
-                </a>
-              </Link>
-            </li>
-          ))}
+          {Object.keys(classifies).map((key, i) => <li key={i}>
+            <Link 
+              as={`/post/${classifies[key].classify.value}`} 
+              href={`/post?classify=${classifies[key].classify.value}`}
+            >
+              <a>{ key }（{classifies[key].count}）</a>
+            </Link>
+          </li>)}
         </ul>
         <style jsx>{`
         ul {
@@ -42,6 +37,7 @@ class RecentArticles extends Component {
         li {
           position: relative;
           padding: .5rem 0;
+          border-bottom: 1px dashed #e5e5e5;
           cursor: pointer;
 
           overflow: hidden;
@@ -66,19 +62,10 @@ class RecentArticles extends Component {
           bottom: 0;
           left: 0;
         }
-
-        p {
-          margin: 5px 0;
-        }
-
-        p.date {
-          font-size: .6em;
-          color: #666;
-        }
         `}</style>
       </div>
     )
   }
 }
 
-export default RecentArticles
+export default ArticleClassify

@@ -36,6 +36,11 @@ app.prepare().then(() => {
     ctx.respond = false
   })
 
+  router.get('/post/:classify', async ctx => {
+    await app.render(ctx.req, ctx.res, '/post', ctx.params)
+    ctx.respond = false
+  })
+
 
   router.get('/article/:id', async ctx => {
     await app.render(ctx.req, ctx.res, '/article', ctx.params)

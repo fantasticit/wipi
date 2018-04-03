@@ -63,21 +63,12 @@ class Header extends Component {
         <div className="container">
           <Link href={'/post'}>
             <a className="logo">
-            <svg version="1.1" viewBox="0 0 226 200" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient x1="196.572434%" y1="228.815483%" x2="50%" y2="50%" id="l1">
-                  <stop offset="0%"></stop>
-                  <stop offset="100%"></stop>
-                </linearGradient>
-              </defs>
-                <g transform="translate(-141.000000, -156.000000)">
-                  <polygon fill="url(#l1)" points="254 156.459299 367 356 141 356 ">
-                  </polygon>
-                </g>
-              </svg>
-              {/* <span>Elapse</span> */}
+              <img src="http://p39p1kvxn.bkt.clouddn.com/elapse.svg" />
+              <span>Coding...</span>
             </a>
           </Link>
+          <ul>
+          </ul>
           <div className="search">
             <input
               ref="input"
@@ -102,7 +93,19 @@ class Header extends Component {
           z-index: 250;
           color: #909090;
           background: #fff;
-          padding: 2rem 0;
+          height: 5rem;
+        }
+
+        header::after {
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: 2px;
+          z-index: 1000;
+          color: rgba(0,0,0,.07);
+          width: 100%;
+          height: 2px;
+          box-shadow: 0 2px 3px 0 rgba(0,0,0,.07);
         }
 
         .container {
@@ -110,6 +113,7 @@ class Header extends Component {
           justify-content: space-between;
           align-items: center;
           overflow: hidden;
+          height: 100%;
         }
 
         @media (max-width: 768px) {
@@ -124,14 +128,14 @@ class Header extends Component {
           align-items: center;
         }
 
-        .logo svg {
-          width: 32px;
-          height: 32px;
+        .logo img {
+          max-width: 100%;
+          height: 40px;
         }
         
         .logo span {
-          margin-left: .6rem;
-          font-size: 1.6rem;
+          margin-left: .2rem;
+          font-size: 1.1rem;
         }
 
         .search {

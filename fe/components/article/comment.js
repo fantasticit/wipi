@@ -5,23 +5,21 @@ class Comment extends Component {
     super()
   }
 
+  componentDidMount() {
+    (function(){ 
+      var appid = 'cytxVX5BF'; 
+      var conf = 'prod_df75302ea62218287af79dd8cc1baa4b'; 
+      var width = window.innerWidth || document.documentElement.clientWidth; 
+      if (width < 960) { 
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); 
+  }
+
   render() {
+    const { articleId } = this.props
+
     return (
       <div className="comment">
-        <div id="uyan_frame"></div>
-        {/* <div className="el-comment__title">
-          <span className="comment-num">0 条评论</span>
-          <span className="comment-line"></span>
-        </div>
-        <div className="el-comment__editor">
-          <div className="editor">
-            <textarea className="el-textarea" />
-          </div>
-          <div className="btn-group">
-            <button className="el-button el-button--text">取消</button>
-            <button className="el-button">评论</button>
-          </div>
-        </div> */}
+        <div id="SOHUCS" sid={articleId} ></div> 
         <style jsx>{`
         .comment {
           min-height: 1px;
