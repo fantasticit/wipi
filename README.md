@@ -8,21 +8,19 @@
   - 前端页面使用React服务端渲染框架`nextjs`
 
 ## 0. 如何运行
-### 1. 运行接口服务
+### 0.1 运行接口服务
 打开 `server` 项目修改 `server/config` 下的相关配置，尤其是 `mongodb` 的配置，然后运行 `npm run dev` 即可
 
-### 2. 运行后台系统
+### 0.2 运行后台系统
 进入 `be` 项目，安装依赖后执行 `npm run dev`，然后打开浏览器相关链接即可
 
-### 3. 运行前台页面
+### 0.3 运行前台页面
 进入 `fe` 项目，安装依赖后执行 `npm run dev`，然后打开浏览器相关链接即可
 
 ## 1. 效果预览
 ### 1.1 后端管理页面
 后端管理页面使用了vue、vuex、sass以及axios，其中模仿ElementUI的样式开发了`dialog`、`loading`、`confirm`、`notofication`、`messgae`等等组件，（感觉自己对vue组件的开发姿势又稍微深入了一点点，毕竟学无止境）。以下为部分页面截图：
 
-<details>
-  <summary>点击展开预览图</summary>
   <ul>
     <li>
       <p>登录预览</p>
@@ -36,19 +34,12 @@
       <p>文章管理</p>
       <img src="http://ownsprds9.bkt.clouddn.com/be-articlelist.JPG" />
     </li>
-    <li>
-      <p>ECharts结合</p>
-      <img src="http://ownsprds9.bkt.clouddn.com/be-echarts.JPG" />
-    </li>
   </ul>
-</details>
 
   
 ### 1.2 前端页面渲染
 借此机会想学习一下`React`，于是前端页面使用了React服务端渲染框架`nextjs`，并使用了`Redux`、`axios`以及`koa`(自定义服务所用)。前端页面目前比较简单，主要就是文章的读取和渲染。以下为截图：
 
-<details>
-  <summary>点击展开预览图</summary>
   <ul>
     <li>
       <p>前端首页</p>
@@ -59,7 +50,6 @@
       <img src="http://ownsprds9.bkt.clouddn.com/fe-article.JPG" />
     </li>
   </ul>
-</details>
 
 ## 2. 笔记总结
 ### 2.1 Vue.js 篇
