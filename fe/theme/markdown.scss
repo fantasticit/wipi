@@ -105,12 +105,22 @@
       -moz-osx-font-smoothing: initial;
     }
     code {
-      color: #e96900;
       padding: 3px 5px;
       margin: 0 2px;
       border-radius: 2px;
     }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      a code {
+        color: #e96900;
+      }
+    }
+    
     pre code {
       color: #525252;
       line-height: 1.5;

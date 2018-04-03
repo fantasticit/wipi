@@ -3,7 +3,7 @@ import BaseHttp from '../base-http'
 class _QiniuProvider extends BaseHttp {
   api = {
     token: '/qiniu/token',
-    upload: 'http://upload.qiniu.com/',
+    upload: 'https://upload.qiniu.com/',
   }
 
   constructor() {
