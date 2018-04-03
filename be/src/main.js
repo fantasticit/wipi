@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import './assets/icon/ionicons.scss'
 import './components/index'
-import './util/performence/first-screen'
+// import './util/performence/first-screen'
 import './util/performence/error'
 
 Vue.config.productionTip = false

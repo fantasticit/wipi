@@ -33,7 +33,9 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   res => {
-    if (res.status === 200) {
+    console.log(res);
+
+    if (/^2/.test(res.status)) {
       if (
         res.data.code === 'ok' 
         || res.statusText === 'OK'

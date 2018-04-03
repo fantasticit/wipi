@@ -5,7 +5,6 @@ const classifySchema = new Schema({
   id: Number,
   title: {
     type: String,
-    unique: true,
   },
   value: {
     type: String,

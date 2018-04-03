@@ -87,7 +87,7 @@ class _ArticleProvider extends BaseHttp {
 
     try {
       const res = await this.http(req)
-      return res.message
+      return '删除成功'
     } catch (err) {
       throw new Error(err)
     }

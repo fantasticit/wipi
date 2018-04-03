@@ -34,12 +34,12 @@ class _UserProvider extends BaseHttp {
       data: { account, passwd },
     }
 
-    try {
+    // try {
       const res = await this.http(req)
       return `${account}, 注册成功`
-    } catch (err) {
-      throw new Error(err)
-    }
+    // } catch (err) {
+    //   throw new Error(err)
+    // }
   }
 
   async login({account, passwd}) {
@@ -97,11 +97,11 @@ class _UserProvider extends BaseHttp {
     }
   }
 
-  async deleteUser(userId, deletedUserId) {
+  async deleteUser(userId, deleteUserId) {
     const req = {
       url: this.api.basic,
       method: 'delete',
-      data: { userId, deletedUserId }
+      data: { userId, deleteUserId }
     }
 
     try {

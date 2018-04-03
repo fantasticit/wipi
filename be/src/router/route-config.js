@@ -103,53 +103,53 @@ const routeConfig = [
     ],
   },
 
-  {
-    prefix: '性能分析',
-    icon: 'compass',
-    children: [
-      {
-        path: 'performence/fe',
-        name: 'FePerformence',
-        component: views.FePerformence,
-        meta: {
-          title: '前端性能',
-        },
-      },
+  // {
+  //   prefix: '性能分析',
+  //   icon: 'compass',
+  //   children: [
+  //     {
+  //       path: 'performence/fe',
+  //       name: 'FePerformence',
+  //       component: views.FePerformence,
+  //       meta: {
+  //         title: '前端性能',
+  //       },
+  //     },
     
-      {
-        path: 'performence/api',
-        name: ' ApiPerformence',
-        component: views.ApiPerformence,
-        meta: {
-          title: '接口性能',
-        },
-      },
-    ],
-  },
+  //     {
+  //       path: 'performence/api',
+  //       name: ' ApiPerformence',
+  //       component: views.ApiPerformence,
+  //       meta: {
+  //         title: '接口性能',
+  //       },
+  //     },
+  //   ],
+  // },
 
-  {
-    prefix: '错误日志',
-    icon: 'bug',
-    children: [
-      {
-        path: 'log/fe',
-        name: 'FeLogger',
-        component: views.FeLogger,
-        meta: {
-          title: '前端日志',
-        },
-      },
+  // {
+  //   prefix: '错误日志',
+  //   icon: 'bug',
+  //   children: [
+  //     {
+  //       path: 'log/fe',
+  //       name: 'FeLogger',
+  //       component: views.FeLogger,
+  //       meta: {
+  //         title: '前端日志',
+  //       },
+  //     },
     
-      {
-        path: 'log/api',
-        name: 'ApiLog',
-        component: views.ApiLogger,
-        meta: {
-          title: '接口日志',
-        },
-      },
-    ],
-  },
+  //     {
+  //       path: 'log/api',
+  //       name: 'ApiLog',
+  //       component: views.ApiLogger,
+  //       meta: {
+  //         title: '接口日志',
+  //       },
+  //     },
+  //   ],
+  // },
 
   {
     icon: 'cube',

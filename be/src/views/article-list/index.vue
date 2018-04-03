@@ -101,7 +101,7 @@ export default class ArticleList extends Vue {
   keyword = ''               // 搜索关键字
   loading = false            // 是否正在加载中
   tableHead = ['标题', '分类', '作者', '状态', '创建日期', '更新日期', '操作']
-  tableKeys = ['title', 'classify', 'author', 'state', 'createAt', 'updateAt']
+  tableKeys = ['title', ['classify', 'title'], ['author', 'account'], 'state', 'createAt', 'updateAt']
   page = 1                   
   pageSize = 20
   userId = ''
@@ -153,7 +153,7 @@ export default class ArticleList extends Vue {
 
         item.createAt = formatTime(item.createAt)
         item.updateAt = formatTime(item.updateAt)
-        item.author = item.author.account
+        item.state = item.state === 'draft' ? '草稿' : '发布'
 
         // // 分类转换
         // // item.classify = JSON.parse(JSON.stringify(this.classifies)).find(num => {

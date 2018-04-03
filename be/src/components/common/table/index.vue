@@ -27,7 +27,9 @@
           <tr v-for="(body, i) in tableBody" :key="i">
             <td v-if="needIndex" width="60">{{ index + i + 1 }}</td>  
             <td v-for="(key, j) in keys" :key="'k' + i + j">
-              {{ body[key] }}
+              {{
+                [].concat(key).reduce((_, subKey) => _ && _[subKey], body)
+              }}
             </td>
             <td>
               <slot :name="i"></slot>

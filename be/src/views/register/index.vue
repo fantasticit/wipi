@@ -91,26 +91,24 @@ export default class Register extends Vue {
   }
 
   async register() {
-    UserProvider.checkAccountExist(this.account)
-      .then(async () => {
-        return UserProvider.register({
-          account: this.account,
-          passwd: this.passwd
-        })
+    try {
+      await UserProvider.checkAccountExist(this.account)
+      await UserProvider.register({
+        account: this.account,
+        passwd: this.passwd
       })
-      .then(() => {
-        this.account = ''
-        this.passwd = ''
-        this.passwdConfirm = ''
-        return this.$confirm('您已注册成功，是否前往登录页', '提示')
-      })
-      .then(() => this.login())
-      .catch(err => {
-        const msg = err.message
-        if (msg) {
-          this.$message.error(msg)
-        }
-      })
+
+      this.account = ''
+      this.passwd = ''
+      this.passwdConfirm = ''
+      await this.$confirm('您已注册成功，是否前往登录页', '提示')
+      this.login()
+    } catch (err) {
+      const msg = err.message
+      if (msg) {
+        this.$message.error(msg)
+      }
+    }
   }
 
   login() {
