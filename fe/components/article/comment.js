@@ -17,7 +17,7 @@ class Comment extends Component {
       owner: 'mvpzx',
       admin: ['mvpzx'],
       id: this.props.articleId,      // Ensure uniqueness and length less than 50
-      distractionFreeMode: false  // Facebook-like distraction free mode
+      distractionFreeMode: false     // Facebook-like distraction free mode
     })
     
     gitalk.render(this.refs['comment'])

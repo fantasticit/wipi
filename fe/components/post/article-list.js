@@ -52,13 +52,13 @@ class ArticleList extends Component {
         }
       
         .cover {
-          height: 180px;
           margin-bottom: 22px;
         }
 
         .cover img {
           width: 100%;
-          height: 100%;
+          height: auto;
+          max-height: 340px;
           border-radius: 3px;
         }
 
