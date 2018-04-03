@@ -12,11 +12,13 @@ export default class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href="http://p39p1kvxn.bkt.clouddn.com/elapse.ico" />
           <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/default.min.css" />
           <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" />
+          <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
           <link rel="stylesheet" href="/_next/static/style.css" />
         </Head>
         <body>
           <Main />
           <NextScript />
+          <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
         </body>
       </html>
     )

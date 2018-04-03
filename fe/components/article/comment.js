@@ -5,21 +5,37 @@ class Comment extends Component {
     super()
   }
 
+  renderGitalk = () => {
+    if (!window || !window.Gitalk) {
+      return
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'a66db756e74c2d554722',
+      clientSecret: 'c7f17db5a023e29d8594f34cef58df96842f037c',
+      repo: 'elapse',
+      owner: 'mvpzx',
+      admin: ['mvpzx'],
+      id: this.props.articleId,      // Ensure uniqueness and length less than 50
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    
+    gitalk.render(this.refs['comment'])
+  }
+
   componentDidMount() {
-    (function(){ 
-      var appid = 'cytxVX5BF'; 
-      var conf = 'prod_df75302ea62218287af79dd8cc1baa4b'; 
-      var width = window.innerWidth || document.documentElement.clientWidth; 
-      if (width < 960) { 
-      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); 
+    this.renderGitalk();
+  }
+
+  componentDidUpdate() {
+    this.renderGitalk();
   }
 
   render() {
     const { articleId } = this.props
 
     return (
-      <div className="comment">
-        <div id="SOHUCS" sid={articleId} ></div> 
+      <div ref="comment" className="comment">
         <style jsx>{`
         .comment {
           min-height: 1px;
