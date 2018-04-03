@@ -74,15 +74,14 @@ module.exports =  (content, tags, parseHtml = false) => {
   var toc = [];
 
   const headingParse = function(text, level, raw) {
-    var anchor =
-      this.options.headerPrefix + raw.toLowerCase().replace(/[^\w]+/g, '-');
-    if (level >= 4 || level === 1)
-      return `<h${level} id="${anchor}">${text}</h${level}>\n`;
+    var anchor = this.options.headerPrefix + raw.toLowerCase().replace(/[^\w]+/g, '-');
     toc.push({
       anchor: `#header-${toc.length}`,
       level: level,
       text: text
     });
+    if (level >= 4 || level === 1)
+      return `<h${level} id="${anchor}">${text}</h${level}>\n`;
     return `<h${level} id="header-${toc.length - 1}">${text}</h${level}>\n`;
   };
 
