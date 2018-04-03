@@ -80,9 +80,7 @@ module.exports =  (content, tags, parseHtml = false) => {
       level: level,
       text: text
     });
-    if (level >= 4 || level === 1)
-      return `<h${level} id="${anchor}">${text}</h${level}>\n`;
-    return `<h${level} id="header-${toc.length - 1}">${text}</h${level}>\n`;
+    return `<h${level} id="header-${toc.length}">${text}</h${level}>\n`;
   };
 
   marked.setOptions({ sanitize: !parseHtml });

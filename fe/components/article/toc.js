@@ -12,7 +12,8 @@ class Toc extends Component {
   componentDidMount() {
     let toc = this.props.toc;
     let offsetTops = toc.map(item => {
-      return document.querySelector(`${item.anchor}`).offsetTop
+      let oHeader =  document.querySelector(`${item.anchor}`)
+      return oHeader && oHeader.offsetTop || 0
     })
 
     function minDiffrence(num) { // 最小差值
