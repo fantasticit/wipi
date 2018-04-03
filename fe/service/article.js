@@ -18,7 +18,6 @@ class ArticlerService {
   
     try {
       const res = await axios(req)
-      console.log(res)
       return res && res.data
     } catch (err) {
       throw new Error(err)

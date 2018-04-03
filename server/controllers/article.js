@@ -7,9 +7,18 @@ module.exports = app => {
 
   ArticleController.create = async ctx => {
     const req = ctx.request.body;
-    console.log(req.tags)
     const { html, toc } = app.service.marked(req.content)
     const result = await model.create({...req, html, toc, createAt: Date.now()})
+    return ctx.body = result;
+  }
+
+  ArticleController.updateById = async ctx => {
+    const req = ctx.request.body;
+    const { html, toc } = app.service.marked(req.content)
+
+    const result = await model.update({_id: ctx.params.id}, {
+      ...req, html, toc, updateAt: Date.now()
+    });
     return ctx.body = result;
   }
 

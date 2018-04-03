@@ -26,7 +26,6 @@ app.prepare().then(() => {
   })
 
   router.get('/post', async ctx => {
-    console.log(ctx.query)
     await app.render(ctx.req, ctx.res, '/post', ctx.query)
     ctx.respond = false
   })
