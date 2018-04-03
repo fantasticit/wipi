@@ -54,18 +54,18 @@
 ## 2. 笔记总结
 ### 2.1 Vue.js 篇
 
-- [Vue组件开发总结](https://github.com/mvpzx/elapse/blob/master/be/src/docs/Vue%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%E5%A7%BF%E5%8A%BF%E6%80%BB%E7%BB%93.md)
-- [Vue组件单元测试](https://github.com/mvpzx/vue-unit-test/blob/master/README.md)
-- [利用Promise做表单验证](https://github.com/mvpzx/elapse/blob/master/be/src/docs/%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81.md)
-- [上传组件开发以及上传到七牛云](https://github.com/mvpzx/elapse/blob/master/be/src/docs/%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6.md)
+- [Vue组件开发总结](./docs/Vue组件开发姿势总结.md)
+- [Vue组件单元测试](https://github.com/mvpzx/vue-unit-test)
+- [利用Promise做表单验证](./docs/表单验证.md)
+- [上传组件开发以及上传到七牛云](./docs/上传组件.md)
 
 ### 2.2 Koa2 篇
 
-- [一文入门koa2接口开发](https://github.com/mvpzx/elapse/blob/master/server/docs/koa2%E6%8E%A5%E5%8F%A3%E5%BC%80%E5%8F%91.md)
-- [使用koa2签发认证token](https://github.com/mvpzx/elapse/blob/master/server/docs/jwt%E7%AD%BE%E5%8F%91%E4%B8%8E%E8%AE%A4%E8%AF%81.md)
-- [使用log4js为koa2增加日志记录](https://github.com/mvpzx/elapse/blob/master/server/docs/%E6%97%A5%E5%BF%97%E4%B8%AD%E9%97%B4%E4%BB%B6.md)
+- [一文入门koa2接口开发](./docs/koa2接口开发.md)
+- [使用koa2签发认证token](./docs/jwt签发与认证.md)
+- [使用log4js为koa2增加日志记录](./docs/日志中间件.md)
 
 ### 2.3 部署篇
 
-- [页面部署与接口服务](https://github.com/mvpzx/elapse/tree/master/server/docs/页面部署与接口服务.md)
+- [页面部署与接口服务](./docs/页面部署与接口服务.md)
 
