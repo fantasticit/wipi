@@ -5,10 +5,10 @@
       <div class="ta-searcharea__item">
         <span>分类:</span>
         <ta-button 
-          v-for="(item, i) in [{ title: '全部', value: '' }, ...classifies]"
+          v-for="(item, i) in [{ title: '全部', value: '', _id: '' }, ...classifies]"
           :key="i"
-          :type="item.value === classify ? 'primary' : 'text'"
-          @click="setClassify(item.value)">
+          :type="(item._id === classify) ? 'primary' : 'text'"
+          @click="setClassify(item._id || '')">
           {{ item.title }}
         </ta-button>
       </div>

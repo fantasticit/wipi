@@ -1,21 +1,19 @@
-const koa = require('koa')
-const app = new koa()
-const port = require('./config').port
-const db = require('./mongodb/db')
-const middleWare = require('./middleware')
-const router = require('./router')
+const Koa = require('koa');
+const app = new Koa();
 
-middleWare(app)
-router(app)
+app.config = require('./config');
+app.model = require('./models');
+app.service = require('./service')(app.config);
+app.controller = require('./controllers')(app);
 
-app.listen(port, () => {
-  console.log('server is running at http://localhost:', port)
-})
+const withConnect = require('./connection');
+const withMiddleware = require('./middlewares');
+const withRouter = require('./router');
 
-// Todo: 前台设置
-//        1. SEO信息（基本信息）
-//        2. 统计代码
-//        3. 页面分类（即文章分类）
+withConnect(app)('mongodb');
+withMiddleware(app);
+withRouter(app);
 
-// Todo: 标签管理
-// Todo: 文章审核
+app.listen(app.config.port, () => {
+  console.log(`Server is running at http://localhost:${app.config.port}`)
+});

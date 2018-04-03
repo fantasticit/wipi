@@ -238,7 +238,7 @@ export default class Article extends Vue {
       cover: this.cover,
       content: this.content,
       classify: this.classify,
-      tags: this.selectedTags.map(tag => tag._id),
+      tags: this.selectedTags.filter(tag => !!tag && !!tag._id).map(tag => tag._id),
       state: this.state,
     })
 

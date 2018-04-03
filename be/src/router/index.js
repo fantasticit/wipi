@@ -18,11 +18,6 @@ const router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  window.document.title = '管理后台'
-  next()
-})
-
 // 登录拦截
 router.beforeEach((to, from, next) => {
   const hasLogined = JSON.parse(window.sessionStorage.getItem('hasLogined'))

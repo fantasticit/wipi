@@ -6,7 +6,7 @@ class _ArticleProvider extends BaseHttp {
     add: '/article',
     delete: '/article/',
     update: '/article/',
-    recent: '/article/publish/recent'
+    recent: '/article??page=1&pageSize=10&sort={"createAt": -1}'
   }
 
   constructor() {
@@ -69,7 +69,7 @@ class _ArticleProvider extends BaseHttp {
   }
 
   async fetchArticle(id) {
-    const req = { url: this.api.get + '/' + id, method: 'get' }
+    const req = { url: this.api.get + '/' + id + '?embedded={"tags": 1}', method: 'get' }
     try {
       const res = await this.http(req)
       return res.data

@@ -28,7 +28,9 @@ module.exports = app => {
     }
     delete req.userId;
 
-    req.tags && (req.tags = req.tags.split(','));
+    if (req.tags && (req.tags.length > 0)) {
+      req.tags = [...req.tags].filter(Boolean)
+    }
 
     if (req.content) {
       const { html, toc } = app.service.marked(req.content);

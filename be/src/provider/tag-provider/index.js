@@ -11,7 +11,7 @@ class _TagProvider extends BaseHttp {
 
   async getTags() {
     const req = {
-      url: this.api.tag + `?select={"title": 1, "value": 1}`,
+      url: this.api.tag,
       method: 'get',
     }
 

@@ -5,7 +5,7 @@ import { confirm } from '@/components/common/messagebox/index'
 
 const baseURL = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3000/api/v1/'
-  : 'http://193.112.102.204:3000'
+  : 'https://api.iamzx.cn/api/v1/'
 
 const instance = axios.create({
   timeout: 5000,
@@ -33,17 +33,8 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   res => {
-    console.log(res);
-
     if (/^2/.test(res.status)) {
-      if (
-        res.data.code === 'ok' 
-        || res.statusText === 'OK'
-      ) {
-        return res.data
-      } else {
-        throw new Error(res.data.message || '', 'info')
-      }
+      return res.data
     } else {
      throw new Error(res.data.message)
     }

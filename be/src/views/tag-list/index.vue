@@ -33,7 +33,7 @@ import { TagProvider } from '@/provider/tag-provider'
 })
 export default class TagList extends Vue {
   tableHead = ['标签名', '标签值', '创建日期', '更新日期', '操作']
-  keys = ['title', 'value', 'createdDate', 'updatedDate']
+  keys = ['title', 'value', 'createAt', 'updateAt']
   tags = []
 
   created() {
@@ -47,8 +47,8 @@ export default class TagList extends Vue {
       const res = await TagProvider.getTags()
 
       this.tags = res.map(tag => {
-        tag.createdDate = formatTime(tag.createdDate)
-        tag.updatedDate = formatTime(tag.updatedDate)
+        tag.createAt = formatTime(tag.createAt)
+        tag.updateAt = formatTime(tag.updateAt)
 
         return tag
       })
@@ -64,7 +64,7 @@ export default class TagList extends Vue {
   }
 
   async deleteTag(id) {
-    this.$confirm('此操作将删除标签，是否继续？', '删除标签', {})
+    this.$confirm('此操作将删除标签，是否继续？', '删除标签', { type: 'warning' })
       .then(async () => await TagProvider.deleteTag(id))
       .then(msg => {
         this.$message.success(msg)

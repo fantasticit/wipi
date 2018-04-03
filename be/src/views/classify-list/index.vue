@@ -32,7 +32,7 @@ import { ClassifyProvider } from '@/provider/classify-provider'
 @Component({})
 export default class ClassifyList extends Vue {
   tableHead = ['标签名', '标签值', '创建日期', '更新日期', '操作']
-  keys = ['title', 'value', 'createdDate', 'updatedDate']
+  keys = ['title', 'value', 'createAt', 'updateAt']
   classifies = []
   userId = ''
 
@@ -47,8 +47,8 @@ export default class ClassifyList extends Vue {
     try {
       const res = await ClassifyProvider.getClassifies()
       this.classifies = res.map(classify => {
-        classify.createdDate = formatTime(classify.createdDate)
-        classify.updatedDate = formatTime(classify.updatedDate)
+        classify.createAt = formatTime(classify.createAt)
+        classify.updateAt = formatTime(classify.updateAt)
 
         return classify
       })
@@ -64,7 +64,7 @@ export default class ClassifyList extends Vue {
   }
 
   async deleteClassify(id) {
-    this.$confirm('此操作将删除标签，是否继续？', '删除标签', {})
+    this.$confirm('此操作将删除标签，是否继续？', '删除标签', { type: 'warning' })
       .then(async () => await ClassifyProvider.deleteClassify(id, this.userId))
       .then(msg => {
         this.$message.success(msg)
