@@ -17,7 +17,7 @@ module.exports = app => {
     const { html, toc } = app.service.marked(req.content)
 
     const result = await model.update({_id: ctx.params.id}, {
-      ...req, html, toc, updateAt: Date.now()
+      ...req, html, toc, updateAt: new Date()
     });
     return ctx.body = result;
   }

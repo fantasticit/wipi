@@ -98,7 +98,7 @@ module.exports = model => (controller = {}) => {
       try {
         await model.update({_id: ctx.params.id}, {
           ...ctx.request.body,
-          updateAt: Date.now() 
+          updateAt: new Date() 
         });
         const result = await model.findById(id);
 

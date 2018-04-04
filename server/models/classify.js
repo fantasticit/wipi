@@ -25,7 +25,7 @@ classifySchema.index({ id: 1 });
 
 // 时间更新
 classifySchema.pre('findOneAndUpdate', function (next) {
-  this.findOneAndUpdate({}, { updateAt: Date.now() });
+  this.findOneAndUpdate({}, { updateAt: new Date() });
 });
 
 const Classify = mongoose.model('Classify', classifySchema)

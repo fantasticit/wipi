@@ -57,7 +57,7 @@ articleSchema.index({ id: 1 });
 
 // 时间更新
 articleSchema.pre('findOneAndUpdate', function (next) {
-  this.findOneAndUpdate({}, { updateAt: Date.now() });
+  this.findOneAndUpdate({}, { updateAt: new Date() });
 });
 
 const Article = mongoose.model('Article', articleSchema);

@@ -24,7 +24,7 @@ module.exports = {
   qiniu: {
     accessKey: 'qCuhQDHLx_XFQnvsVfpWlRdb1oYAHTY0fj28bxHu',
     secretKey: '2Rr3QAZd79rb_SnAr6wb2cVmaTo6MVM-_r-Ocn_6',
-    scope: 'coding-heart',
+    scope: 'cdn-iamzx-cn',
     expires: 7200
   },
 }
