@@ -22,10 +22,13 @@ class Article extends Component {
     return { article, recommedArticles }
   }
 
-  componentDidMount() {
+  setTitle = () => {
     const { article } = this.props
     document.title = `${article.title} | Mvpzx`
+  }
 
+  setMeta = () => {
+    const { article } = this.props;
     let oHead = document.querySelector('head');
     let oKeywordMeta = document.createElement('meta');
     let oDescMeta = document.createElement('meta');
@@ -42,7 +45,7 @@ class Article extends Component {
     oHead.appendChild(oDescMeta);
   }
 
-  componentWillUnmount() {
+  deleteMeta = () => {
     let oHead = document.querySelector('head');
     let oKeywordMeta = document.querySelector('#keywordMeta');
     let oDescMeta = document.querySelector('#descMeta');
@@ -51,6 +54,21 @@ class Article extends Component {
       oHead.removeChild(oKeywordMeta);
       oHead.removeChild(oDescMeta);
     } catch (e) {}
+  }
+
+  componentDidMount() {
+    this.setTitle();
+    this.setMeta();
+  }
+
+  componentDidUpdate() {
+    this.deleteMeta();
+    this.setTitle();
+    this.setMeta();
+  }
+
+  componentWillUnmount() {
+    this.deleteMeta();
   }
 
   render() {

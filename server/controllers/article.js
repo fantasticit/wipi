@@ -8,7 +8,7 @@ module.exports = app => {
   ArticleController.create = async ctx => {
     const req = ctx.request.body;
     const { html, toc } = app.service.marked(req.content)
-    const result = await model.create({...req, html, toc, createAt: Date.now()})
+    const result = await model.create({...req, html, toc, createAt: new Date()})
     return ctx.body = result;
   }
 

@@ -19,7 +19,7 @@ class Recommend extends Component {
             {articles.map((article, i) => (
               <li key={i} className={ article.cover ? 'with-cover' : '' }>
                 <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
-                  <a>
+                  <div>
                     { article.cover ? <img className="cover" src={article.cover} /> : '' }
                     <div>
                       <a className="title">{ article.title }</a>
@@ -31,7 +31,7 @@ class Recommend extends Component {
                         readingQuantity: article.readingQuantity,
                       }} />
                     </div>
-                  </a>
+                  </div>
                 </Link>
               </li>
             ))}
@@ -48,6 +48,7 @@ class Recommend extends Component {
           margin: 2rem 0;
           list-style: none;
           min-height: 130px;
+          cursor: pointer;
         }
 
         li.with-cover {
