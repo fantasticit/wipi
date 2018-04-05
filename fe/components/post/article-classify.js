@@ -44,7 +44,7 @@ class ArticleClassify extends Component {
           text-overflow: ellipsis;
         }
 
-        li:not(:first-of-type) {
+        li:not(:last-of-type) {
           border-bottom: 1px dashed #e5e5e5;
         }
 

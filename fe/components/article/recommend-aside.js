@@ -48,10 +48,6 @@ class RecommendAside extends Component {
           width: 100%;
         }
 
-        li:not(:last-of-type) {
-          border-bottom: 1px solid #DDDDDD;
-        }
-
         .title {
           margin: -7px 0 10px;
           display: inherit;
