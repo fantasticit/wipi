@@ -25,7 +25,7 @@ class Post extends Component {
   }
 
   static async getInitialProps({ query }) {
-    let tag = query.id;
+    let tag = query.tag;
     let classify = query.classify;
     let keyword = query.keyword;
     let conditions = {};
@@ -33,12 +33,12 @@ class Post extends Component {
 
     if (!!tag) {
       tag = await TagService.fetchTagByValue(tag);
-      conditions.tag = tag._id;
+      conditions.tag = tag && tag._id || '';
     }
 
     if (!!classify) {
       classify = await ClassifyService.fetchClassifyByValue(classify)
-      conditions.classify = classify._id;
+      conditions.classify = classify && classify._id || '';
     }
 
     if (!!keyword) {
@@ -49,7 +49,7 @@ class Post extends Component {
     const recentArticles = await ArticleService.fetchRecentArticles();
     const classifies = await ArticleService.fetchArticleClassifies();
 
-    return { articles, tag, recentArticles, classifies };
+    return { articles, tag, classify, recentArticles, classifies };
   }
 
   componentDidMount() {
@@ -91,7 +91,7 @@ class Post extends Component {
 
   render() {
     const { showAside } = this.state;
-    const { articles = [], tag, recentArticles, classifies } = this.props;
+    const { articles = [], tag, classify, recentArticles, classifies } = this.props;
 
     return(
       <Layout activeRoute={'/post'}>
@@ -99,8 +99,10 @@ class Post extends Component {
           <div className="articles">
             {
               tag && tag.title 
-                ? <div className="search-key">{ tag.title } 相关的文章</div> 
-                : ''
+                ? <div className="search-key">{ tag.title } 标签相关的文章</div> 
+                : classify && classify.title
+                  ? <div className="search-key">{ classify.title } 分类相关的文章</div> 
+                  : ''
             }
             {
               articles && articles.length > 0

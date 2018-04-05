@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import throttle from '../../util/throttle'
+import LinePanel from '../common/line-panel'
 
 class Toc extends Component {
   constructor() {
@@ -24,7 +25,10 @@ class Toc extends Component {
     window.addEventListener('scroll', throttle(() => {
       let scrollTop = document.documentElement.scrollTop ||
                       document.body.scrollTop;
-      this.setState({ activeIndex: minDiffrence(scrollTop) });
+      let activeIndex = minDiffrence(scrollTop);
+      let oTocItem = this.refs['item' + activeIndex]
+      this.setState({ activeIndex });
+      oTocItem && oTocItem.scrollIntoView();
     }, 200), false)
   }
 
@@ -34,10 +38,10 @@ class Toc extends Component {
 
     return (
       <div>
-        <p>目录</p>
+        <LinePanel title={'文章目录'} />
         <ul>
           {toc.map((item, i) => (
-            <li key={i} className={activeIndex === i ? 'is-active' : ''}
+            <li key={i} ref={'item' + i} className={activeIndex === i ? 'is-active' : ''}
               onClick={() => setTimeout(() => {
                 this.setState({ activeIndex: i })
               }, 210)}>
@@ -47,18 +51,27 @@ class Toc extends Component {
         </ul>
         <style jsx>{`
         div {
-          position: fixed;
+          overflow: hidden;
+          width: 240px;
         }
 
         ul {
           position: relative;
+          max-height: 300px;
+          overflow: auto;
+          padding-left: 16px;
+        }
+
+
+        ul::-webkit-scrollbar {
+          width: 0;
         }
 
         ul::before {
           content: "";
           position: absolute;
           top: 0;
-          left: 1px;
+          left: 17px;
           bottom: 0;
           width: 2px;
           background-color: #ebedef;

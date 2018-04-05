@@ -53,7 +53,7 @@ module.exports = app => {
   }
 
   ArticleController.getClassifyStats = async ctx => {
-    let articles = await model.find().populate('classify');
+    let articles = await model.find({ state: 'publish' }).populate('classify');
     let data = {};
 
     articles.forEach(article => {
@@ -79,8 +79,8 @@ module.exports = app => {
     let { articleId } = ctx.request.query;
     let recommendArticles = [];
 
-    let last = await model.find({"_id":{"$lt": articleId}}).limit(1);
-    let next = await model.find({"_id":{"$gt": articleId}}).limit(1);
+    let last = await model.find({"_id":{"$lt": articleId}, state: 'publish'}).limit(1);
+    let next = await model.find({"_id":{"$gt": articleId}, state: 'publish'}).limit(1);
 
     recommendArticles.push.apply(recommendArticles, last);
     recommendArticles.push.apply(recommendArticles,next);

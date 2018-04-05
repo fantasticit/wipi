@@ -24,8 +24,8 @@ class ArticleTags extends Component {
           {tags.filter(tag => tag && tag.value).map((tag, i) => (
             <li key={i}>
               <Link 
-                as={`/post/${tag.value}`} 
-                href={`/post?id=${tag.value}`}
+                as={`/post/tag/${tag.value}`} 
+                href={`/post/tag/?tag=${tag.value}`}
                 >
                 <a>
                   <span>{ tag.title }</span>

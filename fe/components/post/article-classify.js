@@ -19,8 +19,8 @@ class ArticleClassify extends Component {
         <ul>
           {Object.keys(classifies).map((key, i) => <li key={i}>
             <Link 
-              as={`/post/${classifies[key].classify.value}`} 
-              href={`/post?classify=${classifies[key].classify.value}`}
+              as={`/post/classify/${classifies[key].classify.value}`} 
+              href={`/post/classify/?classify=${classifies[key].classify.value}`}
             >
               <a>{ key }（{classifies[key].count}）</a>
             </Link>
@@ -37,12 +37,15 @@ class ArticleClassify extends Component {
         li {
           position: relative;
           padding: .5rem 0;
-          border-bottom: 1px dashed #e5e5e5;
           cursor: pointer;
 
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+        }
+
+        li:not(:first-of-type) {
+          border-bottom: 1px dashed #e5e5e5;
         }
 
         li.is-active {

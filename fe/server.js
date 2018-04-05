@@ -30,12 +30,12 @@ app.prepare().then(() => {
     ctx.respond = false
   })
 
-  router.get('/post/:id', async ctx => {
+  router.get('/post/tag/:tag', async ctx => {
     await app.render(ctx.req, ctx.res, '/post', ctx.params)
     ctx.respond = false
   })
 
-  router.get('/post/:classify', async ctx => {
+  router.get('/post/classify/:classify', async ctx => {
     await app.render(ctx.req, ctx.res, '/post', ctx.params)
     ctx.respond = false
   })

@@ -8,7 +8,8 @@ import Markdown from '../components/article/markdown'
 import Toc from '../components/article/toc'
 import Tags from '../components/article/tags'
 import Comment from '../components/article/comment'
-import Recommend from '../components/article/recommend'
+import Recommend from '../components/article/recommend';
+import RecommendAside from '../components/article/recommend-aside';
 import ArticlerService from '../service/article';
 
 class Article extends Component {
@@ -92,7 +93,10 @@ class Article extends Component {
               <Comment articleId={article._id} />
             </div>
             <div className="asidebar">
-              <Toc toc={article.toc} />
+              <nav>
+                <RecommendAside articles={recommedArticles} />
+                <Toc toc={article.toc} />
+              </nav>
             </div>
           </div>
         </div>
@@ -114,22 +118,33 @@ class Article extends Component {
         }
 
         .main-container {
-          display: flex;
+          position: relative;
+          padding-right: 260px;
         }
 
         .main-container .content {
           width: 100%;
-          flex: 1;
         }
 
         .main-container .asidebar {
+          position: absolute;
+          right: 0;
+          top: 0;
           width: 240px;
           margin-left: 20px;
+        }
+
+        .main-container .asidebar nav {
+          position: fixed;
         }
 
         @media (max-width: 768px) {
           .container {
             padding: 2rem 15px 3rem 15px;
+          }
+
+          .main-container {
+            padding-right: 0;
           }
 
           .main-container .asidebar {
