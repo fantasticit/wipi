@@ -37,19 +37,8 @@
   </ul>
 
   
-### 1.2 前端页面渲染
-借此机会想学习一下`React`，于是前端页面使用了React服务端渲染框架`nextjs`，并使用了`Redux`、`axios`以及`koa`(自定义服务所用)。前端页面目前比较简单，主要就是文章的读取和渲染。以下为截图：
-
-  <ul>
-    <li>
-      <p>前端首页</p>
-      <img src="http://ownsprds9.bkt.clouddn.com/fe-home.JPG" />
-    </li>
-    <li>
-      <p>文章详情</p>
-      <img src="http://ownsprds9.bkt.clouddn.com/fe-article.JPG" />
-    </li>
-  </ul>
+### 1.2 前台页面渲染
+借此机会想学习一下`React`，于是前端页面使用了React服务端渲染框架`nextjs`，并使用了`Redux`、`axios`以及`koa`(自定义服务所用)。前端页面目前比较简单，主要就是文章的读取和渲染。点击即可访问 <a href="https://iamzx.cn" target="_blank">前台页面</a>
 
 ## 2. 笔记总结
 ### 2.1 Vue.js 篇
