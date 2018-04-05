@@ -18,15 +18,21 @@ class Recommend extends Component {
           <ul>
             {articles.map((article, i) => (
               <li key={i} className={ article.cover ? 'with-cover' : '' }>
-                { article.cover ? <img className="cover" src={article.cover} /> : '' }
-                <a className="title">{ article.title }</a>
-                <p className="desc">{ article.desc }</p>
-                <Author author={{
-                  avatar: article.author.avatar,
-                  account: article.author.account,
-                  createAt: article.createAt,
-                  readingQuantity: article.readingQuantity,
-                }} />
+                <Link as={`/article/${article._id}`} href={`/article?id=${article._id}`}>
+                  <a>
+                    { article.cover ? <img className="cover" src={article.cover} /> : '' }
+                    <div>
+                      <a className="title">{ article.title }</a>
+                      <p className="desc">{ article.desc }</p>
+                      <Author author={{
+                        avatar: article.author.avatar,
+                        account: article.author.account,
+                        createAt: article.createAt,
+                        readingQuantity: article.readingQuantity,
+                      }} />
+                    </div>
+                  </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -37,7 +43,7 @@ class Recommend extends Component {
           background: #f5f5f5;
         }
 
-        li {
+        ul li {
           position: relative;
           margin: 2rem 0;
           list-style: none;

@@ -14,8 +14,10 @@ class Author extends Component {
       readingQuantity,
     } = this.props.author
 
+    const center = this.props.center || false;
+
     return (
-      <div className="author">
+      <div className={ center ? 'author text-center' : 'author' }>
         <span>{ formatTime(createAt) }</span>
         <span>阅读 { readingQuantity }</span>
         <style jsx>{`
@@ -23,6 +25,10 @@ class Author extends Component {
           font-size: 1rem;
           color: rgb(153, 153, 153);
           margin: 1.5rem 0;
+        }
+
+        .text-center {
+          text-align: center;
         }
 
         span + span {

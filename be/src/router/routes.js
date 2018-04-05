@@ -15,11 +15,11 @@ const routes = [
     component: views.Login
   },
 
-  {
-    path: '/register',
-    name: 'Register',
-    component: views.Register
-  },
+  // {
+  //   path: '/register',
+  //   name: 'Register',
+  //   component: views.Register
+  // },
 
   {
     path: '/forbidden',

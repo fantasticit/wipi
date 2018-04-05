@@ -62,7 +62,7 @@ class Article extends Component {
           <div className="main-container">
             <div className="content">
               <h1>{ article.title }</h1>
-              <Author author={{
+              <Author center={true} author={{
                 avatar: article.author.avatar,
                 account: article.author.account,
                 createAt: article.createAt,
