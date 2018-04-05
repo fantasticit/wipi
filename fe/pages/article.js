@@ -8,24 +8,53 @@ import Markdown from '../components/article/markdown'
 import Toc from '../components/article/toc'
 import Tags from '../components/article/tags'
 import Comment from '../components/article/comment'
+import Recommend from '../components/article/recommend'
+import ArticlerService from '../service/article';
 
 class Article extends Component {
   static async getInitialProps({ query }) {
     const articleId = query.id
     const article = await ArticleService.fetchArticleById(articleId)
+    const recommedArticles = await ArticlerService.fetchRecommendArticles(articleId)
     let readingQuantity = article.readingQuantity + 1;
     // 更新文章阅读量
     await ArticleService.updateArticle(article._id, { readingQuantity })
-    return { article }
+    return { article, recommedArticles }
   }
 
   componentDidMount() {
     const { article } = this.props
-    document.title = `${article.title} | CodingFun`
+    document.title = `${article.title} | Mvpzx`
+
+    let oHead = document.querySelector('head');
+    let oKeywordMeta = document.createElement('meta');
+    let oDescMeta = document.createElement('meta');
+
+    oKeywordMeta.setAttribute('id', 'keywordMeta');
+    oKeywordMeta.setAttribute('name', 'keyword');
+    oKeywordMeta.setAttribute('content', article.tags.map(tag => tag.title).join('，'));
+
+    oDescMeta.setAttribute('id', 'descMeta');
+    oDescMeta.setAttribute('name', 'description');
+    oDescMeta.setAttribute('content', article.desc);
+
+    oHead.appendChild(oKeywordMeta);
+    oHead.appendChild(oDescMeta);
+  }
+
+  componentWillUnmount() {
+    let oHead = document.querySelector('head');
+    let oKeywordMeta = document.querySelector('#keywordMeta');
+    let oDescMeta = document.querySelector('#descMeta');
+
+    try {
+      oHead.removeChild(oKeywordMeta);
+      oHead.removeChild(oDescMeta);
+    } catch (e) {}
   }
 
   render() {
-    const { article } = this.props
+    const { article, recommedArticles } = this.props
 
     return(
       <Layout>
@@ -49,6 +78,7 @@ class Article extends Component {
             </div>
           </div>
         </div>
+        <Recommend articles={recommedArticles} />
         <Backtop />
         <style jsx>{`
         .container {

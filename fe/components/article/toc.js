@@ -12,7 +12,7 @@ class Toc extends Component {
   componentDidMount() {
     let toc = this.props.toc;
     let offsetTops = toc.map(item => {
-      let oHeader =  document.querySelector(`${item.anchor}`)
+      let oHeader =  document.querySelector(`#${item.anchor}`)
       return oHeader && oHeader.offsetTop || 0
     })
 
@@ -29,6 +29,7 @@ class Toc extends Component {
   }
 
   render() {
+    const { activeIndex = '' } = this.state;
     const { toc = [] } = this.props;
 
     return (
@@ -36,11 +37,11 @@ class Toc extends Component {
         <p>目录</p>
         <ul>
           {toc.map((item, i) => (
-            <li key={i} className={this.state.activeIndex === i ? 'is-active' : ''}
+            <li key={i} className={activeIndex === i ? 'is-active' : ''}
               onClick={() => setTimeout(() => {
                 this.setState({ activeIndex: i })
               }, 210)}>
-              <a href={item.anchor} dangerouslySetInnerHTML={{__html: item.text}}></a>
+              <a className={'anchor-' + item.level} href={'#' + item.anchor}>{item.title}</a>
             </li>
           ))}
         </ul>

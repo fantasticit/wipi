@@ -18,16 +18,14 @@ module.exports = content => {
   const toc = [];
 
   renderer.heading = function (text, level) {
-    var anchor = text.toLowerCase().replace(/\s+/g, '-')
+    let anchor = 'heading-' + toc.length;
+
     toc.push({
       level: level,
-      anchor: pinyin(anchor, {
-        style: pinyin.STYLE_INITIALS, // 设置拼音风格 
-        heteronym: true
-      }),
+      anchor: anchor,
       title: text
     })
-    return `<h${level}><a href='#${anchor}' id='${anchor}' class='anchor'></a><a href='#${anchor}'>${text}</a></h${level}>`
+    return `<h${level}><a name='#${anchor}' id='${anchor}' class='anchor'></a><a href='#${anchor}'>${text}</a></h${level}>`
   }
 
   const marked = text => {

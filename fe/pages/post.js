@@ -52,7 +52,7 @@ class Post extends Component {
   }
 
   componentDidMount() {
-    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | CodingFun`;
+    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | Mvpzx`;
     const isMobile = (/mobile/ig).test(window.navigator.userAgent);
 
     if (isMobile) {
@@ -73,7 +73,7 @@ class Post extends Component {
   }
 
   componentDidUpdate() {
-    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | CodingFun`;
+    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | Mvpzx`;
   }
 
   toggleAside = () => {

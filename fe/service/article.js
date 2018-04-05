@@ -81,6 +81,22 @@ class ArticlerService {
       throw new Error(err)
     }
   }
+
+  // 获取推荐文章
+  static async fetchRecommendArticles(article) {
+    const req = {
+      url: `/article/recommend?articleId=${article}`,
+      method: 'get'
+    }
+
+    try {
+      // 只需要发出请求
+      const res = await axios(req)
+      return res.data
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
 }
 
 export default ArticlerService

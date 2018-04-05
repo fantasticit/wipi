@@ -49,8 +49,8 @@ class Bccktop extends Component {
         <style jsx>{`
         div {
           position: fixed;
-          right: 3rem;
-          bottom: 3rem;
+          right: 2rem;
+          bottom: 8rem;
           z-index: 300;
         
           width: 3rem;

@@ -220,7 +220,7 @@ export default class Article extends Vue {
       this.desc = article.desc
       this.content = article['content']
       this.classify = article.classify
-      this.selectedTags = article.tags.map(tag => ({ title: tag.title, value: tag.value }))
+      this.selectedTags = article.tags
       this.cover = article.cover
       this.state = article.state
     } catch (err) {
@@ -232,6 +232,8 @@ export default class Article extends Vue {
 
   // 发布文章前的转换
   publish() {
+    console.log(this.selectedTags);
+
     const article = Object.assign({}, {
       title: this.title,
       desc: this.desc,
@@ -303,7 +305,7 @@ export default class Article extends Vue {
       try {
         const res = await ArticleProvider.updateArticle(article, this.articleId, this.userId)
         this.$message.success(res)
-        this.$router.replace('/article/new')
+        this.$router.go(-1);
       } catch (err) {
         this.$message.error(err.message)
       } finally {

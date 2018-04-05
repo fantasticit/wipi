@@ -63,7 +63,7 @@ class Header extends Component {
         <div className="container">
           <Link href={'/post'}>
             <a className="logo">
-              <img src="http://p39p1kvxn.bkt.clouddn.com/elapse.svg" />
+              <img src="https://cdn.iamzx.cn/elapse.svg" />
               <span>Coding...</span>
             </a>
           </Link>

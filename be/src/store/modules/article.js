@@ -9,7 +9,7 @@ const state = {
     { value: 'draft', title: '草稿' }, 
     { value: 'publish', title: '发布' },
   ],                     // 文章状态
-  coverPrefix: 'http://p39p1kvxn.bkt.clouddn.com/', // 上传图片网址前缀
+  coverPrefix: 'https://cdn.iamzx.cn/', // 上传图片网址前缀
 }
 
 const actions = {

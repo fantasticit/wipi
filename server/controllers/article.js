@@ -70,5 +70,23 @@ module.exports = app => {
     ctx.body = { status: 'ok', data };
   }
 
+  /**
+   * 获取推荐文章
+   * 目前(2018-04-05)做的是前后文章
+   * @param {*} ctx 
+   */
+  ArticleController.getRecommendArticles = async ctx => {
+    let { articleId } = ctx.request.query;
+    let recommendArticles = [];
+
+    let last = await model.find({"_id":{"$lt": articleId}}).limit(1);
+    let next = await model.find({"_id":{"$gt": articleId}}).limit(1);
+
+    recommendArticles.push.apply(recommendArticles, last);
+    recommendArticles.push.apply(recommendArticles,next);
+
+    ctx.body = { status: 'ok', data: recommendArticles.filter(Boolean) };
+  }
+
   return ArticleController
 }

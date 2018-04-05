@@ -23,7 +23,6 @@ class Author extends Component {
           font-size: 1rem;
           color: rgb(153, 153, 153);
           margin: 1.5rem 0;
-          text-align: center;
         }
 
         span + span {
