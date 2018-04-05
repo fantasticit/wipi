@@ -37,6 +37,7 @@ class Post extends Component {
     }
 
     if (!!classify) {
+      classify = await ClassifyService.fetchClassifyByValue(classify)
       conditions.classify = classify._id;
     }
 

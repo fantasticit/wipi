@@ -51,7 +51,7 @@ class Recommend extends Component {
         }
 
         li.with-cover {
-          padding-right: 150px;
+          padding-right: 180px;
         }
 
         li::after {
