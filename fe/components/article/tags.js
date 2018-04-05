@@ -14,8 +14,8 @@ class Tags extends Component {
         <i className="ion-ios-pricetags" />
         {tags.map((tag, i) => {
           return <Link 
-                  as={`/post/${tag.value}`} 
-                  href={`/post?id=${tag.value}`}
+                  as={`/post/tag/${tag.value}`} 
+                  href={`/post/tag?tag=${tag.value}`}
                   key={i}
                   >
                   <a>
