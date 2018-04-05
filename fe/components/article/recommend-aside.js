@@ -44,6 +44,10 @@ class RecommendAside extends Component {
           cursor: pointer;
         }
 
+        li + li {
+          margin-top: 1rem;
+        }
+
         li div {
           width: 100%;
         }
