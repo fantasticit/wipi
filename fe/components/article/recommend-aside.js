@@ -45,7 +45,7 @@ class RecommendAside extends Component {
         }
 
         li + li {
-          margin-top: 1rem;
+          margin-top: 1.5rem;
         }
 
         li div {
