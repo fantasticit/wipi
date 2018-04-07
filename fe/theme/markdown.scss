@@ -222,12 +222,12 @@
       visibility: hidden;
     }
     h2 {
-      margin: 0 0 0.8em;
+      margin: 32px 0 0.8em;
       padding-bottom: 0.7em;
       border-bottom: 1px solid #ddd;
     }
     h3 {
-      margin: 0 0 1.2em;
+      margin: 35px 0 1.2em;
       line-height: 1.5;
       position: relative;
     }
@@ -264,7 +264,7 @@
       display: block;
       position: relative;
       visibility: hidden;
-      height: 1.5em;
+      height: 60px;
     }
 
     p a {
@@ -313,6 +313,12 @@
       background-color: #f8f8f8;
       -webkit-font-smoothing: initial;
       padding: 1.2em 1.4em;
+    }
+
+    code {
+      &::-webkit-scrollbar-track {
+        background: #f8f8f8;
+      }
     }
     
     code.lang-go:before,

@@ -25,7 +25,7 @@ module.exports = content => {
       anchor: anchor,
       title: text
     })
-    return `<h${level}><a name='#${anchor}' id='${anchor}' class='anchor'></a><a href='#${anchor}'>${text}</a></h${level}>`
+    return `<h${level} id="${anchor}">${text}</h${level}>`
   }
 
   const marked = text => {

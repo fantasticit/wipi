@@ -10,26 +10,37 @@ class Toc extends Component {
     };
   }
 
-  componentDidMount() {
+  handleToc = () => {
     let toc = this.props.toc;
     let offsetTops = toc.map(item => {
       let oHeader =  document.querySelector(`#${item.anchor}`)
       return oHeader && oHeader.offsetTop || 0
     })
+    let clientHeight = document.documentElement.clientHeight ||
+                       document.body.clientHeight;
 
-    function minDiffrence(num) { // 最小差值
-      let diffrences = offsetTops.map(offset => Math.abs(offset - num))
-      return diffrences.indexOf(Math.min.apply(null, diffrences))
-    }
-    
-    window.addEventListener('scroll', throttle(() => {
+    function minDiffrence() { // 最小差值
       let scrollTop = document.documentElement.scrollTop ||
                       document.body.scrollTop;
-      let activeIndex = minDiffrence(scrollTop);
-      let oTocItem = this.refs['item' + activeIndex]
-      this.setState({ activeIndex });
-      oTocItem && oTocItem.scrollIntoView();
-    }, 200), false)
+      let data = (offsetTops.map(offsetTop => {
+        return Math.abs(offsetTop - scrollTop)
+      }))
+      
+      return data.indexOf(Math.min.apply(null, data))
+    }
+
+    let activeIndex = minDiffrence();
+    let oTocItem = this.refs['item' + activeIndex]
+    this.setState({ activeIndex });
+    oTocItem && oTocItem.scrollIntoView();
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', throttle(this.handleToc, 160), false)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleToc, false)
   }
 
   render() {
@@ -42,10 +53,12 @@ class Toc extends Component {
         <ul>
           {toc.map((item, i) => (
             <li key={i} ref={'item' + i} className={activeIndex === i ? 'is-active' : ''}
-              onClick={() => setTimeout(() => {
-                this.setState({ activeIndex: i })
-              }, 210)}>
-              <a className={'anchor-' + item.level} href={'#' + item.anchor}>{item.title}</a>
+              onClick={() => setTimeout(this.setState({ activeIndex: i }), 210)}>
+              <a
+                className={'level-' + item.level}
+                href={'#' + item.anchor}
+                style={ { marginLeft: ((item.level - 1) * 15 + 'px')} }
+              >{item.title}</a>
             </li>
           ))}
         </ul>
@@ -57,9 +70,9 @@ class Toc extends Component {
 
         ul {
           position: relative;
-          max-height: 300px;
+          max-height: 240px;
           overflow: auto;
-          padding-left: 16px;
+          font-size: 0;
         }
 
 
@@ -67,23 +80,14 @@ class Toc extends Component {
           width: 0;
         }
 
-        ul::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 17px;
-          bottom: 0;
-          width: 2px;
-          background-color: #ebedef;
-          opacity: .5;
-        }
-
         li {
+          margin: 0;
           font-weight: 500;
           color: #000;
-          font-size: 1.167rem;
-          line-height: 1.3;
+          font-size: 1rem;
           list-style: none;
+          padding-left: 10px;
+          border-left: 1px solid #ebedef;
           transition: all ease .3s;
         }
 
@@ -93,14 +97,16 @@ class Toc extends Component {
 
         li.is-active {
           background-color: #ebedef;
+          border-left: 2px solid #007fff;
         }
 
         li a {
           position: relative;
-          display: block;
+          display: inline-block;
           color: inherit;
-          margin: 6px 0;
           padding: 4px 0 4px 21px;
+          line-height: 1.5;
+          vertical-align: middle;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -112,11 +118,11 @@ class Toc extends Component {
           top: 50%;
           left: 0;
           transform: translate(0, -50%);
+          border-radius: 50%;
 
           width: 4px;
           height: 4px;
           background-color: currentColor;
-          border-radius: 50%;
         }
         `}</style>
       </div>
