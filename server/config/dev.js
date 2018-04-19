@@ -22,9 +22,9 @@ module.exports = {
     prefix: '/api/v1/'
   },
   qiniu: {
-    accessKey: 'qCuhQDHLx_XFQnvsVfpWlRdb1oYAHTY0fj28bxHu',
-    secretKey: '2Rr3QAZd79rb_SnAr6wb2cVmaTo6MVM-_r-Ocn_6',
-    scope: 'cdn-iamzx-cn',
+    accessKey: '',
+    secretKey: '',
+    scope: '',
     expires: 7200
   },
 }
