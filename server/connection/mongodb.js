@@ -3,7 +3,14 @@ const mongoose = require('mongoose');
 module.exports = app => {
   const config = app.config.mongodb;
 
-  const url = `mongodb://${config.user}:${config.pwd}@${config.host}:${config.port}/${config.name}`;
+  let url
+  
+  if (!config.user || !config.pwd) {
+    url = `mongodb://${config.host}:${config.port}/${config.name}`
+  } else {
+    url = `mongodb://${config.user}:${config.pwd}@${config.host}:${config.port}/${config.name}`
+  }
+  
   const options = {
     reconnectTries: Number.MAX_VALUE,
     reconnectInterval: 500
