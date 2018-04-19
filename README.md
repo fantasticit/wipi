@@ -8,6 +8,14 @@
   - 接口服务使用Koa2 + mongodb + mongoose
   - 后端管理使用Vue开发
   - 前端页面使用React服务端渲染框架`nextjs`
+  
+
+运行环境：
+  <ul>
+   <li>node-v: v9.4.0</li>
+   <li>mongod --version: db version v2.6.10</li>
+  </ul>
+
 
 ## 0. 如何运行
 ### 0.1 运行接口服务
