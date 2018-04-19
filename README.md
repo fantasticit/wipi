@@ -10,9 +10,8 @@
   - 前端页面使用React服务端渲染框架`nextjs`
   
 
-
+运行环境:
   <ul>
-  <p>运行环境</p>
    <li>node-v: v9.4.0</li>
    <li>mongod --version: db version v2.6.10</li>
   </ul>
