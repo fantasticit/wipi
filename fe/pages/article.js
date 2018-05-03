@@ -8,16 +8,16 @@ import Markdown from '../components/article/markdown'
 import Toc from '../components/article/toc'
 import Tags from '../components/article/tags'
 import Comment from '../components/article/comment'
-import Recommend from '../components/article/recommend';
-import RecommendAside from '../components/article/recommend-aside';
-import ArticlerService from '../service/article';
+import Recommend from '../components/article/recommend'
+import RecommendAside from '../components/article/recommend-aside'
+import ArticlerService from '../service/article'
 
 class Article extends Component {
   static async getInitialProps({ query }) {
     const articleId = query.id
     const article = await ArticleService.fetchArticleById(articleId)
     const recommedArticles = await ArticlerService.fetchRecommendArticles(articleId)
-    let readingQuantity = article.readingQuantity + 1;
+    let readingQuantity = article.readingQuantity + 1
     // 更新文章阅读量
     await ArticleService.updateArticle(article._id, { readingQuantity })
     return { article, recommedArticles }
@@ -29,65 +29,68 @@ class Article extends Component {
   }
 
   setMeta = () => {
-    const { article } = this.props;
-    let oHead = document.querySelector('head');
-    let oKeywordMeta = document.createElement('meta');
-    let oDescMeta = document.createElement('meta');
+    const { article } = this.props
+    let oHead = document.querySelector('head')
+    let oKeywordMeta = document.createElement('meta')
+    let oDescMeta = document.createElement('meta')
 
-    oKeywordMeta.setAttribute('id', 'keywordMeta');
-    oKeywordMeta.setAttribute('name', 'keyword');
-    oKeywordMeta.setAttribute('content', article.tags.map(tag => tag.title).join('，'));
+    oKeywordMeta.setAttribute('id', 'keywordMeta')
+    oKeywordMeta.setAttribute('name', 'keyword')
+    oKeywordMeta.setAttribute('content', article.tags.map(tag => tag.title).join('，'))
 
-    oDescMeta.setAttribute('id', 'descMeta');
-    oDescMeta.setAttribute('name', 'description');
-    oDescMeta.setAttribute('content', article.desc);
+    oDescMeta.setAttribute('id', 'descMeta')
+    oDescMeta.setAttribute('name', 'description')
+    oDescMeta.setAttribute('content', article.desc)
 
-    oHead.appendChild(oKeywordMeta);
-    oHead.appendChild(oDescMeta);
+    oHead.appendChild(oKeywordMeta)
+    oHead.appendChild(oDescMeta)
   }
 
   deleteMeta = () => {
-    let oHead = document.querySelector('head');
-    let oKeywordMeta = document.querySelector('#keywordMeta');
-    let oDescMeta = document.querySelector('#descMeta');
+    let oHead = document.querySelector('head')
+    let oKeywordMeta = document.querySelector('#keywordMeta')
+    let oDescMeta = document.querySelector('#descMeta')
 
     try {
-      oHead.removeChild(oKeywordMeta);
-      oHead.removeChild(oDescMeta);
+      oHead.removeChild(oKeywordMeta)
+      oHead.removeChild(oDescMeta)
     } catch (e) {}
   }
 
   componentDidMount() {
-    this.setTitle();
-    this.setMeta();
+    this.setTitle()
+    this.setMeta()
   }
 
   componentDidUpdate() {
-    this.deleteMeta();
-    this.setTitle();
-    this.setMeta();
+    this.deleteMeta()
+    this.setTitle()
+    this.setMeta()
   }
 
   componentWillUnmount() {
-    this.deleteMeta();
+    this.deleteMeta()
   }
 
   render() {
     const { article, recommedArticles } = this.props
 
-    return(
+    return (
       <Layout>
         <div className="container">
           <div className="main-container">
             <div className="content">
-              <h1>{ article.title }</h1>
-              <Author center={true} author={{
-                avatar: article.author.avatar,
-                account: article.author.account,
-                createAt: article.createAt,
-                readingQuantity: article.readingQuantity,
-              }} />
-              { article.cover ? <Cover cover={article.cover} />: ''}
+              <h1>{article.title}</h1>
+              <Author
+                center={true}
+                author={{
+                  avatar: article.author.avatar,
+                  account: article.author.account,
+                  createAt: article.createAt,
+                  readingQuantity: article.readingQuantity
+                }}
+              />
+              {article.cover ? <Cover cover={article.cover} /> : ''}
               <Markdown content={article.html} />
               <Tags tags={article.tags} />
               <Comment articleId={article._id} />
@@ -103,54 +106,54 @@ class Article extends Component {
         <Recommend articles={recommedArticles} />
         <Backtop />
         <style jsx>{`
-        .container {
-          padding: 2rem 0 3rem 0;
-          font-size: 16px;
-        }
-
-        h1 {
-          color: rgb(0, 0, 0);
-          font-weight: 200;
-          font-size: 32px;
-          margin: 0;
-          margin-bottom: 30px;
-          text-align: center;
-        }
-
-        .main-container {
-          position: relative;
-          padding-right: 260px;
-        }
-
-        .main-container .content {
-          width: 100%;
-        }
-
-        .main-container .asidebar {
-          position: absolute;
-          right: 0;
-          top: 0;
-          width: 240px;
-          margin-left: 20px;
-        }
-
-        .main-container .asidebar nav {
-          position: fixed;
-        }
-
-        @media (max-width: 768px) {
           .container {
-            padding: 2rem 15px 3rem 15px;
+            padding: 2rem 0 3rem 0;
+            font-size: 16px;
+          }
+
+          h1 {
+            color: rgb(0, 0, 0);
+            font-weight: 200;
+            font-size: 32px;
+            margin: 0;
+            margin-bottom: 30px;
+            text-align: center;
           }
 
           .main-container {
-            padding-right: 0;
+            position: relative;
+            padding-right: 260px;
+          }
+
+          .main-container .content {
+            width: 100%;
           }
 
           .main-container .asidebar {
-            display: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 240px;
+            margin-left: 20px;
           }
-        }
+
+          .main-container .asidebar nav {
+            position: relative;
+          }
+
+          @media (max-width: 768px) {
+            .container {
+              padding: 2rem 15px 3rem 15px;
+            }
+
+            .main-container {
+              padding-right: 0;
+            }
+
+            .main-container .asidebar {
+              display: none;
+            }
+          }
         `}</style>
       </Layout>
     )
