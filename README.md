@@ -49,7 +49,6 @@
 ### 2.1 Vue.js 篇
 
 - [Vue组件开发总结](./docs/Vue组件开发姿势总结.md)
-- [Vue组件单元测试](https://github.com/mvpzx/vue-unit-test)
 - [利用Promise做表单验证](./docs/表单验证.md)
 - [上传组件开发以及上传到七牛云](./docs/上传组件.md)
 
