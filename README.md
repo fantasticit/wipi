@@ -1,4 +1,4 @@
-<h1><img src="./logo.svg" height="240"></h1>
+<p align="center"><img src="./logo.svg" width="300"></p>
 
 > 流水衷曲，韶华飞逝
 
