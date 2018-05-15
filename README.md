@@ -1,5 +1,7 @@
 <p align="center"><img src="./logo.svg" width="300"></p>
 
+<h2 align="center"></h2>
+
 > 流水衷曲，韶华飞逝
 
 线上地址：[https://iamzx.cn](https://iamzx.cn)
@@ -9,12 +11,6 @@
   - 接口服务使用Koa2 + mongodb + mongoose
   - 后端管理使用Vue开发
   - 前端页面使用React服务端渲染框架`nextjs`
-
-
-## -1. 运行环境:
-
-  - node-v: v9.4.0
-  - mongod --version: db version v2.6.10
 
 ## 0. 如何运行
 ### 0.1 运行接口服务
