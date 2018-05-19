@@ -1,12 +1,10 @@
 import axios from 'axios'
 
-const baseURL = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:3000/api/v1/'
-  : 'https://api.iamzx.cn/api/v1/'
+const baseURL = process.env.NODE_ENV === 'development' ? 'https://api.iamzx.cn/api/v1/' : 'https://api.iamzx.cn/api/v1/'
 
 const instance = axios.create({
   timeout: 5000,
-  baseURL,
+  baseURL
 })
 
 instance.interceptors.request.use(
@@ -24,11 +22,10 @@ instance.interceptors.response.use(
     if (res.status === 200) {
       return (res && res.data) || ''
     } else {
-     throw new Error(res.data.message)
+      throw new Error(res.data.message)
     }
   },
-  err => {
-  }
+  err => {}
 )
 
 export default instance

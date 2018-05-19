@@ -60,7 +60,6 @@ class Header extends Component {
     let lastTop = this.state.lastTop
     ;(function(context) {
       const currentScroll = document.documentElement.scrollTop || document.body.scrollTop
-      console.log(currentScroll, '-', lastTop)
       if (currentScroll < 20 || currentScroll > lastTop) {
         context.setState({ position: 'relative' })
       } else {
@@ -72,11 +71,11 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.toggleHeaderPosition, false)
+    // window.addEventListener('scroll', this.toggleHeaderPosition, false)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.toggleHeaderPosition, false)
+    // window.removeEventListener('scroll', this.toggleHeaderPosition, false)
   }
 
   render() {

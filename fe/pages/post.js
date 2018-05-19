@@ -9,6 +9,7 @@ import TagService from '../service/tag'
 
 import LinePanel from '../components/common/line-panel'
 import Layout from '../components/common/layout'
+import Footer from '../components/common/footer'
 import ArticleTags from '../components/post/article-tags'
 import RecentArricles from '../components/post/recent-articles'
 import ArticleClassify from '../components/post/article-classify'
@@ -53,7 +54,7 @@ class Post extends Component {
   }
 
   componentDidMount() {
-    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | Mvpzx`
+    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | Hyiron`
     const isMobile = /mobile/gi.test(window.navigator.userAgent)
 
     if (isMobile) {
@@ -95,34 +96,44 @@ class Post extends Component {
     const { articles = [], tag, classify, recentArticles, classifies } = this.props
 
     return (
-      <Layout activeRoute={'/post'}>
-        <div className="container page">
-          <div className="articles">
-            {tag && tag.title ? (
-              <div className="search-key">{tag.title} 标签相关的文章</div>
-            ) : classify && classify.title ? (
-              <div className="search-key">{classify.title} 分类相关的文章</div>
-            ) : (
-              ''
-            )}
-            {articles && articles.length > 0 ? (
-              <ul>{articles.map((article, i) => <ArticleList article={article} key={i} />)}</ul>
-            ) : (
-              <p className="tip">暂无文章</p>
-            )}
-          </div>
-          <aside className={showAside ? 'is-active' : ''}>
-            <div ref="aside">
-              <RecentArricles articles={recentArticles} />
-              <ArticleClassify classifies={classifies} />
-              <ArticleTags />
+      <div>
+        <Layout noFooter={true} activeRoute={'/post'}>
+          <div className="container page">
+            <div className="articles">
+              {tag && tag.title ? (
+                <div className="search-key">{tag.title} 标签相关的文章</div>
+              ) : classify && classify.title ? (
+                <div className="search-key">{classify.title} 分类相关的文章</div>
+              ) : (
+                ''
+              )}
+              {articles && articles.length > 0 ? (
+                <ul>{articles.map((article, i) => <ArticleList article={article} key={i} />)}</ul>
+              ) : (
+                <p className="tip">暂无文章</p>
+              )}
             </div>
-          </aside>
-          {/* <div className={showAside ? 'm-fbtn is-close' : 'm-fbtn'} onClick={() => this.toggleAside()}>
+
+            {/* <aside className={showAside ? 'is-active' : ''}>
+            <div ref="aside">
+              
+            </div>
+          </aside> */}
+            {/* <div className={showAside ? 'm-fbtn is-close' : 'm-fbtn'} onClick={() => this.toggleAside()}>
             <i className="ion-plus-round" /> onClick={() => this.toggleAside()}
           </div> */}
+          </div>
+        </Layout>
+        <div className="articles-meta">
+          <div className="container">
+            <RecentArricles articles={recentArticles} />
+            <ArticleClassify classifies={classifies} />
+            <ArticleTags />
+          </div>
+          <div className="cover" />
         </div>
-      </Layout>
+        <Footer />
+      </div>
     )
   }
 }

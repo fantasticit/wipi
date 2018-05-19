@@ -16,65 +16,65 @@ class ArticleTags extends Component {
     if (tags.length <= 0) {
       this.props.fetchTags()
     }
-    
-    return(
+
+    return (
       <div>
-        <LinePanel title={'文章标签'} />
+        <LinePanel color={'#ddd'} title={'文章标签'} />
         <ul>
           {tags.filter(tag => tag && tag.value).map((tag, i) => (
             <li key={i}>
-              <Link 
-                as={`/post/tag/${tag.value}`} 
-                href={`/post/tag/?tag=${tag.value}`}
-                >
+              <Link as={`/post/tag/${tag.value}`} href={`/post/tag/?tag=${tag.value}`}>
                 <a>
-                  <span>{ tag.title }</span>
+                  <span>{tag.title}</span>
                 </a>
               </Link>
             </li>
           ))}
         </ul>
         <style jsx>{`
-        ul {
-          color: #333;
-          font-size: 1.15rem;
-          list-style: none;
-          padding-left: 16px;
-        }
+          ul {
+            color: #c6c7c9;
+            font-size: 1.15rem;
+            list-style: none;
+            padding-left: 16px;
+          }
 
-        ul::after {
-          content: '';
-          display: table;
-          clear: both;
-        }
+          ul::after {
+            content: '';
+            display: table;
+            clear: both;
+          }
 
-        li {
-          float: left;
-          list-style: none;
-          margin-right: 10px;
-          margin-top: 5px;
-        }
+          li {
+            float: left;
+            list-style: none;
+            margin-right: 10px;
+            margin-top: 5px;
+          }
 
-        a {
-          position: relative;
-          display: block;
-          border: 1px solid #e5e5e5;
-          border-radius: 34px;
-          font-size: 1rem;
-          color: #242f35;
-          padding: 8px 10px;
-          transition: all ease .3s;
-        }
+          a {
+            position: relative;
+            display: block;
+            border: 1px solid #e5e5e5;
+            border-radius: 34px;
+            font-size: 1rem;
+            color: #fff;
+            padding: 8px 10px;
+            transition: all ease 0.3s;
+          }
 
-  
-        a::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-        }
+          a:hover {
+            color: #fff;
+          }
+
+          a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          }
         `}</style>
       </div>
     )

@@ -20,28 +20,23 @@ class Layout extends Component {
   }
 
   render() {
-    const { activeRoute } = this.props
+    const { activeRoute, noFooter = false } = this.props
 
     return (
       <div className="view-page">
         <Header activeRoute={activeRoute} />
-        <main>
-        { this.props.children }
-        </main>
-        <Footer />
+        <main>{this.props.children}</main>
+        {noFooter ? '' : <Footer />}
         <style jsx>{`
-        .view-page {
-          display: flex;
-          flex-direction: column;
-          min-height: 100vh;
-        }
+          .view-page {
+            display: flex;
+            flex-direction: column;
+          }
 
-        main {
-          margin-top: 5rem;
-          flex: 1;
-          position: relative;
-          overflow: auto;
-        }
+          main {
+            position: relative;
+            overflow: auto;
+          }
         `}</style>
       </div>
     )

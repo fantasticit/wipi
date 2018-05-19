@@ -25,7 +25,7 @@ class Article extends Component {
 
   setTitle = () => {
     const { article } = this.props
-    document.title = `${article.title} | Mvpzx`
+    document.title = `${article.title} | Hyiron`
   }
 
   setMeta = () => {
