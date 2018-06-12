@@ -8,7 +8,7 @@ const http = axios.create({
   baseURL
 })
 
-let api = `/article?sort={%22createAt%22:%20-1}`
+let api = `/article?conditions={"state":"publish"}&sort={%22createAt%22:%20-1}`
 
 module.exports = async () => {
   try {
