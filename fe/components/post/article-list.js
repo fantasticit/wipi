@@ -18,13 +18,9 @@ class ArticleList extends Component {
               </h2>
               <p className="desc">{article.desc}</p>
             </div>
-            {article.cover ? (
-              <div className="cover">
-                <img src={article.cover} />
-              </div>
-            ) : (
-              ''
-            )}
+            <div className="cover">
+              { article.cover ? <img src={article.cover} /> : '' }
+            </div>
             <div className="meta"># {article.classify.title}</div>
           </a>
         </Link>

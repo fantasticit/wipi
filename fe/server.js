@@ -2,6 +2,9 @@ const Koa = require('koa')
 const next = require('next')
 const KoaRouter = require('koa-router')
 
+const getRSS = require('./rss')
+const getSiteMap = require('./sitemap')
+
 const port = parseInt(process.env.PORT, 10) || 4000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -23,6 +26,20 @@ app.prepare().then(() => {
   router.get('/', async ctx => {
     await app.render(ctx.req, ctx.res, '/post', ctx.query)
     ctx.respond = false
+  })
+
+  router.get('/sitemap', async ctx => {
+    ctx.set({
+      "content-type": "application/xml"
+    })
+    return ctx.body = await getSiteMap()
+  })
+
+  router.get('/rss.xml', async ctx => {
+    ctx.set({
+      "content-type": "application/xml"
+    })
+    return ctx.body = await getRSS()
   })
 
   router.get('/post', async ctx => {

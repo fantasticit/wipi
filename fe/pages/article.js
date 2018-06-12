@@ -11,6 +11,7 @@ import Comment from '../components/article/comment'
 import Recommend from '../components/article/recommend'
 import RecommendAside from '../components/article/recommend-aside'
 import ArticlerService from '../service/article'
+import { formatTime } from '../util/format-time'
 
 class Article extends Component {
   static async getInitialProps({ query }) {
@@ -76,11 +77,17 @@ class Article extends Component {
     const { article, recommedArticles } = this.props
 
     return (
-      <Layout>
+      <Layout wrapper={`
+      <h1>${article.title}</h1>
+      <div class="author text-center">
+        <span>${formatTime(article.createAt)}</span>
+        <span> 阅读 ${article.readingQuantity}</span>
+      </div>
+      `} cover={article.cover ? article.cover : 'https://cdn.iamzx.cn/background-cover1.png'}>
         <div className="container">
           <div className="main-container">
             <div className="content">
-              <h1>{article.title}</h1>
+              {/* <h1>{article.title}</h1>
               <Author
                 center={true}
                 author={{
@@ -89,18 +96,17 @@ class Article extends Component {
                   createAt: article.createAt,
                   readingQuantity: article.readingQuantity
                 }}
-              />
-              {article.cover ? <Cover cover={article.cover} /> : ''}
+              /> */}
               <Markdown content={article.html} />
               <Tags tags={article.tags} />
               <Comment articleId={article._id} />
             </div>
-            <div className="asidebar">
+            {/* <div className="asidebar">
               <nav>
                 <RecommendAside articles={recommedArticles} />
                 <Toc toc={article.toc} />
               </nav>
-            </div>
+            </div> */}
           </div>
         </div>
         <Recommend articles={recommedArticles} />
@@ -122,7 +128,7 @@ class Article extends Component {
 
           .main-container {
             position: relative;
-            padding-right: 260px;
+            padding-right: 0px;
           }
 
           .main-container .content {
@@ -138,7 +144,7 @@ class Article extends Component {
           }
 
           .main-container .asidebar nav {
-            position: relative;
+            position: fixed;
           }
 
           @media (max-width: 768px) {

@@ -15,7 +15,7 @@ class ArticleClassify extends Component {
 
     return (
       <div>
-        <LinePanel color={'#ddd'} title={'文章分类'} />
+        <LinePanel color={'#333'} title={'文章分类'} />
         <ul>
           {Object.keys(classifies).map((key, i) => (
             <li key={i}>
@@ -33,7 +33,7 @@ class ArticleClassify extends Component {
         <style jsx>{`
           ul {
             list-style: none;
-            color: #c6c7c9;
+            color: #333;
             font-size: 1.15rem;
             padding-left: 16px;
           }

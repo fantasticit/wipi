@@ -19,7 +19,7 @@ class ArticleTags extends Component {
 
     return (
       <div>
-        <LinePanel color={'#ddd'} title={'文章标签'} />
+        <LinePanel color={'#333'} title={'文章标签'} />
         <ul>
           {tags.filter(tag => tag && tag.value).map((tag, i) => (
             <li key={i}>
@@ -33,7 +33,7 @@ class ArticleTags extends Component {
         </ul>
         <style jsx>{`
           ul {
-            color: #c6c7c9;
+            color: #333;
             font-size: 1.15rem;
             list-style: none;
             padding-left: 16px;
@@ -58,7 +58,6 @@ class ArticleTags extends Component {
             border: 1px solid #e5e5e5;
             border-radius: 34px;
             font-size: 1rem;
-            color: #fff;
             padding: 8px 10px;
             transition: all ease 0.3s;
           }

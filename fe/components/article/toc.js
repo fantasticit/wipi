@@ -31,7 +31,7 @@ class Toc extends Component {
     let activeIndex = minDiffrence()
     let oTocItem = this.refs['item' + activeIndex]
     this.setState({ activeIndex })
-    // oTocItem && oTocItem.scrollIntoView()
+    oTocItem && oTocItem.scrollIntoView()
   }
 
   componentDidMount() {

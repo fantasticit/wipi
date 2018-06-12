@@ -18,7 +18,7 @@ class ArticlerService {
   
     try {
       const res = await axios(req)
-      return res && res.data
+      return res && res.data || []
     } catch (err) {
       throw new Error(err)
     }
@@ -76,7 +76,7 @@ class ArticlerService {
     try {
       // 只需要发出请求
       const res = await axios(req)
-      return res.data
+      return res && res.data || []
     } catch (err) {
       throw new Error(err)
     }

@@ -1,8 +1,10 @@
 .container.page {
   position: relative;
   margin: 20px auto;
-  // padding-right: 22rem;
   padding-bottom: 3rem;
+
+  display: flex;
+  justify-content: space-between;
 }
 
 .search-key {
@@ -24,43 +26,40 @@
   background: #fff;
 }
 
-.articles-meta {
-  position: relative;
-  padding: 2rem 0;
-  color: #fff;
-  background-image: url(https://assets-cdn.shimo.im/assets/images/home/index/pic05-c39de888ff.jpg);
-  background-size: cover;
-  background-position: center;
+// .articles-meta {
+//   position: relative;
+//   padding: 2rem 0;
+//   color: #fff;
+//   background-image: url(https://assets-cdn.shimo.im/assets/images/home/index/pic05-c39de888ff.jpg);
+//   background-size: cover;
+//   background-position: center;
 
-  .cover {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
+//   .cover {
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     width: 100%;
+//     height: 100%;
+//   }
 
-  .cover {
-    background: rgba(0, 0, 0, 0.5);
-  }
+//   .cover {
+//     background: rgba(0, 0, 0, 0.5);
+//   }
 
-  .container {
-    position: relative;
-    z-index: 1;
-  }
+//   .container {
+//     position: relative;
+//     z-index: 1;
+//   }
 
-  @media (max-width: 768px) {
-    .container {
-      padding: 0 15px;
-    }
-  }
-}
+//   @media (max-width: 768px) {
+//     .container {
+//       padding: 0 15px;
+//     }
+//   }
+// }
 
 aside {
-  position: absolute;
-  right: 0;
-  top: -10px;
-
+  box-sizing: border-box;
   width: 240px;
 }
 
@@ -70,55 +69,14 @@ aside > div.is-fix {
   width: 240px;
 }
 
-.m-fbtn {
-  display: none;
-  position: fixed;
-  right: 2rem;
-  bottom: 5rem;
-  z-index: 1000;
-
-  width: 2.67rem;
-  height: 2.67rem;
-  border-radius: 50%;
-  background: #000;
-  color: #fff;
-  font-size: 16px;
-  text-align: center;
-  line-height: 2.84rem;
-}
-
-.m-fbtn.is-close {
-  transform: rotate(45deg);
-}
 
 @media (max-width: 768px) {
   .container.page {
-    padding: 0 15px 3rem 15px;
-  }
-
-  .m-fbtn {
-    display: block;
-    transition: all ease 0.3s;
+    flex-direction: column;
   }
 
   aside {
-    box-sizing: border-box;
-    position: fixed;
-    left: 0;
-    top: -100%;
-    z-index: -100;
-    background: #fff;
-
-    width: 100vw;
-    height: 0;
-    transition: all ease 0.3s;
-  }
-
-  aside.is-active {
-    top: 5rem;
-    z-index: 100;
-    height: calc(100vh - 5rem);
-    overflow: auto;
-    padding: 20px 15px 0 15px;
+    width: 100%;
+    padding: 0 15px;
   }
 }

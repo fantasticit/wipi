@@ -18,6 +18,9 @@ class Footer extends Component {
               <a href="mailto:bken2016@163.com" target="_blank">
                 <i className="ion-android-mail" />
               </a>
+              <a href="/rss.xml" target="_blank">
+                <i className="ion-social-rss" />
+              </a>
             </div>
           </div>
         </footer>

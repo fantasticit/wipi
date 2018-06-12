@@ -79,8 +79,9 @@ class Header extends Component {
   }
 
   render() {
-    const { activeRoute } = this.props
+    const { activeRoute, cover = 'https://cdn.iamzx.cn/background-cover1.png', wrapper } = this.props
     const { position, showInput } = this.state
+
 
     return (
       <header style={{ position: position }}>
@@ -104,6 +105,8 @@ class Header extends Component {
             </ClickOutside>
           </div>
         </div>
+        <div className="cover" style={{ backgroundImage: `url(${cover})` }}></div>
+        <div className="header-wrapper" dangerouslySetInnerHTML={{ __html: wrapper }}></div>
         <style jsx>{`
           header {
             position: fixed;
@@ -113,7 +116,9 @@ class Header extends Component {
             z-index: 250;
             color: #909090;
             background: #fff;
-            height: 5rem;
+            height: 50vh;
+            min-height: 5rem;
+            max-height: 52rem;
           }
 
           header::after {
@@ -131,19 +136,20 @@ class Header extends Component {
           .container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            
             overflow: hidden;
-            height: 100%;
+            padding: 1rem 0;
+            color: #fff;
           }
 
           @media (max-width: 768px) {
             .container {
-              padding: 0 1rem;
+              padding: 1rem 1rem;
             }
           }
 
           .logo {
-            display: flex;
+            display: inline-flex;
             justify-content: center;
             align-items: center;
           }
@@ -186,11 +192,48 @@ class Header extends Component {
             border: 0;
             border-bottom: 1px solid #eee;
             padding: 8px 1px;
+            color: #fff;
+          }
+
+          .search input::placeholder {
+            color: #fff;
           }
 
           .search input.is-active {
             width: 100%;
             right: 0;
+          }
+
+          .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+
+          .cover::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            content: '';
+            background-color: rgba(0, 0, 0, .25);
+          }
+
+          .header-wrapper {
+            max-width: 80%;
+            padding-top: 5%;
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+            font-size: 1.5rem;
           }
         `}</style>
       </header>

@@ -14,7 +14,7 @@ class Recommend extends Component {
     return (
       <div className="recommend">
         <div className="container">
-          <LinePanel color={'#676b6f'} title={'推荐文章'} />
+          <LinePanel color={'#ccc'} title={'推荐文章'} />
           <ul>
             {articles.map((article, i) => (
               <li key={i} className={article.cover ? 'with-cover' : ''}>

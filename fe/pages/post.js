@@ -14,6 +14,7 @@ import ArticleTags from '../components/post/article-tags'
 import RecentArricles from '../components/post/recent-articles'
 import ArticleClassify from '../components/post/article-classify'
 import ArticleList from '../components/post/article-list'
+import Backtop from '../components/common/backtop'
 
 import '../theme/pages/post.scss'
 
@@ -47,6 +48,7 @@ class Post extends Component {
     }
 
     articles = await ArticleService.fetchArticles(conditions)
+
     const recentArticles = await ArticleService.fetchRecentArticles()
     const classifies = await ArticleService.fetchArticleClassifies()
 
@@ -76,7 +78,7 @@ class Post extends Component {
   }
 
   componentDidUpdate() {
-    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | Mvpzx`
+    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | Hyiron`
   }
 
   toggleAside = () => {
@@ -97,7 +99,10 @@ class Post extends Component {
 
     return (
       <div>
-        <Layout noFooter={true} activeRoute={'/post'}>
+        <Layout noFooter={true} activeRoute={'/post'} wrapper={`
+        <a href="/"><h2>Explore in every moment of the cudgel thinking</h2></a>
+        <h4>在每一个苦思冥想的瞬间求知</h4>
+        `}>
           <div className="container page">
             <div className="articles">
               {tag && tag.title ? (
@@ -114,24 +119,27 @@ class Post extends Component {
               )}
             </div>
 
-            {/* <aside className={showAside ? 'is-active' : ''}>
-            <div ref="aside">
-              
-            </div>
-          </aside> */}
+            <aside className={showAside ? 'is-active' : ''}>
+              <div ref="aside">
+                <RecentArricles articles={recentArticles} />
+                <ArticleClassify classifies={classifies} />
+                <ArticleTags />
+              </div>
+            </aside>
             {/* <div className={showAside ? 'm-fbtn is-close' : 'm-fbtn'} onClick={() => this.toggleAside()}>
             <i className="ion-plus-round" /> onClick={() => this.toggleAside()}
           </div> */}
           </div>
+          <Backtop />
         </Layout>
-        <div className="articles-meta">
+        {/* <div className="articles-meta">
           <div className="container">
             <RecentArricles articles={recentArticles} />
             <ArticleClassify classifies={classifies} />
             <ArticleTags />
           </div>
           <div className="cover" />
-        </div>
+        </div> */}
         <Footer />
       </div>
     )

@@ -20,11 +20,11 @@ class Layout extends Component {
   }
 
   render() {
-    const { activeRoute, noFooter = false } = this.props
+    const { activeRoute, cover, wrapper, noFooter = false } = this.props
 
     return (
       <div className="view-page">
-        <Header activeRoute={activeRoute} />
+        <Header activeRoute={activeRoute} cover={cover} wrapper={wrapper} />
         <main>{this.props.children}</main>
         {noFooter ? '' : <Footer />}
         <style jsx>{`

@@ -15,7 +15,7 @@ class RecentArticles extends Component {
 
     return (
       <div>
-        <LinePanel color={'#ddd'} title={'最新文章'} />
+        <LinePanel color={'#333'} title={'最新文章'} />
         <ul>
           {articles.map((article, i) => (
             <li key={i}>
@@ -31,7 +31,7 @@ class RecentArticles extends Component {
         <style jsx>{`
           ul {
             list-style: none;
-            color: #c6c7c9;
+            color: #333;
             font-size: 1.15rem;
             padding-left: 16px;
           }
