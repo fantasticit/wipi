@@ -1,5 +1,5 @@
 # 前言
-临近毕业，写了个简单个人博客，项目地址是[点我访问项目地址](https://github.com/mvpzx/elapse)（顺便求star），本篇是系列总结第一篇。接下来会一步一步模仿一个低配版的[Element 的`对话框`和`弹框`组件](http://element.eleme.io/#/zh-CN/component/message-box)。
+临近毕业，写了个简单个人博客，项目地址是[点我访问项目地址](https://github.com/hyiron/elapse)（顺便求star），本篇是系列总结第一篇。接下来会一步一步模仿一个低配版的[Element 的`对话框`和`弹框`组件](http://element.eleme.io/#/zh-CN/component/message-box)。
 
 # 正文
 ## Vue 单文件组件开发
