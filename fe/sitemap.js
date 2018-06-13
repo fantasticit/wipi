@@ -21,7 +21,7 @@ module.exports = async () => {
     let body = data.reduce((accu, curr) => {
       accu += `  <url>\r\n`
       accu += `    <loc>${siteURL}/article/${curr._id}</loc>\r\n`
-      accu += `    <lastmod>${(curr.updateAt)}</lastmod>\r\n`
+      accu += `    <lastmod>${(curr.createAt)}</lastmod>\r\n`
       accu += `    <priority>0.6</priority>\r\n`
       accu += `  </url>\r\n`
 
