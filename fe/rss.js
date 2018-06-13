@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 const baseURL = process.env.NODE_ENV === 'development' ? 'https://api.iamzx.cn/api/v1/' : 'https://api.iamzx.cn/api/v1/'
-const siteURL = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'https://iamzx.cn'
+const siteURL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'https://iamzx.cn'
 
 const http = axios.create({
   timeout: 5000,
@@ -23,7 +23,7 @@ module.exports = async () => {
       <atom:link href="${siteURL}/rss.xml" rel="self"/>
       <language>zh-cn</language>\r\n`
     let body = data.reduce((accu, curr) => {
-      let date = new Date(curr.updateAt).toUTCString()
+      let date = new Date(curr.createAt).toUTCString()
       let content = curr.html.replace(/&/g, '&amp;')
                                         .replace(/</g, '&lt;')
                                         .replace(/>/g, '&gt;')
@@ -34,7 +34,7 @@ module.exports = async () => {
       accu += `      <link>${siteURL}/article/${curr._id}</link>\r\n`
       accu += `      <description>${content}</description>\r\n`
       accu += `      <pubDate>${date}</pubDate>\r\n`
-      accu += `      <guid>${siteURL}/post/${curr._id}</guid>\r\n`
+      accu += `      <guid>${siteURL}/article/${curr._id}</guid>\r\n`
       accu += `    </item>\r\n`
 
       return accu
