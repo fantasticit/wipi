@@ -41,7 +41,10 @@
 - router: 路由配置，其中`generateRoutes`将读取`app.model`和`app.controller`完成通用路由配置
 - service: 服务代码（可以理解成`util`），将挂载到`app.service`
 
-### 1.2 如何运行
+### 1.2 重要的事
+请将`config`下相关配置按照您的运行环境进行修改。
+
+### 1.3 如何运行
 
 ```
 # 开发模式
