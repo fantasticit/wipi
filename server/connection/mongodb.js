@@ -22,7 +22,7 @@ module.exports = app => {
   const db = mongoose.connection;
 
   db.once('open', () => console.log('数据库连接成功'));
-  db.on('error', () => {
+  db.on('error', (err) => {
     console.log('数据库连接错误：', err);
     mongoose.disconnect();
   });
