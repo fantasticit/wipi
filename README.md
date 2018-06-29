@@ -10,7 +10,8 @@
   - 接口服务使用Koa2 + mongodb + mongoose
   - 后端管理使用Vue开发
   - 前端页面使用React服务端渲染框架`nextjs`
-
+  
+  
 ## 0. 如何运行
 ### 0.1 运行接口服务
 打开 `server` 项目修改 `server/config` 下的相关配置，尤其是 `mongodb` 的配置，然后运行 `npm run dev` 即可
