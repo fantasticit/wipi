@@ -3,7 +3,7 @@ module.exports = (app, router) => {
 
   Object.keys(app.controller).forEach(key => {
     if (!app.model[key]) {
-      console.info(`未找到与 ${key} Controller 对应的 ${key} Model`)
+      console.info(`未找到与 ${key} Controller 对应的 ${key} Model（这并不影响项目的运行）`)
     } else {
       const modelUrl = `/${key}`;
       const itemUrl = `/${key}/:id`;
