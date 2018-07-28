@@ -5,8 +5,7 @@ const routes = [
   {
     path: '/',
     component: views.Home,
-    children: [
-    ]
+    children: []
   },
 
   {
@@ -15,11 +14,11 @@ const routes = [
     component: views.Login
   },
 
-  // {
-  //   path: '/register',
-  //   name: 'Register',
-  //   component: views.Register
-  // },
+  {
+    path: '/register',
+    name: 'Register',
+    component: views.Register
+  },
 
   {
     path: '/forbidden',
@@ -31,7 +30,7 @@ const routes = [
     path: '*',
     name: 'NotFound',
     component: views.NotFound
-  },
+  }
 ]
 
 routeConfig.map(route => {
@@ -52,8 +51,8 @@ routes[0].children.push(
     component: views.Article,
     meta: {
       prefix: '文章管理',
-      title: '编辑文章',
-    },
+      title: '编辑文章'
+    }
   },
 
   {
@@ -62,8 +61,8 @@ routes[0].children.push(
     component: views.Tag,
     meta: {
       prefix: '标签管理',
-      title: '编辑标签',
-    },
+      title: '编辑标签'
+    }
   },
 
   {
@@ -72,9 +71,9 @@ routes[0].children.push(
     component: views.Classify,
     meta: {
       prefix: '分类管理',
-      title: '编辑分类',
-    },
-  },
+      title: '编辑分类'
+    }
+  }
 )
 
 export default routes

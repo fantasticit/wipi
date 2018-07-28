@@ -14,13 +14,13 @@ class About extends Component {
   }
 
   componentDidMount() {
-    document.title = `关于 | Mvpzx`
+    document.title = `关于 | Justemit`
   }
 
   render() {
     const { slogan, contacts, demos } = this.props
 
-    return(
+    return (
       <Layout activeRoute={'/about'}>
         <div className="container">
           <Author />
@@ -55,8 +55,7 @@ const mapStateToProps = ({ author }) => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return {
-  }
+  return {}
 }
 
 export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(About)

@@ -1,7 +1,13 @@
 const axios = require('axios')
 
-const baseURL = process.env.NODE_ENV === 'development' ? 'https://api.iamzx.cn/api/v1/' : 'https://api.iamzx.cn/api/v1/'
-const siteURL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'https://iamzx.cn'
+const baseURL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/api/v1/'
+    : 'https://api.iamzx.cn/api/v1/'
+const siteURL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:4000'
+    : 'https://iamzx.cn'
 
 const http = axios.create({
   timeout: 5000,
@@ -24,11 +30,12 @@ module.exports = async () => {
       <language>zh-cn</language>\r\n`
     let body = data.reduce((accu, curr) => {
       let date = new Date(curr.createAt).toUTCString()
-      let content = curr.html.replace(/&/g, '&amp;')
-                                        .replace(/</g, '&lt;')
-                                        .replace(/>/g, '&gt;')
-                                        .replace(/"/g, '&quot;')
-                                        .replace(/'/g, '&apos;')
+      let content = curr.html
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;')
       accu += `    <item>\r\n`
       accu += `      <title>${curr.title}</title>\r\n`
       accu += `      <link>${siteURL}/article/${curr._id}</link>\r\n`
@@ -43,8 +50,9 @@ module.exports = async () => {
     let tail = `  </channel>
     </rss>`
 
-    let getUpdatedDate = date => `    <lastBuildDate>${date}</lastBuildDate>\r\n`
-    return (head + getUpdatedDate(new Date().toUTCString()) + body + tail)
+    let getUpdatedDate = date =>
+      `    <lastBuildDate>${date}</lastBuildDate>\r\n`
+    return head + getUpdatedDate(new Date().toUTCString()) + body + tail
   } catch (err) {
     return 'Opps, some error occured!'
   }

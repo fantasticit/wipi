@@ -12,7 +12,7 @@ class Footer extends Component {
           <div className="container">
             <div>&copy; {new Date().getFullYear()} 皖ICP备18005737号</div>
             <div>
-              <a href="https://github.com/hyiron" target="_blank">
+              <a href="https://github.com/justemit" target="_blank">
                 <i className="ion-social-github" />
               </a>
               <a href="mailto:bken2016@163.com" target="_blank">

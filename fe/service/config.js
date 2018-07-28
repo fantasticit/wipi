@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const baseURL = process.env.NODE_ENV === 'development' ? 'https://api.iamzx.cn/api/v1/' : 'https://api.iamzx.cn/api/v1/'
+const baseURL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/api/v1/'
+    : 'https://api.iamzx.cn/api/v1/'
 
 const instance = axios.create({
   timeout: 5000,

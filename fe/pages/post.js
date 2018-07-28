@@ -56,7 +56,9 @@ class Post extends Component {
   }
 
   componentDidMount() {
-    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | Hyiron`
+    document.title = `${
+      this.props.tag ? this.props.tag.title : '首页'
+    } | Justemit`
     const isMobile = /mobile/gi.test(window.navigator.userAgent)
 
     if (isMobile) {
@@ -78,7 +80,9 @@ class Post extends Component {
   }
 
   componentDidUpdate() {
-    document.title = `${this.props.tag ? this.props.tag.title : '首页'} | Hyiron`
+    document.title = `${
+      this.props.tag ? this.props.tag.title : '首页'
+    } | Hyiron`
   }
 
   toggleAside = () => {
@@ -95,25 +99,41 @@ class Post extends Component {
 
   render() {
     const { showAside } = this.state
-    const { articles = [], tag, classify, recentArticles, classifies } = this.props
+    const {
+      articles = [],
+      tag,
+      classify,
+      recentArticles,
+      classifies
+    } = this.props
 
     return (
       <div>
-        <Layout noFooter={true} activeRoute={'/post'} wrapper={`
+        <Layout
+          noFooter={true}
+          activeRoute={'/post'}
+          wrapper={`
         <a href="/"><h2>Explore in every moment of the cudgel thinking</h2></a>
         <h4>在每一个苦思冥想的瞬间求知</h4>
-        `}>
+        `}
+        >
           <div className="container page">
             <div className="articles">
               {tag && tag.title ? (
                 <div className="search-key">{tag.title} 标签相关的文章</div>
               ) : classify && classify.title ? (
-                <div className="search-key">{classify.title} 分类相关的文章</div>
+                <div className="search-key">
+                  {classify.title} 分类相关的文章
+                </div>
               ) : (
                 ''
               )}
               {articles && articles.length > 0 ? (
-                <ul>{articles.map((article, i) => <ArticleList article={article} key={i} />)}</ul>
+                <ul>
+                  {articles.map((article, i) => (
+                    <ArticleList article={article} key={i} />
+                  ))}
+                </ul>
               ) : (
                 <p className="tip">暂无文章</p>
               )}

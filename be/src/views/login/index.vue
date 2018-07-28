@@ -16,10 +16,10 @@
           登录
         </ta-button>
       </ta-form>
-      <!-- <div class="register">
+      <div class="register">
         <span>没有帐号？</span>
         <router-link to="/register">立即注册</router-link>
-      </div> -->
+      </div>
     </div>
 
     <ul class="ta-bubbles">

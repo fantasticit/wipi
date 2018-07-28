@@ -17,7 +17,9 @@ class Article extends Component {
   static async getInitialProps({ query }) {
     const articleId = query.id
     const article = await ArticleService.fetchArticleById(articleId)
-    const recommedArticles = await ArticlerService.fetchRecommendArticles(articleId)
+    const recommedArticles = await ArticlerService.fetchRecommendArticles(
+      articleId
+    )
     let readingQuantity = article.readingQuantity + 1
     // 更新文章阅读量
     await ArticleService.updateArticle(article._id, { readingQuantity })
@@ -26,7 +28,7 @@ class Article extends Component {
 
   setTitle = () => {
     const { article } = this.props
-    document.title = `${article.title} | Hyiron`
+    document.title = `${article.title} | Justemit`
   }
 
   setMeta = () => {
@@ -37,7 +39,10 @@ class Article extends Component {
 
     oKeywordMeta.setAttribute('id', 'keywordMeta')
     oKeywordMeta.setAttribute('name', 'keyword')
-    oKeywordMeta.setAttribute('content', article.tags.map(tag => tag.title).join('，'))
+    oKeywordMeta.setAttribute(
+      'content',
+      article.tags.map(tag => tag.title).join('，')
+    )
 
     oDescMeta.setAttribute('id', 'descMeta')
     oDescMeta.setAttribute('name', 'description')
@@ -77,13 +82,20 @@ class Article extends Component {
     const { article, recommedArticles } = this.props
 
     return (
-      <Layout wrapper={`
+      <Layout
+        wrapper={`
       <h1>${article.title}</h1>
       <div class="author text-center">
         <span>${formatTime(article.createAt)}</span>
         <span> 阅读 ${article.readingQuantity}</span>
       </div>
-      `} cover={article.cover ? article.cover : 'https://cdn.iamzx.cn/background-cover1.png'}>
+      `}
+        cover={
+          article.cover
+            ? article.cover
+            : 'https://cdn.iamzx.cn/background-cover1.png'
+        }
+      >
         <div className="container">
           <div className="main-container">
             <div className="content">
