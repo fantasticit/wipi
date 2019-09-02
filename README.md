@@ -4,7 +4,7 @@
 
 > 流水衷曲，韶华飞逝
 
-此项目不再更新，推荐查看重构后的新项目[plarum](https://github.com/justemit/plarum)。
+# 此项目不再更新，推荐查看重构后的新项目[plarum](https://github.com/justemit/plarum)。
 
 前后端分离 + 服务端渲染的博客系统。其中：
 
