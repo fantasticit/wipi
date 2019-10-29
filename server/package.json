@@ -19,7 +19,7 @@
     "koa-router": "^7.4.0",
     "koa2-cors": "^2.0.5",
     "marked": "^0.3.17",
-    "mongoose": "^5.0.10",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.17.2",
     "pinyin": "^2.8.3",
     "qiniu": "^7.1.3"
