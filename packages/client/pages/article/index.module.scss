@@ -1,0 +1,145 @@
+.container {
+  margin-top: 40px;
+  // background-color: var(--bg-second);
+}
+
+.meta {
+  text-align: center;
+
+  .title {
+    margin: 0.67em 0 0;
+    font-size: 2.5rem;
+    line-height: 1rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--main-text-color);
+    text-align: center;
+  }
+
+  .desc {
+    font-style: italic;
+    color: var(--second-text-color);
+    margin-bottom: 1.2em;
+    text-align: center;
+  }
+
+  .coverWrapper {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+
+    img {
+      display: inline-block;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.contentWrapper {
+  position: relative;
+
+  .content {
+    background: var(--bg);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+
+    .articleFooter {
+      margin-top: 30px;
+      border-top: 1px dashed var(--border-color);
+      padding: 21px 0;
+      color: var(--second-text-color);
+      line-height: 28px;
+
+      .articleInfo {
+        blockquote {
+          display: block;
+          width: 100%;
+          font-size: 14px;
+          color: var(--disable-text-color);
+          border: 1px solid var(--border-color);
+          border-left: 4px solid var(--disable-text-color);
+          padding: 12px 24px 12px 12px;
+          background-color: var(--bg-second);
+          position: relative;
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+
+      .tags {
+        width: 100%;
+        display: flex;
+        // justify-content: center;
+
+        .tag {
+          display: inline-flex;
+          align-items: center;
+          color: var(--second-text-color);
+          background-color: var(--bg-second);
+          border: 1px solid var(--border-color);
+          padding: 0 8px;
+          border-radius: 2px;
+          font-size: 14px;
+          text-decoration: none;
+
+          &:hover {
+            color: #fff;
+            background-color: var(--primary-color);
+          }
+
+          & + .tag {
+            margin-left: 0.8rem;
+          }
+
+          span {
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .markdown {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 48px;
+    }
+  }
+
+  .widget {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 21px 30px;
+    margin-bottom: 24px;
+  }
+
+  .anchorWidget {
+    position: absolute;
+    right: 0;
+    top: 0;
+    max-width: 150px;
+    font-size: 1.167rem;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 1196px) {
+    .anchorWidget,
+    .widget {
+      display: none;
+    }
+  }
+}

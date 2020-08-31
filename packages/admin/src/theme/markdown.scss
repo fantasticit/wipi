@@ -1,0 +1,309 @@
+:global {
+  .markdown {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    color: var(--main-text-color) !important;
+    background-color: var(--bg) !important;
+
+    i,
+    cite,
+    em,
+    var,
+    address,
+    dfn {
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    p {
+      margin: 10px 0;
+      color: inherit;
+    }
+
+    > h1:first-of-type,
+    > div > div:first-of-type h1 {
+      margin-top: 14px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 700;
+      color: var(--main-text-color);
+    }
+
+    h1 {
+      font-size: 24px;
+      min-height: 28px;
+      line-height: 28px;
+      border-bottom: 3px double #999;
+      margin: 52px 0 15px 0;
+      padding-bottom: 7px;
+    }
+
+    h2 {
+      font-size: 22px;
+      min-height: 23px;
+      line-height: 23px;
+      border-bottom: 1px solid #dbdbdb;
+      margin: 20px 0 13px 0;
+      padding-bottom: 7px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin: 18px 0 2px;
+    }
+
+    h4 {
+      font-size: 18px;
+      margin: 10px 0 2px;
+    }
+
+    h3,
+    h4 {
+      line-height: 18px;
+    }
+
+    h5 {
+      font-size: 16px;
+    }
+
+    h6 {
+      font-size: 14px;
+    }
+
+    h5,
+    h6 {
+      line-height: 17px;
+      margin: 9px 0 -4px;
+    }
+
+    del {
+      color: #999;
+    }
+
+    blockquote {
+      margin: 14px 0;
+      padding: 0 16px;
+      min-height: 20px;
+
+      border-left-width: 4px;
+      border-left-style: solid;
+      border-left-color: var(--primary-color);
+
+      background-color: var(--bg-code);
+      border-bottom-right-radius: var(--border-radius);
+      border-top-right-radius: var(--border-radius);
+    }
+
+    blockquote p,
+    blockquote ul,
+    blockquote ol {
+      color: #999;
+    }
+
+    blockquote > :first-child {
+      margin-top: 0;
+    }
+
+    blockquote > :last-child {
+      margin-bottom: 0;
+    }
+
+    pre,
+    code {
+      font-family: Consolas, Courier, 'Apple SD 산돌고딕 Neo', -apple-system,
+        'Lucida Grande', 'Apple SD Gothic Neo', '맑은 고딕', 'Malgun Gothic',
+        'Segoe UI', '돋움', dotum, sans-serif;
+      border: 0;
+      border-radius: 0;
+    }
+
+    pre {
+      margin: 2px 0 8px;
+      padding: 18px;
+      background-color: var(--bg-code);
+      border: 1px solid var(--border-color);
+    }
+
+    code {
+      color: #fff;
+      background-color: var(--primary-color);
+      border-radius: var(--border-radius);
+      padding: 2px 3px;
+      letter-spacing: -0.3px;
+      border-radius: 2px;
+    }
+
+    pre code {
+      padding: 0;
+      white-space: pre-wrap;
+      background-color: transparent;
+      border-radius: var(--border-radius);
+    }
+
+    pre.addon {
+      border: 1px solid #e8ebed;
+      background-color: #fff;
+    }
+
+    img {
+      margin: 4px 0 10px;
+      box-sizing: border-box;
+      vertical-align: top;
+      max-width: 100%;
+    }
+
+    table {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 12px 0 14px;
+      width: auto;
+      border-collapse: collapse;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+    }
+
+    table th,
+    table td {
+      border: 1px solid var(--border-color);
+      padding: 5px 14px 5px 12px;
+      height: 32px;
+    }
+
+    table th {
+      font-weight: 300;
+      padding-top: 6px;
+      color: var(--main-text-color);
+      background-color: var(--bg-body);
+    }
+
+    ul,
+    menu,
+    ol,
+    dir {
+      display: block;
+      list-style-type: none;
+      padding-left: 24px;
+      margin: 6px 0 10px;
+    }
+
+    li {
+      min-height: 22px;
+    }
+
+    ol {
+      list-style-type: none;
+      counter-reset: li;
+    }
+
+    ol > li {
+      counter-increment: li;
+    }
+
+    ul > li::before,
+    ol > li::before {
+      display: inline-block;
+      position: absolute;
+    }
+
+    ul > li::before {
+      content: '';
+      margin-top: 9px;
+      margin-left: -17px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: var(--bg-code);
+    }
+
+    ol > li::before {
+      content: '.' counter(li);
+      margin-left: -28px;
+      width: 24px;
+      text-align: right;
+      direction: rtl;
+    }
+
+    ul ul,
+    ul ol,
+    ol ol,
+    ol ul {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    ul li,
+    ol li {
+      position: relative;
+    }
+
+    ul p,
+    ol p {
+      margin: 0;
+    }
+
+    ul li.task-list-item:before,
+    ol li.task-list-item:before,
+    pre ul li:before {
+      content: '';
+    }
+
+    hr {
+      border-top: 1px solid var(--border-color);
+      margin: 16px 0;
+    }
+
+    a {
+      text-decoration: underline;
+      color: #4b96e6;
+    }
+
+    a:hover {
+      color: #1f70de;
+    }
+
+    .task-list-item {
+      border: 0;
+      list-style: none;
+      padding-left: 24px;
+      margin-left: -24px;
+      min-height: 22px;
+    }
+
+    .task-list-item:before {
+      background-repeat: no-repeat;
+      background-size: 18px 18px;
+      background-position: center;
+      content: '';
+      margin-left: 0;
+      margin-top: 0;
+      border-radius: 0;
+      height: 18px;
+      width: 18px;
+      position: absolute;
+      left: 0;
+      top: 1px;
+      cursor: pointer;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEqADAAQAAAABAAAAEgAAAACaqbJVAAAAQklEQVQ4EWM8c+bMfwYqABaQGcbGxhQZdfbsWQYmikxA0jxqEFJg4GCOhhGOgEESHg0jpMDAwRx8YQQuj0DlCaUAAEdBCPJ7TaEPAAAAAElFTkSuQmCC');
+    }
+
+    .task-list-item.checked:before {
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEqADAAQAAAABAAAAEgAAAACaqbJVAAAA1ElEQVQ4EWP0nvbsPwMVABMVzAAbMWoQIiT5OJgYvLS5EAJQFguGCB4BkCHt/kIM8kKsYFXbrn6DqyY6sJENefjuN8ORuz/ghoAYWA0COR2kEQbQDanc+I7h049/MGkwjVANFQYZkmXHD/YCyABiDAFpxQgjkJO9dbjA4QAKDxAAhQnIO9hcAlYAJDBcBHIySANII8gAYgwBGYZhEEgQZFjVJohhhFwCUg8CjPgyLT8nE8N/YJZGD1iIVlQSI4yQpT9+R40ZZDl0NlavoSsihj/4DAIAR+hZHUj727YAAAAASUVORK5CYII=');
+    }
+
+    .task-list-item input[type='checkbox'],
+    .task-list-item .task-list-item-checkbox {
+      margin-left: -17px;
+      margin-right: 3.8px;
+      margin-top: 3px;
+    }
+  }
+}

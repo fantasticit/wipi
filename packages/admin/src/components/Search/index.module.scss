@@ -1,0 +1,14 @@
+.wrapper {
+  border-radius: 6px;
+  margin: 0 0 1.5rem;
+
+  .content {
+    display: flex;
+    align-items: stretch;
+
+    > div {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}

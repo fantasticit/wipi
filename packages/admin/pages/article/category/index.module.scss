@@ -1,0 +1,44 @@
+@import '../../../src/theme/var.scss';
+
+.wrapper {
+  .btns {
+    margin-top: 16px;
+
+    button + button {
+      margin-left: 16px;
+    }
+
+    &.isEdit {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  ul.list {
+    background-color: #fff;
+  }
+
+  li.item {
+    padding: 2px 8px;
+    color: #8e8787;
+    line-height: 1.5em;
+    display: inline-block;
+    margin: 0 7px 7px 0;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    transition: all ease-in-out 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primaryColor;
+      color: #fff;
+      border: 1px solid $primaryColor;
+    }
+
+    &.active {
+      color: $primaryColor;
+      border: 1px solid $primaryColor;
+      background-color: $primaryColor;
+    }
+  }
+}

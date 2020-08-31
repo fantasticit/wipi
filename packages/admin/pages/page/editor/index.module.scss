@@ -1,0 +1,64 @@
+.wrapper {
+  .formItem {
+    margin-top: 16px;
+  }
+
+  :global {
+    .CodeMirror {
+      height: 480px !important;
+    }
+  }
+
+  .operation {
+    height: 56px;
+    line-height: 56px;
+    background: #fff;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button + button {
+      margin-left: 16px;
+    }
+  }
+}
+
+.wrapper {
+  background-color: #f4f5f5;
+  padding-top: 66.5px;
+  min-height: 100vh;
+
+  .header {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+    input {
+      border-top: 0;
+      border-right: 0;
+      border-left: 0;
+      border-radius: 0 !important;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: none !important;
+    }
+  }
+
+  .content {
+    overflow: hidden;
+    > article {
+      padding: 24px;
+
+      > div {
+        padding: 16px 24px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.06);
+        background-color: #fff;
+      }
+    }
+  }
+}
