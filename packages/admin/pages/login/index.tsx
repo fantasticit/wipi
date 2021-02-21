@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { Form, Button, Input, Icon } from 'antd';
+import { Row, Col, Form, Button, Input, Icon } from 'antd';
 import Router from 'next/router';
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 import { FormComponentProps } from 'antd/es/form';
 import { UserProvider } from '@providers/user';
+import { Svg } from './svg';
 import style from './index.module.scss';
 
 type ILoginProps = FormComponentProps;
@@ -35,50 +36,57 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
       <Helmet>
         <title>系统登录</title>
       </Helmet>
-      <div className={style.container}>
-        <h2>系统登录</h2>
-        <Form onSubmit={submit}>
-          <Form.Item label="账户">
-            {getFieldDecorator('name', {
-              rules: [{ required: true, message: '请输入用户名！' }],
-            })(
-              <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                size="large"
-                placeholder="请输入用户名"
-              />
-            )}
-          </Form.Item>
-          <Form.Item label="密码">
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: '请输入密码！' }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                size="large"
-                placeholder="请输入密码"
-              />
-            )}
-          </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              size="large"
-              style={{ width: '100%' }}
-              loading={loading}
-              disabled={loading}
-            >
-              登录
-            </Button>
-            Or{' '}
-            <Link href="/register">
-              <a>注册用户</a>
-            </Link>
-          </Form.Item>
-        </Form>
-      </div>
+      <Row className={style.container}>
+        <Col xs={0} sm={0} md={12}>
+          <Svg />
+        </Col>
+        <Col xs={24} sm={24} md={12}>
+          <div style={{ width: '100%' }}>
+            <h2>系统登录</h2>
+            <Form onSubmit={submit}>
+              <Form.Item label="账户">
+                {getFieldDecorator('name', {
+                  rules: [{ required: true, message: '请输入用户名！' }],
+                })(
+                  <Input
+                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    size="large"
+                    placeholder="请输入用户名"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item label="密码">
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: '请输入密码！' }],
+                })(
+                  <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    type="password"
+                    size="large"
+                    placeholder="请输入密码"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  size="large"
+                  style={{ width: '100%' }}
+                  loading={loading}
+                  disabled={loading}
+                >
+                  登录
+                </Button>
+                Or{' '}
+                <Link href="/register">
+                  <a>注册用户</a>
+                </Link>
+              </Form.Item>
+            </Form>
+          </div>
+        </Col>
+      </Row>
       <ul className={style.bubbles}>
         {Array.from({ length: 10 }).map((_, idx) => (
           <li key={idx}></li>
