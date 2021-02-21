@@ -83,7 +83,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
 
   const uploadProps = {
     name: 'file',
-    multiple: false,
+    multiple: true,
     action: '',
     beforeUpload(file) {
       setLoading(true);
