@@ -38,5 +38,9 @@
       color: var(--primary-color);
       background-color: var(--primary-color);
     }
+
+    a {
+      color: inherit;
+    }
   }
 }
