@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 import { FormComponentProps } from 'antd/es/form';
 import { UserProvider } from '@providers/user';
-import { Svg } from './svg';
+import { Svg } from '@/components/LoginSvg';
 import style from './index.module.scss';
 
 type ILoginProps = FormComponentProps;
