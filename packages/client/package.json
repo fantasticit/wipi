@@ -18,7 +18,7 @@
     "babel-plugin-import": "^1.13.0",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.19",
-    "highlight.js": "^9.18.1",
+    "highlight.js": "^10.4.1",
     "mime-types": "^2.1.26",
     "next": "9.2.1",
     "next-page-transitions": "^1.0.0-beta.2",
