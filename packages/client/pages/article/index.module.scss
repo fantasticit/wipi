@@ -1,0 +1,138 @@
+.container {
+  margin-top: 0;
+}
+
+.contentWrapper {
+  position: relative;
+
+  .coverWrapper {
+    width: 100%;
+    max-width: 768px;
+    margin: 27px auto 0;
+
+    img {
+      display: inline-block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+    }
+  }
+
+  .meta {
+    text-align: center;
+
+    .title {
+      margin: .67em 0 0;
+      color: inherit;
+      font-weight: 700;
+      font-size: 2.5rem;
+      line-height: 1rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .desc {
+      margin-bottom: 1.2em;
+      color: inherit;
+      font-style: italic;
+      text-align: center;
+    }
+  }
+
+  .content {
+    max-width: 800px;
+    padding: 0 16px;
+    margin: 0 auto;
+    background: var(--bg);
+
+    .articleFooter {
+      padding: 21px 0;
+      border-top: 1px dashed var(--border-color);
+      margin-top: 30px;
+      color: var(--second-text-color);
+      line-height: 28px;
+
+      .articleInfo {
+        color: #655e5e;
+        font-size: 12px;
+        line-height: 22px;
+        text-align: center;
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .tags {
+        display: flex;
+        width: 100%;
+        font-size: 12px;
+
+        .tag {
+          display: inline-flex;
+          align-items: center;
+          padding: 0 8px;
+          border: 1px solid var(--border-color);
+          border-radius: 2px;
+          color: var(--second-text-color);
+          background-color: var(--bg-second);
+          font-size: 14px;
+          text-decoration: none;
+
+          &:hover {
+            color: #ffffff;
+            background-color: var(--primary-color);
+          }
+
+          & + .tag {
+            margin-left: .8rem;
+          }
+
+          span {
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .markdown {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 48px;
+    }
+  }
+
+  .widget {
+    padding: 21px 30px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 24px;
+    background: #ffffff;
+  }
+
+  .anchorWidget {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 150px;
+    color: #000000;
+    font-size: 1.167rem;
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 1196px) {
+    .anchorWidget,
+    .widget {
+      display: none;
+    }
+  }
+}

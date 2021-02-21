@@ -1,0 +1,208 @@
+.editor {
+  position: relative;
+  padding: 16px;
+  border-radius: var(--border-radius);
+  margin-bottom: 16px;
+  background-color: var(--bg-second);
+
+  :global {
+    .CodeMirror,
+    .te-mode-switch-section {
+      background-color: transparent !important;
+    }
+
+    .ant-btn-primary[disabled] {
+      border-color: var(--comment-editor-border-color);
+      color: var(--main-text-color);
+      background-color: var(--comment-editor-btn-diable-bg);
+    }
+
+    .tui-editor-defaultUI .CodeMirror-scroll {
+      color: var(--main-text-color);
+    }
+
+    .CodeMirror-cursor {
+      border-left-color: var(--main-text-color);
+    }
+  }
+
+  .avatar {
+    position: absolute;
+    top: 21px;
+    left: -48px;
+  }
+
+  .nameAndMail {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+
+  input,
+  textarea {
+    border-color: var(--comment-editor-border-color);
+    color: var(--main-text-color);
+    background-color: var(--bg-second);
+  }
+
+  input {
+    width: 49%;
+  }
+
+  .markdown {
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    overflow: auto;
+    cursor: not-allowed;
+  }
+
+  .footer {
+    margin-top: 1rem;
+    text-align: right;
+  }
+}
+
+@media (max-width: 768px) {
+  .editor {
+    margin-left: 0;
+
+    .avatar {
+      display: none;
+    }
+  }
+}
+
+.commentWrapper {
+  .commentContainer {
+    position: relative;
+
+    .commentItem {
+      position: relative;
+      padding: 16px;
+      border-radius: var(--border-radius);
+      background-color: var(--bg-second);
+
+      + .commentItem {
+        margin-top: 10px;
+      }
+
+      header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: var(--second-text-color);
+
+        > span.info {
+          margin-left: 10px;
+
+          > span {
+            margin: 0 10px;
+          }
+        }
+
+        strong {
+          color: var(--main-text-color);
+          font-weight: 600;
+        }
+
+        strong.replyUser {
+          color: var(--primary-color);
+        }
+
+        > div:last-of-type {
+          color: transparent;
+
+          span {
+            cursor: pointer;
+
+            i {
+              margin-right: 4px;
+            }
+          }
+        }
+
+        &:hover {
+          > div:last-of-type {
+            color: var(--main-text-color);
+          }
+        }
+      }
+
+      main {
+        > div.content {
+          padding: .8em 0;
+
+          img {
+            width: auto;
+            max-width: 100%;
+          }
+        }
+
+        div.meta {
+          color: var(--disable-text-color);
+
+          span + span {
+            margin-left: 1rem;
+          }
+
+          .reply {
+            cursor: pointer;
+
+            &:hover {
+              color: var(--primary-color);
+            }
+
+            i {
+              margin-right: 8px;
+            }
+          }
+        }
+
+        .subComments {
+          padding-top: 16px;
+        }
+
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      .editorContainer {
+        max-height: 0;
+        overflow: hidden;
+        transition: all ease-in-out .3s;
+
+        &.isActive {
+          max-height: initial;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    border-radius: var(--border-radius);
+    margin-top: 16px;
+    color: var(--second-text-color);
+    background-color: var(--bg-second);
+    text-align: center;
+
+    :global {
+      .ant-pagination {
+        color: var(--main-text-color);
+
+        a {
+          color: inherit;
+        }
+
+        .ant-pagination-item-link {
+          color: var(--second-text-color);
+        }
+
+        .ant-pagination-item-active a {
+          color: #ff0064;
+        }
+      }
+    }
+  }
+}

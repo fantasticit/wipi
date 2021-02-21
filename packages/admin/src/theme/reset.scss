@@ -1,0 +1,125 @@
+::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  border-radius: .5rem;
+  background-color: transparent;
+  transition: all .2s;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+*:hover {
+  &::-webkit-scrollbar-thumb {
+    background-color: #dadada;
+  }
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+html {
+  text-size-adjust: 100% !important;
+}
+
+body {
+  color: #5f5f6f;
+  overflow-x: hidden;
+  font-family: 'Nunito', 'Helvetica', Arial, sans-serif;
+  line-height: 1.75em;
+}
+
+:global {
+  body {
+    --primary-color: #0188fb;
+    --text-primary-color: rgba(0, 0, 0, .88);
+    --text-second-color: rgba(0, 0, 0, .66);
+    --aside-width: 240px;
+    --aside-padding-horizontal: 16px;
+    --border-color: #ebebeb;
+  }
+
+  .container {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .ant-menu-item-selected {
+    color: var(--primary-color) !important;
+    background: transparent !important;
+  }
+
+  .ant-breadcrumb,
+  .ant-breadcrumb a {
+    color: rgba(0, 0, 0, .45) !important;
+  }
+
+  .ant-breadcrumb-separator {
+    color: rgba(0, 0, 0, .45) !important;
+  }
+
+  .ant-breadcrumb > span:last-child a {
+    color: rgba(0, 0, 0, .65) !important;
+  }
+
+  .ant-comment {
+    padding: 0 16px 0 4px;
+    background-color: #ffffff;
+
+    + .ant-comment {
+      margin-top: 8px;
+    }
+
+    .ant-comment-inner {
+      border-bottom: 1px solid #f6f6f6;
+    }
+  }
+
+  .ant-anchor-wrapper {
+    background-color: transparent !important;
+  }
+
+  .ant-upload.ant-upload-drag {
+    background: #ffffff !important;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      width: 768px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .container {
+      width: 970px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .container {
+      width: 1140px;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.wrapper {
+  .action a {
+    color: #1890ff;
+  }
+
+  .btns {
+    text-align: right;
+  }
+
+  .upv {
+    position: relative;
+    padding: 16px 16px;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 0 0 4px 4px;
+    color: #333333;
+    background: #fafafa;
+  }
+
+  @media (max-width: 567px) {
+    .btns {
+      margin-top: 16px;
+    }
+  }
+}

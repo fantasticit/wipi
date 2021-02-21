@@ -1,0 +1,53 @@
+{
+  "name": "@wipi/client",
+  "version": "0.0.1",
+  "author": "fantasticit <zhxuc7@163.com>",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "prebuild": "rimraf .next",
+    "start": "next start",
+    "pm2": "pm2 start npm --name client -- start"
+  },
+  "dependencies": {
+    "@toast-ui/react-editor": "^2.1.0",
+    "@types/react-transition-group": "^4.4.1",
+    "antd": "^3.26.7",
+    "axios": "^0.19.2",
+    "babel-plugin-import": "^1.13.0",
+    "classnames": "^2.2.6",
+    "dayjs": "^1.8.19",
+    "highlight.js": "^9.18.1",
+    "mime-types": "^2.1.26",
+    "next": "9.2.1",
+    "next-page-transitions": "^1.0.0-beta.2",
+    "nprogress": "^0.2.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-helmet": "^5.2.1",
+    "react-infinite-scroller": "^1.2.4",
+    "react-lazyload": "^2.6.5",
+    "react-simplemde-editor": "^4.1.0",
+    "react-transition-group": "^4.4.1",
+    "timeago.js": "^4.0.2",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "ua-parser-js": "^0.7.21",
+    "viewerjs": "^1.5.0",
+    "xml": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.5.3",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-less": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
+    "less": "^3.10.3",
+    "less-vars-to-js": "^1.3.0",
+    "next-compose-plugins": "^2.2.0",
+    "node-sass": "4.14.1",
+    "null-loader": "^3.0.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.7.5",
+    "webpack-filter-warnings-plugin": "^1.2.1"
+  }
+}

@@ -1,0 +1,34 @@
+footer {
+  padding: 20px 0;
+  border-top: 1px solid var(--border-color);
+  color: #c1bdbd;
+  background: var(--bg-footer);
+  text-align: center;
+}
+
+ul.icons {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  margin: 8px 0 16px;
+
+  li {
+    display: inline-block;
+    border-radius: 50%;
+    margin: 0 5px;
+    font-size: 24px;
+    text-align: center;
+
+    &:first-of-type {
+      margin-top: 1px;
+    }
+
+    &:hover {
+      color: var(--main-text-color);
+    }
+  }
+}
+
+.copyright {
+  font-size: 10px;
+  line-height: 15px;
+}

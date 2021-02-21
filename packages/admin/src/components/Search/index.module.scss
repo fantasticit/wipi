@@ -1,0 +1,15 @@
+.wrapper {
+  padding: 24px;
+  margin-bottom: 16px;
+  background: #ffffff;
+
+  .content {
+    display: flex;
+    align-items: stretch;
+
+    > div {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}

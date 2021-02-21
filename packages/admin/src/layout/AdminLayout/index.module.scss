@@ -1,0 +1,137 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100vw;
+  min-width: 960px;
+  height: 100vh;
+  color: var(--text-primary-color);
+
+  .asider {
+    width: var(--aside-width);
+    height: 100%;
+    background: #001529;
+    overflow: auto;
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 16px;
+      color: #ffffff;
+      font-size: 1.2rem;
+      text-align: center;
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .resourceCreate {
+      padding: 0 var(--aside-padding-horizontal);
+      margin: 12px 0;
+    }
+  }
+
+  .main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    background-color: #eff2f5;
+    overflow: auto;
+
+    >header {
+      width: 100%;
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      background: #ffffff;
+
+      .info {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        cursor: pointer;
+
+        .github {
+          display: inline-block;
+          display: flex;
+          align-items: center;
+          margin-right: 12px;
+          color: inherit;
+          font-size: 24px;
+        }
+      }
+    }
+
+    >.content {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      overflow: hidden;
+
+      >header {
+        position: relative;
+        padding: 12px 24px;
+        background: #ffffff;
+        box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+        z-index: 100;
+
+        .title {
+          margin: 12px 0 0;
+          color: rgba(0, 0, 0, .85);
+          overflow: hidden;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 32px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      >main {
+        flex: 1;
+        padding: 24px;
+        overflow: auto;
+
+        >footer {
+          padding: 20px 0;
+          color: rgba(0, 0, 0, .65);
+          text-align: center;
+
+          ul.icons {
+            display: inline-flex;
+            flex-wrap: nowrap;
+            margin: 8px 0 16px;
+
+            li {
+              display: inline-block;
+              border-radius: 50%;
+              margin: 0 5px;
+              font-size: 24px;
+              text-align: center;
+
+              &:first-of-type {
+                margin-top: 1px;
+              }
+
+              &:hover {
+                color: var(--main-text-color);
+              }
+            }
+
+            .github {
+              color: inherit;
+            }
+          }
+
+          .copyright {
+            font-size: 10px;
+            line-height: 15px;
+          }
+        }
+      }
+    }
+  }
+}
