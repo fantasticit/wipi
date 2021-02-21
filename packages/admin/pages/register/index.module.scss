@@ -18,8 +18,9 @@
   box-shadow: 0 2px 8px #f0f1f2;
   border-radius: 4px;
 
+  display: flex !important;
+
   > div {
-    height: 100%;
     padding: 4rem;
 
     &:first-of-type {
