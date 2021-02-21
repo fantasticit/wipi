@@ -14,7 +14,7 @@
     "@toast-ui/react-editor": "^2.1.0",
     "@types/react-transition-group": "^4.4.1",
     "antd": "^3.26.7",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-plugin-import": "^1.13.0",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.19",
