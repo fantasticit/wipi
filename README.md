@@ -46,7 +46,7 @@
 首先安装 `MySQL`，推荐使用 docker 进行安装。
 
 ```bash
-docker run -d --restart=always --name wipi-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
+docker run -d --restart=always --name wipi-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7
 ```
 
 - clone 本项目。
