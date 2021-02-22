@@ -84,6 +84,10 @@ interface IView {
   ip: string;
   userAgent: string;
   url: string;
+  browser: string;
+  engine: string;
+  os: string;
+  device: string;
   count: number;
   createAt: string;
   updateAt: string;

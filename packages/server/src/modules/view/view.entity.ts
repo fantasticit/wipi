@@ -26,6 +26,18 @@ export class View {
   @Column({ type: 'text', default: null })
   address: string; // 访问地址
 
+  @Column({ type: 'text', default: null })
+  browser: string; // 访问浏览器
+
+  @Column({ type: 'text', default: null })
+  engine: string; // 访问的浏览器内核
+
+  @Column({ type: 'text', default: null })
+  os: string; // 访问操作系统
+
+  @Column({ type: 'text', default: null })
+  device: string; // 访问设备
+
   @CreateDateColumn({
     type: 'datetime',
     comment: '创建时间',
