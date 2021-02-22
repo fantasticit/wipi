@@ -12,9 +12,9 @@ const parseUserAgent = (userAgent) => {
   uaparser.setUA(userAgent);
   const uaInfo = uaparser.getResult();
   return {
-    browser: `${uaInfo.browser.name} ${uaInfo.browser.version}`,
-    engine: `${uaInfo.engine.name} ${uaInfo.engine.version}`,
-    os: `${uaInfo.os.name} ${uaInfo.os.version}`,
+    browser: uaInfo.browser ? `${uaInfo.browser.name} ${uaInfo.browser.version}` : '',
+    engine: uaInfo.engine ? `${uaInfo.engine.name} ${uaInfo.engine.version}` : '',
+    os: uaInfo.os ? `${uaInfo.os.name} ${uaInfo.os.version}` : '',
     device: uaInfo.device.vendor
       ? uaInfo.device.vendor + ' ' + uaInfo.device.model + ' ' + uaInfo.device.type
       : '未知设备',
