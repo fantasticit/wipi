@@ -13,4 +13,25 @@
       align-items: center;
     }
   }
+
+  :global {
+    .ant-form-item {
+      display: flex;
+      width: 100%;
+    }
+
+    .ant-form-item-control-wrapper {
+      flex: 1;
+    }
+
+    @media (max-width: 575px) {
+      .ant-form-item {
+        flex-wrap: wrap;
+      }
+  
+      .ant-form-item-control-wrapper {
+        flex: 1;
+      }
+    }
+  }
 }

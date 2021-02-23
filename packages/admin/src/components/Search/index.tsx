@@ -1,4 +1,4 @@
-import { Form, Row, Input, Button } from 'antd';
+import { Form, Row, Col, Input, Button } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import style from './index.module.scss';
 
@@ -24,19 +24,26 @@ const _Search: React.FC<IProps> = ({ form, fields = [], onSearch }) => {
     const children = [];
     for (const field of fields) {
       children.push(
-        // <Col span={8} xs={24} sm={6} key={field.field}>
-        <Form.Item label={field.label}>
-          {getFieldDecorator(field.field, {
-            rules: field.rules,
-          })(
-            field.children ? (
-              field.children
-            ) : (
-              <Input width={180} placeholder={field.msg || 'placeholder'} />
-            )
-          )}
-        </Form.Item>
-        // </Col>
+        <Col xs={24} sm={12} md={6} key={field.field}>
+          <Form.Item
+            label={field.label}
+            labelCol={{
+              xs: { span: 24 },
+              sm: { span: 12 },
+              md: { span: 6 },
+            }}
+          >
+            {getFieldDecorator(field.field, {
+              rules: field.rules,
+            })(
+              field.children ? (
+                field.children
+              ) : (
+                <Input width={'100%'} placeholder={field.msg || 'placeholder'} />
+              )
+            )}
+          </Form.Item>
+        </Col>
       );
     }
     return children;
@@ -53,21 +60,31 @@ const _Search: React.FC<IProps> = ({ form, fields = [], onSearch }) => {
     form.resetFields();
   };
 
+  const submitContent = (
+    <Form.Item>
+      <Button type="primary" htmlType="submit">
+        搜索
+      </Button>
+      <Button style={{ marginLeft: 8 }} onClick={handleReset}>
+        重置
+      </Button>
+    </Form.Item>
+  );
+
   return (
     <Form className={style.wrapper} layout="inline" onSubmit={handleSearch}>
       <Row className={style.content}>
         {getFields()}
-        {/* <Col span={8} xs={24} sm={6} key={"btns"}> */}
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            搜索
-          </Button>
-          <Button style={{ marginLeft: 8 }} onClick={handleReset}>
-            重置
-          </Button>
-        </Form.Item>
-        {/* </Col> */}
+
+        {fields.length <= 3 && <Col>{submitContent}</Col>}
       </Row>
+      {fields.length > 3 && (
+        <Row>
+          <Col span={24} style={{ textAlign: 'right' }}>
+            {submitContent}
+          </Col>
+        </Row>
+      )}
     </Form>
   );
 };
