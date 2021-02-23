@@ -86,7 +86,6 @@ const Views: NextPage = () => {
         return address || '-';
       },
     },
-
     {
       title: '访问量',
       dataIndex: 'count',
@@ -143,7 +142,7 @@ const Views: NextPage = () => {
               msg: '请输入 IP 地址',
             },
             {
-              label: 'User Agent',
+              label: 'UA',
               field: 'userAgent',
               msg: '请输入 User Agent',
             },
@@ -151,6 +150,11 @@ const Views: NextPage = () => {
               label: 'URL',
               field: 'url',
               msg: '请输入 URL',
+            },
+            {
+              label: '地址',
+              field: 'address',
+              msg: '请输入地址',
             },
             {
               label: '浏览器',
