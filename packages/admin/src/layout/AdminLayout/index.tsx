@@ -71,7 +71,13 @@ export const AdminLayout: React.FC = ({ children }) => {
   return (
     <>
       <Helmet></Helmet>
-      <Layout className={style.container}>
+      <Layout
+        className={style.container}
+        style={{
+          display: 'flex',
+          flexWrap: 'nowrap',
+        }}
+      >
         <Sider className={style.asider} trigger={null} collapsible={true} collapsed={collapsed}>
           <div className={style.logo}>
             {setting.systemFavicon && <img src={setting.systemFavicon} />}
