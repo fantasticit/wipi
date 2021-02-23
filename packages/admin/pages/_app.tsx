@@ -21,24 +21,26 @@ const addView = (url) => {
 
 class MyApp extends App {
   state = {
+    user: {},
     setting: {},
     collapsed: false,
   };
 
+  setUser = (user) => {
+    this.setState({ user });
+  };
+
+  getUserFromStorage = () => {
+    const str = localStorage.getItem('user');
+    try {
+      const user = JSON.parse(str);
+      this.setUser(user);
+    } catch (e) {}
+  };
+
   getSetting = () => {
-    const flag = false;
-    if (sessionStorage.getItem('setting')) {
-      const str = sessionStorage.getItem('setting');
-      try {
-        this.setState({ setting: JSON.parse(str) });
-      } catch (e) {}
-    }
-    if (flag) {
-      return;
-    }
     SettingProvider.getSetting().then((res) => {
       this.setState({ setting: res });
-      sessionStorage.setItem('setting', JSON.stringify(res));
     });
   };
 
@@ -48,6 +50,7 @@ class MyApp extends App {
 
   componentDidMount() {
     this.getSetting();
+    this.getUserFromStorage();
     try {
       const el = document.querySelector('#holderStyle');
       el.parentNode.removeChild(el);
@@ -73,6 +76,8 @@ class MyApp extends App {
       <GlobalContext.Provider
         value={{
           ...this.state,
+          setUser: this.setUser,
+          getSetting: this.getSetting,
           toggleCollapse: this.toggleCollapse,
         }}
       >
@@ -80,9 +85,7 @@ class MyApp extends App {
           <style
             id="holderStyle"
             dangerouslySetInnerHTML={{
-              __html: ` * {
-      transition: none !important;
-    }`,
+              __html: `* { transition: none !important; }`,
             }}
           ></style>
           <NProgress color={'#0188fb'} />

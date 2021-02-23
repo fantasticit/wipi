@@ -14,15 +14,12 @@ httpProvider.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
       const token = window.localStorage.getItem('token');
-
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
     }
-
     return config;
   },
-
   (err) => {
     throw new Error('发起请求出错');
   }
@@ -34,14 +31,11 @@ httpProvider.interceptors.response.use(
       typeof window !== 'undefined' && message.error({ message: data.data.msg });
       return;
     }
-
     const res = data.data;
-
     if (!res.success) {
       message.error(res.msg);
       return;
     }
-
     return res.data;
   },
   (err) => {
@@ -60,7 +54,7 @@ httpProvider.interceptors.response.use(
 
         case 401:
           typeof window !== 'undefined' && message.info('请重新登录');
-          Router.push('/login');
+          Router.push(`/login?redirect=${Router.asPath}`);
           break;
 
         default:

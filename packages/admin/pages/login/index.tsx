@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useContext, useEffect } from 'react';
 import { Row, Col, Form, Button, Input, Icon } from 'antd';
 import Router from 'next/router';
 import Link from 'next/link';
@@ -6,13 +6,19 @@ import { Helmet } from 'react-helmet';
 import { FormComponentProps } from 'antd/es/form';
 import { UserProvider } from '@providers/user';
 import { Svg } from '@/components/LoginSvg';
+import { GlobalContext } from '@/context/global';
 import style from './index.module.scss';
 
 type ILoginProps = FormComponentProps;
 
 const _Login: React.FC<ILoginProps> = ({ form }) => {
   const { getFieldDecorator } = form;
+  const globalContext = useContext(GlobalContext);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   const submit = useCallback((e) => {
     e.preventDefault();
@@ -24,7 +30,9 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
             localStorage.setItem('user', JSON.stringify(userInfo));
             localStorage.setItem('token', userInfo.token);
             setLoading(false);
-            Router.push('/');
+            globalContext.setUser(userInfo);
+            globalContext.getSetting();
+            Router.push((Router.query.redirect as string) || '/');
           })
           .catch((e) => setLoading(false));
       }
