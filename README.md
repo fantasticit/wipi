@@ -79,8 +79,8 @@ lerna run dev
 后台管理地址：`http://localhost:3001`。
 服务接口地址：`http://localhost:4000`。
 
-首次启动，默认创建管理员用户：admin，密码：admin（可在 `server/src/config` 文件中进行修改）。
-[PS] 如服务端配置启动失败，请先确认 MySQL 的配置是否正确，配置文件在 `server/src/config`。
+首次启动，默认创建管理员用户：admin，密码：admin（可在 `server/.env` 文件中进行修改）。
+[PS] 如服务端配置启动失败，请先确认 MySQL 的配置是否正确，配置文件在 `server/.env`。
 
 ## 项目部署
 
