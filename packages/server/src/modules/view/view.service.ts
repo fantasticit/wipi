@@ -5,6 +5,7 @@ import axios from 'axios';
 import { config } from '../../config';
 import { View } from './view.entity';
 
+const ipSearcher = require('node-ip2region').create();
 const UAParser = require('ua-parser-js');
 
 const parseUserAgent = (userAgent) => {
@@ -115,8 +116,7 @@ export class ViewService {
   }
 
   /**
-   * 自动任务，解析 ip 地址，依赖聚合数据的 key
-   * 请到 https://apis.juhe.cn/ip/ 申请 key 值
+   * 自动任务，解析 ip 地址
    */
   async parseIpAddress(start) {
     if (!config.juheApiKey) return Promise.reject();
@@ -135,15 +135,14 @@ export class ViewService {
       const uaInfo = parseUserAgent(view.userAgent);
       Object.assign(patch, uaInfo);
     }
+
     try {
-      const res = (await axios.get(
-        `https://apis.juhe.cn/ip/ipNew?key=${config.juheApiKey}&ip=${view.ip}`
-      )) as any;
-      if (+res.data.resultcode === 200) {
-        const data = res.data.result;
-        const address = `${data.Country} ${data.Province} ${data.City} ${data.Isp}`;
-        Object.assign(patch, { address });
-      }
+      const { region } = ipSearcher.btreeSearchSync(view.ip);
+      const address = region
+        .split('|')
+        .filter((d) => +d !== 0)
+        .join(' ');
+      Object.assign(patch, { address });
     } catch (e) {}
     const newView = await this.viewRepository.merge(view, {
       ...patch,
