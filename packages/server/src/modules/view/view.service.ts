@@ -119,8 +119,6 @@ export class ViewService {
    * 自动任务，解析 ip 地址
    */
   async parseIpAddress(start) {
-    if (!config.juheApiKey) return Promise.reject();
-
     const query = this.viewRepository.createQueryBuilder('view');
     query.skip(start);
     query.take(1);
