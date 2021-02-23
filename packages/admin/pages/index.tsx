@@ -60,7 +60,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [], comments: defaultComments =
   return (
     <AdminLayout>
       {!setting || !setting.systemUrl ? (
-        <div style={{ marginTop: 24 }}>
+        <div style={{ marginBottom: 24 }}>
           <Alert
             message={
               <span>
