@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 // 鉴权模块
 import { AuthModule } from './modules/auth/auth.module';
@@ -36,15 +37,24 @@ import { View } from './modules/view/view.entity';
 import { Search } from './modules/search/search.entity';
 import { SearchModule } from './modules/search/search.module';
 // 配置文件
-import { config } from './config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      ...config.mysql,
-      entities: [User, File, Tag, Article, Category, Comment, Setting, SMTP, Page, View, Search],
-      synchronize: true,
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'mysql',
+        entities: [User, File, Tag, Article, Category, Comment, Setting, SMTP, Page, View, Search],
+        host: configService.get('DB_HOST', '0.0.0.0'),
+        port: configService.get<number>('DB_PORT', 3306),
+        username: configService.get('DB_USER', 'root'),
+        password: configService.get('DB_PASSWD', 'root'),
+        database: configService.get('DB_DATABASE', 'wipi'),
+        charset: 'utf8mb4',
+        timezone: '+08:00',
+      }),
     }),
     UserModule,
     FileModule,

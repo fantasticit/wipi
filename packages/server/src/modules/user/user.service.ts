@@ -1,16 +1,18 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
-import { config } from '../../config';
 import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>
+    private readonly userRepository: Repository<User>,
+    private readonly configService: ConfigService
   ) {
-    const { name, password } = config.admin;
+    const name = this.configService.get('ADMIN_USER', 'admin');
+    const password = this.configService.get('ADMIN_PASSWD', 'admin');
     this.createUser({ name, password, role: 'admin' })
       .then((_) => {
         console.log();

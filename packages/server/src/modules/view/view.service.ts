@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import axios from 'axios';
-import { config } from '../../config';
 import { View } from './view.entity';
 
 const ipSearcher = require('node-ip2region').create();
