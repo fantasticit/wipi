@@ -20,10 +20,6 @@ export class ViewProvider {
     return httpProvider.get('/view/url', { params: { url } });
   }
 
-  static async updateIpAddress(id, address): Promise<IView> {
-    return httpProvider.patch(`/view/${id}`, { address });
-  }
-
   static async deleteView(id): Promise<IView> {
     return httpProvider.delete('/view/' + id);
   }

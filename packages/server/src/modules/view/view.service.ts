@@ -25,9 +25,7 @@ export class ViewService {
   constructor(
     @InjectRepository(View)
     private readonly viewRepository: Repository<View>
-  ) {
-    this.parseIpAddress(0).then((task) => task());
-  }
+  ) {}
 
   /**
    * 添加访问
@@ -46,7 +44,12 @@ export class ViewService {
       return newData;
     }
     const uaInfo = parseUserAgent(userAgent);
-    const newData = await this.viewRepository.create({ ip, userAgent, url, ...uaInfo });
+    const { region } = ipSearcher.btreeSearchSync(ip);
+    const address = region
+      .split('|')
+      .filter((d) => +d !== 0)
+      .join(' ');
+    const newData = await this.viewRepository.create({ ip, userAgent, url, address, ...uaInfo });
     await this.viewRepository.save(newData);
     return newData;
   }
@@ -91,60 +94,11 @@ export class ViewService {
   }
 
   /**
-   * 更新地址
-   * @param id
-   * @param address
-   */
-  async updateIpAddress(id, { address }): Promise<View> {
-    const old = await this.viewRepository.findOne(id);
-    const updatedPage = await this.viewRepository.merge(old, {
-      address,
-      updateAt: old.updateAt,
-    });
-    return this.viewRepository.save(updatedPage);
-  }
-
-  /**
    * 删除访问量
    * @param id
    */
   async deleteById(id) {
     const data = await this.viewRepository.findOne(id);
     return this.viewRepository.remove(data);
-  }
-
-  /**
-   * 自动任务，解析 ip 地址
-   */
-  async parseIpAddress(start) {
-    const query = this.viewRepository.createQueryBuilder('view');
-    query.skip(start);
-    query.take(1);
-
-    // 解析完毕
-    const count = await query.getCount();
-    if (start > count) return Promise.reject();
-
-    const view = await query.getOne();
-    const patch = {};
-    if (!view.browser || !view.os || !view.engine || !view.device) {
-      const uaInfo = parseUserAgent(view.userAgent);
-      Object.assign(patch, uaInfo);
-    }
-
-    try {
-      const { region } = ipSearcher.btreeSearchSync(view.ip);
-      const address = region
-        .split('|')
-        .filter((d) => +d !== 0)
-        .join(' ');
-      Object.assign(patch, { address });
-    } catch (e) {}
-    const newView = await this.viewRepository.merge(view, {
-      ...patch,
-      updateAt: view.updateAt,
-    });
-    this.viewRepository.save(newView);
-    return this.parseIpAddress(start + 1);
   }
 }

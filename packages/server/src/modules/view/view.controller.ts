@@ -71,16 +71,6 @@ export class ViewController {
   }
 
   /**
-   * 更新页面
-   * @param id
-   * @param page
-   */
-  @Patch(':id')
-  updateIpAddress(@Param('id') id, @Body() info) {
-    return this.viewService.updateIpAddress(id, info);
-  }
-
-  /**
    * 删除访问
    * @param id
    */
