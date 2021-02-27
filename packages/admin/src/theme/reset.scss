@@ -97,6 +97,18 @@ body {
     background: #ffffff !important;
   }
 
+  .ant-drawer-wrapper-body {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 53px;
+
+
+    > .ant-drawer-body {
+      flex: 1;
+      overflow: auto;
+    }
+  }
+
   @media (max-width: 768px) {
     .container {
       width: 100%;
