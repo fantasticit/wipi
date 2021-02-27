@@ -117,6 +117,7 @@ interface ISetting {
   systemLogo?: string; // 系统 Logo
   systemFavicon?: string; // 系统 favicon
   systemFooterInfo?: string; // 系统页脚信息
+  adminSystemUrl?: string; // 后台系统地址
 
   seoKeyword?: string; // SEO 关键词
   seoDesc?: string; //  SEO 描述

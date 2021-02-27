@@ -35,6 +35,10 @@ export class Setting {
 
   @ApiProperty()
   @Column({ type: 'text', default: null })
+  adminSystemUrl: string; // 后台系统地址
+
+  @ApiProperty()
+  @Column({ type: 'text', default: null })
   baiduAnalyticsId: string; // 百度统计id
 
   @ApiProperty()

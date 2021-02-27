@@ -34,6 +34,7 @@ export class SettingService {
 
     const filterRes = [
       'systemUrl',
+      'adminSystemUrl',
       'systemTitle',
       'systemLogo',
       'systemFavicon',

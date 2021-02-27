@@ -11,6 +11,7 @@ export const SystemSetting = ({ setting }) => {
   const [systemLogo, setSystemLogo] = useState(null);
   const [systemFavicon, setSystemFavicon] = useState(null);
   const [systemFooterInfo, setSystemFooterInfo] = useState(null);
+  const [adminSystemUrl, setAdminSystemUrl] = useState(null);
 
   useEffect(() => {
     setSystemUrl((setting && setting.systemUrl) || null);
@@ -18,6 +19,7 @@ export const SystemSetting = ({ setting }) => {
     setSystemLogo((setting && setting.systemLogo) || null);
     setSystemFavicon((setting && setting.systemFavicon) || null);
     setSystemFooterInfo((setting && setting.systemFooterInfo) || null);
+    setAdminSystemUrl((setting && setting.adminSystemUrl) || null);
   }, [setting]);
 
   const save = () => {
@@ -27,6 +29,7 @@ export const SystemSetting = ({ setting }) => {
       systemLogo,
       systemFavicon,
       systemFooterInfo,
+      adminSystemUrl,
     };
     SettingProvider.updateSetting(data).then((res) => {
       message.success('保存成功');
@@ -41,6 +44,15 @@ export const SystemSetting = ({ setting }) => {
           value={systemUrl}
           onChange={(e) => {
             setSystemUrl(e.target.value);
+          }}
+        />
+      </Form.Item>
+      <Form.Item label="后台地址">
+        <Input
+          placeholder="请输入后台地址"
+          value={adminSystemUrl}
+          onChange={(e) => {
+            setAdminSystemUrl(e.target.value);
           }}
         />
       </Form.Item>
@@ -99,6 +111,7 @@ export const SystemSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
+
       <FileSelectDrawer
         visible={visible}
         closeAfterClick={true}
