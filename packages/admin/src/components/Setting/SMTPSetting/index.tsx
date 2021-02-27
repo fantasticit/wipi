@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Form, Input, Button, message } from 'antd';
-import { SettingProvider } from '@providers/setting';
-import { SMTPProvider } from '@providers/smtp';
+import { SettingProvider } from '@/providers/setting';
+import { SMTPProvider } from '@/providers/smtp';
 
 export const SMTPSetting = ({ setting }) => {
   const [smtpHost, setsmtpHost] = useState(null);

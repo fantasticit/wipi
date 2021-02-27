@@ -20,7 +20,7 @@ interface IArticle {
   title: string;
   summary: string;
   content: string;
-  tags?: [any];
+  tags?: Itag[] | string[] | string;
   cover?: string;
   toc: string;
   views: number;
@@ -109,4 +109,30 @@ interface ISearch {
   keyword: string;
   count: number;
   createAt: string;
+}
+
+interface ISetting {
+  systemUrl?: string; // 系统地址
+  systemTitle?: string; // 系统标题
+  systemLogo?: string; // 系统 Logo
+  systemFavicon?: string; // 系统 favicon
+  systemFooterInfo?: string; // 系统页脚信息
+
+  seoKeyword?: string; // SEO 关键词
+  seoDesc?: string; //  SEO 描述
+
+  baiduAnalyticsId?: string; // 百度统计 id
+  googleAnalyticsId?: string; // 谷歌分析 id
+
+  ossRegion?: string; // 阿里云 region
+  ossAccessKeyId?: string; //  阿里云 accessKeyId
+  ossAccessKeySecret?: string; //  阿里云  accessKeySecret
+  ossHttps?: boolean; //  阿里云 oss 是否开启 https
+  ossBucket?: string; //  阿里云 bucket
+
+  smtpHost?: string; //   SMTP 地址
+  smtpPort?: number; //  SMTP 端口
+  smtpUser?: string; //  SMTP 用户
+  smtpPass?: string; //  SMTP 授权码
+  smtpFromUser?: string; // SMTP 发件人
 }

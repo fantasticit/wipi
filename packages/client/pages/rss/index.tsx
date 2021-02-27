@@ -1,9 +1,9 @@
 import React from 'react';
 import { NextPage } from 'next';
 import RSS from '@/rss/index.js';
-import { ArticleProvider } from '@providers/article';
-import { SettingProvider } from '@providers/setting';
-import { CategoryProvider } from '@providers/category';
+import { ArticleProvider } from '@/providers/article';
+import { SettingProvider } from '@/providers/setting';
+import { CategoryProvider } from '@/providers/category';
 const url = require('url');
 
 const Rss: NextPage = () => {
@@ -15,7 +15,7 @@ Rss.getInitialProps = async (ctx) => {
   const { res } = ctx;
   res.setHeader('Content-Type', 'text/xml');
 
-  let [articles, setting, categories] = await Promise.all([
+  let [[articles], setting, categories] = await Promise.all([
     ArticleProvider.getArticles({
       page: 1,
       pageSize: 99999,
@@ -24,7 +24,6 @@ Rss.getInitialProps = async (ctx) => {
     SettingProvider.getSetting(),
     CategoryProvider.getCategory({ articleStatus: 'publish' }),
   ]);
-  articles = articles[0] as any;
 
   const feed = new RSS(
     {
@@ -38,7 +37,7 @@ Rss.getInitialProps = async (ctx) => {
     null
   );
 
-  articles.forEach((article: any) => {
+  articles.forEach((article) => {
     feed.item({
       title: article.title,
       description: article.summary,

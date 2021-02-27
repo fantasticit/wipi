@@ -3,8 +3,9 @@ import { Row, Col, Form, Button, Input, Icon } from 'antd';
 import Router from 'next/router';
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
+import { Seo } from '@/components/Seo';
 import { FormComponentProps } from 'antd/es/form';
-import { UserProvider } from '@providers/user';
+import { UserProvider } from '@/providers/user';
 import { Svg } from '@/components/LoginSvg';
 import { GlobalContext } from '@/context/global';
 import style from './index.module.scss';
@@ -27,7 +28,6 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
         setLoading(true);
         UserProvider.login(values)
           .then((userInfo) => {
-            localStorage.setItem('user', JSON.stringify(userInfo));
             localStorage.setItem('token', userInfo.token);
             setLoading(false);
             globalContext.setUser(userInfo);
@@ -41,6 +41,7 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
 
   return (
     <div className={style.wrapper}>
+      <Seo />
       <Helmet>
         <title>系统登录</title>
       </Helmet>

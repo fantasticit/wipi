@@ -1,26 +1,31 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Table, Menu, Dropdown, Icon, Tooltip } from 'antd';
+import { TableSize } from 'antd/es/table';
 import { Pagination } from '@/components/Pagination';
-import { Search } from '@/components/Search';
+import { IFieldItem, Search } from '@/components/Search';
 import style from './index.module.scss';
 
 interface IProps {
   title?: React.ReactNode;
   rightNode?: React.ReactNode;
-  scroll?: any;
-  searchFields: Array<any>;
-  columns: Array<any>;
-  data: Array<any>;
+  padding?: number;
+  scroll?: { x?: number; y?: number };
+  searchFields: Array<IFieldItem>;
+  showSearchLabel?: boolean;
+  columns: Array<unknown>;
+  data: Array<unknown>;
   customDataTable?: (data) => React.ReactNode;
   defaultTotal: number;
-  onSearch: (arg: any) => Promise<any>;
+  onSearch: (arg) => Promise<unknown>;
 }
 
-export const SPTDataTable: React.FC<IProps> = ({
+export const DataTable: React.FC<IProps> = ({
   title,
   rightNode,
+  padding = 24,
   scroll = null,
   searchFields = [],
+  showSearchLabel = true,
   columns = [],
   data,
   defaultTotal,
@@ -30,7 +35,7 @@ export const SPTDataTable: React.FC<IProps> = ({
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
-  const [size, setSize] = useState<any>('default');
+  const [size, setSize] = useState<TableSize>('default');
   const [total, setTotal] = useState(defaultTotal);
   const [searchParams, updateSearchParams] = useState({});
 
@@ -55,7 +60,7 @@ export const SPTDataTable: React.FC<IProps> = ({
     <Menu>
       <Menu.Item onClick={() => setSize('default')}>默认</Menu.Item>
       <Menu.Item onClick={() => setSize('small')}>紧凑</Menu.Item>
-      <Menu.Item onClick={() => setSize('medium')}>中等</Menu.Item>
+      <Menu.Item onClick={() => setSize('middle')}>中等</Menu.Item>
     </Menu>
   );
 
@@ -63,12 +68,13 @@ export const SPTDataTable: React.FC<IProps> = ({
     <div className={style.wrapper}>
       <Search
         fields={searchFields}
+        showLabel={showSearchLabel}
         onSearch={(params) => {
           setPage(1);
           updateSearchParams(params);
         }}
       />
-      <div style={{ background: '#fff', padding: 24 }}>
+      <div style={{ background: '#fff', padding }}>
         {customDataTable ? (
           customDataTable(data)
         ) : (
@@ -112,4 +118,4 @@ export const SPTDataTable: React.FC<IProps> = ({
   );
 };
 
-export default SPTDataTable;
+export default DataTable;

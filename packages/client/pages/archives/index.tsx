@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import cls from 'classnames';
 import { Row, Col, Icon } from 'antd';
 import * as dayjs from 'dayjs';
-import { ArticleProvider } from '@providers/article';
+import { ArticleProvider } from '@/providers/article';
+import { GlobalContext } from '@/context/global';
 import { RecommendArticles } from '@components/RecommendArticles';
 import { Tags } from '@components/Tags';
 import { Categories } from '@components/Categories';
@@ -38,7 +39,6 @@ const ArchiveItem = ({ month, articles = [] }) => {
 
 const resolveArticlesCount = (articles) => {
   const years = Object.keys(articles);
-
   return years.reduce((a, year) => {
     const months = Object.keys(articles[year]);
     a += months.reduce((b, month) => (b += articles[year][month].length), 0);
@@ -46,8 +46,8 @@ const resolveArticlesCount = (articles) => {
   }, 0);
 };
 
-const Archives: NextPage<IProps> = (props) => {
-  const { articles = [], tags = [], categories = [] } = props as any;
+const Archives: NextPage<IProps> = ({ articles }) => {
+  const { tags, categories } = useContext(GlobalContext);
 
   return (
     <div className={style.wrapper}>

@@ -9,7 +9,7 @@ interface IProps {
   visible: boolean;
   article?: IArticle;
   onClose: () => void;
-  onChange?: (arg: any) => void;
+  onChange?: (arg) => void;
 }
 
 const FormItem = ({ label, content }) => {
@@ -38,7 +38,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
     (article.category && article.category.id) || null
   );
   const [selectedTags, setSelectedTags] = useState(
-    (Array.isArray(article.tags) && article.tags.map((tag) => tag.id)) || []
+    (Array.isArray(article.tags) && (article.tags as ITag[]).map((tag) => tag.id)) || []
   );
   const [cover, setCover] = useState(article.cover || null);
 
@@ -47,7 +47,9 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
     setCommentable(article.isCommentable || true);
     setRecommended(article.isRecommended || false);
     setSelectedCategory((article.category && article.category.id) || null);
-    setSelectedTags((Array.isArray(article.tags) && article.tags.map((tag) => tag.id)) || []);
+    setSelectedTags(
+      (Array.isArray(article.tags) && (article.tags as ITag[]).map((tag) => tag.id)) || []
+    );
     setCover(article.cover || null);
   }, [article.isCommentable, article.isRecommended, article.category, article.tags, article.cover]);
 

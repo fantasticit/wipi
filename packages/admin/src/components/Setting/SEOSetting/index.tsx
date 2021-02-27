@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message } from 'antd';
-import { SettingProvider } from '@providers/setting';
+import { SettingProvider } from '@/providers/setting';
 
 export const SEOSetting = ({ setting }) => {
   const [seoKeyword, setSeoKeyword] = useState(null);

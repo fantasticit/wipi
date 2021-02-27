@@ -14,7 +14,7 @@ interface IProps {
 export const usePagination = ({
   page: defaultPage = 1,
   pageSize: defaultPageSize = 12,
-}): [{ page: number; pageSize: number }, (arg: any, arg1: any) => void] => {
+}): [{ page: number; pageSize: number }, (arg, arg1) => void] => {
   const [page, setPage] = useState(defaultPage);
   const [pageSize, setPageSize] = useState(defaultPageSize);
 

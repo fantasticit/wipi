@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { Row, Col, Card, Button, Input, Popconfirm, List, Form, message } from 'antd';
 import cls from 'classnames';
 import { AdminLayout } from '@/layout/AdminLayout';
-import { TagProvider } from '@providers/tag';
+import { TagProvider } from '@/providers/tag';
 import style from './index.module.scss';
 
 interface ITagProps {

@@ -3,31 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import cls from 'classnames';
 import { Search } from '@/components/Search';
+import { throttle } from '@/utils';
 import { ThemeToggle } from './ThemeToggle';
 import style from './index.module.scss';
-
-function throttle(fn, threshhold) {
-  let last;
-  let timer;
-  threshhold || (threshhold = 250);
-
-  return function () {
-    const context = this;
-    const args = arguments;
-    const now = +new Date();
-
-    if (last && now < last + threshhold) {
-      clearTimeout(timer);
-      timer = setTimeout(function () {
-        last = now;
-        fn.apply(context, args);
-      }, threshhold);
-    } else {
-      last = now;
-      fn.apply(context, args);
-    }
-  };
-}
 
 export const _Header = ({ setting, menus }) => {
   const router = useRouter();
@@ -51,7 +29,6 @@ export const _Header = ({ setting, menus }) => {
         window.pageYOffset ||
         window.scrollY ||
         document.body.scrollTop;
-
       setAffix(y > 0);
       setAffixVisible(beforeY > y);
       setTimeout(() => {

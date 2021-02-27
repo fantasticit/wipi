@@ -2,35 +2,11 @@ import React from 'react';
 import * as dayjs from 'dayjs';
 import echarts from 'echarts';
 import ReactEcharts from 'echarts-for-react';
+import { groupBy } from '@/utils';
 
 interface IProps {
   data: IView[];
 }
-
-const groupBy = function (data, condition) {
-  if (!condition || !Array.isArray(data)) {
-    return data;
-  }
-
-  const result = Object.create(null);
-  let key = null;
-
-  data.forEach((item, i, arr) => {
-    key = condition(item, i, arr);
-
-    if (key == null) {
-      return;
-    }
-
-    if (result[key]) {
-      result[key].push(item);
-    } else {
-      result[key] = [item];
-    }
-  });
-
-  return result;
-};
 
 export const ViewChart: React.FC<IProps> = ({ data: propsData = [] }) => {
   const formatData = propsData.map((d) => {

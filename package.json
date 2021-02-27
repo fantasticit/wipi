@@ -1,9 +1,0 @@
-{
-  "name": "root",
-  "private": true,
-  "devDependencies": {
-    "lerna": "^3.20.2",
-    "prettier": "^2.1.2",
-    "typescript": "^3.9.7"
-  }
-}

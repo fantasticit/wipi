@@ -27,6 +27,12 @@ export class Setting {
   systemFooterInfo: string; // 系统页脚
 
   @Column({ type: 'text', default: null })
+  baiduAnalyticsId: string; // 百度统计id
+
+  @Column({ type: 'text', default: null })
+  googleAnalyticsId: string; // 谷歌分析 id
+
+  @Column({ type: 'text', default: null })
   seoKeyword: string; // SEO 关键词
 
   @Column({ type: 'text', default: null })
@@ -60,7 +66,7 @@ export class Setting {
   smtpPass: string; // SMTP 授权码
 
   @Column({ type: 'text', default: null })
-  smtpFromUser: string; // SMTP 地址
+  smtpFromUser: string; // SMTP 发件人
 
   @CreateDateColumn({
     type: 'datetime',

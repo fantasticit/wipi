@@ -1,14 +1,4 @@
 .wrapper {
-  // .formItem {
-  //   margin-top: 16px;
-  // }
-
-  :global {
-    .CodeMirror {
-      height: 480px !important;
-    }
-  }
-
   .operation {
     display: flex;
     justify-content: flex-end;

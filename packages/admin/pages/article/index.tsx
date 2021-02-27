@@ -5,14 +5,14 @@ import Link from 'next/link';
 import { Tag, Divider, Badge, Popconfirm, Modal, Spin, Select, Button, Icon, message } from 'antd';
 import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
-import { ArticleProvider } from '@providers/article';
+import { ArticleProvider } from '@/providers/article';
 import style from './index.module.scss';
 import { useSetting } from '@/hooks/useSetting';
 import { ViewProvider } from '@/providers/view';
 import { CategoryProvider } from '@/providers/category';
 import { TagProvider } from '@/providers/tag';
 import { ViewChart } from '@/components/ViewChart';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import { DataTable } from '@/components/DataTable';
 const url = require('url');
 
 const columns = [
@@ -182,7 +182,7 @@ const Article: NextPage<IArticleProps> = ({
   return (
     <AdminLayout>
       <div className={style.wrapper}>
-        <SPTDataTable
+        <DataTable
           rightNode={
             <Link href={'/article/editor'}>
               <a target="_blank">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Icon } from 'antd';
-import { ArticleProvider } from '@providers/article';
+import { Row, Col, Icon } from 'antd';
+import { ArticleProvider } from '@/providers/article';
 import { ArticleList } from '@components/ArticleList';
 import { format } from 'timeago.js';
 import style from './index.module.scss';
@@ -57,13 +57,13 @@ export const RecommendArticles: React.FC<IProps> = ({
           })}
         </ul>
       ) : mode === 'horizontal' ? (
-        <ul className={style.horizontalWrapper}>
+        <Row gutter={[16, 16]}>
           {(articles || [])
             .filter((article) => article.cover)
             .map((article) => {
               return (
-                <li key={article.id} className={style.horizontalItem}>
-                  <div>
+                <Col span={12} xs={24} sm={12} key={article.id}>
+                  <div className={style.articleItem}>
                     <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
                       <a>
                         <div>
@@ -74,10 +74,10 @@ export const RecommendArticles: React.FC<IProps> = ({
                       </a>
                     </Link>
                   </div>
-                </li>
+                </Col>
               );
             })}
-        </ul>
+        </Row>
       ) : (
         <ArticleList articles={articles || []} asCard={asCard} />
       )}

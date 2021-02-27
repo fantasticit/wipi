@@ -1,6 +1,7 @@
-import React from 'react';
-import { BackTop, Switch } from 'antd';
+import React, { useContext } from 'react';
+import { BackTop } from 'antd';
 import { Helmet } from 'react-helmet';
+import { GlobalContext } from '@/context/global';
 import { Header } from '@components/Header';
 import { Footer } from '@components/Footer';
 
@@ -20,16 +21,10 @@ const defaultMenus = [
 interface Iprops {
   backgroundColor?: string;
   needFooter?: boolean;
-  setting: any;
-  pages: any;
 }
 
-export const Layout: React.FC<Iprops> = ({
-  children,
-  needFooter = true,
-  setting = {},
-  pages = [],
-}) => {
+export const Layout: React.FC<Iprops> = ({ children, needFooter = true }) => {
+  const { setting, pages } = useContext(GlobalContext);
   const menus = [
     ...defaultMenus,
     ...pages.map((r) => ({
@@ -39,7 +34,7 @@ export const Layout: React.FC<Iprops> = ({
   ];
 
   return (
-    <div>
+    <>
       <Helmet>
         <title>{setting.systemTitle}</title>
         <meta name="keyword" content={setting.seoKeyword} />
@@ -52,11 +47,8 @@ export const Layout: React.FC<Iprops> = ({
       </Helmet>
       <Header setting={setting} menus={menus} />
       <main>{children}</main>
-
-      <div></div>
-
       <BackTop />
       {needFooter && <Footer setting={setting} />}
-    </div>
+    </>
   );
 };

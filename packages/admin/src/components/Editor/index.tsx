@@ -1,21 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import cls from 'classnames';
 import { Spin } from 'antd';
-// import * as Showdown from 'showdown';
 import style from './index.module.scss';
 
 interface IProps {
   value: string;
-  onChange: (arg: any) => void;
+  onChange: (arg) => void;
 }
-
-// const converter = new Showdown.Converter({
-//   tables: true,
-//   simplifiedAutoLink: true,
-//   strikethrough: true,
-//   tasklists: true,
-//   emoji: true,
-// });
 
 let monacoInstance = null;
 
@@ -35,7 +26,7 @@ export const Editor: React.FC<IProps> = ({ value = '', onChange }) => {
 
   useEffect(() => {
     Promise.all([import('monaco-editor/esm/vs/editor/editor.api.js')]).then((res) => {
-      const monoca = res[0] as any;
+      const monoca = res[0];
       monacoInstance = monoca.editor.create(ref.current, {
         value: value,
         language: 'markdown',

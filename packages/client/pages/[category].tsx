@@ -1,10 +1,12 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
 import cls from 'classnames';
 import { Icon } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
-import { ArticleProvider } from '@providers/article';
-import { CategoryProvider } from '@providers/category';
+import { throttle } from '@/utils';
+import { GlobalContext } from '@/context/global';
+import { ArticleProvider } from '@/providers/article';
+import { CategoryProvider } from '@/providers/category';
 import { ArticleList } from '@components/ArticleList';
 import { RecommendArticles } from '@components/RecommendArticles';
 import { Categories } from '@components/Categories';
@@ -20,24 +22,18 @@ interface IProps {
 
 const pageSize = 12;
 
-const Home: NextPage<IProps> = (props) => {
-  const {
-    articles: defaultArticles = [],
-    total,
-    category,
-    setting = {},
-    tags = [],
-    categories = [],
-  } = props as any;
+const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, category }) => {
+  const { setting, tags, categories } = useContext(GlobalContext);
   const [affix, setAffix] = useState(false);
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
 
   useEffect(() => {
-    const handler = () => {
-      const y = (window as any).scrollY;
+    const handler = throttle(() => {
+      // @ts-ignore
+      const y = window.scrollY;
       setAffix(y > 100);
-    };
+    }, 200);
 
     document.addEventListener('scroll', handler);
 

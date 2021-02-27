@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Menu, Dropdown, Avatar, Divider } from 'antd';
+import { Menu, Dropdown, Avatar } from 'antd';
 import { useUser } from '@/hooks/useUser';
 
 const menus = [

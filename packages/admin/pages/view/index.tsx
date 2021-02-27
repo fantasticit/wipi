@@ -4,7 +4,7 @@ import { Badge, Popconfirm, message } from 'antd';
 import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { ViewProvider } from '@/providers/view';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
 const Views: NextPage = () => {
@@ -130,7 +130,7 @@ const Views: NextPage = () => {
   return (
     <AdminLayout>
       <div className={style.wrapper}>
-        <SPTDataTable
+        <DataTable
           scroll={{ x: 1440 }}
           data={views}
           defaultTotal={0}

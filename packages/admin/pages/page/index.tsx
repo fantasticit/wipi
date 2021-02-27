@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { Modal, Divider, Badge, Popconfirm, Spin, Select, Button, Icon, message } from 'antd';
 import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
-import { PageProvider } from '@providers/page';
+import { PageProvider } from '@/providers/page';
 import { ViewProvider } from '@/providers/view';
 import { ViewChart } from '@/components/ViewChart';
 import style from './index.module.scss';
 import { useSetting } from '@/hooks/useSetting';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import { DataTable } from '@/components/DataTable';
 const url = require('url');
 
 const columns = [
@@ -160,7 +160,7 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
   return (
     <AdminLayout>
       <div className={style.wrapper}>
-        <SPTDataTable
+        <DataTable
           data={pages}
           defaultTotal={defaultTotal}
           rightNode={

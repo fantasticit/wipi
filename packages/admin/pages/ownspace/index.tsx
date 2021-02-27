@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { NextPage } from 'next';
 import { Row, Col, List, Typography, Card, Avatar, Form, Input, Button, Tabs, message } from 'antd';
 import Router from 'next/router';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { ArticleProvider } from '@providers/article';
-import { CommentProvider } from '@providers/comment';
+import { ArticleProvider } from '@/providers/article';
+import { CommentProvider } from '@/providers/comment';
 import { TagProvider } from '@/providers/tag';
 import { CategoryProvider } from '@/providers/category';
 import { FileProvider } from '@/providers/file';
-import { UserProvider } from '@providers/user';
+import { UserProvider } from '@/providers/user';
+import { GlobalContext } from '@/context/global';
 
 interface IOwnspaceProps {
   articlesCount: number;
@@ -35,24 +36,16 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
     `累计上传了 ` + filesCount + ' 个文件',
     `累计获得了 ` + commentsCount + ' 个评论',
   ];
+  const globalContext = useContext(GlobalContext);
+  const [user, setUser] = useState<Partial<IUser>>(globalContext.user);
   const [visible, setVisible] = useState<boolean>(false);
-  const [user, setUser] = useState<IUser | null>(null);
   const [oldPassword, setOldPassword] = useState(null);
   const [newPassword1, setNewPassword1] = useState(null);
   const [newPassword2, setNewPassword2] = useState(null);
 
-  useEffect(() => {
-    let info = window.localStorage.getItem('user');
-    try {
-      info = JSON.parse(info);
-      setUser(info as any);
-    } catch (e) {}
-  }, []);
-
   const save = useCallback(() => {
     UserProvider.update(user).then((res) => {
-      setUser(res);
-      window.localStorage.setItem('user', JSON.stringify(res));
+      globalContext.setUser(res);
       message.success('用户信息已保存');
     });
   }, [user]);
@@ -75,8 +68,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
     const data = { ...user, oldPassword, newPassword: newPassword2 };
     UserProvider.updatePassword(data).then(() => {
       message.success('密码已更新，请重新登录');
-      window.localStorage.clear();
-      Router.replace('/admin/login');
+      Router.replace('/admin/login?redirect=/ownspace');
     });
   };
 

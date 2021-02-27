@@ -1,35 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { NextPage } from 'next';
 import { Helmet } from 'react-helmet';
-import hljs from 'highlight.js';
+import { GlobalContext } from '@/context/global';
+import { PageProvider } from '@/providers/page';
 import { CommentAndRecommendArticles } from '@components/CommentAndRecommendArticles';
-import { PageProvider } from '@providers/page';
+import { MarkdownReader } from '@/components/MarkdownReader';
 import style from './index.module.scss';
 
 interface IProps {
   page: IPage;
 }
 
-const Page: NextPage<IProps> = (props) => {
-  const { setting = {}, page } = props as any;
+const Page: NextPage<IProps> = ({ page }) => {
+  const { setting } = useContext(GlobalContext);
 
-  const ref = useRef(null);
-
-  // 更新阅读量
   useEffect(() => {
     PageProvider.updatePageViews(page.id);
   }, []);
-
-  // 高亮
-  useEffect(() => {
-    if (ref.current) {
-      hljs.initHighlightingOnLoad();
-      setTimeout(() => {
-        const blocks = ref.current.querySelectorAll('pre code');
-        blocks.forEach((block) => hljs.highlightBlock(block));
-      }, 0);
-    }
-  }, [page.id]);
 
   return (
     <div>
@@ -49,11 +36,7 @@ const Page: NextPage<IProps> = (props) => {
               </div>
             )}
             <div className={style.content}>
-              <div
-                ref={ref}
-                className={'markdown'}
-                dangerouslySetInnerHTML={{ __html: page.html }}
-              ></div>
+              <MarkdownReader content={page.html} />
             </div>
           </div>
           <CommentAndRecommendArticles pageId={page.id} isCommentable={true} />

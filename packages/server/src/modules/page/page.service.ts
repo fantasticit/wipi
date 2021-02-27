@@ -91,7 +91,8 @@ export class PageService {
 
     const newPage = {
       ...page,
-      publishAt: status === 'publish' ? dayjs().format('YYYY-MM-DD HH:mm:ss') : old.publishAt,
+      publishAt:
+        status === 'publish' ? dayjs().format('YYYY-MM-DD HH:mm:ss') : old && old.publishAt,
     };
 
     const updatedPage = await this.pageRepository.merge(old, newPage);

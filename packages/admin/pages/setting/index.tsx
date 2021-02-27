@@ -6,6 +6,7 @@ import { AdminLayout } from '@/layout/AdminLayout';
 import { useSetting } from '@/hooks/useSetting';
 import { SystemSetting } from '@/components/Setting/SystemSetting';
 import { SEOSetting } from '@/components/Setting/SEOSetting';
+import { AnalyticsSetting } from '@/components/Setting/AnalyticsSetting';
 import { OSSSetting } from '@/components/Setting/OSSSetting';
 import { SMTPSetting } from '@/components/Setting/SMTPSetting';
 
@@ -28,6 +29,10 @@ const Setting: NextPage<IProps> = ({ type: defaultType }) => {
     {
       label: 'SEO 设置',
       content: <SEOSetting setting={setting} />,
+    },
+    {
+      label: '数据统计',
+      content: <AnalyticsSetting setting={setting} />,
     },
     {
       label: 'OSS 设置',

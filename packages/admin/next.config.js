@@ -13,7 +13,6 @@ const antdVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './src/theme/antd.less'), 'utf8')
 );
 
-// fix: prevents error when .less files are required by node
 if (typeof require !== 'undefined') {
   require.extensions['.less'] = (file) => {};
 }
@@ -26,10 +25,10 @@ const nextConfig = {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
     config.plugins.push(
       new FilterWarningsPlugin({
-        // ignore ANTD chunk styles [mini-css-extract-plugin] warning
         exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
       })
     );
+
     return config;
   },
 };

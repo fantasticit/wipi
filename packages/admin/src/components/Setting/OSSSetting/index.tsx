@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Switch, message } from 'antd';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { SettingProvider } from '@providers/setting';
+import { SettingProvider } from '@/providers/setting';
 
 export const OSSSetting = ({ setting }) => {
   const [visible, setVisible] = useState(false);

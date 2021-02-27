@@ -4,8 +4,8 @@ import Router from 'next/router';
 import { Spin, Input } from 'antd';
 import Link from 'next/link';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { SearchProvider } from '@providers/search';
-import { TagProvider } from '@providers/tag';
+import { SearchProvider } from '@/providers/search';
+import { TagProvider } from '@/providers/tag';
 import { Tags } from '@components/Tags';
 import style from './index.module.scss';
 

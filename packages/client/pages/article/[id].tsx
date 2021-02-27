@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { NextPage } from 'next';
 import Router from 'next/router';
 import { Icon, Modal, Form, Input, message } from 'antd';
 import Link from 'next/link';
 import cls from 'classnames';
-
 import * as dayjs from 'dayjs';
-import hljs from 'highlight.js';
-import { ArticleProvider } from '@providers/article';
+import { GlobalContext } from '@/context/global';
+import { ArticleProvider } from '@/providers/article';
 import { CommentAndRecommendArticles } from '@components/CommentAndRecommendArticles';
+import { MarkdownReader } from '@/components/MarkdownReader';
 import style from './index.module.scss';
 const url = require('url');
 
@@ -17,12 +17,8 @@ interface IProps {
   article: IArticle;
 }
 
-let hasHljsInited = false;
-
-const Article: NextPage<IProps> = (props) => {
-  const { setting = {}, article } = props as any;
-  const ref = useRef(null);
-  const content = useRef(null);
+const Article: NextPage<IProps> = ({ article }) => {
+  const { setting } = useContext(GlobalContext);
   const [password, setPassword] = useState(null);
   const [shouldCheckPassWord, setShouldCheckPassword] = useState(article && article.needPassword);
 
@@ -53,21 +49,6 @@ const Article: NextPage<IProps> = (props) => {
       ArticleProvider.updateArticleViews(article.id);
     }
   }, [shouldCheckPassWord]);
-
-  // 高亮
-  useEffect(() => {
-    if (!shouldCheckPassWord) {
-      if (!hasHljsInited) {
-        hljs.initHighlightingOnLoad();
-        hasHljsInited = true;
-      }
-
-      setTimeout(() => {
-        const blocks = ref.current.querySelectorAll('pre code');
-        blocks.forEach((block) => hljs.highlightBlock(block));
-      }, 0);
-    }
-  }, [shouldCheckPassWord, article.id]);
 
   return (
     <div>
@@ -109,7 +90,7 @@ const Article: NextPage<IProps> = (props) => {
           <meta itemProp="dataPublished" content={article.publishAt} />
           {article.cover && <meta itemProp="image" content={article.cover} />}
 
-          <div className={cls('container', style.contentWrapper)} ref={content}>
+          <div className={cls('container', style.contentWrapper)}>
             {article.cover && (
               <div className={style.coverWrapper}>
                 <img src={article.cover} alt="文章封面" />
@@ -124,11 +105,7 @@ const Article: NextPage<IProps> = (props) => {
               </p>
             </div>
             <div className={style.content}>
-              <div
-                ref={ref}
-                className={cls('markdown', style.markdown)}
-                dangerouslySetInnerHTML={{ __html: article.html }}
-              ></div>
+              <MarkdownReader content={article.html} />
               <div className={style.articleFooter}>
                 <div className={style.articleInfo}>
                   <p>
@@ -142,7 +119,6 @@ const Article: NextPage<IProps> = (props) => {
                     </a>
                   </p>
                 </div>
-
                 {article.tags && article.tags.length ? (
                   <div className={style.tags}>
                     {article.tags.map((tag) => {

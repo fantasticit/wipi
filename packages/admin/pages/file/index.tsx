@@ -17,14 +17,26 @@ import {
 } from 'antd';
 import * as dayjs from 'dayjs';
 import Viewer from 'viewerjs';
+import { copy, formatFileSize } from '@/utils';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { useSetting } from '@/hooks/useSetting';
-import { FileProvider } from '@providers/file';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import { FileProvider } from '@/providers/file';
+import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
 const { Meta } = Card;
-const { Dragger } = Upload;
+
+const drawerFooterStyle: React.CSSProperties = {
+  position: 'absolute',
+  bottom: 0,
+  width: '100%',
+  borderTop: '1px solid #e8e8e8',
+  padding: '10px 16px',
+  textAlign: 'right',
+  left: 0,
+  background: '#fff',
+  borderRadius: '0 0 4px 4px',
+};
 
 const DescriptionItem = ({ title, content }) => (
   <div className={style.description}>
@@ -38,32 +50,7 @@ interface IFileProps {
   total: number;
 }
 
-const copy = (value) => {
-  const textarea: any = document.createElement('textarea');
-  textarea.id = 't';
-  textarea.style.height = 0;
-  document.body.appendChild(textarea);
-  textarea.value = value;
-  const selector: any = document.querySelector('#t');
-  selector.select();
-  document.execCommand('copy');
-  document.body.removeChild(textarea);
-  message.success('链接已复制到剪切板');
-};
-
-let viewer: any = null;
-
-const resolveFileSize = (size) => {
-  if (size < 1024) {
-    return size + ' Byte';
-  }
-
-  if (size < 1024 * 1024) {
-    return (size / 1024).toFixed(2) + ' KB';
-  }
-
-  return (size / 1024 / 1024).toFixed(2) + ' MB';
-};
+let viewer = null;
 
 const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
   const ref = useRef();
@@ -154,7 +141,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
           </div>
         )}
 
-        <SPTDataTable
+        <DataTable
           data={files}
           defaultTotal={total}
           columns={[]}
@@ -232,7 +219,6 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
               src={currentFile && currentFile.url}
             />
           </div>
-
           <Row>
             <Col span={24}>
               <DescriptionItem title="文件名称" content={currentFile && currentFile.originalname} />
@@ -250,7 +236,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
             <Col span={12}>
               <DescriptionItem
                 title="文件大小"
-                content={resolveFileSize((currentFile && currentFile.size) || 0)}
+                content={formatFileSize((currentFile && currentFile.size) || 0)}
               />
             </Col>
           </Row>
@@ -281,19 +267,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
               />
             </Col>
           </Row>
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              width: '100%',
-              borderTop: '1px solid #e8e8e8',
-              padding: '10px 16px',
-              textAlign: 'right',
-              left: 0,
-              background: '#fff',
-              borderRadius: '0 0 4px 4px',
-            }}
-          >
+          <div style={drawerFooterStyle}>
             <Button
               style={{
                 marginRight: 8,

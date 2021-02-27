@@ -107,3 +107,15 @@ interface ISearch {
   count: number;
   createAt: string;
 }
+
+interface ISetting {
+  systemUrl?: string; // 系统地址
+  systemTitle?: string; // 系统标题
+  systemLogo?: string; // 系统 Logo
+  systemFavicon?: string; // 系统 favicon
+  systemFooterInfo?: string; // 系统页脚信息
+  seoKeyword?: string; // SEO 关键词
+  seoDesc?: string; //  SEO 描述
+  baiduAnalyticsId?: string; // 百度统计id
+  googleAnalyticsId?: string; // 谷歌分析 id
+}

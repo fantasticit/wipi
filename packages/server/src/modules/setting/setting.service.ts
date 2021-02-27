@@ -40,6 +40,8 @@ export class SettingService {
       'systemFooterInfo',
       'seoKeyword',
       'seoDesc',
+      'baiduAnalyticsId',
+      'googleAnalyticsId',
     ].reduce((a, c) => {
       a[c] = res[c];
       return a;

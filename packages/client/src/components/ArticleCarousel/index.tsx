@@ -17,7 +17,7 @@ export const ArticleCarousel: React.FC<IProps> = ({ articles = [] }) => {
           .slice(0, 6)
           .map((article) => {
             return (
-              <div>
+              <div key={article.id}>
                 <div
                   className={style.articleItem}
                   style={{ backgroundImage: `url(${article.cover})` }}

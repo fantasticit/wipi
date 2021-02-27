@@ -4,7 +4,7 @@ import { Badge, Divider, Select, message } from 'antd';
 import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { UserProvider } from '@/providers/user';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
 const Page: NextPage = () => {
@@ -95,7 +95,7 @@ const Page: NextPage = () => {
   return (
     <AdminLayout>
       <div className={style.wrapper}>
-        <SPTDataTable
+        <DataTable
           data={data}
           defaultTotal={0}
           columns={[...columns, actionColumn]}

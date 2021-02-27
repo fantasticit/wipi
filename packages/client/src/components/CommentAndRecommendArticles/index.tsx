@@ -28,17 +28,11 @@ export const CommentAndRecommendArticles: NextPage<IProps> = ({
         </div>
       )}
       {/* E 评论 */}
-
       {/* S 推荐阅读 */}
       <div className={style.recmmendArticles}>
         <p className={style.title}>推荐阅读</p>
         <div className={style.articleContainer}>
-          <RecommendArticles
-            articleId={articleId}
-            needTitle={false}
-            asCard={false}
-            // mode="horizontal"
-          />
+          <RecommendArticles articleId={articleId} needTitle={false} asCard={false} />
         </div>
       </div>
       {/* E 推荐阅读 */}

@@ -1,22 +1,24 @@
+import React from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import style from './index.module.scss';
 
-interface IFieldItem {
+export interface IFieldItem {
   label: React.ReactNode;
   field: string;
-  rules?: Array<any>;
+  rules?: Array<unknown>;
   msg?: string;
   children?: React.ReactNode;
 }
 
 interface IProps extends FormComponentProps {
   fields: Array<IFieldItem>;
-  onSearch?: (arg: any) => void;
-  onReset?: (arg: any) => void;
+  showLabel?: boolean;
+  onSearch?: (arg) => void;
+  onReset?: (arg) => void;
 }
 
-const _Search: React.FC<IProps> = ({ form, fields = [], onSearch }) => {
+const _Search: React.FC<IProps> = ({ form, fields = [], showLabel = true, onSearch }) => {
   const getFields = () => {
     const count = 6;
 
@@ -26,12 +28,16 @@ const _Search: React.FC<IProps> = ({ form, fields = [], onSearch }) => {
       children.push(
         <Col xs={24} sm={12} md={6} key={field.field}>
           <Form.Item
-            label={field.label}
-            labelCol={{
-              xs: { span: 24 },
-              sm: { span: 12 },
-              md: { span: 6 },
-            }}
+            {...(showLabel
+              ? {
+                  label: field.label,
+                  labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 12 },
+                    md: { span: 6 },
+                  },
+                }
+              : {})}
           >
             {getFieldDecorator(field.field, {
               rules: field.rules,
@@ -51,7 +57,7 @@ const _Search: React.FC<IProps> = ({ form, fields = [], onSearch }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    form.validateFields((err, values) => {
+    form.validateFields((_, values) => {
       onSearch(values);
     });
   };

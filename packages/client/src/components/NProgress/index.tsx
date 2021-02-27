@@ -21,19 +21,19 @@ export class NProgress extends React.Component<IProps> {
   routeChangeStart = () => {
     const { showAfterMs } = this.props;
     clearTimeout(this.timer);
-    this.timer = setTimeout((_NProgress as any).start, showAfterMs);
+    this.timer = setTimeout(_NProgress.start, showAfterMs);
   };
 
   routeChangeEnd = () => {
     clearTimeout(this.timer);
-    (_NProgress as any).done();
+    _NProgress.done();
   };
 
   componentDidMount() {
     const { options } = this.props;
 
     if (options) {
-      (_NProgress as any).configure(options);
+      _NProgress.configure(options);
     }
 
     Router.events.on('routeChangeStart', this.routeChangeStart);

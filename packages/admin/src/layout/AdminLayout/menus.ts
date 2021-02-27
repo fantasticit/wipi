@@ -1,3 +1,11 @@
+export type IMenuItem = {
+  icon?: string;
+  title?: string;
+  label: string;
+  path: string;
+  ignore?: boolean;
+};
+
 export const menus = [
   {
     icon: 'dashboard',
@@ -5,9 +13,7 @@ export const menus = [
     title: '工作台',
     path: '/',
   },
-  {
-    divider: true,
-  },
+
   {
     icon: 'form',
     label: '所有文章',
@@ -37,9 +43,6 @@ export const menus = [
     path: '/article/tags',
   },
   {
-    divider: true,
-  },
-  {
     icon: 'snippets',
     label: '所有页面',
     title: '所有页面',
@@ -55,9 +58,7 @@ export const menus = [
     path: '/page/editor/[id]',
     ignore: true,
   },
-  {
-    divider: true,
-  },
+
   {
     icon: 'message',
     label: '评论管理',
@@ -76,9 +77,7 @@ export const menus = [
     title: '文件管理',
     path: '/file',
   },
-  {
-    divider: true,
-  },
+
   {
     icon: 'search',
     label: '搜索记录',
@@ -92,9 +91,7 @@ export const menus = [
     title: '访问统计',
     path: '/view',
   },
-  {
-    divider: true,
-  },
+
   {
     label: '个人中心',
     title: '个人中心',
@@ -116,3 +113,23 @@ export const menus = [
     path: '/setting',
   },
 ];
+
+export const findActiveMenu = (pathname): [IMenuItem | null, IMenuItem[]] => {
+  const idx = menus.findIndex((menu) => menu.path === pathname);
+  if (idx < 0) {
+    return [null, []];
+  }
+  const activeMenu = menus[idx];
+  const breadcrumbs =
+    idx > 1
+      ? [
+          menus.slice(0, 1)[0],
+          ...menus.slice(1, idx).filter((menu) => {
+            return activeMenu.path.includes(menu.path);
+          }),
+          activeMenu,
+        ]
+      : [menus.slice(0, 1)[0]];
+
+  return [activeMenu, breadcrumbs];
+};

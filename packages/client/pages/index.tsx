@@ -1,8 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
 import cls from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
-import { ArticleProvider } from '@providers/article';
+import { throttle } from '@/utils';
+import { GlobalContext } from '@/context/global';
+import { ArticleProvider } from '@/providers/article';
 import { ArticleList } from '@components/ArticleList';
 import { ArticleCarousel } from '@components/ArticleCarousel';
 import { RecommendArticles } from '@components/RecommendArticles';
@@ -19,27 +21,23 @@ interface IHomeProps {
 
 const pageSize = 12;
 
-const Home: NextPage<IHomeProps> = (props) => {
-  const {
-    articles: defaultArticles = [],
-    recommendedArticles = [],
-    total = 0,
-    setting = {},
-    categories = [],
-    tags = [],
-  } = props as any;
+const Home: NextPage<IHomeProps> = ({
+  articles: defaultArticles = [],
+  recommendedArticles = [],
+  total = 0,
+}) => {
+  const { setting, tags, categories } = useContext(GlobalContext);
   const [affix, setAffix] = useState(false);
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
 
   useEffect(() => {
-    const handler = () => {
-      const y = (window as any).scrollY;
+    const handler = throttle(() => {
+      // @ts-ignore
+      const y = window.scrollY;
       setAffix(y > 380);
-    };
-
+    }, 200);
     document.addEventListener('scroll', handler);
-
     return () => {
       document.removeEventListener('scroll', handler);
     };

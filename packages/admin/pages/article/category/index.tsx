@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { Row, Col, Card, Button, Input, Popconfirm, Form, message } from 'antd';
 import cls from 'classnames';
 import { AdminLayout } from '@/layout/AdminLayout';
-import { CategoryProvider } from '@providers/category';
+import { CategoryProvider } from '@/providers/category';
 import style from './index.module.scss';
 
 interface IProps {

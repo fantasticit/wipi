@@ -4,7 +4,7 @@ import { Button, Modal, Popconfirm, message } from 'antd';
 import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { MailProvider } from '@/providers/mail';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
 const Mail: NextPage = () => {
@@ -92,7 +92,7 @@ const Mail: NextPage = () => {
   return (
     <AdminLayout>
       <div className={style.wrapper}>
-        <SPTDataTable
+        <DataTable
           data={mails}
           defaultTotal={0}
           columns={[...columns, actionColumn]}

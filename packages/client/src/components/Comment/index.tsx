@@ -3,23 +3,10 @@ import { Button, Icon, Avatar, Pagination } from 'antd';
 import { format } from 'timeago.js';
 import cls from 'classnames';
 import hljs from 'highlight.js';
-import { CommentProvider } from '@providers/comment';
+import { CommentProvider } from '@/providers/comment';
+import { getRandomColor } from '@/utils';
 import { Editor } from './Editor';
 import style from './index.module.scss';
-
-const colors = ['#52c41a', '#f5222d', '#1890ff', '#faad14', '#ff0064', '#722ed1'];
-const getRandomColor = (() => {
-  const cache = {};
-
-  return (key): string => {
-    if (!cache[key]) {
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      cache[key] = color;
-      return color;
-    }
-    return cache[key];
-  };
-})();
 
 export const CommentItem = ({
   comment,
@@ -148,6 +135,7 @@ export const MyComment: React.FC<IProps> = ({ articleId, isInPage = false }) => 
           setTotal(res[1]);
           setTimeout(() => {
             setLoading(false);
+            if (!ref.current) return;
             const blocks = ref.current.querySelectorAll('pre code');
             blocks.forEach((block) => hljs.highlightBlock(block));
           }, 0);

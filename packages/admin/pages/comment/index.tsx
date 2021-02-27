@@ -4,7 +4,7 @@ import { Select, Badge } from 'antd';
 import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { CommentProvider } from '@/providers/comment';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import { DataTable } from '@/components/DataTable';
 import { useSetting } from '@/hooks/useSetting';
 import { CommentArticle } from '@/components/comment/CommentArticle';
 import { CommentAction } from '@/components/comment/CommentAction';
@@ -100,7 +100,7 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }
   return (
     <AdminLayout>
       <div>
-        <SPTDataTable
+        <DataTable
           data={comments}
           defaultTotal={total}
           columns={[...columns, actionColumn]}
@@ -126,7 +126,7 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }
                     { label: '未通过', value: 0 },
                   ].map((t) => {
                     return (
-                      <Select.Option key={t.label} value={t.value as any}>
+                      <Select.Option key={t.label} value={t.value as number}>
                         {t.label}
                       </Select.Option>
                     );

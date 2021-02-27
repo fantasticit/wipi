@@ -17,7 +17,7 @@
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["components/*"],
-      "@providers/*": ["providers/*"]
+      "@wipi/shared/providers/*": ["providers/*"]
     }
   },
   "exclude": ["node_modules"],

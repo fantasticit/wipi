@@ -1,32 +1,25 @@
 import React from 'react';
 import App from 'next/app';
-import { ViewProvider } from '@providers/view';
-import { SettingProvider } from '@providers/setting';
+import { SettingProvider } from '@/providers/setting';
 import { NProgress } from '@components/NProgress';
-import { GlobalContext } from '@/context/global';
+import { IGlobalContext, GlobalContext } from '@/context/global';
+import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
+import { ViewStatistics } from '@/components/ViewStatistics';
+import { Analytics } from '@/components/Analytics';
 import 'viewerjs/dist/viewer.css';
 import '@/theme/antd.less';
 import '@/theme/reset.scss';
 import '@/theme/markdown.scss';
 
-let lastUrl;
-
-const addView = (url) => {
-  if (/localhost/.test(url)) {
-    return;
-  }
-
-  ViewProvider.addView({ url });
-};
-
 class MyApp extends App {
-  state = {
-    user: {},
+  state: Omit<IGlobalContext, 'setUser' | 'getSetting' | 'toggleCollapse'> = {
     setting: {},
+    user: {},
     collapsed: false,
   };
 
   setUser = (user) => {
+    localStorage.setItem('user', JSON.stringify(user));
     this.setState({ user });
   };
 
@@ -51,46 +44,24 @@ class MyApp extends App {
   componentDidMount() {
     this.getSetting();
     this.getUserFromStorage();
-    try {
-      const el = document.querySelector('#holderStyle');
-      el.parentNode.removeChild(el);
-    } catch (e) {}
-    const url = window.location.href;
-    lastUrl = url;
-    addView(url);
-  }
-
-  componentDidUpdate() {
-    const url = window.location.href;
-    if (url === lastUrl) {
-      return;
-    }
-    lastUrl = url;
-    addView(url);
   }
 
   render() {
     const { Component, pageProps } = this.props;
+    const contextValue = {
+      ...this.state,
+      setUser: this.setUser,
+      getSetting: this.getSetting,
+      toggleCollapse: this.toggleCollapse,
+    };
 
     return (
-      <GlobalContext.Provider
-        value={{
-          ...this.state,
-          setUser: this.setUser,
-          getSetting: this.getSetting,
-          toggleCollapse: this.toggleCollapse,
-        }}
-      >
-        <div>
-          <style
-            id="holderStyle"
-            dangerouslySetInnerHTML={{
-              __html: `* { transition: none !important; }`,
-            }}
-          ></style>
-          <NProgress color={'#0188fb'} />
-          <Component {...pageProps} />
-        </div>
+      <GlobalContext.Provider value={contextValue}>
+        <FixAntdStyleTransition />
+        <ViewStatistics />
+        <Analytics />
+        <NProgress color={'#0188fb'} />
+        <Component {...pageProps} />
       </GlobalContext.Provider>
     );
   }

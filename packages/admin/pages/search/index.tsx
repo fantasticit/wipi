@@ -4,7 +4,7 @@ import { Badge, Popconfirm, message } from 'antd';
 import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { SearchProvider } from '@/providers/search';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
 const Search: NextPage = () => {
@@ -87,7 +87,7 @@ const Search: NextPage = () => {
   return (
     <AdminLayout>
       <div className={style.wrapper}>
-        <SPTDataTable
+        <DataTable
           data={data}
           defaultTotal={0}
           columns={[...columns, actionColumn]}

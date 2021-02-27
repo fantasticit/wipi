@@ -54,6 +54,7 @@ import { SearchModule } from './modules/search/search.module';
         database: configService.get('DB_DATABASE', 'wipi'),
         charset: 'utf8mb4',
         timezone: '+08:00',
+        synchronize: true,
       }),
     }),
     UserModule,
