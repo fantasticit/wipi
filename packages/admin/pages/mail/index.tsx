@@ -1,16 +1,27 @@
 import React, { useState, useCallback } from 'react';
 import { NextPage } from 'next';
-import { Button, Modal, Popconfirm, message } from 'antd';
+import { Alert, Button, Modal, Popconfirm, message } from 'antd';
 import * as dayjs from 'dayjs';
+import Link from 'next/link';
+import { useSetting } from '@/hooks/useSetting';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { MailProvider } from '@/providers/mail';
 import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
 const Mail: NextPage = () => {
+  const setting = useSetting();
   const [mails, setMails] = useState<IMail[]>([]);
   const [selectedMail, setSelectedMail] = useState(null);
   const [params, setParams] = useState(null);
+
+  const isSmtpSettingFullfilled =
+    setting &&
+    setting.smtpHost &&
+    setting.smtpPort &&
+    setting.smtpUser &&
+    setting.smtpFromUser &&
+    setting.smtpFromUser;
 
   // 获取邮件
   const getMails = useCallback((params) => {
@@ -92,6 +103,21 @@ const Mail: NextPage = () => {
   return (
     <AdminLayout>
       <div className={style.wrapper}>
+        {!isSmtpSettingFullfilled ? (
+          <div style={{ marginBottom: 24 }}>
+            <Alert
+              message={
+                <span>
+                  系统检测到<strong>SMTP 配置</strong>未完善，当收到评论时，无法进行邮件通知。
+                  <Link href="/setting?type=SMTP%20服务">
+                    <a>点我立即完善</a>
+                  </Link>
+                </span>
+              }
+              type="warning"
+            />
+          </div>
+        ) : null}
         <DataTable
           data={mails}
           defaultTotal={0}
