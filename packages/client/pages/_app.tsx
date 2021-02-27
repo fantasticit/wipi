@@ -12,6 +12,7 @@ import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
 import { ViewStatistics } from '@/components/ViewStatistics';
 import { Analytics } from '@/components/Analytics';
 import 'highlight.js/styles/atom-one-light.css';
+import 'viewerjs/dist/viewer.css';
 import '@/theme/antd.less';
 import '@/theme/reset.scss';
 import '@/theme/markdown.scss';

@@ -8,6 +8,7 @@ import cls from 'classnames';
 import * as dayjs from 'dayjs';
 import { GlobalContext } from '@/context/global';
 import { ArticleProvider } from '@/providers/article';
+import { ImageViewer } from '@/components/ImageViewer';
 import { CommentAndRecommendArticles } from '@components/CommentAndRecommendArticles';
 import { MarkdownReader } from '@/components/MarkdownReader';
 import style from './index.module.scss';
@@ -76,69 +77,73 @@ const Article: NextPage<IProps> = ({ article }) => {
         <Helmet>
           <title>{(article.title || '未知标题') + ' | ' + setting.systemTitle}</title>
         </Helmet>
-        <article className={cls(style.container)}>
-          {setting.systemUrl && (
-            <meta
-              itemProp="url"
-              content={url.resolve(setting.systemUrl, `/article/${article.id}`)}
-            />
-          )}
-          <meta itemProp="headline" content={article.title} />
-          {article.tags && (
-            <meta itemProp="keywords" content={article.tags.map((tag) => tag.label).join(' ')} />
-          )}
-          <meta itemProp="dataPublished" content={article.publishAt} />
-          {article.cover && <meta itemProp="image" content={article.cover} />}
-
-          <div className={cls('container', style.contentWrapper)}>
-            {article.cover && (
-              <div className={style.coverWrapper}>
-                <img src={article.cover} alt="文章封面" />
-              </div>
+        <ImageViewer containerSelector="#js-article-wrapper">
+          <article id="js-article-wrapper" className={cls(style.container)}>
+            {setting.systemUrl && (
+              <meta
+                itemProp="url"
+                content={url.resolve(setting.systemUrl, `/article/${article.id}`)}
+              />
             )}
-            <div className={style.meta}>
-              <h1 className={style.title}>{article.title}</h1>
-              <p className={style.desc}>
-                <span>发布于 {dayjs.default(article.publishAt).format('YYYY-MM-DD HH:mm:ss')}</span>
-                <span> • </span>
-                <span>阅读量 {article.views}</span>
-              </p>
-            </div>
-            <div className={style.content}>
-              <MarkdownReader content={article.html} />
-              <div className={style.articleFooter}>
-                <div className={style.articleInfo}>
-                  <p>
-                    发布时间：
-                    {dayjs.default(article.publishAt).format('YYYY-MM-DD HH:mm:ss')} | 版权信息：
-                    <a
-                      href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
-                      target="_blank"
-                    >
-                      非商用-署名-自由转载
-                    </a>
-                  </p>
+            <meta itemProp="headline" content={article.title} />
+            {article.tags && (
+              <meta itemProp="keywords" content={article.tags.map((tag) => tag.label).join(' ')} />
+            )}
+            <meta itemProp="dataPublished" content={article.publishAt} />
+            {article.cover && <meta itemProp="image" content={article.cover} />}
+
+            <div className={cls('container', style.contentWrapper)}>
+              {article.cover && (
+                <div className={style.coverWrapper}>
+                  <img src={article.cover} alt="文章封面" />
                 </div>
-                {article.tags && article.tags.length ? (
-                  <div className={style.tags}>
-                    {article.tags.map((tag) => {
-                      return (
-                        <div className={style.tag} key={tag.id}>
-                          <Link href={'/tag/[tag]'} as={'/tag/' + tag.value} scroll={false}>
-                            <a>
-                              <Icon type="tag" />
-                              <span>{tag.label}</span>
-                            </a>
-                          </Link>
-                        </div>
-                      );
-                    })}
+              )}
+              <div className={style.meta}>
+                <h1 className={style.title}>{article.title}</h1>
+                <p className={style.desc}>
+                  <span>
+                    发布于 {dayjs.default(article.publishAt).format('YYYY-MM-DD HH:mm:ss')}
+                  </span>
+                  <span> • </span>
+                  <span>阅读量 {article.views}</span>
+                </p>
+              </div>
+              <div className={style.content}>
+                <MarkdownReader content={article.html} />
+                <div className={style.articleFooter}>
+                  <div className={style.articleInfo}>
+                    <p>
+                      发布时间：
+                      {dayjs.default(article.publishAt).format('YYYY-MM-DD HH:mm:ss')} | 版权信息：
+                      <a
+                        href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
+                        target="_blank"
+                      >
+                        非商用-署名-自由转载
+                      </a>
+                    </p>
                   </div>
-                ) : null}
+                  {article.tags && article.tags.length ? (
+                    <div className={style.tags}>
+                      {article.tags.map((tag) => {
+                        return (
+                          <div className={style.tag} key={tag.id}>
+                            <Link href={'/tag/[tag]'} as={'/tag/' + tag.value} scroll={false}>
+                              <a>
+                                <Icon type="tag" />
+                                <span>{tag.label}</span>
+                              </a>
+                            </Link>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </ImageViewer>
         <CommentAndRecommendArticles articleId={article.id} isCommentable={article.isCommentable} />
       </div>
     </div>

@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import { Helmet } from 'react-helmet';
 import { GlobalContext } from '@/context/global';
 import { PageProvider } from '@/providers/page';
+import { ImageViewer } from '@/components/ImageViewer';
 import { CommentAndRecommendArticles } from '@components/CommentAndRecommendArticles';
 import { MarkdownReader } from '@/components/MarkdownReader';
 import style from './index.module.scss';
@@ -25,22 +26,25 @@ const Page: NextPage<IProps> = ({ page }) => {
           <p>页面不存在</p>
         </div>
       ) : (
-        <div className={style.container}>
-          <Helmet>
-            <title>{page.name + ' | ' + setting.systemTitle}</title>
-          </Helmet>
-          <div className="container">
-            {page.cover && (
-              <div className={style.coverWrapper}>
-                <img src={page.cover} alt="文章封面" />
+        <ImageViewer containerSelector="#js-page-wrapper">
+          <div id="js-page-wrapper" className={style.container}>
+            <Helmet>
+              <title>{page.name + ' | ' + setting.systemTitle}</title>
+            </Helmet>
+
+            <div className="container">
+              {page.cover && (
+                <div className={style.coverWrapper}>
+                  <img src={page.cover} alt="文章封面" />
+                </div>
+              )}
+              <div className={style.content}>
+                <MarkdownReader content={page.html} />
               </div>
-            )}
-            <div className={style.content}>
-              <MarkdownReader content={page.html} />
             </div>
+            <CommentAndRecommendArticles pageId={page.id} isCommentable={true} />
           </div>
-          <CommentAndRecommendArticles pageId={page.id} isCommentable={true} />
-        </div>
+        </ImageViewer>
       )}
     </div>
   );
