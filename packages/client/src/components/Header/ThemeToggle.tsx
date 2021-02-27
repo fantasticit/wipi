@@ -19,10 +19,7 @@ export const ThemeToggle = () => {
   }, [dark]);
 
   useEffect(() => {
-    if (
-      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-      new Date().getHours() >= 18
-    ) {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setDark(true);
     }
   }, []);
