@@ -9,6 +9,7 @@
 - [Github 源码](https://github.com/fantasticit/wipi)
 - [前台页面](https://blog.wipi.tech/)
 - [管理系统](https://admin.blog.wipi.tech/)：支持访客注册，也可使用账户：`wipi` `wipi123456`
+- [接口文档](https://api.blog.wipi.tech/api/)
 
 ## 功能点
 
