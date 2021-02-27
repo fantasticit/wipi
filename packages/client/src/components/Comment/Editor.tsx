@@ -67,12 +67,12 @@ export const Editor = ({
     CommentProvider.addComment(data)
       .then(() => {
         message.success('评论成功，已提交审核');
-        setLoading(false);
         setContent('');
         const userInfo = { name, email };
         try {
           window.localStorage.setItem('user', JSON.stringify(userInfo));
         } catch (err) {}
+        setLoading(false);
         onSuccess();
       })
       .catch((err) => {
