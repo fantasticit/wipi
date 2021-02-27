@@ -74,7 +74,7 @@ const Article: NextPage<IProps> = ({ article }) => {
 
       <div>
         <Helmet>
-          <title>{article.title + ' | ' + setting.systemTitle}</title>
+          <title>{(article.title || '未知标题') + ' | ' + setting.systemTitle}</title>
         </Helmet>
         <article className={cls(style.container)}>
           {setting.systemUrl && (

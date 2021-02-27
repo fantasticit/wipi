@@ -79,6 +79,7 @@ export class ArticleService {
     data.forEach((d) => {
       if (d.needPassword) {
         delete d.content;
+        delete d.html;
       }
     });
 
@@ -110,6 +111,7 @@ export class ArticleService {
     data.forEach((d) => {
       if (d.needPassword) {
         delete d.content;
+        delete d.html;
       }
     });
 
@@ -192,6 +194,7 @@ export class ArticleService {
 
       if (d.needPassword) {
         delete d.content;
+        delete d.html;
       }
 
       if (!ret[year]) {
