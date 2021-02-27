@@ -23,7 +23,7 @@ export const Search: React.FC<IProps> = ({ visible = false, onClose }) => {
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const handle = useCallback(() => {
+  const close = useCallback(() => {
     document.body.style.overflow = '';
     onClose();
   }, []);
@@ -54,12 +54,13 @@ export const Search: React.FC<IProps> = ({ visible = false, onClose }) => {
     const listener = (e) => {
       const el = container.current;
       if (el && !el.contains(e.target)) {
-        handle();
+        close();
       }
     };
     const listener2 = (e) => {
+      // ESC
       if (e.which === 27 || e.keyCode === 27) {
-        handle();
+        close();
       }
     };
     document.body.addEventListener('click', listener);
@@ -74,10 +75,10 @@ export const Search: React.FC<IProps> = ({ visible = false, onClose }) => {
   }, []);
 
   useEffect(() => {
-    Router.events.on('routeChangeStart', handle);
+    Router.events.on('routeChangeStart', close);
 
     return () => {
-      Router.events.off('routeChangeStart', handle);
+      Router.events.off('routeChangeStart', close);
     };
   }, []);
 
