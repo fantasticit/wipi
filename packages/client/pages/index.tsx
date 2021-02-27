@@ -32,11 +32,11 @@ const Home: NextPage<IHomeProps> = ({
   const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
 
   useEffect(() => {
-    const handler = throttle(() => {
+    const handler = () => {
       // @ts-ignore
       const y = window.scrollY;
       setAffix(y > 380);
-    }, 200);
+    };
     document.addEventListener('scroll', handler);
     return () => {
       document.removeEventListener('scroll', handler);
