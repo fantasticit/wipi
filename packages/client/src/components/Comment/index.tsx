@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button, Icon, Avatar, Pagination } from 'antd';
 import { format } from 'timeago.js';
 import cls from 'classnames';
-import hljs from 'highlight.js';
 import { CommentProvider } from '@/providers/comment';
+import { MarkdownReader } from '@/components/MarkdownReader';
 import { getRandomColor } from '@/utils';
 import { Editor } from './Editor';
 import style from './index.module.scss';
@@ -40,10 +40,9 @@ export const CommentItem = ({
         </span>
       </header>
       <main style={{ paddingLeft: isChildren ? 24 + 10 : 32 + 10 }}>
-        <div
-          className={cls('markdown', style.content)}
-          dangerouslySetInnerHTML={{ __html: comment.html || comment.content }}
-        ></div>
+        <div className={style.content}>
+          <MarkdownReader content={comment.html || comment.content} />
+        </div>
         <div className={style.meta}>
           {comment.userAgent ? <span>{comment.userAgent}</span> : null}
           <span>{format(comment.createAt, 'zh_CN')}</span>
@@ -95,10 +94,20 @@ export const CommentItem = ({
             onSuccess={() => setReplyComment(null)}
             renderFooter={({ loading, disabled, submit }) => {
               return [
-                <Button style={{ marginRight: 16 }} onClick={() => setVisible(false)}>
+                <Button
+                  key="collapse"
+                  style={{ marginRight: 16 }}
+                  onClick={() => setVisible(false)}
+                >
                   收起
                 </Button>,
-                <Button loading={loading} onClick={submit} type="primary" disabled={disabled}>
+                <Button
+                  key="comment"
+                  loading={loading}
+                  onClick={submit}
+                  type="primary"
+                  disabled={disabled}
+                >
                   评论
                 </Button>,
               ];
@@ -133,12 +142,7 @@ export const MyComment: React.FC<IProps> = ({ articleId, isInPage = false }) => 
         .then((res) => {
           setComments(res[0]);
           setTotal(res[1]);
-          setTimeout(() => {
-            setLoading(false);
-            if (!ref.current) return;
-            const blocks = ref.current.querySelectorAll('pre code');
-            blocks.forEach((block) => hljs.highlightBlock(block));
-          }, 0);
+          setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
@@ -151,10 +155,6 @@ export const MyComment: React.FC<IProps> = ({ articleId, isInPage = false }) => 
     setPage(page);
     getComments(page, pageSize, true);
   };
-
-  useEffect(() => {
-    hljs.initHighlightingOnLoad();
-  }, []);
 
   useEffect(() => {
     setPage(1);

@@ -102,7 +102,7 @@ export const Editor = ({
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            placeholder="请输入您的邮箱（不会公开）"
+            placeholder="请输入您的邮箱（不会公开，您也可以选择不输入）"
           />
         </div>
       </div>
