@@ -2,6 +2,10 @@
 
 后台服务。配置文件在 `.env`。
 
+## swagger 文档
+
+启动项目后，访问 `http://localhost:4000/api` 即可预览 swagger 文档。
+
 ## 模块
 
 ### 用户

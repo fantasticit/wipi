@@ -12,12 +12,14 @@ import {
   HttpException,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 
+@ApiTags('User')
 @Controller('user')
 @UseGuards(RolesGuard)
 export class UserController {
@@ -27,6 +29,8 @@ export class UserController {
     private readonly jwtService: JwtService
   ) {}
 
+  @ApiResponse({ status: 200, description: '获取用户列表', type: [User] })
+  @ApiResponse({ status: 403, description: '无权获取用户列表' })
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   @Roles('admin')
@@ -39,6 +43,7 @@ export class UserController {
    * 用户注册
    * @param user
    */
+  @ApiResponse({ status: 201, description: '创建用户', type: [User] })
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
@@ -74,6 +79,7 @@ export class UserController {
    * 用户更新
    * @param user
    */
+  @ApiResponse({ status: 200, description: '更新用户成功', type: [User] })
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('update')
   @HttpCode(HttpStatus.CREATED)
@@ -86,6 +92,7 @@ export class UserController {
    * 更新用户密码
    * @param user
    */
+  @ApiResponse({ status: 201, description: '更新密码成功', type: [User] })
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('password')
   @HttpCode(HttpStatus.CREATED)

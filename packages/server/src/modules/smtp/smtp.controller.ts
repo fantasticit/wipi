@@ -1,9 +1,11 @@
 import { Controller, Get, Post, Delete, Param, Query, Body, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
-import { SMTPService } from './smtp.service';
 import { SMTP } from './smtp.entity';
+import { SMTPService } from './smtp.service';
 
+@ApiTags('Smtp')
 @Controller('smtp')
 @UseGuards(RolesGuard)
 export class SMTPController {
@@ -13,6 +15,7 @@ export class SMTPController {
    * 发送邮件
    * @param data
    */
+  @ApiResponse({ status: 200, description: '发送邮件', type: [SMTP] })
   @Post()
   @UseGuards(JwtAuthGuard)
   create(@Body() data) {

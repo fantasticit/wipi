@@ -1,12 +1,13 @@
 import { Controller, Post, Body, Request, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { SettingService } from './setting.service';
 import { Setting } from './setting.entity';
 import { UserService } from '../user/user.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
 
+@ApiTags('Setting')
 @Controller('setting')
 @UseGuards(RolesGuard)
 export class SettingController {
@@ -20,6 +21,7 @@ export class SettingController {
    * 更新设置
    * @param tag
    */
+  @ApiResponse({ status: 200, description: '更新设置', type: [Setting] })
   @Post()
   @Roles('admin')
   @UseGuards(JwtAuthGuard)

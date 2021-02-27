@@ -28,6 +28,7 @@
     "@nestjs/microservices": "^6.10.14",
     "@nestjs/passport": "^6.1.1",
     "@nestjs/platform-express": "^6.11.5",
+    "@nestjs/swagger": "^4.7.15",
     "@nestjs/typeorm": "^6.2.0",
     "ali-oss": "^6.5.1",
     "bcrypt": "^3.0.7",
@@ -53,6 +54,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3",
+    "swagger-ui-express": "^4.1.6",
     "trim-html": "^0.1.9",
     "typeorm": "^0.2.22",
     "ua-parser-js": "^0.7.21"
@@ -66,6 +68,7 @@
     "@types/node": "^12.7.5",
     "@types/supertest": "^2.0.8",
     "jest": "^24.9.0",
+    "next-transpile-modules": "^6.3.0",
     "prettier": "^1.18.2",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",

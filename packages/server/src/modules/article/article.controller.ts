@@ -13,12 +13,14 @@ import {
   Request,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
 import { UserService } from '../user/user.service';
 import { ArticleService } from './article.service';
 import { Article } from './article.entity';
 
+@ApiTags('Article')
 @Controller('article')
 @UseGuards(RolesGuard)
 export class ArticleController {
@@ -33,6 +35,7 @@ export class ArticleController {
    * 创建文章
    * @param article
    */
+  @ApiResponse({ status: 200, description: '创建文章', type: [Article] })
   @Post()
   @Roles('admin')
   @UseGuards(JwtAuthGuard)

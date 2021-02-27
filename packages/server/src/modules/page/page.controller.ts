@@ -11,10 +11,13 @@ import {
   Body,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
+import { Page } from './page.entity';
 import { PageService } from './page.service';
 
+@ApiTags('Page')
 @Controller('page')
 @UseGuards(RolesGuard)
 export class PageController {
@@ -24,6 +27,7 @@ export class PageController {
    * 创建页面
    * @param page
    */
+  @ApiResponse({ status: 200, description: '创建页面', type: [Page] })
   @Post()
   @Roles('admin')
   @UseGuards(JwtAuthGuard)

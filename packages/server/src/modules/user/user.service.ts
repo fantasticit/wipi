@@ -56,7 +56,12 @@ export class UserService {
    * @param user
    */
   async createUser(user: Partial<User>): Promise<User> {
-    const { name } = user;
+    const { name, password } = user;
+
+    if (!name || !password) {
+      throw new HttpException('请输入用户名和密码', HttpStatus.BAD_REQUEST);
+    }
+
     const existUser = await this.userRepository.findOne({ where: { name } });
 
     if (existUser) {
@@ -110,6 +115,15 @@ export class UserService {
   async updateById(id, user): Promise<User> {
     const oldUser = await this.userRepository.findOne(id);
     delete user.password;
+
+    if (user.name && user.name !== oldUser.name) {
+      const existUser = await this.userRepository.findOne({ where: { name: user.name } });
+
+      if (existUser) {
+        throw new HttpException('用户已存在', HttpStatus.BAD_REQUEST);
+      }
+    }
+
     const newUser = await this.userRepository.merge(oldUser, user);
     return this.userRepository.save(newUser);
   }

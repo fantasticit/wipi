@@ -10,11 +10,13 @@ import {
   UseGuards,
   Request,
 } from '@nestjs/common';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
 import { CommentService } from './comment.service';
 import { Comment } from './comment.entity';
 
+@ApiTags('Comment')
 @Controller('comment')
 @UseGuards(RolesGuard)
 export class CommentController {
@@ -24,6 +26,7 @@ export class CommentController {
    * 创建评论
    * @param comment
    */
+  @ApiResponse({ status: 200, description: '创建评论', type: [Comment] })
   @Post()
   create(@Request() req, @Body() comment) {
     const userAgent = req.headers['user-agent'];

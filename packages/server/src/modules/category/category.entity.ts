@@ -7,22 +7,31 @@ import {
   OneToOne,
   OneToMany,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 import { Article } from '../article/article.entity';
 
 @Entity()
 export class Category {
+  @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ApiProperty()
   @Column()
   label: string;
 
+  @ApiProperty()
   @Column()
   value: string;
 
-  @OneToMany(() => Article, (article) => article.category)
+  @ApiProperty()
+  @OneToMany(
+    () => Article,
+    (article) => article.category
+  )
   articles: Array<Article>;
 
+  @ApiProperty()
   @CreateDateColumn({
     type: 'datetime',
     comment: '创建时间',
@@ -30,6 +39,7 @@ export class Category {
   })
   createAt: Date;
 
+  @ApiProperty()
   @UpdateDateColumn({
     type: 'datetime',
     comment: '更新时间',

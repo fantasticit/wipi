@@ -9,11 +9,13 @@ import {
   UseGuards,
   Query,
 } from '@nestjs/common';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
 import { CategoryService } from './category.service';
 import { Category } from './category.entity';
 
+@ApiTags('Category')
 @Controller('category')
 @UseGuards(RolesGuard)
 export class CategoryController {
@@ -23,6 +25,7 @@ export class CategoryController {
    * 添加标签
    * @param category
    */
+  @ApiResponse({ status: 200, description: '添加分类', type: [Category] })
   @Post()
   @Roles('admin')
   @UseGuards(JwtAuthGuard)

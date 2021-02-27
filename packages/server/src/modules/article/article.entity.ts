@@ -8,61 +8,87 @@ import {
   JoinTable,
   ManyToOne,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 import { Tag } from '../tag/tag.entity';
 import { Category } from '../category/category.entity';
 
 @Entity()
 export class Article {
+  @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ApiProperty()
   @Column()
   title: string;
 
+  @ApiProperty()
   @Column({ default: null })
   cover: string; // 封面图
 
+  @ApiProperty()
   @Column({ type: 'text', default: null })
   summary: string; // 摘要，自动生成
 
+  @ApiProperty()
   @Column({ type: 'mediumtext', default: null, charset: 'utf8mb4' })
   content: string; // 原始内容
 
+  @ApiProperty()
   @Column({ type: 'mediumtext', default: null, charset: 'utf8mb4' })
   html: string; // 格式化内容，自动生成
 
+  @ApiProperty()
   @Column({ type: 'mediumtext', default: null })
   toc: string; // 格式化内容索引，自动生成
 
-  @ManyToOne(() => Category, (category) => category.articles, { cascade: true })
+  @ApiProperty()
+  @ManyToOne(
+    () => Category,
+    (category) => category.articles,
+    { cascade: true }
+  )
   @JoinTable()
   category: Category;
 
-  @ManyToMany(() => Tag, (tag) => tag.articles, { cascade: true })
+  @ApiProperty()
+  @ManyToMany(
+    () => Tag,
+    (tag) => tag.articles,
+    { cascade: true }
+  )
   @JoinTable()
   tags: Array<Tag>;
 
+  @ApiProperty()
   @Column('simple-enum', { enum: ['draft', 'publish'] })
   status: string; // 文章状态
 
+  @ApiProperty()
   @Column({ type: 'int', default: 0 })
   views: number; // 阅读量
 
+  @ApiProperty()
   @Column({ type: 'boolean', default: false })
   isRecommended: boolean; // 是否推荐到首页
 
+  @ApiProperty()
   @Column({ type: 'text', default: null, select: false })
   password: string;
 
+  @ApiProperty()
   @Column({ type: 'boolean', default: false })
   needPassword: boolean;
 
+  @ApiProperty()
   @Column({ type: 'boolean', default: true })
   isCommentable: boolean;
 
+  @ApiProperty()
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   publishAt: Date; // 发布日期
 
+  @ApiProperty()
   @CreateDateColumn({
     type: 'datetime',
     comment: '创建时间',
@@ -70,6 +96,7 @@ export class Article {
   })
   createAt: Date;
 
+  @ApiProperty()
   @UpdateDateColumn({
     type: 'datetime',
     comment: '更新时间',

@@ -9,11 +9,14 @@ import {
   UploadedFile,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileService } from './file.service';
+import { File } from './file.entity';
 
+@ApiTags('File')
 @Controller('file')
 @UseGuards(RolesGuard)
 export class FileController {
@@ -23,6 +26,7 @@ export class FileController {
    * 上传文件
    * @param file
    */
+  @ApiResponse({ status: 200, description: '上传文件', type: [File] })
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {

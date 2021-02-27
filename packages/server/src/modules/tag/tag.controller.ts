@@ -9,11 +9,13 @@ import {
   UseGuards,
   Query,
 } from '@nestjs/common';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
 import { TagService } from './tag.service';
 import { Tag } from './tag.entity';
 
+@ApiTags('Tag')
 @Controller('tag')
 @UseGuards(RolesGuard)
 export class TagController {
@@ -23,6 +25,7 @@ export class TagController {
    * 添加标签
    * @param tag
    */
+  @ApiResponse({ status: 200, description: '创建标签', type: [Tag] })
   @Post()
   @Roles('admin')
   @UseGuards(JwtAuthGuard)

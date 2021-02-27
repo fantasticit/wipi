@@ -10,6 +10,7 @@ import {
   Body,
   Request,
 } from '@nestjs/common';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
 import { ViewService } from './view.service';
@@ -26,6 +27,7 @@ function getClientIP(req) {
   return ip.split(':').pop();
 }
 
+@ApiTags('View')
 @Controller('view')
 @UseGuards(RolesGuard)
 export class ViewController {
@@ -35,6 +37,7 @@ export class ViewController {
    * 添加访问
    * @param tag
    */
+  @ApiResponse({ status: 200, description: '访问记录添加成功', type: [View] })
   @Post()
   create(@Request() req, @Body() data) {
     const userAgent = req.headers['user-agent'];
