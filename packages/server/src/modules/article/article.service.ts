@@ -6,6 +6,10 @@ import { TagService } from '../tag/tag.service';
 import { CategoryService } from '../category/category.service';
 import { Article } from './article.entity';
 
+const Segment = require('segment');
+const segment = new Segment();
+segment.useDefault();
+
 @Injectable()
 export class ArticleService {
   constructor(
@@ -360,10 +364,14 @@ export class ArticleService {
     const { title, summary } = exist;
 
     try {
-      const nodejieba = require('nodejieba');
-      const topN = 4;
-      const kw1 = nodejieba.extract(title, topN);
-      const kw2 = nodejieba.extract(summary, topN);
+      // nodejieba 安装太麻烦
+      // const nodejieba = require('nodejieba');
+      const kw1 = segment.doSegment(title, {
+        stripStopword: true,
+      });
+      const kw2 = segment.doSegment(summary, {
+        stripStopword: true,
+      });
 
       kw1.forEach((kw, i) => {
         const paramKey = `title_` + i;
@@ -372,7 +380,7 @@ export class ArticleService {
         } else {
           query.orWhere(`article.title LIKE :${paramKey}`);
         }
-        query.setParameter(paramKey, `%${kw.word}%`);
+        query.setParameter(paramKey, `%${kw.w}%`);
       });
 
       kw2.forEach((kw, i) => {
@@ -382,7 +390,7 @@ export class ArticleService {
         } else {
           query.orWhere(`article.summary LIKE :${paramKey}`);
         }
-        query.setParameter(paramKey, `%${kw.word}%`);
+        query.setParameter(paramKey, `%${kw.w}%`);
       });
     } catch (e) {}
 
