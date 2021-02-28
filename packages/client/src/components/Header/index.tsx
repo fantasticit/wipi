@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import cls from 'classnames';
 import { Search } from '@/components/Search';
 import { throttle } from '@/utils';
-import { ThemeToggle } from './ThemeToggle';
+import { Theme } from '@/components/Theme';
 import style from './index.module.scss';
 
 export const _Header = ({ setting, menus }) => {
@@ -108,7 +108,7 @@ export const _Header = ({ setting, menus }) => {
                 <a className={style.search}></a>
               </li>
               <li className={style.themeToggle}>
-                <ThemeToggle />
+                <Theme />
               </li>
             </ul>
           </nav>
