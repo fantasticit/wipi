@@ -66,7 +66,61 @@
     /* Only render when in viewport */
     content-visibility: auto;
   }
- 
+
+  table {
+    font-size: 125%;
+    white-space: nowrap;
+    margin: 0;
+    border: none;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+  }
+
+  table td,
+  table th {
+    padding: 0.5rem 1rem;
+  }
+
+  table thead th {
+    padding: 3px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 25vw;
+  }
+
+  table td {
+    padding: 4px 5px;
+    text-align: center;
+  }
+  
+  table tbody th {
+    font-weight: 100;
+    font-style: italic;
+    text-align: left;
+    position: relative;
+  }
+
+  table thead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+  }
+
+  table tbody th {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+
+  caption {
+    text-align: left;
+    padding: 0.25rem;
+    position: sticky;
+    left: 0;
+  }
+  
   .container {
     margin-right: auto;
     margin-left: auto;
