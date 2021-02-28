@@ -1,25 +1,35 @@
 .wrapper {
   position: fixed;
-  top: 80px;
-  left: 50%;
-  border-radius: var(--border-radius);
+  top: 0;
+  left: 0%;
+  z-index: 100000;
+  width: 100vw;
+  height: 100vh;
   background: var(--bg-second);
   box-shadow: var(--box-shadow);
-  transform: translate(-50%, 0);
-  z-index: 100000;
+  opacity: 0.97;
+  padding: 4rem 1rem;
+  overflow: auto;
+}
 
-  input {
-    height: 48px !important;
-    border: 0 !important;
-    border-radius: var(--border-radius);
-    color: var(--main-text-color) !important;
-    background-color: var(--bg-second) !important;
-    box-shadow: none !important;
-  }
+.innerWrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+}
 
-  p {
-    margin: 0;
-  }
+.closeBtn {
+  position: absolute;
+  right: 0;
+  font-size: 24px;
+  top: -40px;
+  cursor: pointer;
+}
+
+.tagWrapper {
+  margin: 0 -1rem;
 }
 
 .loading {
@@ -32,15 +42,8 @@
 }
 
 .articleWrapper {
-  max-height: 0;
-  border-top: 1px solid var(--border-color);
+  flex: 1;
   overflow: auto;
-  transition: max-height .3s ease-in-out;
-
-  &.active {
-    max-height: 60vh;
-    padding: .5rem;
-  }
 }
 
 .articleListItem {

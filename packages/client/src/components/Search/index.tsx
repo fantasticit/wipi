@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import cls from 'classnames';
 import Router from 'next/router';
-import { Spin, Input } from 'antd';
+import { Spin, Input, Icon } from 'antd';
 import Link from 'next/link';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { SearchProvider } from '@/providers/search';
@@ -16,7 +16,7 @@ interface IProps {
   onClose: () => void;
 }
 
-export const Search: React.FC<IProps> = ({ visible = false, onClose }) => {
+export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
   const ref = useRef(null);
   const container = useRef(null);
   const [tags, setTags] = useState([]);
@@ -93,10 +93,12 @@ export const Search: React.FC<IProps> = ({ visible = false, onClose }) => {
   return (
     <>
       {visible ? (
-        <>
-          <div className={cls('container', style.wrapper)} ref={container}>
+        <div className={cls(style.wrapper)} ref={container}>
+          <div className={cls('container', style.innerWrapper)}>
+            <Icon className={style.closeBtn} type="close" onClick={close} />
             <AntdSearch
               ref={ref}
+              size="large"
               placeholder="输入关键字，搜索文章"
               onChange={(evt) => getArticles(evt.target.value)}
               style={{ width: '100%' }}
@@ -135,7 +137,7 @@ export const Search: React.FC<IProps> = ({ visible = false, onClose }) => {
               </TransitionGroup>
             </div>
           </div>
-        </>
+        </div>
       ) : null}
     </>
   );
