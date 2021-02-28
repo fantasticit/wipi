@@ -17,6 +17,7 @@ import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
 import { UserService } from '../user/user.service';
+import { User } from '../user/user.entity';
 import { ArticleService } from './article.service';
 import { Article } from './article.entity';
 
@@ -111,7 +112,7 @@ export class ArticleController {
     }
 
     try {
-      const tokenUser = this.jwtService.decode(token) as any;
+      const tokenUser = this.jwtService.decode(token) as User;
       const userId = tokenUser.id;
       const exist = await this.userService.findById(userId);
       const isAdmin = userId && exist.role === 'admin';

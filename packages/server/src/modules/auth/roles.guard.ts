@@ -1,6 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable, SetMetadata } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Reflector } from '@nestjs/core';
+import { User } from '../user/user.entity';
 
 export const Roles = (...roles: string[]) => SetMetadata('roles', roles);
 
@@ -22,7 +23,7 @@ export class RolesGuard implements CanActivate {
       token = token.split(' ').pop();
     }
 
-    const user = this.jwtService.decode(token) as any;
+    const user = this.jwtService.decode(token) as User;
     if (!user) return false;
     const hasRole = roles.some((role) => role === user.role);
     return user && user.role && hasRole;

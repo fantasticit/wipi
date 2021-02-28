@@ -77,26 +77,28 @@ export class CommentService {
    * 查询所有评论
    * 额外添加文章信息
    */
-  async findAll(queryParams: any = {}): Promise<[Comment[], number]> {
+  async findAll(queryParams): Promise<[Comment[], number]> {
     const query = this.commentRepository
       .createQueryBuilder('comment')
       .orderBy('comment.createAt', 'DESC');
 
-    const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+    if (typeof queryParams === 'object') {
+      const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
 
-    query.skip((+page - 1) * +pageSize);
-    query.take(+pageSize);
+      query.skip((+page - 1) * +pageSize);
+      query.take(+pageSize);
 
-    if (pass) {
-      query.andWhere('comment.pass=:pass').setParameter('pass', pass);
-    }
+      if (pass) {
+        query.andWhere('comment.pass=:pass').setParameter('pass', pass);
+      }
 
-    if (otherParams) {
-      Object.keys(otherParams).forEach((key) => {
-        query
-          .andWhere(`comment.${key} LIKE :${key}`)
-          .setParameter(`${key}`, `%${otherParams[key]}%`);
-      });
+      if (otherParams) {
+        Object.keys(otherParams).forEach((key) => {
+          query
+            .andWhere(`comment.${key} LIKE :${key}`)
+            .setParameter(`${key}`, `%${otherParams[key]}%`);
+        });
+      }
     }
 
     return query.getManyAndCount();

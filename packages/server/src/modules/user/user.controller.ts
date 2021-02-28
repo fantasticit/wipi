@@ -62,7 +62,7 @@ export class UserController {
       // 不需要 Bearer，否则验证失败
       token = token.split(' ').pop();
     }
-    const tokenUser = this.jwtService.decode(token) as any;
+    const tokenUser = this.jwtService.decode(token) as User;
     const id = tokenUser.id;
 
     if (!id) {

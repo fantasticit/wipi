@@ -57,18 +57,20 @@ export class ViewService {
   /**
    * 获取所有访问
    */
-  async findAll(queryParams: any = {}): Promise<[View[], number]> {
+  async findAll(queryParams): Promise<[View[], number]> {
     const query = this.viewRepository.createQueryBuilder('view').orderBy('view.createAt', 'DESC');
+    if (typeof queryParams === 'object') {
+      const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+      query.skip((+page - 1) * +pageSize);
+      query.take(+pageSize);
 
-    const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
-
-    query.skip((+page - 1) * +pageSize);
-    query.take(+pageSize);
-
-    if (otherParams) {
-      Object.keys(otherParams).forEach((key) => {
-        query.andWhere(`view.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
-      });
+      if (otherParams) {
+        Object.keys(otherParams).forEach((key) => {
+          query
+            .andWhere(`view.${key} LIKE :${key}`)
+            .setParameter(`${key}`, `%${otherParams[key]}%`);
+        });
+      }
     }
 
     return query.getManyAndCount();
@@ -78,7 +80,7 @@ export class ViewService {
    * 查找指定路径访问统计
    * @param url
    */
-  async findByUrl(url): Promise<any> {
+  async findByUrl(url): Promise<View[]> {
     return this.viewRepository.find({
       where: { url },
       order: { updateAt: 'ASC' },

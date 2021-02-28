@@ -6,6 +6,7 @@ import { Setting } from './setting.entity';
 import { UserService } from '../user/user.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
+import { User } from '../user/user.entity';
 
 @ApiTags('Setting')
 @Controller('setting')
@@ -43,7 +44,7 @@ export class SettingController {
     }
 
     try {
-      const tokenUser = this.jwtService.decode(token) as any;
+      const tokenUser = this.jwtService.decode(token) as User;
       const id = tokenUser.id;
       const exist = await this.userService.findById(id);
       const isAdmin = id && exist.role === 'admin';

@@ -19,7 +19,7 @@ export class FileService {
    * 上传文件
    * @param file
    */
-  async uploadFile(file: any): Promise<File> {
+  async uploadFile(file): Promise<File> {
     const { originalname, mimetype, size, buffer } = file;
     const filename = `/${dateFormat(new Date(), 'yyyy-MM-dd')}/${originalname}`;
     const {
@@ -54,18 +54,21 @@ export class FileService {
   /**
    * 获取所有文件
    */
-  async findAll(queryParams: any = {}): Promise<[File[], number]> {
+  async findAll(queryParams): Promise<[File[], number]> {
     const query = this.fileRepository.createQueryBuilder('file').orderBy('file.createAt', 'DESC');
 
-    const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+    if (typeof queryParams === 'object') {
+      const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+      query.skip((+page - 1) * +pageSize);
+      query.take(+pageSize);
 
-    query.skip((+page - 1) * +pageSize);
-    query.take(+pageSize);
-
-    if (otherParams) {
-      Object.keys(otherParams).forEach((key) => {
-        query.andWhere(`file.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
-      });
+      if (otherParams) {
+        Object.keys(otherParams).forEach((key) => {
+          query
+            .andWhere(`file.${key} LIKE :${key}`)
+            .setParameter(`${key}`, `%${otherParams[key]}%`);
+        });
+      }
     }
 
     return query.getManyAndCount();

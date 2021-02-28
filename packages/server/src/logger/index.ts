@@ -40,7 +40,7 @@ log4js.configure({
     response: { appenders: ['response'], level: 'info' },
     error: { appenders: ['error'], level: 'info' },
   },
-} as any);
+});
 
 export const requestLogger = log4js.getLogger('request');
 export const responseLogger = log4js.getLogger('response');

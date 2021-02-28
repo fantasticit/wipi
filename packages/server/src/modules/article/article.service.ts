@@ -55,7 +55,7 @@ export class ArticleService {
   /**
    * 获取所有文章
    */
-  async findAll(queryParams: any = {}): Promise<[Article[], number]> {
+  async findAll(queryParams): Promise<[Article[], number]> {
     const query = this.articleRepository
       .createQueryBuilder('article')
       .leftJoinAndSelect('article.tags', 'tag')
@@ -158,7 +158,7 @@ export class ArticleService {
     const data = await this.articleRepository.find({
       where: { isRecommended: true },
       order: { publishAt: 'DESC' },
-    } as any);
+    });
 
     return data.filter((d) => !d.needPassword);
   }
@@ -170,7 +170,7 @@ export class ArticleService {
     const data = await this.articleRepository.find({
       where: { status: 'publish' },
       order: { publishAt: 'DESC' },
-    } as any);
+    });
     const months = [
       'January',
       'February',
@@ -185,25 +185,19 @@ export class ArticleService {
       'November',
       'December',
     ];
-
     const ret = {};
-
     data.forEach((d) => {
       const year = new Date(d.publishAt).getFullYear();
       const month = new Date(d.publishAt).getMonth();
-
       if (d.needPassword) {
         extractProtectedArticle(d);
       }
-
       if (!ret[year]) {
         ret[year] = {};
       }
-
       if (!ret[year][months[month]]) {
         ret[year][months[month]] = [];
       }
-
       ret[year][months[month]].push(d);
     });
 

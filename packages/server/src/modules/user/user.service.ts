@@ -30,22 +30,26 @@ export class UserService {
       });
   }
 
-  async findAll(queryParams: any = {}): Promise<[User[], number]> {
+  async findAll(queryParams): Promise<[User[], number]> {
     const query = this.userRepository.createQueryBuilder('user').orderBy('user.createAt', 'DESC');
 
-    const { page = 1, pageSize = 12, status, ...otherParams } = queryParams;
+    if (typeof queryParams === 'object') {
+      const { page = 1, pageSize = 12, status, ...otherParams } = queryParams;
 
-    query.skip((+page - 1) * +pageSize);
-    query.take(+pageSize);
+      query.skip((+page - 1) * +pageSize);
+      query.take(+pageSize);
 
-    if (status) {
-      query.andWhere('user.status=:status').setParameter('status', status);
-    }
+      if (status) {
+        query.andWhere('user.status=:status').setParameter('status', status);
+      }
 
-    if (otherParams) {
-      Object.keys(otherParams).forEach((key) => {
-        query.andWhere(`user.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
-      });
+      if (otherParams) {
+        Object.keys(otherParams).forEach((key) => {
+          query
+            .andWhere(`user.${key} LIKE :${key}`)
+            .setParameter(`${key}`, `%${otherParams[key]}%`);
+        });
+      }
     }
 
     return query.getManyAndCount();

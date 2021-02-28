@@ -23,7 +23,7 @@ export class AuthService {
     return Object.assign(data, { token });
   }
 
-  async validateUser(payload: User): Promise<any> {
+  async validateUser(payload: User) {
     return await this.userService.findById(payload.id);
   }
 }
