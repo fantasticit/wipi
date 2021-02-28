@@ -1,57 +1,17 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { parseUserAgent } from '../../utils/ua.utils';
 import { SMTPService } from '../smtp/smtp.service';
 import { ArticleService } from '../article/article.service';
 import { SettingService } from '../setting/setting.service';
 import { UserService } from '../user/user.service';
-import { marked } from '../article/markdown.util';
+import { marked } from '../../utils/markdown.util';
 import { Comment } from './comment.entity';
 import { getNewCommentHTML, getReplyCommentHTML } from './html';
 
 const url = require('url');
-const UAParser = require('ua-parser-js');
-const dayjs = require('dayjs');
 
-/**
- * 扁平接口评论转为树形评论
- * @param list
- */
-function buildTree(list) {
-  const temp = {};
-  const tree = [];
-
-  for (const item of list) {
-    temp[item.id] = item;
-  }
-
-  for (const i in temp) {
-    if (temp[i].parentCommentId) {
-      if (temp[temp[i].parentCommentId]) {
-        if (!temp[temp[i].parentCommentId].children) {
-          temp[temp[i].parentCommentId].children = [];
-        }
-        temp[temp[i].parentCommentId].children.push(temp[i]);
-      } else {
-        tree.push(temp[i]); // 父级可能被删除或者未通过，直接升级
-      }
-    } else {
-      tree.push(temp[i]);
-    }
-  }
-
-  return tree;
-}
-
-const parseUserAgent = (userAgent) => {
-  const uaparser = new UAParser();
-  uaparser.setUA(userAgent);
-  const uaInfo = uaparser.getResult();
-  let msg = `${uaInfo.browser.name || ''} ${uaInfo.browser.version || ''} `;
-  msg += ` ${uaInfo.os.name || ''}  ${uaInfo.os.version || ''} `;
-  msg += `${uaInfo.device.vendor || ''} ${uaInfo.device.model || ''} ${uaInfo.device.type || ''}`;
-  return msg;
-};
 @Injectable()
 export class CommentService {
   constructor(

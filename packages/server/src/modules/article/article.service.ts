@@ -1,10 +1,11 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as dayjs from 'dayjs';
+import { dateFormat } from '../../utils/date.util';
 import { TagService } from '../tag/tag.service';
 import { CategoryService } from '../category/category.service';
 import { Article } from './article.entity';
+import { extractProtectedArticle } from './article.util';
 
 const Segment = require('segment');
 const segment = new Segment();
@@ -35,7 +36,7 @@ export class ArticleService {
 
     if (status === 'publish') {
       Object.assign(article, {
-        publishAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+        publishAt: dateFormat(),
       });
     }
 
@@ -81,10 +82,7 @@ export class ArticleService {
     const [data, total] = await query.getManyAndCount();
 
     data.forEach((d) => {
-      if (d.needPassword) {
-        delete d.content;
-        delete d.html;
-      }
+      extractProtectedArticle(d);
     });
 
     return [data, total];
@@ -114,8 +112,7 @@ export class ArticleService {
 
     data.forEach((d) => {
       if (d.needPassword) {
-        delete d.content;
-        delete d.html;
+        extractProtectedArticle(d);
       }
     });
 
@@ -147,8 +144,7 @@ export class ArticleService {
 
     data.forEach((d) => {
       if (d.needPassword) {
-        delete d.content;
-        delete d.html;
+        extractProtectedArticle(d);
       }
     });
 
@@ -197,8 +193,7 @@ export class ArticleService {
       const month = new Date(d.publishAt).getMonth();
 
       if (d.needPassword) {
-        delete d.content;
-        delete d.html;
+        extractProtectedArticle(d);
       }
 
       if (!ret[year]) {
@@ -254,8 +249,7 @@ export class ArticleService {
     const data = await query.getOne();
 
     if (data && data.needPassword && !isAdmin) {
-      delete data.content;
-      delete data.html;
+      extractProtectedArticle(data);
     }
 
     return data;
@@ -282,9 +276,7 @@ export class ArticleService {
       category: existCategory,
       needPassword: !!article.password,
       publishAt:
-        oldArticle.status === 'draft' && status === 'publish'
-          ? dayjs().format('YYYY-MM-DD HH:mm:ss')
-          : oldArticle.publishAt,
+        oldArticle.status === 'draft' && status === 'publish' ? dateFormat() : oldArticle.publishAt,
     };
 
     if (tags) {

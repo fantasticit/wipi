@@ -1,4 +1,4 @@
-const dayjs = require('dayjs');
+import { dateFormat } from '../../utils/date.util';
 
 export const getNewCommentHTML = ({
   systemLogo,
@@ -290,7 +290,7 @@ export const getNewCommentHTML = ({
                               >
                                 <span
                                   style="font-size:inherit; color:inherit; font-weight:inherit; line-height:inherit; font-family:inherit;"
-                                  >© ${dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')}</span
+                                  >© ${dateFormat()}</span
                                 >
                               </span></font
                             ></span
@@ -613,7 +613,7 @@ export const getReplyCommentHTML = ({
                               >
                                 <span
                                   style="font-size:inherit; color:inherit; font-weight:inherit; line-height:inherit; font-family:inherit;"
-                                  >© ${dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')}</span
+                                  >© ${dateFormat()}</span
                                 >
                               </span></font
                             ></span

@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as dayjs from 'dayjs';
+import { dateFormat } from '../../utils/date.util';
 import { Page } from './page.entity';
 
 @Injectable()
@@ -91,8 +91,7 @@ export class PageService {
 
     const newPage = {
       ...page,
-      publishAt:
-        status === 'publish' ? dayjs().format('YYYY-MM-DD HH:mm:ss') : old && old.publishAt,
+      publishAt: status === 'publish' ? dateFormat() : old && old.publishAt,
     };
 
     const updatedPage = await this.pageRepository.merge(old, newPage);

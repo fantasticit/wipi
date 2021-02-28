@@ -2710,6 +2710,11 @@ data-urls@^1.0.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
+date-fns@^2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.17.0.tgz#afa55daea539239db0a64e236ce716ef3d681ba1"
+  integrity sha512-ZEhqxUtEZeGgg9eHNSOAJ8O9xqSgiJdrL0lzSSfMF54x6KXWJiOH/xntSJ9YomJPrYH/p08t6gWjGWq1SDJlSA==
+
 date-format@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/date-format/-/date-format-2.1.0.tgz"
@@ -2724,11 +2729,6 @@ dateformat@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-2.2.0.tgz"
   integrity sha1-QGXiATz5+5Ft39gu+1Bq1MZ2kGI=
-
-dayjs@^1.8.19:
-  version "1.10.4"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.4.tgz"
-  integrity sha512-RI/Hh4kqRc1UKLOAf/T5zdMMX5DQIlDxwUe3wSyMMnEbGunnpENCdbUgM+dW7kXidZqCttBrmw7BhN4TMddkCw==
 
 debug@2, debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"

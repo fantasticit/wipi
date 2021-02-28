@@ -35,7 +35,7 @@
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.2.3",
     "compression": "^1.7.4",
-    "dayjs": "^1.8.19",
+    "date-fns": "^2.17.0",
     "dotenv": "^8.2.0",
     "express-rate-limit": "^5.0.0",
     "fs-extra": "^8.1.0",
