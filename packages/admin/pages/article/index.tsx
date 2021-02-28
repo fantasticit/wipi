@@ -3,7 +3,6 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Tag, Divider, Badge, Popconfirm, Modal, Spin, Select, Button, Icon, message } from 'antd';
-import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { ArticleProvider } from '@/providers/article';
 import style from './index.module.scss';
@@ -13,6 +12,7 @@ import { CategoryProvider } from '@/providers/category';
 import { TagProvider } from '@/providers/tag';
 import { ViewChart } from '@/components/ViewChart';
 import { DataTable } from '@/components/DataTable';
+import { LocaleTime } from '@/components/LocaleTime';
 const url = require('url');
 
 const columns = [
@@ -79,7 +79,7 @@ const columns = [
     dataIndex: 'publishAt',
     key: 'publishAt',
     width: 200,
-    render: (date) => dayjs.default(date).format('YYYY-MM-DD HH:mm:ss'),
+    render: (date) => <LocaleTime date={date} />,
   },
 ];
 

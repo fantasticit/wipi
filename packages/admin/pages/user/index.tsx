@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { NextPage } from 'next';
 import { Badge, Divider, Select, message } from 'antd';
-import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { UserProvider } from '@/providers/user';
+import { LocaleTime } from '@/components/LocaleTime';
 import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
@@ -63,7 +63,7 @@ const Page: NextPage = () => {
       title: '注册日期',
       dataIndex: 'createAt',
       key: 'createAt',
-      render: (date) => dayjs.default(date).format('YYYY-MM-DD HH:mm:ss'),
+      render: (date) => <LocaleTime date={date} />,
     },
   ];
 

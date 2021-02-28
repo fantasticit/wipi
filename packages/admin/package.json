@@ -14,7 +14,7 @@
     "antd": "^3.26.7",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
-    "dayjs": "^1.8.19",
+    "date-fns": "^2.17.0",
     "echarts": "^4.6.0",
     "echarts-for-react": "^2.0.15-beta.1",
     "mime-types": "^2.1.26",
@@ -27,7 +27,6 @@
     "react-dom": "16.12.0",
     "react-helmet": "^5.2.1",
     "showdown": "^1.9.1",
-    "timeago.js": "^4.0.2",
     "viewerjs": "^1.5.0"
   },
   "devDependencies": {

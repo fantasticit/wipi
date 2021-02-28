@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { NextPage } from 'next';
 import { Badge, Popconfirm, message } from 'antd';
-import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { ViewProvider } from '@/providers/view';
+import { LocaleTime } from '@/components/LocaleTime';
 import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
@@ -105,7 +105,7 @@ const Views: NextPage = () => {
       dataIndex: 'createAt',
       key: 'createAt',
       width: 200,
-      render: (date) => dayjs.default(date).format('YYYY-MM-DD HH:mm:ss'),
+      render: (date) => <LocaleTime date={date} />,
     },
   ];
 

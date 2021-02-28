@@ -15,12 +15,12 @@ import {
   Popconfirm,
   Alert,
 } from 'antd';
-import * as dayjs from 'dayjs';
 import Viewer from 'viewerjs';
 import { copy, formatFileSize } from '@/utils';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { useSetting } from '@/hooks/useSetting';
 import { FileProvider } from '@/providers/file';
+import { LocaleTime } from '@/components/LocaleTime';
 import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
@@ -194,9 +194,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
                   >
                     <Meta
                       title={file.originalname}
-                      description={
-                        '上传于 ' + dayjs.default(file.createAt).format('YYYY-MM-DD HH:mm:ss')
-                      }
+                      description={'上传于 ' + <LocaleTime date={file.createAt} />}
                     />
                   </Card>
                 </List.Item>

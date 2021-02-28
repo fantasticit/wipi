@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { NextPage } from 'next';
 import { Alert, Button, Modal, Popconfirm, message } from 'antd';
-import * as dayjs from 'dayjs';
 import Link from 'next/link';
 import { useSetting } from '@/hooks/useSetting';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { MailProvider } from '@/providers/mail';
+import { LocaleTime } from '@/components/LocaleTime';
 import { DataTable } from '@/components/DataTable';
 import style from './index.module.scss';
 
@@ -79,7 +79,7 @@ const Mail: NextPage = () => {
       title: '发送时间',
       dataIndex: 'createAt',
       key: 'createAt',
-      render: (date) => dayjs.default(date).format('YYYY-MM-DD HH:mm:ss'),
+      render: (date) => <LocaleTime date={date} />,
     },
   ];
 

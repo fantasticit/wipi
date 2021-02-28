@@ -3,10 +3,10 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Modal, Divider, Badge, Popconfirm, Spin, Select, Button, Icon, message } from 'antd';
-import * as dayjs from 'dayjs';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { PageProvider } from '@/providers/page';
 import { ViewProvider } from '@/providers/view';
+import { LocaleTime } from '@/components/LocaleTime';
 import { ViewChart } from '@/components/ViewChart';
 import style from './index.module.scss';
 import { useSetting } from '@/hooks/useSetting';
@@ -50,7 +50,7 @@ const columns = [
     title: '发布时间',
     dataIndex: 'publishAt',
     key: 'publishAt',
-    render: (date) => dayjs.default(date).format('YYYY-MM-DD HH:mm:ss'),
+    render: (date) => <LocaleTime date={date} />,
   },
 ];
 

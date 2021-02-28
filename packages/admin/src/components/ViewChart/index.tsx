@@ -1,7 +1,7 @@
 import React from 'react';
-import * as dayjs from 'dayjs';
 import echarts from 'echarts';
 import ReactEcharts from 'echarts-for-react';
+import dateFormat from 'date-fns/format';
 import { groupBy } from '@/utils';
 
 interface IProps {
@@ -12,7 +12,7 @@ export const ViewChart: React.FC<IProps> = ({ data: propsData = [] }) => {
   const formatData = propsData.map((d) => {
     return {
       ...d,
-      updateAt: dayjs.default(d.updateAt).format('YYYY-MM-DD'),
+      updateAt: dateFormat(new Date(d.updateAt), 'yyyy-MM-dd'),
     };
   });
   const grouped = groupBy(formatData, (d) => d.updateAt);

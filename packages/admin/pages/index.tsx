@@ -79,6 +79,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [], comments: defaultComments =
           {actions.map((action) => {
             return (
               <Col
+                key={action.url}
                 span={4}
                 style={{
                   padding: '2rem 1rem',
@@ -111,6 +112,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [], comments: defaultComments =
         {articles.map((article) => {
           return (
             <Card.Grid
+              key={article.id}
               style={{
                 width: '33.3%',
                 textAlign: 'center',

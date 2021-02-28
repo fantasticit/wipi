@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { NextPage } from 'next';
-import { Select, Badge } from 'antd';
-import * as dayjs from 'dayjs';
+import { Select } from 'antd';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { CommentProvider } from '@/providers/comment';
 import { DataTable } from '@/components/DataTable';
 import { useSetting } from '@/hooks/useSetting';
+import { LocaleTime } from '@/components/LocaleTime';
 import { CommentArticle } from '@/components/comment/CommentArticle';
 import { CommentAction } from '@/components/comment/CommentAction';
 import { CommentContent } from '@/components/comment/CommentContent';
@@ -86,7 +86,7 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }
       dataIndex: 'createAt',
       key: 'createAt',
       width: 200,
-      render: (date) => dayjs.default(date).format('YYYY-MM-DD HH:mm:ss'),
+      render: (date) => <LocaleTime date={date} />,
     },
   ];
 
