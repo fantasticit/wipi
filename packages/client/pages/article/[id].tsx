@@ -5,9 +5,9 @@ import Router from 'next/router';
 import { Icon, Modal, Form, Input, message } from 'antd';
 import Link from 'next/link';
 import cls from 'classnames';
-import * as dayjs from 'dayjs';
 import { GlobalContext } from '@/context/global';
 import { ArticleProvider } from '@/providers/article';
+import { LocaleTime } from '@/components/LocaleTime';
 import { ImageViewer } from '@/components/ImageViewer';
 import { CommentAndRecommendArticles } from '@components/CommentAndRecommendArticles';
 import { MarkdownReader } from '@/components/MarkdownReader';
@@ -102,7 +102,8 @@ const Article: NextPage<IProps> = ({ article }) => {
                 <h1 className={style.title}>{article.title}</h1>
                 <p className={style.desc}>
                   <span>
-                    发布于 {dayjs.default(article.publishAt).format('YYYY-MM-DD HH:mm:ss')}
+                    发布于
+                    <LocaleTime date={article.publishAt} />
                   </span>
                   <span> • </span>
                   <span>阅读量 {article.views}</span>
@@ -114,7 +115,7 @@ const Article: NextPage<IProps> = ({ article }) => {
                   <div className={style.articleInfo}>
                     <p>
                       发布时间：
-                      {dayjs.default(article.publishAt).format('YYYY-MM-DD HH:mm:ss')} | 版权信息：
+                      <LocaleTime date={article.publishAt} /> | 版权信息：
                       <a
                         href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
                         target="_blank"

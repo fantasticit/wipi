@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'antd';
-import { format } from 'timeago.js';
 import Link from 'next/link';
+import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
 
 interface IProps {
@@ -27,7 +27,9 @@ export const ArticleCarousel: React.FC<IProps> = ({ articles = [] }) => {
                       <div className={style.info}>
                         <h2 className={style.title}>{article.title}</h2>
                         <p>
-                          <span>{format(article.publishAt, 'zh_CN')}</span>
+                          <span>
+                            <LocaleTime date={article.publishAt} timeago />
+                          </span>
                           <span className={style.seperator}>·</span>
                           <span>{article.views} 次阅读</span>
                         </p>

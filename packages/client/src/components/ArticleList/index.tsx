@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import cls from 'classnames';
 import LazyLoad from 'react-lazyload';
-import * as dayjs from 'dayjs';
+import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
 
 interface IProps {
@@ -55,7 +55,7 @@ export const ArticleList: React.FC<IProps> = ({
                         ) : null}
                         <span>{article.views} 次阅读</span>
                         <span className={style.pullRight}>
-                          {dayjs.default(article.publishAt).format('YYYY-MM-DD HH:mm:ss')}
+                          <LocaleTime date={article.publishAt} />
                         </span>
                       </div>
                     </div>

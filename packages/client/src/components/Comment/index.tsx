@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button, Icon, Avatar, Pagination } from 'antd';
-import { format } from 'timeago.js';
 import cls from 'classnames';
 import { CommentProvider } from '@/providers/comment';
+import { LocaleTime } from '@/components/LocaleTime';
 import { MarkdownReader } from '@/components/MarkdownReader';
 import { getRandomColor } from '@/utils';
 import { Editor } from './Editor';
@@ -45,7 +45,9 @@ export const CommentItem = ({
         </div>
         <div className={style.meta}>
           {comment.userAgent ? <span>{comment.userAgent}</span> : null}
-          <span>{format(comment.createAt, 'zh_CN')}</span>
+          <span>
+            <LocaleTime date={comment.createAt} timeago />
+          </span>
           <span
             className={style.reply}
             onClick={() => {

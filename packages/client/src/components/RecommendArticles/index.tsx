@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Row, Col, Icon } from 'antd';
 import { ArticleProvider } from '@/providers/article';
 import { ArticleList } from '@components/ArticleList';
-import { format } from 'timeago.js';
+import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
 
 interface IProps {
@@ -47,7 +47,9 @@ export const RecommendArticles: React.FC<IProps> = ({
                       <p className={style.articleTitle}>
                         <span>{article.title}</span>
                         {' · '}
-                        <span>{format(article.publishAt, 'zh_CN')}</span>
+                        <span>
+                          <LocaleTime date={article.publishAt} timeago />
+                        </span>
                       </p>
                     </a>
                   </Link>
@@ -70,7 +72,9 @@ export const RecommendArticles: React.FC<IProps> = ({
                           <img src={article.cover} alt="" />
                         </div>
                         <h1 className={style.title}>{article.title}</h1>
-                        <div className={style.meta}>{format(article.publishAt, 'zh_CN')}</div>
+                        <div className={style.meta}>
+                          <LocaleTime date={article.publishAt} timeago />
+                        </div>
                       </a>
                     </Link>
                   </div>

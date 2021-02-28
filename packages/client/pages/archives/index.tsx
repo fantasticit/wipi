@@ -3,9 +3,9 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import cls from 'classnames';
 import { Row, Col, Icon } from 'antd';
-import * as dayjs from 'dayjs';
 import { ArticleProvider } from '@/providers/article';
 import { GlobalContext } from '@/context/global';
+import { LocaleTime } from '@/components/LocaleTime';
 import { RecommendArticles } from '@components/RecommendArticles';
 import { Tags } from '@components/Tags';
 import { Categories } from '@components/Categories';
@@ -25,7 +25,7 @@ const ArchiveItem = ({ month, articles = [] }) => {
             <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
               <a>
                 <span className={style.meta}>
-                  {dayjs.default(article.publishAt).format('MM-DD')}
+                  <LocaleTime date={article.publishAt} format={'mm-dd'} />
                 </span>
                 <span className={style.title}>{article.title}</span>
               </a>
