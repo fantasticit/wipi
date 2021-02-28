@@ -37,7 +37,6 @@ class MyApp extends App<IGlobalContext, {}> {
 
   render() {
     const { Component, pageProps, ...contextValue } = this.props;
-    const { setting, tags, categories, pages } = contextValue;
     const { needLayoutFooter = true } = pageProps;
 
     return (
