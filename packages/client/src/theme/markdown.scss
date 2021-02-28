@@ -216,7 +216,7 @@
       color: var(--main-text-color);
       background-color: rgba(27, 31, 35, .05);
       font-size: 14px;
-      font-family: Operator Mono, Consolas, Monaco, Menlo, monospace;
+      font-family: Operator Mono,Source Code Pro,Menlo,Consolas,Monaco,monospace;
       word-wrap: break-word;
       word-break: break-all;
     }
@@ -229,7 +229,6 @@
       margin: 10px 0;
       background-color: var(--bg-code);
       font-size: 1em;
-      font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
 
       &::before {
         position: absolute;
@@ -251,14 +250,10 @@
         padding: 12px 10px;
         padding-top: 9px;
         border-radius: 0;
-        border-radius: 5px;
-        border-radius: 0;
-        margin: 0;
-        // color: rgba(255, 255, 255, 0.85);
         background-color: var(--bg-code);
         overflow: auto;
         font-size: 12px;
-        font-family: Operator Mono, Consolas, Monaco, Menlo, monospace;
+        margin: 0;
 
         @at-root pre {
           overflow: hidden;
@@ -339,6 +334,92 @@
     table tr td {
       color: var(--main-text-color);
       font-size: 14px;
+    }
+
+    code.language-ts:before,
+    code.language-js:before,
+    code.language-go:before,
+    code.language-css:before,
+    code.language-sql:before,
+    code.language-php:before,
+    code.language-html:before,
+    code.language-json:before,
+    code.language-bash:before,
+    code.language-less:before,
+    code.language-scss:before,
+    code.language-nginx:before,
+    code.language-javascript:before,
+    code.language-typescript:before,
+    code.language-shell:before,
+    code.language-stylus:before,
+    code.language-python:before,
+    code.language-nginx:before,
+    code.language-json:before {
+      position: absolute;
+      top: 9px;
+      right: 50px;
+      font-size: 12px;
+      line-height: 1;
+      cursor: pointer;
+      color: hsla(0,0%,54.9%,.8);
+      transition: color .1s;
+    }
+    code.language-js:before {
+      content: 'js';
+    }
+    code.language-ts:before {
+      content: 'ts';
+    }
+    code.language-go:before {
+      content: 'go';
+    }
+    code.language-css:before {
+      content: 'css';
+    }
+    code.language-sql:before {
+      content: 'sql';
+    }
+    code.language-php:before {
+      content: 'php';
+    }
+    code.language-bash:before {
+      content: 'bash';
+    }
+    code.language-less:before {
+      content: 'less';
+    }
+    code.language-scss:before {
+      content: 'scss';
+    }
+    code.language-shell:before {
+      content: 'shell';
+    }
+    code.language-nginx:before {
+      content: 'nginx';
+    }
+    code.language-stylus:before {
+      content: 'stylus';
+    }
+    code.language-python:before {
+      content: 'python';
+    }
+    code.language-html:before {
+      content: 'html';
+    }
+    code.language-javascript:before {
+      content: 'js';
+    }
+    code.language-typescript:before {
+      content: 'ts';
+    }
+    code.language-bash:before {
+      content: 'shell';
+    }
+    code.language-css:before {
+      content: 'css';
+    }
+    code.language-json:before {
+      content: 'json';
     }
   }
 }
