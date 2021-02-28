@@ -8,7 +8,7 @@ import { ArticleProvider } from '@/providers/article';
 import { TagProvider } from '@/providers/tag';
 import { GlobalContext } from '@/context/global';
 import { ArticleList } from '@components/ArticleList';
-import { RecommendArticles } from '@components/RecommendArticles';
+import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Tags } from '@components/Tags';
 import { Categories } from '@components/Categories';
 import { Footer } from '@components/Footer';
@@ -89,7 +89,7 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, tag }) 
                   transform: `translateY(${affix ? '-100%' : 0})`,
                 }}
               >
-                <RecommendArticles mode="inline" />
+                <ArticleRecommend mode="inline" />
               </div>
               <div className={cls(affix ? style.isFixed : false)}>
                 <Categories categories={categories} />

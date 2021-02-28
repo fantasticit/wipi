@@ -6,7 +6,7 @@ import { Row, Col, Icon } from 'antd';
 import { ArticleProvider } from '@/providers/article';
 import { GlobalContext } from '@/context/global';
 import { LocaleTime } from '@/components/LocaleTime';
-import { RecommendArticles } from '@components/RecommendArticles';
+import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Tags } from '@components/Tags';
 import { Categories } from '@components/Categories';
 import style from './index.module.scss';
@@ -83,7 +83,7 @@ const Archives: NextPage<IProps> = ({ articles }) => {
             </div>
           </Col>
           <Col sm={8} className={style.aside}>
-            <RecommendArticles mode="inline" />
+            <ArticleRecommend mode="inline" />
             <Categories categories={categories} />
             <Tags tags={tags} />
           </Col>

@@ -9,7 +9,7 @@ import { GlobalContext } from '@/context/global';
 import { ArticleProvider } from '@/providers/article';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ImageViewer } from '@/components/ImageViewer';
-import { CommentAndRecommendArticles } from '@components/CommentAndRecommendArticles';
+import { CommentAndArticleRecommend } from '@/components/CommentAndArticleRecommend';
 import { MarkdownReader } from '@/components/MarkdownReader';
 import style from './index.module.scss';
 const url = require('url');
@@ -145,7 +145,7 @@ const Article: NextPage<IProps> = ({ article }) => {
             </div>
           </article>
         </ImageViewer>
-        <CommentAndRecommendArticles articleId={article.id} isCommentable={article.isCommentable} />
+        <CommentAndArticleRecommend articleId={article.id} isCommentable={article.isCommentable} />
       </div>
     </div>
   );

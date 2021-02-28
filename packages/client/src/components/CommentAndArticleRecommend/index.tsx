@@ -2,7 +2,7 @@ import React from 'react';
 import { NextPage } from 'next';
 import cls from 'classnames';
 import { MyComment } from '@/components/Comment';
-import { RecommendArticles } from '@components/RecommendArticles';
+import { ArticleRecommend } from '@/components/ArticleRecommend';
 import style from './index.module.scss';
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
   isCommentable?: boolean;
 }
 
-export const CommentAndRecommendArticles: NextPage<IProps> = ({
+export const CommentAndArticleRecommend: NextPage<IProps> = ({
   articleId,
   pageId,
   isCommentable,
@@ -32,7 +32,7 @@ export const CommentAndRecommendArticles: NextPage<IProps> = ({
       <div className={style.recmmendArticles}>
         <p className={style.title}>推荐阅读</p>
         <div className={style.articleContainer}>
-          <RecommendArticles articleId={articleId} needTitle={false} asCard={false} />
+          <ArticleRecommend articleId={articleId} needTitle={false} />
         </div>
       </div>
       {/* E 推荐阅读 */}

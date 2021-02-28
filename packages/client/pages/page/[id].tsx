@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { GlobalContext } from '@/context/global';
 import { PageProvider } from '@/providers/page';
 import { ImageViewer } from '@/components/ImageViewer';
-import { CommentAndRecommendArticles } from '@components/CommentAndRecommendArticles';
+import { CommentAndArticleRecommend } from '@/components/CommentAndArticleRecommend';
 import { MarkdownReader } from '@/components/MarkdownReader';
 import style from './index.module.scss';
 
@@ -42,7 +42,7 @@ const Page: NextPage<IProps> = ({ page }) => {
                 <MarkdownReader content={page.html} />
               </div>
             </div>
-            <CommentAndRecommendArticles pageId={page.id} isCommentable={true} />
+            <CommentAndArticleRecommend pageId={page.id} isCommentable={true} />
           </div>
         </ImageViewer>
       )}

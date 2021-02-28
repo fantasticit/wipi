@@ -2,12 +2,11 @@ import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
 import cls from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
-import { throttle } from '@/utils';
 import { GlobalContext } from '@/context/global';
 import { ArticleProvider } from '@/providers/article';
 import { ArticleList } from '@components/ArticleList';
 import { ArticleCarousel } from '@components/ArticleCarousel';
-import { RecommendArticles } from '@components/RecommendArticles';
+import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Tags } from '@components/Tags';
 import { Categories } from '@components/Categories';
 import { Footer } from '@components/Footer';
@@ -83,7 +82,7 @@ const Home: NextPage<IHomeProps> = ({
                   transition: 'none',
                 }}
               >
-                <RecommendArticles mode="inline" />
+                <ArticleRecommend mode="inline" />
               </div>
               <div className={cls(affix ? style.isFixed : false)}>
                 <Categories categories={categories} />
