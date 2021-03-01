@@ -1,5 +1,7 @@
 import React from 'react';
 import App from 'next/app';
+import Router from 'next/router';
+import { message } from 'antd';
 import { SettingProvider } from '@/providers/setting';
 import { NProgress } from '@components/NProgress';
 import { IGlobalContext, GlobalContext } from '@/context/global';
@@ -19,16 +21,21 @@ class MyApp extends App {
   };
 
   setUser = (user) => {
+    if (!user) return;
     localStorage.setItem('user', JSON.stringify(user));
     this.setState({ user });
   };
 
   getUserFromStorage = () => {
     const str = localStorage.getItem('user');
-    try {
+
+    if (str) {
       const user = JSON.parse(str);
       this.setUser(user);
-    } catch (e) {}
+    } else {
+      message.info('请重新登录');
+      Router.push(`/login?redirect=${Router.asPath}`);
+    }
   };
 
   getSetting = () => {

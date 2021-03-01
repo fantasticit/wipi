@@ -41,24 +41,25 @@ httpProvider.interceptors.response.use(
   (err) => {
     if (err && err.response && err.response.status) {
       const status = err.response.status;
+      const isClient = typeof window !== 'undefined';
 
       switch (status) {
         case 504:
         case 404:
-          typeof window !== 'undefined' && message.error('服务器异常');
+          isClient && message.error('服务器异常');
           break;
 
         case 403:
-          typeof window !== 'undefined' && message.warn('访客无权进行该操作');
+          isClient && message.warn('访客无权进行该操作');
           break;
 
         case 401:
-          typeof window !== 'undefined' && message.info('请重新登录');
+          isClient && message.info('请重新登录');
           Router.push(`/login?redirect=${Router.asPath}`);
           break;
 
         default:
-          typeof window !== 'undefined' &&
+          isClient &&
             message.error(
               (err.response && err.response.data && err.response.data.msg) || '未知错误!'
             );
