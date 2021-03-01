@@ -25,7 +25,7 @@ const ArchiveItem = ({ month, articles = [] }) => {
             <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
               <a>
                 <span className={style.meta}>
-                  <LocaleTime date={article.publishAt} format={'mm-dd'} />
+                  <LocaleTime date={article.publishAt} format={'MM-dd'} />
                 </span>
                 <span className={style.title}>{article.title}</span>
               </a>
