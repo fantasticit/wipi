@@ -252,6 +252,7 @@
         border-radius: 0;
         background-color: var(--bg-code);
         overflow: auto;
+        overscroll-behavior: contain;
         font-size: 12px;
         margin: 0;
 
