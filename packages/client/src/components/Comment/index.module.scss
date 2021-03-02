@@ -6,23 +6,10 @@
   background-color: var(--bg-second);
 
   :global {
-    .CodeMirror,
-    .te-mode-switch-section {
-      background-color: transparent !important;
-    }
-
     .ant-btn-primary[disabled] {
       border-color: var(--comment-editor-border-color);
       color: var(--main-text-color);
       background-color: var(--comment-editor-btn-diable-bg);
-    }
-
-    .tui-editor-defaultUI .CodeMirror-scroll {
-      color: var(--main-text-color);
-    }
-
-    .CodeMirror-cursor {
-      border-left-color: var(--main-text-color);
     }
   }
 
