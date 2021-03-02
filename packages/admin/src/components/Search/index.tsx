@@ -14,11 +14,18 @@ export interface IFieldItem {
 interface IProps extends FormComponentProps {
   fields: Array<IFieldItem>;
   showLabel?: boolean;
+  padding?: number;
   onSearch?: (arg) => void;
   onReset?: (arg) => void;
 }
 
-const _Search: React.FC<IProps> = ({ form, fields = [], showLabel = true, onSearch }) => {
+const _Search: React.FC<IProps> = ({
+  form,
+  fields = [],
+  showLabel = true,
+  padding = 24,
+  onSearch,
+}) => {
   const getFields = () => {
     const count = 6;
 
@@ -78,10 +85,9 @@ const _Search: React.FC<IProps> = ({ form, fields = [], showLabel = true, onSear
   );
 
   return (
-    <Form className={style.wrapper} layout="inline" onSubmit={handleSearch}>
+    <Form className={style.wrapper} style={{ padding }} layout="inline" onSubmit={handleSearch}>
       <Row className={style.content}>
         {getFields()}
-
         {fields.length <= 3 && <Col>{submitContent}</Col>}
       </Row>
       {fields.length > 3 && (

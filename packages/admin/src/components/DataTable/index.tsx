@@ -69,6 +69,7 @@ export const DataTable: React.FC<IProps> = ({
       <Search
         fields={searchFields}
         showLabel={showSearchLabel}
+        padding={padding}
         onSearch={(params) => {
           setPage(1);
           updateSearchParams(params);

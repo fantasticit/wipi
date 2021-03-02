@@ -62,7 +62,7 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
       visible={visible}
     >
       {isCopy && (
-        <div>
+        <div style={{ marginBottom: 16 }}>
           <Alert message="点击卡片复制链接，点击图片查看大图" type="info" />
         </div>
       )}
