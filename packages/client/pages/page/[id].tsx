@@ -20,7 +20,7 @@ const Page: NextPage<IProps> = ({ page }) => {
   }, []);
 
   return (
-    <div>
+    <>
       {!page ? (
         <div className="container">
           <p>页面不存在</p>
@@ -46,7 +46,7 @@ const Page: NextPage<IProps> = ({ page }) => {
           </div>
         </ImageViewer>
       )}
-    </div>
+    </>
   );
 };
 

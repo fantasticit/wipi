@@ -52,7 +52,7 @@ const Article: NextPage<IProps> = ({ article }) => {
   }, [shouldCheckPassWord]);
 
   return (
-    <div>
+    <>
       {/* S 密码检验 */}
       <Modal
         title="文章受保护，请输入访问密码"
@@ -73,7 +73,7 @@ const Article: NextPage<IProps> = ({ article }) => {
       </Modal>
       {/* E 密码检验 */}
 
-      <div>
+      <>
         <Helmet>
           <title>{(article.title || '未知标题') + ' | ' + setting.systemTitle}</title>
         </Helmet>
@@ -146,8 +146,8 @@ const Article: NextPage<IProps> = ({ article }) => {
           </article>
         </ImageViewer>
         <CommentAndArticleRecommend articleId={article.id} isCommentable={article.isCommentable} />
-      </div>
-    </div>
+      </>
+    </>
   );
 };
 
