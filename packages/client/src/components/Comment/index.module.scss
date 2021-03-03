@@ -119,6 +119,7 @@
       main {
         > div.content {
           padding: .8em 0;
+          word-break: break-all;
 
           img {
             width: auto;
