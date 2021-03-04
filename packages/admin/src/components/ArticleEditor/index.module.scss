@@ -1,15 +1,18 @@
 .wrapper {
-  min-height: 100vh;
-  padding-top: 66.5px;
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
   background-color: #f4f5f5;
 
   .header {
-    position: fixed;
-    top: 0;
-    width: 100%;
+    height: 64px;
     background-color: #ffffff;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
     z-index: 1000;
+
+    > div {
+      height: 100%;
+    }
 
     input {
       padding-right: 0;
@@ -22,11 +25,8 @@
     }
   }
 
-  .content {
+  .main {
+    flex: 1;
     overflow: hidden;
-
-    > article {
-      padding: 24px;
-    }
   }
 }

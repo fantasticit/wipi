@@ -1,5 +1,60 @@
 .wrapper {
-  height: calc(100vh - 66.5px - 48px);
-  min-height: 400px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, .06);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  user-select: none;
+
+  > header {
+    height: 40px;
+    background: #fff;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-size: 12px;
+
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    span {
+      user-select: none;
+      cursor: pointer;
+
+      i {
+        margin-right: 6px;
+      }
+    }
+
+    .toolWrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 4px 8px;
+      cursor: pointer;
+      font-size: 16px;
+      
+    }
+  }
+
+  > main {
+    flex: 1;
+    height: calc(100% - 40px);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    > div {
+      flex: 1;
+      height: 100%;
+      overflow: auto;
+      background-color: #fff;
+    }
+  }
 }

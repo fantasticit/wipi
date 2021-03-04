@@ -1,15 +1,5 @@
 import { httpProvider } from './http';
 
-import * as Showdown from 'showdown';
-
-const converter = new Showdown.Converter({
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true,
-  emoji: true,
-});
-
 export class ArticleProvider {
   /**
    * 获取所有文章
@@ -66,7 +56,6 @@ export class ArticleProvider {
    * @param data
    */
   static async addArticle(data): Promise<IArticle> {
-    data.html = converter.makeHtml(data.content);
     return httpProvider.post('/article', data);
   }
 
@@ -76,7 +65,6 @@ export class ArticleProvider {
    * @param data
    */
   static async updateArticle(id, data): Promise<IArticle> {
-    data.html = converter.makeHtml(data.content);
     return httpProvider.patch(`/article/${id}`, data);
   }
 

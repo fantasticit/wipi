@@ -44,3 +44,30 @@ export const formatFileSize = (size) => {
   }
   return (size / 1024 / 1024).toFixed(2) + ' MB';
 };
+
+export function debounce(func, wait, immediate = false) {
+  let timeout;
+
+  const debounced = function () {
+    const context = this;
+    const args = arguments;
+    const later = function () {
+      timeout = null;
+      if (!immediate) {
+        func.apply(context, args);
+      }
+    };
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) {
+      func.apply(context, args);
+    }
+  };
+
+  debounced.cancel = () => {
+    clearTimeout(timeout);
+  };
+
+  return debounced;
+}

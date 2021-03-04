@@ -142,7 +142,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
             borderBottom: '1px solid rgb(235, 237, 240)',
             background: '#fff',
           }}
-          backIcon={<Icon type="close" />}
+          backIcon={<Button size="small" icon="close" />}
           onBack={() => window.close()}
           title={
             <Input
@@ -170,13 +170,16 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
           ]}
         />
       </header>
-      <div className={cls(style.content)}>
-        <article>
-          <div>
-            <CodeEditor value={page.content} onChange={patchPage('content')} />
-          </div>
-        </article>
-      </div>
+      <main className={cls(style.main)}>
+        <CodeEditor
+          defaultValue={page.content}
+          onChange={({ value, html, toc }) => {
+            patchPage('content')(value);
+            patchPage('html')(html);
+            patchPage('toc')(toc);
+          }}
+        />
+      </main>
       <Drawer
         title={'页面属性'}
         width={480}

@@ -143,7 +143,7 @@ export const ArticleEditor: React.FC<IProps> = ({
       </Helmet>
       <header className={style.header}>
         <PageHeader
-          backIcon={<Icon type="close" />}
+          backIcon={<Button size="small" icon="close" />}
           style={{
             borderBottom: '1px solid rgb(235, 237, 240)',
           }}
@@ -157,26 +157,31 @@ export const ArticleEditor: React.FC<IProps> = ({
             />
           }
           extra={[
-            <Button key="file" type="dashed" onClick={toggleFileDrawerVisible}>
+            <Button key="file" type="dashed" icon="appstore" onClick={toggleFileDrawerVisible}>
               文件库
             </Button>,
-            <Button key="dradt" onClick={save}>
-              保存草稿
-            </Button>,
-            <Button key="preview" onClick={preview}>
+            <Button key="preview" icon="eye" onClick={preview}>
               预览
             </Button>,
-            <Button key="publish" type="primary" onClick={publish}>
+            <Button key="dradt" icon="book" onClick={save}>
+              保存草稿
+            </Button>,
+            <Button key="publish" type="primary" icon="cloud" onClick={publish}>
               发布
             </Button>,
           ]}
         />
       </header>
-      <div className={cls(style.content)}>
-        <article>
-          <MDEditor value={article.content} onChange={patchArticle('content')} />
-        </article>
-      </div>
+      <main className={cls(style.main)}>
+        <MDEditor
+          defaultValue={article.content}
+          onChange={({ value, html, toc }) => {
+            patchArticle('content')(value);
+            patchArticle('html')(html);
+            patchArticle('toc')(toc);
+          }}
+        />
+      </main>
       <FileSelectDrawer
         isCopy={true}
         closeAfterClick={true}
