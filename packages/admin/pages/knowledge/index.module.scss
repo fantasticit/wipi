@@ -3,6 +3,14 @@
   align-items: stretch;
 }
 
+img {
+  width: 100%;
+  height: 120px;
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+  object-fit: cover;
+}
+
 .item {
   height: 100%;
 
@@ -15,5 +23,13 @@
   &:hover {
     color: var(--link-color);
     border-color: var(--link-color);
+  }
+}
+
+:global {
+  .ant-card-meta-description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

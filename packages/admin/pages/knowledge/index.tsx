@@ -70,7 +70,7 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
         <Card
           loading={getLoading}
           style={{ width: '100%' }}
-          cover={<img alt={book.title} src={book.cover} />}
+          cover={<img className={style.cover} alt={book.title} src={book.cover} />}
           actions={[
             <Link href={`/knowledge/editor/[id]`} as={`/knowledge/editor/` + book.id}>
               <a>
