@@ -29,12 +29,14 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
 
   return (
     <div className={cls(style.wrapper)}>
-      <div
-        className={style.bg}
-        style={{
-          backgroundImage: `url(${book.cover})`,
-        }}
-      ></div>
+      {book.cover && (
+        <div
+          className={style.bg}
+          style={{
+            backgroundImage: `url(${book.cover})`,
+          }}
+        ></div>
+      )}
       <div className={cls('container')}>
         <div className={style.breadcrump}>
           <Breadcrumb>
