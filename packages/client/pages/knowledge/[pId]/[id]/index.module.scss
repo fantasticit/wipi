@@ -153,6 +153,7 @@
     > ul {
       max-height: 28vh;
       overflow: auto;
+      overscroll-behavior: contain;
 
       li {
         border-radius: var(--border-radius);

@@ -1,6 +1,7 @@
 .wrapper {
   max-height: 28vh;
   overflow: auto;
+  overscroll-behavior: contain;
 }
 
 .item {
