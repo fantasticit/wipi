@@ -21,7 +21,7 @@ export const ArticleRecommend: React.FC<IProps> = ({
 
   useEffect(() => {
     ArticleProvider.getRecommend(articleId).then((res) => {
-      setArticles(res);
+      setArticles(res.slice(0, 6));
     });
   }, [articleId]);
 
