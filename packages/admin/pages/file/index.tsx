@@ -1,20 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import {
-  Row,
-  Col,
-  Drawer,
-  Button,
-  Spin,
-  Upload,
-  Icon,
-  message,
-  Card,
-  List,
-  Popconfirm,
-  Alert,
-} from 'antd';
+import { Row, Col, Drawer, Button, message, Card, List, Popconfirm, Alert } from 'antd';
 import Viewer from 'viewerjs';
 import { copy, formatFileSize } from '@/utils';
 import { AdminLayout } from '@/layout/AdminLayout';
@@ -22,6 +9,7 @@ import { useSetting } from '@/hooks/useSetting';
 import { FileProvider } from '@/providers/file';
 import { LocaleTime } from '@/components/LocaleTime';
 import { DataTable } from '@/components/DataTable';
+import { Upload } from '@/components/Upload';
 import style from './index.module.scss';
 
 const { Meta } = Card;
@@ -129,15 +117,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
           </div>
         ) : (
           <div style={{ marginBottom: 24 }}>
-            <Spin tip="文件上传中..." spinning={loading}>
-              <Upload.Dragger {...uploadProps}>
-                <p className="ant-upload-drag-icon">
-                  <Icon type="inbox" />
-                </p>
-                <p className="ant-upload-text">点击选择文件或将文件拖拽到此处</p>
-                <p className="ant-upload-hint">文件将上传到 阿里云 OSS, 如未配置请先配置</p>
-              </Upload.Dragger>
-            </Spin>
+            <Upload onChange={getFiles} />
           </div>
         )}
 

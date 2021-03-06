@@ -1,53 +1,20 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Icon, Input, Upload, Button, Switch, message, Drawer } from 'antd';
-import { UploadListType } from 'antd/es/upload/interface';
+import { Input, Button, Switch, message, Drawer } from 'antd';
 import { useToggle } from '@/hooks/useToggle';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
-import { FileProvider } from '@/providers/file';
 import { KnowledgeProvider } from '@/providers/knowledge';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
+import { Upload } from '@/components/Upload';
 
 export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, onOk }) => {
   const isUpdate = book !== null;
-  const [loading, toggleLoading] = useToggle(false);
   const [fileVisible, toggleFileVisible] = useToggle(false);
   const [createBookApi, createLoading] = useAsyncLoading(KnowledgeProvider.createBook);
   const [updateBookApi, updateLoading] = useAsyncLoading(KnowledgeProvider.updateKnowledge);
   const [title, setTitle] = useState((book && book.title) || '');
   const [summary, setSummary] = useState((book && book.summary) || '');
-  const [isCommentable, setCommentable] = useState((book && book.isCommentable) || false);
+  const [isCommentable, setCommentable] = useState((book && book.isCommentable) || true);
   const [cover, setCover] = useState((book && book.cover) || '');
-
-  const uploadProps = {
-    name: 'avatar',
-    listType: 'picture' as UploadListType,
-    accept: `.jpg, .jpeg, .pjpeg, .png, .apng, .bmp, .gif, .svg, .webp`,
-    multiple: false,
-    action: '',
-    beforeUpload(file) {
-      toggleLoading();
-      FileProvider.uploadFile(file)
-        .then((res) => {
-          setCover(res.url);
-          toggleLoading();
-        })
-        .catch(() => {
-          message.error('上传失败');
-          toggleLoading();
-        });
-      return Promise.reject();
-    },
-  };
-
-  const uploadContent = (
-    <>
-      <p className="ant-upload-drag-icon">
-        {loading ? <Icon type="loading" /> : <Icon type="plus" />}
-      </p>
-      <p className="ant-upload-text">点击选择文件或将文件拖拽到此处</p>
-      <p className="ant-upload-hint">文件将上传到 阿里云 OSS, 如未配置请先配置</p>
-    </>
-  );
 
   const ok = useCallback(() => {
     const data = { title: title.trim(), cover, summary: summary.trim(), isCommentable };
@@ -99,15 +66,15 @@ export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, on
       <div className="form-item">
         <label htmlFor="upload">封面</label>
         <div>
-          <Upload.Dragger
-            {...uploadProps}
+          <Upload
             style={{
               width: '100%',
               minHeight: 160,
             }}
+            onChange={setCover}
           >
-            {cover ? <img src={cover} alt="avatar" style={{ width: '100%' }} /> : uploadContent}
-          </Upload.Dragger>
+            {cover ? <img src={cover} alt="avatar" style={{ width: '100%' }} /> : null}
+          </Upload>
           <Input value={cover} style={{ marginTop: 12 }}></Input>
           <Button style={{ marginTop: 12 }} onClick={toggleFileVisible}>
             选择文件

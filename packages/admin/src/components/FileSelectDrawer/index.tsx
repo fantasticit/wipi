@@ -1,9 +1,10 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { Alert, Drawer, Card, List } from 'antd';
+import { Alert, Drawer, Card, List, Button } from 'antd';
 import Viewer from 'viewerjs';
 import { copy } from '@/utils';
 import { FileProvider } from '@/providers/file';
 import { DataTable } from '@/components/DataTable';
+import { Upload } from '@/components/Upload';
 import style from './index.module.scss';
 
 const { Meta } = Card;
@@ -66,6 +67,7 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
           <Alert message="点击卡片复制链接，点击图片查看大图" type="info" />
         </div>
       )}
+
       <div ref={ref}>
         <DataTable
           data={files}
@@ -86,6 +88,11 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
           showSearchLabel={false}
           padding={0}
           onSearch={getFiles}
+          rightNode={
+            <Upload onChange={getFiles} useDragger={false}>
+              <Button>上传文件</Button>
+            </Upload>
+          }
           customDataTable={(data) => (
             <List
               grid={{
