@@ -8,7 +8,6 @@ interface IToc {
 
 export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> = ({
   tocs = [],
-  maxHeight = '28vh',
 }) => {
   const goto = useCallback((toc) => {
     try {
@@ -20,18 +19,21 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
   }, []);
 
   return (
-    <div className={style.wrapper} style={{ maxHeight }}>
-      {tocs.map((toc) => {
-        return (
-          <div
-            className={style.item}
-            style={{ paddingLeft: 12 * (toc.level - 1), cursor: 'pointer' }}
-            onClick={() => goto(toc)}
-          >
-            {toc.text}
-          </div>
-        );
-      })}
+    <div className={style.wrapper}>
+      <header>目录</header>
+      <main>
+        {tocs.map((toc) => {
+          return (
+            <div
+              className={style.item}
+              style={{ paddingLeft: 12 * (toc.level - 1), cursor: 'pointer' }}
+              onClick={() => goto(toc)}
+            >
+              {toc.text}
+            </div>
+          );
+        })}
+      </main>
     </div>
   );
 };

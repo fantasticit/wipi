@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { BackTop } from 'antd';
 import { GlobalContext } from '@/context/global';
 import { Seo } from '@/components/Seo';
-// import { ImagePlaceholder } from '@/components/ImagePlaceholder';
 import { Header } from '@components/Header';
 import { Footer } from '@components/Footer';
 import style from './index.module.scss';
@@ -29,7 +28,7 @@ interface Iprops {
   needFooter?: boolean;
 }
 
-export const Layout: React.FC<Iprops> = ({ children, needFooter = true }) => {
+export const AppLayout: React.FC<Iprops> = ({ children, needFooter = true }) => {
   const { setting, pages } = useContext(GlobalContext);
   const menus = [
     ...defaultMenus,
@@ -43,9 +42,7 @@ export const Layout: React.FC<Iprops> = ({ children, needFooter = true }) => {
     <div className={style.wrapper}>
       <Seo />
       <Header setting={setting} menus={menus} />
-      {/* <ImagePlaceholder> */}
       <main className={style.main}>{children}</main>
-      {/* </ImagePlaceholder> */}
       <BackTop />
       {needFooter && <Footer setting={setting} />}
     </div>

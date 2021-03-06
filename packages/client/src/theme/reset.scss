@@ -182,6 +182,17 @@
     transition: opacity 300ms, transform 300ms;
   }
 
+  .sticky {
+    position: sticky;
+    top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .loading {
+    padding: 2rem 0 1rem;
+    text-align: center;
+  }
+
   .empty {
     width: 100%;
     height: 60px;

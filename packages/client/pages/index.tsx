@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
-import cls from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GlobalContext } from '@/context/global';
+import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ArticleProvider } from '@/providers/article';
 import { ArticleList } from '@components/ArticleList';
 import { ArticleCarousel } from '@components/ArticleCarousel';
@@ -26,21 +26,8 @@ const Home: NextPage<IHomeProps> = ({
   total = 0,
 }) => {
   const { setting, tags, categories } = useContext(GlobalContext);
-  const [affix, setAffix] = useState(false);
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
-
-  useEffect(() => {
-    const handler = () => {
-      // @ts-ignore
-      const y = window.scrollY;
-      setAffix(y > 380);
-    };
-    document.addEventListener('scroll', handler);
-    return () => {
-      document.removeEventListener('scroll', handler);
-    };
-  }, []);
 
   useEffect(() => {
     setArticles(defaultArticles);
@@ -58,42 +45,35 @@ const Home: NextPage<IHomeProps> = ({
   }, []);
 
   return (
-    <div className={style.wrapper}>
+    <>
       <ArticleCarousel articles={recommendedArticles} />
-      <div className={cls('container', style.container)}>
-        <div className={style.content}>
+      <DoubleColumnLayout
+        leftNode={
           <InfiniteScroll
             pageStart={1}
             loadMore={getArticles}
             hasMore={page * pageSize < total}
             loader={
-              <div className={style.loading} key={0}>
+              <div className={'loading'} key={0}>
                 正在获取文章...
               </div>
             }
           >
             <ArticleList articles={articles} />
           </InfiniteScroll>
-          <aside className={cls(style.aside)}>
-            <div>
-              <div
-                style={{
-                  transform: `translateY(${affix ? '-100%' : 0})`,
-                  transition: 'none',
-                }}
-              >
-                <ArticleRecommend mode="inline" />
-              </div>
-              <div className={cls(affix ? style.isFixed : false)}>
-                <Categories categories={categories} />
-                <Tags tags={tags} />
-                <Footer className={style.footer} setting={setting} />
-              </div>
+        }
+        rightNode={
+          <>
+            <ArticleRecommend mode="inline" />
+            <div className={'sticky'}>
+              <Categories categories={categories} />
+              <Tags tags={tags} />
+              <Footer className={style.footer} setting={setting} />
             </div>
-          </aside>
-        </div>
-      </div>
-    </div>
+          </>
+        }
+      />
+    </>
   );
 };
 

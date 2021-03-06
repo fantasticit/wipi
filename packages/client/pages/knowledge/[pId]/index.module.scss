@@ -1,25 +1,25 @@
 .wrapper {
   position: relative;
   height: 100%;
-  padding: 1rem 0 3rem;
-  background-color: var(--bg-body);
+}
 
-  .bg {
-    content: "";
-    height: 80%;
-    position: absolute;
-    inset: 0px;
-    background-position: 50% 17%;
-    opacity: 0.2;
-    background-size: cover;
-    filter: blur(20px);
-  }
+.bg {
+  content: "";
+  position: absolute;
+  height: 100%;
+  inset: 0px;
+  background-position: 50% 17%;
+  opacity: 0.2;
+  background-size: cover;
+  filter: blur(20px);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
 }
 
 .breadcrump {  
-  position: relative;
-  z-index: 2;
-
   a, span {
     color: var(--second-text-color) !important;
   }

@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
-import cls from 'classnames';
 import { Icon } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
-import { throttle } from '@/utils';
 import { GlobalContext } from '@/context/global';
+import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ArticleProvider } from '@/providers/article';
 import { CategoryProvider } from '@/providers/category';
 import { ArticleList } from '@components/ArticleList';
@@ -24,23 +23,8 @@ const pageSize = 12;
 
 const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, category }) => {
   const { setting, tags, categories } = useContext(GlobalContext);
-  const [affix, setAffix] = useState(false);
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
-
-  useEffect(() => {
-    const handler = throttle(() => {
-      // @ts-ignore
-      const y = window.scrollY;
-      setAffix(y > 100);
-    }, 200);
-
-    document.addEventListener('scroll', handler);
-
-    return () => {
-      document.removeEventListener('scroll', handler);
-    };
-  }, []);
 
   useEffect(() => {
     setArticles(defaultArticles);
@@ -58,9 +42,9 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, categor
   }, []);
 
   return (
-    <div className={style.wrapper}>
-      <div className={cls('container', style.container)}>
-        <div className={style.content}>
+    <DoubleColumnLayout
+      leftNode={
+        <>
           <div className={style.tagOrCategoryDetail}>
             <div>
               <Icon type="book" />
@@ -77,32 +61,26 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, categor
             loadMore={getArticles}
             hasMore={page * pageSize < total}
             loader={
-              <div className={style.loading} key={0}>
+              <div className={'loading'} key={0}>
                 正在获取文章...
               </div>
             }
           >
             <ArticleList articles={articles} />
           </InfiniteScroll>
-          <aside className={cls(style.aside)}>
-            <div>
-              <div
-                style={{
-                  transform: `translateY(${affix ? '-100%' : 0})`,
-                }}
-              >
-                <ArticleRecommend mode="inline" />
-              </div>
-              <div className={cls(affix ? style.isFixed : false)}>
-                <Categories categories={categories} />
-                <Tags tags={tags} />
-                <Footer className={style.footer} setting={setting} />
-              </div>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </div>
+        </>
+      }
+      rightNode={
+        <>
+          <ArticleRecommend mode="inline" />
+          <div className={'sticky'}>
+            <Categories categories={categories} />
+            <Tags tags={tags} />
+            <Footer className={style.footer} setting={setting} />
+          </div>
+        </>
+      }
+    />
   );
 };
 

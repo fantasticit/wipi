@@ -11,47 +11,12 @@ export const _Header = ({ setting, menus }) => {
   const router = useRouter();
   const asPath = router.asPath;
   const pathname = router.pathname;
-  const [affix, setAffix] = useState(false);
-  const [affixVisible, setAffixVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
-  // useEffect(() => {
-  //   let beforeY =
-  //     document.documentElement.scrollTop ||
-  //     window.pageYOffset ||
-  //     window.scrollY ||
-  //     document.body.scrollTop;
-
-  //   const handler = throttle(() => {
-  //     const y =
-  //       document.documentElement.scrollTop ||
-  //       window.pageYOffset ||
-  //       window.scrollY ||
-  //       document.body.scrollTop;
-  //     setAffix(y > 0);
-  //     setAffixVisible(beforeY > y);
-  //     setTimeout(() => {
-  //       beforeY = y;
-  //     }, 0);
-  //   }, 200);
-
-  //   document.addEventListener('scroll', handler);
-
-  //   return () => {
-  //     document.removeEventListener('scroll', handler);
-  //   };
-  // }, []);
-
   return (
-    <header className={cls(style.header)}>
-      <div
-        className={cls(
-          style.wrapper,
-          affix ? style.isFixed : false,
-          affixVisible ? style.visible : false
-        )}
-      >
+    <header className={cls(style.header, style.sticky)}>
+      <div className={cls(style.wrapper)}>
         <div className={cls('container')}>
           <div className={style.logo}>
             {/^http/.test(setting.systemLogo) ? (

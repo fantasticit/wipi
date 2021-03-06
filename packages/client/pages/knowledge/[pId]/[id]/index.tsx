@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { Icon, Breadcrumb } from 'antd';
-import cls from 'classnames';
 import { KnowledgeProvider } from '@/providers/knowledge';
+import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ImageViewer } from '@/components/ImageViewer';
 import { MarkdownReader } from '@/components/MarkdownReader';
@@ -22,7 +23,6 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
   const chapters = book.children || [];
   const tocs = chapter.toc ? JSON.parse(chapter.toc) : [];
   const idx = chapters.findIndex((t) => t.id === chapter.id);
-  const [affix, setAffix] = useState(false);
 
   const prev = useMemo(() => {
     if (idx <= 0) return null;
@@ -33,18 +33,6 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
     if (idx >= chapters.length - 1) return null;
     return chapters[idx + 1];
   }, [idx]);
-
-  useEffect(() => {
-    const handler = () => {
-      // @ts-ignore
-      const y = window.scrollY;
-      setAffix(y > 118);
-    };
-    document.addEventListener('scroll', handler);
-    return () => {
-      document.removeEventListener('scroll', handler);
-    };
-  }, []);
 
   // 更新阅读量
   useEffect(() => {
@@ -58,43 +46,43 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
   }
 
   return (
-    <div className={cls(style.wrapper)}>
-      <div className={cls('container')}>
-        <div className={style.breadcrump}>
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <Link href="/knowledge">
-                <a>知识笔记</a>
-              </Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>
-              <Link as={`/knowledge/${pId}`} href="/knowledge/[pId]">
-                <a>{book.title}</a>
-              </Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>{chapter.title}</Breadcrumb.Item>
-          </Breadcrumb>
-        </div>
-        <div className={style.main}>
-          <ImageViewer containerSelector="#js-knowledge-content">
-            <div id="js-knowledge-content" className={style.content}>
-              <article>
-                <div className={style.meta}>
-                  <h1 className={style.title}>{chapter.title}</h1>
-                  <p className={style.desc}>
-                    <span>
-                      发布于
-                      <LocaleTime date={chapter.publishAt} />
-                    </span>
-                    <span> • </span>
-                    <span>阅读量 {chapter.views}</span>
-                  </p>
-                </div>
-                <div>
-                  <MarkdownReader content={chapter.html || chapter.content} />
-                </div>
-                <div className={style.metaInfo}>
-                  <p>
+    <>
+      <DoubleColumnLayout
+        leftNode={
+          <>
+            <div className={cls(style.breadcrump)}>
+              <Breadcrumb>
+                <Breadcrumb.Item>
+                  <Link href="/knowledge">
+                    <a>知识笔记</a>
+                  </Link>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  <Link as={`/knowledge/${pId}`} href="/knowledge/[pId]">
+                    <a>{book.title}</a>
+                  </Link>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item>{chapter.title}</Breadcrumb.Item>
+              </Breadcrumb>
+            </div>
+            <ImageViewer containerSelector="#js-knowledge-content">
+              <div id="js-knowledge-content" className={style.content}>
+                <article>
+                  <div className={style.meta}>
+                    <h1 className={style.title}>{chapter.title}</h1>
+                    <p className={style.desc}>
+                      <span>
+                        发布于
+                        <LocaleTime date={chapter.publishAt} />
+                      </span>
+                      <span> • </span>
+                      <span>阅读量 {chapter.views}</span>
+                    </p>
+                  </div>
+                  <div>
+                    <MarkdownReader content={chapter.html || chapter.content} />
+                  </div>
+                  <div className={style.copyrightInfo}>
                     发布时间：
                     <LocaleTime date={chapter.publishAt} /> | 版权信息：
                     <a
@@ -103,80 +91,77 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                     >
                       非商用-署名-自由转载
                     </a>
-                  </p>
-                </div>
-                <div className={style.navigation}>
-                  {prev && (
-                    <div
-                      className={style.left}
-                      style={{
-                        width: next ? '45%' : '100%',
-                      }}
-                    >
-                      <Link href={`/knowledge/[pId]/[id]`} as={`/knowledge/${pId}/${prev.id}`}>
-                        <a>
-                          <Icon type="arrow-left" />
-                          <span>{prev.title}</span>
-                        </a>
-                      </Link>
-                    </div>
-                  )}
-                  {next && (
-                    <div
-                      className={style.right}
-                      style={{
-                        width: prev ? '45%' : '100%',
-                      }}
-                    >
-                      <Link href={`/knowledge/[pId]/[id]`} as={`/knowledge/${pId}/${next.id}`}>
-                        <a>
-                          <span>{next.title}</span>
-                          <Icon type="arrow-right" />
-                        </a>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </article>
-              {book.isCommentable ? (
-                <>
-                  <p className={style.title}>评论</p>
-                  <Comment hostId={chapter.id} />
-                </>
-              ) : null}
-            </div>
-          </ImageViewer>
-          <aside className={style.aside}>
-            <div className={cls(affix ? style.isFixed : false)}>
-              <div className={cls(style.infoWrapper, style.isBg)}>
-                <header>{book.title}</header>
-                <main>
-                  <ul>
-                    {chapters.map((item) => {
-                      return (
-                        <li key={item.id}>
-                          <Link as={`/knowledge/${pId}/${item.id}`} href={`/knowledge/[pId]/[id]`}>
-                            <a className={cls(item.id === id && style.active)}>{item.title}</a>
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </main>
+                  </div>
+                  <div className={style.navigation}>
+                    {prev && (
+                      <div
+                        className={style.left}
+                        style={{
+                          width: next ? '45%' : '100%',
+                        }}
+                      >
+                        <Link href={`/knowledge/[pId]/[id]`} as={`/knowledge/${pId}/${prev.id}`}>
+                          <a>
+                            <Icon type="arrow-left" />
+                            <span>{prev.title}</span>
+                          </a>
+                        </Link>
+                      </div>
+                    )}
+                    {next && (
+                      <div
+                        className={style.right}
+                        style={{
+                          width: prev ? '45%' : '100%',
+                        }}
+                      >
+                        <Link href={`/knowledge/[pId]/[id]`} as={`/knowledge/${pId}/${next.id}`}>
+                          <a>
+                            <span>{next.title}</span>
+                            <Icon type="arrow-right" />
+                          </a>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                </article>
+                {book.isCommentable ? (
+                  <div className={style.commentWrap}>
+                    <p className={style.title}>评论</p>
+                    <Comment hostId={chapter.id} />
+                  </div>
+                ) : null}
               </div>
-              {tocs && tocs.length ? (
-                <div className={style.infoWrapper} style={{ marginTop: '1rem' }}>
-                  <header>目录</header>
-                  <main>
-                    <Toc tocs={tocs} />
-                  </main>
-                </div>
-              ) : null}
+            </ImageViewer>
+          </>
+        }
+        rightNode={
+          <div className={'sticky'} style={{ marginTop: 37 }}>
+            <div className={cls(style.infoWrapper, style.isBg)}>
+              <header>{book.title}</header>
+              <main>
+                <ul>
+                  {chapters.map((item) => {
+                    return (
+                      <li key={item.id}>
+                        <Link as={`/knowledge/${pId}/${item.id}`} href={`/knowledge/[pId]/[id]`}>
+                          <a className={cls(item.id === id && style.active)}>{item.title}</a>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </main>
             </div>
-          </aside>
-        </div>
-      </div>
-    </div>
+            {tocs && tocs.length ? (
+              <div className={style.infoWrapper} style={{ marginTop: '1rem' }}>
+                <Toc tocs={tocs} />
+              </div>
+            ) : null}
+          </div>
+        }
+      />
+    </>
   );
 };
 

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import cls from 'classnames';
-import { Row, Col, Icon } from 'antd';
+import { Icon } from 'antd';
 import { ArticleProvider } from '@/providers/article';
 import { GlobalContext } from '@/context/global';
+import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Tags } from '@components/Tags';
@@ -50,46 +50,44 @@ const Archives: NextPage<IProps> = ({ articles }) => {
   const { tags, categories } = useContext(GlobalContext);
 
   return (
-    <div className={style.wrapper}>
-      <div className={cls('container', style.container)}>
-        <Row>
-          <Col sm={16} className={style.main}>
-            <div className={style.content}>
-              <div className={style.summary}>
-                <div>
-                  <Icon type="block" />
-                </div>
-                <p>
-                  <span>归档</span>
-                </p>
-                <p>
-                  共计 <span>{resolveArticlesCount(articles)}</span> 篇
-                </p>
-              </div>
-              {Object.keys(articles)
-                .sort((a, b) => +b - +a)
-                .map((year) => {
-                  return (
-                    <div className={style.list}>
-                      <h2>{year}</h2>
-                      {Object.keys(articles[year]).map((month) => {
-                        return (
-                          <ArchiveItem key={year} month={month} articles={articles[year][month]} />
-                        );
-                      })}
-                    </div>
-                  );
-                })}
+    <DoubleColumnLayout
+      leftNode={
+        <div className={style.content}>
+          <div className={style.summary}>
+            <div>
+              <Icon type="block" />
             </div>
-          </Col>
-          <Col sm={8} className={style.aside}>
-            <ArticleRecommend mode="inline" />
-            <Categories categories={categories} />
-            <Tags tags={tags} />
-          </Col>
-        </Row>
-      </div>
-    </div>
+            <p>
+              <span>归档</span>
+            </p>
+            <p>
+              共计 <span>{resolveArticlesCount(articles)}</span> 篇
+            </p>
+          </div>
+          {Object.keys(articles)
+            .sort((a, b) => +b - +a)
+            .map((year) => {
+              return (
+                <div className={style.list}>
+                  <h2>{year}</h2>
+                  {Object.keys(articles[year]).map((month) => {
+                    return (
+                      <ArchiveItem key={year} month={month} articles={articles[year][month]} />
+                    );
+                  })}
+                </div>
+              );
+            })}
+        </div>
+      }
+      rightNode={
+        <div className="sticky">
+          <ArticleRecommend mode="inline" />
+          <Categories categories={categories} />
+          <Tags tags={tags} />
+        </div>
+      }
+    />
   );
 };
 

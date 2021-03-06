@@ -6,7 +6,7 @@ import { SettingProvider } from '@/providers/setting';
 import { PageProvider } from '@/providers/page';
 import { CategoryProvider } from '@/providers/category';
 import { TagProvider } from '@/providers/tag';
-import { Layout } from '@/layout/Layout';
+import { AppLayout } from '@/layout/AppLayout';
 import { NProgress } from '@components/NProgress';
 import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
 import { ViewStatistics } from '@/components/ViewStatistics';
@@ -44,10 +44,10 @@ class MyApp extends App<IGlobalContext, {}> {
         <FixAntdStyleTransition />
         <ViewStatistics />
         <Analytics />
-        <Layout needFooter={needLayoutFooter}>
+        <AppLayout needFooter={needLayoutFooter}>
           <NProgress color={'#ff0064'} />
           <Component {...pageProps} />
-        </Layout>
+        </AppLayout>
       </GlobalContext.Provider>
     );
   }
