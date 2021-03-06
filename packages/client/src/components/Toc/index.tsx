@@ -17,7 +17,7 @@ export const Toc: React.FC<{ tocs: Array<IToc> }> = ({ tocs = [] }) => {
   }, []);
 
   return (
-    <div>
+    <div className={style.wrapper}>
       {tocs.map((toc) => {
         return (
           <div

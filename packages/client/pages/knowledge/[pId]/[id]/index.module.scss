@@ -150,7 +150,10 @@
   }
 
   > main {
-    ul {
+    > ul {
+      max-height: 28vh;
+      overflow: auto;
+
       li {
         border-radius: var(--border-radius);
 
