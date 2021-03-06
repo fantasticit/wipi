@@ -174,7 +174,7 @@ const Article: NextPage<IProps> = ({ article }) => {
     <>
       <ArticleRecommend articleId={article.id} mode="inline" />
       <div className={'sticky'}>
-        {tocs && tocs.length && <Toc tocs={tocs} maxHeight={'80vh'} />}
+        {tocs && tocs.length ? <Toc tocs={tocs} maxHeight={'80vh'} /> : null}
       </div>
     </>
   ) : (
