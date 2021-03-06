@@ -56,11 +56,17 @@
           position: relative;
           width: 40%;
           padding: 8px;
-          border: 1px solid rgb(230, 236, 241);
-          border-radius: 3px;
-          box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
-          background: #fff;
+          border-radius: var(--border-radius);
+          background: var(--bg-second);
+          border: 1px solid var(--border-color);
+          box-shadow: var(--box-shadow);
           overflow: hidden;
+
+          &:hover {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+          }
+
           > a {
             display: flex;
             align-items: center;
@@ -75,6 +81,7 @@
               max-width: calc(100% - 30px);
             }
           }
+
           &.right {
             text-align: right;
             > a {

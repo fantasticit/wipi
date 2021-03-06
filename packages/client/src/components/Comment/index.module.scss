@@ -151,6 +151,10 @@
 
         .subComments {
           padding-top: 16px;
+
+          .commentItem {
+            box-shadow: none;
+          }
         }
 
         p {
