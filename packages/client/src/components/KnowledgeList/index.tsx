@@ -7,9 +7,10 @@ import style from './index.module.scss';
 
 interface IProps {
   knowledges: IKnowledge[];
+  isBoxshadowed?: boolean;
 }
 
-export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
+export const KnowledgeList: React.FC<IProps> = ({ knowledges = [], isBoxshadowed = true }) => {
   return (
     <div style={{ width: '100%' }} className={cls(style.wrapper)}>
       {knowledges && knowledges.length ? (
@@ -21,7 +22,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
               as={`/knowledge/${knowledge.id}`}
               scroll={false}
             >
-              <a className={cls(style.articleItem)}>
+              <a className={cls(style.articleItem, isBoxshadowed && style.isBoxshadowed)}>
                 {knowledge.cover && (
                   <LazyLoad height={110}>
                     <div className={style.coverWrapper}>
@@ -45,7 +46,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
           );
         })
       ) : (
-        <div className={style.empty}>暂无数据</div>
+        <div className={'empty'}>暂无数据</div>
       )}
     </div>
   );

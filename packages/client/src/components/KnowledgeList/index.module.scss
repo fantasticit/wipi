@@ -1,14 +1,3 @@
-.empty {
-  width: 100%;
-  height: 60px;
-  border-radius: var(--border-radius);
-  color: var(--second-text-color);
-  background: var(--bg-second);
-  font-size: 14px;
-  line-height: 60px;
-  text-align: center;
-}
-
 .articleItem {
   position: relative;
   width: 100%;
@@ -17,7 +6,6 @@
   margin-right: 14px;
   border-radius: var(--border-radius);
   background-color: var(--bg-second);
-  box-shadow: var(--box-shadow);
   overflow: hidden;
   transition: transform .3s;
 
@@ -25,6 +13,10 @@
   flex-wrap: nowrap;
 
   padding: .8rem;
+
+  &.isBoxshadowed {
+    box-shadow: var(--box-shadow);
+  }
 
   &+.articleItem {
     margin-top: 1rem;

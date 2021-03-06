@@ -5,18 +5,21 @@
   background-color: var(--bg-body);
 
   .bg {
-      content: "";
-      height: 80%;
-      position: absolute;
-      inset: 0px;
-      background-position: 50% 17%;
-      opacity: 0.2;
-      background-size: cover;
-      filter: blur(20px);
+    content: "";
+    height: 80%;
+    position: absolute;
+    inset: 0px;
+    background-position: 50% 17%;
+    opacity: 0.2;
+    background-size: cover;
+    filter: blur(20px);
   }
 }
 
 .breadcrump {  
+  position: relative;
+  z-index: 2;
+
   a, span {
     color: var(--second-text-color) !important;
   }
@@ -106,10 +109,13 @@
 
   > main {
     margin-top: 1rem;
-    background-color: var(--bg-second);
-    padding: .8rem;
-    box-shadow: var(--box-shadow);
-    border-radius: var(--border-radius);
+  
+    &.bgMain {
+      background-color: var(--bg-second);
+      padding: .8rem;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+    }
 
     ul {
       li {

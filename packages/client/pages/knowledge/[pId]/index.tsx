@@ -73,26 +73,33 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
         </section>
         <Row gutter={16}>
           <Col xs={24} sm={12} md={16}>
-            <section className={style.tocWrapper}>
+            <section className={cls(style.tocWrapper)}>
               <header>目录</header>
-              <main>
-                <ul>
-                  {chapters.map((chapter) => {
-                    return (
-                      <li key={chapter.id}>
-                        <Link as={`/knowledge/${pId}/${chapter.id}`} href={`/knowledge/[pId]/[id]`}>
-                          <a>
-                            <span>{chapter.title}</span>
-                            <span>
-                              <LocaleTime date={chapter.createAt} />
-                              <Icon type="arrow-right" />
-                            </span>
-                          </a>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+              <main className={style.bgMain}>
+                {chapters.length ? (
+                  <ul>
+                    {chapters.map((chapter) => {
+                      return (
+                        <li key={chapter.id}>
+                          <Link
+                            as={`/knowledge/${pId}/${chapter.id}`}
+                            href={`/knowledge/[pId]/[id]`}
+                          >
+                            <a>
+                              <span>{chapter.title}</span>
+                              <span>
+                                <LocaleTime date={chapter.createAt} />
+                                <Icon type="arrow-right" />
+                              </span>
+                            </a>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  <div className={'empty'}>敬请期待</div>
+                )}
               </main>
             </section>
           </Col>
@@ -100,7 +107,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
             <section className={style.tocWrapper}>
               <header>其他知识笔记</header>
               <main>
-                <KnowledgeList knowledges={otherBooks} />
+                <KnowledgeList knowledges={otherBooks} isBoxshadowed={false} />
               </main>
             </section>
           </Col>

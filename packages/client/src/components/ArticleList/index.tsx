@@ -53,7 +53,7 @@ export const ArticleList: React.FC<IProps> = ({ articles = [] }) => {
           );
         })
       ) : (
-        <div className={style.empty}>暂无数据</div>
+        <div className={'empty'}>暂无数据</div>
       )}
     </div>
   );

@@ -181,4 +181,15 @@
     transform: scale(.9);
     transition: opacity 300ms, transform 300ms;
   }
+
+  .empty {
+    width: 100%;
+    height: 60px;
+    border-radius: var(--border-radius);
+    color: var(--second-text-color);
+    background: var(--bg-second);
+    font-size: 14px;
+    line-height: 60px;
+    text-align: center;
+  }
 }
