@@ -8,10 +8,12 @@ interface IToc {
 
 export const Toc: React.FC<{ tocs: Array<IToc> }> = ({ tocs = [] }) => {
   const goto = useCallback((toc) => {
-    const el = document.getElementById(toc.text.split(' ').join('-'));
-    if (el) {
-      el.scrollIntoView();
-    }
+    try {
+      const el = document.getElementById(toc.text.toLowerCase().split(' ').join('-'));
+      if (el) {
+        el.scrollIntoView();
+      }
+    } catch (e) {}
   }, []);
 
   return (
