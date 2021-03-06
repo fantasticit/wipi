@@ -4,6 +4,7 @@
   border-radius: var(--border-radius);
   margin-bottom: 16px;
   background-color: var(--bg-second);
+  box-shadow: var(--box-shadow);
 
   :global {
     .ant-btn-primary[disabled] {
@@ -69,6 +70,7 @@
       padding: 16px;
       border-radius: var(--border-radius);
       background-color: var(--bg-second);
+      box-shadow: var(--box-shadow);
 
       + .commentItem {
         margin-top: 10px;
