@@ -156,14 +156,14 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
             <Button key="file" type="dashed" onClick={toggleFileDrawerVisible}>
               文件库
             </Button>,
-            <Button key="preview" onClick={preview}>
-              预览
-            </Button>,
             page.path && (
               <Button key="draft" onClick={save}>
                 保存
               </Button>
             ),
+            <Button key="preview" onClick={preview}>
+              预览
+            </Button>,
             <Button key="save" type="primary" onClick={beforeSave}>
               保存/发布
             </Button>,

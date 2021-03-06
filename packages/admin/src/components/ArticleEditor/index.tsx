@@ -160,11 +160,11 @@ export const ArticleEditor: React.FC<IProps> = ({
             <Button key="file" type="dashed" icon="appstore" onClick={toggleFileDrawerVisible}>
               文件库
             </Button>,
-            <Button key="preview" icon="eye" onClick={preview}>
-              预览
-            </Button>,
             <Button key="dradt" icon="book" onClick={save}>
               保存草稿
+            </Button>,
+            <Button key="preview" icon="eye" onClick={preview}>
+              预览
             </Button>,
             <Button key="publish" type="primary" icon="cloud" onClick={publish}>
               发布
