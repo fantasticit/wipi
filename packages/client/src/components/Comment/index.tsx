@@ -12,7 +12,6 @@ export const CommentItem = ({
   comment,
   parentComment,
   hostId,
-  isHostInPage,
   onReply = () => {},
   subComments = [],
   isChildren = false,
@@ -72,7 +71,6 @@ export const CommentItem = ({
                 comment={subComment}
                 parentComment={comment}
                 hostId={hostId}
-                isHostInPage={isHostInPage}
                 onReply={() => {
                   setReplyComment(subComment);
                   setVisible(true);
@@ -90,7 +88,6 @@ export const CommentItem = ({
         >
           <Editor
             hostId={hostId}
-            isHostInPage={isHostInPage}
             parentComment={comment}
             replyComment={replyComment}
             onSuccess={() => setReplyComment(null)}
@@ -122,11 +119,10 @@ export const CommentItem = ({
 };
 
 interface IProps {
-  articleId: string;
-  isInPage?: boolean;
+  hostId: string;
 }
 
-export const MyComment: React.FC<IProps> = ({ articleId, isInPage = false }) => {
+export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
   const ref = useRef(null);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -145,6 +141,9 @@ export const MyComment: React.FC<IProps> = ({ articleId, isInPage = false }) => 
           setComments(res[0]);
           setTotal(res[1]);
           setLoading(false);
+          Promise.resolve().then(() => {
+            ref.current.scrollIntoView();
+          });
         })
         .catch((err) => {
           setLoading(false);
@@ -165,7 +164,7 @@ export const MyComment: React.FC<IProps> = ({ articleId, isInPage = false }) => 
 
   return (
     <div className={style.commentWrapper} ref={ref}>
-      <Editor hostId={articleId} isHostInPage={isInPage} parentComment={null} replyComment={null} />
+      <Editor hostId={articleId} parentComment={null} replyComment={null} />
       <div className={style.commentContainer}>
         {comments.map((comment, i) => {
           return (
@@ -175,7 +174,6 @@ export const MyComment: React.FC<IProps> = ({ articleId, isInPage = false }) => 
               parentComment={[]}
               subComments={comment.children}
               hostId={articleId}
-              isHostInPage={isInPage}
             />
           );
         })}

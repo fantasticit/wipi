@@ -13,7 +13,7 @@ export const Categories = ({ categories = [] }) => {
     <div className={style.wrapper}>
       <div className={style.title}>
         <Icon type="appstore" />
-        <span>分类</span>
+        <span>文章分类</span>
       </div>
       <ul>
         {categories.map((category) => (

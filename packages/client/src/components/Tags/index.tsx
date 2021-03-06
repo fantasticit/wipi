@@ -14,7 +14,7 @@ export const Tags = ({ tags = [], needTitle = true, style: cssStyle = {} }) => {
       {needTitle && (
         <div className={style.title}>
           <Icon type="tags" />
-          <span>标签</span>
+          <span>文章标签</span>
         </div>
       )}
       <ul>

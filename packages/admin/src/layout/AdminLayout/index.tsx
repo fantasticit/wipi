@@ -13,7 +13,7 @@ import style from './index.module.scss';
 
 const { Sider, Content } = Layout;
 
-export const AdminLayout: React.FC = ({ children }) => {
+export const AdminLayout: React.FC<{ onlyAside?: boolean }> = ({ onlyAside = false, children }) => {
   const { collapsed, toggleCollapse } = useContext(GlobalContext);
   const setting = useSetting();
   const router = useRouter();
@@ -59,71 +59,77 @@ export const AdminLayout: React.FC = ({ children }) => {
         </Menu>
       </Sider>
       <Layout className={style.main}>
-        <header>
-          <Row>
-            <Col span={12}>
-              <Icon
-                className="trigger"
-                type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={toggleCollapse}
-              />
-            </Col>
-            <Col span={12} style={{ textAlign: 'right' }}>
-              <div className={style.info}>
-                <a
-                  className={style.github}
-                  href="https://github.com/fantasticit/wipi"
-                  target="_blank"
-                >
-                  <Icon type="github" />
-                  <span></span>
-                </a>
-                <UserInfo />
-              </div>
-            </Col>
-          </Row>
-        </header>
-        <Content className={style.content}>
-          <header>
-            <Breadcrumb>
-              {breadcrumbs.map((breadcrumb) => {
-                return (
-                  <Breadcrumb.Item key={breadcrumb.path}>
-                    <Link href={breadcrumb.path}>
-                      <a>{breadcrumb.title}</a>
-                    </Link>
-                  </Breadcrumb.Item>
-                );
-              })}
-            </Breadcrumb>
-            <div className={style.title}>{activeMenu && activeMenu.label}</div>
-          </header>
-          <main>
-            {children}
-            <footer>
-              <ul className={style.icons}>
-                <li>
-                  <a
-                    className={style.github}
-                    href="https://github.com/fantasticit/wipi"
-                    target="_blank"
-                  >
-                    <Icon type="github" />
-                  </a>
-                </li>
-              </ul>
-              <div className={style.copyright}>
-                <p>
-                  Copyright <Icon type="copyright" /> {new Date().getFullYear()} Designed by
-                  <a href="https://github.com/fantasticit/wipi" target="_blank">
-                    {' '}
-                    Fantasticit.
-                  </a>
-                </p>
-              </div>
-            </footer>
-          </main>
-        </Content>
+        {onlyAside ? (
+          children
+        ) : (
+          <>
+            <header>
+              <Row>
+                <Col span={12}>
+                  <Icon
+                    className="trigger"
+                    type={collapsed ? 'menu-unfold' : 'menu-fold'}
+                    onClick={toggleCollapse}
+                  />
+                </Col>
+                <Col span={12} style={{ textAlign: 'right' }}>
+                  <div className={style.info}>
+                    <a
+                      className={style.github}
+                      href="https://github.com/fantasticit/wipi"
+                      target="_blank"
+                    >
+                      <Icon type="github" />
+                      <span></span>
+                    </a>
+                    <UserInfo />
+                  </div>
+                </Col>
+              </Row>
+            </header>
+            <Content className={style.content}>
+              <header>
+                <Breadcrumb>
+                  {breadcrumbs.map((breadcrumb) => {
+                    return (
+                      <Breadcrumb.Item key={breadcrumb.path}>
+                        <Link href={breadcrumb.path}>
+                          <a>{breadcrumb.title}</a>
+                        </Link>
+                      </Breadcrumb.Item>
+                    );
+                  })}
+                </Breadcrumb>
+                <div className={style.title}>{activeMenu && activeMenu.label}</div>
+              </header>
+              <main>
+                {children}
+                <footer>
+                  <ul className={style.icons}>
+                    <li>
+                      <a
+                        className={style.github}
+                        href="https://github.com/fantasticit/wipi"
+                        target="_blank"
+                      >
+                        <Icon type="github" />
+                      </a>
+                    </li>
+                  </ul>
+                  <div className={style.copyright}>
+                    <p>
+                      Copyright <Icon type="copyright" /> {new Date().getFullYear()} Designed by
+                      <a href="https://github.com/fantasticit/wipi" target="_blank">
+                        {' '}
+                        Fantasticit.
+                      </a>
+                    </p>
+                  </div>
+                </footer>
+              </main>
+            </Content>
+          </>
+        )}
       </Layout>
     </Layout>
   );

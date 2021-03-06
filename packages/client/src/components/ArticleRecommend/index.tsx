@@ -30,7 +30,7 @@ export const ArticleRecommend: React.FC<IProps> = ({
       {needTitle && (
         <div className={style.title}>
           <Icon type="file-text" />
-          <span>推荐</span>
+          <span>推荐文章</span>
         </div>
       )}
       {mode === 'inline' ? (

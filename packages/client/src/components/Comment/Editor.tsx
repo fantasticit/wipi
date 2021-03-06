@@ -14,7 +14,6 @@ type IUser = {
 
 export const Editor = ({
   hostId,
-  isHostInPage = false,
   parentComment,
   replyComment,
   renderFooter = null,
@@ -45,7 +44,7 @@ export const Editor = ({
       name,
       email,
       content,
-      isHostInPage,
+      url: window.location.pathname,
     };
 
     // 父级评论 id

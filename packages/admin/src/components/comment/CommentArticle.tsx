@@ -5,24 +5,11 @@ const url = require('url');
 
 export const CommentArticle = ({ comment }) => {
   const setting = useSetting();
-  const { hostId, isHostInPage } = comment;
+  const { url: link } = comment;
 
   return (
-    <>
-      {hostId ? (
-        <a
-          href={url.resolve(
-            setting.systemUrl || '',
-            `/${isHostInPage ? 'page' : 'article'}/` + hostId
-          )}
-          className={style.link}
-          target="_blank"
-        >
-          文章
-        </a>
-      ) : (
-        '文章不存在，可能已经被删除'
-      )}
-    </>
+    <a href={url.resolve(setting.systemUrl || '', link)} className={style.link} target="_blank">
+      文章
+    </a>
   );
 };

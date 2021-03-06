@@ -43,6 +43,12 @@ export const menus = [
     path: '/article/tags',
   },
   {
+    icon: 'diff',
+    label: '知识笔记',
+    title: '知识笔记',
+    path: '/knowledge',
+  },
+  {
     icon: 'snippets',
     label: '所有页面',
     title: '所有页面',

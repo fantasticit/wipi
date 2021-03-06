@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "antd": "^3.26.7",
+    "array-move": "^3.0.1",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "date-fns": "^2.17.0",
@@ -27,6 +28,7 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-helmet": "^5.2.1",
+    "react-sortable-hoc": "^1.11.0",
     "showdown": "^1.9.1",
     "viewerjs": "^1.5.0"
   },

@@ -50,7 +50,7 @@ body {
 
     // 亮色主题
     --bg: #ffffff;
-    --bg-second: #ffffff;
+    --bg-second: rgb(230, 236, 241);
     --bg-body: #e7eaee;
     --bg-footer: #292525;
     --bg-code: #f8f8f8;
@@ -58,11 +58,13 @@ body {
     --main-text-color: rgba(0, 0, 0, .85);
     --second-text-color: rgba(0, 0, 0, .65);
     --disable-text-color: rgba(0, 0, 0, .45);
-    --border-color: rgb(240,240,240);
+    --border-color: rgb(230, 236, 241);
     --box-shadow: 0 6px 14px 0 rgba(26, 26, 26, .06);
     --scrollbar-bg: #dadada;
     --comment-editor-border-color: #d9d9d9; // 评论框所用编辑器边框颜色
     --comment-editor-btn-disable-bg: #f5f5f5; // 评论框所用编辑器按钮禁用背景色
+
+    --aside-padding-horizontal: 16px;
 
     color: var(--main-text-color);
 
@@ -166,6 +168,23 @@ body {
   @media (min-width: 1200px) {
     .container {
       width: 1140px;
+    }
+  }
+
+  .form-item {
+    display: flex;
+    align-items: center;
+  
+    + .form-item {
+      margin-top: 16px;
+    }
+  
+    > label {
+      padding-right: 16px;
+    }
+  
+    > div {
+      flex: 1;
     }
   }
 }

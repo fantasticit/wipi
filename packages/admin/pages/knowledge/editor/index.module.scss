@@ -1,0 +1,118 @@
+.wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+
+  > .aside {
+    width: 280px;
+    border-right: 1px solid var(--border-color);
+    user-select: none;
+  }
+
+  > .main {
+    position: relative;
+    flex: 1;
+    width: calc(100% - 280px);
+    background: var(--bg-body);
+
+    .helper {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.1em;
+    }
+  }
+}
+
+.aside {
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+
+  > header {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  > main {
+    position: relative;
+
+    > .action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 8px;
+      cursor: pointer;
+
+      + .action {
+        margin-top: 8px;
+      }
+
+      &:hover {
+        color: var(--main-text-color);
+        background-color: var(--border-color);
+      }
+    }
+
+    .saveAction {
+      padding: 12px 8px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-second);
+      border-radius: var(--border-radius);
+    }
+  }
+
+  > footer {
+    flex: 1;
+    overflow: auto;
+
+    > ul.menu {
+      list-style: none;
+
+      > li.item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 8px;
+        cursor: pointer;
+        border-radius: var(--border-radius);
+
+        > span:nth-of-type(2) {
+          flex: 1;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          margin-left: 8px;
+        }
+
+        i {
+          opacity: 0;
+        }
+
+        + li {
+          margin-top: .5rem;
+        }
+
+        &:hover, &:focus {
+          i {
+            opacity: 1;
+          }
+        }
+
+        &:hover, &.active {
+          color: var(--main-text-color);
+          background-color: var(--bg-second);
+        }
+      }
+    }
+  }
+}

@@ -42,8 +42,8 @@ export class Comment {
   hostId: string; // 关联文章或页面 id
 
   @ApiProperty()
-  @Column({ type: 'boolean', default: false })
-  isHostInPage: boolean; // 是否评论动态页面
+  @Column()
+  url: string; // 关联页面路径，可与 systemUrl 拼接
 
   @ApiProperty()
   @Column({ default: null })

@@ -77,7 +77,13 @@ export const DataTable: React.FC<IProps> = ({
       />
       <div style={{ background: '#fff', padding }}>
         {customDataTable ? (
-          customDataTable(data)
+          <>
+            <div className={style.tableHeader}>
+              <div>{title}</div>
+              <div>{rightNode}</div>
+            </div>
+            {customDataTable(data)}
+          </>
         ) : (
           <>
             <div className={style.tableHeader}>

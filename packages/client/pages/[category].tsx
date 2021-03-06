@@ -66,7 +66,7 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, categor
               <Icon type="book" />
             </div>
             <p>
-              <span>{category.label}</span> 分类文章
+              <span>{category && category.label}</span> 分类文章
             </p>
             <p>
               共搜索到 <span>{total}</span> 篇

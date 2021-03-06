@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import cls from 'classnames';
-import { MyComment } from '@/components/Comment';
+import { Comment } from '@/components/Comment';
 import { ArticleRecommend } from '@/components/ArticleRecommend';
 import style from './index.module.scss';
 
@@ -23,7 +23,7 @@ export const CommentAndArticleRecommend: NextPage<IProps> = ({
         <div className={style.comments}>
           <p className={style.title}>评论</p>
           <div className={style.commentContainer}>
-            <MyComment articleId={articleId || pageId} isInPage={!articleId && !!pageId} />
+            <Comment hostId={articleId || pageId} />
           </div>
         </div>
       )}

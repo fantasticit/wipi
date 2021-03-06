@@ -18,6 +18,10 @@ const defaultMenus = [
     label: '归档',
     path: '/archives',
   },
+  {
+    label: '知识笔记',
+    path: '/knowledge',
+  },
 ];
 
 interface Iprops {
@@ -36,7 +40,7 @@ export const Layout: React.FC<Iprops> = ({ children, needFooter = true }) => {
   ];
 
   return (
-    <>
+    <div className={style.wrapper}>
       <Seo />
       <Header setting={setting} menus={menus} />
       {/* <ImagePlaceholder> */}
@@ -44,6 +48,6 @@ export const Layout: React.FC<Iprops> = ({ children, needFooter = true }) => {
       {/* </ImagePlaceholder> */}
       <BackTop />
       {needFooter && <Footer setting={setting} />}
-    </>
+    </div>
   );
 };

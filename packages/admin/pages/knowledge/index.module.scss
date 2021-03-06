@@ -1,0 +1,19 @@
+.wrap {
+  display: flex;
+  align-items: stretch;
+}
+
+.item {
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  &:hover {
+    color: var(--link-color);
+    border-color: var(--link-color);
+  }
+}

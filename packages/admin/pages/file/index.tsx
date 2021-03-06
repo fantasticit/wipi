@@ -194,7 +194,12 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
                   >
                     <Meta
                       title={file.originalname}
-                      description={'上传于 ' + <LocaleTime date={file.createAt} />}
+                      description={
+                        <>
+                          上传于
+                          <LocaleTime date={file.createAt} />
+                        </>
+                      }
                     />
                   </Card>
                 </List.Item>

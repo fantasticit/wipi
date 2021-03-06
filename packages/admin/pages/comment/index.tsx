@@ -31,10 +31,17 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }
 
   const columns = [
     {
+      title: '状态',
+      dataIndex: 'pass',
+      key: 'pass',
+      fixed: 'left',
+      width: 100,
+      render: (_, record) => <CommentStatus comment={record} />,
+    },
+    {
       title: '称呼',
       dataIndex: 'name',
       key: 'name',
-      fixed: 'left',
     },
     {
       title: '联系方式',
@@ -67,20 +74,14 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }
     },
     {
       title: '管理文章',
-      dataIndex: 'hostId',
-      key: 'hostId',
+      dataIndex: 'url',
+      key: 'url',
       width: 100,
       render: (_, record) => {
         return <CommentArticle comment={record} />;
       },
     },
-    {
-      title: '状态',
-      dataIndex: 'pass',
-      key: 'pass',
-      width: 100,
-      render: (_, record) => <CommentStatus comment={record} />,
-    },
+
     {
       title: '创建时间',
       dataIndex: 'createAt',

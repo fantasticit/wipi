@@ -160,7 +160,7 @@ export class CommentService {
     const newData = await this.commentRepository.merge(old, data);
 
     if (newData.pass) {
-      const { replyUserName, replyUserEmail, hostId, isHostInPage } = newData;
+      const { replyUserName, replyUserEmail, hostId, url: link } = newData;
       const isReply = replyUserName && replyUserEmail;
       if (isReply) {
         // 发送通知邮件
@@ -173,10 +173,7 @@ export class CommentService {
             html: getReplyCommentHTML({
               ...setting,
               replyUserName,
-              commentHostUrl: url.resolve(
-                setting.systemUrl,
-                `/${isHostInPage ? 'page' : 'article'}/` + hostId
-              ),
+              commentHostUrl: url.resolve(setting.systemUrl, link),
             }),
           };
           this.smtpService.create(emailMessage).catch(() => {

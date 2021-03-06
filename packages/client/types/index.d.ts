@@ -22,6 +22,7 @@ interface IArticle {
   content: string;
   html: string;
   cover?: string;
+  toc?: string;
   views: number;
   category: any;
   tags?: [any];
@@ -49,6 +50,25 @@ interface ICategory {
   articleCount?: number;
 }
 
+interface IKnowledge {
+  id: string;
+  parentId: string;
+  order: number;
+  title: string;
+  cover?: string;
+  summary: string;
+  content: string;
+  html: string;
+  toc: string;
+  views: number;
+  status: 'draft' | 'publish';
+  isCommentable?: boolean;
+  createAt: string;
+  updateAt: string;
+  publishAt: string;
+  children?: Array<IKnowledge>;
+}
+
 interface IPage {
   id: string;
   name: string;
@@ -74,7 +94,7 @@ interface IComment {
   article?: IArticle;
   parentCommentId: string;
   hostId: string;
-  isHostInPage: boolean;
+  url: string;
   replyUserName?: string;
   replyUserEmail?: string;
   children?: [IComment];

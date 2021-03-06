@@ -9,6 +9,9 @@ import { User } from './modules/user/user.entity';
 // 文件模块
 import { FileModule } from './modules/file/file.module';
 import { File } from './modules/file/file.entity';
+// 知识库模块
+import { KnowledgeModule } from './modules/knowledge/knowledge.module';
+import { Knowledge } from './modules/knowledge/knowledge.entity';
 // 文章模块
 import { ArticleModule } from './modules/article/article.module';
 import { Article } from './modules/article/article.entity';
@@ -46,7 +49,20 @@ import { SearchModule } from './modules/search/search.module';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'mysql',
-        entities: [User, File, Tag, Article, Category, Comment, Setting, SMTP, Page, View, Search],
+        entities: [
+          User,
+          File,
+          Knowledge,
+          Article,
+          Category,
+          Tag,
+          Comment,
+          Setting,
+          SMTP,
+          Page,
+          View,
+          Search,
+        ],
         host: configService.get('DB_HOST', '0.0.0.0'),
         port: configService.get<number>('DB_PORT', 3306),
         username: configService.get('DB_USER', 'root'),
@@ -61,6 +77,7 @@ import { SearchModule } from './modules/search/search.module';
     FileModule,
     TagModule,
     ArticleModule,
+    KnowledgeModule,
     CategoryModule,
     CommentModule,
     SettingModule,
