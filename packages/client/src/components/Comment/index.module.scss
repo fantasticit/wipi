@@ -72,6 +72,10 @@
       background-color: var(--bg-second);
       box-shadow: var(--box-shadow);
 
+      .editor {
+        box-shadow: none;
+      }
+
       + .commentItem {
         margin-top: 10px;
       }
