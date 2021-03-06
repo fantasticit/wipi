@@ -107,7 +107,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
             <section className={style.tocWrapper}>
               <header>其他知识笔记</header>
               <main>
-                <KnowledgeList knowledges={otherBooks} isBoxshadowed={false} />
+                <KnowledgeList knowledges={otherBooks} />
               </main>
             </section>
           </Col>
