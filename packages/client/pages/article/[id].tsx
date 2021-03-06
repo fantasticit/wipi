@@ -25,6 +25,7 @@ const Article: NextPage<IProps> = ({ article }) => {
   const { setting } = useContext(GlobalContext);
   const [password, setPassword] = useState(null);
   const [shouldCheckPassWord, setShouldCheckPassword] = useState(article && article.needPassword);
+  const tocs = article.toc ? JSON.parse(article.toc) : [];
 
   // 检查文章密码
   const checkPassWord = useCallback(() => {
@@ -173,7 +174,7 @@ const Article: NextPage<IProps> = ({ article }) => {
     <>
       <ArticleRecommend articleId={article.id} mode="inline" />
       <div className={'sticky'}>
-        {article.toc && <Toc tocs={JSON.parse(article.toc)} maxHeight={'80vh'} />}
+        {tocs && tocs.length && <Toc tocs={tocs} maxHeight={'80vh'} />}
       </div>
     </>
   ) : (
