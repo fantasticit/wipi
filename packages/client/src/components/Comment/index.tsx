@@ -133,7 +133,7 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
   const getComments = useCallback(
     (page, pageSize, loadMore = false) => {
       setLoading(true);
-      CommentProvider.getArticleComments(articleId, {
+      return CommentProvider.getArticleComments(articleId, {
         page,
         pageSize,
       })
@@ -141,9 +141,6 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
           setComments(res[0]);
           setTotal(res[1]);
           setLoading(false);
-          Promise.resolve().then(() => {
-            ref.current.scrollIntoView();
-          });
         })
         .catch((err) => {
           setLoading(false);
@@ -154,7 +151,11 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
 
   const loadMore = (page) => {
     setPage(page);
-    getComments(page, pageSize, true);
+    getComments(page, pageSize, true).then(() => {
+      Promise.resolve().then(() => {
+        ref.current.scrollIntoView();
+      });
+    });
   };
 
   useEffect(() => {
