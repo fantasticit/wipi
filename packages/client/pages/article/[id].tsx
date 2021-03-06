@@ -174,7 +174,7 @@ const Article: NextPage<IProps> = ({ article }) => {
                       <div className={style.infoWrapper}>
                         <header>目录</header>
                         <main>
-                          <Toc tocs={JSON.parse(article.toc)} />
+                          <Toc tocs={JSON.parse(article.toc)} maxHeight={'80vh'} />
                         </main>
                       </div>
                     )}
