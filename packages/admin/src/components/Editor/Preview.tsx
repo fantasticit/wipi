@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { MarkdownReader } from '@/components/MarkdownReader';
 import { makeHtml } from './utils/markdown';
 import {
   registerScollListener,
@@ -8,7 +9,7 @@ import {
 
 export const Preview = ({ value }) => {
   const ref = useRef<HTMLDivElement>();
-  const HTML = makeHtml(value);
+  const html = makeHtml(value);
 
   useEffect(() => {
     const listener = ({ top, left }) => {
@@ -38,7 +39,7 @@ export const Preview = ({ value }) => {
 
   return (
     <div ref={ref} style={{ height: '100%', padding: '10px 2rem 40px', overflow: 'auto' }}>
-      <div className="markdown" dangerouslySetInnerHTML={{ __html: HTML }}></div>
+      <MarkdownReader content={html}></MarkdownReader>
     </div>
   );
 };
