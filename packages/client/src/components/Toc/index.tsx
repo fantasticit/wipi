@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import cls from 'classnames';
-import { isOdd, elementInViewport, throttle } from '@/utils';
+import { isOdd, elementInViewport } from '@/utils';
 import style from './index.module.scss';
 
 interface IToc {
@@ -9,6 +9,7 @@ interface IToc {
 }
 
 const HEIGHT = 32;
+const getTocSelector = (text) => text && text.toLowerCase().split(' ').join('-');
 
 export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> = ({
   tocs = [],
@@ -17,7 +18,7 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
   const [active, setActive] = useState(0);
   const goto = useCallback((toc) => {
     try {
-      const el = document.getElementById(toc.text.toLowerCase().split(' ').join('-'));
+      const el = document.getElementById(getTocSelector(toc.text));
       if (el) {
         el.scrollIntoView();
       }
@@ -25,10 +26,9 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
   }, []);
 
   useEffect(() => {
-    const listener = throttle(() => {
+    const listener = () => {
       tocs.reduceRight((_, toc, index) => {
-        const selector = toc.text.toLowerCase().split(' ').join('-');
-        const el = document.getElementById(selector);
+        const el = document.getElementById(getTocSelector(toc.text));
         if (!el) return;
         if (elementInViewport(el)) {
           setActive(index);
@@ -36,7 +36,7 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
         }
         return _;
       }, null);
-    }, 200);
+    };
     document.addEventListener('scroll', listener);
 
     return () => {
