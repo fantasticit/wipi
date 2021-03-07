@@ -6,6 +6,7 @@ import {
   removeScrollListener,
 } from './utils/syncScroll';
 
+declare let ResizeObserver;
 export let editor = null;
 export let monaco = null;
 
