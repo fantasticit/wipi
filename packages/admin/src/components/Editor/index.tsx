@@ -114,12 +114,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
       </header>
       <main>
         <div style={{ width: two ? '50%' : mode === 'preview' ? 0 : '100%' }}>
-          <MonacoEditor
-            isFull={!two}
-            defaultValue={defaultValue}
-            onChange={setInnerValue}
-            onSave={saveCache}
-          />
+          <MonacoEditor defaultValue={defaultValue} onChange={setInnerValue} onSave={saveCache} />
         </div>
         <div style={{ width: two ? '50%' : mode === 'edit' ? 0 : '100%' }}>
           <Preview value={innerValue} />

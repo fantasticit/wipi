@@ -9,7 +9,7 @@ import {
 export let editor = null;
 export let monaco = null;
 
-export const MonacoEditor = ({ isFull, defaultValue, onChange, onSave }) => {
+export const MonacoEditor = ({ defaultValue, onChange, onSave }) => {
   const container = useRef(null);
   const [mounted, setMounted] = useState(false);
 
@@ -98,8 +98,14 @@ export const MonacoEditor = ({ isFull, defaultValue, onChange, onSave }) => {
 
   useEffect(() => {
     if (!mounted || !editor) return;
-    editor.layout(container.current.getBoundingClientRect());
-  }, [mounted, isFull]);
+    const ro = new ResizeObserver(() => {
+      editor.layout(container.current.getBoundingClientRect());
+    });
+    ro.observe(container.current);
+    return () => {
+      ro.disconnect();
+    };
+  }, [mounted]);
 
   return (
     <div ref={container} style={{ height: '100%', overflow: 'hidden' }}>
