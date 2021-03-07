@@ -28,7 +28,7 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
   const ref = useRef();
   const [files, setFiles] = useState<IFile[]>([]);
 
-  const getFiles = useCallback((params) => {
+  const getFiles = useCallback((params = {}) => {
     return FileProvider.getFiles(params).then((res) => {
       setFiles(res[0]);
       return res;
