@@ -11,8 +11,6 @@
     "pm2": "pm2 start npm --name client -- start"
   },
   "dependencies": {
-    "@toast-ui/react-editor": "^2.1.0",
-    "@types/react-transition-group": "^4.4.1",
     "antd": "^3.26.7",
     "axios": "^0.19.2",
     "babel-plugin-import": "^1.13.0",
@@ -30,13 +28,13 @@
     "react-lazyload": "^2.6.5",
     "react-simplemde-editor": "^4.1.0",
     "react-transition-group": "^4.4.1",
-    "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "ua-parser-js": "^0.7.21",
+    "showdown": "^1.9.1",
     "viewerjs": "^1.5.0",
     "xml": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^13.5.3",
+    "@types/react-transition-group": "^4.4.1",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
@@ -47,6 +45,7 @@
     "node-sass": "4.14.1",
     "null-loader": "^3.0.0",
     "rimraf": "^3.0.2",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "^3.7.5",
     "webpack-filter-warnings-plugin": "^1.2.1"
   }
