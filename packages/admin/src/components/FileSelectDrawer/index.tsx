@@ -89,7 +89,7 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
           padding={0}
           onSearch={getFiles}
           rightNode={
-            <Upload onChange={getFiles} useDragger={false}>
+            <Upload onOK={getFiles} useDragger={false}>
               <Button>上传文件</Button>
             </Upload>
           }

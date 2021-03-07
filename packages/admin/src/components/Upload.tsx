@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { Spin, Upload as AntdUpload, Icon, message } from 'antd';
 import { FileProvider } from '@/providers/file';
 
-export const Upload = ({ onChange, style = {}, useDragger = true, children = null }) => {
+export const Upload = ({
+  onChange = null,
+  onOK = null,
+  style = {},
+  useDragger = true,
+  children = null,
+}) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const uploadProps = {
@@ -10,12 +16,14 @@ export const Upload = ({ onChange, style = {}, useDragger = true, children = nul
     multiple: true,
     action: '',
     beforeUpload(file) {
+      console.log(file);
       setLoading(true);
       FileProvider.uploadFile(file)
         .then((res) => {
           setLoading(false);
           message.success('上传成功');
-          onChange(res.url);
+          onChange && onChange(res.url);
+          onOK && onOK();
         })
         .catch(() => {
           setLoading(false);

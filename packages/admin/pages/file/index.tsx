@@ -56,24 +56,6 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
     setting.ossAccessKeySecret &&
     setting.ossBucket;
 
-  const uploadProps = {
-    name: 'file',
-    multiple: true,
-    action: '',
-    beforeUpload(file) {
-      setLoading(true);
-      FileProvider.uploadFile(file)
-        .then(() => {
-          message.success('上传成功');
-          getFiles(params);
-        })
-        .catch(() => {
-          setLoading(false);
-        });
-      return Promise.reject();
-    },
-  };
-
   const getFiles = useCallback((params = {}) => {
     return FileProvider.getFiles(params)
       .then((res) => {
@@ -117,7 +99,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
           </div>
         ) : (
           <div style={{ marginBottom: 24 }}>
-            <Upload onChange={getFiles} />
+            <Upload onOK={getFiles} />
           </div>
         )}
 
@@ -266,7 +248,9 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
               okText="确认"
               cancelText="取消"
             >
-              <Button type="danger">删除</Button>
+              <Button type="danger" loading={loading}>
+                删除
+              </Button>
             </Popconfirm>
           </div>
         </Drawer>
