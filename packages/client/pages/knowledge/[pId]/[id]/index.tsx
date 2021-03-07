@@ -41,6 +41,14 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
     KnowledgeProvider.updateKnowledgeViews(id);
   }, [pId, id, chapter]);
 
+  useEffect(() => {
+    if (!chapter) return;
+    const el = document.querySelector(`#js-toc-item-wrapper-` + id);
+    if (el) {
+      el.scrollIntoView();
+    }
+  }, []);
+
   if (!chapter) {
     return <p>未知章节内容</p>;
   }
@@ -143,7 +151,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                 <ul>
                   {chapters.map((item) => {
                     return (
-                      <li key={item.id}>
+                      <li key={item.id} id={`js-toc-item-wrapper-` + item.id}>
                         <Link as={`/knowledge/${pId}/${item.id}`} href={`/knowledge/[pId]/[id]`}>
                           <a className={cls(item.id === id && style.active)}>{item.title}</a>
                         </Link>

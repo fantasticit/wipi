@@ -128,6 +128,13 @@
   &.isBg {
     background: var(--bg-second);
     padding: .8rem;
+    
+    > main {
+      max-height: 40vh;
+      overflow: auto;
+      scroll-behavior: smooth;
+      overscroll-behavior: contain;
+    }
   }
 
   > header {
@@ -140,10 +147,6 @@
 
   > main {
     > ul {
-      max-height: 50%;
-      overflow: auto;
-      overscroll-behavior: contain;
-
       li {
         border-radius: var(--border-radius);
 
