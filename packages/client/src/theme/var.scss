@@ -7,6 +7,7 @@
     // 亮色主题
     --bg: #ffffff;
     --bg-second: #ffffff;
+    --rgb-bg-second: 255,255,255;
     --bg-body: #e7eaee;
     --bg-footer: #292525;
     --bg-code: #f8f8f8;
@@ -29,6 +30,7 @@
     // 暗黑主题
     --bg: #282c35;
     --bg-second: #363c48;
+    --rgb-bg-second: 54,60,72;
     --bg-body: var(--bg);
     --bg-footer: var(--bg);
     --bg-code: rgba(115, 124, 153, .2);

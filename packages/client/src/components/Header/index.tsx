@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import cls from 'classnames';
 import { Search } from '@/components/Search';
-import { throttle } from '@/utils';
 import { Theme } from '@/components/Theme';
 import style from './index.module.scss';
 
@@ -15,7 +14,7 @@ export const _Header = ({ setting, menus }) => {
   const [showSearch, setShowSearch] = useState(false);
 
   return (
-    <header className={cls(style.header, style.sticky)}>
+    <header className={cls(style.header)}>
       <div className={cls(style.wrapper)}>
         <div className={cls('container')}>
           <div className={style.logo}>

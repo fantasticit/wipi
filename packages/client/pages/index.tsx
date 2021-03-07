@@ -48,6 +48,7 @@ const Home: NextPage<IHomeProps> = ({
     <>
       <ArticleCarousel articles={recommendedArticles} />
       <DoubleColumnLayout
+        minHeight={'0px'}
         leftNode={
           <InfiniteScroll
             pageStart={1}

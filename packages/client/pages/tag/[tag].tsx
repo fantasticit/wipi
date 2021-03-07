@@ -90,7 +90,7 @@ Home.getInitialProps = async (ctx) => {
   const [articles, tag] = await Promise.all([
     ArticleProvider.getArticlesByTag(tagValue, {
       page: 1,
-      pageSize: 8,
+      pageSize,
       status: 'publish',
     }),
     TagProvider.getTagById(tagValue),

@@ -19,7 +19,9 @@
   z-index: 2;
 }
 
-.breadcrump {  
+.breadcrump {
+  padding-top: 1rem;
+
   a, span {
     color: var(--second-text-color) !important;
   }

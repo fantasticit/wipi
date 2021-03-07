@@ -90,7 +90,7 @@ Home.getInitialProps = async (ctx) => {
   const [articles, category] = await Promise.all([
     ArticleProvider.getArticlesByCategory(categoryValue, {
       page: 1,
-      pageSize: 8,
+      pageSize,
       status: 'publish',
     }),
     CategoryProvider.getCategoryById(categoryValue),

@@ -8,9 +8,11 @@ export const DoubleColumnLayout = ({
   rightNode,
   rightClassName = null,
   isRightNodeMobileHidden = true,
+  minHeight = '100%',
+  background = 'var(--bg-body)',
 }) => {
   return (
-    <div className={cls(style.outerWrap)}>
+    <div className={cls(style.outerWrap)} style={{ minHeight, background }}>
       <div className={cls('container')}>
         <div className={style.wrap}>
           <section className={cls(style.left, leftClassName)}>{leftNode}</section>

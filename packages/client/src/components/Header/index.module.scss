@@ -4,6 +4,7 @@ $height: 64px;
   position: relative;
   width: 100%;
   height: $height;
+  z-index: 1000;
 
   &.sticky {
     position: sticky;
