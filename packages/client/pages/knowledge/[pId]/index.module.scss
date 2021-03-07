@@ -14,12 +14,10 @@
   filter: blur(20px);
 }
 
-.content {
-  position: relative;
-  z-index: 2;
-}
 
 .breadcrump {
+  position: relative;
+  z-index: 2;
   padding-top: 1rem;
 
   a, span {
@@ -28,6 +26,8 @@
 }
 
 .desc {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-wrap: nowrap;
   margin-top: 1rem;
@@ -47,6 +47,7 @@
       object-fit: cover;
     }
   }
+  
 
   .infoWrapper {
     display: flex;
@@ -97,6 +98,11 @@
       }
     }
   }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
 }
 
 .tocWrapper {
