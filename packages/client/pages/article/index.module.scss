@@ -52,10 +52,14 @@
     margin-bottom: 21px;
   }
 
-  .tagWrap {
-    display: flex;
-    width: 100%;
+  .tagsWrap {
     font-size: 12px;
+    margin: 0 -8px;
+
+    .tagWrapper {
+      display: inline-block;
+      padding: 0 8px;
+    }
 
     .tag {
       display: inline-flex;
@@ -67,14 +71,11 @@
       background-color: var(--bg-second);
       font-size: 14px;
       text-decoration: none;
+      margin-top: 0.5rem;
 
       &:hover {
         color: #ffffff;
         background-color: var(--primary-color);
-      }
-
-      & + .tag {
-        margin-left: .8rem;
       }
 
       span {

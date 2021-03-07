@@ -138,16 +138,18 @@ const Article: NextPage<IProps> = ({ article }) => {
 
             {/* S 文章标签 */}
             {article.tags && article.tags.length ? (
-              <div className={style.tagWrap}>
+              <div className={style.tagsWrap}>
                 {article.tags.map((tag) => {
                   return (
-                    <div className={style.tag} key={tag.id}>
-                      <Link href={'/tag/[tag]'} as={'/tag/' + tag.value} scroll={false}>
-                        <a>
-                          <Icon type="tag" />
-                          <span>{tag.label}</span>
-                        </a>
-                      </Link>
+                    <div className={style.tagWrapper} key={tag.id}>
+                      <div className={style.tag}>
+                        <Link href={'/tag/[tag]'} as={'/tag/' + tag.value} scroll={false}>
+                          <a>
+                            <Icon type="tag" />
+                            <span>{tag.label}</span>
+                          </a>
+                        </Link>
+                      </div>
                     </div>
                   );
                 })}
