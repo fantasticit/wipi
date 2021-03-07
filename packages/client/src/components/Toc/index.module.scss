@@ -6,17 +6,64 @@
     line-height: 22px;
     margin-bottom: 12px;
   }
+
+  > main {
+    padding: 0 .8rem;
+
+    > div {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 2px;
+        bottom: 0;
+        width: 2px;
+        background-color: var(--border-color);
+        opacity: .5;
+      }
+    }
+  }
 }
 
 .item {
-  display: block;
   position: relative;
+  z-index: 10;
   padding: 4px 0 4px 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
-  &:hover {
+  &:hover, &.active {
     color: var(--primary-color)
   }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: var(--dot-left);
+    margin-top: -2px;
+    width: var(--dot-width);
+    height: var(--dot-width);
+    background-color: currentColor;
+    border-radius: 50%;
+  }
+}
+
+.indicator {
+  position: absolute;
+  left: -8px;
+  // background: rgba(var(--rgb-link-color), .5);
+  border-radius: var(--border-radius);
+  background: var(--bg-code);
+  opacity: .5;
+
+  width: 100%;
+  height: 32px;
+  padding: 4px 0 4px 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -154,7 +154,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
               </main>
             </div>
             {tocs && tocs.length ? (
-              <div className={style.infoWrapper} style={{ marginTop: '1rem' }}>
+              <div className={style.infoWrapper}>
                 <Toc tocs={tocs} />
               </div>
             ) : null}
