@@ -49,28 +49,30 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
       <header>目录</header>
       <main>
         <div ref={ref}>
-          {tocs.map((toc, idx) => {
-            const v = toc.level;
-            const f = isOdd(v - 1);
-            return (
-              <div
-                className={cls(style.item, idx === active && style.active)}
-                id={`js-toc-` + idx}
-                style={
-                  {
-                    'paddingLeft': 12 * (v - 1),
-                    'cursor': 'pointer',
-                    '--dot-left': 10 * (v - 2) + 'px',
-                    '--dot-width': 6 - (v - 1) + (f ? 1 : 0) + 'px',
-                  } as React.CSSProperties
-                }
-                onClick={() => goto(toc)}
-              >
-                <div>{toc.text}</div>
-              </div>
-            );
-          })}
-          <div className={style.indicator} style={{ top: HEIGHT * active + 'px' }} />
+          <div>
+            {tocs.map((toc, idx) => {
+              const v = toc.level;
+              const f = isOdd(v - 1);
+              return (
+                <div
+                  className={cls(style.item, idx === active && style.active)}
+                  id={`js-toc-` + idx}
+                  style={
+                    {
+                      'paddingLeft': 12 * (v - 1),
+                      'cursor': 'pointer',
+                      '--dot-left': 10 * (v - 2) + 'px',
+                      '--dot-width': 6 - (v - 1) + (f ? 1 : 0) + 'px',
+                    } as React.CSSProperties
+                  }
+                  onClick={() => goto(toc)}
+                >
+                  <div>{toc.text}</div>
+                </div>
+              );
+            })}
+            <div className={style.indicator} style={{ top: HEIGHT * active + 'px' }} />
+          </div>
         </div>
       </main>
     </div>

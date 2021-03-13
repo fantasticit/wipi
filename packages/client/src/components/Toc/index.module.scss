@@ -2,26 +2,30 @@
   > header {
     color: var(--main-text-color);
     font-weight: 600;
-    font-size: 16px;
     line-height: 22px;
     margin-bottom: 12px;
   }
 
   > main {
-    padding: 0 .8rem;
-
     > div {
       position: relative;
+      max-height: 50vh;
+      padding: 0 10px;
+      overflow: auto;
 
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 2px;
-        bottom: 0;
-        width: 2px;
-        background-color: var(--border-color);
-        opacity: .5;
+      > div {
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 2px;
+          bottom: 0;
+          width: 2px;
+          background-color: var(--border-color);
+          opacity: .5;
+        }
       }
     }
   }
@@ -54,8 +58,7 @@
 
 .indicator {
   position: absolute;
-  left: -8px;
-  // background: rgba(var(--rgb-link-color), .5);
+  left: -4px;
   border-radius: var(--border-radius);
   background: var(--bg-code);
   opacity: .5;
