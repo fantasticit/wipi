@@ -37,7 +37,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [], isBoxshadowed
                     <span>{knowledge.views} 次阅读</span>
                     <span className={style.seperator}>·</span>
                     <span className={style.pullRight}>
-                      <LocaleTime date={knowledge.publishAt} />
+                      <LocaleTime date={knowledge.publishAt} timeago />
                     </span>
                   </div>
                 </div>

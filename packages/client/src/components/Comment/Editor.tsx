@@ -84,7 +84,7 @@ export const Editor = ({
       <div>
         <TextArea
           placeholder="请输入评论内容（可输入 Markerdown 语法内容）"
-          autoSize={{ minRows: 3 }}
+          autoSize={{ minRows: 6, maxRows: 12 }}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
