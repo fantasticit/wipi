@@ -1,4 +1,8 @@
 .wrapper {
+  > div {
+    font-size: 0 !important;
+  }
+
   .articleItem {
     position: relative;
     display: flex;
