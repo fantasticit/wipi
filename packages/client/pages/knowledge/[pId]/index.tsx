@@ -50,31 +50,6 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
             <Breadcrumb.Item>{book.title}</Breadcrumb.Item>
           </Breadcrumb>
         </div>
-        <section className={style.desc}>
-          {book.cover && (
-            <div className={style.coverWrapper}>
-              <img src={book.cover} alt="cover" />
-            </div>
-          )}
-          <div className={style.infoWrapper}>
-            <div>
-              <p className={style.title}>{book.title}</p>
-              <p className={style.desc}>{book.summary}</p>
-            </div>
-            <div className={style.meta}>
-              <Button type="primary" onClick={start} disabled={!chapters.length}>
-                开始阅读
-              </Button>
-              <div>
-                <span>{book.views} 次阅读</span>
-                <span className={style.seperator}>·</span>
-                <span className={style.pullRight}>
-                  <LocaleTime date={book.publishAt} />
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
       <DoubleColumnLayout
         minHeight={'0px'}
@@ -82,8 +57,33 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
         leftNode={
           <div className={style.content}>
             <section className={cls(style.tocWrapper)}>
-              <header>目录</header>
+              <header>{book.title}</header>
               <main className={style.bgMain}>
+                <section className={style.desc}>
+                  {book.cover && (
+                    <div className={style.coverWrapper}>
+                      <img src={book.cover} alt="cover" />
+                    </div>
+                  )}
+                  <div className={style.infoWrapper}>
+                    <div>
+                      <p className={style.title}>{book.title}</p>
+                      <p className={style.desc}>{book.summary}</p>
+                      <p className={style.meta}>
+                        <span>{book.views} 次阅读</span>
+                        <span className={style.seperator}>·</span>
+                        <span className={style.pullRight}>
+                          <LocaleTime date={book.publishAt} />
+                        </span>
+                      </p>
+                      <div className={style.btnWrap}>
+                        <Button type="primary" onClick={start} disabled={!chapters.length}>
+                          开始阅读
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
                 {chapters.length ? (
                   <ul>
                     {chapters.map((chapter) => {

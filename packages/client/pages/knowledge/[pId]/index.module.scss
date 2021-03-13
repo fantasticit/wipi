@@ -4,16 +4,20 @@
 }
 
 .bg {
-  content: "";
   position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  inset: 0px;
-  background-position: 50% 17%;
+  background-position-x: 50%;
+  background-position-y: 17%;
   opacity: 0.2;
+  -webkit-background-size: cover;
   background-size: cover;
   filter: blur(20px);
 }
-
 
 .breadcrump {
   position: relative;
@@ -28,15 +32,12 @@
 .desc {
   position: relative;
   z-index: 2;
-  display: flex;
-  flex-wrap: nowrap;
-  margin-top: 1rem;
+  text-align: center;
 
   .coverWrapper {
-    flex: 0 0 auto;
-    width: 30%;
+    width: 100%;
     border-radius: var(--border-radius);
-    margin-right: 1rem;
+    margin: 1rem auto;
     overflow: hidden;
 
     img {
@@ -70,6 +71,7 @@
     .desc {
       display: -webkit-box;
       max-width: 100%;
+      margin-top: .8rem;
       color: var(--second-text-color);
       overflow: hidden;
       font-size: 14px;
@@ -79,10 +81,8 @@
     }
   
     .meta {
-      display: flex;
-      justify-content: space-between;
       width: 100%;
-      padding-top: .8rem;
+      margin-top: .4rem;
       color: #8590a6;
       font-size: 14px;
       line-height: 20px;
@@ -97,6 +97,10 @@
         flex-wrap: wrap;
       }
     }
+
+    .btnWrap {
+      margin-top: .8rem;
+    }
   }
 }
 
@@ -106,8 +110,6 @@
 }
 
 .tocWrapper {
-  margin-top: 1rem;
-
   > header {
     color: var(--main-text-color);
     font-weight: 600;
@@ -126,6 +128,8 @@
     }
 
     ul {
+      margin-top: 2rem;
+
       li {
         border-radius: var(--border-radius);
 
@@ -144,6 +148,7 @@
           line-height: 20px;
           padding-left: 12px;
           padding-right: 16px;
+          color: var(--main-text-color);
 
           > span:last-of-type {
             opacity: 0;
