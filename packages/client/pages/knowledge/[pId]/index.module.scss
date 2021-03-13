@@ -134,21 +134,25 @@
         }
 
         a {
+          position: relative;
           display: flex;
           align-items: center;
           justify-content: space-between;
-
           width: 100%;
           height: 44px;
-
           font-size: 14px;
           line-height: 20px;
-        
           padding-left: 12px;
           padding-right: 16px;
 
           > span:last-of-type {
             opacity: 0;
+          }
+
+          @media (max-width: 768px) {
+            > span:last-of-type {
+              display: none;
+            }
           }
 
           &:hover {
