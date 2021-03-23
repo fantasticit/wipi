@@ -64,8 +64,6 @@
   img {
     max-width: 100%;
     height: auto;
-    /* Only render when in viewport */
-    content-visibility: auto;
   }
 
   iframe {
