@@ -1,5 +1,4 @@
 import React from 'react';
-import { editor } from '../MonacoEditor';
 import { Emoji } from './Emoji';
 import { Iframe } from './Iframe';
 import { Image } from './Image';
@@ -8,18 +7,18 @@ import { Video } from './Video';
 export const toolbar = [
   {
     label: '标题',
-    content: (
+    content: ({ editor }) => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path fillRule="evenodd" d="M15 13H9v6H7V5h2v6h6V5h2v14h-2v-6z"></path>
       </svg>
     ),
-    action: () => {
+    getAction: (editor) => () => {
       editor.getAction('markdown.extension.editing.toggleHeadingUp').run(editor);
     },
   },
   {
     label: '加粗',
-    content: (
+    content: ({ editor }) => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path
           fillRule="evenodd"
@@ -27,35 +26,35 @@ export const toolbar = [
         ></path>
       </svg>
     ),
-    action: () => {
+    getAction: (editor) => () => {
       editor.getAction('markdown.extension.editing.toggleBold').run(editor);
     },
   },
   {
     label: '斜体',
-    content: (
+    content: ({ editor }) => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path fillRule="evenodd" d="M10 5v2h2.623l-3.42 10H6v2h8.9v-2h-3.11l3.42-10H18V5z"></path>
       </svg>
     ),
-    action: () => {
+    getAction: (editor) => () => {
       editor.getAction('markdown.extension.editing.toggleItalic').run(editor);
     },
   },
   {
     label: '行内代码',
-    content: (
+    content: ({ editor }) => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path fillRule="evenodd" d="M8.5 6l-3 5h-2l1-5h4zm12 0l-3 5h-2l1-5h4z"></path>
       </svg>
     ),
-    action: () => {
+    getAction: (editor) => () => {
       editor.getAction('markdown.extension.editing.toggleCodeSpan').run(editor);
     },
   },
   {
     label: '删除线',
-    content: (
+    content: ({ editor }) => (
       <svg viewBox="64 64 896 896" width="0.9em" height="0.9em">
         <path
           fillRule="evenodd"
@@ -63,13 +62,13 @@ export const toolbar = [
         ></path>
       </svg>
     ),
-    action: () => {
+    getAction: (editor) => () => {
       editor.getAction('markdown.extension.editing.toggleStrikethrough').run(editor);
     },
   },
   {
     label: '列表',
-    content: (
+    content: ({ editor }) => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path
           fillRule="evenodd"
@@ -77,28 +76,28 @@ export const toolbar = [
         ></path>
       </svg>
     ),
-    action: () => {
+    getAction: (editor) => () => {
       editor.getAction('markdown.extension.editing.toggleList').run(editor);
     },
   },
   {
     label: '表情',
-    content: <Emoji />,
-    action: () => {},
+    content: ({ editor }) => <Emoji editor={editor} />,
+    getAction: () => () => {},
   },
   {
     label: '上传图片',
-    content: <Image />,
-    action: () => {},
+    content: ({ editor }) => <Image editor={editor} />,
+    getAction: () => () => {},
   },
   {
     label: '上传视频',
-    content: <Video />,
-    action: () => {},
+    content: ({ editor }) => <Video editor={editor} />,
+    getAction: () => () => {},
   },
   {
     label: '嵌入链接',
-    content: <Iframe />,
-    action: () => {},
+    content: ({ editor }) => <Iframe editor={editor} />,
+    getAction: () => () => {},
   },
 ];

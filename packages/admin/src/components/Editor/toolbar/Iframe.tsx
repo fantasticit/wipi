@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Tooltip, Popover, Input, Button } from 'antd';
-import { monaco, editor } from '../MonacoEditor';
+import { monaco } from '../MonacoEditor';
 
-export const Iframe = () => {
+export const Iframe = ({ editor }) => {
   const [url, setURL] = useState('');
 
   const insertIframe = useCallback(() => {
@@ -16,7 +16,7 @@ export const Iframe = () => {
       },
     ]);
     setURL('');
-  }, [url]);
+  }, [editor, url]);
 
   return (
     <Popover

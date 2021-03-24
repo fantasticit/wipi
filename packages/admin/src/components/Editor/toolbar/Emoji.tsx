@@ -1,19 +1,22 @@
-import React, { useCallback, useState } from 'react';
-import { Tooltip, Popover, Input, Button, List } from 'antd';
-import { monaco, editor } from '../MonacoEditor';
+import React, { useCallback } from 'react';
+import { Tooltip, Popover } from 'antd';
+import { monaco } from '../MonacoEditor';
 import { emojis } from './emojis';
 
-export const Emoji = () => {
-  const insert = useCallback((key) => {
-    const result = emojis[key];
-    const p = editor.getPosition();
-    editor.executeEdits('', [
-      {
-        range: new monaco.Range(p.lineNumber, p.column, p.lineNumber, p.column),
-        text: result,
-      },
-    ]);
-  }, []);
+export const Emoji = ({ editor }) => {
+  const insert = useCallback(
+    (key) => {
+      const result = emojis[key];
+      const p = editor.getPosition();
+      editor.executeEdits('', [
+        {
+          range: new monaco.Range(p.lineNumber, p.column, p.lineNumber, p.column),
+          text: result,
+        },
+      ]);
+    },
+    [editor]
+  );
 
   return (
     <Popover

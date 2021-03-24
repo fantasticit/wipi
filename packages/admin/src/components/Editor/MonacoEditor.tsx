@@ -1,4 +1,11 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, {
+  forwardRef,
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  useImperativeHandle,
+} from 'react';
 import { Spin } from 'antd';
 import {
   registerScollListener,
@@ -7,37 +14,39 @@ import {
 } from './utils/syncScroll';
 
 declare let ResizeObserver;
-export let editor = null;
 export let monaco = null;
 
-export const MonacoEditor = ({ defaultValue, onChange, onSave }) => {
+const _MonacoEditor = (props, ref) => {
+  const { defaultValue, onChange, onSave } = props;
   const container = useRef(null);
+  const editorRef = useRef(null);
   const [mounted, setMounted] = useState(false);
 
   const registerChange = useCallback(() => {
-    editor.onDidChangeModelContent(() => {
-      const content = editor.getValue();
+    editorRef.current.onDidChangeModelContent(() => {
+      const content = editorRef.current.getValue();
       onChange(content);
     });
   }, [onSave]);
 
   const registerScroll = useCallback(() => {
-    editor.onDidScrollChange(
+    editorRef.current.onDidScrollChange(
       registerScollListener('editor', () => {
         const top =
-          editor.getScrollTop() / (editor.getContentHeight() - editor.getLayoutInfo().height);
+          editorRef.current.getScrollTop() /
+          (editorRef.current.getContentHeight() - editorRef.current.getLayoutInfo().height);
         return {
           id: 'editor-scroll',
           top: top,
-          left: editor.getScrollLeft(),
+          left: editorRef.current.getScrollLeft(),
         };
       })
     );
   }, []);
 
   const registerSave = useCallback(() => {
-    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
-      onSave(editor.getValue());
+    editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
+      onSave(editorRef.current.getValue());
     });
   }, []);
 
@@ -50,6 +59,8 @@ export const MonacoEditor = ({ defaultValue, onChange, onSave }) => {
     );
   }, []);
 
+  useImperativeHandle(ref, () => editorRef.current, [mounted]);
+
   useEffect(() => {
     Promise.all([
       import('monaco-editor/esm/vs/editor/editor.api.js'),
@@ -57,7 +68,7 @@ export const MonacoEditor = ({ defaultValue, onChange, onSave }) => {
     ]).then((res) => {
       monaco = res[0];
       const MonacoMarkdown = res[1];
-      editor = monaco.editor.create(container.current, {
+      const editor = monaco.editor.create(container.current, {
         language: 'markdown',
         automaticLayout: true,
         theme: 'vs',
@@ -66,7 +77,8 @@ export const MonacoEditor = ({ defaultValue, onChange, onSave }) => {
         },
         scrollBeyondLastLine: false,
       });
-      var extension = new MonacoMarkdown.MonacoMarkdownExtension();
+      editorRef.current = editor;
+      const extension = new MonacoMarkdown.MonacoMarkdownExtension();
       extension.activate(editor);
       registerScroll();
       registerChange();
@@ -76,15 +88,15 @@ export const MonacoEditor = ({ defaultValue, onChange, onSave }) => {
     });
     return () => {
       setMounted(false);
-      editor && editor.dispose();
+      editorRef.current && editorRef.current.dispose();
     };
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
     const listener = ({ top, left }) => {
-      editor.setScrollTop(top * editor.getContentHeight());
-      editor.setScrollLeft(left);
+      editorRef.current.setScrollTop(top * editorRef.current.getContentHeight());
+      editorRef.current.setScrollLeft(left);
     };
     subjectScrollListener('editor', 'preview', listener);
     return () => {
@@ -93,14 +105,14 @@ export const MonacoEditor = ({ defaultValue, onChange, onSave }) => {
   }, [mounted]);
 
   useEffect(() => {
-    if (!mounted || !editor) return;
-    editor.setValue(defaultValue);
+    if (!mounted || !editorRef.current) return;
+    editorRef.current.setValue(defaultValue);
   }, [mounted, defaultValue]);
 
   useEffect(() => {
-    if (!mounted || !editor) return;
+    if (!mounted || !editorRef.current) return;
     const ro = new ResizeObserver(() => {
-      editor.layout(container.current.getBoundingClientRect());
+      editorRef.current.layout(container.current.getBoundingClientRect());
     });
     ro.observe(container.current);
     return () => {
@@ -114,3 +126,5 @@ export const MonacoEditor = ({ defaultValue, onChange, onSave }) => {
     </div>
   );
 };
+
+export const MonacoEditor = forwardRef(_MonacoEditor);

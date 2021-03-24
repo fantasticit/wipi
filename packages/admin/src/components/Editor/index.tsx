@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import cls from 'classnames';
 import { Tooltip, Divider } from 'antd';
 import { DEFAULT_MARKDOWN } from './DefaultMarkdown';
 import { toolbar } from './toolbar';
-import { editor, MonacoEditor } from './MonacoEditor';
+import { MonacoEditor } from './MonacoEditor';
 import { Preview } from './Preview';
 import { confirm } from './utils/modal';
 import { makeHtml, makeToc } from './utils/markdown';
@@ -18,6 +18,7 @@ const CACHE_KEY = 'MONACO_CONTENT_STORAGE';
 let timer;
 
 export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onChange }) => {
+  const editorRef = useRef<any>();
   const [innerValue, setInnerValue] = useState(defaultValue);
   const [mode, setMode] = useState<'preview' | 'edit'>('edit');
   const [two, setTwo] = useState(true);
@@ -59,7 +60,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
     const listener = (evt) => {
       const handle = (value) => {
         setInnerValue(value);
-        editor.setValue(value);
+        editorRef.current && editorRef.current.setValue(value);
       };
       if (evt.data.id !== 'editor-mounted') return;
       const cache = localStorage.getItem(CACHE_KEY);
@@ -92,8 +93,10 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
         <div>
           {toolbar.map((tool) => {
             return (
-              <span className={style.toolWrap} onClick={tool.action}>
-                <Tooltip title={tool.label}>{tool.content}</Tooltip>
+              <span className={style.toolWrap} onClick={tool.getAction(editorRef.current)}>
+                <Tooltip title={tool.label}>
+                  <tool.content editor={editorRef.current} />
+                </Tooltip>
               </span>
             );
           })}
@@ -115,7 +118,12 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
       </header>
       <main>
         <div style={{ width: two ? '50%' : mode === 'preview' ? 0 : '100%' }}>
-          <MonacoEditor defaultValue={defaultValue} onChange={setInnerValue} onSave={saveCache} />
+          <MonacoEditor
+            ref={editorRef}
+            defaultValue={defaultValue}
+            onChange={setInnerValue}
+            onSave={saveCache}
+          />
         </div>
         <div style={{ width: two ? '50%' : mode === 'edit' ? 0 : '100%' }}>
           <Preview value={innerValue} />

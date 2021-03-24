@@ -1,9 +1,9 @@
 import React from 'react';
 import { Upload, message, Tooltip } from 'antd';
 import { FileProvider } from '@/providers/file';
-import { monaco, editor } from '../MonacoEditor';
+import { monaco } from '../MonacoEditor';
 
-export const Image = () => {
+export const Image = ({ editor }) => {
   const uploadProps = {
     name: 'file',
     accept: `.jpg, .jpeg, .pjpeg, .png, .apng, .bmp, .gif, .svg, .webp`,
