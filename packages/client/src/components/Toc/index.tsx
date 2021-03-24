@@ -18,7 +18,7 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
   const [active, setActive] = useState(0);
   const goto = useCallback((toc) => {
     try {
-      const el = document.getElementById(toc.id || toc.text);
+      const el = document.getElementById(toc.id);
       if (el) {
         el.scrollIntoView();
       }
@@ -28,7 +28,7 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
   useEffect(() => {
     const listener = () => {
       tocs.reduceRight((_, toc, index) => {
-        const el = document.getElementById(toc.id || toc.text);
+        const el = document.getElementById(toc.id);
         if (!el) return;
         if (elementInViewport(el)) {
           setActive(index);
