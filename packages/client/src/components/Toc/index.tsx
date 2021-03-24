@@ -5,11 +5,11 @@ import style from './index.module.scss';
 
 interface IToc {
   level: number;
+  id: string;
   text: string;
 }
 
 const HEIGHT = 32;
-const getTocSelector = (text) => text && text.toLowerCase().split(' ').join('-');
 
 export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> = ({
   tocs = [],
@@ -18,7 +18,7 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
   const [active, setActive] = useState(0);
   const goto = useCallback((toc) => {
     try {
-      const el = document.getElementById(getTocSelector(toc.text));
+      const el = document.getElementById(toc.id || toc.text);
       if (el) {
         el.scrollIntoView();
       }
@@ -28,7 +28,7 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
   useEffect(() => {
     const listener = () => {
       tocs.reduceRight((_, toc, index) => {
-        const el = document.getElementById(getTocSelector(toc.text));
+        const el = document.getElementById(toc.id || toc.text);
         if (!el) return;
         if (elementInViewport(el)) {
           setActive(index);

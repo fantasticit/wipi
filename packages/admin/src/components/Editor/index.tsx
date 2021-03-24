@@ -47,10 +47,11 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
   }, []);
 
   useEffect(() => {
+    const html = makeHtml(innerValue);
     onChange({
       value: innerValue,
-      html: makeHtml(innerValue),
-      toc: JSON.stringify(makeToc(innerValue)),
+      html,
+      toc: JSON.stringify(makeToc(html)),
     });
   }, [innerValue]);
 
