@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 import { Seo } from '@/components/Seo';
 import { FormComponentProps } from 'antd/es/form';
 import { UserProvider } from '@/providers/user';
-import { Svg } from '@/components/RegisterSvg';
+import { Svg } from '@/assets/RegisterSvg';
 import style from './index.module.scss';
 
 type IProps = FormComponentProps;

@@ -6,8 +6,8 @@ import { Helmet } from 'react-helmet';
 import { Seo } from '@/components/Seo';
 import { FormComponentProps } from 'antd/es/form';
 import { UserProvider } from '@/providers/user';
-import { Svg } from '@/components/LoginSvg';
 import { GlobalContext } from '@/context/global';
+import { Svg } from '@/assets/LoginSvg';
 import style from './index.module.scss';
 
 type ILoginProps = FormComponentProps;
