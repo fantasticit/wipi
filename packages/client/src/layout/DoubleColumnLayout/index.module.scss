@@ -1,9 +1,14 @@
-.outerWrap {}
-
 .wrap {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+
+  > .fixed {
+    position: fixed;
+    margin-left: -1140px;
+    top: 40vh;
+    transform: translateX(-100%);
+  }
 
   > .left {
     flex: 1;
@@ -38,3 +43,4 @@
     }
   }
 }
+

@@ -168,6 +168,12 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
             ) : null}
           </div>
         }
+        shareProps={{
+          cover: book.cover,
+          title: book.title,
+          desc: chapter.title,
+          url: `/knowledge/${pId}/${id}`,
+        }}
       />
     </>
   );

@@ -4,7 +4,6 @@ import { NextPage } from 'next';
 import Router from 'next/router';
 import Link from 'next/link';
 import { Icon, Modal, Form, Input, message } from 'antd';
-import cls from 'classnames';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ArticleProvider } from '@/providers/article';
@@ -185,7 +184,18 @@ const Article: NextPage<IProps> = ({ article }) => {
     </div>
   );
 
-  return <DoubleColumnLayout leftNode={Content} rightNode={Aside} />;
+  return (
+    <DoubleColumnLayout
+      leftNode={Content}
+      rightNode={Aside}
+      shareProps={{
+        cover: article.cover,
+        title: article.title,
+        desc: article.summary,
+        url: `/article/${article.id}`,
+      }}
+    />
+  );
 };
 
 Article.getInitialProps = async (ctx) => {
