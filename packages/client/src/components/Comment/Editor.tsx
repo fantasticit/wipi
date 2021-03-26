@@ -37,6 +37,7 @@ export const Editor = ({
   const submit = () => {
     if (!regexp.test(email)) {
       message.info('输入合法邮箱地址，以便在收到回复时邮件通知');
+      return;
     }
 
     const data = {
