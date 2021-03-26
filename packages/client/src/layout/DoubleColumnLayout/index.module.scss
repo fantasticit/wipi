@@ -59,6 +59,12 @@
     }
   }
 
+  @media (min-width: 1560px) {
+    > .fixed {
+      margin-left: -80vw;
+    }
+  }
+
   > .left {
     flex: 1;
     width: calc(100% - 20rem - 1rem);
@@ -89,6 +95,16 @@
         width: 0;
         display: none;
       }
+    }
+  }
+
+  @media (min-width: 1560px) {
+    > .left {
+      width: calc(100% - 30rem - 1rem);
+    }
+  
+    > .right {
+      width: 30rem;
     }
   }
 }
