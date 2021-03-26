@@ -5,15 +5,16 @@
 
   > .fixed {
     position: fixed;
-    top: 40vh;
+    top: 30vh;
     transform: translateX(-100%);
 
     .iconWrap {
+      border-radius: 50%;
+
       > div {
         width: 36px;
         height: 36px;
         font-size: 24px;
-        border-radius: 50%;
         cursor: pointer;
         display: flex;
         justify-content: center;
