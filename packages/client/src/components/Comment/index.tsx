@@ -122,6 +122,8 @@ interface IProps {
   hostId: string;
 }
 
+export const COMMENT_DOM_ID = `js-comment-id`;
+
 export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
   const ref = useRef(null);
   const [total, setTotal] = useState(0);
@@ -164,7 +166,7 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
   }, [articleId]);
 
   return (
-    <div className={style.commentWrapper} ref={ref}>
+    <div className={style.commentWrapper} id={COMMENT_DOM_ID} ref={ref}>
       <Editor hostId={articleId} parentComment={null} replyComment={null} />
       <div className={style.commentContainer}>
         {comments.map((comment, i) => {

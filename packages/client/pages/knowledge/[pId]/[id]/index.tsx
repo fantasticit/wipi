@@ -168,6 +168,8 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
             ) : null}
           </div>
         }
+        showStar
+        showComment={book.isCommentable}
         shareProps={{
           cover: book.cover,
           title: book.title,

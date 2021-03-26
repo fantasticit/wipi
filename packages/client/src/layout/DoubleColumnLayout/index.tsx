@@ -1,6 +1,8 @@
 import React from 'react';
 import cls from 'classnames';
-import { ShareProps, Share } from '@components/Share';
+import { ShareProps, Share } from '@/components/Share';
+import { CommentIcon } from '@/components/Comment/CommentIcon';
+import { Star } from '@/components/Star';
 import style from './index.module.scss';
 
 interface IProps {
@@ -11,6 +13,8 @@ interface IProps {
   isRightNodeMobileHidden?: boolean;
   minHeight?: string | number;
   background?: string;
+  showStar?: boolean;
+  showComment?: boolean;
   shareProps?: ShareProps;
 }
 
@@ -22,13 +26,31 @@ export const DoubleColumnLayout: React.FC<IProps> = ({
   isRightNodeMobileHidden = true,
   minHeight = '100%',
   background = 'var(--bg-body)',
+  showStar = false,
+  showComment = false,
   shareProps,
 }) => {
   return (
     <div className={cls(style.outerWrap)} style={{ minHeight, background }}>
       <div className={cls('container')}>
         <div className={style.wrap}>
-          <div className={cls(style.fixed)}>{shareProps && <Share {...shareProps} />}</div>
+          <div className={cls(style.fixed)}>
+            {showStar ? (
+              <div className={style.iconWrap}>
+                <Star />
+              </div>
+            ) : null}
+            {showComment ? (
+              <div className={style.iconWrap}>
+                <CommentIcon />
+              </div>
+            ) : null}
+            {shareProps && (
+              <div className={style.iconWrap}>
+                <Share {...shareProps} />
+              </div>
+            )}
+          </div>
           <section className={cls(style.left, leftClassName)}>{leftNode}</section>
           <aside
             className={cls(

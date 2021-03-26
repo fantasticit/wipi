@@ -171,16 +171,10 @@ const Article: NextPage<IProps> = ({ article }) => {
     </>
   );
 
-  const Aside = article.toc ? (
-    <>
-      <ArticleRecommend articleId={article.id} mode="inline" />
-      <div className={'sticky'}>
-        {tocs && tocs.length ? <Toc tocs={tocs} maxHeight={'80vh'} /> : null}
-      </div>
-    </>
-  ) : (
+  const Aside = (
     <div className={'sticky'}>
       <ArticleRecommend articleId={article.id} mode="inline" />
+      {tocs && tocs.length ? <Toc tocs={tocs} maxHeight={'80vh'} /> : null}
     </div>
   );
 
@@ -188,6 +182,8 @@ const Article: NextPage<IProps> = ({ article }) => {
     <DoubleColumnLayout
       leftNode={Content}
       rightNode={Aside}
+      showStar
+      showComment={article.isCommentable}
       shareProps={{
         cover: article.cover,
         title: article.title,

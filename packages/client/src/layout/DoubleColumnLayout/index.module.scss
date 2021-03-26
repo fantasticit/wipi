@@ -5,9 +5,55 @@
 
   > .fixed {
     position: fixed;
-    margin-left: -1140px;
     top: 40vh;
     transform: translateX(-100%);
+
+    .iconWrap {
+      width: 36px;
+      height: 36px;
+      font-size: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      background: #fff;
+      color: var(--disable-text-color);
+    
+      &:hover {
+        color: #fff;
+        background: var(--primary-color);
+      }
+
+      + .iconWrap {
+        margin-top: 12px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    > .fixed {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    > .fixed {
+      margin-left: -768px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    > .fixed {
+      margin-left: -970px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    > .fixed {
+      margin-left: -1140px;
+    }
   }
 
   > .left {
