@@ -9,14 +9,16 @@
     transform: translateX(-100%);
 
     .iconWrap {
-      width: 36px;
-      height: 36px;
-      font-size: 24px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      > div {
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       
       background: #fff;
       color: var(--disable-text-color);
