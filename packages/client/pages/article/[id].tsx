@@ -184,12 +184,16 @@ const Article: NextPage<IProps> = ({ article }) => {
       rightNode={Aside}
       showStar
       showComment={article.isCommentable}
-      shareProps={{
-        cover: article.cover,
-        title: article.title,
-        desc: article.summary,
-        url: `/article/${article.id}`,
-      }}
+      shareProps={
+        shouldCheckPassWord
+          ? null
+          : {
+              cover: article.cover,
+              title: article.title,
+              desc: article.summary,
+              url: `/article/${article.id}`,
+            }
+      }
     />
   );
 };
