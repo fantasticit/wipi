@@ -21,7 +21,7 @@
         align-items: center;
       }
       
-      background: #fff;
+      background: var(--bg-second);
       color: var(--disable-text-color);
     
       &:hover {
