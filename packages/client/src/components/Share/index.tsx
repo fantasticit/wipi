@@ -82,7 +82,6 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url }) => {
         onOk={save}
         confirmLoading={loading}
         width={424}
-        style={{ top: 20 }}
       >
         <div className={style.content} ref={ref}>
           <div className={style.main}>
