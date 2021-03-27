@@ -75,6 +75,20 @@ const columns = [
     ),
   },
   {
+    title: '喜欢数',
+    dataIndex: 'likes',
+    key: 'likes',
+    width: 120,
+    render: (val) => (
+      <Badge
+        count={val}
+        showZero={true}
+        overflowCount={Infinity}
+        style={{ backgroundColor: '#eb2f96' }}
+      />
+    ),
+  },
+  {
     title: '发布时间',
     dataIndex: 'publishAt',
     key: 'publishAt',
