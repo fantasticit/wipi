@@ -1,27 +1,16 @@
+$height: 64px;
+
 .header {
   position: relative;
   width: 100%;
+  $height: 64px;
   z-index: 1000;
-  transition: all .6s ease-in-out;
-}
-
-@media (max-width: 768px) {
-  .header {
-    height: 52px;
-  }
-}
-
-@media (min-width: 768px) {
-  .header {
-    height: 64px;
-  }
 }
 
 .wrapper {
   display: flex;
   align-items: center;
   width: 100vw;
-  height: 100%;
   border-bottom: 1px solid var(--border-color);
   background-color: var(--bg);
   transition: all .2s;
@@ -37,8 +26,10 @@
   }
 
   .logo {
+    height: $height;
     margin-right: 2rem;
     color: var(--main-text-color);
+    line-height: $height;
     text-align: left;
 
     img {
