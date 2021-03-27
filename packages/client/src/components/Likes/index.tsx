@@ -32,7 +32,7 @@ export const Likes: React.FC<LikesProps> = ({ defaultCount = 0, id, api }) => {
   }, []);
 
   return (
-    <Badge count={count}>
+    <Badge count={count} style={{ backgroundColor: 'var(--primary-color)' }}>
       <div className={cls(style.wrap, likes.includes(id) && style.active)} onClick={like}>
         <svg
           viewBox="0 0 1024 1024"
