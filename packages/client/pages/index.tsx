@@ -46,23 +46,26 @@ const Home: NextPage<IHomeProps> = ({
 
   return (
     <>
-      <ArticleCarousel articles={recommendedArticles} />
       <DoubleColumnLayout
         minHeight={'0px'}
         leftNode={
-          <InfiniteScroll
-            pageStart={1}
-            loadMore={getArticles}
-            hasMore={page * pageSize < total}
-            loader={
-              <div className={'loading'} key={0}>
-                正在获取文章...
-              </div>
-            }
-          >
-            <ArticleList articles={articles} />
-          </InfiniteScroll>
+          <div className={style.content}>
+            <ArticleCarousel articles={recommendedArticles} />
+            <InfiniteScroll
+              pageStart={1}
+              loadMore={getArticles}
+              hasMore={page * pageSize < total}
+              loader={
+                <div className={'loading'} key={0}>
+                  正在获取文章...
+                </div>
+              }
+            >
+              <ArticleList articles={articles} />
+            </InfiniteScroll>
+          </div>
         }
+        leftClassName={style.left}
         rightNode={
           <>
             <ArticleRecommend mode="inline" />
