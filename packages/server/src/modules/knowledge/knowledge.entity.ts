@@ -57,6 +57,10 @@ export class Knowledge {
   views: number; // 阅读量
 
   @ApiProperty()
+  @Column({ type: 'int', default: 0 })
+  likes: number; // 喜欢数
+
+  @ApiProperty()
   @Column({ type: 'boolean', default: true })
   isCommentable: boolean;
 

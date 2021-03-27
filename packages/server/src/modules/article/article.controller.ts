@@ -143,6 +143,15 @@ export class ArticleController {
   }
 
   /**
+   * 文章访问量 +1
+   */
+  @Post(':id/likes')
+  @HttpCode(HttpStatus.OK)
+  updateLikesById(@Param('id') id) {
+    return this.articleService.updateLikesById(id);
+  }
+
+  /**
    * 更新文章
    * @param id
    * @param article

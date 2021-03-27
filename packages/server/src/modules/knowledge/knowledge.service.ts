@@ -107,6 +107,19 @@ export class KnowledgeService {
   }
 
   /**
+   * 更新喜欢数
+   * @param id
+   * @returns
+   */
+  async updateLikesById(id): Promise<Knowledge> {
+    const oldData = await this.repository.findOne(id);
+    const newData = await this.repository.merge(oldData, {
+      likes: oldData.likes + 1,
+    });
+    return this.repository.save(newData);
+  }
+
+  /**
    * 获取所有知识库
    */
   async findAll(queryParams): Promise<[Knowledge[], number]> {

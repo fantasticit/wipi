@@ -10,11 +10,12 @@
 
     .iconWrap {
       border-radius: 50%;
+      margin-top: 12px;
 
       > div {
-        width: 36px;
-        height: 36px;
-        font-size: 24px;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
         cursor: pointer;
         display: flex;
         justify-content: center;
@@ -27,10 +28,6 @@
       &:hover {
         color: #fff;
         background: var(--primary-color);
-      }
-
-      + .iconWrap {
-        margin-top: 12px;
       }
     }
   }

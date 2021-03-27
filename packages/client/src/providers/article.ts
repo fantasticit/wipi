@@ -85,6 +85,15 @@ export class ArticleProvider {
   }
 
   /**
+   * 更新文章喜欢数
+   * @param id
+   * @param data
+   */
+  static async updateArticleLikes(id): Promise<IArticle> {
+    return httpProvider.post(`/article/${id}/likes`);
+  }
+
+  /**
    * 校验文章密码是否正确
    * @param id
    * @param password

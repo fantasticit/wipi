@@ -182,7 +182,11 @@ const Article: NextPage<IProps> = ({ article }) => {
     <DoubleColumnLayout
       leftNode={Content}
       rightNode={Aside}
-      showStar
+      likesProps={{
+        defaultCount: article.likes,
+        id: article.id,
+        api: (id) => ArticleProvider.updateArticleLikes(id).then((res) => res.likes),
+      }}
       showComment={article.isCommentable}
       shareProps={
         shouldCheckPassWord

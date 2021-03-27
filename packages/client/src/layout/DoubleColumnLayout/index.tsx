@@ -2,7 +2,7 @@ import React from 'react';
 import cls from 'classnames';
 import { ShareProps, Share } from '@/components/Share';
 import { CommentIcon } from '@/components/Comment/CommentIcon';
-import { Star } from '@/components/Star';
+import { LikesProps, Likes } from '@/components/Likes';
 import style from './index.module.scss';
 
 interface IProps {
@@ -13,7 +13,7 @@ interface IProps {
   isRightNodeMobileHidden?: boolean;
   minHeight?: string | number;
   background?: string;
-  showStar?: boolean;
+  likesProps?: LikesProps;
   showComment?: boolean;
   shareProps?: ShareProps;
 }
@@ -26,7 +26,7 @@ export const DoubleColumnLayout: React.FC<IProps> = ({
   isRightNodeMobileHidden = true,
   minHeight = '100%',
   background = 'var(--bg-body)',
-  showStar = false,
+  likesProps,
   showComment = false,
   shareProps,
 }) => {
@@ -35,16 +35,12 @@ export const DoubleColumnLayout: React.FC<IProps> = ({
       <div className={cls('container')}>
         <div className={style.wrap}>
           <div className={cls(style.fixed)}>
-            {showStar ? (
-              <div className={style.iconWrap}>
-                <Star />
-              </div>
-            ) : null}
-            {showComment ? (
+            {likesProps && <Likes {...likesProps} />}
+            {showComment && (
               <div className={style.iconWrap}>
                 <CommentIcon />
               </div>
-            ) : null}
+            )}
             {shareProps && (
               <div className={style.iconWrap}>
                 <Share {...shareProps} />
