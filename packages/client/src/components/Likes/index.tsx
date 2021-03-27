@@ -18,6 +18,7 @@ export const Likes: React.FC<LikesProps> = ({ defaultCount = 0, id, api }) => {
     api(id).then((c) => {
       setCount(c);
       window.localStorage.setItem('LIKES', JSON.stringify([...likes, id]));
+      setLikes([...likes, id]);
     });
   }, [likes, id, api]);
 
