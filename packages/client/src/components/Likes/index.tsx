@@ -9,7 +9,7 @@ export interface LikesProps {
   api: (id) => Promise<number>;
 }
 
-export const Likes: React.FC<LikesProps> = ({ defaultCount = 0, id, api }) => {
+export const Likes: React.FC<LikesProps> = ({ defaultCount, id, api }) => {
   const [count, setCount] = useState(defaultCount);
   const [likes, setLikes] = useState([]);
 
