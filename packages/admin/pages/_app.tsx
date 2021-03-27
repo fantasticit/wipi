@@ -13,6 +13,7 @@ import 'viewerjs/dist/viewer.css';
 import '@/theme/antd.less';
 import '@/theme/reset.scss';
 import '@/theme/markdown.scss';
+import { UserProvider } from '@/providers/user';
 
 class MyApp extends App {
   state: Omit<IGlobalContext, 'setUser' | 'getSetting' | 'toggleCollapse'> = {
@@ -29,10 +30,10 @@ class MyApp extends App {
 
   getUserFromStorage = () => {
     const str = localStorage.getItem('user');
-
     if (str) {
       const user = JSON.parse(str);
       this.setUser(user);
+      UserProvider.checkAdmin(user);
     } else {
       message.info('请重新登录');
       Router.push(`/login?redirect=${Router.asPath}`);

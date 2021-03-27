@@ -23,6 +23,10 @@ export class AuthService {
     return Object.assign(data, { token });
   }
 
+  async checkAdmin() {
+    return true;
+  }
+
   async validateUser(payload: User) {
     return await this.userService.findById(payload.id);
   }

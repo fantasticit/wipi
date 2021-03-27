@@ -9,6 +9,10 @@ export class UserProvider {
     return httpProvider.post('/auth/login', data);
   }
 
+  static async checkAdmin(data): Promise<IUser> {
+    return httpProvider.post('/auth/admin', data);
+  }
+
   /**
    * 用户注册
    * @param data

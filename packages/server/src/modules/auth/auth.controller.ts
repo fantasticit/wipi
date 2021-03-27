@@ -6,9 +6,12 @@ import {
   Body,
   UseInterceptors,
   ClassSerializerInterceptor,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
+import { Roles } from './roles.guard';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -24,5 +27,12 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async login(@Body() user) {
     return await this.authService.login(user);
+  }
+
+  @Post('admin')
+  @Roles('admin')
+  @UseGuards(JwtAuthGuard)
+  createBook() {
+    return this.authService.checkAdmin();
   }
 }
