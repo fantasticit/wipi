@@ -6,7 +6,6 @@ import style from './index.module.scss';
 const QRCode = require('qrcode-svg');
 const download = require('downloadjs');
 const urllib = require('url');
-
 export interface ShareProps {
   cover?: string;
   title: React.ReactNode;
@@ -19,7 +18,8 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url }) => {
   const { setting } = useContext(GlobalContext);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
-  const fullUrl = useMemo(() => urllib.resolve(setting.systemUrl, url), [url]);
+  const systemUrl = setting.systemUrl || ''; // 当项目首次创建，后端没有添加系统地址时，项目会报因systemUrl为null而导致the path argument must be of type string 的错误。
+  const fullUrl = useMemo(() => urllib.resolve(systemUrl, url), [url]);
   const qrcode = useMemo(
     () =>
       new QRCode({
