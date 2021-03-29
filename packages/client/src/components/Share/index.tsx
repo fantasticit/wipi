@@ -18,7 +18,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url }) => {
   const { setting } = useContext(GlobalContext);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
-  const systemUrl = setting.systemUrl || ''; // 当项目首次创建，后端没有添加系统地址时，项目会报path 为null的错误。
+  const systemUrl = setting.systemUrl || ''; // 当项目首次创建，后端没有添加系统地址时，项目会报因systemUrl为null而导致the path argument must be of type string 的错误。
   const fullUrl = useMemo(() => urllib.resolve(systemUrl, url), [url]);
   const qrcode = useMemo(
     () =>
