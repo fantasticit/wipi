@@ -168,6 +168,18 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
             ) : null}
           </div>
         }
+        likesProps={{
+          defaultCount: chapter.likes,
+          id: chapter.id,
+          api: (id) => KnowledgeProvider.updateKnowledgeLikes(id).then((res) => res.likes),
+        }}
+        showComment={book.isCommentable}
+        shareProps={{
+          cover: book.cover,
+          title: book.title,
+          desc: chapter.title,
+          url: `/knowledge/${pId}/${id}`,
+        }}
       />
     </>
   );

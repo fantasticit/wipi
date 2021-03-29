@@ -24,6 +24,7 @@ interface IArticle {
   cover?: string;
   toc?: string;
   views: number;
+  likes: number;
   category: any;
   tags?: [any];
   status: string;
@@ -61,6 +62,7 @@ interface IKnowledge {
   html: string;
   toc: string;
   views: number;
+  likes: number;
   status: 'draft' | 'publish';
   isCommentable?: boolean;
   createAt: string;

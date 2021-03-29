@@ -69,6 +69,10 @@ export class Article {
   views: number; // 阅读量
 
   @ApiProperty()
+  @Column({ type: 'int', default: 0 })
+  likes: number; // 喜欢数
+
+  @ApiProperty()
   @Column({ type: 'boolean', default: false })
   isRecommended: boolean; // 是否推荐到首页
 

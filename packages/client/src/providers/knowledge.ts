@@ -57,4 +57,13 @@ export class KnowledgeProvider {
   static async updateKnowledgeViews(id): Promise<IKnowledge> {
     return httpProvider.post(`/knowledge/${id}/views`);
   }
+
+  /**
+   * 更新知识喜欢数
+   * @param id
+   * @param data
+   */
+  static async updateKnowledgeLikes(id): Promise<IKnowledge> {
+    return httpProvider.post(`/knowledge/${id}/likes`);
+  }
 }

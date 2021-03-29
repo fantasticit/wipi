@@ -295,6 +295,19 @@ export class ArticleService {
   }
 
   /**
+   * 更新喜欢数
+   * @param id
+   * @returns
+   */
+  async updateLikesById(id): Promise<Article> {
+    const oldArticle = await this.articleRepository.findOne(id);
+    const updatedArticle = await this.articleRepository.merge(oldArticle, {
+      likes: oldArticle.likes + 1,
+    });
+    return this.articleRepository.save(updatedArticle);
+  }
+
+  /**
    * 删除文章
    * @param id
    */

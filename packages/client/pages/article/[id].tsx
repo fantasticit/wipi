@@ -4,7 +4,6 @@ import { NextPage } from 'next';
 import Router from 'next/router';
 import Link from 'next/link';
 import { Icon, Modal, Form, Input, message } from 'antd';
-import cls from 'classnames';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ArticleProvider } from '@/providers/article';
@@ -172,20 +171,35 @@ const Article: NextPage<IProps> = ({ article }) => {
     </>
   );
 
-  const Aside = article.toc ? (
-    <>
-      <ArticleRecommend articleId={article.id} mode="inline" />
-      <div className={'sticky'}>
-        {tocs && tocs.length ? <Toc tocs={tocs} maxHeight={'80vh'} /> : null}
-      </div>
-    </>
-  ) : (
+  const Aside = (
     <div className={'sticky'}>
       <ArticleRecommend articleId={article.id} mode="inline" />
+      {tocs && tocs.length ? <Toc tocs={tocs} maxHeight={'80vh'} /> : null}
     </div>
   );
 
-  return <DoubleColumnLayout leftNode={Content} rightNode={Aside} />;
+  return (
+    <DoubleColumnLayout
+      leftNode={Content}
+      rightNode={Aside}
+      likesProps={{
+        defaultCount: article.likes,
+        id: article.id,
+        api: (id) => ArticleProvider.updateArticleLikes(id).then((res) => res.likes),
+      }}
+      showComment={article.isCommentable}
+      shareProps={
+        shouldCheckPassWord
+          ? null
+          : {
+              cover: article.cover,
+              title: article.title,
+              desc: article.summary,
+              url: `/article/${article.id}`,
+            }
+      }
+    />
+  );
 };
 
 Article.getInitialProps = async (ctx) => {
