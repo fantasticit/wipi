@@ -6,7 +6,7 @@ import style from './index.module.scss';
 export interface LikesProps {
   defaultCount?: number;
   id: string;
-  api: (id) => Promise<number>;
+  api: (id,type) => Promise<number>;
 }
 
 export const Likes: React.FC<LikesProps> = ({ defaultCount, id, api }) => {
@@ -14,11 +14,21 @@ export const Likes: React.FC<LikesProps> = ({ defaultCount, id, api }) => {
   const [likes, setLikes] = useState([]);
 
   const like = useCallback(() => {
-    if (likes.includes(id)) return;
-    api(id).then((c) => {
+    let type = 'up'
+    const index = likes.indexOf(id)
+    const tempLike = [...likes]
+   if (index > -1) {
+     tempLike.splice(index, 1);
+     type = 'down'
+    }
+    // if (likes.includes(id)){
+    //    type = 'down'
+    // };
+    api(id,type).then((c) => {
       setCount(c);
-      window.localStorage.setItem('LIKES', JSON.stringify([...likes, id]));
-      setLikes([...likes, id]);
+      type==='up'?setLikes([...likes, id]):setLikes([...tempLike]);
+      window.localStorage.setItem('LIKES', JSON.stringify([...likes]));
+      console.log(likes);
     });
   }, [likes, id, api]);
 

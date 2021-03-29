@@ -1,7 +1,7 @@
 import { Injectable, NestInterceptor, CallHandler, ExecutionContext } from '@nestjs/common';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { responseLogger } from '../logger';
+import { responseLogger, requestLogger } from '../logger';
 
 interface Response<T> {
   data: T;
@@ -15,7 +15,7 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Response<T>> 
         const ctx = context.switchToHttp();
         const response = ctx.getResponse();
         const request = ctx.getRequest();
-
+        const {body} = request
         const statusCode = response.statusCode;
         const url = request.originalUrl;
         const res = {
@@ -25,6 +25,7 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Response<T>> 
           data,
         };
         responseLogger.info(url, res);
+        requestLogger.info(url, body);
         return res;
       })
     );

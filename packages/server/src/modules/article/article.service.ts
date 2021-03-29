@@ -296,13 +296,16 @@ export class ArticleService {
 
   /**
    * 更新喜欢数
-   * @param id
+   * @param data
    * @returns
    */
-  async updateLikesById(id): Promise<Article> {
+  async updateLikesById(data): Promise<Article> {
+    const {id, type} = data
     const oldArticle = await this.articleRepository.findOne(id);
+    // 当type为up当时候，喜欢数+1，否则-1
+    const tempLikes =  type === 'up' ? (oldArticle.likes + 1) : (oldArticle.likes -1)
     const updatedArticle = await this.articleRepository.merge(oldArticle, {
-      likes: oldArticle.likes + 1,
+      likes: tempLikes,
     });
     return this.articleRepository.save(updatedArticle);
   }

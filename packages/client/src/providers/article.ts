@@ -87,10 +87,10 @@ export class ArticleProvider {
   /**
    * 更新文章喜欢数
    * @param id
-   * @param data
+   * @param type
    */
-  static async updateArticleLikes(id): Promise<IArticle> {
-    return httpProvider.post(`/article/${id}/likes`);
+  static async updateArticleLikes(id,type): Promise<IArticle> {
+    return httpProvider.post(`/article/${id}/likes`, {type});
   }
 
   /**
