@@ -73,7 +73,7 @@ lerna bootstrap
 - 启动项目
 
 ```bash
-lerna run dev
+lerna run --parallel dev
 ```
 
 前台页面地址：`http://localhost:3000`。
