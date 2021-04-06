@@ -33,7 +33,6 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
       setArticles([]);
       return;
     }
-
     setLoading(true);
     SearchProvider.searchArticles(keyword)
       .then((res) => {
@@ -100,7 +99,7 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
               ref={ref}
               size="large"
               placeholder="输入关键字，搜索文章"
-              onChange={(evt) => getArticles(evt.target.value)}
+              onSearch={getArticles}
               style={{ width: '100%' }}
             />
             <div className={style.tagWrapper}>
