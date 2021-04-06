@@ -71,7 +71,6 @@ Page.getInitialProps = async () => {
   return {
     books,
     total,
-    needLayoutFooter: false,
   };
 };
 
