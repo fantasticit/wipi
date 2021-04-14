@@ -12,6 +12,7 @@ import {
   subjectScrollListener,
   removeScrollListener,
 } from './utils/syncScroll';
+import { on } from 'process';
 
 declare let ResizeObserver;
 export let monaco = null;
@@ -71,6 +72,7 @@ const _MonacoEditor = (props, ref) => {
       const editor = monaco.editor.create(container.current, {
         language: 'markdown',
         automaticLayout: true,
+        wordWrap: 'on',
         theme: 'vs',
         minimap: {
           enabled: false,
