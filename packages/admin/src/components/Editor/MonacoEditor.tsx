@@ -71,6 +71,7 @@ const _MonacoEditor = (props, ref) => {
       const editor = monaco.editor.create(container.current, {
         language: 'markdown',
         automaticLayout: true,
+        wordWrap: 'on',
         theme: 'vs',
         minimap: {
           enabled: false,
