@@ -1,5 +1,6 @@
 node_modules
-
+.next
+dist
 # css文件完全由stylelint接管，不要用prettier，可能存在冲突
 
 **/*.css

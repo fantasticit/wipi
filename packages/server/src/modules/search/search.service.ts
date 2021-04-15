@@ -37,7 +37,7 @@ export class SearchService {
     }
 
     const newData = await this.searchRepository.create({ type, keyword });
-    await this.searchRepository.save(newData);
+    return await this.searchRepository.save(newData);
   }
 
   /**

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useReducer } from 'react';
 import { Table, Menu, Dropdown, Icon, Tooltip } from 'antd';
 import { TableSize } from 'antd/es/table';
 import { Pagination } from '@/components/Pagination';
@@ -19,6 +19,20 @@ interface IProps {
   onSearch: (arg) => Promise<unknown>;
 }
 
+const initialParams = { page: 1, pageSize: 12 };
+function reducer(state: typeof initialParams, action) {
+  switch (action.type) {
+    case 'page':
+      return { ...state, page: action.payload };
+    case 'pageSize':
+      return { ...state, pageSize: action.payload };
+    case 'params':
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
+}
+
 export const DataTable: React.FC<IProps> = ({
   title,
   rightNode,
@@ -33,28 +47,21 @@ export const DataTable: React.FC<IProps> = ({
   customDataTable = null,
 }) => {
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(12);
   const [size, setSize] = useState<TableSize>('default');
   const [total, setTotal] = useState(defaultTotal);
-  const [searchParams, updateSearchParams] = useState({});
+  const [params, dispatch] = useReducer(reducer, initialParams);
 
   const getData = useCallback(() => {
     setLoading(true);
-    const params = { page, pageSize, ...searchParams };
     onSearch(params)
       .then((res) => {
         setTotal(res[1]);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
       });
-  }, [page, pageSize, searchParams]);
-
-  useEffect(() => {
-    getData();
-  }, [page, pageSize, searchParams]);
+  }, [onSearch, params]);
 
   const menu = (
     <Menu>
@@ -64,6 +71,10 @@ export const DataTable: React.FC<IProps> = ({
     </Menu>
   );
 
+  useEffect(() => {
+    getData();
+  }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div className={style.wrapper}>
       <Search
@@ -71,8 +82,11 @@ export const DataTable: React.FC<IProps> = ({
         showLabel={showSearchLabel}
         padding={padding}
         onSearch={(params) => {
-          setPage(1);
-          updateSearchParams(params);
+          dispatch({ type: 'page', payload: 1 });
+          dispatch({ type: 'params', payload: params });
+          // setPage(1);
+          // updateSearchParams(params);
+          // getData(1, pageSize, params);
         }}
       />
       <div style={{ background: '#fff', padding }}>
@@ -112,12 +126,15 @@ export const DataTable: React.FC<IProps> = ({
           </>
         )}
         <Pagination
-          page={page}
-          pageSize={pageSize}
+          page={params.page}
+          pageSize={params.pageSize}
           total={total}
           onChange={(page, pageSize) => {
-            setPage(page);
-            setPageSize(pageSize);
+            dispatch({ type: 'page', payload: page });
+            dispatch({ type: 'pageSize', payload: pageSize });
+            // setPage(page);
+            // setPageSize(pageSize);
+            // getData(page, pageSize, searchParams);
           }}
         />
       </div>

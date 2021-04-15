@@ -23,7 +23,9 @@ class MyApp extends App {
   };
 
   setUser = (user) => {
-    if (!user) return;
+    if (!user) {
+      return;
+    }
     localStorage.setItem('user', JSON.stringify(user));
     this.setState({ user });
   };
@@ -36,7 +38,7 @@ class MyApp extends App {
       UserProvider.checkAdmin(user);
     } else {
       message.info('请重新登录');
-      Router.push(`/login?redirect=${Router.asPath}`);
+      !Router.pathname.includes('login') && Router.push(`/login?redirect=${Router.asPath}`);
     }
   };
 

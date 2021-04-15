@@ -2,7 +2,46 @@
   "name": "root",
   "private": true,
   "npmClient": "yarn",
+  "scripts": {
+    "dev": "lerna run dev --parallel",
+    "build": "lerna run build --parallel",
+    "start": "lerna run start --parallel",
+    "pm2": "lerna run pm2 --parallel",
+    "precommit": "npm run lint && npm run format",
+    "lint": "eslint . -c ./.eslintrc.js --fix --quiet 'packages/**/*.{ts,tsx,js,jsx}'",
+    "format": "npm run format:md && npm run format:json && npm run format:source",
+    "format:md": "prettier --parser markdown --write './**/*.md'",
+    "format:json": "prettier --parser json --write './**/*.json'",
+    "format:source": "prettier --write './**/*.{js,ts}'"
+  },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "@fantasticit/code-lint": "^0.0.7",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "commitizen": "^4.2.3",
+    "cz-customizable": "^6.3.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.5",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "stylelint": "^13.12.0",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-order": "^4.1.0",
+    "typescript": "^4.2.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
   }
 }

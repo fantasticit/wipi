@@ -25,29 +25,37 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
   const idx = chapters.findIndex((t) => t.id === chapter.id);
 
   const prev = useMemo(() => {
-    if (idx <= 0) return null;
+    if (idx <= 0) {
+      return null;
+    }
     return chapters[idx - 1];
-  }, [idx]);
+  }, [idx]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const next = useMemo(() => {
-    if (idx >= chapters.length - 1) return null;
+    if (idx >= chapters.length - 1) {
+      return null;
+    }
     return chapters[idx + 1];
-  }, [idx]);
+  }, [idx]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 更新阅读量
   useEffect(() => {
-    if (!chapter) return;
+    if (!chapter) {
+      return;
+    }
     KnowledgeProvider.updateKnowledgeViews(pId);
     KnowledgeProvider.updateKnowledgeViews(id);
   }, [pId, id, chapter]);
 
   useEffect(() => {
-    if (!chapter) return;
+    if (!chapter) {
+      return;
+    }
     const el = document.querySelector(`#js-toc-item-wrapper-` + id);
     if (el) {
       el.scrollIntoView();
     }
-  }, []);
+  }, [chapter, id]);
 
   if (!chapter) {
     return <p>未知章节内容</p>;
@@ -96,6 +104,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                     <a
                       href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       非商用-署名-自由转载
                     </a>

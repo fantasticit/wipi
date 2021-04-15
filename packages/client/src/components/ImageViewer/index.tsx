@@ -4,7 +4,9 @@ import Viewer from 'viewerjs';
 export const ImageViewer = ({ containerSelector, children }) => {
   useEffect(() => {
     const el = document.querySelector(containerSelector);
-    if (!el) return;
+    if (!el) {
+      return null;
+    }
     const viewer = new Viewer(el, { inline: false });
     const io = new MutationObserver(() => {
       viewer.update();

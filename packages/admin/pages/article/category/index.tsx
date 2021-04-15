@@ -32,37 +32,46 @@ const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
     setValue(null);
   }, []);
 
-  const addTag = useCallback((data) => {
-    if (!data || !data.label) {
-      return;
-    }
+  const addTag = useCallback(
+    (data) => {
+      if (!data || !data.label) {
+        return;
+      }
 
-    CategoryProvider.add(data).then(() => {
-      message.success('添加分类成功');
-      reset();
-      getData();
-    });
-  }, []);
+      CategoryProvider.add(data).then(() => {
+        message.success('添加分类成功');
+        reset();
+        getData();
+      });
+    },
+    [reset, getData]
+  );
 
-  const updateTag = useCallback((id, data) => {
-    if (!data || !data.label) {
-      return;
-    }
+  const updateTag = useCallback(
+    (id, data) => {
+      if (!data || !data.label) {
+        return;
+      }
 
-    CategoryProvider.update(id, data).then(() => {
-      message.success('更新分类成功');
-      reset();
-      getData();
-    });
-  }, []);
+      CategoryProvider.update(id, data).then(() => {
+        message.success('更新分类成功');
+        reset();
+        getData();
+      });
+    },
+    [reset, getData]
+  );
 
-  const deleteTag = useCallback((id) => {
-    CategoryProvider.delete(id).then(() => {
-      message.success('删除分类成功');
-      reset();
-      getData();
-    });
-  }, []);
+  const deleteTag = useCallback(
+    (id) => {
+      CategoryProvider.delete(id).then(() => {
+        message.success('删除分类成功');
+        reset();
+        getData();
+      });
+    },
+    [reset, getData]
+  );
 
   return (
     <AdminLayout>

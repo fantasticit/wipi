@@ -8,7 +8,9 @@ export const MarkdownReader = ({ content }) => {
 
   // 高亮
   useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current) {
+      return;
+    }
 
     setTimeout(() => {
       const blocks = ref.current.querySelectorAll('pre code');

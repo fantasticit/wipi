@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import React, { useState, useEffect } from 'react';
 import { Button, Input, message } from 'antd';
 import cls from 'classnames';
@@ -75,7 +76,7 @@ export const Editor = ({
         setLoading(false);
         onSuccess();
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
       });
   };

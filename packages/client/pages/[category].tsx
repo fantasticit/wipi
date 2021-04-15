@@ -30,16 +30,19 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, categor
     setArticles(defaultArticles);
   }, [defaultArticles]);
 
-  const getArticles = useCallback((page) => {
-    ArticleProvider.getArticlesByCategory(category.value, {
-      page,
-      pageSize,
-      status: 'publish',
-    }).then((res) => {
-      setPage(page);
-      setArticles((articles) => [...articles, ...res[0]]);
-    });
-  }, []);
+  const getArticles = useCallback(
+    (page) => {
+      ArticleProvider.getArticlesByCategory(category.value, {
+        page,
+        pageSize,
+        status: 'publish',
+      }).then((res) => {
+        setPage(page);
+        setArticles((articles) => [...articles, ...res[0]]);
+      });
+    },
+    [category]
+  );
 
   return (
     <DoubleColumnLayout

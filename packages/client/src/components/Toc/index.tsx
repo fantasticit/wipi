@@ -22,14 +22,16 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
       if (el) {
         el.scrollIntoView();
       }
-    } catch (e) {}
+    } catch (e) {} // eslint-disable-line no-empty
   }, []);
 
   useEffect(() => {
     const listener = () => {
       tocs.reduceRight((_, toc, index) => {
         const el = document.getElementById(toc.id);
-        if (!el) return;
+        if (!el) {
+          return _;
+        }
         if (elementInViewport(el)) {
           setActive(index);
           ref.current.scrollTop = HEIGHT * index;
@@ -55,6 +57,7 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
               const f = isOdd(v - 1);
               return (
                 <div
+                  key={`js-toc-` + idx}
                   className={cls(style.item, idx === active && style.active)}
                   id={`js-toc-` + idx}
                   style={

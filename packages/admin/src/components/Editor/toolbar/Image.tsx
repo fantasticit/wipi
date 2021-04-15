@@ -28,7 +28,7 @@ export const Image = ({ editor }) => {
           message.error('上传失败');
           hide();
         });
-      return Promise.reject();
+      return Promise.reject(new Error('canceld'));
     },
   };
 

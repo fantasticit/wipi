@@ -44,7 +44,7 @@ export const ArticleList: React.FC<IProps> = ({ articles = [] }) => {
                     <span>{article.views} 次阅读</span>
                     <span className={style.seperator}>·</span>
                     <span className={style.pullRight}>
-                      <LocaleTime date={article.publishAt} timeago />
+                      <LocaleTime date={article.publishAt} timeago={true} />
                     </span>
                   </div>
                 </div>

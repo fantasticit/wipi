@@ -30,9 +30,9 @@ if __name__ == '__main__':
 
 | 项目        | 价格   |  数量  |
 | --------   | -----:  | :----:  |
-| 计算机     | \$1600 |   5     |
-| 手机        |   \$12   |   12   |
-| 管线        |    \$1    |  234  |
+| 计算机     | 1600 |   5     |
+| 手机        |   12   |   12   |
+| 管线        |    10    |  234  |
 
 ### 4. 嵌入网址
 <iframe src="//player.bilibili.com/player.html?aid=77737877&bvid=BV1xJ411z7eS&cid=132993821&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>

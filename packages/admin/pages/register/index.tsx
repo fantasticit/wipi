@@ -30,30 +30,33 @@ const _Register: React.FC<IProps> = ({ form }) => {
     callback();
   };
 
-  const submit = useCallback((e) => {
-    e.preventDefault();
-    form.validateFields((err, values) => {
-      if (!err) {
-        setLoading(true);
-        UserProvider.register(values)
-          .then(() => {
-            Modal.confirm({
-              title: '注册成功',
-              content: '是否跳转至登录?',
-              okText: '确认',
-              cancelText: '取消',
-              onOk() {
-                Router.push('/login');
-              },
-              onCancel() {
-                console.log('Cancel');
-              },
-            });
-          })
-          .catch((e) => setLoading(false));
-      }
-    });
-  }, []);
+  const submit = useCallback(
+    (e) => {
+      e.preventDefault();
+      form.validateFields((err, values) => {
+        if (!err) {
+          setLoading(true);
+          UserProvider.register(values)
+            .then(() => {
+              Modal.confirm({
+                title: '注册成功',
+                content: '是否跳转至登录?',
+                okText: '确认',
+                cancelText: '取消',
+                onOk() {
+                  Router.push('/login');
+                },
+                onCancel() {
+                  console.log('Cancel');
+                },
+              });
+            })
+            .catch((e) => setLoading(false));
+        }
+      });
+    },
+    [form]
+  );
 
   return (
     <div className={style.wrapper}>

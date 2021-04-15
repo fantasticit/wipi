@@ -22,6 +22,7 @@ export const groupBy = function (data, condition) {
 
   data.forEach((item, i, arr) => {
     key = condition(item, i, arr);
+    // eslint-disable-next-line eqeqeq
     if (key == null) {
       return;
     }
@@ -49,8 +50,8 @@ export function debounce(func, wait, immediate = false) {
   let timeout;
 
   const debounced = function () {
-    const context = this;
-    const args = arguments;
+    const context = this; // eslint-disable-line @typescript-eslint/no-this-alias
+    const args = arguments; // eslint-disable-line prefer-rest-params
     const later = function () {
       timeout = null;
       if (!immediate) {

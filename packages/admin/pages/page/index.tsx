@@ -93,7 +93,7 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
         getPages(params);
       });
     },
-    [params]
+    [params, getPages]
   );
 
   const editPage = useCallback(
@@ -103,7 +103,7 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
         getPages(params);
       });
     },
-    [params]
+    [params, getPages]
   );
 
   const titleColumn = {
@@ -111,7 +111,11 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
     dataIndex: 'name',
     key: 'name',
     render: (text, record) => (
-      <a href={url.resolve(setting.systemUrl || '', `/page/${record.path}`)} target="_blank">
+      <a
+        href={url.resolve(setting.systemUrl || '', `/page/${record.path}`)}
+        target="_blank"
+        rel="noreferrer"
+      >
         {text}
       </a>
     ),

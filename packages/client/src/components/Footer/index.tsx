@@ -37,7 +37,12 @@ export const Footer = ({ setting, className = '' }) => {
           </a>
         </li>
         <li>
-          <a className={style.github} href="https://github.com/fantasticit/wipi" target="_blank">
+          <a
+            className={style.github}
+            href="https://github.com/fantasticit/wipi"
+            target="_blank"
+            rel="noreferrer"
+          >
             <Icon type="github" />
           </a>
         </li>

@@ -7,13 +7,15 @@ export const Analytics = (props) => {
   useEffect(() => {
     const googleAnalyticsId = setting.googleAnalyticsId;
 
-    if (!googleAnalyticsId) return;
+    if (!googleAnalyticsId) {
+      return;
+    }
 
     // @ts-ignore
     window.dataLayer = window.dataLayer || [];
     function gtag() {
       // @ts-ignore
-      window.dataLayer.push(arguments);
+      window.dataLayer.push(arguments); // eslint-disable-line prefer-rest-params
     }
     // @ts-ignore
     gtag('js', new Date());
@@ -32,12 +34,13 @@ export const Analytics = (props) => {
   useEffect(() => {
     const baiduAnalyticsId = setting.baiduAnalyticsId;
 
-    if (!baiduAnalyticsId) return;
+    if (!baiduAnalyticsId) {
+      return;
+    }
 
-    var _hmt = _hmt || [];
-    var hm = document.createElement('script');
+    const hm = document.createElement('script');
     hm.src = `https://hm.baidu.com/hm.js?${baiduAnalyticsId}`;
-    var s = document.getElementsByTagName('script')[0];
+    const s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(hm, s);
   }, [setting.baiduAnalyticsId]);
 

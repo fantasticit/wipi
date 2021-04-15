@@ -2,10 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 
 type PromiseAction = (...args: any[]) => Promise<any>;
 
-export function useAsyncLoading<A extends PromiseAction>(
-  action: A,
-  wait: number = 200
-): [A, boolean] {
+export function useAsyncLoading<A extends PromiseAction>(action: A, wait = 200): [A, boolean] {
   const timerRef = useRef(null);
   const [pending, setPending] = useState(false);
   const [loading, setLoading] = useState(false);

@@ -11,12 +11,15 @@ export const CommentAction = ({ comment, refresh }) => {
   const [replyVisible, setReplyVisible] = useState(false);
 
   // 修改评论
-  const updateComment = useCallback((comment, pass = false) => {
-    CommentProvider.updateComment(comment.id, { pass }).then(() => {
-      message.success(pass ? '评论已通过' : '评论已拒绝');
-      refresh();
-    });
-  }, []);
+  const updateComment = useCallback(
+    (comment, pass = false) => {
+      CommentProvider.updateComment(comment.id, { pass }).then(() => {
+        message.success(pass ? '评论已通过' : '评论已拒绝');
+        refresh();
+      });
+    },
+    [refresh]
+  );
 
   const reply = useCallback(() => {
     if (!replyContent) {
@@ -71,15 +74,28 @@ export const CommentAction = ({ comment, refresh }) => {
       handle(email);
       setReplyVisible(false);
     }
-  }, [replyContent]);
+  }, [
+    replyContent,
+    comment.email,
+    comment.hostId,
+    comment.id,
+    comment.isHostInPage,
+    comment.name,
+    comment.parentCommentId,
+    refresh,
+    setting,
+  ]);
 
   // 删除评论
-  const deleteComment = useCallback((id) => {
-    CommentProvider.deleteComment(id).then(() => {
-      message.success('评论删除成功');
-      refresh();
-    });
-  }, []);
+  const deleteComment = useCallback(
+    (id) => {
+      CommentProvider.deleteComment(id).then(() => {
+        message.success('评论删除成功');
+        refresh();
+      });
+    },
+    [refresh]
+  );
 
   return (
     <div>

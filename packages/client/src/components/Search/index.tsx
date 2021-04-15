@@ -26,7 +26,7 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
   const close = useCallback(() => {
     document.body.style.overflow = '';
     onClose();
-  }, []);
+  }, [onClose]);
 
   const getArticles = useCallback((keyword) => {
     if (!keyword) {
@@ -71,7 +71,7 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
       document.body.removeEventListener('touchend', listener);
       document.body.removeEventListener('keydown', listener2);
     };
-  }, []);
+  }, [close]);
 
   useEffect(() => {
     Router.events.on('routeChangeStart', close);
@@ -79,7 +79,7 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
     return () => {
       Router.events.off('routeChangeStart', close);
     };
-  }, []);
+  }, [close]);
 
   useEffect(() => {
     if (!visible || !ref.current) {

@@ -14,7 +14,9 @@ export const Likes: React.FC<LikesProps> = ({ defaultCount, id, api }) => {
   const [likes, setLikes] = useState([]);
 
   const like = useCallback(() => {
-    if (likes.includes(id)) return;
+    if (likes.includes(id)) {
+      return;
+    }
     api(id).then((c) => {
       setCount(c);
       window.localStorage.setItem('LIKES', JSON.stringify([...likes, id]));

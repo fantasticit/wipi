@@ -179,7 +179,7 @@ export class CommentService {
           this.smtpService.create(emailMessage).catch(() => {
             console.log(`通知用户 ${replyUserName}（${replyUserEmail}），但发送邮件通知失败`);
           });
-        } catch (e) {}
+        } catch (e) {} // eslint-disable-line no-empty
       }
     }
 

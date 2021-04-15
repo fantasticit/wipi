@@ -34,7 +34,9 @@ export const registerScollListener = (
     const tmp = ignore[self];
 
     ignore[self] = false;
-    if (tmp) return;
+    if (tmp) {
+      return;
+    }
     const value = callback(...args);
 
     const subjectFns = subjects.get(self) || [];

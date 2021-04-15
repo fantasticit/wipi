@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback, useContext, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { NextPage } from 'next';
 import Router from 'next/router';
@@ -22,13 +22,13 @@ interface IProps {
 
 const Article: NextPage<IProps> = ({ article }) => {
   const { setting } = useContext(GlobalContext);
-  const [password, setPassword] = useState(null);
+  const passwdRef = useRef(null);
   const [shouldCheckPassWord, setShouldCheckPassword] = useState(article && article.needPassword);
-  const tocs = article.toc ? JSON.parse(article.toc) : [];
+  const tocs = article && article.toc ? JSON.parse(article.toc) : [];
 
   // 检查文章密码
   const checkPassWord = useCallback(() => {
-    ArticleProvider.checkPassword(article.id, password).then((res) => {
+    ArticleProvider.checkPassword(article.id, passwdRef.current).then((res) => {
       if (res.pass) {
         Object.assign(article, res);
         setShouldCheckPassword(false);
@@ -37,7 +37,7 @@ const Article: NextPage<IProps> = ({ article }) => {
         setShouldCheckPassword(true);
       }
     });
-  }, [article.id, password]);
+  }, [article]);
 
   const back = useCallback(() => {
     Router.push('/');
@@ -54,9 +54,8 @@ const Article: NextPage<IProps> = ({ article }) => {
     >
       <Form.Item label={'密码'}>
         <Input.Password
-          value={password}
           onChange={(e) => {
-            setPassword(e.target.value);
+            passwdRef.current = e.target.value;
           }}
         />
       </Form.Item>
@@ -65,14 +64,14 @@ const Article: NextPage<IProps> = ({ article }) => {
 
   useEffect(() => {
     setShouldCheckPassword(article && article.needPassword);
-  }, [article.id]);
+  }, [article]);
 
   // 更新阅读量
   useEffect(() => {
     if (!shouldCheckPassWord) {
       ArticleProvider.updateArticleViews(article.id);
     }
-  }, [shouldCheckPassWord]);
+  }, [shouldCheckPassWord, article]);
 
   const Content = (
     <>
@@ -129,7 +128,11 @@ const Article: NextPage<IProps> = ({ article }) => {
             <div className={style.copyrightInfo}>
               发布时间：
               <LocaleTime date={article.publishAt} /> | 版权信息：
-              <a href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh" target="_blank">
+              <a
+                href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
+                target="_blank"
+                rel="noreferrer"
+              >
                 非商用-署名-自由转载
               </a>
             </div>

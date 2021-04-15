@@ -64,7 +64,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
         setLoading(false);
         return res;
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
       });
   }, []);
@@ -77,7 +77,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
         getFiles(params);
       });
     },
-    [params]
+    [params, getFiles]
   );
 
   return (

@@ -61,6 +61,7 @@ module.exports = (nextConfig = {}) => ({
         const antdStyles = /antd\/.*?\/style.*?/;
         const rawExternals = [...config.externals];
 
+        /* eslint-disable consistent-return */
         config.externals = [
           (context, request, callback) => {
             if (request.match(antdStyles)) {

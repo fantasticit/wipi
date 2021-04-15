@@ -15,7 +15,7 @@ Rss.getInitialProps = async (ctx) => {
   const { res } = ctx;
   res.setHeader('Content-Type', 'text/xml');
 
-  let [[articles], setting, categories] = await Promise.all([
+  const [[articles], setting, categories] = await Promise.all([
     ArticleProvider.getArticles({
       page: 1,
       pageSize: 99999,

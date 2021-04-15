@@ -100,7 +100,7 @@ export const ArticleEditor: React.FC<IProps> = ({
       return;
     }
     toggleSettingDrawerVisible();
-  }, [article]);
+  }, [article, toggleSettingDrawerVisible]);
 
   const saveOrPublish = (patch) => {
     const data = { ...article, ...patch };
@@ -133,7 +133,7 @@ export const ArticleEditor: React.FC<IProps> = ({
     if (isCreate && id) {
       Router.replace('/article/editor/' + id);
     }
-  }, [id]);
+  }, [id, isCreate]);
 
   return (
     <div className={style.wrapper}>

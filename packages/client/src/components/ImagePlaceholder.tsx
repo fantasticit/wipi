@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 export const ImagePlaceholder = ({ children }) => {
   useEffect(() => {
     const listener = (e) => {
-      if (e.target.tagName != 'IMG') {
+      if (e.target.tagName !== 'IMG') {
         return;
       }
       e.target.style.backgroundImage = 'none';

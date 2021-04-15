@@ -48,7 +48,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
       globalContext.setUser(res);
       message.success('用户信息已保存');
     });
-  }, [user]);
+  }, [user, globalContext]);
 
   const changePassword = () => {
     if (!oldPassword || !newPassword1 || !newPassword2) {

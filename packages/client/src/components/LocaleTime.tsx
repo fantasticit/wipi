@@ -29,7 +29,7 @@ type Props = {
 const getTimeago = (date) => {
   let content = distanceInWordsToNow(new Date(date), {
     addSuffix: true,
-    locale: locales['zh'],
+    locale: locales.zh,
   });
 
   content = content

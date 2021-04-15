@@ -33,8 +33,8 @@ export function throttle(fn, threshhold) {
   threshhold || (threshhold = 250);
 
   return function () {
-    const context = this;
-    const args = arguments;
+    const context = this; // eslint-disable-line @typescript-eslint/no-this-alias
+    const args = arguments; // eslint-disable-line prefer-rest-params
     const now = +new Date();
 
     if (last && now < last + threshhold) {
@@ -53,10 +53,10 @@ export function throttle(fn, threshhold) {
 export const isOdd = (v) => v % 2 !== 0;
 
 export function elementInViewport(el) {
-  var top = el.offsetTop;
-  var left = el.offsetLeft;
-  var width = el.offsetWidth;
-  var height = el.offsetHeight;
+  let top = el.offsetTop;
+  let left = el.offsetLeft;
+  const width = el.offsetWidth;
+  const height = el.offsetHeight;
 
   while (el.offsetParent) {
     el = el.offsetParent;

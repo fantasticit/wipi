@@ -40,7 +40,7 @@ const Mail: NextPage = () => {
         getMails(params);
       });
     },
-    [params]
+    [params, getMails]
   );
 
   const columns = [

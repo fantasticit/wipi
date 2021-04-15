@@ -27,7 +27,7 @@ const _MonacoEditor = (props, ref) => {
       const content = editorRef.current.getValue();
       onChange(content);
     });
-  }, [onSave]);
+  }, [onChange]);
 
   const registerScroll = useCallback(() => {
     editorRef.current.onDidScrollChange(
@@ -45,10 +45,11 @@ const _MonacoEditor = (props, ref) => {
   }, []);
 
   const registerSave = useCallback(() => {
+    // eslint-disable-next-line no-bitwise
     editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
       onSave(editorRef.current.getValue());
     });
-  }, []);
+  }, [onSave]);
 
   const notifyMounted = useCallback(() => {
     window.postMessage(
@@ -59,7 +60,7 @@ const _MonacoEditor = (props, ref) => {
     );
   }, []);
 
-  useImperativeHandle(ref, () => editorRef.current, [mounted]);
+  useImperativeHandle(ref, () => editorRef.current, [mounted]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     Promise.all([
@@ -90,10 +91,12 @@ const _MonacoEditor = (props, ref) => {
       setMounted(false);
       editorRef.current && editorRef.current.dispose();
     };
-  }, []);
+  }, [registerScroll, registerChange, registerSave, notifyMounted]);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted) {
+      return undefined;
+    }
     const listener = ({ top, left }) => {
       editorRef.current.setScrollTop(top * editorRef.current.getContentHeight());
       editorRef.current.setScrollLeft(left);
@@ -105,12 +108,16 @@ const _MonacoEditor = (props, ref) => {
   }, [mounted]);
 
   useEffect(() => {
-    if (!mounted || !editorRef.current) return;
+    if (!mounted || !editorRef.current) {
+      return;
+    }
     editorRef.current.setValue(defaultValue);
   }, [mounted, defaultValue]);
 
   useEffect(() => {
-    if (!mounted || !editorRef.current) return;
+    if (!mounted || !editorRef.current) {
+      return undefined;
+    }
     const ro = new ResizeObserver(() => {
       editorRef.current.layout(container.current.getBoundingClientRect());
     });

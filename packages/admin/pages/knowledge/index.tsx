@@ -24,19 +24,25 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
   const [updateBookApi, updateLoading] = useAsyncLoading(KnowledgeProvider.updateKnowledge);
   const [deleteKnowledgeApi, deleteLoading] = useAsyncLoading(KnowledgeProvider.deleteKnowledge);
 
-  const getBooks = useCallback((params = {}) => {
-    setSelectedBook(null);
-    return getKnowledgesApi(params).then((res) => {
-      setBooks(res[0]);
-      setParams(params);
-      return res;
-    });
-  }, []);
+  const getBooks = useCallback(
+    (params = {}) => {
+      setSelectedBook(null);
+      return getKnowledgesApi(params).then((res) => {
+        setBooks(res[0]);
+        setParams(params);
+        return res;
+      });
+    },
+    [getKnowledgesApi]
+  );
 
-  const editBook = useCallback((book) => {
-    setSelectedBook(book);
-    toggleVisible();
-  }, []);
+  const editBook = useCallback(
+    (book) => {
+      setSelectedBook(book);
+      toggleVisible();
+    },
+    [toggleVisible]
+  );
 
   const toggleBookStatus = useCallback(
     (book) => {
@@ -46,7 +52,7 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
         getBooks(params);
       });
     },
-    [params]
+    [updateBookApi, params, getBooks]
   );
 
   const deleteBook = useCallback(
@@ -55,14 +61,14 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
         getBooks(params);
       });
     },
-    [params]
+    [deleteKnowledgeApi, params, getBooks]
   );
 
   useEffect(() => {
     if (!visible && selectedBook) {
       setSelectedBook(null);
     }
-  }, [visible]);
+  }, [visible, selectedBook]);
 
   const renderBook = useCallback(
     (book: IKnowledge) => (
@@ -98,7 +104,7 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
         </Card>
       </List.Item>
     ),
-    []
+    [getLoading, editBook, deleteBook, toggleBookStatus]
   );
 
   return (

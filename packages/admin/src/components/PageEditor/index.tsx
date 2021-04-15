@@ -73,7 +73,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
   const save = useCallback(() => {
     if (!page.name) {
       message.warn('请输入页面名称');
-      return;
+      return Promise.reject(new Error('请输入页面名称'));
     }
     page.status = 'draft';
     if (id) {
@@ -109,7 +109,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
       }
     });
     if (!canPublish) {
-      return;
+      return Promise.reject(new Error('信息不全'));
     }
     page.status = 'publish';
     if (id) {
@@ -128,7 +128,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     if (isCreate && id) {
       Router.replace('/page/editor/' + id);
     }
-  }, [id]);
+  }, [isCreate, id]);
 
   return (
     <div className={style.wrapper}>

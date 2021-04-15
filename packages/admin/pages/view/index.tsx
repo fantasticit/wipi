@@ -12,21 +12,24 @@ const Views: NextPage = () => {
   const [loading, setLoaidng] = useState(false);
   const [params, setParams] = useState(null);
 
-  const getViews = useCallback((params) => {
-    if (loading) {
-      return;
-    }
+  const getViews = useCallback(
+    (params) => {
+      if (loading) {
+        return Promise.reject(new Error('加载中'));
+      }
 
-    setLoaidng(true);
-    return ViewProvider.getViews(params)
-      .then((res) => {
-        setParams(params);
-        setViews(res[0]);
-        setLoaidng(false);
-        return res;
-      })
-      .catch(() => setLoaidng(false));
-  }, []);
+      setLoaidng(true);
+      return ViewProvider.getViews(params)
+        .then((res) => {
+          setParams(params);
+          setViews(res[0]);
+          setLoaidng(false);
+          return res;
+        })
+        .catch(() => setLoaidng(false));
+    },
+    [loading]
+  );
 
   // 删除
   const deleteView = useCallback(
@@ -36,7 +39,7 @@ const Views: NextPage = () => {
         getViews(params);
       });
     },
-    [params]
+    [params, getViews]
   );
 
   const columns = [
@@ -47,7 +50,7 @@ const Views: NextPage = () => {
       width: 200,
       fixed: 'left',
       render: (url) => (
-        <a className={style.link} href={url} target="_blank">
+        <a className={style.link} href={url} target="_blank" rel="noreferrer">
           {url}
         </a>
       ),

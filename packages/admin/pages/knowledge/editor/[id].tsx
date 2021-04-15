@@ -30,6 +30,29 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
   const [chapters, setChapters] = useState<Array<Partial<IKnowledge>>>(knowledge.children || []);
   const currentChapter = chapters[currentIndex] || null;
 
+  const deleteKnowledge = useCallback(
+    (idx) => {
+      const handle = () => {
+        setChapters((chapters) => {
+          chapters.splice(idx, 1);
+          return chapters;
+        });
+        forceUpdate();
+        setCurrentIndex(currentIndex - 1);
+      };
+      const target = chapters[idx];
+      if (target.id) {
+        KnowledgeProvider.deleteKnowledge(target.id).then(() => {
+          handle();
+          message.success('已保存');
+        });
+      } else {
+        handle();
+      }
+    },
+    [chapters, currentIndex, forceUpdate]
+  );
+
   const SortableItem = SortableElement(({ value: idx }) => (
     <li
       key={idx}
@@ -67,7 +90,9 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
 
   const createNewKnowledge = useCallback(() => {
     const title = newTitle.trim();
-    if (!title) return;
+    if (!title) {
+      return;
+    }
     setChapters((chapters) => {
       chapters.push({
         title: title,
@@ -79,48 +104,31 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
     setNewTitle('');
     togglePopVisible();
     forceUpdate();
-  }, [newTitle]);
-
-  const deleteKnowledge = useCallback(
-    (idx) => {
-      const handle = () => {
-        setChapters((chapters) => {
-          chapters.splice(idx, 1);
-          return chapters;
-        });
-        forceUpdate();
-        setCurrentIndex(currentIndex - 1);
-      };
-      const target = chapters[idx];
-      if (target.id) {
-        KnowledgeProvider.deleteKnowledge(target.id).then(() => {
-          handle();
-          message.success('已保存');
-        });
-      } else {
-        handle();
-      }
-    },
-    [chapters.length, currentIndex]
-  );
+  }, [newTitle, chapters, forceUpdate, togglePopVisible]);
 
   const patchKnowledge = useCallback(
     (patch) => {
-      if (currentIndex < 0) return;
+      if (currentIndex < 0) {
+        return;
+      }
       setChapters((chapters) => {
         const target = chapters[currentIndex];
-        if (!target) return chapters;
+        if (!target) {
+          return chapters;
+        }
         target.content = patch.value;
         target.html = patch.html;
         target.toc = patch.toc;
         return chapters;
       });
     },
-    [currentIndex, chapters.length]
+    [currentIndex]
   );
 
   const save = useCallback(() => {
-    if (!chapters || !chapters.length) return;
+    if (!chapters || !chapters.length) {
+      return;
+    }
     chapters.forEach((chapter, idx) => {
       chapter.order = idx;
     });
@@ -128,9 +136,8 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
     const promises = chapters.map((chapter) => {
       if (chapter.parentId) {
         return KnowledgeProvider.updateKnowledge(chapter.id, chapter);
-      } else {
-        return KnowledgeProvider.createChapters([{ ...chapter, parentId: id }]);
       }
+      return KnowledgeProvider.createChapters([{ ...chapter, parentId: id }]);
     });
     Promise.all(promises as Array<Promise<IKnowledge>>).then((res) => {
       const data = res.flat(Infinity);
@@ -138,10 +145,10 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
       forceUpdate();
       setLoading(false);
     });
-  }, [id, chapters]);
+  }, [id, chapters, forceUpdate]);
 
   return (
-    <AdminLayout onlyAside>
+    <AdminLayout onlyAside={true}>
       <div className={styles.wrap}>
         <aside className={styles.aside}>
           <header>
@@ -165,7 +172,7 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
               content={
                 <div style={{ display: 'flex' }}>
                   <Input
-                    autoFocus
+                    autoFocus={true}
                     width={240}
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
@@ -189,7 +196,7 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
               <span>文件</span>
               <Icon type="folder" />
             </div>
-            <FileSelectDrawer isCopy visible={fileVisible} onClose={toggleFileVisible} />
+            <FileSelectDrawer isCopy={true} visible={fileVisible} onClose={toggleFileVisible} />
           </main>
           <Divider type="horizontal" />
           <footer>
@@ -198,7 +205,7 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
                 return <SortableItem key={`item-${idx}`} index={idx} value={idx} />;
               })}
             </ul> */}
-            <SortableList items={chapters} onSortEnd={onSortEnd} useDragHandle />
+            <SortableList items={chapters} onSortEnd={onSortEnd} useDragHandle={true} />
           </footer>
         </aside>
         <main className={styles.main}>

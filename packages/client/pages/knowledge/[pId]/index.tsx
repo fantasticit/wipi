@@ -21,7 +21,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
   const start = useCallback(() => {
     const chapter = chapters[0];
     window.open(`/knowledge/${pId}/${chapter.id}`);
-  }, []);
+  }, [pId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!book) {
     return null;

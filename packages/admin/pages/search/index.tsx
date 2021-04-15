@@ -13,21 +13,24 @@ const Search: NextPage = () => {
   const [params, setParams] = useState(null);
 
   // 获取
-  const getData = useCallback((params) => {
-    if (loading) {
-      return;
-    }
+  const getData = useCallback(
+    (params) => {
+      if (loading) {
+        return Promise.reject(new Error('加载中'));
+      }
 
-    setLoaidng(true);
-    return SearchProvider.getRecords(params)
-      .then((res) => {
-        setParams(params);
-        setData(res[0]);
-        setLoaidng(false);
-        return res;
-      })
-      .catch(() => setLoaidng(false));
-  }, []);
+      setLoaidng(true);
+      return SearchProvider.getRecords(params)
+        .then((res) => {
+          setParams(params);
+          setData(res[0]);
+          setLoaidng(false);
+          return res;
+        })
+        .catch(() => setLoaidng(false));
+    },
+    [loading]
+  );
 
   // 删除
   const deleteItem = useCallback(
@@ -37,7 +40,7 @@ const Search: NextPage = () => {
         getData(params);
       });
     },
-    [params]
+    [params, getData]
   );
 
   const columns = [

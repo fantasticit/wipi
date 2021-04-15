@@ -8,7 +8,12 @@ export const CommentArticle = ({ comment }) => {
   const { url: link } = comment;
 
   return (
-    <a href={url.resolve(setting.systemUrl || '', link)} className={style.link} target="_blank">
+    <a
+      href={url.resolve(setting.systemUrl || '', link)}
+      className={style.link}
+      target="_blank"
+      rel="noreferrer"
+    >
       文章
     </a>
   );

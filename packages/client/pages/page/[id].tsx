@@ -17,7 +17,7 @@ const Page: NextPage<IProps> = ({ page }) => {
 
   useEffect(() => {
     PageProvider.updatePageViews(page.id);
-  }, []);
+  }, [page.id]);
 
   return (
     <>

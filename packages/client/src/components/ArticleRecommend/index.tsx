@@ -56,7 +56,7 @@ export const ArticleRecommend: React.FC<IProps> = ({
                             <span>{article.title}</span>
                             {' · '}
                             <span>
-                              <LocaleTime date={article.publishAt} timeago />
+                              <LocaleTime date={article.publishAt} timeago={true} />
                             </span>
                           </p>
                         </a>

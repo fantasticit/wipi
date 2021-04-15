@@ -42,10 +42,13 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
     });
   }, []);
 
-  const saveCache = useCallback((value) => {
-    localStorage.setItem(CACHE_KEY, value);
-    toggleSaveState();
-  }, []);
+  const saveCache = useCallback(
+    (value) => {
+      localStorage.setItem(CACHE_KEY, value);
+      toggleSaveState();
+    },
+    [toggleSaveState]
+  );
 
   useEffect(() => {
     const html = makeHtml(innerValue);
@@ -54,7 +57,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
       html,
       toc: JSON.stringify(makeToc(html)),
     });
-  }, [innerValue]);
+  }, [innerValue, onChange]);
 
   useEffect(() => {
     const listener = (evt) => {
@@ -62,7 +65,9 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
         setInnerValue(value);
         editorRef.current && editorRef.current.setValue(value);
       };
-      if (evt.data.id !== 'editor-mounted') return;
+      if (evt.data.id !== 'editor-mounted') {
+        return;
+      }
       const cache = localStorage.getItem(CACHE_KEY);
       if (cache && defaultValue === DEFAULT_MARKDOWN) {
         confirm()
@@ -79,7 +84,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
     return () => {
       window.removeEventListener('message', listener);
     };
-  }, []);
+  }, [defaultValue]);
 
   useEffect(() => {
     return () => {

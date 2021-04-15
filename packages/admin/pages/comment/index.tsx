@@ -18,16 +18,15 @@ interface IProps {
 }
 
 const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }) => {
-  const setting = useSetting();
   const [comments, setComments] = useState<IComment[]>(defaultComments);
   const [params, setParams] = useState(null);
 
-  const getComments = useCallback(() => {
+  const getComments = useCallback((params) => {
     return CommentProvider.getComments(params).then((res) => {
       setComments(res[0]);
       return res;
     });
-  }, [params]);
+  }, []);
 
   const columns = [
     {
@@ -95,7 +94,7 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }
     title: '操作',
     key: 'action',
     fixed: 'right',
-    render: (_, record) => <CommentAction comment={record} refresh={getComments} />,
+    render: (_, record) => <CommentAction comment={record} refresh={() => getComments(params)} />,
   };
 
   return (
@@ -138,7 +137,7 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }
           ]}
           onSearch={(params) => {
             setParams(params);
-            return getComments();
+            return getComments(params);
           }}
         />
       </div>

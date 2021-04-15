@@ -6,7 +6,9 @@ export const Iframe = ({ editor }) => {
   const [url, setURL] = useState('');
 
   const insertIframe = useCallback(() => {
-    if (!url) return;
+    if (!url) {
+      return;
+    }
     const result = `<iframe src="${url}"></iframe>\n`;
     const p = editor.getPosition();
     editor.executeEdits('', [
@@ -22,7 +24,7 @@ export const Iframe = ({ editor }) => {
     <Popover
       content={
         <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
-          <Input autoFocus value={url} onChange={(e) => setURL(e.target.value)} />
+          <Input autoFocus={true} value={url} onChange={(e) => setURL(e.target.value)} />
           <Button style={{ marginLeft: 6 }} onClick={insertIframe}>
             嵌入
           </Button>

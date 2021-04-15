@@ -45,7 +45,7 @@ export const CommentItem = ({
         <div className={style.meta}>
           {comment.userAgent ? <span>{comment.userAgent}</span> : null}
           <span>
-            <LocaleTime date={comment.createAt} timeago />
+            <LocaleTime date={comment.createAt} timeago={true} />
           </span>
           <span
             className={style.reply}
@@ -144,7 +144,7 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
           setTotal(res[1]);
           setLoading(false);
         })
-        .catch((err) => {
+        .catch(() => {
           setLoading(false);
         });
     },
@@ -163,7 +163,7 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
   useEffect(() => {
     setPage(1);
     getComments(1, pageSize, false);
-  }, [articleId]);
+  }, [articleId, getComments, pageSize]);
 
   return (
     <div className={style.commentWrapper} id={COMMENT_DOM_ID} ref={ref}>

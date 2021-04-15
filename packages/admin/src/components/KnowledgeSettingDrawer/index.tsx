@@ -24,7 +24,18 @@ export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, on
       toggleVisible();
       onOk();
     });
-  }, [title, summary, isCommentable, cover, onOk]);
+  }, [
+    title,
+    summary,
+    isCommentable,
+    cover,
+    isUpdate,
+    updateBookApi,
+    createBookApi,
+    book,
+    toggleVisible,
+    onOk,
+  ]);
 
   useEffect(() => {
     setTitle((book && book.title) || '');

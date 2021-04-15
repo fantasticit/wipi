@@ -3,7 +3,7 @@ import * as hljs from 'highlight.js';
 
 const renderer = new Marked.Renderer();
 
-renderer.heading = function(text, level) {
+renderer.heading = function (text, level) {
   const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
 
   return `
@@ -16,7 +16,7 @@ renderer.heading = function(text, level) {
 };
 
 Marked.setOptions({
-  highlight: function(code: string, lang: string) {
+  highlight: function (code: string, lang: string) {
     if (hljs.getLanguage(lang)) {
       return hljs.highlight(lang, code).value;
     }
@@ -28,7 +28,7 @@ Marked.setOptions({
 export const marked = (content: string): { html: string; toc: string } => {
   const toc = [];
 
-  renderer.heading = function(text: string, level: number) {
+  renderer.heading = function (text: string, level: number) {
     const anchor = 'heading-' + toc.length;
 
     toc.push([level, anchor, text]);
@@ -37,7 +37,7 @@ export const marked = (content: string): { html: string; toc: string } => {
 
   const marked = (text: string) => {
     const tok = Marked.lexer(text);
-    text = Marked.parser(tok).replace(/<pre>/gi, '<pre class="hljs">');
+    text = Marked.parser(tok).replace(/<pre>/gi, '<pre class="hljs">'); // eslint-disable-line no-param-reassign
     return text;
   };
 

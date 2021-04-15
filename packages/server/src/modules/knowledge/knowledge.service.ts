@@ -81,7 +81,7 @@ export class KnowledgeService {
    */
   async updateById(id, data: Partial<Knowledge>): Promise<Knowledge> {
     const oldData = await this.repository.findOne(id);
-    let { status } = oldData;
+    const { status } = oldData;
     const newData = {
       ...data,
       views: oldData.views,

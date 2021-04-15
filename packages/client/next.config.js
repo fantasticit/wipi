@@ -29,6 +29,8 @@ const nextConfig = {
         exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
       })
     );
+    config.node = config.node || {};
+    config.node.fs = 'empty';
     return config;
   },
 };
@@ -36,7 +38,6 @@ const nextConfig = {
 module.exports = withPlugins(
   [
     [withCss],
-
     [
       withSass,
       {

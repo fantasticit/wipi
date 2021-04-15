@@ -21,23 +21,26 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
     localStorage.clear();
   }, []);
 
-  const submit = useCallback((e) => {
-    e.preventDefault();
-    form.validateFields((err, values) => {
-      if (!err) {
-        setLoading(true);
-        UserProvider.login(values)
-          .then((userInfo) => {
-            localStorage.setItem('token', userInfo.token);
-            setLoading(false);
-            globalContext.setUser(userInfo);
-            globalContext.getSetting();
-            Router.push((Router.query.redirect as string) || '/');
-          })
-          .catch((e) => setLoading(false));
-      }
-    });
-  }, []);
+  const submit = useCallback(
+    (e) => {
+      e.preventDefault();
+      form.validateFields((err, values) => {
+        if (!err) {
+          setLoading(true);
+          UserProvider.login(values)
+            .then((userInfo) => {
+              localStorage.setItem('token', userInfo.token);
+              setLoading(false);
+              globalContext.setUser(userInfo);
+              globalContext.getSetting();
+              Router.push((Router.query.redirect as string) || '/');
+            })
+            .catch((e) => setLoading(false));
+        }
+      });
+    },
+    [form, globalContext]
+  );
 
   return (
     <div className={style.wrapper}>

@@ -6,7 +6,7 @@ interface IProps {
   showAfterMs: number;
   color: string;
   spinner: boolean;
-  options?: object;
+  options?: Record<string, unknown>;
 }
 
 export class NProgress extends React.Component<IProps> {

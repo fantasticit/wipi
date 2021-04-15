@@ -27,7 +27,7 @@ export const Upload = ({
         .catch(() => {
           setLoading(false);
         });
-      return Promise.reject();
+      return Promise.reject(new Error('cancel'));
     },
   };
 

@@ -32,7 +32,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
   const [categorys, setCategorys] = useState<Array<ICategory>>([]);
   const [tags, setTags] = useState<Array<ITag>>([]);
   const [password, setPassWord] = useState(article.password || null);
-  const [isCommentable, setCommentable] = useState(article.isCommentable || true);
+  const [isCommentable, setCommentable] = useState<boolean>(article.isCommentable || true);
   const [isRecommended, setRecommended] = useState(article.isRecommended || false);
   const [selectedCategory, setSelectedCategory] = useState(
     (article.category && article.category.id) || null
@@ -51,7 +51,14 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
       (Array.isArray(article.tags) && (article.tags as ITag[]).map((tag) => tag.id)) || []
     );
     setCover(article.cover || null);
-  }, [article.isCommentable, article.isRecommended, article.category, article.tags, article.cover]);
+  }, [
+    article.summary,
+    article.isCommentable,
+    article.isRecommended,
+    article.category,
+    article.tags,
+    article.cover,
+  ]);
 
   useEffect(() => {
     CategoryProvider.getCategory().then((res) => setCategorys(res));

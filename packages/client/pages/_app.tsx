@@ -23,7 +23,7 @@ Router.events.on('routeChangeComplete', () => {
   }, 0);
 });
 
-class MyApp extends App<IGlobalContext, {}> {
+class MyApp extends App<IGlobalContext, unknown> {
   static getInitialProps = async (ctx) => {
     const [appProps, setting, tags, categories, pages] = await Promise.all([
       App.getInitialProps(ctx),

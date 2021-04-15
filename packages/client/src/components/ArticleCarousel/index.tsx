@@ -28,7 +28,7 @@ export const ArticleCarousel: React.FC<IProps> = ({ articles = [] }) => {
                         <h2 className={style.title}>{article.title}</h2>
                         <p>
                           <span>
-                            <LocaleTime date={article.publishAt} timeago />
+                            <LocaleTime date={article.publishAt} timeago={true} />
                           </span>
                           <span className={style.seperator}>·</span>
                           <span>{article.views} 次阅读</span>

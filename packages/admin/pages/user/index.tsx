@@ -26,7 +26,7 @@ const Page: NextPage = () => {
         getData(params);
       });
     },
-    [params]
+    [params, getData]
   );
 
   const columns = [

@@ -7,7 +7,9 @@ const addView = (url) => {
   if (/localhost|127\.0\.0\.1/.test(url)) {
     return;
   }
-  if (lastUrl === url) return;
+  if (lastUrl === url) {
+    return;
+  }
   lastUrl = url;
   ViewProvider.addView({ url });
 };

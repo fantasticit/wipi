@@ -1,0 +1,15 @@
+assets
+dist
+coverage
+node_modules
+types
+bin
+**/*.test.js
+**/*.test.ts
+.eslintrc.js
+.prettierrc.js
+.huskyrc.js
+.cz-config.js
+lint-staged.config.js
+stylelint.config.js
+commitlint.config.js
