@@ -159,7 +159,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({ article, visible, onClo
           <Select
             style={{ width: '100%' }}
             mode="tags"
-            value={attrs.tags.map((t) => t.id || t)}
+            value={(attrs.tags || []).map((t) => t.id || t)}
             onChange={(tags) => {
               dispatch({ type: 'tags', payload: tags });
             }}
