@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { Drawer, Button, Input, Switch, Select } from 'antd';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { CategoryProvider } from '@/providers/category';
@@ -7,7 +7,7 @@ import style from './index.module.scss';
 
 interface IProps {
   visible: boolean;
-  article?: IArticle;
+  article?: Partial<IArticle>;
   onClose: () => void;
   onChange?: (arg) => void;
 }
@@ -21,44 +21,41 @@ const FormItem = ({ label, content }) => {
   );
 };
 
-export const ArticleSettingDrawer: React.FC<IProps> = ({
-  article = {},
-  visible,
-  onClose,
-  onChange,
-}) => {
+const initialArticleAttrs = {
+  summary: null, // 摘要
+  password: null, // 密码
+  isCommentable: true, // 评论
+  isRecommended: true, // 推荐到首页
+  category: null, // 分类
+  tags: [], // 标签
+  cover: null, // 封面
+};
+function reducer(state: typeof initialArticleAttrs = initialArticleAttrs, action) {
+  const payload = action.payload;
+  switch (action.type) {
+    case 'summary':
+      return { ...state, summary: payload };
+    case 'password':
+      return { ...state, password: payload };
+    case 'isCommentable':
+      return { ...state, isCommentable: payload };
+    case 'isRecommended':
+      return { ...state, isRecommended: payload };
+    case 'category':
+      return { ...state, category: payload };
+    case 'tags':
+      return { ...state, tags: payload };
+    case 'cover':
+      return { ...state, cover: payload };
+    default:
+      return state;
+  }
+}
+export const ArticleSettingDrawer: React.FC<IProps> = ({ article, visible, onClose, onChange }) => {
   const [fileVisible, setFileVisible] = useState(false);
-  const [summary, setSummary] = useState(article.summary || null);
+  const [attrs, dispatch] = useReducer(reducer, article as typeof initialArticleAttrs);
   const [categorys, setCategorys] = useState<Array<ICategory>>([]);
   const [tags, setTags] = useState<Array<ITag>>([]);
-  const [password, setPassWord] = useState(article.password || null);
-  const [isCommentable, setCommentable] = useState<boolean>(article.isCommentable || true);
-  const [isRecommended, setRecommended] = useState(article.isRecommended || false);
-  const [selectedCategory, setSelectedCategory] = useState(
-    (article.category && article.category.id) || null
-  );
-  const [selectedTags, setSelectedTags] = useState(
-    (Array.isArray(article.tags) && (article.tags as ITag[]).map((tag) => tag.id)) || []
-  );
-  const [cover, setCover] = useState(article.cover || null);
-
-  useEffect(() => {
-    setSummary(article.summary);
-    setCommentable(article.isCommentable || true);
-    setRecommended(article.isRecommended || false);
-    setSelectedCategory((article.category && article.category.id) || null);
-    setSelectedTags(
-      (Array.isArray(article.tags) && (article.tags as ITag[]).map((tag) => tag.id)) || []
-    );
-    setCover(article.cover || null);
-  }, [
-    article.summary,
-    article.isCommentable,
-    article.isRecommended,
-    article.category,
-    article.tags,
-    article.cover,
-  ]);
 
   useEffect(() => {
     CategoryProvider.getCategory().then((res) => setCategorys(res));
@@ -67,26 +64,16 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
 
   const save = () => {
     onChange({
-      summary,
-      password,
-      isCommentable,
-      isRecommended,
-      category: selectedCategory,
-      tags: selectedTags.join(','),
-      cover,
+      ...attrs,
+      tags: attrs.tags.join(','),
       status: 'draft',
     });
   };
 
   const publish = () => {
     onChange({
-      summary,
-      password,
-      isCommentable,
-      isRecommended,
-      tags: selectedTags.join(','),
-      category: selectedCategory,
-      cover,
+      ...attrs,
+      tags: attrs.tags.join(','),
       status: 'publish',
     });
   };
@@ -107,9 +94,9 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
             className={style.formItem}
             placeholder="请输入文章摘要"
             autoSize={{ minRows: 6, maxRows: 8 }}
-            value={summary}
+            value={attrs.summary}
             onChange={(e) => {
-              setSummary(e.target.value);
+              dispatch({ type: 'summary', payload: e.target.value });
             }}
           />
         }
@@ -118,26 +105,46 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
         label="访问密码"
         content={
           <Input.Password
-            value={password}
-            onChange={(e) => {
-              setPassWord(e.target.value);
-            }}
             placeholder="输入后查看需要密码"
+            value={attrs.password}
+            onChange={(e) => {
+              dispatch({ type: 'password', payload: e.target.value });
+            }}
           />
         }
       />
       <FormItem
         label="开启评论"
-        content={<Switch checked={isCommentable} onChange={setCommentable} />}
+        content={
+          <Switch
+            checked={attrs.isCommentable}
+            onChange={(val) => {
+              dispatch({ type: 'isCommentable', payload: val });
+            }}
+          />
+        }
       />
       <FormItem
         label="首页推荐"
-        content={<Switch checked={isRecommended} onChange={setRecommended} />}
+        content={
+          <Switch
+            checked={attrs.isRecommended}
+            onChange={(val) => {
+              dispatch({ type: 'isRecommended', payload: val });
+            }}
+          />
+        }
       />
       <FormItem
         label="选择分类"
         content={
-          <Select value={selectedCategory} onChange={setSelectedCategory} style={{ width: '100%' }}>
+          <Select
+            value={(attrs.category && attrs.category.id) || attrs.category}
+            onChange={(id) => {
+              dispatch({ type: 'category', payload: id });
+            }}
+            style={{ width: '100%' }}
+          >
             {categorys.map((t) => (
               <Select.Option key={t.id} value={t.id}>
                 {t.label}
@@ -150,10 +157,12 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
         label="选择标签"
         content={
           <Select
-            mode="tags"
-            value={selectedTags}
-            onChange={setSelectedTags}
             style={{ width: '100%' }}
+            mode="tags"
+            value={attrs.tags.map((t) => t.id || t)}
+            onChange={(tags) => {
+              dispatch({ type: 'tags', payload: tags });
+            }}
           >
             {tags.map((tag) => (
               <Select.Option key={tag.id} value={tag.id}>
@@ -168,17 +177,22 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
         content={
           <div className={style.cover}>
             <div onClick={() => setFileVisible(true)} className={style.preview}>
-              <img src={cover} alt="预览图" />
+              <img src={attrs.cover} alt="预览图" />
             </div>
-
             <Input
               placeholder="或输入外部链接"
-              value={cover}
+              value={attrs.cover}
               onChange={(e) => {
-                setCover(e.target.value);
+                dispatch({ type: 'cover', payload: e.target.value });
               }}
             />
-            <Button onClick={() => setCover(null)}>移除</Button>
+            <Button
+              onClick={() => {
+                dispatch({ type: 'cover', payload: null });
+              }}
+            >
+              移除
+            </Button>
           </div>
         }
       />
@@ -186,7 +200,9 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
         closeAfterClick={true}
         visible={fileVisible}
         onClose={() => setFileVisible(false)}
-        onChange={(url) => setCover(url)}
+        onChange={(url) => {
+          dispatch({ type: 'cover', payload: url });
+        }}
       />
       <div
         style={{
