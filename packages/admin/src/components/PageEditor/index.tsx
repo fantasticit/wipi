@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import cls from 'classnames';
 import Router from 'next/router';
 import { Helmet } from 'react-helmet';
+import { resolveUrl } from '@/utils';
 import { Seo } from '@/components/Seo';
 import { Button, Input, InputNumber, message, PageHeader, Icon, Drawer } from 'antd';
 import { Editor as CodeEditor } from '@components/Editor';
@@ -9,7 +10,6 @@ import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { PageProvider } from '@/providers/page';
 import { useSetting } from '@/hooks/useSetting';
 import style from './index.module.scss';
-const url = require('url');
 
 interface IProps {
   id?: string | number;
@@ -90,7 +90,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
 
   const preview = useCallback(() => {
     if (id) {
-      window.open(url.resolve(setting.systemUrl || '', '/page/' + id));
+      window.open(resolveUrl(setting.systemUrl, '/page/' + id));
     } else {
       message.warn('请先保存');
     }

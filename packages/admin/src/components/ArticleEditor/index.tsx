@@ -3,6 +3,7 @@ import cls from 'classnames';
 import Router from 'next/router';
 import { Button, Input, message, PageHeader, Icon } from 'antd';
 import { Helmet } from 'react-helmet';
+import { resolveUrl } from '@/utils';
 import { Seo } from '@/components/Seo';
 import { Editor as MDEditor } from '@components/Editor';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
@@ -10,8 +11,6 @@ import { ArticleSettingDrawer } from '@/components/ArticleSettingDrawer';
 import { ArticleProvider } from '@/providers/article';
 import { useSetting } from '@/hooks/useSetting';
 import style from './index.module.scss';
-const url = require('url');
-
 interface IProps {
   id?: string | number;
   article?: IArticle;
@@ -79,7 +78,7 @@ export const ArticleEditor: React.FC<IProps> = ({
 
   const preview = useCallback(() => {
     if (id) {
-      window.open(url.resolve(setting.systemUrl || '', '/article/' + id));
+      window.open(resolveUrl(setting.systemUrl, '/article/' + id));
     } else {
       message.warn('请先保存');
     }

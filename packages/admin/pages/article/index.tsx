@@ -3,6 +3,8 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Tag, Divider, Badge, Popconfirm, Modal, Spin, Select, Button, Icon, message } from 'antd';
+import { getOneTagColor } from '@/constants';
+import { resolveUrl } from '@/utils';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { ArticleProvider } from '@/providers/article';
 import { useSetting } from '@/hooks/useSetting';
@@ -12,10 +14,7 @@ import { TagProvider } from '@/providers/tag';
 import { ViewChart } from '@/components/ViewChart';
 import { DataTable } from '@/components/DataTable';
 import { LocaleTime } from '@/components/LocaleTime';
-import { getOneTagColor } from '@/constants';
 import style from './index.module.scss';
-
-const url = require('url');
 
 const columns = [
   {
@@ -104,7 +103,6 @@ const Article: NextPage<IArticleProps> = ({
   articles: defaultArticles = [],
   total: defaultTotal = 0,
 }) => {
-  const router = useRouter();
   const setting = useSetting();
   const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
   const [visible, setVisible] = useState(false);
@@ -123,9 +121,7 @@ const Article: NextPage<IArticleProps> = ({
     setLoading(true);
     ViewProvider.getViewsByUrl(url).then((res) => {
       setViews(res);
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
+      setLoading(false);
     });
   }, []);
 
@@ -155,7 +151,7 @@ const Article: NextPage<IArticleProps> = ({
     width: 200,
     render: (text, record) => (
       <a
-        href={url.resolve(setting.systemUrl || '', `/article/${record.id}`)}
+        href={resolveUrl(setting.systemUrl, `/article/${record.id}`)}
         target="_blank"
         rel="noreferrer"
       >
@@ -177,7 +173,7 @@ const Article: NextPage<IArticleProps> = ({
         <span
           onClick={() => {
             setVisible(true);
-            getViews(url.resolve(setting.systemUrl || '', '/article/' + record.id));
+            getViews(resolveUrl(setting.systemUrl, '/article/' + record.id));
           }}
         >
           <a>查看访问</a>

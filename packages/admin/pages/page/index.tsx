@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Modal, Divider, Badge, Popconfirm, Spin, Select, Button, Icon, message } from 'antd';
+import { resolveUrl } from '@/utils';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { PageProvider } from '@/providers/page';
 import { ViewProvider } from '@/providers/view';
@@ -11,7 +12,6 @@ import { ViewChart } from '@/components/ViewChart';
 import style from './index.module.scss';
 import { useSetting } from '@/hooks/useSetting';
 import { DataTable } from '@/components/DataTable';
-const url = require('url');
 
 const columns = [
   {
@@ -111,11 +111,7 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
     dataIndex: 'name',
     key: 'name',
     render: (text, record) => (
-      <a
-        href={url.resolve(setting.systemUrl || '', `/page/${record.path}`)}
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={(setting.systemUrl || '', `/page/${record.path}`)} target="_blank" rel="noreferrer">
         {text}
       </a>
     ),
@@ -142,7 +138,7 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
           <span
             onClick={() => {
               setVisible(true);
-              getViews(url.resolve(setting.systemUrl, '/page/' + record.path));
+              getViews(resolveUrl(setting.systemUrl, '/page/' + record.path));
             }}
           >
             <a>查看访问</a>

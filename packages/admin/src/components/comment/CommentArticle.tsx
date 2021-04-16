@@ -1,7 +1,7 @@
 import React from 'react';
+import { resolveUrl } from '@/utils';
 import { useSetting } from '@/hooks/useSetting';
 import style from './index.module.scss';
-const url = require('url');
 
 export const CommentArticle = ({ comment }) => {
   const setting = useSetting();
@@ -9,7 +9,7 @@ export const CommentArticle = ({ comment }) => {
 
   return (
     <a
-      href={url.resolve(setting.systemUrl || '', link)}
+      href={resolveUrl(setting.systemUrl, link)}
       className={style.link}
       target="_blank"
       rel="noreferrer"
