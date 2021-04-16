@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Tag, Divider, Badge, Popconfirm, Modal, Spin, Select, Button, Icon, message } from 'antd';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { ArticleProvider } from '@/providers/article';
-import style from './index.module.scss';
 import { useSetting } from '@/hooks/useSetting';
 import { ViewProvider } from '@/providers/view';
 import { CategoryProvider } from '@/providers/category';
@@ -13,6 +12,9 @@ import { TagProvider } from '@/providers/tag';
 import { ViewChart } from '@/components/ViewChart';
 import { DataTable } from '@/components/DataTable';
 import { LocaleTime } from '@/components/LocaleTime';
+import { getOneTagColor } from '@/constants';
+import style from './index.module.scss';
+
 const url = require('url');
 
 const columns = [
@@ -34,7 +36,7 @@ const columns = [
     render: (category) =>
       category ? (
         <span>
-          <Tag color={'magenta'} key={category.value}>
+          <Tag color={getOneTagColor()} key={category.value}>
             {category.label}
           </Tag>
         </span>
@@ -46,13 +48,9 @@ const columns = [
     dataIndex: 'tags',
     render: (tags) => (
       <span>
-        {tags.map((tag) => {
-          let color = tag.label.length > 2 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
+        {tags.map((tag, idx) => {
           return (
-            <Tag color={color} key={tag.label}>
+            <Tag color={getOneTagColor(idx)} key={tag.label}>
               {tag.label}
             </Tag>
           );
