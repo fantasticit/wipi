@@ -131,7 +131,7 @@ export const ArticleEditor: React.FC<IProps> = ({
 
   useEffect(() => {
     if (isCreate && id) {
-      Router.replace('/article/editor/' + id);
+      setSettingDrawerVisible(false)
     }
   }, [id, isCreate]);
 
