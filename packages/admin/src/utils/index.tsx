@@ -78,3 +78,5 @@ export function resolveUrl(...parts) {
   const replace = new RegExp(separator + '{1,}', 'g');
   return parts.join(separator).replace(replace, separator);
 }
+
+export const isOdd = (v) => v % 2 !== 0;

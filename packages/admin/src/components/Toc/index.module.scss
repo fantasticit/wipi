@@ -1,0 +1,56 @@
+.wrapper {
+  > header {
+    color: var(--main-text-color);
+    font-weight: 600;
+    line-height: 22px;
+    margin-bottom: 12px;
+  }
+
+  > div {
+    position: relative;
+    max-height: 50vh;
+    padding: 0 10px;
+    overflow: auto;
+
+    > div {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 2px;
+        bottom: 0;
+        width: 2px;
+        background-color: var(--border-color);
+        opacity: .5;
+      }
+    }
+  }
+}
+
+.item {
+  position: relative;
+  z-index: 10;
+  padding: 4px 0 4px 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover, &.active {
+    color: var(--primary-color)
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: var(--dot-left);
+    margin-top: -2px;
+    width: var(--dot-width);
+    height: var(--dot-width);
+    background-color: currentColor;
+    border-radius: 50%;
+  }
+}
+

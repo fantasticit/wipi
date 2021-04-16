@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import cls from 'classnames';
-import { Tooltip, Divider } from 'antd';
+import { Tooltip, Divider, Modal } from 'antd';
+import { useToggle } from '@/hooks/useToggle';
 import { DEFAULT_MARKDOWN } from './DefaultMarkdown';
 import { toolbar } from './toolbar';
 import { MonacoEditor } from './MonacoEditor';
@@ -8,6 +9,7 @@ import { Preview } from './Preview';
 import { confirm } from './utils/modal';
 import { makeHtml, makeToc } from './utils/markdown';
 import style from './index.module.scss';
+import { Toc } from '../Toc';
 
 interface IProps {
   defaultValue?: string;
@@ -19,10 +21,13 @@ let timer;
 
 export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onChange }) => {
   const editorRef = useRef<any>();
+
   const [innerValue, setInnerValue] = useState(defaultValue);
   const [mode, setMode] = useState<'preview' | 'edit'>('edit');
   const [two, setTwo] = useState(true);
   const [saveState, setSaveState] = useState(false);
+  const [tocVisible, toggleTocVisible] = useToggle(false);
+  const [tocs, setTocs] = useState([]);
 
   const toggleMode = useCallback(() => {
     setMode((mode) => (mode === 'preview' ? 'edit' : 'preview'));
@@ -52,10 +57,13 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
 
   useEffect(() => {
     const html = makeHtml(innerValue);
+    const tocs = makeToc(html);
+    setTocs(tocs);
+
     onChange({
       value: innerValue,
       html,
-      toc: JSON.stringify(makeToc(html)),
+      toc: JSON.stringify(tocs),
     });
   }, [innerValue, onChange]);
 
@@ -92,6 +100,10 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
     };
   }, []);
 
+  const [fullWidth, halfWidth] = useMemo(() => {
+    return [tocVisible ? '80%' : '100%', tocVisible ? '40%' : '50%'];
+  }, [tocVisible]);
+
   return (
     <div className={cls(style.wrapper)}>
       <header>
@@ -108,6 +120,13 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
           <span style={{ opacity: saveState ? 1 : 0 }}>已保存到本地</span>
         </div>
         <div>
+          <span onClick={toggleTocVisible}>
+            <span>目录</span>
+          </span>
+          {/* <Modal title="目录" footer={null} visible={tocVisible} onCancel={toggleTocVisible}>
+            <Toc tocs={tocs} />
+          </Modal> */}
+          <Divider type="vertical" />
           {mode === 'preview' ? (
             <span onClick={toggleMode}>
               <span>预览</span>
@@ -122,7 +141,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
         </div>
       </header>
       <main>
-        <div style={{ width: two ? '50%' : mode === 'preview' ? 0 : '100%' }}>
+        <div style={{ width: two ? halfWidth : mode === 'preview' ? 0 : fullWidth }}>
           <MonacoEditor
             ref={editorRef}
             defaultValue={defaultValue}
@@ -130,8 +149,13 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
             onSave={saveCache}
           />
         </div>
-        <div style={{ width: two ? '50%' : mode === 'edit' ? 0 : '100%' }}>
+        <div style={{ width: two ? halfWidth : mode === 'edit' ? 0 : fullWidth }}>
           <Preview value={innerValue} />
+        </div>
+        <div style={{ width: tocVisible ? '20%' : 0 }}>
+          <div className={style.tocWrapper}>
+            <Toc tocs={tocs} />
+          </div>
         </div>
       </main>
     </div>
