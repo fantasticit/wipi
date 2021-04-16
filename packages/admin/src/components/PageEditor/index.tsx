@@ -3,7 +3,7 @@ import cls from 'classnames';
 import Router from 'next/router';
 import { Helmet } from 'react-helmet';
 import { resolveUrl } from '@/utils';
-import { Seo } from '@/components/Seo';
+import { useToggle } from '@/hooks/useToggle';
 import { Button, Input, InputNumber, message, PageHeader, Icon, Drawer } from 'antd';
 import { Editor as CodeEditor } from '@components/Editor';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
@@ -40,10 +40,10 @@ const drawerFooterStyle: React.CSSProperties = {
 export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage = {} }) => {
   const setting = useSetting();
   const isCreate = !defaultId; // 一开始是否是新建
-  const [fileDrawerVisible, setFileDrawerVisible] = useState(false);
   const [id, setId] = useState(defaultId);
   const [page, setPage] = useState<Partial<IPage>>(defaultPage);
   const [pageDrawerVisible, setPageDrawerVisible] = useState(false);
+  const [fileDrawerVisible, toggleFileDrawerVisible] = useToggle(false);
 
   const patchPage = useMemo(
     () => (key) => (value) => {
@@ -57,10 +57,6 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     },
     []
   );
-
-  const toggleFileDrawerVisible = useCallback(() => {
-    setFileDrawerVisible((v) => !v);
-  }, []);
 
   const beforeSave = useCallback(() => {
     if (!page.name) {
@@ -76,25 +72,12 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
       return Promise.reject(new Error('请输入页面名称'));
     }
     page.status = 'draft';
-    if (id) {
-      return PageProvider.updatePage(id, page).then((res) => {
-        setId(res.id);
-        message.success('页面已保存为草稿');
-      });
-    }
-    return PageProvider.addPage(page).then((res) => {
+    const promise = id ? PageProvider.updatePage(id, page) : PageProvider.addPage(page);
+    promise.then((res) => {
       setId(res.id);
       message.success('页面已保存为草稿');
     });
   }, [page, id]);
-
-  const preview = useCallback(() => {
-    if (id) {
-      window.open(resolveUrl(setting.systemUrl, '/page/' + id));
-    } else {
-      message.warn('请先保存');
-    }
-  }, [id, setting.systemUrl]);
 
   const publish = useCallback(() => {
     let canPublish = true;
@@ -124,6 +107,14 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     });
   }, [page, id]);
 
+  const preview = useCallback(() => {
+    if (id) {
+      window.open(resolveUrl(setting.systemUrl, '/page/' + id));
+    } else {
+      message.warn('请先保存');
+    }
+  }, [id, setting.systemUrl]);
+
   useEffect(() => {
     if (isCreate && id) {
       Router.replace('/page/editor/' + id);
@@ -132,7 +123,6 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
 
   return (
     <div className={style.wrapper}>
-      <Seo />
       <Helmet>
         <title>{id ? `编辑页面 ${page.name ? '-' + page.name : ''}` : '新建页面'}</title>
       </Helmet>
@@ -161,11 +151,11 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
                 保存
               </Button>
             ),
-            <Button key="preview" onClick={preview}>
-              预览
-            </Button>,
-            <Button key="save" type="primary" onClick={beforeSave}>
+            <Button key="save" onClick={beforeSave}>
               保存/发布
+            </Button>,
+            <Button key="preview" type="primary" onClick={preview}>
+              预览
             </Button>,
           ]}
         />
