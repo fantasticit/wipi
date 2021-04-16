@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useReducer } from 'react';
-import { Table, Menu, Dropdown, Icon, Tooltip } from 'antd';
+import { Table, Icon, Tooltip } from 'antd';
 import { TableSize } from 'antd/es/table';
 import { Pagination } from '@/components/Pagination';
 import { IFieldItem, Search } from '@/components/Search';
@@ -63,14 +63,6 @@ export const DataTable: React.FC<IProps> = ({
       });
   }, [onSearch, params]);
 
-  const menu = (
-    <Menu>
-      <Menu.Item onClick={() => setSize('default')}>默认</Menu.Item>
-      <Menu.Item onClick={() => setSize('small')}>紧凑</Menu.Item>
-      <Menu.Item onClick={() => setSize('middle')}>中等</Menu.Item>
-    </Menu>
-  );
-
   useEffect(() => {
     getData();
   }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -84,9 +76,6 @@ export const DataTable: React.FC<IProps> = ({
         onSearch={(params) => {
           dispatch({ type: 'page', payload: 1 });
           dispatch({ type: 'params', payload: params });
-          // setPage(1);
-          // updateSearchParams(params);
-          // getData(1, pageSize, params);
         }}
       />
       <div style={{ background: '#fff', padding }}>
@@ -106,11 +95,6 @@ export const DataTable: React.FC<IProps> = ({
                 {rightNode}
                 <Tooltip title="刷新">
                   <Icon type="reload" onClick={getData} style={{ marginLeft: 12 }} />
-                </Tooltip>
-                <Tooltip title="密度">
-                  <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']}>
-                    <Icon type="column-height" style={{ marginLeft: 12 }} />
-                  </Dropdown>
                 </Tooltip>
               </div>
             </div>
@@ -132,9 +116,6 @@ export const DataTable: React.FC<IProps> = ({
           onChange={(page, pageSize) => {
             dispatch({ type: 'page', payload: page });
             dispatch({ type: 'pageSize', payload: pageSize });
-            // setPage(page);
-            // setPageSize(pageSize);
-            // getData(page, pageSize, searchParams);
           }}
         />
       </div>
