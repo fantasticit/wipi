@@ -167,7 +167,7 @@ const Article: NextPage<IArticleProps> = ({
     render: (_, record) => (
       <span className={style.action}>
         <Link href={`/article/editor/[id]`} as={`/article/editor/` + record.id}>
-          <a target="_blank">编辑</a>
+          <a>编辑</a>
         </Link>
         <Divider type="vertical" />
         <span
@@ -197,7 +197,7 @@ const Article: NextPage<IArticleProps> = ({
         <DataTable
           rightNode={
             <Link href={'/article/editor'}>
-              <a target="_blank">
+              <a>
                 <Button type="primary">
                   <Icon type="plus" />
                   新建

@@ -138,7 +138,7 @@ export const ArticleEditor: React.FC<IProps> = ({
     Modal.confirm({
       title: '确认关闭？',
       content: '如果有内容变更，请先保存。',
-      onOk: () => window.close(),
+      onOk: () => Router.push('/article'),
       okText: '确认',
       cancelText: '取消',
     });
@@ -151,7 +151,7 @@ export const ArticleEditor: React.FC<IProps> = ({
     const handle = () => {
       ArticleProvider.deleteArticle(id).then(() => {
         message.success('文章删除成功');
-        window.close();
+        Router.push('/article');
       });
     };
     Modal.confirm({
