@@ -111,7 +111,11 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
     dataIndex: 'name',
     key: 'name',
     render: (text, record) => (
-      <a href={(setting.systemUrl || '', `/page/${record.path}`)} target="_blank" rel="noreferrer">
+      <a
+        href={resolveUrl(setting.systemUrl || '', `/page/${record.path}`)}
+        target="_blank"
+        rel="noreferrer"
+      >
         {text}
       </a>
     ),
