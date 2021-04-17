@@ -124,7 +124,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     Modal.confirm({
       title: '确认关闭？',
       content: '如果有内容变更，请先保存。',
-      onOk: () => window.close(),
+      onOk: () => Router.push('/page'),
       okText: '确认',
       cancelText: '取消',
     });
@@ -137,7 +137,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     const handle = () => {
       PageProvider.deletePage(id).then(() => {
         message.success('页面删除成功');
-        window.close();
+        Router.push('/page');
       });
     };
     Modal.confirm({

@@ -136,7 +136,7 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
           )}
           <Divider type="vertical" />
           <Link href={`/page/editor/[id]`} as={`/page/editor/` + record.id}>
-            <a target="_blank">编辑</a>
+            <a>编辑</a>
           </Link>
           <Divider type="vertical" />
           <span
@@ -169,7 +169,7 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
           defaultTotal={defaultTotal}
           rightNode={
             <Link href={'/page/editor'}>
-              <a target="_blank">
+              <a>
                 <Button type="primary">
                   <Icon type="plus" />
                   新建
