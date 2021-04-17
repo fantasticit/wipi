@@ -14,7 +14,7 @@ export interface IFieldItem {
 interface IProps extends FormComponentProps {
   fields: Array<IFieldItem>;
   showLabel?: boolean;
-  padding?: number;
+  padding?: number | string;
   onSearch?: (arg) => void;
   onReset?: (arg) => void;
 }
@@ -23,7 +23,7 @@ const _Search: React.FC<IProps> = ({
   form,
   fields = [],
   showLabel = true,
-  padding = 24,
+  padding = 12,
   onSearch,
 }) => {
   const getFields = () => {

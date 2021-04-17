@@ -148,7 +148,7 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
   }, [id, chapters, forceUpdate]);
 
   return (
-    <AdminLayout onlyAside={true}>
+    <AdminLayout>
       <div className={styles.wrap}>
         <aside className={styles.aside}>
           <header>
@@ -200,11 +200,6 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
           </main>
           <Divider type="horizontal" />
           <footer>
-            {/* <ul>
-              {chapters.map((_, idx) => {
-                return <SortableItem key={`item-${idx}`} index={idx} value={idx} />;
-              })}
-            </ul> */}
             <SortableList items={chapters} onSortEnd={onSortEnd} useDragHandle={true} />
           </footer>
         </aside>

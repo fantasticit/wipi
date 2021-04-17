@@ -8,7 +8,7 @@ import style from './index.module.scss';
 interface IProps {
   title?: React.ReactNode;
   rightNode?: React.ReactNode;
-  padding?: number;
+  padding?: number | string;
   scroll?: { x?: number; y?: number };
   searchFields: Array<IFieldItem>;
   showSearchLabel?: boolean;
@@ -36,7 +36,7 @@ function reducer(state: typeof initialParams, action) {
 export const DataTable: React.FC<IProps> = ({
   title,
   rightNode,
-  padding = 24,
+  padding = '24px 12px',
   scroll = null,
   searchFields = [],
   showSearchLabel = true,
