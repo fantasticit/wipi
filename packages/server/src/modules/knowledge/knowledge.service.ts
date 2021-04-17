@@ -111,10 +111,10 @@ export class KnowledgeService {
    * @param id
    * @returns
    */
-  async updateLikesById(id): Promise<Knowledge> {
+  async updateLikesById(id, type): Promise<Knowledge> {
     const oldData = await this.repository.findOne(id);
     const newData = await this.repository.merge(oldData, {
-      likes: oldData.likes + 1,
+      likes: type === 'like' ? oldData.likes + 1 : oldData.likes - 1,
     });
     return this.repository.save(newData);
   }

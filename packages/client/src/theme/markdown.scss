@@ -176,7 +176,7 @@
       margin-left: -28px;
       direction: rtl;
       text-align: right;
-      content: '.' counter(li);
+      content: counter(li)'. ';
     }
 
     ul ul,

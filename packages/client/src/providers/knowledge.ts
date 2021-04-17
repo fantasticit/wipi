@@ -63,7 +63,7 @@ export class KnowledgeProvider {
    * @param id
    * @param data
    */
-  static async updateKnowledgeLikes(id): Promise<IKnowledge> {
-    return httpProvider.post(`/knowledge/${id}/likes`);
+  static async updateKnowledgeLikes(id, type): Promise<IKnowledge> {
+    return httpProvider.post(`/knowledge/${id}/likes`, { type });
   }
 }

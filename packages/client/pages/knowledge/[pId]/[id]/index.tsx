@@ -180,7 +180,8 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
         likesProps={{
           defaultCount: chapter.likes,
           id: chapter.id,
-          api: (id) => KnowledgeProvider.updateKnowledgeLikes(id).then((res) => res.likes),
+          api: (id, type) =>
+            KnowledgeProvider.updateKnowledgeLikes(id, type).then((res) => res.likes),
         }}
         showComment={book.isCommentable}
         shareProps={{

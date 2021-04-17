@@ -188,7 +188,7 @@ const Article: NextPage<IProps> = ({ article }) => {
       likesProps={{
         defaultCount: article.likes,
         id: article.id,
-        api: (id) => ArticleProvider.updateArticleLikes(id).then((res) => res.likes),
+        api: (id, type) => ArticleProvider.updateArticleLikes(id, type).then((res) => res.likes),
       }}
       showComment={article.isCommentable}
       shareProps={

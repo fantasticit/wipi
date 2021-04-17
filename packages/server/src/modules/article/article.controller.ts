@@ -147,8 +147,8 @@ export class ArticleController {
    */
   @Post(':id/likes')
   @HttpCode(HttpStatus.OK)
-  updateLikesById(@Param('id') id) {
-    return this.articleService.updateLikesById(id);
+  updateLikesById(@Param('id') id, @Body('type') type) {
+    return this.articleService.updateLikesById(id, type);
   }
 
   /**

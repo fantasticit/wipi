@@ -103,7 +103,7 @@ export class KnowledgeController {
    */
   @Post(':id/likes')
   @HttpCode(HttpStatus.OK)
-  updateLikesById(@Param('id') id) {
-    return this.service.updateLikesById(id);
+  updateLikesById(@Param('id') id, @Body('type') type) {
+    return this.service.updateLikesById(id, type);
   }
 }
