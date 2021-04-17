@@ -3,6 +3,7 @@ import { Emoji } from './Emoji';
 import { Iframe } from './Iframe';
 import { Image } from './Image';
 import { Video } from './Video';
+import { File } from './File';
 
 export const toolbar = [
   {
@@ -98,6 +99,11 @@ export const toolbar = [
   {
     label: '嵌入链接',
     content: ({ editor }) => <Iframe editor={editor} />,
+    getAction: () => () => {},
+  },
+  {
+    label: '文件库',
+    content: ({ editor }) => <File editor={editor} />,
     getAction: () => () => {},
   },
 ];

@@ -62,19 +62,10 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({ article, visible, onClo
     TagProvider.getTags().then((tags) => setTags(tags));
   }, []);
 
-  const save = () => {
+  const ok = () => {
     onChange({
       ...attrs,
       tags: attrs.tags.join(','),
-      status: 'draft',
-    });
-  };
-
-  const publish = () => {
-    onChange({
-      ...attrs,
-      tags: attrs.tags.join(','),
-      status: 'publish',
     });
   };
 
@@ -217,16 +208,8 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({ article, visible, onClo
           borderRadius: '0 0 4px 4px',
         }}
       >
-        <Button
-          style={{
-            marginRight: 8,
-          }}
-          onClick={save}
-        >
-          保存草稿
-        </Button>
-        <Button type="primary" onClick={publish}>
-          发布
+        <Button type="primary" onClick={ok}>
+          确认
         </Button>
       </div>
     </Drawer>

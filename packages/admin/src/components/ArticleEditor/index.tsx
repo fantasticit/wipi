@@ -1,16 +1,15 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import cls from 'classnames';
 import Router from 'next/router';
-import { Button, Input, message, PageHeader, Icon } from 'antd';
+import { Button, Input, message, PageHeader, Modal, Dropdown, Menu } from 'antd';
 import { Helmet } from 'react-helmet';
 import { resolveUrl } from '@/utils';
-import { Seo } from '@/components/Seo';
-import { Editor as MDEditor } from '@components/Editor';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { ArticleSettingDrawer } from '@/components/ArticleSettingDrawer';
-import { ArticleProvider } from '@/providers/article';
 import { useSetting } from '@/hooks/useSetting';
 import { useToggle } from '@/hooks/useToggle';
+import { Seo } from '@/components/Seo';
+import { Editor as MDEditor } from '@components/Editor';
+import { ArticleProvider } from '@/providers/article';
+import { ArticleSettingDrawer } from './ArticleSettingDrawer';
 import style from './index.module.scss';
 interface IProps {
   id?: string | number;
@@ -46,7 +45,6 @@ export const ArticleEditor: React.FC<IProps> = ({
   const setting = useSetting();
   const [id, setId] = useState(defaultId);
   const [article, setArticle] = useState<Partial<IArticle>>(defaultArticle);
-  const [fileDrawerVisible, toggleFileDrawerVisible] = useToggle(false);
   const [settingDrawerVisible, toggleSettingDrawerVisible] = useToggle(false);
 
   const patchArticle = useMemo(
@@ -80,7 +78,7 @@ export const ArticleEditor: React.FC<IProps> = ({
   }, [article]);
 
   // 打开发布抽屉
-  const openPublishDrawer = useCallback(() => {
+  const openSetting = useCallback(() => {
     check()
       .then(() => {
         toggleSettingDrawerVisible();
@@ -89,6 +87,14 @@ export const ArticleEditor: React.FC<IProps> = ({
         message.warn(err.message);
       });
   }, [article, settingDrawerVisible, toggleSettingDrawerVisible]);
+
+  const saveSetting = useCallback(
+    (setting) => {
+      toggleSettingDrawerVisible();
+      Object.assign(article, setting);
+    },
+    [article, toggleSettingDrawerVisible]
+  );
 
   // 保存草稿或者发布线上
   const saveOrPublish = useCallback(
@@ -114,7 +120,11 @@ export const ArticleEditor: React.FC<IProps> = ({
   );
 
   const saveDraft = useCallback(() => {
-    saveOrPublish();
+    saveOrPublish({ status: 'draft' });
+  }, [saveOrPublish]);
+
+  const publish = useCallback(() => {
+    saveOrPublish({ status: 'publish' });
   }, [saveOrPublish]);
 
   // 预览文章
@@ -125,6 +135,33 @@ export const ArticleEditor: React.FC<IProps> = ({
       message.warn('请先保存');
     }
   }, [id, setting.systemUrl]);
+
+  const close = useCallback(() => {
+    Modal.confirm({
+      title: '确认关闭？',
+      content: '如果有内容变更，请先保存。',
+      onOk: () => window.close(),
+      okText: '确认',
+      cancelText: '取消',
+    });
+  }, []);
+
+  const deleteArticle = useCallback(() => {
+    if (!id) return;
+    const handle = () => {
+      ArticleProvider.deleteArticle(id).then(() => {
+        message.success('文章删除成功');
+        window.close();
+      });
+    };
+    Modal.confirm({
+      title: '确认删除？',
+      content: '删除内容后，无法恢复。',
+      onOk: handle,
+      okText: '确认',
+      cancelText: '取消',
+    });
+  }, [id]);
 
   useEffect(() => {
     if (isCreate && id) {
@@ -144,7 +181,7 @@ export const ArticleEditor: React.FC<IProps> = ({
           style={{
             borderBottom: '1px solid rgb(235, 237, 240)',
           }}
-          onBack={() => window.close()}
+          onBack={close}
           title={
             <Input
               style={{ width: 300 }}
@@ -154,18 +191,31 @@ export const ArticleEditor: React.FC<IProps> = ({
             />
           }
           extra={[
-            <Button key="file" type="dashed" icon="appstore" onClick={toggleFileDrawerVisible}>
-              文件库
-            </Button>,
-            <Button key="dradt" icon="book" onClick={saveDraft}>
-              保存草稿
-            </Button>,
-            <Button key="publish" icon="cloud" onClick={openPublishDrawer}>
+            <Button key="publish" type="primary" onClick={publish}>
               发布
             </Button>,
-            <Button key="preview" icon="eye" type="primary" disabled={!id} onClick={preview}>
-              预览
-            </Button>,
+            <Dropdown
+              overlay={
+                <Menu>
+                  <Menu.Item disabled={isCreate} key="preview" onClick={preview}>
+                    查看
+                  </Menu.Item>
+                  <Menu.Item key="setting" onClick={openSetting}>
+                    设置
+                  </Menu.Item>
+                  <Menu.Divider />
+                  <Menu.Item key="draft" onClick={saveDraft}>
+                    保存草稿
+                  </Menu.Item>
+                  <Menu.Divider />
+                  <Menu.Item disabled={isCreate} key="delete" onClick={deleteArticle}>
+                    删除
+                  </Menu.Item>
+                </Menu>
+              }
+            >
+              <Button icon="ellipsis" type="link"></Button>
+            </Dropdown>,
           ]}
         />
       </header>
@@ -179,17 +229,11 @@ export const ArticleEditor: React.FC<IProps> = ({
           }}
         />
       </main>
-      <FileSelectDrawer
-        isCopy={true}
-        closeAfterClick={true}
-        visible={fileDrawerVisible}
-        onClose={toggleFileDrawerVisible}
-      />
       <ArticleSettingDrawer
         article={article as IArticle}
         visible={settingDrawerVisible}
         onClose={toggleSettingDrawerVisible}
-        onChange={saveOrPublish}
+        onChange={saveSetting}
       />
     </div>
   );
