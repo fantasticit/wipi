@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import cls from 'classnames';
-import { Tooltip, Divider, Modal } from 'antd';
+import { Tooltip, Divider, Icon } from 'antd';
 import { useToggle } from '@/hooks/useToggle';
 import { DEFAULT_MARKDOWN } from './DefaultMarkdown';
 import { toolbar } from './toolbar';
@@ -26,7 +26,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
   const [mode, setMode] = useState<'preview' | 'edit'>('edit');
   const [two, setTwo] = useState(true);
   const [saveState, setSaveState] = useState(false);
-  const [tocVisible, toggleTocVisible] = useToggle(false);
+  const [tocVisible, toggleTocVisible] = useToggle(true);
   const [tocs, setTocs] = useState([]);
 
   const toggleMode = useCallback(() => {
@@ -120,14 +120,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
           <span style={{ opacity: saveState ? 1 : 0 }}>已保存到本地</span>
         </div>
         <div>
-          <span onClick={toggleTocVisible}>
-            <span>目录</span>
-          </span>
-          {/* <Modal title="目录" footer={null} visible={tocVisible} onCancel={toggleTocVisible}>
-            <Toc tocs={tocs} />
-          </Modal> */}
-          <Divider type="vertical" />
-          {mode === 'preview' ? (
+          {/* {mode === 'preview' ? (
             <span onClick={toggleMode}>
               <span>预览</span>
             </span>
@@ -138,6 +131,10 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
           )}
           <Divider type="vertical" />
           <span onClick={toggleTwo}>{two ? '退出' : ''}两栏显示</span>
+          <Divider type="vertical" /> */}
+          <span onClick={toggleTocVisible}>
+            <span>大纲</span>
+          </span>
         </div>
       </header>
       <main>
@@ -154,7 +151,15 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
         </div>
         <div style={{ width: tocVisible ? '20%' : 0 }}>
           <div className={style.tocWrapper}>
-            <Toc tocs={tocs} />
+            <header>
+              <span>大纲</span>
+              <span onClick={toggleTocVisible}>
+                <Icon type="close" />
+              </span>
+            </header>
+            <main>
+              <Toc tocs={tocs} />
+            </main>
           </div>
         </div>
       </main>

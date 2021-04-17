@@ -78,6 +78,13 @@ const _MonacoEditor = (props, ref) => {
           enabled: false,
         },
         scrollBeyondLastLine: false,
+        scrollbar: {
+          useShadows: false,
+          vertical: 'visible',
+          horizontal: 'visible',
+          verticalScrollbarSize: 6,
+          horizontalScrollbarSize: 6,
+        },
       });
       editorRef.current = editor;
       const extension = new MonacoMarkdown.MonacoMarkdownExtension();

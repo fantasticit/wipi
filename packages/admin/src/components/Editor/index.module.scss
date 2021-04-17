@@ -59,8 +59,20 @@
 
     .tocWrapper {
       border-left: 1px solid var(--border-color);
-      padding: 10px 2rem 40px;
+      padding: 1rem;
       height: 100%;
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: .6rem;
+        font-weight: 700;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      main {
+        padding: 1rem 0;
+      }
     }
   }
 }
