@@ -120,7 +120,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [], comments: defaultComments =
               hoverable={true}
             >
               <Link href={`/article/editor/[id]`} as={`/article/editor/` + article.id}>
-                <a target="_blank" className={style.recentArticleItem}>
+                <a className={style.recentArticleItem}>
                   <img width={120} alt="文章封面" src={article.cover} />
                   <p className={style.title}>{article.title}</p>
                 </a>
