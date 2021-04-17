@@ -6,7 +6,6 @@ import { Avatar, Divider, Icon, Input, Button, Popconfirm, Popover, Modal, messa
 import { SortableHandle, SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import { KnowledgeProvider } from '@/providers/knowledge';
-import { AdminLayout } from '@/layout/AdminLayout';
 import { Editor } from '@/components/Editor';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { useForceUpdate } from '@/hooks/useForceUpdate';
@@ -158,73 +157,71 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
   }, []);
 
   return (
-    <AdminLayout>
-      <div className={styles.wrap}>
-        <aside className={styles.aside}>
-          <header>
-            <div>
-              <Avatar shape="square" size="large" src={knowledge.cover} />
-              <span style={{ marginLeft: 8 }}>{knowledge.title}</span>
+    <div className={styles.wrap}>
+      <aside className={styles.aside}>
+        <header>
+          <div>
+            <Avatar shape="square" size="large" src={knowledge.cover} />
+            <span style={{ marginLeft: 8 }}>{knowledge.title}</span>
+          </div>
+          <Icon type="close" onClick={close} />
+        </header>
+        <Divider type="horizontal" />
+        <main>
+          {chapters.length > 0 ? (
+            <div className={cls(styles.action, styles.saveAction)}>
+              <span>{chapters.length}篇文章</span>
+              <Button size="small" type="primary" onClick={save} loading={loading}>
+                保存
+              </Button>
             </div>
-            <Icon type="close" onClick={close} />
-          </header>
-          <Divider type="horizontal" />
-          <main>
-            {chapters.length > 0 ? (
-              <div className={cls(styles.action, styles.saveAction)}>
-                <span>{chapters.length}篇文章</span>
-                <Button size="small" type="primary" onClick={save} loading={loading}>
-                  保存
+          ) : null}
+          <Popover
+            content={
+              <div style={{ display: 'flex' }}>
+                <Input
+                  autoFocus={true}
+                  width={240}
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                />
+                <Button style={{ marginLeft: 8 }} type="primary" onClick={createNewKnowledge}>
+                  新建
                 </Button>
               </div>
-            ) : null}
-            <Popover
-              content={
-                <div style={{ display: 'flex' }}>
-                  <Input
-                    autoFocus={true}
-                    width={240}
-                    value={newTitle}
-                    onChange={(e) => setNewTitle(e.target.value)}
-                  />
-                  <Button style={{ marginLeft: 8 }} type="primary" onClick={createNewKnowledge}>
-                    新建
-                  </Button>
-                </div>
-              }
-              visible={popVisible}
-              onVisibleChange={togglePopVisible}
-              placement="rightTop"
-              trigger="click"
-            >
-              <div className={styles.action}>
-                <span>新建</span>
-                <Icon type="plus" />
-              </div>
-            </Popover>
-            <div className={styles.action} onClick={toggleFileVisible}>
-              <span>文件</span>
-              <Icon type="folder" />
+            }
+            visible={popVisible}
+            onVisibleChange={togglePopVisible}
+            placement="rightTop"
+            trigger="click"
+          >
+            <div className={styles.action}>
+              <span>新建</span>
+              <Icon type="plus" />
             </div>
-            <FileSelectDrawer isCopy={true} visible={fileVisible} onClose={toggleFileVisible} />
-          </main>
-          <Divider type="horizontal" />
-          <footer>
-            <SortableList items={chapters} onSortEnd={onSortEnd} useDragHandle={true} />
-          </footer>
-        </aside>
-        <main className={styles.main}>
-          {currentChapter ? (
-            <Editor
-              defaultValue={(currentChapter && currentChapter.content) || ''}
-              onChange={patchKnowledge}
-            />
-          ) : (
-            <div className={styles.helper}>请新建章节（或者选择章节进行编辑）</div>
-          )}
+          </Popover>
+          <div className={styles.action} onClick={toggleFileVisible}>
+            <span>文件</span>
+            <Icon type="folder" />
+          </div>
+          <FileSelectDrawer isCopy={true} visible={fileVisible} onClose={toggleFileVisible} />
         </main>
-      </div>
-    </AdminLayout>
+        <Divider type="horizontal" />
+        <footer>
+          <SortableList items={chapters} onSortEnd={onSortEnd} useDragHandle={true} />
+        </footer>
+      </aside>
+      <main className={styles.main}>
+        {currentChapter ? (
+          <Editor
+            defaultValue={(currentChapter && currentChapter.content) || ''}
+            onChange={patchKnowledge}
+          />
+        ) : (
+          <div className={styles.helper}>请新建章节（或者选择章节进行编辑）</div>
+        )}
+      </main>
+    </div>
   );
 };
 
