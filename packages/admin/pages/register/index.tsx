@@ -3,7 +3,6 @@ import { Row, Col, Form, Button, Input, Icon, Modal } from 'antd';
 import Router from 'next/router';
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
-import { Seo } from '@/components/Seo';
 import { FormComponentProps } from 'antd/es/form';
 import { UserProvider } from '@/providers/user';
 import { Svg } from '@/assets/RegisterSvg';
@@ -60,7 +59,6 @@ const _Register: React.FC<IProps> = ({ form }) => {
 
   return (
     <div className={style.wrapper}>
-      <Seo />
       <Helmet>
         <title>访客注册</title>
       </Helmet>

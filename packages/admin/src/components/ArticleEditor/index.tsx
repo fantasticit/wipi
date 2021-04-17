@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet';
 import { resolveUrl } from '@/utils';
 import { useSetting } from '@/hooks/useSetting';
 import { useToggle } from '@/hooks/useToggle';
-import { Seo } from '@/components/Seo';
 import { Editor as MDEditor } from '@components/Editor';
 import { ArticleProvider } from '@/providers/article';
 import { ArticleSettingDrawer } from './ArticleSettingDrawer';
@@ -171,7 +170,6 @@ export const ArticleEditor: React.FC<IProps> = ({
 
   return (
     <div className={style.wrapper}>
-      <Seo />
       <Helmet>
         <title>{id ? `编辑文章 ${article.title ? '-' + article.title : ''}` : '新建文章'}</title>
       </Helmet>
