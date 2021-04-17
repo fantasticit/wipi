@@ -428,10 +428,10 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@fantasticit/code-lint@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@fantasticit/code-lint/-/code-lint-0.0.7.tgz#b59a876eb2090442a46f3c813dc5329ecbca7190"
-  integrity sha512-g8p7hA54Th66YFARDksB9016VxZQ00yo/1eicHLxuDvsR9oXpIGuktJbxb5mI0DQ1+HUl4HT8PwA2/KRRBZTbA==
+"@fantasticit/code-lint@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@fantasticit/code-lint/-/code-lint-0.0.8.tgz#f141557bc3a408e1c75089dcb22f5e6522cd844f"
+  integrity sha512-jLs4tx4l1e3dkFY1kN++JNTwOEvXeckBrIbVG2BM0M3UZcHO/3skEHfSME1HeA6hbaHRtWkmTKnSrC6MYukEJA==
   dependencies:
     "@types/node" "^14.0.12"
     chalk "^4.1.0"

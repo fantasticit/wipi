@@ -72,7 +72,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
   const save = useCallback(() => {
     if (!page.name) {
       message.warn('请输入页面名称');
-      return Promise.reject(new Error('请输入页面名称'));
+      return;
     }
     page.status = 'draft';
     const promise = id ? PageProvider.updatePage(id, page) : PageProvider.addPage(page);
@@ -110,7 +110,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
         message.success('页面已发布');
       });
     }
-  }, [page, id]);
+  }, [page, id, togglePageDrawerVisible]);
 
   const preview = useCallback(() => {
     if (id) {
@@ -131,7 +131,9 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
   }, []);
 
   const deletePage = useCallback(() => {
-    if (!id) return;
+    if (!id) {
+      return;
+    }
     const handle = () => {
       PageProvider.deletePage(id).then(() => {
         message.success('页面删除成功');

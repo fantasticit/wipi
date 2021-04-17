@@ -71,9 +71,8 @@ export const ArticleEditor: React.FC<IProps> = ({
     });
     if (!canPublish) {
       return Promise.reject(new Error(errorMsg));
-    } else {
-      return Promise.resolve();
     }
+    return Promise.resolve();
   }, [article]);
 
   // 打开发布抽屉
@@ -85,7 +84,7 @@ export const ArticleEditor: React.FC<IProps> = ({
       .catch((err) => {
         message.warn(err.message);
       });
-  }, [article, settingDrawerVisible, toggleSettingDrawerVisible]);
+  }, [check, toggleSettingDrawerVisible]);
 
   const saveSetting = useCallback(
     (setting) => {
@@ -115,7 +114,7 @@ export const ArticleEditor: React.FC<IProps> = ({
           message.warn(err.message);
         });
     },
-    [article, isCreate]
+    [article, isCreate, check, id]
   );
 
   const saveDraft = useCallback(() => {
@@ -146,7 +145,9 @@ export const ArticleEditor: React.FC<IProps> = ({
   }, []);
 
   const deleteArticle = useCallback(() => {
-    if (!id) return;
+    if (!id) {
+      return;
+    }
     const handle = () => {
       ArticleProvider.deleteArticle(id).then(() => {
         message.success('文章删除成功');

@@ -21,7 +21,9 @@ export const Theme = () => {
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
     if (dark) {
       document.body.classList.add('dark');
     } else {
