@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { NextPage } from 'next';
 import Router from 'next/router';
 import cls from 'classnames';
-import { Avatar, Divider, Icon, Input, Button, Popconfirm, Popover, message } from 'antd';
+import { Avatar, Divider, Icon, Input, Button, Popconfirm, Popover, Modal, message } from 'antd';
 import { SortableHandle, SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import { KnowledgeProvider } from '@/providers/knowledge';
@@ -147,6 +147,16 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
     });
   }, [id, chapters, forceUpdate]);
 
+  const close = useCallback(() => {
+    Modal.confirm({
+      title: '确认关闭？',
+      content: '如果有内容变更，请先保存。',
+      onOk: () => Router.push('/knowledge'),
+      okText: '确认',
+      cancelText: '取消',
+    });
+  }, []);
+
   return (
     <AdminLayout>
       <div className={styles.wrap}>
@@ -156,7 +166,7 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
               <Avatar shape="square" size="large" src={knowledge.cover} />
               <span style={{ marginLeft: 8 }}>{knowledge.title}</span>
             </div>
-            <Icon type="close" onClick={() => Router.push('/knowledge')} />
+            <Icon type="close" onClick={close} />
           </header>
           <Divider type="horizontal" />
           <main>
