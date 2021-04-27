@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { Menu, Dropdown } from 'antd';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import cls from 'classnames';
 import { Search } from '@/components/Search';
 import { Theme } from '@/components/Theme';
 import style from './index.module.scss';
 
-export const _Header = ({ setting, menus }) => {
+export const _Header = ({ setting, categories, pages }) => {
   const router = useRouter();
   const asPath = router.asPath;
   const pathname = router.pathname;
@@ -42,7 +43,52 @@ export const _Header = ({ setting, menus }) => {
 
           <nav className={cls(visible ? style.active : false)}>
             <ul>
-              {menus.map((menu) => (
+              <li>
+                <Link href={'/'}>
+                  <a>
+                    <span>首页</span>
+                  </a>
+                </Link>
+              </li>
+              <Dropdown
+                overlay={
+                  <Menu key="category" style={{ width: 240 }}>
+                    {categories.map((category) => (
+                      <Menu.Item
+                        key={category.value}
+                        onClick={() => Router.push('/' + category.value)}
+                      >
+                        <Link href="/[category]" as={`/` + category.value} shallow={false}>
+                          <a>
+                            <span>{category.label}</span>
+                          </a>
+                        </Link>
+                      </Menu.Item>
+                    ))}
+                  </Menu>
+                }
+              >
+                <li>
+                  <a>
+                    <span>分类</span>
+                  </a>
+                </li>
+              </Dropdown>
+              <li>
+                <Link href={'/knowledge'}>
+                  <a>
+                    <span>归档</span>
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href={'/archives'}>
+                  <a>
+                    <span>知识笔记</span>
+                  </a>
+                </Link>
+              </li>
+              {pages.map((menu) => (
                 <li
                   key={menu.label}
                   className={cls({
@@ -57,15 +103,9 @@ export const _Header = ({ setting, menus }) => {
                     }
                   }}
                 >
-                  {/page/.test(menu.path) ? (
-                    <Link href={'/page/[id]'} as={menu.path} scroll={false}>
-                      <a>{menu.label}</a>
-                    </Link>
-                  ) : (
-                    <Link href={menu.path} scroll={false}>
-                      <a>{menu.label}</a>
-                    </Link>
-                  )}
+                  <Link href={'/page/[id]'} as={menu.path} scroll={false}>
+                    <a>{menu.name}</a>
+                  </Link>
                 </li>
               ))}
               <li className={style.searchWrapper} onClick={() => setShowSearch(true)}>
