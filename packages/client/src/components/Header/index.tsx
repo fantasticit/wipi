@@ -52,7 +52,7 @@ export const _Header = ({ setting, categories, pages }) => {
               </li>
               <Dropdown
                 overlay={
-                  <Menu key="category" style={{ width: 240 }}>
+                  <Menu key="category" style={{ minWidth: 240 }}>
                     {categories.map((category) => (
                       <Menu.Item
                         key={category.value}
