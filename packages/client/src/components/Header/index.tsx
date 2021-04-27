@@ -103,7 +103,7 @@ export const _Header = ({ setting, categories, pages }) => {
                     }
                   }}
                 >
-                  <Link href={'/page/[id]'} as={menu.path} scroll={false}>
+                  <Link href={'/page/[id]'} as={`/page/${menu.path}`} scroll={false}>
                     <a>{menu.name}</a>
                   </Link>
                 </li>
