@@ -28,11 +28,7 @@
       max-width: 100%;
       padding: 0 0 12px;
       color: var(--second-text-color);
-      overflow: hidden;
       font-size: 14px;
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 5;
-      -webkit-box-orient: vertical;
     }
   }
 
@@ -64,7 +60,7 @@
       }
 
       a {
-        color: var(--link-color);
+        color: var(--primary-color);
       }
     }
   }
