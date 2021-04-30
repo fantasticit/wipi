@@ -75,14 +75,14 @@ export const _Header = ({ setting, categories, pages }) => {
                 </li>
               </Dropdown>
               <li>
-                <Link href={'/knowledge'}>
+                <Link href={'/archives'}>
                   <a>
                     <span>归档</span>
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href={'/archives'}>
+                <Link href={'/knowledge'}>
                   <a>
                     <span>知识笔记</span>
                   </a>
