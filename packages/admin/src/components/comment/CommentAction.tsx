@@ -83,6 +83,7 @@ export const CommentAction = ({ comment, refresh }) => {
     comment.isHostInPage,
     comment.name,
     comment.parentCommentId,
+    comment.url,
     refresh,
     setting,
   ]);

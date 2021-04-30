@@ -7,16 +7,14 @@ export const MarkdownReader = ({ content }) => {
   const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    if (!content) return;
+    if (!content) {
+      return;
+    }
     const el = ref.current;
     const range = document.createRange();
     const slot = range.createContextualFragment(content);
     el.innerHTML = '';
     el.appendChild(slot);
-
-    return () => {
-      el.textContent = '';
-    };
   }, [content]);
 
   // 高亮
