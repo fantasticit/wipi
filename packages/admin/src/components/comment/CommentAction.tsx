@@ -44,6 +44,7 @@ export const CommentAction = ({ comment, refresh }) => {
         isHostInPage: comment.isHostInPage,
         replyUserName: comment.name,
         replyUserEmail: comment.email,
+        url: comment.url,
         createByAdmin: true,
       };
 
