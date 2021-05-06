@@ -351,7 +351,7 @@
     code.language-stylus:before,
     code.language-python:before,
     code.language-nginx:before,
-    code.language-json:before {
+    code.language-yaml:before {
       position: absolute;
       top: 9px;
       right: 50px;
@@ -417,6 +417,9 @@
     }
     code.language-json:before {
       content: 'json';
+    }
+    code.language-yaml:before {
+      content: 'yaml';
     }
   }
 }
