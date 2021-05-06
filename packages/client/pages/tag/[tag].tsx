@@ -9,7 +9,6 @@ import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ArticleList } from '@components/ArticleList';
 import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Tags } from '@components/Tags';
-import { Categories } from '@components/Categories';
 import { Footer } from '@components/Footer';
 import style from '../index.module.scss';
 
@@ -74,14 +73,11 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, tag }) 
         </>
       }
       rightNode={
-        <>
+        <div className={'sticky'}>
           <ArticleRecommend mode="inline" />
-          <div className={'sticky'}>
-            <Categories categories={categories} />
-            <Tags tags={tags} />
-            <Footer className={style.footer} setting={setting} />
-          </div>
-        </>
+          <Tags tags={tags} />
+          <Footer className={style.footer} setting={setting} />
+        </div>
       }
     />
   );

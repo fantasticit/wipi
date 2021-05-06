@@ -8,7 +8,6 @@ import { ArticleList } from '@components/ArticleList';
 import { ArticleCarousel } from '@components/ArticleCarousel';
 import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Tags } from '@components/Tags';
-import { Categories } from '@components/Categories';
 import { Footer } from '@components/Footer';
 import style from './index.module.scss';
 
@@ -67,14 +66,11 @@ const Home: NextPage<IHomeProps> = ({
         }
         leftClassName={style.left}
         rightNode={
-          <>
+          <div className={'sticky'}>
             <ArticleRecommend mode="inline" />
-            <div className={'sticky'}>
-              <Categories categories={categories} />
-              <Tags tags={tags} />
-              <Footer className={style.footer} setting={setting} />
-            </div>
-          </>
+            <Tags tags={tags} />
+            <Footer className={style.footer} setting={setting} />
+          </div>
         }
       />
     </>
