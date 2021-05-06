@@ -54,10 +54,7 @@ export const _Header = ({ setting, categories, pages }) => {
                 overlay={
                   <Menu key="category" style={{ minWidth: 240 }}>
                     {categories.map((category) => (
-                      <Menu.Item
-                        key={category.value}
-                        onClick={() => Router.push('/' + category.value)}
-                      >
+                      <Menu.Item key={category.value}>
                         <Link href="/[category]" as={`/` + category.value} shallow={false}>
                           <a>
                             <span>{category.label}</span>
