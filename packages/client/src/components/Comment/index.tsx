@@ -155,7 +155,7 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
     setPage(page);
     getComments(page, pageSize, true).then(() => {
       Promise.resolve().then(() => {
-        ref.current.scrollIntoView();
+        ref.current.scrollIntoView({ behavior: 'smooth' });
       });
     });
   };

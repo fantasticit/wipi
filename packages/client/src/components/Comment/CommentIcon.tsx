@@ -4,7 +4,7 @@ import { COMMENT_DOM_ID } from '@/components/Comment';
 export const CommentIcon = () => {
   const intoView = useCallback(() => {
     const el = document.querySelector(`#${COMMENT_DOM_ID}`);
-    el && el.scrollIntoView();
+    el && el.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   return (

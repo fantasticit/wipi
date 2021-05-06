@@ -90,6 +90,7 @@ interface IComment {
   name: string;
   email: string;
   content: string;
+  html: string;
   pass: boolean;
   createAt: string;
   userAgent: string;
