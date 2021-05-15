@@ -94,7 +94,12 @@ export class CategoryService {
    * @param id
    */
   async deleteById(id) {
-    const category = await this.categoryRepository.findOne(id);
-    return this.categoryRepository.remove(category);
+    try {
+      const category = await this.categoryRepository.findOne(id);
+      await this.categoryRepository.remove(category);
+      return true;
+    } catch (e) {
+      throw new HttpException('删除失败，可能存在关联文章', HttpStatus.BAD_REQUEST);
+    }
   }
 }
