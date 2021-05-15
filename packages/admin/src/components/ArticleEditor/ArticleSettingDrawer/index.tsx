@@ -65,7 +65,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({ article, visible, onClo
   const ok = () => {
     onChange({
       ...attrs,
-      tags: attrs.tags.join(','),
+      tags: (attrs.tags || []).join(','),
     });
   };
 
