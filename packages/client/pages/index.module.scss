@@ -1,4 +1,5 @@
 .wrapper {
+  height: 100%;
   background: var(--bg-body);
 }
 
@@ -34,20 +35,6 @@
   }
 }
 
-
-// .tagOrCategoryDetail {
-//   padding-bottom: 1rem;
-
-//   .count {
-//     color: var(--primary-color);
-//     font-size: 1.5rem;
-//   }
-
-//   .label {
-//     color: var(--primary-color);
-//     font-size: 1.5rem;
-//   }
-// }
 
 .articleWrapper {
   padding: 2rem 0;

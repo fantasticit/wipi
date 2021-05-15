@@ -87,7 +87,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [], comments: defaultComments =
                 }}
               >
                 <Link href={action.url}>
-                  <a target="_blank" className={style.recentArticleItem}>
+                  <a className={style.recentArticleItem}>
                     <span>{action.name}</span>
                   </a>
                 </Link>
