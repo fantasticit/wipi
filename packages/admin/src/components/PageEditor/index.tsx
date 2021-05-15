@@ -62,6 +62,9 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
         value = value.target.value;
       }
       setPage((page) => {
+        if (key === 'path') {
+          value = value.replace('/', '');
+        }
         page[key] = value;
         return page;
       });
