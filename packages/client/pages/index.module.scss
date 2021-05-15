@@ -1,7 +1,5 @@
-.left {
-  padding: 0;
-  background: none;
-  border-radius: 0;
+.wrapper {
+  background: var(--bg-body);
 }
 
 .tagOrCategoryDetail {
@@ -36,8 +34,27 @@
   }
 }
 
-.footer {
-  border-top: 1px solid var(--border-color);
-  color: var(--disable-text-color);
-  background-color: transparent;
+
+// .tagOrCategoryDetail {
+//   padding-bottom: 1rem;
+
+//   .count {
+//     color: var(--primary-color);
+//     font-size: 1.5rem;
+//   }
+
+//   .label {
+//     color: var(--primary-color);
+//     font-size: 1.5rem;
+//   }
+// }
+
+.articleWrapper {
+  padding: 2rem 0;
+}
+
+@media (max-width: 576px) {
+  .articleWrapper {
+    padding: 2rem .8rem;
+  }
 }

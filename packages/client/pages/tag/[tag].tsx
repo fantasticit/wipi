@@ -1,13 +1,11 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
-import { Icon } from 'antd';
+import cls from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
 import { ArticleProvider } from '@/providers/article';
 import { TagProvider } from '@/providers/tag';
 import { GlobalContext } from '@/context/global';
-import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ArticleList } from '@components/ArticleList';
-import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Tags } from '@components/Tags';
 import { Footer } from '@components/Footer';
 import style from '../index.module.scss';
@@ -44,42 +42,32 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, tag }) 
   );
 
   return (
-    <DoubleColumnLayout
-      leftNode={
-        <>
-          <div className={style.tagOrCategoryDetail}>
-            <div>
-              <Icon type="tags" />
-            </div>
-            <p>
-              与 <span>{tag.label}</span> 标签有关的文章
-            </p>
-            <p>
-              共搜索到 <span>{total}</span> 篇
-            </p>
-          </div>
-          <InfiniteScroll
-            pageStart={1}
-            loadMore={getArticles}
-            hasMore={page * pageSize < total}
-            loader={
-              <div className={'loading'} key={0}>
-                正在获取文章...
-              </div>
-            }
-          >
-            <ArticleList articles={articles} />
-          </InfiniteScroll>
-        </>
-      }
-      rightNode={
-        <div className={'sticky'}>
-          <ArticleRecommend mode="inline" />
-          <Tags tags={tags} />
-          <Footer className={style.footer} setting={setting} />
+    <div className={style.wrapper}>
+      <div className={cls('container', style.articleWrapper)}>
+        <Tags tags={tags} />
+        <div className={style.tagOrCategoryDetail}>
+          <p>
+            与 <span>{tag.label}</span> 标签有关的文章
+          </p>
+          <p>
+            共搜索到 <span>{total}</span> 篇
+          </p>
         </div>
-      }
-    />
+        <InfiniteScroll
+          pageStart={1}
+          loadMore={getArticles}
+          hasMore={page * pageSize < total}
+          loader={
+            <div className={'loading'} key={0}>
+              正在获取文章...
+            </div>
+          }
+        >
+          <ArticleList articles={articles} />
+        </InfiniteScroll>
+      </div>
+      <Footer setting={setting} />
+    </div>
   );
 };
 

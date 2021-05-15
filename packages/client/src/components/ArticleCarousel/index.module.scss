@@ -1,9 +1,6 @@
 .wrapper {
-  padding: .8rem;
   background: var(--bg-second);
-  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  margin-bottom: 1rem;
 
   > div {
     font-size: 0 !important;
@@ -18,11 +15,9 @@
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
-    border-radius: var(--border-radius);
 
     img {
       width: 100%;
-      border-radius: var(--border-radius);
     }
 
     .info {

@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
+import cls from 'classnames';
 import { NextPage } from 'next';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GlobalContext } from '@/context/global';
@@ -44,36 +45,25 @@ const Home: NextPage<IHomeProps> = ({
   }, []);
 
   return (
-    <>
-      <DoubleColumnLayout
-        minHeight={'0px'}
-        leftNode={
-          <div className={style.content}>
-            <ArticleCarousel articles={recommendedArticles} />
-            <InfiniteScroll
-              pageStart={1}
-              loadMore={getArticles}
-              hasMore={page * pageSize < total}
-              loader={
-                <div className={'loading'} key={0}>
-                  正在获取文章...
-                </div>
-              }
-            >
-              <ArticleList articles={articles} />
-            </InfiniteScroll>
-          </div>
-        }
-        leftClassName={style.left}
-        rightNode={
-          <div className={'sticky'}>
-            <ArticleRecommend mode="inline" />
-            <Tags tags={tags} />
-            <Footer className={style.footer} setting={setting} />
-          </div>
-        }
-      />
-    </>
+    <div className={style.wrapper}>
+      <ArticleCarousel articles={recommendedArticles} />
+      <div className={cls('container', style.articleWrapper)}>
+        <Tags tags={tags} />
+        <InfiniteScroll
+          pageStart={1}
+          loadMore={getArticles}
+          hasMore={page * pageSize < total}
+          loader={
+            <div className={'loading'} key={0}>
+              正在获取文章...
+            </div>
+          }
+        >
+          <ArticleList articles={articles} />
+        </InfiniteScroll>
+      </div>
+      <Footer setting={setting} />
+    </div>
   );
 };
 

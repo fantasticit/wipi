@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { Icon } from 'antd';
 import { ArticleProvider } from '@/providers/article';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ArticleRecommend } from '@/components/ArticleRecommend';
-import { Tags } from '@components/Tags';
 import { Categories } from '@components/Categories';
 import style from './index.module.scss';
 
@@ -47,16 +45,13 @@ const resolveArticlesCount = (articles) => {
 };
 
 const Archives: NextPage<IProps> = ({ articles }) => {
-  const { tags, categories } = useContext(GlobalContext);
+  const { categories } = useContext(GlobalContext);
 
   return (
     <DoubleColumnLayout
       leftNode={
         <div className={style.content}>
           <div className={style.summary}>
-            <div>
-              <Icon type="block" />
-            </div>
             <p>
               <span>归档</span>
             </p>
@@ -84,7 +79,6 @@ const Archives: NextPage<IProps> = ({ articles }) => {
         <div className="sticky">
           <ArticleRecommend mode="inline" />
           <Categories categories={categories} />
-          <Tags tags={tags} />
         </div>
       }
     />

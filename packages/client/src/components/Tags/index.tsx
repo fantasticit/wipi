@@ -1,7 +1,7 @@
 import React from 'react';
 import cls from 'classnames';
 import Link from 'next/link';
-import { Icon } from 'antd';
+import { Tag } from 'antd';
 import { useRouter } from 'next/router';
 import style from './index.module.scss';
 
@@ -11,26 +11,23 @@ export const Tags = ({ tags = [], needTitle = true, style: cssStyle = {} }) => {
 
   return (
     <div className={style.wrapper} style={cssStyle}>
-      {needTitle && (
-        <div className={style.title}>
-          <Icon type="tags" />
-          <span>文章标签</span>
-        </div>
-      )}
-      <ul>
-        {tags.map((tag) => (
-          <li
-            key={tag.id}
-            className={cls(style.item, routerTag === tag.value ? style.active : false)}
-          >
-            <Link href={`/tag/[tag]`} as={`/tag/` + tag.value} scroll={false}>
-              <a>
-                {tag.label} [{tag.articleCount}]
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {needTitle && <div className={style.title}>文章标签</div>}
+      <div>
+        {tags
+          .filter((tag) => tag.articleCount > 0)
+          .map((tag) => (
+            <Tag
+              key={tag.id}
+              {...(routerTag === tag.value ? { color: 'var(--main-text-color)' } : {})}
+            >
+              <Link href={`/tag/[tag]`} as={`/tag/` + tag.value} scroll={false}>
+                <a className={cls(style.tagItem, routerTag === tag.value ? style.active : false)}>
+                  {tag.label}[{tag.articleCount}]
+                </a>
+              </Link>
+            </Tag>
+          ))}
+      </div>
     </div>
   );
 };

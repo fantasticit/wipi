@@ -16,8 +16,11 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"],
-      "@components/*": ["components/*"],
-      "@wipi/shared/providers/*": ["providers/*"]
+      "@service/*": ["service/*"],
+      "@models/*": ["models/*"],
+      "@hooks/*": ["hooks/*"],
+      "@context/*": ["context/*"],
+      "@components/*": ["components/*"]
     }
   },
   "exclude": ["node_modules"],

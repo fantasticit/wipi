@@ -52,7 +52,11 @@ export const _Header = ({ setting, categories, pages }) => {
               </li>
               <Dropdown
                 overlay={
-                  <Menu key="category" style={{ minWidth: 240 }}>
+                  <Menu
+                    key="category"
+                    style={{ minWidth: 240 }}
+                    selectedKeys={[asPath.replace('/', '')]}
+                  >
                     {categories.map((category) => (
                       <Menu.Item key={category.value}>
                         <Link href="/[category]" as={`/` + category.value} shallow={false}>
