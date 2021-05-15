@@ -1,12 +1,11 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
+import cls from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GlobalContext } from '@/context/global';
-import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { KnowledgeProvider } from '@/providers/knowledge';
 import { KnowledgeList } from '@components/KnowledgeList';
-import { Tags } from '@components/Tags';
-import { Categories } from '@components/Categories';
+import style from '../index.module.scss';
 
 interface IHomeProps {
   books: IKnowledge[];
@@ -36,8 +35,8 @@ const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => 
   }, []);
 
   return (
-    <DoubleColumnLayout
-      leftNode={
+    <div className={style.wrapper}>
+      <div className={cls('container', style.articleWrapper)}>
         <InfiniteScroll
           pageStart={1}
           loadMore={getArticles}
@@ -50,14 +49,8 @@ const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => 
         >
           <KnowledgeList knowledges={books} />
         </InfiniteScroll>
-      }
-      rightNode={
-        <div className={'sticky'}>
-          <Categories categories={categories} />
-          <Tags tags={tags} />
-        </div>
-      }
-    />
+      </div>
+    </div>
   );
 };
 

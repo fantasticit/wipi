@@ -38,7 +38,7 @@ export const ArticleList: React.FC<IProps> = ({ articles = [] }) => {
                     }
                   >
                     <Meta
-                      title={article.title}
+                      title={<p className={style.title}>{article.title}</p>}
                       description={
                         <div className={style.meta}>
                           {article.category ? (

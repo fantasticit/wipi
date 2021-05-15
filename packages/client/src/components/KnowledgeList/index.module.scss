@@ -1,3 +1,70 @@
+.item {
+  > div {
+    border: 1px solid var(--border-color);
+    background: var(--bg-second);
+
+    &:hover {
+      .title {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .coverWrapper {
+    height: 208px;
+  
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .title {
+    color: var(--main-text-color);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .summary {
+    color: var(--second-text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .meta {
+    width: 100%;
+    color: #8590a6;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  
+    .seperator {
+      margin: 0 4px;
+    }
+  }  
+}
+
+@media (max-width: 576px) {
+  .item + .item {
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .item:nth-child(n+3) {
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .item:nth-child(n+4) {
+    margin-top: 1rem;
+  }
+}
+
+
 .articleItem {
   position: relative;
   width: 100%;
@@ -8,15 +75,10 @@
   background-color: var(--bg-second);
   overflow: hidden;
   transition: transform .3s;
-
   display: flex;
   flex-wrap: nowrap;
-
   padding: .8rem;
-
-  &.isBoxshadowed {
-    box-shadow: var(--box-shadow);
-  }
+  box-shadow: var(--box-shadow);
 
   &+.articleItem {
     margin-top: 1rem;

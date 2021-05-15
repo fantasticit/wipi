@@ -53,7 +53,9 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
     }
     const el = document.querySelector(`#js-toc-item-wrapper-` + id);
     if (el) {
-      el.scrollIntoView();
+      Promise.resolve().then(() => {
+        el.scrollIntoView();
+      });
     }
   }, [chapter, id]);
 

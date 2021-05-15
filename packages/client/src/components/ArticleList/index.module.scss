@@ -1,6 +1,13 @@
 .articleItem {
   > div {
     border: 1px solid var(--border-color);
+    background: var(--bg-second);
+
+    &:hover {
+      .title {
+        color: var(--primary-color);
+      }
+    }
   }
 
   .coverWrapper {
@@ -10,6 +17,13 @@
       width: 100%;
       height: 100%;
     }
+  }
+
+  .title {
+    color: var(--main-text-color);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   
   .summary {
@@ -22,11 +36,14 @@
   .meta {
     width: 100%;
     color: #8590a6;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   
     .seperator {
       margin: 0 4px;
     }
-  }  
+  }
 }
 
 @media (max-width: 576px) {

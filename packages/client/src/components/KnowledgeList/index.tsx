@@ -1,28 +1,31 @@
 import React from 'react';
 import Link from 'next/link';
 import cls from 'classnames';
+import { Row, Col, Card } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
 
+const { Meta } = Card;
+
 interface IProps {
   knowledges: IKnowledge[];
-  isBoxshadowed?: boolean;
+  horizontal?: boolean;
 }
 
-export const KnowledgeList: React.FC<IProps> = ({ knowledges = [], isBoxshadowed = true }) => {
+export const KnowledgeList: React.FC<IProps> = ({ knowledges = [], horizontal = false }) => {
   return (
-    <div style={{ width: '100%' }} className={cls(style.wrapper)}>
+    <Row gutter={16}>
       {knowledges && knowledges.length ? (
         knowledges.map((knowledge) => {
-          return (
+          return horizontal ? (
             <Link
               key={knowledge.id}
               href={`/knowledge/[pId]`}
               as={`/knowledge/${knowledge.id}`}
               scroll={false}
             >
-              <a className={cls(style.articleItem, isBoxshadowed && style.isBoxshadowed)}>
+              <a className={cls(style.articleItem)}>
                 {knowledge.cover && (
                   <LazyLoad height={110}>
                     <div className={style.coverWrapper}>
@@ -43,11 +46,53 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [], isBoxshadowed
                 </div>
               </a>
             </Link>
+          ) : (
+            <Col
+              className={style.item}
+              {...{
+                span: 8,
+                xs: 24,
+                sm: 12,
+                md: 8,
+              }}
+            >
+              <Link
+                key={knowledge.id}
+                href={`/knowledge/[id]`}
+                as={`/knowledge/${knowledge.id}`}
+                scroll={false}
+              >
+                <Card
+                  hoverable
+                  bordered={false}
+                  cover={
+                    <LazyLoad height={208}>
+                      <div className={style.coverWrapper}>
+                        <img src={knowledge.cover} alt="cover" />
+                      </div>
+                    </LazyLoad>
+                  }
+                >
+                  <Meta
+                    title={<p className={style.title}>{knowledge.title}</p>}
+                    description={
+                      <div className={style.meta}>
+                        <span>{knowledge.views} 次阅读</span>
+                        <span className={style.seperator}>·</span>
+                        <span className={style.pullRight}>
+                          <LocaleTime date={knowledge.publishAt} timeago={true} />
+                        </span>
+                      </div>
+                    }
+                  />
+                </Card>
+              </Link>
+            </Col>
           );
         })
       ) : (
         <div className={'empty'}>暂无数据</div>
       )}
-    </div>
+    </Row>
   );
 };

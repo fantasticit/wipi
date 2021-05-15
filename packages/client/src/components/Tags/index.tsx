@@ -16,16 +16,11 @@ export const Tags = ({ tags = [], needTitle = true, style: cssStyle = {} }) => {
         {tags
           .filter((tag) => tag.articleCount > 0)
           .map((tag) => (
-            <Tag
-              key={tag.id}
-              {...(routerTag === tag.value ? { color: 'var(--main-text-color)' } : {})}
-            >
-              <Link href={`/tag/[tag]`} as={`/tag/` + tag.value} scroll={false}>
-                <a className={cls(style.tagItem, routerTag === tag.value ? style.active : false)}>
-                  {tag.label}[{tag.articleCount}]
-                </a>
-              </Link>
-            </Tag>
+            <Link key={tag.id} href={`/tag/[tag]`} as={`/tag/` + tag.value} scroll={false}>
+              <a className={cls(style.tagItem, routerTag === tag.value ? style.active : false)}>
+                {tag.label}
+              </a>
+            </Link>
           ))}
       </div>
     </div>

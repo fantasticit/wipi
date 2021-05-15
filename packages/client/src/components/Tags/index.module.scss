@@ -13,6 +13,21 @@
     color: var(--second-text-color);
     margin-right: 12px;
   }
+
+  .tagItem {
+    padding: 8px 20px;
+    background: var(--bg-second);
+    border-radius: 15px;
+
+    &:hover {
+      color: #fff;
+      background: var(--primary-color);
+    }
+
+    + .tagItem {
+      margin-left: 12px;
+    }
+  }
 }
 
 @media (max-width: 576px) {

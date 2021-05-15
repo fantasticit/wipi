@@ -14,6 +14,8 @@ export const _Header = ({ setting, categories, pages }) => {
   const [visible, setVisible] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
+  console.log(asPath, pathname, pages);
+
   return (
     <header className={cls(style.header)}>
       <div className={cls(style.wrapper)}>
@@ -93,10 +95,7 @@ export const _Header = ({ setting, categories, pages }) => {
                 <li
                   key={menu.label}
                   className={cls({
-                    [style.active]:
-                      pathname === menu.path ||
-                      asPath === menu.path ||
-                      (menu.dynamicPath && pathname === menu.dynamicPath),
+                    [style.active]: asPath.replace('/page/', '') === menu.path,
                   })}
                   onClick={() => {
                     if (visible) {
