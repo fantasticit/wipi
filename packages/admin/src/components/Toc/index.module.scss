@@ -9,16 +9,16 @@
   > div {
     position: relative;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 2px;
-      bottom: 0;
-      width: 2px;
-      background-color: var(--border-color);
-      opacity: .5;
-    }
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   top: 0;
+    //   left: 2px;
+    //   bottom: 0;
+    //   width: 2px;
+    //   background-color: var(--border-color);
+    //   opacity: .5;
+    // }
   }
 }
 
