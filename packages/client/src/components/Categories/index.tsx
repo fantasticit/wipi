@@ -1,7 +1,6 @@
 import React from 'react';
 import cls from 'classnames';
 import Link from 'next/link';
-import { Icon } from 'antd';
 import { useRouter } from 'next/router';
 import style from './index.module.scss';
 
@@ -12,7 +11,6 @@ export const Categories = ({ categories = [] }) => {
   return (
     <div className={style.wrapper}>
       <div className={style.title}>
-        <Icon type="appstore" />
         <span>文章分类</span>
       </div>
       <ul>
