@@ -47,7 +47,7 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, categor
         <Tags tags={tags} />
         <div className={style.tagOrCategoryDetail}>
           <p>
-            与 <span>{category && category.label}</span> 分类文章
+            <span>{category && category.label}</span> 分类文章
           </p>
           <p>
             共搜索到 <span>{total}</span> 篇

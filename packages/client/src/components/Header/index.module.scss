@@ -19,11 +19,20 @@ $height: 64px;
 
 .wrapper {
   width: 100vw;
-  border-bottom: 1px solid var(--border-color);
   background-color: var(--bg);
 
   &.boxShadow {
     box-shadow: var(--box-shadow);
+  }
+
+  &.isFixed {
+    position: fixed;
+    z-index: 1000;
+    transform: translate3d(0,-100%,0);
+
+    &.visible {
+      transform: translateZ(0);
+    }
   }
 
   > div {

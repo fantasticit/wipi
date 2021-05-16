@@ -58,14 +58,14 @@ export const _Header = ({ setting, categories, pages }) => {
   }, []);
 
   return (
-    <header
-      className={cls(
-        style.header,
-        affix ? style.isFixed : false,
-        affixVisible ? style.visible : false
-      )}
-    >
-      <div className={cls(style.wrapper)}>
+    <header className={cls(style.header)}>
+      <div
+        className={cls(
+          style.wrapper,
+          affix ? style.isFixed : false,
+          affixVisible ? style.visible : false
+        )}
+      >
         <div className={cls('container')}>
           <div className={style.logo}>
             {/^http/.test(setting.systemLogo) ? (
