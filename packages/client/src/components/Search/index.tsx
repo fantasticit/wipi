@@ -103,7 +103,7 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
               style={{ width: '100%' }}
             />
             <div className={style.tagWrapper}>
-              <Tags tags={tags} needTitle={false} style={{ marginBottom: 0, boxShadow: 'none' }} />
+              <Tags tags={tags} />
             </div>
             {loading && (
               <div className={style.loading}>

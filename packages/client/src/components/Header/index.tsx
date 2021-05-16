@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, Dropdown } from 'antd';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
@@ -10,14 +10,61 @@ import style from './index.module.scss';
 export const _Header = ({ setting, categories, pages }) => {
   const router = useRouter();
   const asPath = router.asPath;
-  const pathname = router.pathname;
+  const [affix, setAffix] = useState(false);
+  const [affixVisible, setAffixVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
-  console.log(asPath, pathname, pages);
+  useEffect(() => {
+    const close = () => {
+      if (visible) {
+        setVisible(false);
+      }
+    };
+
+    Router.events.on('routeChangeStart', close);
+
+    return () => {
+      Router.events.off('routeChangeStart', close);
+    };
+  }, [visible]);
+
+  useEffect(() => {
+    let beforeY =
+      document.documentElement.scrollTop ||
+      window.pageYOffset ||
+      window.scrollY ||
+      document.body.scrollTop;
+
+    const handler = () => {
+      let y =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        window.scrollY ||
+        document.body.scrollTop;
+
+      setAffix(y > 0);
+      setAffixVisible(beforeY > y);
+      setTimeout(() => {
+        beforeY = y;
+      }, 0);
+    };
+
+    document.addEventListener('scroll', handler);
+
+    return () => {
+      document.removeEventListener('scroll', handler);
+    };
+  }, []);
 
   return (
-    <header className={cls(style.header)}>
+    <header
+      className={cls(
+        style.header,
+        affix ? style.isFixed : false,
+        affixVisible ? style.visible : false
+      )}
+    >
       <div className={cls(style.wrapper)}>
         <div className={cls('container')}>
           <div className={style.logo}>

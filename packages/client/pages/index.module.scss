@@ -1,6 +1,21 @@
 .wrapper {
   height: 100%;
   background: var(--bg-body);
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.articleWrapper {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+@media (max-width: 576px) {
+  .articleWrapper {
+    padding: 1rem .8rem;
+  }
 }
 
 .tagOrCategoryDetail {
@@ -32,16 +47,5 @@
         font-size: 1.1rem;
       }
     }
-  }
-}
-
-
-.articleWrapper {
-  padding: 2rem 0;
-}
-
-@media (max-width: 576px) {
-  .articleWrapper {
-    padding: 2rem .8rem;
   }
 }

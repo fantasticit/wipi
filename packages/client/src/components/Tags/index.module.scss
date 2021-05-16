@@ -1,13 +1,12 @@
 .wrapper {
   border-radius: var(--border-radius);
-  margin-bottom: 1.3rem;
   box-shadow: var(--box-shadow);
   line-height: 1.29;
+  margin-bottom: 1rem;
 
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-
 
   .title {
     color: var(--second-text-color);
@@ -15,13 +14,13 @@
   }
 
   .tagItem {
-    padding: 8px 20px;
-    background: var(--bg-second);
+    display: inline-block;
+    padding: 6px 12px;
     border-radius: 15px;
 
     &:hover {
       color: #fff;
-      background: var(--primary-color);
+      background: var(--primary-color) !important;
     }
 
     + .tagItem {
