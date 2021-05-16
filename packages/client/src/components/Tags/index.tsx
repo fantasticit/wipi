@@ -1,7 +1,6 @@
 import React from 'react';
 import cls from 'classnames';
 import Link from 'next/link';
-import { Tag } from 'antd';
 import { useRouter } from 'next/router';
 import style from './index.module.scss';
 
