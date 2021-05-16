@@ -56,6 +56,11 @@ export const menus = [
     ignore: true,
   },
   {
+    label: '知识管理',
+    path: '/knowledge',
+    icon: 'star',
+  },
+  {
     divider: true,
   },
   {
