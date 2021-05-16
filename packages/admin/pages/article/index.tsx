@@ -133,6 +133,17 @@ const Article: NextPage<IArticleProps> = ({
     });
   }, []);
 
+  const toggleArticle = useCallback(
+    (article, key) => {
+      return () =>
+        ArticleProvider.updateArticle(article.id, { [key]: !article[key] }).then(() => {
+          message.success('操作成功');
+          getArticles(params);
+        });
+    },
+    [params, getArticles]
+  );
+
   const deleteArticle = useCallback(
     (id) => {
       ArticleProvider.deleteArticle(id).then(() => {
@@ -164,11 +175,15 @@ const Article: NextPage<IArticleProps> = ({
     title: '操作',
     key: 'action',
     fixed: 'right',
-    render: (_, record) => (
+    render: (_, record: IArticle) => (
       <span className={style.action}>
         <Link href={`/article/editor/[id]`} as={`/article/editor/` + record.id}>
           <a>编辑</a>
         </Link>
+        <Divider type="vertical" />
+        <span onClick={toggleArticle(record, 'isRecommended')}>
+          <a>{record.isRecommended ? '撤销首焦' : '首焦推荐'}</a>
+        </span>
         <Divider type="vertical" />
         <span
           onClick={() => {
@@ -205,7 +220,7 @@ const Article: NextPage<IArticleProps> = ({
               </a>
             </Link>
           }
-          scroll={{ x: 1200 }}
+          scroll={{ x: 1400 }}
           data={articles}
           defaultTotal={defaultTotal}
           columns={[titleColumn, ...columns, actionColumn]}

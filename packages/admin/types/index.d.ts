@@ -30,6 +30,7 @@ interface IArticle {
   needPassword: boolean;
   isRecommended?: boolean;
   isCommentable?: boolean; // 是否可评论
+  likes: number;
   createAt: string;
   updateAt: string;
   publishAt: string;

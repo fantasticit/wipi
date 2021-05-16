@@ -57,6 +57,7 @@ export const menus = [
   },
   {
     label: '知识管理',
+    title: '知识管理',
     path: '/knowledge',
     icon: 'star',
   },
