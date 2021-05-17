@@ -63,7 +63,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [], horizontal = 
                 scroll={false}
               >
                 <Card
-                  hoverable
+                  hoverable={true}
                   bordered={false}
                   cover={
                     <LazyLoad height={208}>

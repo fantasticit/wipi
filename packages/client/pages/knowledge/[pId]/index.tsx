@@ -116,7 +116,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
           <div className={cls('sticky', style.tocWrapper)}>
             <header>其他知识笔记</header>
             <main>
-              <KnowledgeList horizontal knowledges={otherBooks} />
+              <KnowledgeList horizontal={true} knowledges={otherBooks} />
             </main>
           </div>
         }
