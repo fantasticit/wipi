@@ -1,5 +1,5 @@
 :global {
-  $languages: ts js typescript javascript html css php go sql json bash less scss nginx shell stylus python yaml yml;
+  $languages: ts js typescript javascript html css php go sql json bash less scss nginx shell stylus python yaml yml lua;
 
   .markdown {
     word-break: break-word;
@@ -7,13 +7,14 @@
     font-weight: 400;
     font-size: 15px;
     overflow-x: hidden;
-    color: #333;
+    color: var(--main-text-color);
     
     h1, h2, h3, h4, h5, h6 {
       line-height: 1.5;
       margin-top: 35px;
       margin-bottom: 10px;
       padding-bottom: 5px;
+      color: inherit;
     }
 
     h1 {
