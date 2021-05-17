@@ -68,6 +68,7 @@ export const AdminLayout: React.FC = ({ children }) => {
                   className={style.github}
                   href="https://github.com/fantasticit/wipi"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <Icon type="github" />
                   <span></span>
@@ -101,6 +102,7 @@ export const AdminLayout: React.FC = ({ children }) => {
                     className={style.github}
                     href="https://github.com/fantasticit/wipi"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <Icon type="github" />
                   </a>
@@ -109,7 +111,7 @@ export const AdminLayout: React.FC = ({ children }) => {
               <div className={style.copyright}>
                 <p>
                   Copyright <Icon type="copyright" /> {new Date().getFullYear()} Designed by
-                  <a href="https://github.com/fantasticit/wipi" target="_blank">
+                  <a href="https://github.com/fantasticit/wipi" target="_blank" rel="noreferrer">
                     {' '}
                     Fantasticit.
                   </a>

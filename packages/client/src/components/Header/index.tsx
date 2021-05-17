@@ -37,7 +37,7 @@ export const _Header = ({ setting, categories, pages }) => {
       document.body.scrollTop;
 
     const handler = () => {
-      let y =
+      const y =
         document.documentElement.scrollTop ||
         window.pageYOffset ||
         window.scrollY ||

@@ -26,7 +26,7 @@ export const ArticleList: React.FC<IProps> = ({ articles = [], coverHeight = 168
                 scroll={false}
               >
                 <Card
-                  hoverable
+                  hoverable={true}
                   bordered={false}
                   cover={
                     <LazyLoad height={208}>
