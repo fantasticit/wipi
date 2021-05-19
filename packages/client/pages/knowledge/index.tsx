@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
-import cls from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GlobalContext } from '@/context/global';
+import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { KnowledgeProvider } from '@/providers/knowledge';
 import { KnowledgeList } from '@components/KnowledgeList';
-import style from '../index.module.scss';
+import { Categories } from '@components/Categories';
+import { ArticleRecommend } from '@/components/ArticleRecommend';
 
 interface IHomeProps {
   books: IKnowledge[];
@@ -35,8 +36,8 @@ const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => 
   }, []);
 
   return (
-    <div className={style.wrapper}>
-      <div className={cls('container', style.articleWrapper)}>
+    <DoubleColumnLayout
+      leftNode={
         <InfiniteScroll
           pageStart={1}
           loadMore={getArticles}
@@ -47,10 +48,16 @@ const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => 
             </div>
           }
         >
-          <KnowledgeList knowledges={books} />
+          <KnowledgeList knowledges={books} horizontal />
         </InfiniteScroll>
-      </div>
-    </div>
+      }
+      rightNode={
+        <div className={'sticky'}>
+          <ArticleRecommend mode="inline" />
+          <Categories categories={categories} />
+        </div>
+      }
+    />
   );
 };
 
