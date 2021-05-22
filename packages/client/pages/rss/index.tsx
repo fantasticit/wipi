@@ -40,7 +40,7 @@ Rss.getInitialProps = async (ctx) => {
   articles.forEach((article) => {
     feed.item({
       title: article.title,
-      description: article.summary,
+      description: article.html || article.content,
       url: url.resolve(setting.systemUrl, 'article/' + article.id),
       date: article.publishAt,
       categories: [(article.category || {}).label],

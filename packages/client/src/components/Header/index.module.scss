@@ -5,6 +5,7 @@ $height: 64px;
   width: 100%;
   height: $height;
   transition: all .2s;
+  border: 1px solid var(--border-color);
 
   &.isFixed {
     position: fixed;
