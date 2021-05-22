@@ -82,7 +82,9 @@ export class ArticleService {
     const [data, total] = await query.getManyAndCount();
 
     data.forEach((d) => {
-      extractProtectedArticle(d);
+      if (d.needPassword) {
+        extractProtectedArticle(d);
+      }
     });
 
     return [data, total];
