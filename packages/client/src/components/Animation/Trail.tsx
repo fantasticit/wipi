@@ -18,8 +18,8 @@ export const ListTrail: React.FC<ListTrailProps> = ({
 }) => {
   const C = animated[element];
   const trail = useTrail(length, {
-    ...options,
     config: { mass: 2, tension: 280, friction: 24, clamp: true },
+    ...options,
   });
 
   return (

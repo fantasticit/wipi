@@ -93,10 +93,10 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
             <ListTrail
               length={articles.length}
               options={{
+                config: { mass: 1, tension: 180, friction: 12, clamp: true },
                 opacity: loading ? 0 : 1,
-                y: loading ? 20 : 0,
                 height: loading ? 0 : 48,
-                from: { opacity: 0, y: 20, height: 0 },
+                from: { opacity: 0, height: 0 },
               }}
               renderItem={(index) => {
                 const article = articles[index];

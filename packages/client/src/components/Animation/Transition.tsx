@@ -12,8 +12,8 @@ export const ConditionTransition: React.FC<ConditionTransitionProps> = ({
   children,
 }) => {
   const transitions = useTransition(visible, {
-    ...options,
     config: { mass: 2, tension: 280, friction: 24, clamp: true },
+    ...options,
   });
 
   return (
