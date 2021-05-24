@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import cls from 'classnames';
 import { isOdd, elementInViewport } from '@/utils';
+import { ListTrail } from '@/components/Animation/Trail';
 import style from './index.module.scss';
 
 interface IToc {
@@ -52,28 +53,36 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
       <main>
         <div ref={ref}>
           <div>
-            {tocs.map((toc, idx) => {
-              const v = toc.level;
-              const f = isOdd(v - 1);
-              return (
-                <div
-                  key={`js-toc-` + idx}
-                  className={cls(style.item, idx === active && style.active)}
-                  id={`js-toc-` + idx}
-                  style={
-                    {
-                      'paddingLeft': 12 * (v - 1),
-                      'cursor': 'pointer',
-                      '--dot-left': 10 * (v - 2) + 'px',
-                      '--dot-width': 6 - (v - 1) + (f ? 1 : 0) + 'px',
-                    } as React.CSSProperties
-                  }
-                  onClick={() => goto(toc)}
-                >
-                  <div>{toc.text}</div>
-                </div>
-              );
-            })}
+            <ListTrail
+              length={tocs.length}
+              options={{
+                opacity: 1,
+                height: 32,
+                from: { opacity: 0, height: 0 },
+              }}
+              element={'div'}
+              renderItem={(idx) => {
+                const toc = tocs[idx];
+                const v = toc.level;
+                const f = isOdd(v - 1);
+                return (
+                  <div
+                    className={cls(style.item, idx === active && style.active)}
+                    style={
+                      {
+                        'paddingLeft': 12 * (v - 1),
+                        'cursor': 'pointer',
+                        '--dot-left': 10 * (v - 2) + 'px',
+                        '--dot-width': 6 - (v - 1) + (f ? 1 : 0) + 'px',
+                      } as React.CSSProperties
+                    }
+                    onClick={() => goto(toc)}
+                  >
+                    <div>{toc.text}</div>
+                  </div>
+                );
+              }}
+            />
             <div className={style.indicator} style={{ top: HEIGHT * active + 'px' }} />
           </div>
         </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Tooltip } from 'antd';
 import LazyLoad from 'react-lazyload';
+import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
 
@@ -19,45 +20,51 @@ export const ArticleList: React.FC<IProps> = ({ articles = [], coverHeight = 168
         articles.map((article) => {
           return (
             <Col className={style.articleItem} span={8} xs={24} sm={12} md={8}>
-              <Link
-                key={article.id}
-                href={`/article/[id]`}
-                as={`/article/${article.id}`}
-                scroll={false}
-              >
-                <Card
-                  hoverable={true}
-                  bordered={false}
-                  cover={
-                    <LazyLoad height={208}>
-                      <div className={style.coverWrapper} style={{ height: coverHeight }}>
-                        <img src={article.cover} alt="cover" />
-                      </div>
-                    </LazyLoad>
-                  }
+              <Opacity>
+                <Link
+                  key={article.id}
+                  href={`/article/[id]`}
+                  as={`/article/${article.id}`}
+                  scroll={false}
                 >
-                  <Meta
-                    title={<p className={style.title}>{article.title}</p>}
-                    description={
-                      <div className={style.meta}>
-                        {article.category ? (
-                          <>
-                            <span className={style.category}>
-                              {article.category ? article.category.label : ''}
-                            </span>
-                            <span className={style.seperator}>·</span>
-                          </>
-                        ) : null}
-                        <span>{article.views} 次阅读</span>
-                        <span className={style.seperator}>·</span>
-                        <span className={style.pullRight}>
-                          <LocaleTime date={article.publishAt} timeago={true} />
-                        </span>
-                      </div>
+                  <Card
+                    hoverable={true}
+                    bordered={false}
+                    cover={
+                      <LazyLoad height={208}>
+                        <div className={style.coverWrapper} style={{ height: coverHeight }}>
+                          <img src={article.cover} alt="cover" />
+                        </div>
+                      </LazyLoad>
                     }
-                  />
-                </Card>
-              </Link>
+                  >
+                    <Meta
+                      title={
+                        <Tooltip title={article.summary}>
+                          <span className={style.title}>{article.title}</span>
+                        </Tooltip>
+                      }
+                      description={
+                        <div className={style.meta}>
+                          {article.category ? (
+                            <>
+                              <span className={style.category}>
+                                {article.category ? article.category.label : ''}
+                              </span>
+                              <span className={style.seperator}>·</span>
+                            </>
+                          ) : null}
+                          <span>{article.views} 次阅读</span>
+                          <span className={style.seperator}>·</span>
+                          <span className={style.pullRight}>
+                            <LocaleTime date={article.publishAt} timeago={true} />
+                          </span>
+                        </div>
+                      }
+                    />
+                  </Card>
+                </Link>
+              </Opacity>
             </Col>
           );
         })

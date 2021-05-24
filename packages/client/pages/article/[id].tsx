@@ -3,10 +3,12 @@ import { Helmet } from 'react-helmet';
 import { NextPage } from 'next';
 import Router from 'next/router';
 import Link from 'next/link';
-import { Icon, Modal, Form, Input, message } from 'antd';
+import { Modal, Form, Input, message } from 'antd';
+import { TagOutlined } from '@ant-design/icons';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ArticleProvider } from '@/providers/article';
+import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ImageViewer } from '@/components/ImageViewer';
 import { Comment } from '@/components/Comment';
@@ -147,7 +149,7 @@ const Article: NextPage<IProps> = ({ article }) => {
                       <div className={style.tag}>
                         <Link href={'/tag/[tag]'} as={'/tag/' + tag.value} scroll={false}>
                           <a>
-                            <Icon type="tag" />
+                            <TagOutlined />
                             <span>{tag.label}</span>
                           </a>
                         </Link>
@@ -165,8 +167,10 @@ const Article: NextPage<IProps> = ({ article }) => {
         {/* S 文章评论 */}
         {article.isCommentable && (
           <div className={style.commentWrap}>
-            <p className={style.title}>评论</p>
-            <Comment hostId={article.id} />
+            <Opacity>
+              <p className={style.title}>评论</p>
+            </Opacity>
+            <Comment key={article.id} hostId={article.id} />
           </div>
         )}
         {/* E 文章评论 */}

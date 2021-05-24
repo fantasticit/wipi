@@ -4,13 +4,12 @@ $height: 64px;
   position: relative;
   width: 100%;
   height: $height;
-  transition: all .2s;
-  border-bottom: 1px solid var(--border-color);
+  transition: all 0.2s;
 
   &.isFixed {
     position: fixed;
     z-index: 1000;
-    transform: translate3d(0,-100%,0);
+    transform: translate3d(0, -100%, 0);
 
     &.visible {
       transform: translateZ(0);
@@ -21,6 +20,7 @@ $height: 64px;
 .wrapper {
   width: 100vw;
   background-color: var(--bg);
+  border-bottom: 1px solid var(--border-color);
 
   &.boxShadow {
     box-shadow: var(--box-shadow);
@@ -29,7 +29,7 @@ $height: 64px;
   &.isFixed {
     position: fixed;
     z-index: 1000;
-    transform: translate3d(0,-100%,0);
+    transform: translate3d(0, -100%, 0);
 
     &.visible {
       transform: translateZ(0);
@@ -98,11 +98,11 @@ $height: 64px;
     color: var(--main-text-color);
     font-size: 16px;
 
-    ul {
+    > ul {
       position: relative;
       width: 100%;
 
-      li {
+      > li {
         display: inline-flex;
         padding: 0;
         padding: 0 20px;
@@ -149,7 +149,7 @@ $height: 64px;
       }
 
       @media (max-width: 768px) {
-        li {
+        > li {
           text-align: center;
 
           &:first-child {
@@ -183,7 +183,7 @@ $height: 64px;
       margin-left: 0;
       background-color: var(--bg);
       overflow: hidden;
-      transition: max-height .25s;
+      transition: max-height 0.25s;
       z-index: 100;
 
       &.active {
@@ -193,10 +193,10 @@ $height: 64px;
         overflow: auto;
       }
 
-      ul {
+      > ul {
         width: 100%;
 
-        li {
+        > li {
           display: flex;
           padding: 0;
           line-height: 48px;

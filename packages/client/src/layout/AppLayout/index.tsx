@@ -12,12 +12,12 @@ interface Iprops {
 }
 
 export const AppLayout: React.FC<Iprops> = ({ children, needFooter = true }) => {
-  const { setting, pages, categories } = useContext(GlobalContext);
+  const { setting, pages, categories, tags } = useContext(GlobalContext);
 
   return (
     <div className={style.wrapper}>
       <Seo />
-      <Header setting={setting} categories={categories} pages={pages} />
+      <Header setting={setting} categories={categories} tags={tags} pages={pages} />
       <main className={style.main}>{children}</main>
       <BackTop />
       {needFooter && <Footer setting={setting} />}

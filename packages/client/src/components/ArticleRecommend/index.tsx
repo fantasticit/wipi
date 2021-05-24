@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Spin } from 'antd';
+import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { ArticleProvider } from '@/providers/article';
+import { ListTrail } from '@/components/Animation/Trail';
 import { ArticleList } from '@components/ArticleList';
 import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
@@ -17,20 +19,14 @@ export const ArticleRecommend: React.FC<IProps> = ({
   articleId = null,
   needTitle = true,
 }) => {
-  const [loading, setLoading] = useState(false);
+  const [getRecommend, loading] = useAsyncLoading(ArticleProvider.getRecommend);
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
-    ArticleProvider.getRecommend(articleId)
-      .then((res) => {
-        setArticles(res.slice(0, 6));
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-  }, [articleId]);
+    getRecommend(articleId).then((res) => {
+      setArticles(res.slice(0, 6));
+    });
+  }, [articleId, getRecommend]);
 
   return (
     <div className={style.wrapper}>
@@ -42,28 +38,35 @@ export const ArticleRecommend: React.FC<IProps> = ({
       <Spin spinning={loading}>
         {mode === 'inline' ? (
           articles.length <= 0 ? (
-            <div className={'empty'}>{!loading && '暂无推荐'}</div>
+            loading ? (
+              <div style={{ height: 32 }}></div>
+            ) : (
+              <div className={'empty'}>暂无推荐</div>
+            )
           ) : (
             <ul className={style.inlineWrapper}>
-              {(articles || []).map((article) => {
-                return (
-                  <li key={article.id} className={style.inlineItem}>
-                    <div>
-                      <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
-                        <a>
-                          <p className={style.articleTitle}>
-                            <span>{article.title}</span>
-                            {' · '}
-                            <span>
-                              <LocaleTime date={article.publishAt} timeago={true} />
-                            </span>
-                          </p>
-                        </a>
-                      </Link>
-                    </div>
-                  </li>
-                );
-              })}
+              <ListTrail
+                length={articles.length}
+                options={{
+                  opacity: loading ? 0 : 1,
+                  height: loading ? 0 : 32,
+                  from: { opacity: 0, height: 0 },
+                }}
+                renderItem={(index) => {
+                  const article = articles[index];
+                  return (
+                    <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
+                      <a>
+                        <span>{article.title}</span>
+                        {' · '}
+                        <span>
+                          <LocaleTime date={article.publishAt} timeago={true} />
+                        </span>
+                      </a>
+                    </Link>
+                  );
+                }}
+              />
             </ul>
           )
         ) : (

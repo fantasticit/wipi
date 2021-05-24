@@ -3,10 +3,12 @@ import { NextPage } from 'next';
 import { Helmet } from 'react-helmet';
 import { GlobalContext } from '@/context/global';
 import { PageProvider } from '@/providers/page';
+import { Opacity } from '@/components/Animation/Opacity';
 import { ImageViewer } from '@/components/ImageViewer';
-import { CommentAndArticleRecommend } from '@/components/CommentAndArticleRecommend';
+import { Comment } from '@/components/Comment';
 import { MarkdownReader } from '@/components/MarkdownReader';
 import style from './index.module.scss';
+import { ArticleRecommend } from '@/components/ArticleRecommend';
 
 interface IProps {
   page: IPage;
@@ -31,7 +33,6 @@ const Page: NextPage<IProps> = ({ page }) => {
             <Helmet>
               <title>{page.name + ' | ' + setting.systemTitle}</title>
             </Helmet>
-
             <div className="container">
               {page.cover && (
                 <div className={style.coverWrapper}>
@@ -42,7 +43,24 @@ const Page: NextPage<IProps> = ({ page }) => {
                 <MarkdownReader content={page.html} />
               </div>
             </div>
-            <CommentAndArticleRecommend pageId={page.id} isCommentable={true} />
+            <div className={style.commentAndArticleWrapper}>
+              <div className={style.comments}>
+                <Opacity key={page.id}>
+                  <p className={style.title}>评论</p>
+                </Opacity>
+                <div className={style.commentContainer}>
+                  <Comment key={page.id} hostId={page.id} />
+                </div>
+              </div>
+              <div className={style.recmmendArticles}>
+                <Opacity key={page.id}>
+                  <p className={style.title}>推荐阅读</p>
+                </Opacity>
+                <div className={style.articleContainer}>
+                  <ArticleRecommend articleId={null} needTitle={false} />
+                </div>
+              </div>
+            </div>
           </div>
         </ImageViewer>
       )}

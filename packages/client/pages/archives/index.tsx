@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArticleProvider } from '@/providers/article';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
+import { ListTrail } from '@/components/Animation/Trail';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Categories } from '@components/Categories';
@@ -18,18 +19,27 @@ const ArchiveItem = ({ month, articles = [] }) => {
     <div className={style.item}>
       <h3>{month}</h3>
       <ul>
-        {articles.map((article) => (
-          <li key={article.id}>
-            <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
-              <a>
-                <span className={style.meta}>
-                  <LocaleTime date={article.publishAt} format={'MM-dd'} />
-                </span>
-                <span className={style.title}>{article.title}</span>
-              </a>
-            </Link>
-          </li>
-        ))}
+        <ListTrail
+          length={articles.length}
+          options={{
+            opacity: 1,
+            height: 48,
+            from: { opacity: 0, height: 0 },
+          }}
+          renderItem={(index) => {
+            const article = articles[index];
+            return (
+              <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
+                <a>
+                  <span className={style.meta}>
+                    <LocaleTime date={article.publishAt} format={'MM-dd'} />
+                  </span>
+                  <span className={style.title}>{article.title}</span>
+                </a>
+              </Link>
+            );
+          }}
+        />
       </ul>
     </div>
   );

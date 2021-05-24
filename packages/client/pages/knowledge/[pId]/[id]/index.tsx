@@ -2,9 +2,11 @@ import React, { useEffect, useMemo } from 'react';
 import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { Icon, Breadcrumb } from 'antd';
+import { Breadcrumb } from 'antd';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { KnowledgeProvider } from '@/providers/knowledge';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
+import { ListTrail } from '@/components/Animation/Trail';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ImageViewer } from '@/components/ImageViewer';
 import { MarkdownReader } from '@/components/MarkdownReader';
@@ -51,12 +53,10 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
     if (!chapter) {
       return;
     }
-    const el = document.querySelector(`#js-toc-item-wrapper-` + id);
-    if (el) {
-      Promise.resolve().then(() => {
-        el.scrollIntoView();
-      });
-    }
+    Promise.resolve().then(() => {
+      const el = document.querySelector(`#js-toc-item-wrapper-` + id);
+      el && el.scrollIntoView();
+    });
   }, [chapter, id]);
 
   if (!chapter) {
@@ -121,7 +121,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                       >
                         <Link href={`/knowledge/[pId]/[id]`} as={`/knowledge/${pId}/${prev.id}`}>
                           <a>
-                            <Icon type="arrow-left" />
+                            <LeftOutlined />
                             <span>{prev.title}</span>
                           </a>
                         </Link>
@@ -137,7 +137,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                         <Link href={`/knowledge/[pId]/[id]`} as={`/knowledge/${pId}/${next.id}`}>
                           <a>
                             <span>{next.title}</span>
-                            <Icon type="arrow-right" />
+                            <RightOutlined />
                           </a>
                         </Link>
                       </div>
@@ -147,7 +147,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                 {book.isCommentable ? (
                   <div className={style.commentWrap}>
                     <p className={style.title}>评论</p>
-                    <Comment hostId={chapter.id} />
+                    <Comment key={chapter.id} hostId={chapter.id} />
                   </div>
                 ) : null}
               </div>
@@ -160,15 +160,23 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
               <header>{book.title}</header>
               <main>
                 <ul>
-                  {chapters.map((item) => {
-                    return (
-                      <li key={item.id} id={`js-toc-item-wrapper-` + item.id}>
+                  <ListTrail
+                    length={chapters.length}
+                    options={{
+                      opacity: 1,
+                      height: 32,
+                      from: { opacity: 0, height: 0 },
+                    }}
+                    setItemContainerProps={(index) => ({ id: `js-toc-item-wrapper-${index}` })}
+                    renderItem={(idx) => {
+                      const item = chapters[idx];
+                      return (
                         <Link as={`/knowledge/${pId}/${item.id}`} href={`/knowledge/[pId]/[id]`}>
                           <a className={cls(item.id === id && style.active)}>{item.title}</a>
                         </Link>
-                      </li>
-                    );
-                  })}
+                      );
+                    }}
+                  />
                 </ul>
               </main>
             </div>

@@ -2,7 +2,9 @@
 
 :global {
   * {
-    transition: background-color .2s ease-in-out, margin .2s ease-in-out, opacity .2s ease-in-out, filter .2s ease-in-out, visibility .2s ease-in-out, transform .2s ease-in-out, border-color .2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, margin 0.2s ease-in-out, opacity 0.2s ease-in-out,
+      filter 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
   }
 
   ::-webkit-scrollbar-track {
@@ -12,9 +14,9 @@
 
   ::-webkit-scrollbar-thumb {
     border-radius: 0;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     background-color: transparent;
-    transition: all .2s;
+    transition: all 0.2s;
   }
 
   *:hover {
@@ -38,7 +40,8 @@
     color: var(--main-text-color);
     background-color: var(--bg);
     overflow-x: hidden;
-    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei,
+      Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
     line-height: 1.75em;
   }
 
@@ -73,7 +76,7 @@
     border: 0;
     overflow: hidden;
     clear: both;
-    margin: 1rem 0;;
+    margin: 1rem 0;
   }
 
   table {
@@ -102,7 +105,7 @@
     padding: 4px 5px;
     text-align: center;
   }
-  
+
   table tbody th {
     font-weight: 100;
     font-style: italic;
@@ -128,7 +131,7 @@
     position: sticky;
     left: 0;
   }
-  
+
   .container {
     margin-right: auto;
     margin-left: auto;
@@ -158,27 +161,6 @@
     .container {
       width: 1140px;
     }
-  }
-
-  .item-enter {
-    opacity: 0;
-    transform: scale(.9);
-  }
-
-  .item-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 300ms, transform 300ms;
-  }
-
-  .item-exit {
-    opacity: 1;
-  }
-
-  .item-exit-active {
-    opacity: 0;
-    transform: scale(.9);
-    transition: opacity 300ms, transform 300ms;
   }
 
   .sticky {

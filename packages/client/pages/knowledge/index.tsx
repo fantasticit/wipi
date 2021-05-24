@@ -48,7 +48,7 @@ const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => 
             </div>
           }
         >
-          <KnowledgeList knowledges={books} horizontal />
+          <KnowledgeList knowledges={books} />
         </InfiniteScroll>
       }
       rightNode={

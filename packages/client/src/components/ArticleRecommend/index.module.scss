@@ -15,7 +15,7 @@
   ul.inlineWrapper {
     padding: 0 1rem 1rem;
 
-    li.inlineItem {
+    li {
       display: flex;
       flex-wrap: nowrap;
       align-items: stretch;
@@ -28,6 +28,10 @@
       }
 
       a {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
         span:first-of-type {
           color: var(--main-text-color);
         }
@@ -49,12 +53,11 @@
         display: inline-block;
         width: 6.8rem;
         height: 3.8rem;
-        margin-right: .8rem;
+        margin-right: 0.8rem;
       }
     }
   }
 }
-
 
 .articleItem {
   position: relative;
@@ -65,7 +68,7 @@
   background: var(--bg-second);
   box-shadow: var(--box-shadow);
   overflow: hidden;
-  transition: transform .3s;
+  transition: transform 0.3s;
 
   &:hover {
     transform: scale(1.04);

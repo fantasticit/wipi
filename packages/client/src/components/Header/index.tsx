@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import cls from 'classnames';
 import { Menu, Dropdown } from 'antd';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
-import cls from 'classnames';
+import { useToggle } from '@/hooks/useToggle';
 import { Search } from '@/components/Search';
 import { Theme } from '@/components/Theme';
 import style from './index.module.scss';
 
-export const _Header = ({ setting, categories, pages }) => {
+export const Header = ({ setting, categories, tags, pages }) => {
   const router = useRouter();
   const asPath = router.asPath;
   const [affix, setAffix] = useState(false);
   const [affixVisible, setAffixVisible] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
+  const [showSearch, toggleSearch] = useToggle(false);
 
   useEffect(() => {
     const close = () => {
@@ -155,19 +156,17 @@ export const _Header = ({ setting, categories, pages }) => {
                   </Link>
                 </li>
               ))}
-              <li className={style.searchWrapper} onClick={() => setShowSearch(true)}>
-                <a className={style.search}></a>
+              <li className={style.searchWrapper}>
+                <a className={style.search} onClick={toggleSearch}></a>
               </li>
               <li className={style.themeToggle}>
                 <Theme />
               </li>
             </ul>
+            <Search tags={tags} visible={showSearch} onClose={toggleSearch} />
           </nav>
-          <Search visible={showSearch} onClose={() => setShowSearch(false)} />
         </div>
       </div>
     </header>
   );
 };
-
-export const Header = React.memo(_Header);

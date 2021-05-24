@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 480px;
+  height: 240px;
+  overflow: auto;
+
+  li {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+.text {
+  display: flex;
+  align-items: center;
+
+  color: var(--disable-text-color);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+
+  > span {
+    margin-left: 4px;
+    transform: translateY(1px);
+  }
+}

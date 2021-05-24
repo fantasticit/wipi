@@ -1,0 +1,61 @@
+.commentItem {
+  background-color: var(--bg-second);
+
+  &.isParent {
+    padding: 16px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-top: 1rem;
+  }
+
+  &.isChild {
+    padding: 16px 0;
+
+    &:not(:first-of-type) {
+      padding-top: 0;
+    }
+
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+
+  > header {
+    display: flex;
+    align-items: center;
+
+    .name {
+      color: var(--main-text-color);
+      padding: 0 8px;
+    }
+  }
+
+  > main {
+    font-size: 0.9rem;
+  }
+
+  > footer {
+    font-size: 0.8rem;
+
+    .meta {
+      color: var(--disable-text-color);
+    }
+
+    .reply {
+      cursor: pointer;
+      margin-left: 8px;
+
+      &:hover {
+        color: var(--primary-color);
+      }
+
+      i {
+        margin-right: 4px;
+      }
+    }
+
+    .editorWrapper {
+      padding-top: 16px;
+    }
+  }
+}

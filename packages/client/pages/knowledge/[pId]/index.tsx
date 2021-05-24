@@ -2,9 +2,11 @@ import React, { useCallback } from 'react';
 import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { Breadcrumb, Button, Icon } from 'antd';
+import { Breadcrumb, Button } from 'antd';
+import { RightOutlined } from '@ant-design/icons';
 import { KnowledgeProvider } from '@/providers/knowledge';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
+import { ListTrail } from '@/components/Animation/Trail';
 import { LocaleTime } from '@/components/LocaleTime';
 import { KnowledgeList } from '@/components/KnowledgeList';
 import style from './index.module.scss';
@@ -86,9 +88,17 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
                 </section>
                 {chapters.length ? (
                   <ul>
-                    {chapters.map((chapter) => {
-                      return (
-                        <li key={chapter.id}>
+                    <ListTrail
+                      length={chapters.length}
+                      options={{
+                        opacity: 1,
+                        height: 44,
+                        from: { opacity: 0, height: 0 },
+                      }}
+                      renderItem={(idx) => {
+                        const chapter = chapters[idx];
+
+                        return (
                           <Link
                             as={`/knowledge/${pId}/${chapter.id}`}
                             href={`/knowledge/[pId]/[id]`}
@@ -97,13 +107,13 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
                               <span>{chapter.title}</span>
                               <span>
                                 <LocaleTime date={chapter.createAt} />
-                                <Icon type="arrow-right" />
+                                <RightOutlined />
                               </span>
                             </a>
                           </Link>
-                        </li>
-                      );
-                    })}
+                        );
+                      }}
+                    />
                   </ul>
                 ) : (
                   <div className={'empty'}>敬请期待</div>
@@ -116,7 +126,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
           <div className={cls('sticky', style.tocWrapper)}>
             <header>其他知识笔记</header>
             <main>
-              <KnowledgeList horizontal={true} knowledges={otherBooks} />
+              <KnowledgeList knowledges={otherBooks} />
             </main>
           </div>
         }

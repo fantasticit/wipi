@@ -1,0 +1,22 @@
+.wrapper {
+  textarea {
+    border-color: var(--comment-editor-border-color);
+    color: var(--main-text-color);
+    background-color: var(--bg-second);
+    box-shadow: none !important;
+  }
+
+  :global {
+    .ant-btn-primary[disabled] {
+      border-color: var(--comment-editor-border-color);
+      color: var(--main-text-color);
+      background-color: var(--comment-editor-disable-bg);
+    }
+  }
+
+  > footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+  }
+}
