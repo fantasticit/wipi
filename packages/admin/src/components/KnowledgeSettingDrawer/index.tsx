@@ -91,11 +91,7 @@ export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, on
             选择文件
           </Button>
           {cover && (
-            <Button
-              style={{ marginTop: 12, marginLeft: 12 }}
-              type="danger"
-              onClick={() => setCover('')}
-            >
+            <Button style={{ marginTop: 12, marginLeft: 12 }} danger onClick={() => setCover('')}>
               移除
             </Button>
           )}

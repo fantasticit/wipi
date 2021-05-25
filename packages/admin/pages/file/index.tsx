@@ -248,7 +248,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
               okText="确认"
               cancelText="取消"
             >
-              <Button type="danger" loading={loading}>
+              <Button danger loading={loading}>
                 删除
               </Button>
             </Popconfirm>

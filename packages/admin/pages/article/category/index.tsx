@@ -127,7 +127,7 @@ const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
                     okText="确认"
                     cancelText="取消"
                   >
-                    <Button type="danger">删除</Button>
+                    <Button danger>删除</Button>
                   </Popconfirm>
                 </>
               )}
