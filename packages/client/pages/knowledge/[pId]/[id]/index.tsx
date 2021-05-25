@@ -182,7 +182,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
             </div>
             {tocs && tocs.length ? (
               <div className={style.infoWrapper}>
-                <Toc tocs={tocs} />
+                <Toc key={chapter.id} tocs={tocs} />
               </div>
             ) : null}
           </div>
