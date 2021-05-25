@@ -2,7 +2,8 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Tag, Divider, Badge, Popconfirm, Modal, Spin, Select, Button, Icon, message } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Tag, Divider, Badge, Popconfirm, Modal, Spin, Select, Button, message } from 'antd';
 import { getOneTagColor } from '@/constants';
 import { resolveUrl } from '@/utils';
 import { AdminLayout } from '@/layout/AdminLayout';
@@ -214,7 +215,7 @@ const Article: NextPage<IArticleProps> = ({
             <Link href={'/article/editor'}>
               <a>
                 <Button type="primary">
-                  <Icon type="plus" />
+                  <PlusOutlined />
                   新建
                 </Button>
               </a>

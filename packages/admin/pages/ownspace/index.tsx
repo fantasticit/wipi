@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { NextPage } from 'next';
-import { Row, Col, List, Typography, Card, Avatar, Form, Input, Button, Tabs, message } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Row, Col, List, Typography, Card, Avatar, Input, Button, Tabs, message } from 'antd';
 import Router from 'next/router';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
@@ -89,7 +92,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
                   {user.avatar ? (
                     <Avatar size={64} src={user.avatar} />
                   ) : (
-                    <Avatar size={64} icon="user" />
+                    <Avatar size={64} icon={<UserOutlined />} />
                   )}
                 </div>
               )

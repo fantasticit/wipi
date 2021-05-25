@@ -2,7 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { NextPage } from 'next';
 import Router from 'next/router';
 import cls from 'classnames';
-import { Avatar, Divider, Icon, Input, Button, Popconfirm, Popover, Modal, message } from 'antd';
+import { CloseOutlined, DeleteOutlined, FolderOutlined, PlusOutlined } from '@ant-design/icons';
+import { Avatar, Divider, Input, Button, Popconfirm, Popover, Modal, message } from 'antd';
 import { SortableHandle, SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import { KnowledgeProvider } from '@/providers/knowledge';
@@ -66,7 +67,7 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
         okText="确定"
         cancelText="取消"
       >
-        <Icon type="delete" onClick={(e) => e.stopPropagation()} />
+        <DeleteOutlined onClick={(e) => e.stopPropagation()} />
       </Popconfirm>
     </li>
   ));
@@ -164,7 +165,7 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
             <Avatar shape="square" size="large" src={knowledge.cover} />
             <span style={{ marginLeft: 8 }}>{knowledge.title}</span>
           </div>
-          <Icon type="close" onClick={close} />
+          <CloseOutlined onClick={close} />
         </header>
         <Divider type="horizontal" />
         <main>
@@ -197,12 +198,12 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
           >
             <div className={styles.action}>
               <span>新建</span>
-              <Icon type="plus" />
+              <PlusOutlined />
             </div>
           </Popover>
           <div className={styles.action} onClick={toggleFileVisible}>
             <span>文件</span>
-            <Icon type="folder" />
+            <FolderOutlined />
           </div>
           <FileSelectDrawer isCopy={true} visible={fileVisible} onClose={toggleFileVisible} />
         </main>

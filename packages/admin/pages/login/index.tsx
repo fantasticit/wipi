@@ -1,9 +1,12 @@
 import React, { useCallback, useState, useContext, useEffect } from 'react';
-import { Row, Col, Form, Button, Input, Icon } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Row, Col, Button, Input } from 'antd';
 import Router from 'next/router';
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
-import { FormComponentProps } from 'antd/es/form';
+import { FormComponentProps } from '@ant-design/compatible/es/form';
 import { UserProvider } from '@/providers/user';
 import { GlobalContext } from '@/context/global';
 import { Svg } from '@/assets/LoginSvg';
@@ -59,7 +62,7 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
                   rules: [{ required: true, message: '请输入用户名！' }],
                 })(
                   <Input
-                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     size="large"
                     placeholder="请输入用户名"
                   />
@@ -70,7 +73,7 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
                   rules: [{ required: true, message: '请输入密码！' }],
                 })(
                   <Input
-                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     type="password"
                     size="large"
                     placeholder="请输入密码"

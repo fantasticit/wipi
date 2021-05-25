@@ -2,7 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Modal, Divider, Badge, Popconfirm, Spin, Select, Button, Icon, message } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Modal, Divider, Badge, Popconfirm, Spin, Select, Button, message } from 'antd';
 import { resolveUrl } from '@/utils';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { PageProvider } from '@/providers/page';
@@ -171,7 +172,7 @@ const Page: NextPage<IProps> = ({ pages: defaultPages = [], total: defaultTotal 
             <Link href={'/page/editor'}>
               <a>
                 <Button type="primary">
-                  <Icon type="plus" />
+                  <PlusOutlined />
                   新建
                 </Button>
               </a>

@@ -1,9 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { Row, Col, Form, Button, Input, Icon, Modal } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Form, Icon as LegacyIcon } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Row, Col, Button, Input, Modal } from 'antd';
 import Router from 'next/router';
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
-import { FormComponentProps } from 'antd/es/form';
+import { FormComponentProps } from '@ant-design/compatible/es/form';
 import { UserProvider } from '@/providers/user';
 import { Svg } from '@/assets/RegisterSvg';
 import style from './index.module.scss';
@@ -75,7 +78,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
                   rules: [{ required: true, message: '请输入用户名！' }],
                 })(
                   <Input
-                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     autoComplete={'off'}
                     size="large"
                     placeholder="请输入用户名"
@@ -93,7 +96,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
                   ],
                 })(
                   <Input
-                    prefix={<Icon type="password" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    prefix={<LegacyIcon type="password" style={{ color: 'rgba(0,0,0,.25)' }} />}
                     autoComplete={'off'}
                     type="password"
                     size="large"
@@ -112,7 +115,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
                   ],
                 })(
                   <Input
-                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     autoComplete={'off'}
                     type="password"
                     size="large"

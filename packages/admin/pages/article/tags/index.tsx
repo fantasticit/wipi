@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { NextPage } from 'next';
-import { Row, Col, Card, Button, Input, Popconfirm, List, Form, message } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Row, Col, Card, Button, Input, Popconfirm, List, message } from 'antd';
 import cls from 'classnames';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { TagProvider } from '@/providers/tag';

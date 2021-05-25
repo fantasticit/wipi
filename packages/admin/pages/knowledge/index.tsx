@@ -1,7 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { Icon, Card, Button, List, Tooltip, Select, Popconfirm } from 'antd';
+import { DeleteOutlined, EditOutlined, PlusOutlined, SettingOutlined } from '@ant-design/icons';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Card, Button, List, Tooltip, Select, Popconfirm } from 'antd';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { useToggle } from '@/hooks/useToggle';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
@@ -80,23 +82,23 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
           actions={[
             <Link href={`/knowledge/editor/[id]`} as={`/knowledge/editor/` + book.id}>
               <a>
-                <Icon type="edit" key="edit" />
+                <EditOutlined key="edit" />
               </a>
             </Link>,
             <Tooltip title={book.status === 'draft' ? '发布线上' : '设为草稿'}>
-              <Icon
+              <LegacyIcon
                 onClick={() => toggleBookStatus(book)}
                 type={book.status === 'draft' ? 'cloud-upload' : 'cloud-download'}
               />
             </Tooltip>,
-            <Icon type="setting" key="setting" onClick={() => editBook(book)} />,
+            <SettingOutlined key="setting" onClick={() => editBook(book)} />,
             <Popconfirm
               title="确认删除？"
               okText="确认"
               cancelText="取消"
               onConfirm={() => deleteBook(book)}
             >
-              <Icon type="delete" key="setting" />
+              <DeleteOutlined key="setting" />
             </Popconfirm>,
           ]}
         >
@@ -141,7 +143,7 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
         onSearch={getBooks}
         rightNode={
           <Button type="primary" onClick={toggleVisible}>
-            <Icon type="plus" />
+            <PlusOutlined />
             新建
           </Button>
         }
