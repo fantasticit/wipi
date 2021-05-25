@@ -1,6 +1,7 @@
 import React from 'react';
-import Icon, { GithubOutlined } from '@ant-design/icons';
 import cls from 'classnames';
+import Icon, { GithubOutlined } from '@ant-design/icons';
+import { Opacity } from '@/components/Animation/Opacity';
 import style from './index.module.scss';
 
 const RSS = () => {
@@ -31,31 +32,33 @@ const RSS = () => {
 export const Footer = ({ setting, className = '' }) => {
   return (
     <footer className={cls(style.footer, className)}>
-      <ul className={style.icons}>
-        <li>
-          <a className={style.github} href="/rss" target="_blank">
-            <RSS />
-          </a>
-        </li>
-        <li>
-          <a
-            className={style.github}
-            href="https://github.com/fantasticit/wipi"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <GithubOutlined />
-          </a>
-        </li>
-      </ul>
-      {setting && setting.systemFooterInfo && (
-        <div
-          className={style.copyright}
-          dangerouslySetInnerHTML={{
-            __html: setting.systemFooterInfo,
-          }}
-        ></div>
-      )}
+      <Opacity>
+        <ul className={style.icons}>
+          <li>
+            <a className={style.github} href="/rss" target="_blank">
+              <RSS />
+            </a>
+          </li>
+          <li>
+            <a
+              className={style.github}
+              href="https://github.com/fantasticit/wipi"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <GithubOutlined />
+            </a>
+          </li>
+        </ul>
+        {setting && setting.systemFooterInfo && (
+          <div
+            className={style.copyright}
+            dangerouslySetInnerHTML={{
+              __html: setting.systemFooterInfo,
+            }}
+          ></div>
+        )}
+      </Opacity>
     </footer>
   );
 };
