@@ -1,5 +1,5 @@
 .articleItem {
-  > div {
+  > div > div {
     border: 1px solid var(--border-color);
     background: var(--bg-second);
     border-radius: var(--border-radius);
@@ -29,21 +29,21 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  
+
   .summary {
     color: var(--second-text-color);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  
+
   .meta {
     width: 100%;
     color: #8590a6;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  
+
     .seperator {
       margin: 0 4px;
     }
@@ -57,13 +57,13 @@
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
-  .articleItem:nth-child(n+3) {
+  .articleItem:nth-child(n + 3) {
     margin-top: 1rem;
   }
 }
 
 @media (min-width: 768px) {
-  .articleItem:nth-child(n+4) {
+  .articleItem:nth-child(n + 4) {
     margin-top: 1rem;
   }
 }

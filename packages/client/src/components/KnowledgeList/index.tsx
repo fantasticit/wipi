@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import cls from 'classnames';
-import { Row, Card } from 'antd';
+import { Row } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
@@ -17,7 +16,11 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
       {knowledges && knowledges.length ? (
         knowledges.map((knowledge) => {
           return (
-            <Opacity className={cls(style.articleItem)}>
+            <Opacity
+              containerProps={{
+                className: style.articleItem,
+              }}
+            >
               <Link
                 key={knowledge.id}
                 href={`/knowledge/[pId]`}

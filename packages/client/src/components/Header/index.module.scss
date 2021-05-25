@@ -4,7 +4,7 @@ $height: 64px;
   position: relative;
   width: 100%;
   height: $height;
-  transition: all 0.2s;
+  transition: all 0.3s ease-in-out;
 
   &.isFixed {
     position: fixed;

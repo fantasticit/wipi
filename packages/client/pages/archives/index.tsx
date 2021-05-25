@@ -24,7 +24,8 @@ const ArchiveItem = ({ month, articles = [] }) => {
           options={{
             opacity: 1,
             height: 48,
-            from: { opacity: 0, height: 0 },
+            x: 0,
+            from: { opacity: 0, height: 0, x: -20 },
           }}
           renderItem={(index) => {
             const article = articles[index];

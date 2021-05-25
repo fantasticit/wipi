@@ -1,9 +1,13 @@
 .wrapper {
-  border-radius: var(--border-radius);
   margin-bottom: 1.3rem;
-  background-color: var(--bg-second);
-  box-shadow: var(--box-shadow);
   line-height: 1.29;
+  overflow: hidden;
+
+  &.inline {
+    border-radius: var(--border-radius);
+    background-color: var(--bg-second);
+    box-shadow: var(--box-shadow);
+  }
 
   .title {
     padding: 1rem;

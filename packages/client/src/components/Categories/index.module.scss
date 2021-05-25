@@ -4,6 +4,7 @@
   background-color: var(--bg-second);
   box-shadow: var(--box-shadow);
   line-height: 1.29;
+  overflow: hidden;
 
   .title {
     padding: 1rem 1.3rem;
@@ -21,7 +22,7 @@
     border-radius: var(--border-radius);
     color: var(--second-text-color);
     line-height: 1.5em;
-    transition: all ease-in-out .2s;
+    transition: all ease-in-out 0.2s;
 
     a {
       display: inline-flex;

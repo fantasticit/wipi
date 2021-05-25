@@ -39,7 +39,7 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
         <CommentEditor hostId={articleId} parentComment={null} replyComment={null} />
       </div>
       <Comments comments={comments} />
-      <Opacity>
+      <Opacity from={{ y: 20 }} to={{ y: 0 }}>
         <div className={styles.pagination} style={{ padding: loading || total > 0 ? '16px 0' : 0 }}>
           {!loading && total > 0 ? (
             <Pagination
