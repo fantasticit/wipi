@@ -11,7 +11,7 @@
     "pm2": "pm2 start npm --name admin -- start"
   },
   "dependencies": {
-    "antd": "^3.26.7",
+    "antd": "4",
     "array-move": "^3.0.1",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
