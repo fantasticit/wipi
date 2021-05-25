@@ -1,4 +1,5 @@
 import React from 'react';
+import { PlusOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, Button } from 'antd';
 import Link from 'next/link';
 
@@ -24,7 +25,7 @@ export const ResourceCreate = ({ collapsed = false }) => {
 
   return (
     <Dropdown overlay={menu} placement="bottomLeft">
-      <Button style={{ width: '100%' }} type="primary" size="large" icon="plus">
+      <Button style={{ width: '100%' }} type="primary" size="large" icon={<PlusOutlined />}>
         {!collapsed && '新建'}
       </Button>
     </Dropdown>

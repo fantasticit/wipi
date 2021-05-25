@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Icon, message } from 'antd';
+import { FileImageOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button, message } from 'antd';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { SettingProvider } from '@/providers/setting';
 
@@ -69,13 +72,11 @@ export const SystemSetting = ({ setting }) => {
         <Input
           placeholder="请输入 logo 链接或选择文件，也可输入 html"
           addonAfter={
-            <Icon
-              type="file-image"
+            <FileImageOutlined
               onClick={() => {
                 setMode('logo');
                 setVisible(true);
-              }}
-            />
+              }} />
           }
           value={systemLogo}
           onChange={(e) => {
@@ -87,13 +88,11 @@ export const SystemSetting = ({ setting }) => {
         <Input
           placeholder="请输入 favicon 链接或选择文件"
           addonAfter={
-            <Icon
-              type="file-image"
+            <FileImageOutlined
               onClick={() => {
                 setMode('favicon');
                 setVisible(true);
-              }}
-            />
+              }} />
           }
           value={systemFavicon}
           onChange={(e) => {

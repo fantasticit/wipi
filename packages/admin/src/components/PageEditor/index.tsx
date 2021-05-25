@@ -4,13 +4,13 @@ import Router from 'next/router';
 import { Helmet } from 'react-helmet';
 import { resolveUrl } from '@/utils';
 import { useToggle } from '@/hooks/useToggle';
+import { CloseOutlined, EllipsisOutlined, FileImageOutlined } from '@ant-design/icons';
 import {
   Button,
   Input,
   InputNumber,
   message,
   PageHeader,
-  Icon,
   Drawer,
   Dropdown,
   Menu,
@@ -169,7 +169,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
             borderBottom: '1px solid rgb(235, 237, 240)',
             background: '#fff',
           }}
-          backIcon={<Button size="small" icon="close" />}
+          backIcon={<Button size="small" icon={<CloseOutlined />} />}
           onBack={close}
           title={
             <Input
@@ -203,7 +203,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
                 </Menu>
               }
             >
-              <Button icon="ellipsis" type="link"></Button>
+              <Button icon={<EllipsisOutlined />} type="link"></Button>
             </Dropdown>,
           ]}
         />
@@ -229,7 +229,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
           content={
             <Input
               placeholder="请输入页面封面"
-              addonAfter={<Icon type="file-image" onClick={toggleFileDrawerVisible} />}
+              addonAfter={<FileImageOutlined onClick={toggleFileDrawerVisible} />}
               defaultValue={page.cover}
               onChange={patchPage('cover')}
             />

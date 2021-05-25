@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import cls from 'classnames';
 import Router from 'next/router';
+import { CloseOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Button, Input, message, PageHeader, Modal, Dropdown, Menu } from 'antd';
 import { Helmet } from 'react-helmet';
 import { resolveUrl } from '@/utils';
@@ -176,7 +177,7 @@ export const ArticleEditor: React.FC<IProps> = ({
       </Helmet>
       <header className={style.header}>
         <PageHeader
-          backIcon={<Button size="small" icon="close" />}
+          backIcon={<Button size="small" icon={<CloseOutlined />} />}
           style={{
             borderBottom: '1px solid rgb(235, 237, 240)',
           }}
@@ -213,7 +214,7 @@ export const ArticleEditor: React.FC<IProps> = ({
                 </Menu>
               }
             >
-              <Button icon="ellipsis" type="link"></Button>
+              <Button icon={<EllipsisOutlined />} type="link"></Button>
             </Dropdown>,
           ]}
         />

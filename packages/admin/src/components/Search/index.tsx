@@ -1,6 +1,8 @@
 import React from 'react';
-import { Form, Row, Col, Input, Button } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Row, Col, Input, Button } from 'antd';
+import { FormComponentProps } from '@ant-design/compatible/es/form';
 import style from './index.module.scss';
 
 export interface IFieldItem {

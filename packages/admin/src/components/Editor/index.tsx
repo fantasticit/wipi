@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import cls from 'classnames';
-import { Tooltip, Divider, Icon } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
+import { Tooltip, Divider } from 'antd';
 import { useToggle } from '@/hooks/useToggle';
 import { DEFAULT_MARKDOWN } from './DefaultMarkdown';
 import { toolbar } from './toolbar';
@@ -154,7 +155,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
             <header>
               <span>大纲</span>
               <span onClick={toggleTocVisible}>
-                <Icon type="close" />
+                <CloseOutlined />
               </span>
             </header>
             <main>

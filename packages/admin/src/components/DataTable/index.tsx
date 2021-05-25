@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useReducer } from 'react';
-import { Table, Icon, Tooltip } from 'antd';
+import { ReloadOutlined } from '@ant-design/icons';
+import { Table, Tooltip } from 'antd';
 import { TableSize } from 'antd/es/table';
 import { Pagination } from '@/components/Pagination';
 import { IFieldItem, Search } from '@/components/Search';
@@ -94,7 +95,7 @@ export const DataTable: React.FC<IProps> = ({
               <div>
                 {rightNode}
                 <Tooltip title="刷新">
-                  <Icon type="reload" onClick={getData} style={{ marginLeft: 12 }} />
+                  <ReloadOutlined onClick={getData} style={{ marginLeft: 12 }} />
                 </Tooltip>
               </div>
             </div>

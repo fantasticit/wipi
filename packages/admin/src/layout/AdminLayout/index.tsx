@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
-import { Layout, Breadcrumb, Row, Col, Menu, Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { CopyrightOutlined, GithubOutlined } from '@ant-design/icons';
+import { Layout, Breadcrumb, Row, Col, Menu } from 'antd';
 import Link from 'next/link';
 import cls from 'classnames';
 import { useSetting } from '@/hooks/useSetting';
@@ -43,7 +45,7 @@ export const AdminLayout: React.FC = ({ children }) => {
                         [style.active]: activeMenu && activeMenu.path === menu.path,
                       })}
                     >
-                      <Icon type={menu.icon} />
+                      <LegacyIcon type={menu.icon} />
                       <span>{menu.label}</span>
                     </a>
                   </Link>
@@ -56,7 +58,7 @@ export const AdminLayout: React.FC = ({ children }) => {
         <header>
           <Row>
             <Col span={12}>
-              <Icon
+              <LegacyIcon
                 className="trigger"
                 type={collapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={toggleCollapse}
@@ -70,7 +72,7 @@ export const AdminLayout: React.FC = ({ children }) => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Icon type="github" />
+                  <GithubOutlined />
                   <span></span>
                 </a>
                 <UserInfo />
@@ -104,13 +106,13 @@ export const AdminLayout: React.FC = ({ children }) => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Icon type="github" />
+                    <GithubOutlined />
                   </a>
                 </li>
               </ul>
               <div className={style.copyright}>
                 <p>
-                  Copyright <Icon type="copyright" /> {new Date().getFullYear()} Designed by
+                  Copyright <CopyrightOutlined /> {new Date().getFullYear()} Designed by
                   <a href="https://github.com/fantasticit/wipi" target="_blank" rel="noreferrer">
                     {' '}
                     Fantasticit.

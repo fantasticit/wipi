@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button, message } from 'antd';
 import { SettingProvider } from '@/providers/setting';
 
 export const AnalyticsSetting = ({ setting }) => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { UserOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, Avatar } from 'antd';
 import { useUser } from '@/hooks/useUser';
 
@@ -49,7 +50,7 @@ export const UserInfo = () => {
         {user && user.avatar ? (
           <Avatar size={'small'} src={user.avatar} />
         ) : (
-          <Avatar size={'small'} icon="user" />
+          <Avatar size={'small'} icon={<UserOutlined />} />
         )}
         {user ? <span style={{ marginLeft: 8 }}>Hi, {user.name}</span> : null}
       </div>

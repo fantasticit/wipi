@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Spin, Upload as AntdUpload, Icon, message } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
+import { Spin, Upload as AntdUpload, message } from 'antd';
 import { FileProvider } from '@/providers/file';
 
 export const Upload = ({
@@ -39,7 +40,7 @@ export const Upload = ({
         {children || (
           <>
             <p className="ant-upload-drag-icon">
-              <Icon type="inbox" />
+              <InboxOutlined />
             </p>
             <p className="ant-upload-text">点击选择文件或将文件拖拽到此处</p>
             <p className="ant-upload-hint">文件将上传到 阿里云 OSS, 如未配置请先配置</p>
