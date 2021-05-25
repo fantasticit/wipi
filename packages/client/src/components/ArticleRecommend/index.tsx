@@ -70,7 +70,7 @@ export const ArticleRecommend: React.FC<IProps> = ({
             </ul>
           )
         ) : (
-          <ArticleList articles={articles || []} coverHeight={110} />
+          <ArticleList articles={articles || []} coverHeight={110} asRecommend />
         )}
       </Spin>
     </div>

@@ -11,9 +11,14 @@ const { Meta } = Card;
 interface IProps {
   articles: IArticle[];
   coverHeight?: number;
+  asRecommend?: boolean;
 }
 
-export const ArticleList: React.FC<IProps> = ({ articles = [], coverHeight = 168 }) => {
+export const ArticleList: React.FC<IProps> = ({
+  articles = [],
+  coverHeight = 168,
+  asRecommend = false,
+}) => {
   return (
     <Row gutter={16}>
       {articles && articles.length ? (
@@ -33,7 +38,11 @@ export const ArticleList: React.FC<IProps> = ({ articles = [], coverHeight = 168
                     cover={
                       <LazyLoad height={208}>
                         <div className={style.coverWrapper} style={{ height: coverHeight }}>
-                          <img src={article.cover} alt="cover" />
+                          <img
+                            src={article.cover}
+                            alt="cover"
+                            onClick={(e) => asRecommend && e.stopPropagation()}
+                          />
                         </div>
                       </LazyLoad>
                     }
