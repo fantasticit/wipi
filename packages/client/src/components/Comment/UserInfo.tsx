@@ -40,11 +40,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({ visible, onCancel, onOk }) =
       onCancel={onCancel}
     >
       <Form name="user-info" onFinish={submit}>
-        <Form.Item
-          label="名称"
-          name="name"
-          rules={[{ required: true, message: '请输入您的称呼!' }]}
-        >
+        <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入您的称呼' }]}>
           <Input />
         </Form.Item>
         <Form.Item

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef } from 'react';
 import { Button, Pagination } from 'antd';
 import { CommentProvider } from '@/providers/comment';
 import { usePagination } from '@/hooks/usePagination';

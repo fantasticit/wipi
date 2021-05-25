@@ -1,16 +1,22 @@
 .wrapper {
-  textarea {
-    border-color: var(--comment-editor-border-color);
-    color: var(--main-text-color);
-    background-color: var(--bg-second);
-    box-shadow: none !important;
-  }
+  .textareaWrapper {
+    position: relative;
 
-  :global {
-    .ant-btn-primary[disabled] {
+    .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    textarea {
       border-color: var(--comment-editor-border-color);
       color: var(--main-text-color);
-      background-color: var(--comment-editor-disable-bg);
+      background-color: var(--bg-second);
+      box-shadow: none !important;
     }
   }
 
@@ -18,5 +24,30 @@
     display: flex;
     justify-content: space-between;
     padding-top: 1rem;
+
+    :global {
+      .ant-btn-primary[disabled] {
+        border-color: var(--comment-editor-border-color);
+        color: var(--main-text-color);
+        background-color: var(--comment-editor-disable-bg);
+      }
+    }
+
+    .emojiTrigger {
+      display: flex;
+      align-items: center;
+
+      color: var(--disable-text-color);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--primary-color);
+      }
+
+      > span {
+        margin-left: 4px;
+        transform: translateY(1px);
+      }
+    }
   }
 }
