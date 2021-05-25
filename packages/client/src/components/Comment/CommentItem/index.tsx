@@ -43,10 +43,10 @@ export const CommentItem: React.FC<Props> = ({ comment, parentComment, isChild =
           ) : null}
         </span>
       </header>
-      <main style={{ padding: `12px ${paddingHorizontal}px` }}>
+      <main style={{ padding: `12px 0 12px ${paddingHorizontal}px` }}>
         <div dangerouslySetInnerHTML={{ __html: comment.html || comment.content }} />
       </main>
-      <footer style={{ padding: `0 ${paddingHorizontal}px` }}>
+      <footer style={{ paddingLeft: `${paddingHorizontal}px` }}>
         <div className={styles.meta}>
           {comment.userAgent ? (
             <span>
