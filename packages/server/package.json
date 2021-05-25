@@ -2,7 +2,7 @@
   "name": "@wipi/server",
   "version": "0.0.1",
   "description": "",
-  "author": "fantasticit <zhxuc7@163.com>",
+  "author": "fantasticit <fantasticit@163.com>",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
@@ -81,7 +81,11 @@
     "typescript": "^3.6.3"
   },
   "jest": {
-    "moduleFileExtensions": ["js", "json", "ts"],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
     "rootDir": "src",
     "testRegex": ".spec.ts$",
     "transform": {

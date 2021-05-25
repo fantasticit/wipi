@@ -1,7 +1,7 @@
 {
   "name": "@wipi/client",
   "version": "0.0.1",
-  "author": "fantasticit <zhxuc7@163.com>",
+  "author": "fantasticit <fantasticit@163.com>",
   "private": true,
   "scripts": {
     "dev": "next dev",
