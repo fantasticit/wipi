@@ -32,7 +32,7 @@ const RSS = () => {
 export const Footer = ({ setting, className = '' }) => {
   return (
     <footer className={cls(style.footer, className)}>
-      <Opacity from={{ y: 20 }} to={{ y: 0 }}>
+      <Opacity>
         <ul className={style.icons}>
           <li>
             <a className={style.github} href="/rss" target="_blank">

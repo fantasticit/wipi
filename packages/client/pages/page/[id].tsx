@@ -3,7 +3,6 @@ import { NextPage } from 'next';
 import { Helmet } from 'react-helmet';
 import { GlobalContext } from '@/context/global';
 import { PageProvider } from '@/providers/page';
-import { Opacity } from '@/components/Animation/Opacity';
 import { ImageViewer } from '@/components/ImageViewer';
 import { Comment } from '@/components/Comment';
 import { MarkdownReader } from '@/components/MarkdownReader';
@@ -29,37 +28,35 @@ const Page: NextPage<IProps> = ({ page }) => {
         </div>
       ) : (
         <ImageViewer containerSelector="#js-page-wrapper">
-          <Opacity key={page.id} from={{ y: 20 }} to={{ y: 0 }}>
-            <div id="js-page-wrapper" className={style.container}>
-              <Helmet>
-                <title>{page.name + ' | ' + setting.systemTitle}</title>
-              </Helmet>
-              <div className="container">
-                {page.cover && (
-                  <div className={style.coverWrapper}>
-                    <img src={page.cover} alt="文章封面" />
-                  </div>
-                )}
-                <div className={style.content}>
-                  <MarkdownReader content={page.html} />
+          <div id="js-page-wrapper" className={style.container}>
+            <Helmet>
+              <title>{page.name + ' | ' + setting.systemTitle}</title>
+            </Helmet>
+            <div className="container">
+              {page.cover && (
+                <div className={style.coverWrapper}>
+                  <img src={page.cover} alt="文章封面" />
+                </div>
+              )}
+              <div className={style.content}>
+                <MarkdownReader content={page.html} />
+              </div>
+            </div>
+            <div className={style.commentAndArticleWrapper}>
+              <div className={style.comments}>
+                <p className={style.title}>评论</p>
+                <div className={style.commentContainer}>
+                  <Comment key={page.id} hostId={page.id} />
                 </div>
               </div>
-              <div className={style.commentAndArticleWrapper}>
-                <div className={style.comments}>
-                  <p className={style.title}>评论</p>
-                  <div className={style.commentContainer}>
-                    <Comment key={page.id} hostId={page.id} />
-                  </div>
-                </div>
-                <div className={style.recmmendArticles}>
-                  <p className={style.title}>推荐阅读</p>
-                  <div className={style.articleContainer}>
-                    <ArticleRecommend articleId={null} needTitle={false} />
-                  </div>
+              <div className={style.recmmendArticles}>
+                <p className={style.title}>推荐阅读</p>
+                <div className={style.articleContainer}>
+                  <ArticleRecommend articleId={null} needTitle={false} />
                 </div>
               </div>
             </div>
-          </Opacity>
+          </div>
         </ImageViewer>
       )}
     </>

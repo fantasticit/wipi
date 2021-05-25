@@ -8,7 +8,6 @@ import { TagOutlined } from '@ant-design/icons';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ArticleProvider } from '@/providers/article';
-import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ImageViewer } from '@/components/ImageViewer';
 import { Comment } from '@/components/Comment';
@@ -82,98 +81,96 @@ const Article: NextPage<IProps> = ({ article }) => {
         <title>{(article.title || '未知标题') + ' | ' + setting.systemTitle}</title>
       </Helmet>
       <ImageViewer containerSelector="#js-article-wrapper">
-        <Opacity from={{ y: 20 }} to={{ y: 0 }}>
-          <article id="js-article-wrapper" className={style.articleWrap}>
-            {/* S 文章 Seo 信息 */}
-            {setting.systemUrl && (
-              <meta
-                itemProp="url"
-                content={url.resolve(setting.systemUrl, `/article/${article.id}`)}
-              />
-            )}
-            <meta itemProp="headline" content={article.title} />
-            {article.tags && (
-              <meta itemProp="keywords" content={article.tags.map((tag) => tag.label).join(' ')} />
-            )}
-            <meta itemProp="dataPublished" content={article.publishAt} />
-            {article.cover && <meta itemProp="image" content={article.cover} />}
-            {/* E 文章 Seo 信息 */}
+        <article id="js-article-wrapper" className={style.articleWrap}>
+          {/* S 文章 Seo 信息 */}
+          {setting.systemUrl && (
+            <meta
+              itemProp="url"
+              content={url.resolve(setting.systemUrl, `/article/${article.id}`)}
+            />
+          )}
+          <meta itemProp="headline" content={article.title} />
+          {article.tags && (
+            <meta itemProp="keywords" content={article.tags.map((tag) => tag.label).join(' ')} />
+          )}
+          <meta itemProp="dataPublished" content={article.publishAt} />
+          {article.cover && <meta itemProp="image" content={article.cover} />}
+          {/* E 文章 Seo 信息 */}
 
-            {/* S 文章封面 */}
-            {article.cover && (
-              <div className={style.coverWrapper}>
-                <img src={article.cover} alt="文章封面" />
-              </div>
-            )}
-            {/* E 文章封面 */}
-
-            {/* S 文章元信息 */}
-            <div className={style.metaInfoWrap}>
-              <h1 className={style.title}>{article.title}</h1>
-              <p className={style.desc}>
-                <span>
-                  发布于
-                  <LocaleTime date={article.publishAt} />
-                </span>
-                <span> • </span>
-                <span>阅读量 {article.views}</span>
-              </p>
-            </div>
-            {/* E 文章元信息 */}
-
-            {/* S 文章内容 */}
-            <MarkdownReader content={article.html} />
-            {/* E 文章内容 */}
-
-            {/* S 文章脚部 */}
-            <div className={style.footerInfoWrap}>
-              {/* S 文章版权 */}
-              <div className={style.copyrightInfo}>
-                发布时间：
-                <LocaleTime date={article.publishAt} /> | 版权信息：
-                <a
-                  href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  非商用-署名-自由转载
-                </a>
-              </div>
-              {/* E 文章版权 */}
-
-              {/* S 文章标签 */}
-              {article.tags && article.tags.length ? (
-                <div className={style.tagsWrap}>
-                  {article.tags.map((tag) => {
-                    return (
-                      <div className={style.tagWrapper} key={tag.id}>
-                        <div className={style.tag}>
-                          <Link href={'/tag/[tag]'} as={'/tag/' + tag.value} scroll={false}>
-                            <a>
-                              <TagOutlined />
-                              <span>{tag.label}</span>
-                            </a>
-                          </Link>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : null}
-              {/* E 文章标签 */}
-            </div>
-            {/* E 文章脚部 */}
-          </article>
-
-          {/* S 文章评论 */}
-          {article.isCommentable && (
-            <div className={style.commentWrap}>
-              <p className={style.title}>评论</p>
-              <Comment key={article.id} hostId={article.id} />
+          {/* S 文章封面 */}
+          {article.cover && (
+            <div className={style.coverWrapper}>
+              <img src={article.cover} alt="文章封面" />
             </div>
           )}
-          {/* E 文章评论 */}
-        </Opacity>
+          {/* E 文章封面 */}
+
+          {/* S 文章元信息 */}
+          <div className={style.metaInfoWrap}>
+            <h1 className={style.title}>{article.title}</h1>
+            <p className={style.desc}>
+              <span>
+                发布于
+                <LocaleTime date={article.publishAt} />
+              </span>
+              <span> • </span>
+              <span>阅读量 {article.views}</span>
+            </p>
+          </div>
+          {/* E 文章元信息 */}
+
+          {/* S 文章内容 */}
+          <MarkdownReader content={article.html} />
+          {/* E 文章内容 */}
+
+          {/* S 文章脚部 */}
+          <div className={style.footerInfoWrap}>
+            {/* S 文章版权 */}
+            <div className={style.copyrightInfo}>
+              发布时间：
+              <LocaleTime date={article.publishAt} /> | 版权信息：
+              <a
+                href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
+                target="_blank"
+                rel="noreferrer"
+              >
+                非商用-署名-自由转载
+              </a>
+            </div>
+            {/* E 文章版权 */}
+
+            {/* S 文章标签 */}
+            {article.tags && article.tags.length ? (
+              <div className={style.tagsWrap}>
+                {article.tags.map((tag) => {
+                  return (
+                    <div className={style.tagWrapper} key={tag.id}>
+                      <div className={style.tag}>
+                        <Link href={'/tag/[tag]'} as={'/tag/' + tag.value} scroll={false}>
+                          <a>
+                            <TagOutlined />
+                            <span>{tag.label}</span>
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : null}
+            {/* E 文章标签 */}
+          </div>
+          {/* E 文章脚部 */}
+        </article>
+
+        {/* S 文章评论 */}
+        {article.isCommentable && (
+          <div className={style.commentWrap}>
+            <p className={style.title}>评论</p>
+            <Comment key={article.id} hostId={article.id} />
+          </div>
+        )}
+        {/* E 文章评论 */}
       </ImageViewer>
     </>
   );

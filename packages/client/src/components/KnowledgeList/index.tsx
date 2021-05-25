@@ -16,13 +16,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
       {knowledges && knowledges.length ? (
         knowledges.map((knowledge) => {
           return (
-            <Opacity
-              containerProps={{
-                className: style.articleItem,
-              }}
-              from={{ y: 20 }}
-              to={{ y: 0 }}
-            >
+            <div className={style.articleItem}>
               <Link
                 key={knowledge.id}
                 href={`/knowledge/[pId]`}
@@ -50,7 +44,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
                   </div>
                 </a>
               </Link>
-            </Opacity>
+            </div>
           );
         })
       ) : (

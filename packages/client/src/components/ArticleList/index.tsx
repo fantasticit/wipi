@@ -25,7 +25,7 @@ export const ArticleList: React.FC<IProps> = ({
         articles.map((article) => {
           return (
             <Col className={style.articleItem} span={8} xs={24} sm={12} md={8}>
-              <Opacity from={{ y: 20 }} to={{ y: 0 }}>
+              <Opacity>
                 <Link
                   key={article.id}
                   href={`/article/[id]`}

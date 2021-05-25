@@ -5,7 +5,6 @@ import { ArticleProvider } from '@/providers/article';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ListTrail } from '@/components/Animation/Trail';
-import { Spring } from '@/components/Animation/Spring';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Categories } from '@components/Categories';
@@ -62,32 +61,30 @@ const Archives: NextPage<IProps> = ({ articles }) => {
   return (
     <DoubleColumnLayout
       leftNode={
-        <Spring from={{ y: 20 }} to={{ y: 0 }}>
-          <div className={style.content}>
-            <div className={style.summary}>
-              <p>
-                <span>归档</span>
-              </p>
-              <p>
-                共计 <span>{resolveArticlesCount(articles)}</span> 篇
-              </p>
-            </div>
-            {Object.keys(articles)
-              .sort((a, b) => +b - +a)
-              .map((year) => {
-                return (
-                  <div className={style.list}>
-                    <h2>{year}</h2>
-                    {Object.keys(articles[year]).map((month) => {
-                      return (
-                        <ArchiveItem key={year} month={month} articles={articles[year][month]} />
-                      );
-                    })}
-                  </div>
-                );
-              })}
+        <div className={style.content}>
+          <div className={style.summary}>
+            <p>
+              <span>归档</span>
+            </p>
+            <p>
+              共计 <span>{resolveArticlesCount(articles)}</span> 篇
+            </p>
           </div>
-        </Spring>
+          {Object.keys(articles)
+            .sort((a, b) => +b - +a)
+            .map((year) => {
+              return (
+                <div className={style.list}>
+                  <h2>{year}</h2>
+                  {Object.keys(articles[year]).map((month) => {
+                    return (
+                      <ArchiveItem key={year} month={month} articles={articles[year][month]} />
+                    );
+                  })}
+                </div>
+              );
+            })}
+        </div>
       }
       rightNode={
         <div className="sticky">
