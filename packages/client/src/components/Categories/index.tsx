@@ -3,7 +3,7 @@ import cls from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ListTrail } from '@/components/Animation/Trail';
-import { Opacity } from '@/components/Animation/Opacity';
+import { Spring } from '@/components/Animation/Spring';
 import style from './index.module.scss';
 
 export const Categories = ({ categories = [] }) => {
@@ -11,7 +11,7 @@ export const Categories = ({ categories = [] }) => {
   const { category: routerCategory } = router.query;
 
   return (
-    <Opacity from={{ y: 20 }} to={{ y: 0 }}>
+    <Spring from={{ y: 20 }} to={{ y: 0 }}>
       <div className={style.wrapper}>
         <div className={style.title}>
           <span>文章分类</span>
@@ -45,6 +45,6 @@ export const Categories = ({ categories = [] }) => {
           />
         </ul>
       </div>
-    </Opacity>
+    </Spring>
   );
 };

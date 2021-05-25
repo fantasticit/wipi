@@ -4,7 +4,7 @@ import { Spin } from 'antd';
 import cls from 'classnames';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { ArticleProvider } from '@/providers/article';
-import { Opacity } from '@/components/Animation/Opacity';
+import { Spring } from '@/components/Animation/Spring';
 import { ListTrail } from '@/components/Animation/Trail';
 import { ArticleList } from '@components/ArticleList';
 import { LocaleTime } from '@/components/LocaleTime';
@@ -31,7 +31,7 @@ export const ArticleRecommend: React.FC<IProps> = ({
   }, [articleId, getRecommend]);
 
   return (
-    <Opacity from={{ y: 20 }} to={{ y: 0 }}>
+    <Spring from={{ y: 20 }} to={{ y: 0 }}>
       <div className={cls(style.wrapper, mode === 'inline' && style.inline)}>
         {needTitle && (
           <div className={style.title}>
@@ -78,6 +78,6 @@ export const ArticleRecommend: React.FC<IProps> = ({
           )}
         </Spin>
       </div>
-    </Opacity>
+    </Spring>
   );
 };

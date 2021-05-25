@@ -20,6 +20,8 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
               containerProps={{
                 className: style.articleItem,
               }}
+              from={{ y: 20 }}
+              to={{ y: 0 }}
             >
               <Link
                 key={knowledge.id}
