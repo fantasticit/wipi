@@ -3,7 +3,12 @@
     margin: 0 0 16px;
   }
 
-  .action a {
-    color: #1890ff;
+  .action {
+    display: flex;
+    align-items: center;
+
+    a {
+      color: #1890ff;
+    }
   }
 }

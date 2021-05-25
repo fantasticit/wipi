@@ -1,10 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { NextPage } from 'next';
-import { Select } from 'antd';
+import { Select, Button, Popconfirm, message } from 'antd';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { CommentProvider } from '@/providers/comment';
-import { DataTable } from '@/components/DataTable';
-import { useSetting } from '@/hooks/useSetting';
+import { useAsyncLoading } from '@/hooks/useAsyncLoading';
+import { usePagination } from '@/hooks/usePagination';
+import { PaginationTable } from '@/components/PaginationTable';
 import { LocaleTime } from '@/components/LocaleTime';
 import { CommentArticle } from '@/components/comment/CommentArticle';
 import { CommentAction } from '@/components/comment/CommentAction';
@@ -12,21 +13,62 @@ import { CommentContent } from '@/components/comment/CommentContent';
 import { CommentHTML } from '@/components/comment/CommentHTML';
 import { CommentStatus } from '@/components/comment/CommentStatus';
 
+let updateLoadingMessage = null;
+
 interface IProps {
   comments: IComment[];
   total: number;
 }
 
-const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }) => {
-  const [comments, setComments] = useState<IComment[]>(defaultComments);
-  const [params, setParams] = useState(null);
+const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
+  const {
+    loading,
+    data: comments,
+    total,
+    page,
+    pageSize,
+    params,
+    setPage,
+    setPageSize,
+    setParams,
+    refresh,
+    reset,
+  } = usePagination<IComment>(CommentProvider.getComments);
+  const [updateApi, updateLoading] = useAsyncLoading(CommentProvider.updateComment);
+  const [deleteApi, deleteLoading] = useAsyncLoading(CommentProvider.deleteComment);
 
-  const getComments = useCallback((params) => {
-    return CommentProvider.getComments(params).then((res) => {
-      setComments(res[0]);
-      return res;
-    });
-  }, []);
+  const updateAction = useCallback(
+    (articles, key, value = null) => {
+      if (!Array.isArray(articles)) {
+        articles = [articles];
+      }
+      return () =>
+        Promise.all(
+          articles.map((article) =>
+            updateApi(article.id, { [key]: value !== null ? value : !article[key] })
+          )
+        ).then(() => {
+          message.success('操作成功');
+          refresh();
+        });
+    },
+    [updateApi, refresh]
+  );
+
+  const deleteAction = useCallback(
+    (ids) => {
+      if (!Array.isArray(ids)) {
+        ids = [ids];
+      }
+      return () => {
+        Promise.all(ids.map((id) => deleteApi(id))).then(() => {
+          message.success('操作成功');
+          refresh();
+        });
+      };
+    },
+    [deleteApi, refresh]
+  );
 
   const columns = [
     {
@@ -94,16 +136,64 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }
     title: '操作',
     key: 'action',
     fixed: 'right',
-    render: (_, record) => <CommentAction comment={record} refresh={() => getComments(params)} />,
+    render: (_, record) => <CommentAction comment={record} refresh={refresh} />,
   };
+
+  useEffect(() => {
+    if (updateLoading) {
+      updateLoadingMessage = message.loading('操作中...', 0);
+    } else {
+      updateLoadingMessage && updateLoadingMessage();
+    }
+  }, [updateLoading]);
 
   return (
     <AdminLayout>
       <div>
-        <DataTable
+        <PaginationTable
+          loading={loading}
           data={comments}
-          defaultTotal={total}
           columns={[...columns, actionColumn]}
+          total={total}
+          page={page}
+          pageSize={pageSize}
+          params={params}
+          setPage={setPage}
+          setPageSize={setPageSize}
+          setParams={setParams}
+          refresh={refresh}
+          reset={reset}
+          showSelection
+          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows }) =>
+            hasSelected ? (
+              <>
+                <Button
+                  disabled={!hasSelected}
+                  style={{ marginRight: 8 }}
+                  onClick={updateAction(selectedRows, 'pass', true)}
+                >
+                  通过
+                </Button>
+                <Button
+                  disabled={!hasSelected}
+                  style={{ marginRight: 8 }}
+                  onClick={updateAction(selectedRows, 'status', false)}
+                >
+                  拒绝
+                </Button>
+                <Popconfirm
+                  title="确认删除？"
+                  onConfirm={deleteAction(selectedRowKeys)}
+                  okText="确认"
+                  cancelText="取消"
+                >
+                  <Button disabled={!hasSelected} loading={deleteLoading} danger>
+                    删除
+                  </Button>
+                </Popconfirm>
+              </>
+            ) : null
+          }
           scroll={{ x: 1440 }}
           searchFields={[
             {
@@ -135,10 +225,6 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [], total = 0 }
               ),
             },
           ]}
-          onSearch={(params) => {
-            setParams(params);
-            return getComments(params);
-          }}
         />
       </div>
     </AdminLayout>

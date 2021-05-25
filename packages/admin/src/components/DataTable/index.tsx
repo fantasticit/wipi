@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useReducer } from 'react';
 import { ReloadOutlined } from '@ant-design/icons';
 import { Table, Tooltip } from 'antd';
-import { TableSize } from 'antd/es/table';
+import { SizeType } from 'antd/lib/config-provider/SizeContext';
 import { Pagination } from '@/components/Pagination';
 import { IFieldItem, Search } from '@/components/Search';
 import style from './index.module.scss';
@@ -14,7 +14,7 @@ interface IProps {
   searchFields: Array<IFieldItem>;
   showSearchLabel?: boolean;
   columns: Array<unknown>;
-  data: Array<unknown>;
+  data: Array<object>;
   customDataTable?: (data) => React.ReactNode;
   defaultTotal: number;
   onSearch: (arg) => Promise<unknown>;
@@ -48,7 +48,7 @@ export const DataTable: React.FC<IProps> = ({
   customDataTable = null,
 }) => {
   const [loading, setLoading] = useState(false);
-  const [size, setSize] = useState<TableSize>('default');
+  const [size, setSize] = useState<SizeType>('middle');
   const [total, setTotal] = useState(defaultTotal);
   const [params, dispatch] = useReducer(reducer, initialParams);
 

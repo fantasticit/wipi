@@ -50,7 +50,7 @@ if (!fs.existsSync(envFilePath)) {
   console.warn('can not locate .env file in ' + path.resolve(__dirname, '../'));
 }
 
-if (isProd && fs.existsSync(path.resolve(__dirname, '../.env.prod'))) {
+if (!isProd && fs.existsSync(path.resolve(__dirname, '../.env.prod'))) {
   envFilePath = path.resolve(__dirname, '../.env.prod');
 }
 

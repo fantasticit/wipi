@@ -1,22 +1,24 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { PlusOutlined } from '@ant-design/icons';
 import { Tag, Divider, Badge, Popconfirm, Modal, Spin, Select, Button, message } from 'antd';
-import { getOneTagColor } from '@/constants';
+import { getRandomColor } from '@/constants';
 import { resolveUrl } from '@/utils';
+import { useAsyncLoading } from '@/hooks/useAsyncLoading';
+import { usePagination } from '@/hooks/usePagination';
+import { useSetting } from '@/hooks/useSetting';
+import { useToggle } from '@/hooks/useToggle';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { ArticleProvider } from '@/providers/article';
-import { useSetting } from '@/hooks/useSetting';
 import { ViewProvider } from '@/providers/view';
 import { CategoryProvider } from '@/providers/category';
-import { TagProvider } from '@/providers/tag';
 import { ViewChart } from '@/components/ViewChart';
-import { DataTable } from '@/components/DataTable';
+import { PaginationTable } from '@/components/PaginationTable';
 import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
 
+let updateLoadingMessage = null;
 const columns = [
   {
     title: '状态',
@@ -36,7 +38,7 @@ const columns = [
     render: (category) =>
       category ? (
         <span>
-          <Tag color={getOneTagColor()} key={category.value}>
+          <Tag color={getRandomColor(category.label)} key={category.value}>
             {category.label}
           </Tag>
         </span>
@@ -46,11 +48,12 @@ const columns = [
     title: '标签',
     key: 'tags',
     dataIndex: 'tags',
+    width: 200,
     render: (tags) => (
       <span>
         {tags.map((tag, idx) => {
           return (
-            <Tag color={getOneTagColor(idx)} key={tag.label}>
+            <Tag color={getRandomColor(tag.label)} key={tag.label}>
               {tag.label}
             </Tag>
           );
@@ -95,65 +98,75 @@ const columns = [
   },
 ];
 
-interface IArticleProps {
-  articles: IArticle[];
-  total: number;
-}
-
-const Article: NextPage<IArticleProps> = ({
-  articles: defaultArticles = [],
-  total: defaultTotal = 0,
-}) => {
+const Article: NextPage = () => {
   const setting = useSetting();
-  const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
-  const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [modalVisible, toggleModalVisible] = useToggle(false);
   const [views, setViews] = useState<IView[]>([]);
-  const [params, setParams] = useState(null);
   const [categorys, setCategorys] = useState<Array<ICategory>>([]);
-  const [tags, setTags] = useState<Array<ITag>>([]);
+  const {
+    loading: listLoading,
+    data: articles,
+    total,
+    page,
+    pageSize,
+    params,
+    setPage,
+    setPageSize,
+    setParams,
+    refresh,
+    reset,
+  } = usePagination<IArticle>(ArticleProvider.getArticles);
+  const [updateApi, updateLoading] = useAsyncLoading(ArticleProvider.updateArticle);
+  const [deleteAPi, deleteLoading] = useAsyncLoading(ArticleProvider.deleteArticle);
+  const [getViewsByUrlApi, getViewsLoading] = useAsyncLoading(ViewProvider.getViewsByUrl);
 
-  useEffect(() => {
-    CategoryProvider.getCategory().then((res) => setCategorys(res));
-    TagProvider.getTags().then((tags) => setTags(tags));
-  }, []);
-
-  const getViews = useCallback((url) => {
-    setLoading(true);
-    ViewProvider.getViewsByUrl(url).then((res) => {
-      setViews(res);
-      setLoading(false);
-    });
-  }, []);
-
-  const getArticles = useCallback((params = {}) => {
-    return ArticleProvider.getArticles(params).then((res) => {
-      setParams(params);
-      setArticles(res[0]);
-      return res;
-    });
-  }, []);
-
-  const toggleArticle = useCallback(
-    (article, key) => {
+  const updateAction = useCallback(
+    (articles, key, value = null) => {
+      if (!Array.isArray(articles)) {
+        articles = [articles];
+      }
       return () =>
-        ArticleProvider.updateArticle(article.id, { [key]: !article[key] }).then(() => {
+        Promise.all(
+          articles.map((article) =>
+            updateApi(article.id, { [key]: value !== null ? value : !article[key] })
+          )
+        ).then(() => {
           message.success('操作成功');
-          getArticles(params);
+          refresh();
         });
     },
-    [params, getArticles]
+    [updateApi, refresh]
   );
 
-  const deleteArticle = useCallback(
-    (id) => {
-      ArticleProvider.deleteArticle(id).then(() => {
-        message.success('文章删除成功');
-        getArticles(params);
+  const deleteAction = useCallback(
+    (ids) => {
+      if (!Array.isArray(ids)) {
+        ids = [ids];
+      }
+      return () => {
+        Promise.all(ids.map((id) => deleteAPi(id))).then(() => {
+          message.success('操作成功');
+          refresh();
+        });
+      };
+    },
+    [deleteAPi, refresh]
+  );
+
+  const getViews = useCallback(
+    (url) => {
+      toggleModalVisible();
+      getViewsByUrlApi(url).then((res) => {
+        setViews(res);
       });
     },
-    [params, getArticles]
+    [toggleModalVisible, getViewsByUrlApi]
   );
+
+  const closeViewModal = useCallback(() => {
+    toggleModalVisible();
+    setViews([]);
+  }, [toggleModalVisible]);
 
   const titleColumn = {
     title: '标题',
@@ -179,38 +192,113 @@ const Article: NextPage<IArticleProps> = ({
     render: (_, record: IArticle) => (
       <span className={style.action}>
         <Link href={`/article/editor/[id]`} as={`/article/editor/` + record.id}>
-          <a>编辑</a>
+          <a>
+            <Button type="link" size={'small'}>
+              编辑
+            </Button>
+          </a>
         </Link>
         <Divider type="vertical" />
-        <span onClick={toggleArticle(record, 'isRecommended')}>
-          <a>{record.isRecommended ? '撤销首焦' : '首焦推荐'}</a>
-        </span>
+        <Button type="link" size={'small'} onClick={updateAction(record, 'isRecommended')}>
+          {record.isRecommended ? '撤销首焦' : '首焦推荐'}
+        </Button>
         <Divider type="vertical" />
-        <span
-          onClick={() => {
-            setVisible(true);
-            getViews(resolveUrl(setting.systemUrl, '/article/' + record.id));
-          }}
+        <Button
+          type="link"
+          size={'small'}
+          onClick={() => getViews(resolveUrl(setting.systemUrl, '/article/' + record.id))}
         >
-          <a>查看访问</a>
-        </span>
+          查看访问
+        </Button>
         <Divider type="vertical" />
         <Popconfirm
           title="确认删除这个文章？"
-          onConfirm={() => deleteArticle(record.id)}
+          onConfirm={deleteAction(record.id)}
           okText="确认"
           cancelText="取消"
+          okButtonProps={{ loading: deleteLoading }}
         >
-          <a>删除</a>
+          <Button type="link" size={'small'}>
+            删除
+          </Button>
         </Popconfirm>
       </span>
     ),
   };
 
+  useEffect(() => {
+    CategoryProvider.getCategory().then((res) => setCategorys(res));
+  }, []);
+
+  useEffect(() => {
+    if (updateLoading) {
+      updateLoadingMessage = message.loading('操作中...', 0);
+    } else {
+      updateLoadingMessage && updateLoadingMessage();
+    }
+  }, [updateLoading]);
+
   return (
     <AdminLayout>
       <div className={style.wrapper}>
-        <DataTable
+        <PaginationTable
+          loading={listLoading}
+          data={articles}
+          columns={[titleColumn, ...columns, actionColumn]}
+          total={total}
+          page={page}
+          pageSize={pageSize}
+          params={params}
+          setPage={setPage}
+          setPageSize={setPageSize}
+          setParams={setParams}
+          refresh={refresh}
+          reset={reset}
+          showSelection
+          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows }) =>
+            hasSelected ? (
+              <>
+                <Button
+                  disabled={!hasSelected}
+                  style={{ marginRight: 8 }}
+                  onClick={updateAction(selectedRows, 'status', 'publish')}
+                >
+                  发布
+                </Button>
+                <Button
+                  disabled={!hasSelected}
+                  style={{ marginRight: 8 }}
+                  onClick={updateAction(selectedRows, 'status', 'draft')}
+                >
+                  草稿
+                </Button>
+                <Button
+                  disabled={!hasSelected}
+                  style={{ marginRight: 8 }}
+                  onClick={updateAction(selectedRows, 'isRecommended', true)}
+                >
+                  首焦推荐
+                </Button>
+                <Button
+                  disabled={!hasSelected}
+                  style={{ marginRight: 8 }}
+                  onClick={updateAction(selectedRows, 'isRecommended', false)}
+                >
+                  撤销首焦
+                </Button>
+                <Popconfirm
+                  title="确认删除？"
+                  onConfirm={deleteAction(selectedRowKeys)}
+                  okText="确认"
+                  cancelText="取消"
+                >
+                  <Button disabled={!hasSelected} loading={deleteLoading} danger>
+                    删除
+                  </Button>
+                </Popconfirm>
+              </>
+            ) : null
+          }
           rightNode={
             <Link href={'/article/editor'}>
               <a>
@@ -221,10 +309,7 @@ const Article: NextPage<IArticleProps> = ({
               </a>
             </Link>
           }
-          scroll={{ x: 1400 }}
-          data={articles}
-          defaultTotal={defaultTotal}
-          columns={[titleColumn, ...columns, actionColumn]}
+          scroll={{ x: 1380 }}
           searchFields={[
             {
               label: '标题',
@@ -263,35 +348,24 @@ const Article: NextPage<IArticleProps> = ({
               ),
             },
           ]}
-          onSearch={getArticles}
         />
         <Modal
           title="访问统计"
-          visible={visible}
+          visible={modalVisible}
           width={640}
-          onCancel={() => {
-            setVisible(false);
-            setViews([]);
-          }}
+          onCancel={closeViewModal}
           maskClosable={false}
           footer={null}
         >
-          {loading ? (
-            <div style={{ textAlign: 'center' }}>
-              <Spin spinning={loading}></Spin>
-            </div>
-          ) : (
-            <ViewChart data={views} />
-          )}
+          <div style={{ textAlign: 'center' }}>
+            <Spin spinning={getViewsLoading}>
+              <ViewChart data={views} />
+            </Spin>
+          </div>
         </Modal>
       </div>
     </AdminLayout>
   );
-};
-
-Article.getInitialProps = async () => {
-  const articles = await ArticleProvider.getArticles({ page: 1, pageSize: 12 });
-  return { articles: articles[0], total: articles[1] };
 };
 
 export default Article;
