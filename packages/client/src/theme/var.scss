@@ -1,6 +1,7 @@
 :global {
   body {
     --primary-color: #ff0064;
+    --sun-color: #eec413;
     --link-color: #4299e1;
     --border-radius: 4px;
 
@@ -27,6 +28,7 @@
   }
 
   body.dark {
+    --sun-color: #e684af;
     // 暗黑主题
     --bg: #282c35;
     --bg-second: #363c48;

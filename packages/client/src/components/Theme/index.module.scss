@@ -1,0 +1,90 @@
+.theme {
+  height: 24px;
+  width: 24px;
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(50%, -50%);
+
+  .sun {
+    background: var(--sun-color);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 4px solid var(--bg);
+  }
+
+  .sunRay {
+    width: 2px;
+    background: var(--sun-color);
+    display: block;
+    height: 121%;
+    position: absolute;
+    z-index: -1;
+    transition: 0.4s all, height 0.3s ease-in-out;
+
+    $columns: 12;
+    @for $i from 1 through $columns {
+      &:nth-child(#{$i}) {
+        transform: rotate(calc(#{$i} * calc(360deg / #{$columns})));
+      }
+    }
+  }
+
+  &:hover .sunRay {
+    $columns: 12;
+
+    @for $i from 1 through $columns {
+      &:nth-child(#{$i}) {
+        transform: rotate(calc(calc(#{$i} * calc(360deg / #{$columns})) - 20deg));
+      }
+    }
+  }
+
+  .moon {
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    right: 0;
+    transform: scale(0) translate(-100%, 35%);
+    z-index: 9;
+    transition: 0.4s transform;
+    transform-origin: right;
+    background: var(--sun-color);
+  }
+
+  &.dark {
+    .sun {
+      border-color: var(--sun-color);
+    }
+
+    .moon {
+      transform: scale(1) translate(35%, -35%);
+      background: var(--bg);
+    }
+
+    &:hover {
+      .moon {
+        transform: scale(1) translate(20%, -40%);
+      }
+    }
+
+    .sunRay {
+      height: 0;
+      transition: 0.4s, transform 0.4s, height 0.2s 0.1s;
+
+      $columns: 12;
+      @for $i from 1 through $columns {
+        &:nth-child(#{$i}) {
+          transform: rotate(calc(calc(#{$i} * calc(360deg / #{$columns})) - 45deg));
+        }
+      }
+    }
+  }
+}
