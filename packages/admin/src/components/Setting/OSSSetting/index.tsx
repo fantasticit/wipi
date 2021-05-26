@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
 import { Input, Button, Switch, message } from 'antd';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { SettingProvider } from '@/providers/setting';

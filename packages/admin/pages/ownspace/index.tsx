@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { NextPage } from 'next';
 import { UserOutlined } from '@ant-design/icons';
 import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
 import { Row, Col, List, Typography, Card, Avatar, Input, Button, Tabs, message } from 'antd';
 import Router from 'next/router';
 import { AdminLayout } from '@/layout/AdminLayout';

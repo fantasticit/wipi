@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FileImageOutlined } from '@ant-design/icons';
 import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
 import { Input, Button, message } from 'antd';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { SettingProvider } from '@/providers/setting';
@@ -76,7 +75,8 @@ export const SystemSetting = ({ setting }) => {
               onClick={() => {
                 setMode('logo');
                 setVisible(true);
-              }} />
+              }}
+            />
           }
           value={systemLogo}
           onChange={(e) => {
@@ -92,7 +92,8 @@ export const SystemSetting = ({ setting }) => {
               onClick={() => {
                 setMode('favicon');
                 setVisible(true);
-              }} />
+              }}
+            />
           }
           value={systemFavicon}
           onChange={(e) => {
