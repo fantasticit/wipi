@@ -1,8 +1,9 @@
-import React, { useState, useContext, useMemo, useRef } from 'react';
+import React, { useContext, useMemo, useRef, useEffect } from 'react';
 import domtoimage from 'dom-to-image';
-import { Modal, message } from 'antd';
+import { Popover, Button, message } from 'antd';
 import { GlobalContext } from '@/context/global';
 import style from './index.module.scss';
+import { useToggle } from '@/hooks/useToggle';
 const QRCode = require('qrcode-svg');
 const download = require('downloadjs');
 const urllib = require('url');
@@ -16,9 +17,9 @@ export interface ShareProps {
 export const Share: React.FC<ShareProps> = ({ cover, title, desc, url }) => {
   const ref = useRef(null);
   const { setting } = useContext(GlobalContext);
-  const [loading, setLoading] = useState(false);
-  const [visible, setVisible] = useState(false);
   const systemUrl = setting.systemUrl || '';
+  const [loading, toggleLoading] = useToggle(false);
+  const [visible, toggleVisible] = useToggle(false);
   const fullUrl = useMemo(() => urllib.resolve(systemUrl, url), [systemUrl, url]);
   const qrcode = useMemo(
     () =>
@@ -33,7 +34,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url }) => {
     [fullUrl]
   );
   const save = () => {
-    setLoading(true);
+    toggleLoading();
     const node = ref.current;
     const scale = 750 / node.offsetWidth;
     domtoimage
@@ -49,17 +50,65 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url }) => {
       })
       .then((dataUrl) => {
         download(dataUrl, `${title}.png`);
-        setLoading(false);
+        toggleLoading();
       })
       .catch(() => {
         message.error('保存图片失败，请手动截图');
-        setLoading(false);
+        toggleLoading();
       });
   };
 
+  const content = (
+    <div className={style.wrapper}>
+      <div className={style.content} ref={ref}>
+        <div className={style.main}>
+          {cover && <img className={style.cover} src={cover} alt={'内容封面'} />}
+          <div className={style.title}>{title}</div>
+          <div className={style.desc}>{desc}</div>
+        </div>
+        <div className={style.footer}>
+          <div className={style.code} dangerouslySetInnerHTML={{ __html: qrcode.svg() }}></div>
+          <div>
+            <p>识别二维码查看文章</p>
+            <p>
+              原文分享自 <a href={fullUrl}>{setting.systemTitle}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <Button size="small" style={{ marginRight: 12 }} onClick={toggleVisible}>
+          关闭
+        </Button>
+        <Button type="primary" size="small" onClick={save} loading={loading}>
+          下载
+        </Button>
+      </footer>
+    </div>
+  );
+
+  useEffect(() => {
+    const handler = () => {
+      let y =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        window.scrollY ||
+        document.body.scrollTop;
+      if (visible && y > 50) {
+        toggleVisible(false);
+      }
+    };
+
+    document.addEventListener('scroll', handler);
+
+    return () => {
+      document.removeEventListener('scroll', handler);
+    };
+  }, [visible, toggleVisible]);
+
   return (
-    <>
-      <div onClick={() => setVisible(true)}>
+    <Popover title="分享内容" content={content} visible={visible} placement="right">
+      <div onClick={toggleVisible}>
         <svg
           viewBox="0 0 1024 1024"
           version="1.1"
@@ -73,33 +122,6 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url }) => {
           ></path>
         </svg>
       </div>
-      <Modal
-        title="分享内容"
-        visible={visible}
-        onCancel={() => setVisible(false)}
-        cancelText="取消"
-        okText="下载"
-        onOk={save}
-        confirmLoading={loading}
-        width={424}
-      >
-        <div className={style.content} ref={ref}>
-          <div className={style.main}>
-            {cover && <img className={style.cover} src={cover} alt={'内容封面'} />}
-            <div className={style.title}>{title}</div>
-            <div className={style.desc}>{desc}</div>
-          </div>
-          <div className={style.footer}>
-            <div className={style.code} dangerouslySetInnerHTML={{ __html: qrcode.svg() }}></div>
-            <div>
-              <p>识别二维码查看文章</p>
-              <p>
-                原文分享自 <a href={fullUrl}>{setting.systemTitle}</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </Modal>
-    </>
+    </Popover>
   );
 };

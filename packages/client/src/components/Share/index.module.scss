@@ -1,3 +1,10 @@
+.wrapper {
+  > footer {
+    padding-top: 12px;
+    text-align: right;
+  }
+}
+
 .content {
   width: 375px;
   padding: 1.5rem 2rem;
@@ -22,7 +29,7 @@
       font-size: 16px;
       line-height: 22px;
     }
-  
+
     .desc {
       display: -webkit-box;
       max-width: 100%;
@@ -46,7 +53,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: .5rem 1rem;
+      padding: 0.5rem 1rem;
 
       > p {
         &:first-of-type {
@@ -55,7 +62,7 @@
 
         &:last-of-type {
           color: var(--second-text-color);
-          font-size: .9em;
+          font-size: 0.9em;
         }
       }
 
