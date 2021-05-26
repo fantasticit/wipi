@@ -15,6 +15,7 @@ import {
   Dropdown,
   Menu,
   Modal,
+  Popconfirm,
 } from 'antd';
 import { Editor as CodeEditor } from '@components/Editor';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
@@ -123,16 +124,6 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     }
   }, [id, setting.systemUrl]);
 
-  const close = useCallback(() => {
-    Modal.confirm({
-      title: '确认关闭？',
-      content: '如果有内容变更，请先保存。',
-      onOk: () => Router.push('/page'),
-      okText: '确认',
-      cancelText: '取消',
-    });
-  }, []);
-
   const deletePage = useCallback(() => {
     if (!id) {
       return;
@@ -149,6 +140,8 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
       onOk: handle,
       okText: '确认',
       cancelText: '取消',
+      transitionName: '',
+      maskTransitionName: '',
     });
   }, [id]);
 
@@ -169,8 +162,19 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
             borderBottom: '1px solid rgb(235, 237, 240)',
             background: '#fff',
           }}
-          backIcon={<Button size="small" icon={<CloseOutlined />} />}
-          onBack={close}
+          backIcon={
+            <Popconfirm
+              title="确认关闭？如果有内容变更，请先保存。"
+              onConfirm={() => Router.push('/page')}
+              onCancel={() => null}
+              okText="确认"
+              cancelText="取消"
+              placement="rightBottom"
+            >
+              <Button size="small" icon={<CloseOutlined />} />
+            </Popconfirm>
+          }
+          onBack={() => null}
           title={
             <Input
               style={{ width: 300 }}

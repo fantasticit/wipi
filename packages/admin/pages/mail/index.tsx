@@ -149,6 +149,8 @@ const Mail: NextPage = () => {
           onCancel={() => {
             setSelectedMail(null);
           }}
+          transitionName={''}
+          maskTransitionName={''}
         >
           <div
             className="markdown"

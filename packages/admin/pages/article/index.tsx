@@ -356,6 +356,8 @@ const Article: NextPage = () => {
           onCancel={closeViewModal}
           maskClosable={false}
           footer={null}
+          transitionName={''}
+          maskTransitionName={''}
         >
           <div style={{ textAlign: 'center' }}>
             <Spin spinning={getViewsLoading}>

@@ -124,6 +124,8 @@ export const CommentAction = ({ comment, refresh }) => {
         okText={'回复'}
         onOk={reply}
         onCancel={() => setReplyVisible(false)}
+        transitionName={''}
+        maskTransitionName={''}
       >
         <Input.TextArea
           autoSize={{ minRows: 6, maxRows: 10 }}

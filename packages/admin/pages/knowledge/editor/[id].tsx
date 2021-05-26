@@ -147,16 +147,6 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
     });
   }, [id, chapters, forceUpdate]);
 
-  const close = useCallback(() => {
-    Modal.confirm({
-      title: '确认关闭？',
-      content: '如果有内容变更，请先保存。',
-      onOk: () => Router.push('/knowledge'),
-      okText: '确认',
-      cancelText: '取消',
-    });
-  }, []);
-
   return (
     <div className={styles.wrap}>
       <aside className={styles.aside}>
@@ -165,7 +155,16 @@ const Page: NextPage<IProps> = ({ id, knowledge }) => {
             <Avatar shape="square" size="large" src={knowledge.cover} />
             <span style={{ marginLeft: 8 }}>{knowledge.title}</span>
           </div>
-          <CloseOutlined onClick={close} />
+          <Popconfirm
+            title="确认关闭？如果有内容变更，请先保存。"
+            onConfirm={() => Router.push('/knowledge')}
+            onCancel={() => null}
+            okText="确认"
+            cancelText="取消"
+            placement="rightBottom"
+          >
+            <CloseOutlined />
+          </Popconfirm>
         </header>
         <Divider type="horizontal" />
         <main>

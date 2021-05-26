@@ -50,6 +50,8 @@ const _Register: React.FC<IProps> = ({ form }) => {
                 onCancel() {
                   console.log('Cancel');
                 },
+                transitionName: '',
+                maskTransitionName: '',
               });
             })
             .catch((e) => setLoading(false));

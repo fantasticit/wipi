@@ -2,7 +2,7 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import cls from 'classnames';
 import Router from 'next/router';
 import { CloseOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { Button, Input, message, PageHeader, Modal, Dropdown, Menu } from 'antd';
+import { Button, Input, message, PageHeader, Modal, Popconfirm, Dropdown, Menu } from 'antd';
 import { Helmet } from 'react-helmet';
 import { resolveUrl } from '@/utils';
 import { useSetting } from '@/hooks/useSetting';
@@ -135,16 +135,6 @@ export const ArticleEditor: React.FC<IProps> = ({
     }
   }, [id, setting.systemUrl]);
 
-  const close = useCallback(() => {
-    Modal.confirm({
-      title: '确认关闭？',
-      content: '如果有内容变更，请先保存。',
-      onOk: () => Router.push('/article'),
-      okText: '确认',
-      cancelText: '取消',
-    });
-  }, []);
-
   const deleteArticle = useCallback(() => {
     if (!id) {
       return;
@@ -161,6 +151,8 @@ export const ArticleEditor: React.FC<IProps> = ({
       onOk: handle,
       okText: '确认',
       cancelText: '取消',
+      transitionName: '',
+      maskTransitionName: '',
     });
   }, [id]);
 
@@ -177,11 +169,22 @@ export const ArticleEditor: React.FC<IProps> = ({
       </Helmet>
       <header className={style.header}>
         <PageHeader
-          backIcon={<Button size="small" icon={<CloseOutlined />} />}
+          backIcon={
+            <Popconfirm
+              title="确认关闭？如果有内容变更，请先保存。"
+              onConfirm={() => Router.push('/article')}
+              onCancel={() => null}
+              okText="确认"
+              cancelText="取消"
+              placement="rightBottom"
+            >
+              <Button size="small" icon={<CloseOutlined />} />
+            </Popconfirm>
+          }
           style={{
             borderBottom: '1px solid rgb(235, 237, 240)',
           }}
-          onBack={close}
+          onBack={() => null}
           title={
             <Input
               style={{ width: 300 }}

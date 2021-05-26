@@ -13,6 +13,8 @@ export const confirm = () => {
       onCancel: () => {
         reject(new Error('canceld'));
       },
+      transitionName: '',
+      maskTransitionName: '',
     });
   });
 };
