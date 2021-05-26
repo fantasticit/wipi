@@ -1,5 +1,6 @@
 :global {
-  $languages: ts js typescript javascript html css php go sql json bash less scss nginx shell stylus python yaml yml lua;
+  $languages: ts js typescript javascript html css php go sql json bash less scss nginx shell stylus
+    python yaml yml lua;
 
   .markdown {
     word-break: break-word;
@@ -7,9 +8,15 @@
     font-weight: 400;
     font-size: 15px;
     overflow-x: hidden;
+    letter-spacing: 1.2px;
     color: var(--main-text-color);
-    
-    h1, h2, h3, h4, h5, h6 {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       line-height: 1.5;
       margin-top: 35px;
       margin-bottom: 10px;
@@ -159,8 +166,7 @@
           border: 2px solid #fff;
           border-top: 0;
           border-left: 0;
-          transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),
-            opacity 0.1s;
+          transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6), opacity 0.1s;
           transform: rotate(45deg) scale(0);
           opacity: 0;
         }
@@ -277,37 +283,30 @@
     }
 
     table {
-      font-size: 12px;
+      display: inline-block;
+      font-size: 13px;
       width: auto;
       max-width: 100%;
-      border-collapse: collapse;
-      box-sizing: border-box;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      overflow: auto;
       border: 1px solid var(--border-color);
-      margin: 12px 0 14px;
+      border-collapse: collapse;
+
+      thead {
+        background-color: var(--bg-code);
+      }
+
+      tr:nth-child(2n) {
+        background-color: var(--bg-code);
+      }
+
+      th,
+      td {
+        padding: 4px 8px;
+        line-height: 24px;
+      }
     }
 
-    thead {
-      background: #f6f6f6;
-      color: #000;
-      text-align: left;
-    }
-
-    tr:nth-child(2n) {
-      background-color: #fcfcfc;
-    }
-
-    td,
-    th {
-      padding: 12px 7px;
-      line-height: 24px;
-    }
-
-    td {
-      min-width: 120px;
-    }
-
-    @each $language in $languages { 
+    @each $language in $languages {
       code.language-#{$language}::before {
         content: '#{$language}';
         position: absolute;

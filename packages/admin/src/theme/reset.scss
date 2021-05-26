@@ -2,7 +2,9 @@
 
 :global {
   * {
-    transition: background-color .2s ease-in-out, margin .2s ease-in-out, opacity .2s ease-in-out, filter .2s ease-in-out, visibility .2s ease-in-out, transform .2s ease-in-out, border-color .2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, margin 0.2s ease-in-out, opacity 0.2s ease-in-out,
+      filter 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
   }
 
   ::-webkit-scrollbar-track {
@@ -12,15 +14,8 @@
 
   ::-webkit-scrollbar-thumb {
     border-radius: 0;
-    border-radius: .5rem;
-    background-color: transparent;
-    transition: all .2s;
-  }
-
-  *:hover {
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--scrollbar-bg);
-    }
+    background-color: var(--scrollbar-bg);
+    transition: all 0.2s;
   }
 
   ::-webkit-scrollbar {
@@ -38,7 +33,8 @@
     color: var(--main-text-color);
     background-color: var(--bg);
     overflow-x: hidden;
-    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei,
+      Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
     line-height: 1.75em;
   }
 
@@ -73,7 +69,7 @@
     border: 0;
     overflow: hidden;
     clear: both;
-    margin: 1rem 0;;
+    margin: 1rem 0;
   }
 
   .ant-menu-item-selected {
@@ -83,15 +79,15 @@
 
   .ant-breadcrumb,
   .ant-breadcrumb a {
-    color: rgba(0, 0, 0, .45) !important;
+    color: rgba(0, 0, 0, 0.45) !important;
   }
 
   .ant-breadcrumb-separator {
-    color: rgba(0, 0, 0, .45) !important;
+    color: rgba(0, 0, 0, 0.45) !important;
   }
 
   .ant-breadcrumb > span:last-child a {
-    color: rgba(0, 0, 0, .65) !important;
+    color: rgba(0, 0, 0, 0.65) !important;
   }
 
   .ant-comment {
@@ -120,7 +116,6 @@
     flex-direction: column;
     padding-bottom: 53px;
 
-
     > .ant-drawer-body {
       flex: 1;
       overflow: auto;
@@ -141,15 +136,15 @@
   .form-item {
     display: flex;
     align-items: center;
-  
+
     + .form-item {
       margin-top: 16px;
     }
-  
+
     > label {
       padding-right: 16px;
     }
-  
+
     > div {
       flex: 1;
     }
