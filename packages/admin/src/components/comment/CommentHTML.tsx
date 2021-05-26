@@ -9,6 +9,7 @@ export const CommentHTML = ({ comment }) => {
         content={
           <div
             className="markdown"
+            style={{ maxWidth: 320 }}
             dangerouslySetInnerHTML={{
               __html: comment && comment.html,
             }}
