@@ -97,7 +97,12 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
             <List
               grid={{
                 gutter: 16,
-                sm: 3,
+                xs: 1,
+                sm: 2,
+                md: 3,
+                lg: 3,
+                xl: 3,
+                xxl: 3,
               }}
               dataSource={files}
               renderItem={(file: IFile) => (
