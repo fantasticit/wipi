@@ -38,6 +38,7 @@ export const Video = ({ editor }) => {
         <svg viewBox="0 0 24 24" width="16px" height="16px" style={{ marginTop: 6 }}>
           <path
             fillRule="evenodd"
+            fill="currentColor"
             d="M21 19c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v14zm-5-7L9 8v8l7-4z"
           ></path>
         </svg>

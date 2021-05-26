@@ -26,6 +26,10 @@
       user-select: none;
       cursor: pointer;
 
+      &:hover {
+        color: var(--primary-color);
+      }
+
       i {
         margin-right: 6px;
       }
@@ -39,7 +43,22 @@
       padding: 4px 8px;
       cursor: pointer;
       font-size: 16px;
-      
+    }
+
+    .modeWrapper {
+      > span {
+        &:first-of-type {
+          color: var(--second-text-color);
+        }
+
+        &:last-of-type {
+          color: var(--main-text-color);
+
+          &:hover {
+            color: var(--primary-color);
+          }
+        }
+      }
     }
   }
 
@@ -67,18 +86,16 @@
       header {
         display: flex;
         justify-content: space-between;
-        padding-bottom: .6rem;
+        padding-bottom: 0.6rem;
         font-weight: 700;
         border-bottom: 1px solid var(--border-color);
       }
 
       main {
-        padding: 1rem .5rem;
+        padding: 1rem 0.5rem;
         flex: 1;
         overflow: auto;
       }
     }
   }
 }
-
-
