@@ -122,18 +122,18 @@ const _MonacoEditor = (props, ref) => {
     editorRef.current.setValue(defaultValue);
   }, [mounted, defaultValue]);
 
-  useEffect(() => {
-    if (!mounted || !editorRef.current) {
-      return undefined;
-    }
-    const ro = new ResizeObserver(() => {
-      editorRef.current.layout(container.current.getBoundingClientRect());
-    });
-    ro.observe(container.current);
-    return () => {
-      ro.disconnect();
-    };
-  }, [mounted]);
+  // useEffect(() => {
+  //   if (!mounted || !editorRef.current) {
+  //     return undefined;
+  //   }
+  //   const ro = new ResizeObserver(() => {
+  //     editorRef.current.layout(container.current.getBoundingClientRect());
+  //   });
+  //   ro.observe(container.current);
+  //   return () => {
+  //     ro.disconnect();
+  //   };
+  // }, [mounted]);
 
   return (
     <div ref={container} style={{ height: '100%', overflow: 'hidden' }}>
