@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Form, Icon as LegacyIcon } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
 import { Row, Col, Button, Input, Modal } from 'antd';
 import Router from 'next/router';
 import Link from 'next/link';
@@ -72,18 +71,11 @@ const _Register: React.FC<IProps> = ({ form }) => {
         <Col xs={24} sm={24} md={12}>
           <div style={{ width: '100%' }}>
             <h2>访客注册</h2>
-            <Form onSubmit={submit}>
+            <Form layout="horizontal" onSubmit={submit}>
               <Form.Item hasFeedback={true} label="账户">
                 {getFieldDecorator('name', {
                   rules: [{ required: true, message: '请输入用户名！' }],
-                })(
-                  <Input
-                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    autoComplete={'off'}
-                    size="large"
-                    placeholder="请输入用户名"
-                  />
-                )}
+                })(<Input autoComplete={'off'} placeholder="请输入用户名" />)}
               </Form.Item>
               <Form.Item hasFeedback={true} label="密码">
                 {getFieldDecorator('password', {
@@ -94,17 +86,9 @@ const _Register: React.FC<IProps> = ({ form }) => {
                       validator: validateToNextPassword,
                     },
                   ],
-                })(
-                  <Input
-                    prefix={<LegacyIcon type="password" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    autoComplete={'off'}
-                    type="password"
-                    size="large"
-                    placeholder="请输入密码"
-                  />
-                )}
+                })(<Input autoComplete={'off'} type="password" placeholder="请输入密码" />)}
               </Form.Item>
-              <Form.Item hasFeedback={true} label="确认密码">
+              <Form.Item hasFeedback={true} label="确认">
                 {getFieldDecorator('confirm', {
                   rules: [
                     { required: true, message: '请再次输入密码！' },
@@ -113,15 +97,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
                       validator: compareToFirstPassword,
                     },
                   ],
-                })(
-                  <Input
-                    prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    autoComplete={'off'}
-                    type="password"
-                    size="large"
-                    placeholder="请再次输入密码"
-                  />
-                )}
+                })(<Input autoComplete={'off'} type="password" placeholder="请再次输入密码" />)}
               </Form.Item>
               <Form.Item>
                 <Button

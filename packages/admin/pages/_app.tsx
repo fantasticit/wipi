@@ -1,21 +1,22 @@
 import React from 'react';
 import App from 'next/app';
-import Router from 'next/router';
 import { ConfigProvider, message } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
-import { IGlobalContext, GlobalContext } from '@/context/global';
+import { toLogin } from '@/utils/login';
+import { UserProvider } from '@/providers/user';
 import { SettingProvider } from '@/providers/setting';
+import { IGlobalContext, GlobalContext } from '@/context/global';
 import { NProgress } from '@components/NProgress';
 import { Seo } from '@components/Seo';
 import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
 import { ViewStatistics } from '@/components/ViewStatistics';
 import { Analytics } from '@/components/Analytics';
+import '@ant-design/compatible/assets/index.css';
 import 'highlight.js/styles/atom-one-light.css';
 import 'viewerjs/dist/viewer.css';
 import '@/theme/antd.less';
 import '@/theme/reset.scss';
 import '@/theme/markdown.scss';
-import { UserProvider } from '@/providers/user';
 
 class MyApp extends App {
   state: Omit<IGlobalContext, 'setUser' | 'getSetting' | 'toggleCollapse'> = {
@@ -39,8 +40,7 @@ class MyApp extends App {
       this.setUser(user);
       UserProvider.checkAdmin(user);
     } else {
-      message.info('请重新登录');
-      !Router.pathname.includes('login') && Router.push(`/login?redirect=${Router.asPath}`);
+      toLogin();
     }
   };
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { message } from 'antd';
-import Router from 'next/router';
+import { toLogin } from '@/utils/login';
 
 export const httpProvider = axios.create({
   baseURL:
@@ -55,7 +55,7 @@ httpProvider.interceptors.response.use(
 
         case 401:
           isClient && message.info('请重新登录');
-          !Router.pathname.includes('login') && Router.push(`/login?redirect=${Router.asPath}`);
+          toLogin();
           break;
 
         default:

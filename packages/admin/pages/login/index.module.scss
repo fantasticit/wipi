@@ -12,16 +12,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   width: 80vw;
-  height: 60vh;
   box-shadow: 0 2px 8px #f0f1f2;
   border-radius: 4px;
-
   display: flex !important;
 
   > div {
-    padding: 4rem;
+    padding: 2rem;
 
     &:first-of-type {
       background: #fff;
@@ -39,7 +36,6 @@
       padding: 2rem;
     }
   }
-
 
   svg {
     width: 100%;
@@ -61,7 +57,7 @@
     list-style: none;
     width: 40px;
     height: 40px;
-    background: rgba(1, 136, 251, .15);
+    background: rgba(1, 136, 251, 0.15);
     animation: square 15s infinite linear;
 
     &:nth-of-type(1) {
@@ -85,7 +81,7 @@
       left: 40%;
       width: 60px;
       height: 60px;
-      background: rgba(1, 136, 251, .3);
+      background: rgba(1, 136, 251, 0.3);
       animation-duration: 8s;
     }
 
@@ -97,7 +93,7 @@
       left: 80%;
       width: 120px;
       height: 120px;
-      background: rgba(1, 136, 251, .2);
+      background: rgba(1, 136, 251, 0.2);
       animation-delay: 3s;
     }
 
@@ -120,7 +116,7 @@
       left: 25%;
       width: 10px;
       height: 10px;
-      background: rgba(1, 136, 251, .3);
+      background: rgba(1, 136, 251, 0.3);
       animation-duration: 12s;
       animation-delay: 2s;
     }
@@ -136,18 +132,18 @@
 
 @media (max-width: 768px) {
   .container {
-    max-width: 90%;
+    width: 90%;
   }
 }
 
 @keyframes square {
   0% {
-    opacity: .5;
+    opacity: 0.5;
     transform: translateY(0) rotate(45deg);
   }
 
   25% {
-    opacity: .75;
+    opacity: 0.75;
     transform: translateY(-400px) rotate(90deg);
   }
 
