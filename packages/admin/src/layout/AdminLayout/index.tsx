@@ -13,6 +13,7 @@ import { menus, findActiveMenu } from './menus';
 import style from './index.module.scss';
 
 const { Sider, Content } = Layout;
+const { SubMenu } = Menu;
 
 export const AdminLayout: React.FC = ({ children }) => {
   const { collapsed, toggleCollapse } = useContext(GlobalContext);
@@ -20,6 +21,37 @@ export const AdminLayout: React.FC = ({ children }) => {
   const router = useRouter();
   const { pathname } = router;
   const [activeMenu, breadcrumbs] = findActiveMenu(pathname);
+
+  const renderMenuItem = (menu) => (
+    <Menu.Item key={menu.path} onClick={() => Router.push(menu.path)}>
+      <Link href={menu.path}>
+        <a
+          className={cls({
+            [style.active]: activeMenu && activeMenu.path === menu.path,
+          })}
+        >
+          <LegacyIcon type={menu.icon} />
+          <span>{menu.title}</span>
+        </a>
+      </Link>
+    </Menu.Item>
+  );
+
+  const MenuContent = (
+    <Menu theme="dark" mode="inline" defaultSelectedKeys={[activeMenu && activeMenu.path]}>
+      {menus
+        .filter((m: any) => !m.ignore)
+        .map((menu) => {
+          return menu.children ? (
+            <SubMenu key={menu.title} icon={<LegacyIcon type={menu.icon} />} title={menu.title}>
+              {menu.children.filter((m: any) => !m.ignore).map(renderMenuItem)}
+            </SubMenu>
+          ) : (
+            renderMenuItem(menu)
+          );
+        })}
+    </Menu>
+  );
 
   return (
     <Layout className={style.container}>
@@ -31,28 +63,7 @@ export const AdminLayout: React.FC = ({ children }) => {
         <div className={style.resourceCreate}>
           <ResourceCreate collapsed={collapsed} />
         </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={[activeMenu && activeMenu.path]}>
-          {menus
-            .filter((m: any) => !m.ignore)
-            .map((menu) => {
-              return menu.divider ? (
-                <div className={style.divider}></div>
-              ) : (
-                <Menu.Item key={menu.path} onClick={() => Router.push(menu.path)}>
-                  <Link href={menu.path}>
-                    <a
-                      className={cls({
-                        [style.active]: activeMenu && activeMenu.path === menu.path,
-                      })}
-                    >
-                      <LegacyIcon type={menu.icon} />
-                      <span>{menu.label}</span>
-                    </a>
-                  </Link>
-                </Menu.Item>
-              );
-            })}
-        </Menu>
+        {MenuContent}
       </Sider>
       <Layout className={style.main}>
         <header>
