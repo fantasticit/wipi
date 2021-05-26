@@ -1,35 +1,24 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
+import React from 'react';
+import { Button, Popover } from 'antd';
 
 export const CommentContent = ({ comment }) => {
-  const [visibel, setVisibel] = useState(false);
-
   return (
     <span>
-      <Button
-        type="link"
-        style={{ paddingLeft: 0 }}
-        onClick={() => {
-          setVisibel(true);
-        }}
-      >
-        查看内容
-      </Button>
-      <Modal
+      <Popover
         title={'评论详情-原始内容'}
-        visible={visibel}
-        footer={null}
-        onCancel={() => {
-          setVisibel(false);
-        }}
+        content={
+          <div
+            className="markdown"
+            dangerouslySetInnerHTML={{
+              __html: comment && comment.content,
+            }}
+          ></div>
+        }
       >
-        <span
-          className="markdown"
-          dangerouslySetInnerHTML={{
-            __html: comment && comment.content,
-          }}
-        ></span>
-      </Modal>
+        <Button type="link" style={{ paddingLeft: 0 }}>
+          查看内容
+        </Button>
+      </Popover>
     </span>
   );
 };

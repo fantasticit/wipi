@@ -1,4 +1,5 @@
 import React from 'react';
+import { Popover } from 'antd';
 import { resolveUrl } from '@/utils';
 import { useSetting } from '@/hooks/useSetting';
 import style from './index.module.scss';
@@ -6,15 +7,18 @@ import style from './index.module.scss';
 export const CommentArticle = ({ comment }) => {
   const setting = useSetting();
   const { url: link } = comment;
+  const href = resolveUrl(setting.systemUrl, link);
 
   return (
-    <a
-      href={resolveUrl(setting.systemUrl, link)}
-      className={style.link}
-      target="_blank"
-      rel="noreferrer"
+    <Popover
+      title={'页面预览'}
+      content={<iframe src={href} />}
+      placement={'right'}
+      mouseEnterDelay={0.5}
     >
-      文章
-    </a>
+      <a href={href} className={style.link} target="_blank" rel="noreferrer">
+        文章
+      </a>
+    </Popover>
   );
 };
