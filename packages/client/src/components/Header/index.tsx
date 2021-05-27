@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import cls from 'classnames';
 import { Menu, Dropdown } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useToggle } from '@/hooks/useToggle';
@@ -156,10 +157,10 @@ export const Header = ({ setting, categories, tags, pages }) => {
                   </Link>
                 </li>
               ))}
-              <li className={style.searchWrapper}>
-                <a className={style.search} onClick={toggleSearch}></a>
+              <li className={style.toolWrapper}>
+                <SearchOutlined style={{ cursor: 'pointer' }} onClick={toggleSearch} />
               </li>
-              <li className={style.themeToggle}>
+              <li className={style.toolWrapper}>
                 <Theme />
               </li>
             </ul>
