@@ -18,7 +18,7 @@
   > main {
     flex: 1;
     display: flex;
-    overflow: auto;
+    overflow: hidden;
 
     > aside {
       width: 240px;
@@ -57,7 +57,7 @@
       > main {
         padding: 6px 12px;
         flex: 1;
-        overflow: hidden;
+        overflow: auto;
 
         > ul {
           list-style: none;
