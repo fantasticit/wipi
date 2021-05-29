@@ -3,6 +3,7 @@ interface IUser {
   avatar: string;
   email: string;
   token: string;
+  role: 'admin' | 'visitor';
 }
 
 interface IFile {

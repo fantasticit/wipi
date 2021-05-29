@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { Row, Col, Card, List, Alert } from 'antd';
+import { Row, Col, Card, List, Alert, Typography } from 'antd';
 import { useSetting } from '@/hooks/useSetting';
+import { useUser } from '@/hooks/useUser';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { ArticleProvider } from '@/providers/article';
 import { CommentProvider } from '@/providers/comment';
@@ -10,8 +11,9 @@ import { CommentArticle } from '@/components/comment/CommentArticle';
 import { CommentStatus } from '@/components/comment/CommentStatus';
 import { CommentAction } from '@/components/comment/CommentAction';
 import { CommentContent } from '@/components/comment/CommentContent';
-
 import style from './index.module.scss';
+
+const { Title, Paragraph } = Typography;
 
 interface IHomeProps {
   articles: IArticle[];
@@ -48,6 +50,7 @@ const pageSize = 6;
 
 const Home: NextPage<IHomeProps> = ({ articles = [], comments: defaultComments = [] }) => {
   const setting = useSetting();
+  const user = useUser();
   const [comments, setComments] = useState<IComment[]>(defaultComments);
 
   const getComments = useCallback(() => {
@@ -58,7 +61,14 @@ const Home: NextPage<IHomeProps> = ({ articles = [], comments: defaultComments =
   }, []);
 
   return (
-    <AdminLayout>
+    <AdminLayout
+      headerAppender={
+        <Typography>
+          <Title>您好，{user.name}</Title>
+          <Paragraph>您的角色：{user.role === 'admin' ? '管理员' : '访客'}</Paragraph>
+        </Typography>
+      }
+    >
       {!setting || !setting.systemUrl ? (
         <div style={{ marginBottom: 24 }}>
           <Alert

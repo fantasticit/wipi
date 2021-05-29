@@ -15,7 +15,10 @@ import style from './index.module.scss';
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
-export const AdminLayout: React.FC = ({ children }) => {
+export const AdminLayout: React.FC<{ headerAppender?: React.ReactNode }> = ({
+  headerAppender,
+  children,
+}) => {
   const { collapsed, toggleCollapse } = useContext(GlobalContext);
   const setting = useSetting();
   const router = useRouter();
@@ -105,6 +108,7 @@ export const AdminLayout: React.FC = ({ children }) => {
               })}
             </Breadcrumb>
             <div className={style.title}>{activeMenu && activeMenu.label}</div>
+            {headerAppender && <div>{headerAppender}</div>}
           </header>
           <main>
             {children}
