@@ -36,7 +36,7 @@ export const OSSSetting = ({ setting }) => {
 
   return (
     <div>
-      <Form.Item label="Region">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="Region">
         <Input
           placeholder="请输入正确的阿里 oss region"
           value={ossRegion}
@@ -45,7 +45,7 @@ export const OSSSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="AccessKeyId">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="AccessKeyId">
         <Input
           placeholder="请输入正确的阿里 oss accessKeyId"
           value={ossAccessKeyId}
@@ -54,7 +54,7 @@ export const OSSSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="AccessKeySecret">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="AccessKeySecret">
         <Input
           placeholder="请输入正确的阿里 oss accessKeySecret"
           value={ossAccessKeySecret}
@@ -63,7 +63,7 @@ export const OSSSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="Bucket">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="Bucket">
         <Input
           placeholder="请输入正确的阿里 oss Bucket"
           value={ossBucket}
@@ -72,7 +72,7 @@ export const OSSSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="HTTPS">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="HTTPS">
         <Switch checked={ossHttps} onChange={setOssHttps} />
       </Form.Item>
       <FileSelectDrawer

@@ -24,7 +24,7 @@ export const AnalyticsSetting = ({ setting }) => {
 
   return (
     <div>
-      <Form.Item label="百度统计">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="百度统计">
         <Input
           placeholder="请输入百度统计 Id"
           value={baiduAnalyticsId}
@@ -33,7 +33,7 @@ export const AnalyticsSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="谷歌分析">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="谷歌分析">
         <Input
           placeholder="请输入谷歌分析 Id"
           value={googleAnalyticsId}

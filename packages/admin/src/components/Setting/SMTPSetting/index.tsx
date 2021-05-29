@@ -44,7 +44,7 @@ export const SMTPSetting = ({ setting }) => {
 
   return (
     <div>
-      <Form.Item label="SMTP 地址">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="SMTP 地址">
         <Input
           placeholder="请输入SMTP"
           value={smtpHost}
@@ -53,7 +53,11 @@ export const SMTPSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="SMTP 端口（注意强制使用 SSL 连接）">
+      <Form.Item
+        labelCol={{ xs: 8, sm: 6, md: 4 }}
+        labelAlign="left"
+        label="SMTP 端口（强制使用 SSL 连接）"
+      >
         <Input
           placeholder="请输入SMTP 端口"
           value={smtpPort}
@@ -62,7 +66,7 @@ export const SMTPSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="SMTP 用户">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="SMTP 用户">
         <Input
           placeholder="请输入SMTP 用户"
           value={smtpUser}
@@ -71,7 +75,7 @@ export const SMTPSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="SMTP 密码">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="SMTP 密码">
         <Input
           placeholder="也可能是授权码"
           value={smtpPass}
@@ -80,7 +84,7 @@ export const SMTPSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="发件人">
+      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="发件人">
         <Input
           placeholder="请输入正确的邮箱地址"
           value={smtpFromUser}

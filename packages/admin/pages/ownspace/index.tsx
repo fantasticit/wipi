@@ -108,7 +108,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
             <Card title="个人资料" bordered={true}>
               <Tabs defaultActiveKey="1">
                 <TabPane tab="基本设置" key="1">
-                  <Form.Item>
+                  <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left">
                     <div
                       style={{ textAlign: 'center' }}
                       onClick={() => {
@@ -118,7 +118,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
                       <Avatar size={64} src={user.avatar} />
                     </div>
                   </Form.Item>
-                  <Form.Item label="用户名">
+                  <Form.Item label="用户名" labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left">
                     <Input
                       placeholder="请输入用户名"
                       defaultValue={user.name}
@@ -131,7 +131,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
                       }}
                     />
                   </Form.Item>
-                  <Form.Item label="邮箱">
+                  <Form.Item label="邮箱" labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left">
                     <Input
                       placeholder="请输入邮箱"
                       defaultValue={user.email}
@@ -155,7 +155,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
                   </Button>
                 </TabPane>
                 <TabPane tab="更新密码" key="2">
-                  <Form.Item label="原密码">
+                  <Form.Item label="原密码" labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left">
                     <Input.Password
                       placeholder="请输入原密码"
                       value={oldPassword}
@@ -165,7 +165,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
                       }}
                     />
                   </Form.Item>
-                  <Form.Item label="新密码">
+                  <Form.Item label="新密码" labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left">
                     <Input.Password
                       placeholder="请输入新密码"
                       value={newPassword1}
@@ -175,7 +175,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
                       }}
                     />
                   </Form.Item>
-                  <Form.Item label="确认密码">
+                  <Form.Item label="确认密码" labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left">
                     <Input.Password
                       placeholder="请确认新密码"
                       value={newPassword2}
