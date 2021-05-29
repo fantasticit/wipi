@@ -70,8 +70,8 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
         <div className="container">
           <header>
             <span className={styles.title}>文章搜索</span>
-            <span className={styles.btnWrapper}>
-              <CloseOutlined onClick={close} />
+            <span className={styles.btnWrapper} onClick={close}>
+              <CloseOutlined />
               <span>esc</span>
             </span>
           </header>
