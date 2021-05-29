@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { NextPage } from 'next';
-import { UserOutlined } from '@ant-design/icons';
 import { Form } from '@ant-design/compatible';
 import { Row, Col, List, Typography, Card, Avatar, Input, Button, Tabs, message } from 'antd';
 import Router from 'next/router';
@@ -13,6 +12,7 @@ import { CategoryProvider } from '@/providers/category';
 import { FileProvider } from '@/providers/file';
 import { UserProvider } from '@/providers/user';
 import { GlobalContext } from '@/context/global';
+import styles from './index.module.scss';
 
 interface IOwnspaceProps {
   articlesCount: number;
@@ -76,28 +76,13 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
 
   return (
     <AdminLayout>
-      <Row gutter={16}>
+      <Row gutter={16} className={styles.wrapper}>
         <Col span={12} md={12} xs={24}>
           <List
             style={{ backgroundColor: '#fff' }}
-            header={
-              user && (
-                <div
-                  style={{ textAlign: 'center' }}
-                  onClick={() => {
-                    setVisible(true);
-                  }}
-                >
-                  {user.avatar ? (
-                    <Avatar size={64} src={user.avatar} />
-                  ) : (
-                    <Avatar size={64} icon={<UserOutlined />} />
-                  )}
-                </div>
-              )
-            }
-            bordered={true}
+            header={'系统概览'}
             dataSource={data}
+            bordered
             renderItem={(item) => (
               <List.Item>
                 <Typography.Text>{item}</Typography.Text>
@@ -123,6 +108,16 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
             <Card title="个人资料" bordered={true}>
               <Tabs defaultActiveKey="1">
                 <TabPane tab="基本设置" key="1">
+                  <Form.Item>
+                    <div
+                      style={{ textAlign: 'center' }}
+                      onClick={() => {
+                        setVisible(true);
+                      }}
+                    >
+                      <Avatar size={64} src={user.avatar} />
+                    </div>
+                  </Form.Item>
                   <Form.Item label="用户名">
                     <Input
                       placeholder="请输入用户名"
