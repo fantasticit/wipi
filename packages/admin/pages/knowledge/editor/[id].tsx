@@ -21,7 +21,7 @@ import styles from './index.module.scss';
 import { scrollToBottom } from '@/utils';
 
 const DragHandle = SortableHandle(() => (
-  <span>
+  <span style={{ cursor: 'move' }}>
     <MenuOutlined />
   </span>
 ));
@@ -198,7 +198,7 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
             />
           </div>
           <div>
-            <Button type="primary" style={{ width: '100%' }} onClick={save} loading={loading}>
+            <Button style={{ width: '100%' }} onClick={save} loading={loading}>
               保存
             </Button>
           </div>
@@ -228,8 +228,8 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
               </Button>
             </Popover>
           </div>
+          <Divider style={{ margin: '16px 0' }} />
         </header>
-        <Divider />
         <main ref={$container}>
           <SortableList
             items={chapters}

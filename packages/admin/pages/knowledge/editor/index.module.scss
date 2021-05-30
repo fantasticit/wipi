@@ -1,12 +1,13 @@
 .wrapper {
   display: flex;
   flex-wrap: nowrap;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
 
   > aside {
     width: 240px;
-    padding: 12px;
+    padding: 12px 0;
     background: var(--bg-body);
     user-select: none;
 
@@ -15,19 +16,22 @@
     overflow: hidden;
 
     > header {
+      padding: 0 12px;
+
       > div {
         display: flex;
         justify-content: space-between;
         align-items: center;
 
         + div {
-          padding-top: 16px;
+          margin-top: 16px;
         }
       }
     }
 
     > main {
       flex: 1;
+      padding: 0 12px;
       overflow: auto;
       scroll-behavior: smooth;
     }
@@ -36,6 +40,7 @@
   > main {
     position: relative;
     flex: 1;
+    width: calc(100% - 240px);
   }
 }
 
@@ -44,7 +49,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 210px;
+    width: 216px;
     padding: 12px 8px;
     cursor: pointer;
     border-radius: var(--border-radius);
@@ -74,7 +79,7 @@
     }
 
     &:hover {
-      background-color: var(--bg-second);
+      background-color: var(--bg-code);
     }
 
     &.active {
