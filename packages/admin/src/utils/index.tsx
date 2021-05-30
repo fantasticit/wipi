@@ -80,3 +80,11 @@ export function resolveUrl(baseURL = '/', relativeURL) {
 }
 
 export const isOdd = (v) => v % 2 !== 0;
+
+export const scrollToBottom = (el: HTMLElement) => {
+  const currentScrollTop = el.scrollTop;
+  const clientHeight = el.offsetHeight;
+  const scrollHeight = el.scrollHeight;
+
+  el.scrollTo(0, currentScrollTop + (scrollHeight - currentScrollTop - clientHeight));
+};

@@ -19,10 +19,10 @@ export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, on
   const ok = useCallback(() => {
     const data = { title: title.trim(), cover, summary: summary.trim(), isCommentable };
     const promise = isUpdate ? updateBookApi(book.id, data) : createBookApi(data);
-    promise.then(() => {
+    promise.then((res) => {
       message.success(isUpdate ? '更新成功' : '创建成功');
       toggleVisible();
-      onOk();
+      onOk(res);
     });
   }, [
     title,
