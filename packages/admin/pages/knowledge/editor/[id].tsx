@@ -176,11 +176,7 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
           <div>
             <Popconfirm
               title="确认关闭？如果有内容变更，请先保存。"
-              onConfirm={() => {
-                save().then(() => {
-                  Router.push('/knowledge');
-                });
-              }}
+              onConfirm={() => Router.push('/knowledge')}
               onCancel={() => null}
               okText="确认"
               cancelText="取消"
@@ -241,7 +237,6 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
             useDragHandle={true}
             lockAxis={'y'}
             transitionDuration={0}
-            getContainer={() => $container.current}
           />
         </main>
       </aside>
