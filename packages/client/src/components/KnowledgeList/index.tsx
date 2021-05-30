@@ -12,7 +12,7 @@ interface IProps {
 
 export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
   return (
-    <Row gutter={16}>
+    <>
       {knowledges && knowledges.length ? (
         knowledges.map((knowledge) => {
           return (
@@ -50,6 +50,6 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
       ) : (
         <div className={'empty'}>暂无数据</div>
       )}
-    </Row>
+    </>
   );
 };
