@@ -14,8 +14,15 @@
 
   ::-webkit-scrollbar-thumb {
     border-radius: 0;
-    background-color: var(--scrollbar-bg);
+    border-radius: 0.5rem;
+    background-color: transparent;
     transition: all 0.2s;
+  }
+
+  *:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-bg);
+    }
   }
 
   ::-webkit-scrollbar {
