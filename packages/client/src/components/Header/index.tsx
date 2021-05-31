@@ -45,8 +45,8 @@ export const Header = ({ setting, categories, tags, pages }) => {
         window.scrollY ||
         document.body.scrollTop;
 
-      setAffix(y > 0);
-      setAffixVisible(beforeY > y);
+      setAffix(y > 100);
+      setAffixVisible(beforeY - y > 100);
       setTimeout(() => {
         beforeY = y;
       }, 0);
