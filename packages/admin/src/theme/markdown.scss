@@ -311,8 +311,8 @@
       code.language-#{$language}::before {
         content: '#{$language}';
         position: absolute;
-        top: 9px;
-        right: 50px;
+        top: 8px;
+        right: 35px;
         font-size: 12px;
         line-height: 1;
         cursor: pointer;
