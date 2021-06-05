@@ -88,8 +88,8 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
   const SortableList = SortableContainer(({ items }) => {
     return (
       <div className={styles.menu}>
-        {items.map((_, index) => (
-          <SortableItem key={`item-${index}`} index={index} value={index} />
+        {items.map((item, index) => (
+          <SortableItem key={`item-${item.title}`} index={index} value={index} />
         ))}
       </div>
     );
@@ -236,7 +236,6 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
             onSortEnd={onSortEnd}
             useDragHandle={true}
             lockAxis={'y'}
-            transitionDuration={0}
           />
         </main>
       </aside>

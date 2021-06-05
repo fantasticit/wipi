@@ -30,7 +30,7 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-helmet": "^5.2.1",
-    "react-sortable-hoc": "^1.11.0",
+    "react-sortable-hoc": "^2.0.0",
     "showdown": "^1.9.1",
     "viewerjs": "^1.5.0",
     "webpack": "^4.46.0"
