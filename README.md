@@ -18,6 +18,7 @@
 - 页面创建、发布、更新
 - 评论管理
 - 邮件通知
+- 知识管理
 - 系统访问统计（ip + user-agent）
 - 用户管理（管理员、访客）
 - 文件上传（上传到 阿里 OSS）
@@ -67,13 +68,13 @@ git clone --depth=1 https://github.com/fantasticit/wipi.git your-project-name
 然后安装项目 node 依赖。
 
 ```bash
-lerna bootstrap
+yarn
 ```
 
 - 启动项目
 
 ```bash
-lerna run --parallel dev
+yarn dev
 ```
 
 前台页面地址：`http://localhost:3000`。
