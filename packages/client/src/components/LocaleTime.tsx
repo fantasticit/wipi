@@ -1,10 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-import distanceInWordsToNow from 'date-fns/formatDistanceToNow';
+import distanceInWords from 'date-fns/formatDistance';
 import dateFormat from 'date-fns/format';
-
-const locales = {
-  zh: require(`date-fns/locale/zh-CN`),
-};
+import zh from 'date-fns/locale/zh-CN';
 
 let callbacks = [];
 
@@ -27,9 +24,9 @@ type Props = {
 };
 
 const getTimeago = (date) => {
-  let content = distanceInWordsToNow(new Date(date), {
+  let content = distanceInWords(new Date(date), new Date(), {
     addSuffix: true,
-    locale: locales.zh,
+    locale: zh,
   });
 
   content = content
