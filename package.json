@@ -2,6 +2,18 @@
   "name": "root",
   "private": true,
   "npmClient": "yarn",
+  "usingWorkspances": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/webpack",
+      "**/webpack/**",
+      "**/@nestjs/common",
+      "**/@nestjs/common/**"
+    ]
+  },
   "scripts": {
     "dev": "lerna run dev --parallel",
     "build": "lerna run build --parallel",
