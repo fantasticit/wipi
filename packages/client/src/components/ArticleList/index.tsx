@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import Img from 'next/image';
 import { Row, Col, Card, Tooltip } from 'antd';
-import LazyLoad from 'react-lazyload';
 import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
@@ -36,15 +36,13 @@ export const ArticleList: React.FC<IProps> = ({
                     hoverable={true}
                     bordered={false}
                     cover={
-                      <LazyLoad height={208}>
-                        <div className={style.coverWrapper} style={{ height: coverHeight }}>
-                          <img
-                            src={article.cover}
-                            alt="cover"
-                            onClick={(e) => asRecommend && e.stopPropagation()}
-                          />
-                        </div>
-                      </LazyLoad>
+                      <div
+                        className={style.coverWrapper}
+                        style={{ position: 'relative', height: coverHeight }}
+                        onClick={(e) => asRecommend && e.stopPropagation()}
+                      >
+                        <Img layout={'fill'} src={article.cover} alt="cover" />
+                      </div>
                     }
                   >
                     <Meta

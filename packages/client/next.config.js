@@ -33,6 +33,10 @@ const nextConfig = {
     config.node.fs = 'empty';
     return config;
   },
+  images: {
+    // 改成你的域名
+    domains: ['wipi.oss-cn-shanghai.aliyuncs.com'],
+  },
 };
 
 module.exports = withPlugins(
