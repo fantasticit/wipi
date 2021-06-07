@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import Img from 'next/image';
+import { Row } from 'antd';
+import LazyLoad from 'react-lazyload';
+import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
 
@@ -23,9 +25,11 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
               >
                 <a>
                   {knowledge.cover && (
-                    <div className={style.coverWrapper}>
-                      <Img src={knowledge.cover} layout="fill" alt="cover" />
-                    </div>
+                    <LazyLoad height={110}>
+                      <div className={style.coverWrapper}>
+                        <img src={knowledge.cover} alt="cover" />
+                      </div>
+                    </LazyLoad>
                   )}
                   <div className={style.infoWrapper}>
                     <p className={style.title}>{knowledge.title}</p>
