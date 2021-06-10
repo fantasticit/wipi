@@ -30,6 +30,7 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
     (params = {}) => {
       setSelectedBook(null);
       return getKnowledgesApi(params).then((res) => {
+        console.log(res);
         setBooks(res[0]);
         setParams(params);
         return res;
@@ -168,7 +169,7 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
         visible={visible}
         toggleVisible={toggleVisible}
         book={selectedBook}
-        onOk={getBooks}
+        onOk={() => getBooks()}
       />
     </AdminLayout>
   );
