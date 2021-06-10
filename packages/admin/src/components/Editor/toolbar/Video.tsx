@@ -9,6 +9,7 @@ export const Video = ({ editor }) => {
     multiple: false,
     accept: `.mp4, .mov, .wmv, .flv, .avi, .webm, .mkv, .avchd`,
     action: '',
+    showUploadList: false,
     beforeUpload(file) {
       const hide = message.loading('视频上传中...', 0);
       FileProvider.uploadFile(file)

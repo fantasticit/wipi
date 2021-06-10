@@ -16,6 +16,7 @@ export const Upload = ({
     name: 'file',
     multiple: true,
     action: '',
+    showUploadList: false,
     beforeUpload(file) {
       setLoading(true);
       FileProvider.uploadFile(file)

@@ -8,6 +8,7 @@ export const Image = ({ editor }) => {
     name: 'file',
     accept: `.jpg, .jpeg, .pjpeg, .png, .apng, .bmp, .gif, .svg, .webp`,
     multiple: false,
+    showUploadList: false,
     action: '',
     beforeUpload(file) {
       const hide = message.loading('图片上传中...', 0);
