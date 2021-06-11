@@ -6,15 +6,16 @@ import React, {
   useCallback,
   useImperativeHandle,
 } from 'react';
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
+import { FileProvider } from '@/providers/file';
 import {
   registerScollListener,
   subjectScrollListener,
   removeScrollListener,
 } from './utils/syncScroll';
 
-declare let ResizeObserver;
 export let monaco = null;
+const IMG_REXEXP = /^image\/(png|jpg|jpeg|gif)$/i;
 
 const _MonacoEditor = (props, ref) => {
   const { defaultValue, onChange, onSave } = props;
@@ -116,24 +117,73 @@ const _MonacoEditor = (props, ref) => {
   }, [mounted]);
 
   useEffect(() => {
+    if (!mounted) {
+      return undefined;
+    }
+
+    const editor = editorRef.current;
+    let clear = () => {};
+    editor.onDidPaste((e) => {
+      const pastePosition = e.range;
+      clear = () => {
+        editor.executeEdits('', [
+          {
+            range: new monaco.Range(
+              pastePosition.startLineNumber,
+              pastePosition.startColumn,
+              pastePosition.endLineNumber,
+              pastePosition.endColumn
+            ),
+            text: ``,
+          },
+        ]);
+      };
+    });
+
+    const onPaste = async (e) => {
+      const selection = editor.getSelection();
+      const items = e.clipboardData.items;
+      const imgs = (Array.from(items) as [DataTransferItem]).filter((item) =>
+        item.type.match(IMG_REXEXP)
+      );
+      const hide = message.loading('正在上传图片中', 0);
+      await Promise.all(
+        imgs.map(async (img) => {
+          const file = img.getAsFile();
+          return FileProvider.uploadFile(file).then(({ url }) => {
+            editor.executeEdits('', [
+              {
+                range: new monaco.Range(
+                  selection.endLineNumber,
+                  selection.endColumn,
+                  selection.endLineNumber,
+                  selection.endColumn
+                ),
+                text: `![${file.name}](${url})`,
+              },
+            ]);
+            let { endLineNumber, endColumn } = editor.getSelection();
+            editor.setPosition({ lineNumber: endLineNumber, column: endColumn });
+          });
+        })
+      );
+      hide();
+      clear();
+    };
+
+    window.addEventListener('paste', onPaste);
+
+    return () => {
+      window.removeEventListener('paste', onPaste);
+    };
+  }, [mounted]);
+
+  useEffect(() => {
     if (!mounted || !editorRef.current) {
       return;
     }
     editorRef.current.setValue(defaultValue);
   }, [mounted, defaultValue]);
-
-  // useEffect(() => {
-  //   if (!mounted || !editorRef.current) {
-  //     return undefined;
-  //   }
-  //   const ro = new ResizeObserver(() => {
-  //     editorRef.current.layout(container.current.getBoundingClientRect());
-  //   });
-  //   ro.observe(container.current);
-  //   return () => {
-  //     ro.disconnect();
-  //   };
-  // }, [mounted]);
 
   return (
     <div ref={container} style={{ height: '100%', overflow: 'hidden' }}>
