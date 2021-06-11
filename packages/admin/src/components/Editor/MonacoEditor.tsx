@@ -122,53 +122,54 @@ const _MonacoEditor = (props, ref) => {
     }
 
     const editor = editorRef.current;
-    let clear = () => {};
+    const clearRef = { current: () => {} };
     editor.onDidPaste((e) => {
       const pastePosition = e.range;
-      clear = () => {
-        editor.executeEdits('', [
-          {
-            range: new monaco.Range(
-              pastePosition.startLineNumber,
-              pastePosition.startColumn,
-              pastePosition.endLineNumber,
-              pastePosition.endColumn
-            ),
-            text: ``,
-          },
-        ]);
+      const delta = [
+        {
+          range: new monaco.Range(
+            pastePosition.startLineNumber,
+            pastePosition.startColumn,
+            pastePosition.endLineNumber,
+            pastePosition.endColumn
+          ),
+          text: ``,
+        },
+      ];
+      clearRef.current = () => {
+        editor.executeEdits('', delta);
       };
     });
 
     const onPaste = async (e) => {
       const selection = editor.getSelection();
       const items = e.clipboardData.items;
-      const imgs = (Array.from(items) as [DataTransferItem]).filter((item) =>
-        item.type.match(IMG_REXEXP)
-      );
+      const imgFiles = (Array.from(items) as [DataTransferItem])
+        .filter((item) => item.type.match(IMG_REXEXP))
+        .map((item) => item.getAsFile());
+      if (!imgFiles.length) return;
       const hide = message.loading('正在上传图片中', 0);
-      await Promise.all(
-        imgs.map(async (img) => {
-          const file = img.getAsFile();
-          return FileProvider.uploadFile(file).then(({ url }) => {
-            editor.executeEdits('', [
-              {
-                range: new monaco.Range(
-                  selection.endLineNumber,
-                  selection.endColumn,
-                  selection.endLineNumber,
-                  selection.endColumn
-                ),
-                text: `![${file.name}](${url})`,
-              },
-            ]);
-            let { endLineNumber, endColumn } = editor.getSelection();
-            editor.setPosition({ lineNumber: endLineNumber, column: endColumn });
-          });
-        })
-      );
+      const upload = (file) => {
+        return FileProvider.uploadFile(file).then(({ url }) => {
+          const delta = [
+            {
+              range: new monaco.Range(
+                selection.endLineNumber,
+                selection.endColumn,
+                selection.endLineNumber,
+                selection.endColumn
+              ),
+              text: `![${file.name}](${url})`,
+            },
+          ];
+          editor.executeEdits('', delta);
+          const { endLineNumber, endColumn } = editor.getSelection();
+          editor.setPosition({ lineNumber: endLineNumber, column: endColumn });
+        });
+      };
+      await Promise.all(imgFiles.map(upload));
       hide();
-      clear();
+      clearRef.current();
     };
 
     window.addEventListener('paste', onPaste);
