@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useMemo } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { Row, Col, Drawer, Button, message, Card, List, Popconfirm, Alert } from 'antd';
@@ -8,8 +8,11 @@ import { AdminLayout } from '@/layout/AdminLayout';
 import { useSetting } from '@/hooks/useSetting';
 import { FileProvider } from '@/providers/file';
 import { LocaleTime } from '@/components/LocaleTime';
-import { DataTable } from '@/components/DataTable';
 import { Upload } from '@/components/Upload';
+import { useToggle } from '@/hooks/useToggle';
+import { useAsyncLoading } from '@/hooks/useAsyncLoading';
+import { usePagination } from '@/hooks/usePagination';
+import { PaginationTable } from '@/components/PaginationTable';
 import style from './index.module.scss';
 
 const { Meta } = Card;
@@ -33,6 +36,29 @@ const DescriptionItem = ({ title, content }) => (
   </div>
 );
 
+const SEARCH_FIELDS = [
+  {
+    label: '文件名称',
+    field: 'originalname',
+    msg: '请输入文件名称',
+  },
+  {
+    label: '文件类型',
+    field: 'type',
+    msg: '请输入文件类型',
+  },
+];
+
+const GRID = {
+  gutter: 16,
+  xs: 1,
+  sm: 2,
+  md: 4,
+  lg: 4,
+  xl: 4,
+  xxl: 6,
+};
+
 interface IFileProps {
   files: IFile[];
   total: number;
@@ -43,41 +69,38 @@ let viewer = null;
 const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
   const ref = useRef();
   const setting = useSetting();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [visible, setVisible] = useState<boolean>(false);
-  const [files, setFiles] = useState<IFile[]>(defaultFiles);
+  const [visible, toggleVisible] = useToggle(false);
   const [currentFile, setCurrentFile] = useState<IFile | null>(null);
-  const [params, setParams] = useState(null);
+  const { loading, data: files, refresh, ...resetPagination } = usePagination<IFile>(
+    FileProvider.getFiles
+  );
+  const [deleteApi, deleteLoading] = useAsyncLoading(FileProvider.deleteFile);
+  const isOSSSettingFullFiled = useMemo(
+    () =>
+      setting &&
+      setting.ossRegion &&
+      setting.ossAccessKeyId &&
+      setting.ossAccessKeySecret &&
+      setting.ossBucket,
+    [setting]
+  );
 
-  const isOSSSettingFullFiled =
-    setting &&
-    setting.ossRegion &&
-    setting.ossAccessKeyId &&
-    setting.ossAccessKeySecret &&
-    setting.ossBucket;
-
-  const getFiles = useCallback((params = {}) => {
-    return FileProvider.getFiles(params)
-      .then((res) => {
-        setParams(params);
-        setFiles(res[0]);
-        setLoading(false);
-        return res;
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-  }, []);
-
-  const deleteFile = useCallback(
-    (id) => {
-      FileProvider.deleteFile(id).then(() => {
-        setVisible(false);
-        setLoading(true);
-        getFiles(params);
-      });
+  const deleteAction = useCallback(
+    (ids, resetSelectedRows = null) => {
+      if (!Array.isArray(ids)) {
+        ids = [ids];
+      }
+      return () => {
+        Promise.all(ids.map((id) => deleteApi(id))).then(() => {
+          message.success('操作成功');
+          resetSelectedRows && resetSelectedRows();
+          setCurrentFile(null);
+          toggleVisible();
+          refresh();
+        });
+      };
     },
-    [params, getFiles]
+    [deleteApi, toggleVisible, refresh]
   );
 
   return (
@@ -99,39 +122,20 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
           </div>
         ) : (
           <div style={{ marginBottom: 24 }}>
-            <Upload onOK={getFiles} />
+            <Upload onOK={refresh} />
           </div>
         )}
-
-        <DataTable
+        <PaginationTable
+          loading={loading}
           data={files}
-          defaultTotal={total}
-          columns={[]}
-          searchFields={[
-            {
-              label: '文件名称',
-              field: 'originalname',
-              msg: '请输入文件名称',
-            },
-            {
-              label: '文件类型',
-              field: 'type',
-              msg: '请输入文件类型',
-            },
-          ]}
-          onSearch={getFiles}
+          refresh={refresh}
+          {...resetPagination}
+          showSelection
+          searchFields={SEARCH_FIELDS}
           customDataTable={(data) => (
             <List
               className={style.imgs}
-              grid={{
-                gutter: 16,
-                xs: 1,
-                sm: 2,
-                md: 4,
-                lg: 4,
-                xl: 4,
-                xxl: 6,
-              }}
+              grid={GRID}
               dataSource={data}
               renderItem={(file: IFile) => (
                 <List.Item key={file.id}>
@@ -144,7 +148,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
                     }
                     onClick={() => {
                       setCurrentFile(file);
-                      setVisible(true);
+                      toggleVisible();
                       Promise.resolve().then(() => {
                         if (!viewer) {
                           viewer = new Viewer(ref.current, { inline: false });
@@ -169,13 +173,12 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
             />
           )}
         />
-
         <Drawer
           width={640}
           placement="right"
           title={'文件信息'}
           closable={true}
-          onClose={() => setVisible(false)}
+          onClose={() => toggleVisible()}
           visible={visible}
         >
           <div ref={ref} className={style.previewContainer}>
@@ -237,18 +240,18 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
               style={{
                 marginRight: 8,
               }}
-              onClick={() => setVisible(false)}
+              onClick={() => toggleVisible()}
             >
               关闭
             </Button>
             <Popconfirm
               placement="topRight"
               title="确认删除这个文件？"
-              onConfirm={() => deleteFile(currentFile && currentFile.id)}
+              onConfirm={deleteAction(currentFile && currentFile.id)}
               okText="确认"
               cancelText="取消"
             >
-              <Button danger loading={loading}>
+              <Button danger loading={deleteLoading}>
                 删除
               </Button>
             </Popconfirm>

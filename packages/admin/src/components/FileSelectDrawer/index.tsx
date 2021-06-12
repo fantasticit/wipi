@@ -1,14 +1,38 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Alert, Drawer, Card, List, Button } from 'antd';
 import Viewer from 'viewerjs';
 import { copy } from '@/utils';
 import { FileProvider } from '@/providers/file';
-import { DataTable } from '@/components/DataTable';
 import { Upload } from '@/components/Upload';
+import { usePagination } from '@/hooks/usePagination';
+import { PaginationTable } from '@/components/PaginationTable';
 import style from './index.module.scss';
 
 const { Meta } = Card;
 let viewer = null;
+
+const SEARCH_FIELDS = [
+  {
+    label: '文件名称',
+    field: 'originalname',
+    msg: '请输入文件名称',
+  },
+  {
+    label: '文件类型',
+    field: 'type',
+    msg: '请输入文件类型',
+  },
+];
+
+const GRID = {
+  gutter: 16,
+  xs: 1,
+  sm: 2,
+  md: 4,
+  lg: 4,
+  xl: 4,
+  xxl: 6,
+};
 
 interface IFileProps {
   isCopy?: boolean;
@@ -26,14 +50,9 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
   onChange,
 }) => {
   const ref = useRef();
-  const [files, setFiles] = useState<IFile[]>([]);
-
-  const getFiles = useCallback((params = {}) => {
-    return FileProvider.getFiles(params).then((res) => {
-      setFiles(res[0]);
-      return res;
-    });
-  }, []);
+  const { loading, data: files, refresh, ...resetPagination } = usePagination<IFile>(
+    FileProvider.getFiles
+  );
 
   const previewImage = useCallback((e) => {
     e.stopPropagation();
@@ -69,42 +88,22 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
       )}
 
       <div ref={ref}>
-        <DataTable
+        <PaginationTable
+          loading={loading}
           data={files}
-          defaultTotal={0}
-          columns={[]}
-          searchFields={[
-            {
-              label: '文件名称',
-              field: 'originalname',
-              msg: '请输入文件名称',
-            },
-            {
-              label: '文件类型',
-              field: 'type',
-              msg: '请输入文件类型',
-            },
-          ]}
-          showSearchLabel={false}
-          padding={0}
-          onSearch={getFiles}
+          {...resetPagination}
+          refresh={refresh}
+          searchFields={SEARCH_FIELDS}
           rightNode={
-            <Upload onOK={getFiles} useDragger={false}>
+            <Upload onOK={refresh} useDragger={false}>
               <Button>上传文件</Button>
             </Upload>
           }
           customDataTable={(data) => (
             <List
-              grid={{
-                gutter: 16,
-                xs: 1,
-                sm: 2,
-                md: 3,
-                lg: 3,
-                xl: 3,
-                xxl: 3,
-              }}
-              dataSource={files}
+              className={style.imgs}
+              grid={GRID}
+              dataSource={data}
               renderItem={(file: IFile) => (
                 <List.Item key={file.id}>
                   <Card

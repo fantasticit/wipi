@@ -1,83 +1,89 @@
 import React, { useState, useCallback } from 'react';
 import { NextPage } from 'next';
-import { Badge, Popconfirm, message } from 'antd';
+import { Badge, Popconfirm, Button, message } from 'antd';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { SearchProvider } from '@/providers/search';
 import { LocaleTime } from '@/components/LocaleTime';
-import { DataTable } from '@/components/DataTable';
+import { useAsyncLoading } from '@/hooks/useAsyncLoading';
+import { usePagination } from '@/hooks/usePagination';
+import { PaginationTable } from '@/components/PaginationTable';
 import style from './index.module.scss';
 
+const COMMON_COLUMNS = [
+  {
+    title: '搜索词',
+    dataIndex: 'keyword',
+    key: 'keyword',
+  },
+  {
+    title: '搜索量',
+    dataIndex: 'count',
+    key: 'count',
+    render: (views) => (
+      <Badge
+        count={views}
+        showZero={true}
+        overflowCount={Infinity}
+        style={{ backgroundColor: '#52c41a' }}
+      />
+    ),
+  },
+  {
+    title: '搜索时间',
+    dataIndex: 'createAt',
+    key: 'createAt',
+    render: (date) => <LocaleTime date={date} />,
+  },
+];
+
+const SEARCH_FIELDS = [
+  {
+    label: '类型',
+    field: 'type',
+    msg: '请输入搜索类型',
+  },
+  {
+    label: '搜索词',
+    field: 'keyword',
+    msg: '请输入搜索词',
+  },
+  {
+    label: '搜索量',
+    field: 'count',
+    msg: '请输入搜索量',
+  },
+];
+
 const Search: NextPage = () => {
-  const [data, setData] = useState<ISearch[]>([]);
-  const [loading, setLoaidng] = useState(false);
-  const [params, setParams] = useState(null);
+  const { loading, data, refresh, ...resetPagination } = usePagination<ISearch>(
+    SearchProvider.getRecords
+  );
+  const [deleteApi, deleteLoading] = useAsyncLoading(SearchProvider.deleteRecord);
 
-  // 获取
-  const getData = useCallback(
-    (params) => {
-      if (loading) {
-        return Promise.reject(new Error('加载中'));
+  const deleteAction = useCallback(
+    (ids, resetSelectedRows = null) => {
+      if (!Array.isArray(ids)) {
+        ids = [ids];
       }
-
-      setLoaidng(true);
-      return SearchProvider.getRecords(params)
-        .then((res) => {
-          setParams(params);
-          setData(res[0]);
-          setLoaidng(false);
-          return res;
-        })
-        .catch(() => setLoaidng(false));
+      return () => {
+        Promise.all(ids.map((id) => deleteApi(id))).then(() => {
+          message.success('操作成功');
+          resetSelectedRows && resetSelectedRows();
+          refresh();
+        });
+      };
     },
-    [loading]
+    [deleteApi, refresh]
   );
 
-  // 删除
-  const deleteItem = useCallback(
-    (id) => {
-      SearchProvider.deleteRecord(id).then(() => {
-        message.success('搜索记录删除成功');
-        getData(params);
-      });
-    },
-    [params, getData]
-  );
-
-  const columns = [
-    {
-      title: '搜索词',
-      dataIndex: 'keyword',
-      key: 'keyword',
-    },
-    {
-      title: '搜索量',
-      dataIndex: 'count',
-      key: 'count',
-      render: (views) => (
-        <Badge
-          count={views}
-          showZero={true}
-          overflowCount={Infinity}
-          style={{ backgroundColor: '#52c41a' }}
-        />
-      ),
-    },
-    {
-      title: '搜索时间',
-      dataIndex: 'createAt',
-      key: 'createAt',
-      render: (date) => <LocaleTime date={date} />,
-    },
-  ];
-
-  const actionColumn = {
+  const actionColumn = (resetSelectedRows) => ({
     title: '操作',
     key: 'action',
     render: (_, record) => (
       <span className={style.action}>
         <Popconfirm
           title="确认删除这个搜索记录？"
-          onConfirm={() => deleteItem(record.id)}
+          onConfirm={deleteAction(record.id, resetSelectedRows)}
           okText="确认"
           cancelText="取消"
         >
@@ -85,33 +91,33 @@ const Search: NextPage = () => {
         </Popconfirm>
       </span>
     ),
-  };
+  });
 
   return (
     <AdminLayout>
       <div className={style.wrapper}>
-        <DataTable
+        <PaginationTable
+          loading={loading}
           data={data}
-          defaultTotal={0}
-          columns={[...columns, actionColumn]}
-          searchFields={[
-            {
-              label: '类型',
-              field: 'type',
-              msg: '请输入搜索类型',
-            },
-            {
-              label: '搜索词',
-              field: 'keyword',
-              msg: '请输入搜索词',
-            },
-            {
-              label: '搜索量',
-              field: 'count',
-              msg: '请输入搜索量',
-            },
-          ]}
-          onSearch={getData}
+          columns={(resetSelectedRows) => [...COMMON_COLUMNS, actionColumn(resetSelectedRows)]}
+          refresh={refresh}
+          {...resetPagination}
+          showSelection
+          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
+            hasSelected ? (
+              <Popconfirm
+                title="确认删除？"
+                onConfirm={deleteAction(selectedRowKeys, resetSelectedRows)}
+                okText="确认"
+                cancelText="取消"
+              >
+                <Button disabled={!hasSelected} loading={deleteLoading} danger>
+                  删除
+                </Button>
+              </Popconfirm>
+            ) : null
+          }
+          searchFields={SEARCH_FIELDS}
         />
       </div>
     </AdminLayout>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ReloadOutlined } from '@ant-design/icons';
-import { Table, Tooltip } from 'antd';
+import { Table, Tooltip, Spin } from 'antd';
 import { ReturnProps } from '@/hooks/usePagination';
 import { Pagination } from '@/components/Pagination';
 import { IFieldItem, Search } from '@/components/Search';
@@ -13,13 +13,14 @@ interface IProps extends ReturnProps<object> {
     hasSelected: boolean;
     selectedRowKeys: string[];
     selectedRows: object[];
+    resetSelectedRows: () => void;
   }) => React.ReactNode;
   rightNode?: React.ReactNode;
   padding?: number | string;
   scroll?: { x?: number; y?: number };
   searchFields: Array<IFieldItem>;
   showSearchLabel?: boolean;
-  columns: Array<object>;
+  columns?: Array<object> | ((resetSelectedRows) => Array<object>);
   customDataTable?: (data) => React.ReactNode;
 }
 
@@ -54,12 +55,16 @@ export const PaginationTable: React.FC<IProps> = ({
     selectedRowKeys,
     onChange: setSelectedRowKeys,
   };
+  const resetSelectedRows = () => {
+    setSelectedRowKeys([]);
+  };
   const leftNode =
     renderLeftNode &&
     renderLeftNode({
       hasSelected,
       selectedRowKeys,
       selectedRows: selectedRowKeys.map((id) => data.find((item) => item[rowKey] === id)),
+      resetSelectedRows,
     });
 
   return (
@@ -83,7 +88,7 @@ export const PaginationTable: React.FC<IProps> = ({
               </div>
               <div>{rightNode}</div>
             </div>
-            {customDataTable(data)}
+            <Spin spinning={loading}>{customDataTable(data)}</Spin>
           </>
         ) : (
           <>
@@ -101,7 +106,7 @@ export const PaginationTable: React.FC<IProps> = ({
             </div>
             <Table
               loading={loading}
-              columns={columns}
+              columns={typeof columns === 'function' ? columns(resetSelectedRows) : columns}
               dataSource={data}
               rowKey={rowKey}
               pagination={false}

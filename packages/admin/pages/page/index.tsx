@@ -61,19 +61,9 @@ const columns = [
 
 const Page: NextPage = () => {
   const setting = useSetting();
-  const {
-    loading: listLoading,
-    data,
-    total,
-    page,
-    pageSize,
-    params,
-    setPage,
-    setPageSize,
-    setParams,
-    refresh,
-    reset,
-  } = usePagination<IPage>(PageProvider.getPages);
+  const { loading: listLoading, data, refresh, ...resetPagination } = usePagination<IPage>(
+    PageProvider.getPages
+  );
   const [modalVisible, toggleModalVisible] = useToggle(false);
   const [views, setViews] = useState<IView[]>([]);
   const [updateApi, updateLoading] = useAsyncLoading(PageProvider.updatePage);
@@ -99,13 +89,14 @@ const Page: NextPage = () => {
   );
 
   const deleteAction = useCallback(
-    (ids) => {
+    (ids, resetSelectedRows = null) => {
       if (!Array.isArray(ids)) {
         ids = [ids];
       }
       return () => {
         Promise.all(ids.map((id) => deleteApi(id))).then(() => {
           message.success('操作成功');
+          resetSelectedRows && resetSelectedRows();
           refresh();
         });
       };
@@ -143,7 +134,7 @@ const Page: NextPage = () => {
     ),
   };
 
-  const actionColumn = {
+  const actionColumn = (resetSelectedRows) => ({
     title: '操作',
     key: 'action',
     render: (_, record) => {
@@ -179,7 +170,7 @@ const Page: NextPage = () => {
           <Divider type="vertical" />
           <Popconfirm
             title="确认删除这个文章？"
-            onConfirm={deleteAction(record.id)}
+            onConfirm={deleteAction(record.id, resetSelectedRows)}
             okText="确认"
             cancelText="取消"
             okButtonProps={{ loading: deleteLoading }}
@@ -191,7 +182,7 @@ const Page: NextPage = () => {
         </span>
       );
     },
-  };
+  });
 
   useEffect(() => {
     if (updateLoading) {
@@ -207,18 +198,15 @@ const Page: NextPage = () => {
         <PaginationTable
           loading={listLoading}
           data={data}
-          columns={[titleColumn, ...columns, actionColumn]}
-          total={total}
-          page={page}
-          pageSize={pageSize}
-          params={params}
-          setPage={setPage}
-          setPageSize={setPageSize}
-          setParams={setParams}
+          columns={(resetSelectedRows) => [
+            titleColumn,
+            ...columns,
+            actionColumn(resetSelectedRows),
+          ]}
           refresh={refresh}
-          reset={reset}
+          {...resetPagination}
           showSelection
-          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows }) =>
+          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
             hasSelected ? (
               <>
                 <Button
@@ -237,7 +225,7 @@ const Page: NextPage = () => {
                 </Button>
                 <Popconfirm
                   title="确认删除？"
-                  onConfirm={deleteAction(selectedRowKeys)}
+                  onConfirm={deleteAction(selectedRowKeys, resetSelectedRows)}
                   okText="确认"
                   cancelText="取消"
                 >

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { NextPage } from 'next';
 import { Select, Button, Popconfirm, message } from 'antd';
 import { AdminLayout } from '@/layout/AdminLayout';
@@ -14,6 +14,88 @@ import { CommentHTML } from '@/components/comment/CommentHTML';
 import { CommentStatus } from '@/components/comment/CommentStatus';
 
 let updateLoadingMessage = null;
+const SCROLL = { x: 1440 };
+const SEARCH_FIELDS = [
+  {
+    label: '称呼',
+    field: 'name',
+    msg: '请输入称呼',
+  },
+  {
+    label: 'Email',
+    field: 'email',
+    msg: '请输入联系方式',
+  },
+  {
+    label: '状态',
+    field: 'pass',
+    children: (
+      <Select style={{ width: 180 }}>
+        {[
+          { label: '已通过', value: 1 },
+          { label: '未通过', value: 0 },
+        ].map((t) => {
+          return (
+            <Select.Option key={t.label} value={t.value as number}>
+              {t.label}
+            </Select.Option>
+          );
+        })}
+      </Select>
+    ),
+  },
+];
+const COMMON_COLUMNS = [
+  {
+    title: '状态',
+    dataIndex: 'pass',
+    key: 'pass',
+    fixed: 'left',
+    width: 100,
+    render: (_, record) => <CommentStatus comment={record} />,
+  },
+  {
+    title: '称呼',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: '联系方式',
+    dataIndex: 'email',
+    key: 'email',
+  },
+  {
+    title: '原始内容',
+    dataIndex: 'content',
+    key: 'content',
+    width: 160,
+    render: (_, record) => <CommentContent comment={record} />,
+  },
+  {
+    title: 'HTML 内容',
+    dataIndex: 'html',
+    key: 'html',
+    width: 160,
+    render: (_, record) => <CommentHTML comment={record} />,
+  },
+
+  {
+    title: '管理文章',
+    dataIndex: 'url',
+    key: 'url',
+    width: 100,
+    render: (_, record) => {
+      return <CommentArticle comment={record} />;
+    },
+  },
+  {
+    title: '创建时间',
+    dataIndex: 'createAt',
+    key: 'createAt',
+    width: 200,
+    render: (date) => <LocaleTime date={date} />,
+  },
+];
 
 interface IProps {
   comments: IComment[];
@@ -21,19 +103,9 @@ interface IProps {
 }
 
 const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
-  const {
-    loading,
-    data: comments,
-    total,
-    page,
-    pageSize,
-    params,
-    setPage,
-    setPageSize,
-    setParams,
-    refresh,
-    reset,
-  } = usePagination<IComment>(CommentProvider.getComments);
+  const { loading, data: comments, refresh, ...resetPagination } = usePagination<IComment>(
+    CommentProvider.getComments
+  );
   const [updateApi, updateLoading] = useAsyncLoading(CommentProvider.updateComment);
   const [deleteApi, deleteLoading] = useAsyncLoading(CommentProvider.deleteComment);
 
@@ -56,13 +128,14 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
   );
 
   const deleteAction = useCallback(
-    (ids) => {
+    (ids, resetSelectedRows = null) => {
       if (!Array.isArray(ids)) {
         ids = [ids];
       }
       return () => {
         Promise.all(ids.map((id) => deleteApi(id))).then(() => {
           message.success('操作成功');
+          resetSelectedRows && resetSelectedRows();
           refresh();
         });
       };
@@ -70,40 +143,8 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
     [deleteApi, refresh]
   );
 
-  const columns = [
-    {
-      title: '状态',
-      dataIndex: 'pass',
-      key: 'pass',
-      fixed: 'left',
-      width: 100,
-      render: (_, record) => <CommentStatus comment={record} />,
-    },
-    {
-      title: '称呼',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '联系方式',
-      dataIndex: 'email',
-      key: 'email',
-    },
-    {
-      title: '原始内容',
-      dataIndex: 'content',
-      key: 'content',
-      width: 160,
-      render: (_, record) => <CommentContent comment={record} />,
-    },
-    {
-      title: 'HTML 内容',
-      dataIndex: 'html',
-      key: 'html',
-      width: 160,
-      render: (_, record) => <CommentHTML comment={record} />,
-    },
-    {
+  const parentCommentColumn = useMemo(
+    () => ({
       title: '父级评论',
       dataIndex: 'parentCommentId',
       key: 'parentCommentId',
@@ -112,32 +153,27 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
         const target = comments.find((c) => c.id === id);
         return (target && target.name) || '无';
       },
-    },
-    {
-      title: '管理文章',
-      dataIndex: 'url',
-      key: 'url',
-      width: 100,
-      render: (_, record) => {
-        return <CommentArticle comment={record} />;
-      },
-    },
+    }),
+    [comments]
+  );
 
-    {
-      title: '创建时间',
-      dataIndex: 'createAt',
-      key: 'createAt',
-      width: 200,
-      render: (date) => <LocaleTime date={date} />,
-    },
-  ];
-
-  const actionColumn = {
-    title: '操作',
-    key: 'action',
-    fixed: 'right',
-    render: (_, record) => <CommentAction comment={record} refresh={refresh} />,
-  };
+  const actionColumn = useCallback(
+    (resetSelectedRows) => ({
+      title: '操作',
+      key: 'action',
+      fixed: 'right',
+      render: (_, record) => (
+        <CommentAction
+          comment={record}
+          refresh={() => {
+            resetSelectedRows();
+            refresh();
+          }}
+        />
+      ),
+    }),
+    [refresh]
+  );
 
   useEffect(() => {
     if (updateLoading) {
@@ -149,84 +185,50 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
 
   return (
     <AdminLayout>
-      <div>
-        <PaginationTable
-          loading={loading}
-          data={comments}
-          columns={[...columns, actionColumn]}
-          total={total}
-          page={page}
-          pageSize={pageSize}
-          params={params}
-          setPage={setPage}
-          setPageSize={setPageSize}
-          setParams={setParams}
-          refresh={refresh}
-          reset={reset}
-          showSelection
-          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows }) =>
-            hasSelected ? (
-              <>
-                <Button
-                  disabled={!hasSelected}
-                  style={{ marginRight: 8 }}
-                  onClick={updateAction(selectedRows, 'pass', true)}
-                >
-                  通过
+      <PaginationTable
+        loading={loading}
+        data={comments}
+        columns={(resetSelectedRows) => [
+          ...COMMON_COLUMNS,
+          parentCommentColumn,
+          actionColumn(resetSelectedRows),
+        ]}
+        refresh={refresh}
+        {...resetPagination}
+        showSelection
+        renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
+          hasSelected ? (
+            <>
+              <Button
+                disabled={!hasSelected}
+                style={{ marginRight: 8 }}
+                onClick={updateAction(selectedRows, 'pass', true)}
+              >
+                通过
+              </Button>
+              <Button
+                disabled={!hasSelected}
+                style={{ marginRight: 8 }}
+                onClick={updateAction(selectedRows, 'status', false)}
+              >
+                拒绝
+              </Button>
+              <Popconfirm
+                title="确认删除？"
+                onConfirm={deleteAction(selectedRowKeys, resetSelectedRows)}
+                okText="确认"
+                cancelText="取消"
+              >
+                <Button disabled={!hasSelected} loading={deleteLoading} danger>
+                  删除
                 </Button>
-                <Button
-                  disabled={!hasSelected}
-                  style={{ marginRight: 8 }}
-                  onClick={updateAction(selectedRows, 'status', false)}
-                >
-                  拒绝
-                </Button>
-                <Popconfirm
-                  title="确认删除？"
-                  onConfirm={deleteAction(selectedRowKeys)}
-                  okText="确认"
-                  cancelText="取消"
-                >
-                  <Button disabled={!hasSelected} loading={deleteLoading} danger>
-                    删除
-                  </Button>
-                </Popconfirm>
-              </>
-            ) : null
-          }
-          scroll={{ x: 1440 }}
-          searchFields={[
-            {
-              label: '称呼',
-              field: 'name',
-              msg: '请输入称呼',
-            },
-            {
-              label: 'Email',
-              field: 'email',
-              msg: '请输入联系方式',
-            },
-            {
-              label: '状态',
-              field: 'pass',
-              children: (
-                <Select style={{ width: 180 }}>
-                  {[
-                    { label: '已通过', value: 1 },
-                    { label: '未通过', value: 0 },
-                  ].map((t) => {
-                    return (
-                      <Select.Option key={t.label} value={t.value as number}>
-                        {t.label}
-                      </Select.Option>
-                    );
-                  })}
-                </Select>
-              ),
-            },
-          ]}
-        />
-      </div>
+              </Popconfirm>
+            </>
+          ) : null
+        }
+        scroll={SCROLL}
+        searchFields={SEARCH_FIELDS}
+      />
     </AdminLayout>
   );
 };

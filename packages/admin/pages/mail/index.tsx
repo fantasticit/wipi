@@ -1,64 +1,93 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { NextPage } from 'next';
-import { Alert, Button, Modal, Popconfirm, message } from 'antd';
 import Link from 'next/link';
+import { Alert, Button, Modal, Popconfirm, message } from 'antd';
 import { useSetting } from '@/hooks/useSetting';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { MailProvider } from '@/providers/mail';
 import { LocaleTime } from '@/components/LocaleTime';
-import { DataTable } from '@/components/DataTable';
+import { useAsyncLoading } from '@/hooks/useAsyncLoading';
+import { usePagination } from '@/hooks/usePagination';
+import { PaginationTable } from '@/components/PaginationTable';
 import style from './index.module.scss';
+
+const SCROLL = { x: 1440 };
+const SEARCH_FIELDS = [
+  {
+    label: '发件人',
+    field: 'from',
+    msg: '请输入发件人',
+  },
+  {
+    label: '收件人',
+    field: 'to',
+    msg: '请输入收件人',
+  },
+  {
+    label: '主题',
+    field: 'subject',
+    msg: '请输入主题',
+  },
+];
+const COMMON_COLUMNS = [
+  {
+    title: '发件人',
+    dataIndex: 'from',
+    key: 'from',
+  },
+  {
+    title: '收件人',
+    dataIndex: 'to',
+    key: 'to',
+  },
+  {
+    title: '主题',
+    dataIndex: 'subject',
+    key: 'subject',
+  },
+];
+const TIME_COLUMN = {
+  title: '发送时间',
+  dataIndex: 'createAt',
+  key: 'createAt',
+  render: (date) => <LocaleTime date={date} />,
+};
 
 const Mail: NextPage = () => {
   const setting = useSetting();
-  const [mails, setMails] = useState<IMail[]>([]);
+  const { loading, data: mails, refresh, ...resetPagination } = usePagination<IMail>(
+    MailProvider.getMails
+  );
+  const [deleteApi, deleteLoading] = useAsyncLoading(MailProvider.deleteMail);
   const [selectedMail, setSelectedMail] = useState(null);
-  const [params, setParams] = useState(null);
+  const isSmtpSettingFullfilled = useMemo(() => {
+    return (
+      setting &&
+      setting.smtpHost &&
+      setting.smtpPort &&
+      setting.smtpUser &&
+      setting.smtpFromUser &&
+      setting.smtpFromUser
+    );
+  }, [setting]);
 
-  const isSmtpSettingFullfilled =
-    setting &&
-    setting.smtpHost &&
-    setting.smtpPort &&
-    setting.smtpUser &&
-    setting.smtpFromUser &&
-    setting.smtpFromUser;
-
-  // 获取邮件
-  const getMails = useCallback((params) => {
-    return MailProvider.getMails(params).then((res) => {
-      setParams(params);
-      setMails(res[0]);
-      return res;
-    });
-  }, []);
-
-  // 删除邮件
-  const deleteMail = useCallback(
-    (id) => {
-      MailProvider.deleteMail(id).then(() => {
-        message.success('邮件删除成功');
-        getMails(params);
-      });
+  const deleteAction = useCallback(
+    (ids, resetSelectedRows = null) => {
+      if (!Array.isArray(ids)) {
+        ids = [ids];
+      }
+      return () => {
+        Promise.all(ids.map((id) => deleteApi(id))).then(() => {
+          message.success('操作成功');
+          resetSelectedRows && resetSelectedRows();
+          refresh();
+        });
+      };
     },
-    [params, getMails]
+    [deleteApi, refresh]
   );
 
-  const columns = [
-    {
-      title: '发件人',
-      dataIndex: 'from',
-      key: 'from',
-    },
-    {
-      title: '收件人',
-      dataIndex: 'to',
-      key: 'to',
-    },
-    {
-      title: '主题',
-      dataIndex: 'subject',
-      key: 'subject',
-    },
+  const contentColumn = [
     {
       title: '内容',
       dataIndex: 'html',
@@ -75,22 +104,16 @@ const Mail: NextPage = () => {
         </Button>
       ),
     },
-    {
-      title: '发送时间',
-      dataIndex: 'createAt',
-      key: 'createAt',
-      render: (date) => <LocaleTime date={date} />,
-    },
   ];
 
-  const actionColumn = {
+  const actionColumn = (resetSelectedRows) => ({
     title: '操作',
     key: 'action',
     render: (_, record) => (
       <span className={style.action}>
         <Popconfirm
           title="确认删除这个邮件？"
-          onConfirm={() => deleteMail(record.id)}
+          onConfirm={deleteAction(record.id, resetSelectedRows)}
           okText="确认"
           cancelText="取消"
         >
@@ -98,7 +121,7 @@ const Mail: NextPage = () => {
         </Popconfirm>
       </span>
     ),
-  };
+  });
 
   return (
     <AdminLayout>
@@ -118,28 +141,29 @@ const Mail: NextPage = () => {
             />
           </div>
         ) : null}
-        <DataTable
+        <PaginationTable
+          loading={loading}
           data={mails}
-          defaultTotal={0}
-          columns={[...columns, actionColumn]}
-          searchFields={[
-            {
-              label: '发件人',
-              field: 'from',
-              msg: '请输入发件人',
-            },
-            {
-              label: '收件人',
-              field: 'to',
-              msg: '请输入收件人',
-            },
-            {
-              label: '主题',
-              field: 'subject',
-              msg: '请输入主题',
-            },
-          ]}
-          onSearch={getMails}
+          columns={[...COMMON_COLUMNS, contentColumn, TIME_COLUMN, actionColumn]}
+          refresh={refresh}
+          {...resetPagination}
+          showSelection
+          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
+            hasSelected ? (
+              <Popconfirm
+                title="确认删除？"
+                onConfirm={deleteAction(selectedRowKeys, resetSelectedRows)}
+                okText="确认"
+                cancelText="取消"
+              >
+                <Button disabled={!hasSelected} loading={deleteLoading} danger>
+                  删除
+                </Button>
+              </Popconfirm>
+            ) : null
+          }
+          scroll={SCROLL}
+          searchFields={SEARCH_FIELDS}
         />
         <Modal
           title={'发送内容'}

@@ -19,7 +19,33 @@ import { LocaleTime } from '@/components/LocaleTime';
 import style from './index.module.scss';
 
 let updateLoadingMessage = null;
-const columns = [
+const SCROLL = { x: 1380 };
+const SEARCH_FIELDS = [
+  {
+    label: '标题',
+    field: 'title',
+    msg: '请输入文章标题',
+  },
+  {
+    label: '状态',
+    field: 'status',
+    children: (
+      <Select style={{ width: 180 }}>
+        {[
+          { label: '已发布', value: 'publish' },
+          { label: '草稿', value: 'draft' },
+        ].map((t) => {
+          return (
+            <Select.Option key={t.label} value={t.value}>
+              {t.label}
+            </Select.Option>
+          );
+        })}
+      </Select>
+    ),
+  },
+];
+const COMMON_COLUMNS = [
   {
     title: '状态',
     dataIndex: 'status',
@@ -106,15 +132,8 @@ const Article: NextPage = () => {
   const {
     loading: listLoading,
     data: articles,
-    total,
-    page,
-    pageSize,
-    params,
-    setPage,
-    setPageSize,
-    setParams,
     refresh,
-    reset,
+    ...resetPagination
   } = usePagination<IArticle>(ArticleProvider.getArticles);
   const [updateApi, updateLoading] = useAsyncLoading(ArticleProvider.updateArticle);
   const [deleteAPi, deleteLoading] = useAsyncLoading(ArticleProvider.deleteArticle);
@@ -139,7 +158,7 @@ const Article: NextPage = () => {
   );
 
   const deleteAction = useCallback(
-    (ids) => {
+    (ids, resetSelectedRows = null) => {
       if (!Array.isArray(ids)) {
         ids = [ids];
       }
@@ -147,6 +166,7 @@ const Article: NextPage = () => {
         Promise.all(ids.map((id) => deleteAPi(id))).then(() => {
           message.success('操作成功');
           refresh();
+          resetSelectedRows && resetSelectedRows();
         });
       };
     },
@@ -185,7 +205,7 @@ const Article: NextPage = () => {
     ),
   };
 
-  const actionColumn = {
+  const actionColumn = (resetSelectedRows) => ({
     title: '操作',
     key: 'action',
     fixed: 'right',
@@ -213,7 +233,7 @@ const Article: NextPage = () => {
         <Divider type="vertical" />
         <Popconfirm
           title="确认删除这个文章？"
-          onConfirm={deleteAction(record.id)}
+          onConfirm={deleteAction(record.id, resetSelectedRows)}
           okText="确认"
           cancelText="取消"
           okButtonProps={{ loading: deleteLoading }}
@@ -224,7 +244,7 @@ const Article: NextPage = () => {
         </Popconfirm>
       </span>
     ),
-  };
+  });
 
   useEffect(() => {
     CategoryProvider.getCategory().then((res) => setCategorys(res));
@@ -244,18 +264,15 @@ const Article: NextPage = () => {
         <PaginationTable
           loading={listLoading}
           data={articles}
-          columns={[titleColumn, ...columns, actionColumn]}
-          total={total}
-          page={page}
-          pageSize={pageSize}
-          params={params}
-          setPage={setPage}
-          setPageSize={setPageSize}
-          setParams={setParams}
+          columns={(resetSelectedRows) => [
+            titleColumn,
+            ...COMMON_COLUMNS,
+            actionColumn(resetSelectedRows),
+          ]}
+          {...resetPagination}
           refresh={refresh}
-          reset={reset}
           showSelection
-          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows }) =>
+          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
             hasSelected ? (
               <>
                 <Button
@@ -288,7 +305,7 @@ const Article: NextPage = () => {
                 </Button>
                 <Popconfirm
                   title="确认删除？"
-                  onConfirm={deleteAction(selectedRowKeys)}
+                  onConfirm={deleteAction(selectedRowKeys, resetSelectedRows)}
                   okText="确认"
                   cancelText="取消"
                 >
@@ -309,31 +326,9 @@ const Article: NextPage = () => {
               </a>
             </Link>
           }
-          scroll={{ x: 1380 }}
+          scroll={SCROLL}
           searchFields={[
-            {
-              label: '标题',
-              field: 'title',
-              msg: '请输入文章标题',
-            },
-            {
-              label: '状态',
-              field: 'status',
-              children: (
-                <Select style={{ width: 180 }}>
-                  {[
-                    { label: '已发布', value: 'publish' },
-                    { label: '草稿', value: 'draft' },
-                  ].map((t) => {
-                    return (
-                      <Select.Option key={t.label} value={t.value}>
-                        {t.label}
-                      </Select.Option>
-                    );
-                  })}
-                </Select>
-              ),
-            },
+            ...SEARCH_FIELDS,
             {
               label: '分类',
               field: 'category',

@@ -9,7 +9,8 @@ import { useToggle } from '@/hooks/useToggle';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { KnowledgeProvider } from '@/providers/knowledge';
 import { KnowledgeSettingDrawer } from '@/components/KnowledgeSettingDrawer';
-import { DataTable } from '@/components/DataTable';
+import { usePagination } from '@/hooks/usePagination';
+import { PaginationTable } from '@/components/PaginationTable';
 import style from './index.module.scss';
 
 interface IProps {
@@ -17,27 +18,52 @@ interface IProps {
   total: number;
 }
 
+const GRID = {
+  gutter: 16,
+  xs: 1,
+  sm: 2,
+  md: 4,
+  lg: 4,
+  xl: 4,
+  xxl: 6,
+};
+const SEARCH_FIELDS = [
+  {
+    label: '名称',
+    field: 'title',
+    msg: '请输入知识库名称',
+  },
+  {
+    label: '状态',
+    field: 'status',
+    children: (
+      <Select style={{ width: 180 }}>
+        {[
+          { label: '已发布', value: 'publish' },
+          { label: '草稿', value: 'draft' },
+        ].map((t) => {
+          return (
+            <Select.Option key={t.label} value={t.value}>
+              {t.label}
+            </Select.Option>
+          );
+        })}
+      </Select>
+    ),
+  },
+];
+
 const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
   const [visible, toggleVisible] = useToggle(false);
-  const [params, setParams] = useState({});
-  const [books, setBooks] = useState<IKnowledge[]>(defaultBooks);
   const [selectedBook, setSelectedBook] = useState<IKnowledge | null>(null);
-  const [getKnowledgesApi, getLoading] = useAsyncLoading(KnowledgeProvider.getKnowledges);
+  const {
+    loading: getLoading,
+    data: books,
+    refresh,
+    ...resetPagination
+  } = usePagination<IKnowledge>(KnowledgeProvider.getKnowledges);
   const [updateBookApi, updateLoading] = useAsyncLoading(KnowledgeProvider.updateKnowledge);
   const [deleteKnowledgeApi, deleteLoading] = useAsyncLoading(KnowledgeProvider.deleteKnowledge);
-
-  const getBooks = useCallback(
-    (params = {}) => {
-      setSelectedBook(null);
-      return getKnowledgesApi(params).then((res) => {
-        console.log(res);
-        setBooks(res[0]);
-        setParams(params);
-        return res;
-      });
-    },
-    [getKnowledgesApi]
-  );
 
   const editBook = useCallback(
     (book) => {
@@ -52,19 +78,19 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
       updateBookApi(book.id, {
         status: book.status === 'draft' ? 'publish' : 'draft',
       }).then(() => {
-        getBooks(params);
+        refresh();
       });
     },
-    [updateBookApi, params, getBooks]
+    [updateBookApi, refresh]
   );
 
   const deleteBook = useCallback(
     (book) => {
       deleteKnowledgeApi(book.id).then(() => {
-        getBooks(params);
+        refresh();
       });
     },
-    [deleteKnowledgeApi, params, getBooks]
+    [deleteKnowledgeApi, refresh]
   );
 
   useEffect(() => {
@@ -112,36 +138,12 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
 
   return (
     <AdminLayout>
-      <DataTable
+      <PaginationTable
+        loading={getLoading}
         data={books}
-        defaultTotal={total}
-        columns={[]}
-        searchFields={[
-          {
-            label: '名称',
-            field: 'title',
-            msg: '请输入知识库名称',
-          },
-          {
-            label: '状态',
-            field: 'status',
-            children: (
-              <Select style={{ width: 180 }}>
-                {[
-                  { label: '已发布', value: 'publish' },
-                  { label: '草稿', value: 'draft' },
-                ].map((t) => {
-                  return (
-                    <Select.Option key={t.label} value={t.value}>
-                      {t.label}
-                    </Select.Option>
-                  );
-                })}
-              </Select>
-            ),
-          },
-        ]}
-        onSearch={getBooks}
+        {...resetPagination}
+        refresh={refresh}
+        searchFields={SEARCH_FIELDS}
         rightNode={
           <Button type="primary" onClick={toggleVisible}>
             <PlusOutlined />
@@ -149,27 +151,14 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
           </Button>
         }
         customDataTable={(data) => (
-          <List
-            className={style.imgs}
-            grid={{
-              gutter: 16,
-              xs: 1,
-              sm: 2,
-              md: 4,
-              lg: 4,
-              xl: 4,
-              xxl: 6,
-            }}
-            dataSource={data}
-            renderItem={renderBook}
-          />
+          <List className={style.imgs} grid={GRID} dataSource={data} renderItem={renderBook} />
         )}
       />
       <KnowledgeSettingDrawer
         visible={visible}
         toggleVisible={toggleVisible}
         book={selectedBook}
-        onOk={() => getBooks()}
+        onOk={refresh}
       />
     </AdminLayout>
   );
