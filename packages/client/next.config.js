@@ -34,7 +34,7 @@ const config = (() => {
 })();
 
 const nextConfig = {
-  assetPrefix: isProd ? (config && confi['CLIENT_ASSET_PREFIX']) || '/' : '/',
+  assetPrefix: isProd ? (config && config['CLIENT_ASSET_PREFIX']) || '/' : '/',
   webpack: (config) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
     config.plugins.push(
