@@ -58,12 +58,45 @@ const columns = [
     render: (date) => <LocaleTime date={date} />,
   },
 ];
+const SEARCH_FIELDS = [
+  {
+    label: '名称',
+    field: 'name',
+    msg: '请输入页面名称',
+  },
+  {
+    label: '路径',
+    field: 'path',
+    msg: '请输入页面路径',
+  },
+  {
+    label: '状态',
+    field: 'status',
+    children: (
+      <Select style={{ width: 180 }}>
+        {[
+          { label: '已发布', value: 'publish' },
+          { label: '草稿', value: 'draft' },
+        ].map((t) => {
+          return (
+            <Select.Option key={t.label} value={t.value}>
+              {t.label}
+            </Select.Option>
+          );
+        })}
+      </Select>
+    ),
+  },
+];
 
 const Page: NextPage = () => {
   const setting = useSetting();
-  const { loading: listLoading, data, refresh, ...resetPagination } = usePagination<IPage>(
-    PageProvider.getPages
-  );
+  const {
+    loading: listLoading,
+    data,
+    refresh,
+    ...resetPagination
+  } = usePagination<IPage>(PageProvider.getPages);
   const [modalVisible, toggleModalVisible] = useToggle(false);
   const [views, setViews] = useState<IView[]>([]);
   const [updateApi, updateLoading] = useAsyncLoading(PageProvider.updatePage);
@@ -163,7 +196,7 @@ const Page: NextPage = () => {
           <Button
             type="link"
             size={'small'}
-            onClick={() => getViews(resolveUrl(setting.systemUrl, '/article/' + record.id))}
+            onClick={() => getViews(resolveUrl(setting.systemUrl, '/page/' + record.id))}
           >
             查看访问
           </Button>
@@ -246,36 +279,7 @@ const Page: NextPage = () => {
               </a>
             </Link>
           }
-          searchFields={[
-            {
-              label: '名称',
-              field: 'name',
-              msg: '请输入页面名称',
-            },
-            {
-              label: '路径',
-              field: 'path',
-              msg: '请输入页面路径',
-            },
-            {
-              label: '状态',
-              field: 'status',
-              children: (
-                <Select style={{ width: 180 }}>
-                  {[
-                    { label: '已发布', value: 'publish' },
-                    { label: '草稿', value: 'draft' },
-                  ].map((t) => {
-                    return (
-                      <Select.Option key={t.label} value={t.value}>
-                        {t.label}
-                      </Select.Option>
-                    );
-                  })}
-                </Select>
-              ),
-            },
-          ]}
+          searchFields={SEARCH_FIELDS}
         />
         <Modal
           title="访问统计"
@@ -284,6 +288,8 @@ const Page: NextPage = () => {
           onCancel={closeViewModal}
           maskClosable={false}
           footer={null}
+          transitionName={''}
+          maskTransitionName={''}
         >
           <div style={{ textAlign: 'center' }}>
             <Spin spinning={getViewsLoading}>
