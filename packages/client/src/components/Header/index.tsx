@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import cls from 'classnames';
-import { Menu, Dropdown } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
+import { Menu, Dropdown } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import { useToggle } from '@/hooks/useToggle';
 import { Search } from '@/components/Search';
 import { Theme } from '@/components/Theme';
 import style from './index.module.scss';
 
+const NAV_LINKS = [
+  {
+    path: '/',
+    label: '首页',
+  },
+  {
+    path: '/archives',
+    label: '归档',
+  },
+  {
+    path: '/knowledge',
+    label: '知识小册',
+  },
+];
+
 export const Header = ({ setting, categories, tags, pages }) => {
   const router = useRouter();
-  const asPath = router.asPath;
+  const { asPath, pathname } = router;
   const [affix, setAffix] = useState(false);
   const [affixVisible, setAffixVisible] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -44,8 +59,7 @@ export const Header = ({ setting, categories, tags, pages }) => {
         window.pageYOffset ||
         window.scrollY ||
         document.body.scrollTop;
-
-      setAffix(y > 100);
+      setAffix(y > 240);
       setAffixVisible(beforeY > y);
       setTimeout(() => {
         beforeY = y;
@@ -58,6 +72,58 @@ export const Header = ({ setting, categories, tags, pages }) => {
       document.removeEventListener('scroll', handler);
     };
   }, []);
+
+  const navMenu = NAV_LINKS.map((nav) => (
+    <li className={cls({ [style.active]: asPath === nav.path })}>
+      <Link href={nav.path}>
+        <a>
+          <span>{nav.label}</span>
+        </a>
+      </Link>
+    </li>
+  ));
+
+  const categoryMenu = (
+    <Dropdown
+      overlay={
+        <Menu key="category" style={{ minWidth: 240 }} selectedKeys={[asPath.replace('/', '')]}>
+          {categories.map((category) => (
+            <Menu.Item key={category.value} onClick={() => router.push(`/` + category.value)}>
+              <Link href="/[category]" as={`/` + category.value} shallow={false}>
+                <a>
+                  <span>{category.label}</span>
+                </a>
+              </Link>
+            </Menu.Item>
+          ))}
+        </Menu>
+      }
+    >
+      <li className={cls({ [style.active]: pathname === '/[category]' })}>
+        <a>
+          <span>分类</span>
+        </a>
+      </li>
+    </Dropdown>
+  );
+
+  const pageMenu = pages.map((menu) => (
+    <li
+      key={menu.label}
+      className={cls({
+        [style.active]: asPath.replace('/page/', '') === menu.path,
+      })}
+      onClick={() => {
+        if (visible) {
+          setVisible(false);
+        }
+      }}
+    >
+      <Link href={'/page/[id]'} as={`/page/${menu.path}`} scroll={false}>
+        <a>{menu.name}</a>
+      </Link>
+    </li>
+  ));
 
   return (
     <header className={cls(style.header)}>
@@ -94,69 +160,10 @@ export const Header = ({ setting, categories, tags, pages }) => {
 
           <nav className={cls(visible ? style.active : false)}>
             <ul>
-              <li>
-                <Link href={'/'}>
-                  <a>
-                    <span>首页</span>
-                  </a>
-                </Link>
-              </li>
-              <Dropdown
-                overlay={
-                  <Menu
-                    key="category"
-                    style={{ minWidth: 240 }}
-                    selectedKeys={[asPath.replace('/', '')]}
-                  >
-                    {categories.map((category) => (
-                      <Menu.Item key={category.value}>
-                        <Link href="/[category]" as={`/` + category.value} shallow={false}>
-                          <a>
-                            <span>{category.label}</span>
-                          </a>
-                        </Link>
-                      </Menu.Item>
-                    ))}
-                  </Menu>
-                }
-              >
-                <li>
-                  <a>
-                    <span>分类</span>
-                  </a>
-                </li>
-              </Dropdown>
-              <li>
-                <Link href={'/archives'}>
-                  <a>
-                    <span>归档</span>
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href={'/knowledge'}>
-                  <a>
-                    <span>知识笔记</span>
-                  </a>
-                </Link>
-              </li>
-              {pages.map((menu) => (
-                <li
-                  key={menu.label}
-                  className={cls({
-                    [style.active]: asPath.replace('/page/', '') === menu.path,
-                  })}
-                  onClick={() => {
-                    if (visible) {
-                      setVisible(false);
-                    }
-                  }}
-                >
-                  <Link href={'/page/[id]'} as={`/page/${menu.path}`} scroll={false}>
-                    <a>{menu.name}</a>
-                  </Link>
-                </li>
-              ))}
+              {navMenu[0]}
+              {categoryMenu}
+              {navMenu.slice(1)}
+              {pageMenu}
               <li className={style.toolWrapper}>
                 <SearchOutlined style={{ cursor: 'pointer' }} onClick={toggleSearch} />
               </li>
