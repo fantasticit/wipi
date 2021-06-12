@@ -2,20 +2,21 @@ import React from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, Button } from 'antd';
 import Link from 'next/link';
+import Router from 'next/router';
 
 export const ResourceCreate = ({ collapsed = false }) => {
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item onClick={() => Router.push('/article/editor')}>
         <Link href={'/article/editor'}>
-          <a target="_blank">
+          <a>
             <span>新建文章</span>
           </a>
         </Link>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item onClick={() => Router.push('/page/editor')}>
         <Link href={'/page/editor'}>
-          <a target="_blank">
+          <a>
             <span>新建页面</span>
           </a>
         </Link>
