@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const dotenv = require('dotenv');
 const withPlugins = require('next-compose-plugins');
 const withCss = require('@zeit/next-css');
 const withSass = require('@zeit/next-sass');
@@ -18,9 +19,22 @@ if (typeof require !== 'undefined') {
 }
 
 const isProd = process.env.NODE_ENV === 'production';
+const config = (() => {
+  const env = path.resolve(__dirname, '../../.env');
+  const prodenv = path.resolve(__dirname, '../../.env.prod');
+
+  try {
+    if (isProd && fs.existsSync(prodenv)) {
+      return dotenv.parse(fs.readFileSync(prodenv));
+    }
+    if (fs.existsSync(env)) {
+      return dotenv.parse(fs.readFileSync(env));
+    }
+  } catch (e) {}
+})();
 
 const nextConfig = {
-  assetPrefix: isProd ? 'https://cdn.blog.wipi.tech' : '/',
+  assetPrefix: isProd ? (config && confi['CLIENT_ASSET_PREFIX']) || '/' : '/',
   webpack: (config) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
     config.plugins.push(
