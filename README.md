@@ -81,8 +81,25 @@ yarn dev
 后台管理地址：`http://localhost:3001`。
 服务接口地址：`http://localhost:4000`。
 
-首次启动，默认创建管理员用户：admin，密码：admin（可在 `server/.env` 文件中进行修改）。
+首次启动，默认创建管理员用户：admin，密码：admin（可在 `.env` 文件中进行修改）。
 [PS] 如服务端配置启动失败，请先确认 MySQL 的配置是否正确，配置文件在 `server/.env`。在生产环境中需要在后台正确设置系统的地址，否则二维码无法正确识别。本地开发环境中，如未填域名地址，默认为空。
+
+## 配置文件
+
+默认加载 `.env` 文件，生产环境会尝试加载 `.env.prod` 文件。
+
+```bash
+CLIENT_ASSET_PREFIX=/ # client 打包前缀地址（类似 webpack publicPath 配置）
+ADMIN_ASSET_PREFIX=/ # admin 打包前缀地址
+
+ADMIN_USER=admin # 默认管理员账户
+ADMIN_PASSWD=admin # 默认管理员密码
+DB_HOST=127.0.0.1 # 数据库地址
+DB_PORT=3306 # 数据库端口
+DB_USER=root # 数据库用户名
+DB_PASSWD=root # 数据库密码
+DB_DATABASE=wipi # 数据库名称
+```
 
 ## 项目部署
 
