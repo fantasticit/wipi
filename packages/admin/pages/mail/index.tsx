@@ -144,7 +144,12 @@ const Mail: NextPage = () => {
         <PaginationTable
           loading={loading}
           data={mails}
-          columns={[...COMMON_COLUMNS, contentColumn, TIME_COLUMN, actionColumn]}
+          columns={(resetSelectedRows) => [
+            ...COMMON_COLUMNS,
+            contentColumn,
+            TIME_COLUMN,
+            actionColumn(resetSelectedRows),
+          ]}
           refresh={refresh}
           {...resetPagination}
           showSelection
