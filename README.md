@@ -2,43 +2,43 @@
 
 ## 简介
 
-本项目使用 `next.js`、`nest.js` 和 `MySQL` 从 0 到 1 搭建了一个完整的前后端分离项目。其中，使用 `next.js` 通过服务端渲染前台页面和后台管理系统，使用 `nest.js` 提供了 `restful api` 接口，使用 `typeorm` 操作 `MySQL` 数据。
+Wipi 是一个面向个人的开源的集成文章发表、页面创建、知识小册等功能的 CMS 系统。涉及到的技术如下：
+
+- `MySQL`：数据存储
+- `next.js`：前端页面框架
+- `nest.js`：服务端框架
+- `AliyunOSS`：对象存储
 
 ## 链接
 
 - [Github 源码](https://github.com/fantasticit/wipi)
 - [前台页面](https://blog.wipi.tech/)
-- [管理系统](https://admin.blog.wipi.tech/)：支持访客注册，也可使用账户：`wipi` `wipi123456`
+- [管理系统](https://admin.blog.wipi.tech/)：支持访客注册
 - [接口文档](https://api.blog.wipi.tech/api/)
 
 ## 功能点
 
-- 文章创建、发布、更新，以及相应标签、分类管理
-- 文章搜索
-- 页面创建、发布、更新
+- 文章管理
+- 页面管理
+- 知识小册
 - 评论管理
-- 邮件通知
-- 知识管理
-- 系统访问统计（ip + user-agent）
-- 用户管理（管理员、访客）
-- 文件上传（上传到 阿里 OSS）
-- 动态 SEO、标题、Logo、favicon 等设置
-- 使用 vscode 的 `monaco` 作为文章、页面的编辑器，支持 `Markdown` 语法
+- 邮件管理
+- 访问统计
+- 文件管理
+- 系统设置
 
 更多功能，欢迎访问系统进行体验。
 
 ## 预览
 
 <ul>
-  <li><img width="240" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-02-21/wipi-client-home.png" alt="前台首页" /></li>
-  <li><img width="240" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-02-21/wipi-client-article.png" alt="前台文章" /></li>
-  <li><img width="240" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-02-21/wipi-client-search.png" alt="前台搜索" /></li>
-  <li><img width="240" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-02-21/wipi-clinet-archives.png" alt="前台归档" /></li>
-  <li><img width="240" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-02-21/wipi-admin-home.png" alt="后台首页" /></li>
-  <li><img width="240" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-02-21/wipi-admin-setting.png" alt="后台设置" /></li>
-  <li><img width="240" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-02-21/wipi-admin-article.png" alt="后台文章管理" /></li>
-  <li><img width="240" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-02-21/wipi-admin-editor.png" alt="后台编辑器" /></li>
-  <li><img width="240" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-02-21/wipi-admin-comment.png" alt="后台评论管理" /></li>
+  <li><img width="240" alt="文章列表" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/7480/image.png"/></li>
+  <li><img width="240" alt="文章详情" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/815/image.png"/></li>
+  <li><img width="240" alt="动态页面" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/3124/image.png"/></li>
+  <li><img width="240" alt="知识小册" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/6485/image.png"/></li>
+  <li><img width="240" alt="后台管理" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/754/image.png"/></li>
+  <li><img width="240" alt="文章编辑" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/6587/image.png"/></li>
+  <li><img width="240" alt="小册编辑" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/1864/image.png"/></li>
 </ul>
 
 ## 本地启动
@@ -65,7 +65,7 @@ CREATE DATABASE  `wipi` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 git clone --depth=1 https://github.com/fantasticit/wipi.git your-project-name
 ```
 
-然后安装项目 node 依赖。
+然后安装项目依赖。
 
 ```bash
 yarn
@@ -86,7 +86,7 @@ yarn dev
 
 ## 项目部署
 
-在服务器使用 pm2 进行部署即可，可以查看 `deploy.sh` 文件。具体内容如下：
+生产环境部署的脚本如下：
 
 ```bash
 
@@ -95,13 +95,11 @@ npm -v
 
 npm config set registry http://registry.npmjs.org
 
-npm install pm2 -g
-npm i -g @nestjs/cli
-npm i -g lerna
+npm i -g pm2 @nestjs/cli lerna yarn
 
-lerna bootstrap
-lerna run build
-lerna run pm2
+yarn
+yarn run build
+yarn run pm2
 
 pm2 startup
 pm2 save
