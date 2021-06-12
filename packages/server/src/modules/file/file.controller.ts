@@ -36,8 +36,8 @@ export class FileController {
     })
   )
   @UseGuards(JwtAuthGuard)
-  uploadFile(@UploadedFile() file) {
-    return this.fileService.uploadFile(file);
+  uploadFile(@UploadedFile() file, @Query('unique') unique) {
+    return this.fileService.uploadFile(file, unique);
   }
 
   /**

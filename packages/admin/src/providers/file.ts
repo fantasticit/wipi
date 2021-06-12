@@ -5,11 +5,11 @@ export class FileProvider {
    * 上传文件
    * @param file
    */
-  static async uploadFile(file): Promise<IFile> {
+  static async uploadFile(file, unique = 0): Promise<IFile> {
     const formData = new FormData();
     formData.append('file', file);
 
-    return httpProvider.post('/file/upload', formData, {
+    return httpProvider.post('/file/upload?unique=' + unique, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

@@ -150,7 +150,7 @@ const _MonacoEditor = (props, ref) => {
       if (!imgFiles.length) return;
       const hide = message.loading('正在上传图片中', 0);
       const upload = (file) => {
-        return FileProvider.uploadFile(file).then(({ url }) => {
+        return FileProvider.uploadFile(file, 1).then(({ url }) => {
           const delta = [
             {
               range: new monaco.Range(

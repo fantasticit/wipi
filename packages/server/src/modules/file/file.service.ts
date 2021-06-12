@@ -19,9 +19,12 @@ export class FileService {
    * 上传文件
    * @param file
    */
-  async uploadFile(file): Promise<File> {
+  async uploadFile(file, unique): Promise<File> {
     const { originalname, mimetype, size, buffer } = file;
-    const filename = `/${dateFormat(new Date(), 'yyyy-MM-dd')}/${originalname}`;
+    const filename =
+      +unique === 1
+        ? `/${dateFormat(new Date(), 'yyyy-MM-dd')}/${~~(Math.random() * 10000)}/${originalname}`
+        : `/${dateFormat(new Date(), 'yyyy-MM-dd')}/${originalname}`;
     const {
       ossRegion,
       ossAccessKeyId,
