@@ -49,7 +49,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
         height: target.offsetHeight,
         pageUrl: location.pathname,
       });
-      message.info('分享海报制作完成。');
+      message.success('分享海报制作完成。');
       download(ret);
     } catch (e) {
       message.error('保存图片失败，请手动截图');
