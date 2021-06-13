@@ -41,9 +41,9 @@ Wipi 是一个面向个人的开源的集成文章发表、页面创建、知识
   <li><img width="240" alt="小册编辑" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/1864/image.png"/></li>
 </ul>
 
-## 本地启动
+## 项目运行
 
-- 安装依赖
+### 数据库
 
 首先安装 `MySQL`，推荐使用 docker 进行安装。
 
@@ -59,13 +59,15 @@ mysql -u root -p root;
 CREATE DATABASE  `wipi` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-- clone 本项目。
+### 本地运行
+
+首先，clone 项目。
 
 ```bash
 git clone --depth=1 https://github.com/fantasticit/wipi.git your-project-name
 ```
 
-然后安装项目依赖。
+然后，安装项目依赖。
 
 ```bash
 yarn
@@ -82,9 +84,18 @@ yarn dev
 服务接口地址：`http://localhost:4000`。
 
 首次启动，默认创建管理员用户：admin，密码：admin（可在 `.env` 文件中进行修改）。
-[PS] 如服务端配置启动失败，请先确认 MySQL 的配置是否正确，配置文件在 `server/.env`。在生产环境中需要在后台正确设置系统的地址，否则二维码无法正确识别。本地开发环境中，如未填域名地址，默认为空。
+[PS] 如服务端配置启动失败，请先确认 MySQL 的配置是否正确，配置文件在 `.env`。在生产环境中需要在后台正确设置系统的地址，否则二维码无法正确识别。本地开发环境中，如未填域名地址，默认为空。
 
-## 配置文件
+### 系统设置
+
+<ul>
+  <li><img width="240" alt="系统设置" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/image.png"/></li>
+  <li><img width="240" alt="前台页面" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/image.png"/></li>
+</ul>
+
+项目初次启动时，需要在后台进行系统设置。随着内容的丰富，页面内容也会丰富起来。
+
+### 配置文件
 
 默认加载 `.env` 文件，生产环境会尝试加载 `.env.prod` 文件。
 
@@ -101,7 +112,7 @@ DB_PASSWD=root # 数据库密码
 DB_DATABASE=wipi # 数据库名称
 ```
 
-## 项目部署
+### 项目部署
 
 生产环境部署的脚本如下：
 
@@ -122,7 +133,7 @@ pm2 startup
 pm2 save
 ```
 
-## nginx 配置
+### nginx 配置
 
 采用反向代理进行 `nginx` 配置，**同时设置 `proxy_set_header X-Real-IP $remote_addr;` 以便服务端获取到真实 ip 地址**。
 
@@ -165,5 +176,3 @@ server {
 - next.js 文档：https://nextjs.org/
 - nest.js 源码：https://github.com/nestjs/nest
 - nest.js 文档：https://nestjs.com/
-
-遇到问题，善用搜索引擎。
