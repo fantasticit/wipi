@@ -36,6 +36,7 @@ export const CategoryMenu = ({ categories }) => {
         ...categories,
       ].map((category, index) => (
         <Link
+          key={index}
           {...(index === 0
             ? { href: '/' }
             : {

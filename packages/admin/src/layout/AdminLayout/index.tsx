@@ -87,7 +87,6 @@ export const AdminLayout: React.FC<{ headerAppender?: React.ReactNode }> = ({
                   rel="noreferrer"
                 >
                   <GithubOutlined />
-                  <span></span>
                 </a>
                 <UserInfo />
               </div>
@@ -99,7 +98,7 @@ export const AdminLayout: React.FC<{ headerAppender?: React.ReactNode }> = ({
             <Breadcrumb>
               {breadcrumbs.map((breadcrumb) => {
                 return (
-                  <Breadcrumb.Item>
+                  <Breadcrumb.Item key={breadcrumb.path}>
                     <Link href={breadcrumb.path}>
                       <a>{breadcrumb.title}</a>
                     </Link>
