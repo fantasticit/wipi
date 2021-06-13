@@ -48,7 +48,6 @@
     padding: 1rem;
     background: var(--bg-second);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
-    box-shadow: var(--box-shadow);
     border-bottom: 1px solid var(--border-color);
 
     a {
@@ -68,6 +67,7 @@
   > main {
     > div > div {
       border-radius: 0 0 var(--border-radius) var(--border-radius) !important;
+      box-shadow: none !important;
     }
   }
 }
