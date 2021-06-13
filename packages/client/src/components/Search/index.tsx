@@ -13,7 +13,7 @@ const { Search: AntdSearch } = Input;
 interface IProps {
   visible: boolean;
   tags: ITag[];
-  onClose: () => void;
+  onClose: (arg: boolean) => void;
 }
 
 export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
@@ -22,8 +22,9 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
   const [articles, setArticles] = useState<IArticle[]>([]);
   const close = useCallback(() => {
     document.body.style.overflow = '';
+    document.body.style.width = '';
     setArticles([]);
-    onClose();
+    onClose(false);
   }, [onClose]);
 
   const getArticles = useCallback(
@@ -59,6 +60,7 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
     }
     ref.current.focus();
     document.body.style.overflow = 'hidden';
+    document.body.style.width = 'calc(100% - 6px)';
   }, [visible]);
 
   if (!visible) return null;

@@ -45,6 +45,12 @@
     line-height: 1.75em;
   }
 
+  @media (max-width: 768px) {
+    body {
+      width: 100% !important;
+    }
+  }
+
   ul {
     list-style: none;
     padding: 0;
@@ -128,5 +134,9 @@
     font-size: 14px;
     line-height: 60px;
     text-align: center;
+  }
+
+  .ant-back-top {
+    bottom: 60px !important;
   }
 }
