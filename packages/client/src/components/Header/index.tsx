@@ -83,30 +83,6 @@ export const Header = ({ setting, categories, tags, pages }) => {
     </li>
   ));
 
-  const categoryMenu = (
-    <Dropdown
-      overlay={
-        <Menu key="category" style={{ minWidth: 240 }} selectedKeys={[asPath.replace('/', '')]}>
-          {categories.map((category) => (
-            <Menu.Item key={category.value} onClick={() => router.push(`/` + category.value)}>
-              <Link href="/[category]" as={`/` + category.value} shallow={false}>
-                <a>
-                  <span>{category.label}</span>
-                </a>
-              </Link>
-            </Menu.Item>
-          ))}
-        </Menu>
-      }
-    >
-      <li className={cls({ [style.active]: pathname === '/[category]' })}>
-        <a>
-          <span>分类</span>
-        </a>
-      </li>
-    </Dropdown>
-  );
-
   const pageMenu = pages.map((menu) => (
     <li
       key={menu.label}
@@ -160,9 +136,7 @@ export const Header = ({ setting, categories, tags, pages }) => {
 
           <nav className={cls(visible ? style.active : false)}>
             <ul>
-              {navMenu[0]}
-              {/* {categoryMenu} */}
-              {navMenu.slice(1)}
+              {navMenu}
               {pageMenu}
               <li className={style.toolWrapper}>
                 <SearchOutlined style={{ cursor: 'pointer' }} onClick={toggleSearch} />
