@@ -1,12 +1,12 @@
 import React, { useContext, useMemo, useRef, useEffect } from 'react';
-import domtoimage from 'dom-to-image';
-import { Modal, Button, message } from 'antd';
+import { Modal, message } from 'antd';
+import { PosterProvider } from '@/providers/poster';
 import { GlobalContext } from '@/context/global';
 import style from './index.module.scss';
 import { useToggle } from '@/hooks/useToggle';
-const QRCode = require('qrcode-svg');
-const download = require('downloadjs');
+import { download } from '@/utils';
 const urllib = require('url');
+const QRCode = require('qrcode-svg');
 export interface ShareProps {
   cover?: string;
   title: React.ReactNode;
@@ -33,48 +33,125 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
       }),
     [fullUrl]
   );
-  const save = (e) => {
+  const save = async (e) => {
     e.preventDefault();
     e.nativeEvent.stopImmediatePropagation();
     e.stopPropagation();
     toggleLoading();
     const node = ref.current;
-    const scale = 750 / node.offsetWidth;
-    domtoimage
-      .toPng(node, {
-        height: node.offsetHeight * scale,
-        width: node.offsetWidth * scale,
-        style: {
-          transform: 'scale(' + scale + ')',
-          transformOrigin: 'top left',
-          width: node.offsetWidth + 'px',
-          height: node.offsetHeight + 'px',
-        },
-      })
-      .then((dataUrl) => {
-        download(dataUrl, `${title}.png`);
-        toggleLoading();
-      })
-      .catch(() => {
-        message.error('保存图片失败，请手动截图');
-        toggleLoading();
+    const target = node.firstChild;
+    try {
+      const ret = await PosterProvider.createPoster({
+        name: title,
+        html: node.innerHTML,
+        width: target.offsetWidth,
+        height: target.offsetHeight,
+        pageUrl: location.pathname,
       });
+      download(ret);
+    } catch (e) {
+      message.error('保存图片失败，请手动截图');
+    } finally {
+      toggleLoading();
+    }
   };
 
   const content = (
-    <div className={style.wrapper}>
-      <div className={style.content} ref={ref}>
-        <div className={style.main}>
-          {cover && <img className={style.cover} src={cover} alt={'内容封面'} />}
-          <div className={style.title}>{title}</div>
-          <div className={style.desc}>{desc}</div>
+    // 以下的内联样式，请勿修改，将用于服务端海报生成
+    <div className={style.wrapper} ref={ref}>
+      <div
+        style={{
+          width: 375,
+          background: '#fff',
+        }}
+        ref={ref}
+      >
+        <div>
+          {cover && (
+            <img
+              style={{
+                width: '100%',
+                borderRadius: '2px',
+                objectFit: 'cover',
+              }}
+              src={cover}
+              alt={'内容封面'}
+            />
+          )}
+          <div
+            style={{
+              minWidth: 225,
+              padding: '12px 0',
+              border: 0,
+              marginBottom: 0,
+              color: 'rgba(0, 0, 0, 0.85)',
+              overflow: 'hidden',
+              fontWeight: 600,
+              fontSize: '16px',
+              lineHeight: '22px',
+            }}
+          >
+            {title}
+          </div>
+          <div
+            style={{
+              display: '-webkit-box',
+              maxWidth: '100%',
+              padding: '0 0 12px',
+              color: 'rgba(0, 0, 0, 0.65)',
+              fontSize: 14,
+            }}
+          >
+            {desc}
+          </div>
         </div>
-        <div className={style.footer}>
-          <div className={style.code} dangerouslySetInnerHTML={{ __html: qrcode.svg() }}></div>
-          <div>
-            <p>识别二维码查看文章</p>
-            <p>
-              原文分享自 <a href={fullUrl}>{setting.systemTitle}</a>
+        <div style={{ position: 'relative', height: 80 }}>
+          <div
+            style={{
+              position: 'absolute',
+              left: 0,
+              width: 80,
+              height: 80,
+              padding: 0,
+            }}
+            dangerouslySetInnerHTML={{ __html: qrcode.svg() }}
+          ></div>
+          <div
+            style={{
+              position: 'absolute',
+              left: 80,
+              padding: '8px 16px',
+              width: 295,
+              height: 80,
+            }}
+          >
+            <p
+              style={{
+                position: 'absolute',
+                top: 0,
+                width: '100%',
+                color: 'rgba(0, 0, 0, 0.85)',
+              }}
+            >
+              识别二维码查看文章
+            </p>
+            <p
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                color: 'rgba(0, 0, 0, 0.65)',
+                fontSize: '0.9em',
+              }}
+            >
+              原文分享自{' '}
+              <a
+                style={{
+                  color: '#ff0064',
+                }}
+                href={fullUrl}
+              >
+                {setting.systemTitle}
+              </a>
             </p>
           </div>
         </div>
@@ -111,9 +188,6 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
         bodyStyle={{
           display: 'flex',
           justifyContent: 'center',
-          maxHeight: '70vh',
-          padding: '20px 12px',
-          overflow: 'auto',
         }}
         onCancel={(e) => {
           e.preventDefault();

@@ -79,3 +79,13 @@ export function getDocumentScrollTop() {
     document.body.scrollTop
   );
 }
+
+export function download({ name, url }) {
+  const eleLink = document.createElement('a');
+  eleLink.download = name;
+  eleLink.style.display = 'none';
+  eleLink.href = url;
+  document.body.appendChild(eleLink);
+  eleLink.click();
+  document.body.removeChild(eleLink);
+}

@@ -41,6 +41,9 @@ import { View } from './modules/view/view.entity';
 // 搜索模块
 import { Search } from './modules/search/search.entity';
 import { SearchModule } from './modules/search/search.module';
+// 海报模块
+import { Poster } from './modules/poster/poster.entity';
+import { PosterModule } from './modules/poster/poster.module';
 // 配置文件
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -77,6 +80,7 @@ if (isProd && fs.existsSync(prodenv)) {
           Page,
           View,
           Search,
+          Poster,
         ],
         host: configService.get('DB_HOST', '0.0.0.0'),
         port: configService.get<number>('DB_PORT', 3306),
@@ -101,6 +105,7 @@ if (isProd && fs.existsSync(prodenv)) {
     PageModule,
     ViewModule,
     SearchModule,
+    PosterModule,
   ],
   controllers: [],
   providers: [],

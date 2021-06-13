@@ -28,9 +28,12 @@
       padding-right: 0;
       width: 100vw;
       height: 52px;
+      height: calc(52px + constant(safe-area-inset-bottom));
+      height: calc(52px + env(safe-area-inset-bottom));
       background-color: var(--bg-second);
       border-top: 1px solid var(--border-color);
       transform: translate(0, 0);
+      transition: all 0.2s;
 
       display: flex;
       flex-wrap: nowrap;

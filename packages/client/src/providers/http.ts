@@ -7,7 +7,7 @@ export const httpProvider = axios.create({
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:4000/api'
       : 'https://api.blog.wipi.tech/api',
-  timeout: 10000,
+  timeout: 60000,
 });
 
 httpProvider.interceptors.request.use(

@@ -157,3 +157,12 @@ interface ISetting {
   smtpPass?: string; //  SMTP 授权码
   smtpFromUser?: string; // SMTP 发件人
 }
+
+interface IPoster {
+  id: string;
+  name: string;
+  pageUrl: string;
+  imgUrl: string;
+  size: number;
+  createAt: string;
+}
