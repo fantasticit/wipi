@@ -53,7 +53,7 @@ export const menus = [
   {
     title: '知识小册',
     path: '/knowledge',
-    icon: 'star',
+    icon: 'book',
   },
   {
     title: '海报管理',
