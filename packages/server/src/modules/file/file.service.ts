@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { dateFormat } from '../../utils/date.util';
+import { uniqueid } from '../../utils/uniqueid.util';
 import { SettingService } from '../setting/setting.service';
 import { File } from './file.entity';
 
@@ -23,7 +24,7 @@ export class FileService {
     const { originalname, mimetype, size, buffer } = file;
     const filename =
       +unique === 1
-        ? `/${dateFormat(new Date(), 'yyyy-MM-dd')}/${~~(Math.random() * 10000)}/${originalname}`
+        ? `/${dateFormat(new Date(), 'yyyy-MM-dd')}/${uniqueid()}/${originalname}`
         : `/${dateFormat(new Date(), 'yyyy-MM-dd')}/${originalname}`;
     const {
       ossRegion,
