@@ -6,7 +6,6 @@ import { Breadcrumb } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { KnowledgeProvider } from '@/providers/knowledge';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
-import { ListTrail } from '@/components/Animation/Trail';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ImageViewer } from '@/components/ImageViewer';
 import { MarkdownReader } from '@/components/MarkdownReader';
@@ -55,6 +54,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
     }
     Promise.resolve().then(() => {
       const el = document.querySelector(`#js-toc-item-wrapper-` + id);
+      console.log(el);
       el && el.scrollIntoView();
     });
   }, [chapter, id]);
@@ -72,7 +72,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
               <Breadcrumb>
                 <Breadcrumb.Item>
                   <Link href="/knowledge">
-                    <a>知识笔记</a>
+                    <a>知识小册</a>
                   </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
@@ -160,23 +160,15 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
               <header>{book.title}</header>
               <main>
                 <ul>
-                  <ListTrail
-                    length={chapters.length}
-                    options={{
-                      opacity: 1,
-                      height: 32,
-                      from: { opacity: 0, height: 0 },
-                    }}
-                    setItemContainerProps={(index) => ({ id: `js-toc-item-wrapper-${index}` })}
-                    renderItem={(idx) => {
-                      const item = chapters[idx];
-                      return (
-                        <Link as={`/knowledge/${pId}/${item.id}`} href={`/knowledge/[pId]/[id]`}>
-                          <a className={cls(item.id === id && style.active)}>{item.title}</a>
+                  {chapters.map((chapter) => {
+                    return (
+                      <li id={`js-toc-item-wrapper-${chapter.id}`}>
+                        <Link as={`/knowledge/${pId}/${chapter.id}`} href={`/knowledge/[pId]/[id]`}>
+                          <a className={cls(chapter.id === id && style.active)}>{chapter.title}</a>
                         </Link>
-                      );
-                    }}
-                  />
+                      </li>
+                    );
+                  })}
                 </ul>
               </main>
             </div>

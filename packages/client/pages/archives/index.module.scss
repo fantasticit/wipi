@@ -1,5 +1,6 @@
 .content {
   background-color: var(--bg-second);
+  box-shadow: var(--box-shadow);
 }
 
 .summary {
@@ -17,7 +18,7 @@
     margin-bottom: 0;
 
     &:first-of-type {
-      margin-top: .5rem;
+      margin-top: 0.5rem;
 
       span {
         color: var(--primary-color);
@@ -47,11 +48,11 @@
   }
 
   .item {
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 4px;
 
     + .item {
-      margin-top: .75rem;
+      margin-top: 0.75rem;
     }
 
     ul {
@@ -60,7 +61,7 @@
 
     li {
       position: relative;
-      padding: .5rem 0;
+      padding: 0.5rem 0;
 
       a {
         display: inline-block;
@@ -115,7 +116,7 @@
       padding-right: 1em;
       margin: 0;
       color: var(--second-text-color);
-      font-size: .8rem;
+      font-size: 0.8rem;
     }
   }
 }

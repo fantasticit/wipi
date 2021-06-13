@@ -1,10 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import { Row, Col, Card, Tooltip } from 'antd';
+import { Row, Col, Card, Tooltip, Divider } from 'antd';
+import { HeartOutlined, EyeOutlined, ShareAltOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
+import { Share } from '@/components/Share';
 import style from './index.module.scss';
+import { ArticleProvider } from '@/providers/article';
 
 const { Meta } = Card;
 
@@ -20,66 +23,80 @@ export const ArticleList: React.FC<IProps> = ({
   asRecommend = false,
 }) => {
   return (
-    <Row gutter={16}>
+    <div className={style.wrapper}>
       {articles && articles.length ? (
         articles.map((article) => {
           return (
-            <Col className={style.articleItem} span={8} xs={24} sm={12} md={8}>
+            // <Col className={style.articleItem} span={8} xs={24} sm={12} md={8}>
+            <div className={style.articleItem}>
               <Opacity>
                 <Link
                   key={article.id}
-                  href={`/article/[id]`}
+                  href={`/article/[pId]`}
                   as={`/article/${article.id}`}
                   scroll={false}
                 >
-                  <Card
-                    hoverable={true}
-                    bordered={false}
-                    cover={
-                      <LazyLoad height={208}>
-                        <div className={style.coverWrapper} style={{ height: coverHeight }}>
-                          <img
-                            src={article.cover}
-                            alt="cover"
-                            onClick={(e) => asRecommend && e.stopPropagation()}
-                          />
-                        </div>
-                      </LazyLoad>
-                    }
-                  >
-                    <Meta
-                      title={
-                        <Tooltip title={article.summary}>
-                          <span className={style.title}>{article.title}</span>
-                        </Tooltip>
-                      }
-                      description={
+                  <a>
+                    <header>
+                      <div className={style.title}>{article.title}</div>
+                      <div className={style.info}>
+                        <Divider type="vertical" />
+                        <span className={style.time}>
+                          <LocaleTime date={article.publishAt} timeago={true} />
+                        </span>
+                        {article.category && (
+                          <>
+                            <Divider type="vertical" />
+                            <span className={style.time}>{article.category.label}</span>
+                          </>
+                        )}
+                      </div>
+                    </header>
+                    <main>
+                      {article.cover && (
+                        <LazyLoad height={120}>
+                          <div className={style.coverWrapper}>
+                            <img src={article.cover} alt="cover" />
+                          </div>
+                        </LazyLoad>
+                      )}
+
+                      <div>
+                        <div className={style.desc}>{article.summary}</div>
                         <div className={style.meta}>
-                          {article.category ? (
-                            <>
-                              <span className={style.category}>
-                                {article.category ? article.category.label : ''}
-                              </span>
-                              <span className={style.seperator}>·</span>
-                            </>
-                          ) : null}
-                          <span>{article.views} 次阅读</span>
-                          <span className={style.seperator}>·</span>
-                          <span className={style.pullRight}>
-                            <LocaleTime date={article.publishAt} timeago={true} />
+                          <span>
+                            <HeartOutlined />
+                            <span className={style.number}>{article.likes}</span>
                           </span>
+                          <span className={style.seperator}>·</span>
+                          <span>
+                            <EyeOutlined />
+                            <span className={style.number}>{article.views}</span>
+                          </span>
+                          <span className={style.seperator}>·</span>
+                          <Share
+                            cover={article.cover}
+                            title={article.title}
+                            desc={article.summary}
+                            url={`/article/${article.id}`}
+                          >
+                            <span>
+                              <ShareAltOutlined />
+                              <span className={style.number}>分享</span>
+                            </span>
+                          </Share>
                         </div>
-                      }
-                    />
-                  </Card>
+                      </div>
+                    </main>
+                  </a>
                 </Link>
               </Opacity>
-            </Col>
+            </div>
           );
         })
       ) : (
         <div className={'empty'}>暂无数据</div>
       )}
-    </Row>
+    </div>
   );
 };

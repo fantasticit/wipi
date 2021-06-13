@@ -5,6 +5,7 @@ $height: 64px;
   width: 100%;
   height: $height;
   transition: all 0.3s ease-in-out;
+  background: rgb(76, 46, 18);
 
   &.isFixed {
     position: fixed;
@@ -18,6 +19,7 @@ $height: 64px;
 }
 
 .wrapper {
+  position: relative;
   width: 100vw;
   background-color: var(--bg);
   border-bottom: 1px solid var(--border-color);

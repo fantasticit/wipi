@@ -46,7 +46,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
           <Breadcrumb>
             <Breadcrumb.Item>
               <Link href="/knowledge">
-                <a>知识笔记</a>
+                <a>知识小册</a>
               </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>{book.title}</Breadcrumb.Item>

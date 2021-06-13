@@ -24,7 +24,7 @@ export const DoubleColumnLayout: React.FC<IProps> = ({
   rightNode,
   rightClassName = null,
   isRightNodeMobileHidden = true,
-  minHeight = '100%',
+  minHeight = '100vh',
   background = 'var(--bg-body)',
   likesProps,
   showComment = false,

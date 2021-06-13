@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import cls from 'classnames';
 import { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
@@ -19,6 +21,44 @@ interface IHomeProps {
 }
 
 const pageSize = 12;
+
+export const CategoryMenu = ({ categories }) => {
+  const router = useRouter();
+  const { asPath } = router;
+
+  return (
+    <>
+      {[
+        {
+          label: '所有',
+          path: '/',
+        },
+        ...categories,
+      ].map((category, index) => (
+        <Link
+          {...(index === 0
+            ? { href: '/' }
+            : {
+                href: '/category/[category]',
+                as: `/category/` + category.value,
+              })}
+          shallow={false}
+        >
+          <a
+            className={cls({
+              [style.active]:
+                index === 0
+                  ? asPath === category.path
+                  : asPath.replace('/category/', '') === category.value,
+            })}
+          >
+            <span>{category.label}</span>
+          </a>
+        </Link>
+      ))}
+    </>
+  );
+};
 
 const Home: NextPage<IHomeProps> = ({
   articles: defaultArticles = [],
@@ -47,21 +87,35 @@ const Home: NextPage<IHomeProps> = ({
   return (
     <div className={style.wrapper}>
       <ArticleCarousel articles={recommendedArticles} />
-      <div className={cls('container', style.articleWrapper)}>
-        <Tags tags={tags} />
-        <InfiniteScroll
-          pageStart={1}
-          loadMore={getArticles}
-          hasMore={page * pageSize < total}
-          loader={
-            <div className={'loading'} key={0}>
-              正在获取文章...
-            </div>
-          }
-        >
-          <ArticleList articles={articles} />
-        </InfiniteScroll>
-      </div>
+      <DoubleColumnLayout
+        leftNode={
+          <div className={style.leftWrap}>
+            <header>
+              <CategoryMenu categories={categories} />
+            </header>
+            <main>
+              <InfiniteScroll
+                pageStart={1}
+                loadMore={getArticles}
+                hasMore={page * pageSize < total}
+                loader={
+                  <div className={'loading'} key={0}>
+                    正在获取文章...
+                  </div>
+                }
+              >
+                <ArticleList articles={articles} />
+              </InfiniteScroll>
+            </main>
+          </div>
+        }
+        rightNode={
+          <div className="sticky">
+            <ArticleRecommend mode="inline" />
+            <Tags tags={tags} />
+          </div>
+        }
+      />
       <Footer setting={setting} />
     </div>
   );

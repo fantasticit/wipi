@@ -12,7 +12,7 @@ import style from './index.module.scss';
 const NAV_LINKS = [
   {
     path: '/',
-    label: '首页',
+    label: '文章',
   },
   {
     path: '/archives',
@@ -161,7 +161,7 @@ export const Header = ({ setting, categories, tags, pages }) => {
           <nav className={cls(visible ? style.active : false)}>
             <ul>
               {navMenu[0]}
-              {categoryMenu}
+              {/* {categoryMenu} */}
               {navMenu.slice(1)}
               {pageMenu}
               <li className={style.toolWrapper}>

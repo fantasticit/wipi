@@ -6,7 +6,6 @@ import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { SearchProvider } from '@/providers/search';
 import { Opacity } from '@/components/Animation/Opacity';
 import { ListTrail } from '@/components/Animation/Trail';
-import { Tags } from '@components/Tags';
 import styles from './index.module.scss';
 
 const { Search: AntdSearch } = Input;
@@ -85,9 +84,6 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
               onSearch={getArticles}
               style={{ width: '100%' }}
             />
-            <div className={styles.tags}>
-              <Tags tags={tags} needTitle={false} bgcolor={'var(--bg-body)'} />
-            </div>
           </section>
 
           <section>

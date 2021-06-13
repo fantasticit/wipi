@@ -32,7 +32,7 @@ export const Categories = ({ categories = [] }) => {
           renderItem={(index) => {
             const category = categories[index];
             return (
-              <Link href="/[category]" as={`/` + category.value} shallow={false}>
+              <Link href="/[category]" as={`/category/` + category.value} shallow={false}>
                 <a>
                   <span>{category.label}</span>
                   <span>共 {category.articleCount} 篇文章</span>
