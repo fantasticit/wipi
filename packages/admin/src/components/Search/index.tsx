@@ -87,17 +87,12 @@ const _Search: React.FC<IProps> = ({
 
   return (
     <Form className={style.wrapper} style={{ padding }} layout="inline" onSubmit={handleSearch}>
-      <Row className={style.content}>
-        {getFields()}
-        {fields.length <= 3 && <Col>{submitContent}</Col>}
+      <Row>{getFields()}</Row>
+      <Row>
+        <Col span={24} style={{ textAlign: 'right' }}>
+          {submitContent}
+        </Col>
       </Row>
-      {fields.length > 3 && (
-        <Row>
-          <Col span={24} style={{ textAlign: 'right' }}>
-            {submitContent}
-          </Col>
-        </Row>
-      )}
     </Form>
   );
 };

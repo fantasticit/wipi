@@ -23,8 +23,8 @@ export const SEOSetting = ({ setting }) => {
   };
 
   return (
-    <div>
-      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="关键词">
+    <Form layout="vertical">
+      <Form.Item label="关键词">
         <Input
           placeholder="请输入关键词，空格分割"
           value={seoKeyword}
@@ -33,7 +33,7 @@ export const SEOSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="描述信息">
+      <Form.Item label="描述信息">
         <Input.TextArea
           placeholder="请输入描述信息"
           rows={6}
@@ -46,6 +46,6 @@ export const SEOSetting = ({ setting }) => {
       <Button type="primary" onClick={save}>
         保存
       </Button>
-    </div>
+    </Form>
   );
 };

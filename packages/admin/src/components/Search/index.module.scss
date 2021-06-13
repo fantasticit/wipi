@@ -15,21 +15,21 @@
   }
 
   :global {
-    .ant-form-item {
+    .ant-legacy-form-item {
       display: flex;
       width: 100%;
     }
 
-    .ant-form-item-control-wrapper {
+    .ant-legacy-form-item-control-wrapper {
       flex: 1;
     }
 
     @media (max-width: 575px) {
-      .ant-form-item {
+      .ant-legacy-form-item {
         flex-wrap: wrap;
       }
-  
-      .ant-form-item-control-wrapper {
+
+      .ant-legacy-form-item-control-wrapper {
         flex: 1;
       }
     }

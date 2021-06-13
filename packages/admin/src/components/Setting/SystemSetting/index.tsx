@@ -39,8 +39,8 @@ export const SystemSetting = ({ setting }) => {
   };
 
   return (
-    <div>
-      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="系统地址">
+    <Form layout="vertical">
+      <Form.Item label="系统地址">
         <Input
           placeholder="请输入系统地址"
           value={systemUrl}
@@ -49,7 +49,7 @@ export const SystemSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="后台地址">
+      <Form.Item label="后台地址">
         <Input
           placeholder="请输入后台地址"
           value={adminSystemUrl}
@@ -58,7 +58,7 @@ export const SystemSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="系统标题">
+      <Form.Item label="系统标题">
         <Input
           placeholder="请输入系统标题，将作为 head.title 显示"
           value={systemTitle}
@@ -67,7 +67,7 @@ export const SystemSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="Logo">
+      <Form.Item label="Logo">
         <Input
           placeholder="请输入 logo 链接或选择文件，也可输入 html"
           addonAfter={
@@ -84,7 +84,7 @@ export const SystemSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="Favicon">
+      <Form.Item label="Favicon">
         <Input
           placeholder="请输入 favicon 链接或选择文件"
           addonAfter={
@@ -101,7 +101,7 @@ export const SystemSetting = ({ setting }) => {
           }}
         />
       </Form.Item>
-      <Form.Item labelCol={{ xs: 8, sm: 6, md: 4 }} labelAlign="left" label="页脚信息">
+      <Form.Item label="页脚信息">
         <Input.TextArea
           placeholder="请输入页脚信息"
           rows={8}
@@ -126,6 +126,6 @@ export const SystemSetting = ({ setting }) => {
       <Button type="primary" onClick={save}>
         保存
       </Button>
-    </div>
+    </Form>
   );
 };
