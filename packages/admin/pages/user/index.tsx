@@ -59,6 +59,24 @@ const SEARCH_FIELDS = [
     msg: '请输入账户邮箱',
   },
   {
+    label: '角色',
+    field: 'role',
+    children: (
+      <Select style={{ width: 180 }}>
+        {[
+          { label: '管理员', value: 'admin' },
+          { label: '访客', value: 'visitor' },
+        ].map((t) => {
+          return (
+            <Select.Option key={t.label} value={t.value}>
+              {t.label}
+            </Select.Option>
+          );
+        })}
+      </Select>
+    ),
+  },
+  {
     label: '状态',
     field: 'status',
     children: (
