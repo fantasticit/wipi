@@ -32,7 +32,7 @@ Wipi 是一个面向个人的开源的集成文章发表、页面创建、知识
 ## 预览
 
 <ul>
-  <li><img width="240" alt="文章列表" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/7480/image.png"/></li>
+  <li><img width="240" alt="文章列表" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/3402/image.png"/></li>
   <li><img width="240" alt="文章详情" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/815/image.png"/></li>
   <li><img width="240" alt="动态页面" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/3124/image.png"/></li>
   <li><img width="240" alt="知识小册" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-12/6485/image.png"/></li>
@@ -89,8 +89,8 @@ yarn dev
 ### 系统设置
 
 <ul>
-  <li><img width="240" alt="系统设置" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/4333/image.png"/></li>
-  <li><img width="240" alt="前台页面" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/4588/image.png"/></li>
+  <li><img width="240" alt="系统设置" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/FURY8457EB0K41T6ABMBCSP1N9HUUFAB/image.png"/></li>
+  <li><img width="240" alt="前台页面" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/ICS41W05E4XRKLEAF9YO99A48CWGRP9X/image.png"/></li>
 </ul>
 
 项目初次启动时，需要在后台进行系统设置。随着内容的丰富，页面内容也会丰富起来。
