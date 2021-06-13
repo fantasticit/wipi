@@ -24,7 +24,7 @@ export class PosterService {
     html,
   }): Promise<{ url: string; name: string }> {
     // 海报已生成
-    const ret = await this.repository.findOne({ pageUrl });
+    const ret = await this.repository.findOne({ name });
     if (ret) return { url: ret.imgUrl, name: ret.name };
 
     const uploadPath = path.resolve(
@@ -35,7 +35,7 @@ export class PosterService {
     const { size, buffer } = await createImage({ width, height, html, ratio: 2 });
     const url = await putFile(this.settingService, uploadPath, buffer);
     const data = await this.repository.create({
-      name: name + '.png',
+      name,
       size,
       pageUrl,
       imgUrl: url,
