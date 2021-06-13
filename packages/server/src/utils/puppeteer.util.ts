@@ -9,7 +9,10 @@ const tmpdir = path.join(os.tmpdir(), '/poster/');
 export async function createImage({ html, width, height, ratio, ext = 'png' }) {
   width = Math.ceil(width + 16);
   height = Math.ceil(height + Math.ceil(height / width) * 16);
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const page = await browser.newPage();
   await page.setViewport({
     width,

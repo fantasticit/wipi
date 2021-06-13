@@ -41,7 +41,7 @@ export class PosterService {
       imgUrl: url,
     });
     await this.repository.save(data);
-    return { url: ret.imgUrl, name: ret.name };
+    return { url: data.imgUrl, name: data.name };
   }
 
   /**
