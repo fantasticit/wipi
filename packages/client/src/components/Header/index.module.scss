@@ -5,22 +5,13 @@ $height: 64px;
   width: 100%;
   height: $height;
   transition: all 0.3s ease-in-out;
-  background: rgb(76, 46, 18);
-
-  &.isFixed {
-    position: fixed;
-    z-index: 1000;
-    transform: translate3d(0, -100%, 0);
-
-    &.visible {
-      transform: translateZ(0);
-    }
-  }
 }
 
 .wrapper {
   position: relative;
+  z-index: 100;
   width: 100vw;
+  height: $height;
   background-color: var(--bg);
   border-bottom: 1px solid var(--border-color);
 
@@ -30,7 +21,10 @@ $height: 64px;
 
   &.isFixed {
     position: fixed;
-    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.2s;
     transform: translate3d(0, -100%, 0);
 
     &.visible {

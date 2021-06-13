@@ -1,10 +1,8 @@
 .wrapper {
   height: 100vh;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 
   > main {
-    flex: 1;
+    min-height: calc(100% - 64px);
   }
 }

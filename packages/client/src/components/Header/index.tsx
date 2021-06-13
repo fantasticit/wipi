@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import cls from 'classnames';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
-import { Menu, Dropdown } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import { getDocumentScrollTop } from '@/utils';
 import { useToggle } from '@/hooks/useToggle';
 import { Search } from '@/components/Search';
 import { Theme } from '@/components/Theme';
@@ -27,9 +27,9 @@ const NAV_LINKS = [
 export const Header = ({ setting, categories, tags, pages }) => {
   const router = useRouter();
   const { asPath, pathname } = router;
-  const [affix, setAffix] = useState(false);
-  const [affixVisible, setAffixVisible] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [affix, setAffix] = useToggle(false);
+  const [affixVisible, setAffixVisible] = useToggle(false);
+  const [visible, setVisible] = useToggle(false);
   const [showSearch, toggleSearch] = useToggle(false);
 
   useEffect(() => {
@@ -47,25 +47,16 @@ export const Header = ({ setting, categories, tags, pages }) => {
   }, [visible]);
 
   useEffect(() => {
-    let beforeY =
-      document.documentElement.scrollTop ||
-      window.pageYOffset ||
-      window.scrollY ||
-      document.body.scrollTop;
-
+    let beforeY = 0;
+    let y = 0;
     const handler = () => {
-      const y =
-        document.documentElement.scrollTop ||
-        window.pageYOffset ||
-        window.scrollY ||
-        document.body.scrollTop;
-      setAffix(y > 240);
-      setAffixVisible(beforeY > y);
+      y = getDocumentScrollTop();
+      setAffix(y > 0);
+      setAffixVisible(beforeY >= y);
       setTimeout(() => {
         beforeY = y;
       }, 0);
     };
-
     document.addEventListener('scroll', handler);
 
     return () => {
@@ -103,6 +94,7 @@ export const Header = ({ setting, categories, tags, pages }) => {
 
   return (
     <header className={cls(style.header)}>
+      <div className={style.mask}></div>
       <div
         className={cls(
           style.wrapper,
