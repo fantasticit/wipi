@@ -5,37 +5,47 @@
 
   > .fixed {
     position: fixed;
+    z-index: 10;
     top: 30vh;
     transform: translateX(-100%);
     padding-right: 10px;
 
-    .iconWrap {
-      border-radius: 50%;
-      margin-top: 12px;
+    .widgetWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      > div {
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      
-      background: var(--bg-second);
-      color: var(--disable-text-color);
-    
-      &:hover {
-        color: #fff;
-        background: var(--primary-color);
+      + .widgetWrapper {
+        margin-top: 1rem;
       }
     }
   }
 
   @media (max-width: 768px) {
     > .fixed {
-      display: none;
+      top: 100%;
+      bottom: 0;
+      padding-right: 0;
+      width: 100vw;
+      height: 52px;
+      background-color: var(--bg-second);
+      border-top: 1px solid var(--border-color);
+      transform: translate(0, 0);
+
+      display: flex;
+      flex-wrap: nowrap;
+
+      &.active {
+        transform: translate(0, -100%);
+      }
+
+      .widgetWrapper {
+        flex: 1;
+
+        + .widgetWrapper {
+          margin-top: 0;
+        }
+      }
     }
   }
 
@@ -72,7 +82,8 @@
   }
 
   @media (max-width: 768px) {
-    > .left, > .right{
+    > .left,
+    > .right {
       width: 100%;
     }
 
@@ -90,4 +101,3 @@
     }
   }
 }
-

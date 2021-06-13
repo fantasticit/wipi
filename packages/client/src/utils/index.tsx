@@ -71,3 +71,11 @@ export function elementInViewport(el) {
     left + width > window.pageXOffset
   );
 }
+export function getDocumentScrollTop() {
+  return (
+    document.documentElement.scrollTop ||
+    window.pageYOffset ||
+    window.scrollY ||
+    document.body.scrollTop
+  );
+}

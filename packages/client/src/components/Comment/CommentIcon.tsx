@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { COMMENT_DOM_ID } from '@/components/Comment';
+import styles from './CommentIcon.module.scss';
 
 export const CommentIcon = () => {
   const intoView = useCallback(() => {
@@ -8,7 +9,7 @@ export const CommentIcon = () => {
   }, []);
 
   return (
-    <div onClick={intoView}>
+    <div className={styles.wrap} onClick={intoView}>
       <svg
         viewBox="0 0 1024 1024"
         version="1.1"

@@ -72,3 +72,26 @@
     }
   }
 }
+
+.iconWrap {
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--bg-second);
+  color: var(--disable-text-color);
+
+  &:hover,
+  &.active {
+    color: var(--primary-color);
+  }
+
+  + .iconWrap {
+    margin-top: 12px;
+  }
+}

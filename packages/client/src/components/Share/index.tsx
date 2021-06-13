@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useRef, useEffect } from 'react';
 import domtoimage from 'dom-to-image';
-import { Popover, Button, message } from 'antd';
+import { Modal, Button, message } from 'antd';
 import { GlobalContext } from '@/context/global';
 import style from './index.module.scss';
 import { useToggle } from '@/hooks/useToggle';
@@ -33,7 +33,10 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
       }),
     [fullUrl]
   );
-  const save = () => {
+  const save = (e) => {
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+    e.stopPropagation();
     toggleLoading();
     const node = ref.current;
     const scale = 750 / node.offsetWidth;
@@ -76,14 +79,6 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
           </div>
         </div>
       </div>
-      <footer>
-        <Button size="small" style={{ marginRight: 12 }} onClick={toggleVisible}>
-          关闭
-        </Button>
-        <Button type="primary" size="small" onClick={save} loading={loading}>
-          下载
-        </Button>
-      </footer>
     </div>
   );
 
@@ -107,23 +102,60 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
   }, [visible, toggleVisible]);
 
   return (
-    <Popover content={content} placement="right">
-      {children || (
-        <div>
-          <svg
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            width="1em"
-            height="1em"
-          >
-            <path
-              d="M753.607 584.7c-48.519 0-91.596 23.298-118.66 59.315l-233.123-116.96c3.684-12.936 5.657-26.591 5.657-40.71 0-15.465-2.369-30.374-6.76-44.391l232.241-116.52c26.916 37.549 70.919 62.017 120.644 62.017 81.926 0 148.34-66.412 148.34-148.34 0-81.926-66.413-148.34-148.34-148.34-81.927 0-148.34 66.413-148.34 148.34 0 5.668 0.33 11.258 0.948 16.762l-244.945 122.892c-26.598-25.259-62.553-40.762-102.129-40.762-81.926 0-148.34 66.412-148.34 148.34s66.413 148.34 148.34 148.34c41.018 0 78.144-16.648 104.997-43.555l242.509 121.668c-0.904 6.621-1.382 13.374-1.382 20.242 0 81.927 66.412 148.34 148.34 148.34s148.34-66.413 148.34-148.34c-0.001-81.925-66.409-148.339-148.336-148.339l0 0z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </div>
-      )}
-    </Popover>
+    <>
+      <Modal
+        style={{
+          top: 20,
+        }}
+        visible={visible}
+        bodyStyle={{
+          display: 'flex',
+          justifyContent: 'center',
+          maxHeight: '70vh',
+          padding: '20px 12px',
+          overflow: 'auto',
+        }}
+        onCancel={(e) => {
+          e.preventDefault();
+          e.nativeEvent.stopImmediatePropagation();
+          e.stopPropagation();
+          toggleVisible(false);
+        }}
+        onOk={save}
+        okText="下载"
+        cancelText="关闭"
+        okButtonProps={{ loading }}
+        maskClosable={false}
+        transitionName={''}
+        maskTransitionName={''}
+      >
+        {content}
+      </Modal>
+      <span
+        onClickCapture={(e) => {
+          e.preventDefault();
+          e.nativeEvent.stopImmediatePropagation();
+          e.stopPropagation();
+          toggleVisible();
+        }}
+      >
+        {children || (
+          <div className={style.iconWrap}>
+            <svg
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+            >
+              <path
+                d="M753.607 584.7c-48.519 0-91.596 23.298-118.66 59.315l-233.123-116.96c3.684-12.936 5.657-26.591 5.657-40.71 0-15.465-2.369-30.374-6.76-44.391l232.241-116.52c26.916 37.549 70.919 62.017 120.644 62.017 81.926 0 148.34-66.412 148.34-148.34 0-81.926-66.413-148.34-148.34-148.34-81.927 0-148.34 66.413-148.34 148.34 0 5.668 0.33 11.258 0.948 16.762l-244.945 122.892c-26.598-25.259-62.553-40.762-102.129-40.762-81.926 0-148.34 66.412-148.34 148.34s66.413 148.34 148.34 148.34c41.018 0 78.144-16.648 104.997-43.555l242.509 121.668c-0.904 6.621-1.382 13.374-1.382 20.242 0 81.927 66.412 148.34 148.34 148.34s148.34-66.413 148.34-148.34c-0.001-81.925-66.409-148.339-148.336-148.339l0 0z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+        )}
+      </span>
+    </>
   );
 };
