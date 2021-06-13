@@ -6,7 +6,7 @@ import { dateFormat } from '../../utils/date.util';
 import { createImage } from '../../utils/puppeteer.util';
 import { putFile, deleteFile } from '../../utils/oss.util';
 import { SettingService } from '../setting/setting.service';
-import { Poster } from './Poster.entity';
+import { Poster } from './poster.entity';
 
 @Injectable()
 export class PosterService {
