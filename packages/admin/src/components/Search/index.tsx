@@ -87,8 +87,8 @@ const _Search: React.FC<IProps> = ({
 
   return (
     <Form className={style.wrapper} style={{ padding }} layout="inline" onSubmit={handleSearch}>
-      <Row>{getFields()}</Row>
-      <Row>
+      <Row gutter={24}>{getFields()}</Row>
+      <Row gutter={24}>
         <Col span={24} style={{ textAlign: 'right' }}>
           {submitContent}
         </Col>
