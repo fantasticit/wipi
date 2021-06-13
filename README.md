@@ -55,7 +55,7 @@ docker run -d --restart=always --name wipi -p 3306:3306 -e MYSQL_ROOT_PASSWORD=r
 
 ```bash
 docker container exec -it wipi  bash;
-mysql -u root -p root;
+mysql -u root -p;
 CREATE DATABASE  `wipi` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
