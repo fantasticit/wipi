@@ -1,15 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import { Row, Col, Card, Tooltip, Divider } from 'antd';
+import { Divider } from 'antd';
 import { HeartOutlined, EyeOutlined, ShareAltOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
 import { Share } from '@/components/Share';
 import style from './index.module.scss';
-import { ArticleProvider } from '@/providers/article';
-
-const { Meta } = Card;
 
 interface IProps {
   articles: IArticle[];
@@ -27,7 +24,6 @@ export const ArticleList: React.FC<IProps> = ({
       {articles && articles.length ? (
         articles.map((article) => {
           return (
-            // <Col className={style.articleItem} span={8} xs={24} sm={12} md={8}>
             <div className={style.articleItem}>
               <Opacity>
                 <Link
