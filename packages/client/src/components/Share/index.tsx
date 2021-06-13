@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useRef, useEffect } from 'react';
-import { Modal, message } from 'antd';
+import { Modal, Tooltip, message } from 'antd';
 import { PosterProvider } from '@/providers/poster';
 import { GlobalContext } from '@/context/global';
 import style from './index.module.scss';
@@ -40,6 +40,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
     toggleLoading();
     const node = ref.current;
     const target = node.firstChild;
+    const hide = message.loading('海报生成中，请耐心等待...', 0);
     try {
       const ret = await PosterProvider.createPoster({
         name: title,
@@ -48,17 +49,19 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
         height: target.offsetHeight,
         pageUrl: location.pathname,
       });
+      message.info('分享海报制作完成。');
       download(ret);
     } catch (e) {
       message.error('保存图片失败，请手动截图');
     } finally {
       toggleLoading();
+      hide();
     }
   };
 
   const content = (
     // 以下的内联样式，请勿修改，将用于服务端海报生成
-    <div className={style.wrapper} ref={ref}>
+    <div ref={ref}>
       <div
         style={{
           width: 375,
@@ -181,9 +184,8 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
   return (
     <>
       <Modal
-        style={{
-          top: 20,
-        }}
+        title="分享海报"
+        width={400}
         visible={visible}
         bodyStyle={{
           display: 'flex',
