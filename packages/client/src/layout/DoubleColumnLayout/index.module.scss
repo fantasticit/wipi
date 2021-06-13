@@ -21,7 +21,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     > .fixed {
       top: 100%;
       bottom: 0;
@@ -52,19 +52,19 @@
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1025px) {
     > .fixed {
-      margin-left: -768px;
-    }
-  }
-
-  @media (min-width: 992px) {
-    > .fixed {
-      margin-left: -970px;
+      margin-left: -930px;
     }
   }
 
   @media (min-width: 1200px) {
+    > .fixed {
+      margin-left: -1120px;
+    }
+  }
+
+  @media (min-width: 1440px) {
     > .fixed {
       margin-left: -1140px;
     }
