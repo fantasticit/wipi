@@ -89,8 +89,8 @@ yarn dev
 ### 系统设置
 
 <ul>
-  <li><img width="240" alt="系统设置" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/image.png"/></li>
-  <li><img width="240" alt="前台页面" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/image.png"/></li>
+  <li><img width="240" alt="系统设置" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/4333/image.png"/></li>
+  <li><img width="240" alt="前台页面" src="https://wipi.oss-cn-shanghai.aliyuncs.com/2021-06-13/4588/image.png"/></li>
 </ul>
 
 项目初次启动时，需要在后台进行系统设置。随着内容的丰富，页面内容也会丰富起来。
