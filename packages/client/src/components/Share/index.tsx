@@ -61,7 +61,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
 
   const content = (
     // 以下的内联样式，请勿修改，将用于服务端海报生成
-    <div ref={ref}>
+    <div ref={ref} className={style.wrapper}>
       <div
         style={{
           width: 375,
@@ -190,6 +190,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
         bodyStyle={{
           display: 'flex',
           justifyContent: 'center',
+          overflow: 'auto',
         }}
         onCancel={(e) => {
           e.preventDefault();
