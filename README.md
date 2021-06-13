@@ -123,7 +123,7 @@ npm -v
 
 npm config set registry http://registry.npmjs.org
 
-npm i -g pm2 @nestjs/cli lerna yarn
+npm i -g pm2 @nestjs/cli yarn
 
 yarn
 yarn run build
