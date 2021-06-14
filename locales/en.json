@@ -52,7 +52,7 @@
   "shareNamespace": {
     "title": "Share Poster",
     "createingPoster": "The poster is being generated, please be patient...",
-    "createdPosterSuccess": "分享海报制作完成。",
+    "createdPosterSuccess": "The poster is completed.",
     "createdPosterError": "The sharing poster is completed.",
     "qrcode": "Scan the QR code to view the article",
     "shareFrom": " Original shared from "
