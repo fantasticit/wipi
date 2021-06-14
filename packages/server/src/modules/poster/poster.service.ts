@@ -27,7 +27,7 @@ export class PosterService {
     const ret = await this.repository.findOne({ name });
     if (ret) return { url: ret.imgUrl, name: ret.name };
 
-    const uploadPath = path.resolve(
+    const uploadPath = path.join(
       'poster',
       dateFormat(new Date(), 'yyyy-MM-dd'),
       `${pageUrl}/${name}.png`
