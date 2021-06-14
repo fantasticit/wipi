@@ -81,6 +81,19 @@
   .ant-menu-item-selected {
     color: var(--primary-color) !important;
     background: transparent !important;
+
+    .ant-menu-title-content {
+      color: inherit !important;
+
+      a {
+        display: block;
+      }
+
+      a,
+      span {
+        color: inherit !important;
+      }
+    }
   }
 
   .ant-breadcrumb,
