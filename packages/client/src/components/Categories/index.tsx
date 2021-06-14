@@ -34,7 +34,7 @@ export const Categories = ({ categories = [] }) => {
           renderItem={(index) => {
             const category = categories[index];
             return (
-              <Link href="/[category]" as={`/category/` + category.value} shallow={false}>
+              <Link href="/category/[category]" as={`/category/` + category.value} shallow={false}>
                 <a>
                   <span>{category.label}</span>
                   <span>
