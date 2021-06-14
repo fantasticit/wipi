@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { NextPage } from 'next';
 import Router from 'next/router';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { Modal, Form, Input, message } from 'antd';
 import { TagOutlined } from '@ant-design/icons';
 import { GlobalContext } from '@/context/global';
@@ -22,6 +23,7 @@ interface IProps {
 }
 
 const Article: NextPage<IProps> = ({ article }) => {
+  const t = useTranslations();
   const { setting } = useContext(GlobalContext);
   const passwdRef = useRef(null);
   const [shouldCheckPassWord, setShouldCheckPassword] = useState(article && article.needPassword);
@@ -34,11 +36,11 @@ const Article: NextPage<IProps> = ({ article }) => {
         Object.assign(article, res);
         setShouldCheckPassword(false);
       } else {
-        message.error('密码错误');
+        message.error(t('wrongPasswd'));
         setShouldCheckPassword(true);
       }
     });
-  }, [article]);
+  }, [t, article]);
 
   const back = useCallback(() => {
     Router.push('/');
@@ -46,14 +48,14 @@ const Article: NextPage<IProps> = ({ article }) => {
 
   const checkPassWordModal = (
     <Modal
-      title="文章受保护，请输入访问密码"
-      cancelText={'回首页'}
-      okText={'确认'}
+      title={t('protectedArticleMsg')}
+      cancelText={t('backHome')}
+      okText={t('confirm')}
       visible={shouldCheckPassWord}
       onOk={checkPassWord}
       onCancel={back}
     >
-      <Form.Item label={'密码'}>
+      <Form.Item label={t('passwd')}>
         <Input.Password
           onChange={(e) => {
             passwdRef.current = e.target.value;
@@ -78,7 +80,7 @@ const Article: NextPage<IProps> = ({ article }) => {
     <>
       {checkPassWordModal}
       <Helmet>
-        <title>{(article.title || '未知标题') + ' | ' + setting.systemTitle}</title>
+        <title>{(article.title || t('unknownTitle')) + ' | ' + setting.systemTitle}</title>
       </Helmet>
       <ImageViewer containerSelector="#js-article-wrapper">
         <article id="js-article-wrapper" className={style.articleWrap}>
@@ -100,7 +102,7 @@ const Article: NextPage<IProps> = ({ article }) => {
           {/* S 文章封面 */}
           {article.cover && (
             <div className={style.coverWrapper}>
-              <img src={article.cover} alt="文章封面" />
+              <img src={article.cover} alt={t('articleCover') as string} />
             </div>
           )}
           {/* E 文章封面 */}
@@ -110,11 +112,13 @@ const Article: NextPage<IProps> = ({ article }) => {
             <h1 className={style.title}>{article.title}</h1>
             <p className={style.desc}>
               <span>
-                发布于
+                {t('publishAt')}
                 <LocaleTime date={article.publishAt} />
               </span>
               <span> • </span>
-              <span>阅读量 {article.views}</span>
+              <span>
+                {t('readings')} {article.views}
+              </span>
             </p>
           </div>
           {/* E 文章元信息 */}
@@ -127,14 +131,14 @@ const Article: NextPage<IProps> = ({ article }) => {
           <div className={style.footerInfoWrap}>
             {/* S 文章版权 */}
             <div className={style.copyrightInfo}>
-              发布时间：
-              <LocaleTime date={article.publishAt} /> | 版权信息：
+              {t('publishAt')}
+              <LocaleTime date={article.publishAt} /> | {t('copyrightInfo')}：
               <a
                 href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
                 target="_blank"
                 rel="noreferrer"
               >
-                非商用-署名-自由转载
+                {t('copyrightContent')}
               </a>
             </div>
             {/* E 文章版权 */}
@@ -166,7 +170,7 @@ const Article: NextPage<IProps> = ({ article }) => {
         {/* S 文章评论 */}
         {article.isCommentable && (
           <div className={style.commentWrap}>
-            <p className={style.title}>评论</p>
+            <p className={style.title}>{t('comment')}</p>
             <Comment key={article.id} hostId={article.id} />
           </div>
         )}

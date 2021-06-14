@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
+import { useTranslations } from 'next-intl';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
@@ -17,6 +18,7 @@ const pageSize = 12;
 
 const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => {
   const { tags, categories } = useContext(GlobalContext);
+  const t = useTranslations();
   const [page, setPage] = useState(1);
   const [books, setBooks] = useState<IKnowledge[]>(defaultBooks);
 
@@ -44,7 +46,7 @@ const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => 
           hasMore={page * pageSize < total}
           loader={
             <div className={'loading'} key={0}>
-              正在获取知识...
+              {t('gettingKnowledge')}
             </div>
           }
         >

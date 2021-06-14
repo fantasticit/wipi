@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Input } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { SearchProvider } from '@/providers/search';
 import { Opacity } from '@/components/Animation/Opacity';
@@ -18,6 +19,7 @@ interface IProps {
 
 export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
   const ref = useRef(null);
+  const t = useTranslations();
   const [searchArticles, loading] = useAsyncLoading(SearchProvider.searchArticles);
   const [articles, setArticles] = useState<IArticle[]>([]);
   const close = useCallback(() => {
@@ -70,7 +72,7 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
       <Opacity from={{ y: 20 }} to={{ y: 0 }}>
         <div className="container">
           <header>
-            <span className={styles.title}>文章搜索</span>
+            <span className={styles.title}>{t('searchArticle')}</span>
             <span className={styles.btnWrapper} onClick={close}>
               <CloseOutlined />
               <span>esc</span>
@@ -82,7 +84,7 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
               ref={ref}
               size="large"
               loading={loading}
-              placeholder="输入关键字，搜索文章"
+              placeholder={t('searchArticlePlaceholder') as string}
               onSearch={getArticles}
               style={{ width: '100%' }}
             />

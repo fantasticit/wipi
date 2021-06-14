@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Divider } from 'antd';
+import { useTranslations } from 'next-intl';
 import { HeartOutlined, EyeOutlined, ShareAltOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import { Opacity } from '@/components/Animation/Opacity';
@@ -19,6 +20,8 @@ export const ArticleList: React.FC<IProps> = ({
   coverHeight = 168,
   asRecommend = false,
 }) => {
+  const t = useTranslations();
+
   return (
     <div className={style.wrapper}>
       {articles && articles.length ? (
@@ -78,7 +81,7 @@ export const ArticleList: React.FC<IProps> = ({
                           >
                             <span>
                               <ShareAltOutlined />
-                              <span className={style.number}>分享</span>
+                              <span className={style.number}>{t('share')}</span>
                             </span>
                           </Share>
                         </div>
@@ -91,7 +94,7 @@ export const ArticleList: React.FC<IProps> = ({
           );
         })
       ) : (
-        <div className={'empty'}>暂无数据</div>
+        <div className={'empty'}>{t('empty')}</div>
       )}
     </div>
   );

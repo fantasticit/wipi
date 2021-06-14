@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import cls from 'classnames';
+import { useTranslations } from 'next-intl';
 import { isOdd, elementInViewport } from '@/utils';
 import { ListTrail } from '@/components/Animation/Trail';
 import style from './index.module.scss';
@@ -15,6 +16,7 @@ const HEIGHT = 32;
 export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> = ({
   tocs = [],
 }) => {
+  const t = useTranslations();
   const ref = useRef<HTMLDivElement>();
   const [active, setActive] = useState(0);
   const goto = useCallback((toc) => {
@@ -49,7 +51,7 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
 
   return (
     <div className={style.wrapper}>
-      <header>目录</header>
+      <header>{t('toc')}</header>
       <main>
         <div ref={ref}>
           <div>

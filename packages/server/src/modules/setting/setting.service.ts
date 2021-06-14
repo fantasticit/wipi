@@ -1,16 +1,26 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserService } from '../user/user.service';
 import { Setting } from './setting.entity';
-import { UNPROTECTED_KEYS } from './setting.constant';
+import { UNPROTECTED_KEYS, i18n } from './setting.constant';
 
 @Injectable()
 export class SettingService {
   constructor(
     @InjectRepository(Setting)
     private readonly settingRepository: Repository<Setting>
-  ) {}
+  ) {
+    this.initI18n();
+  }
+
+  async initI18n() {
+    const old = await this.settingRepository.find();
+    if (!old || !old[0]) return;
+    const target = old && old[0];
+    if (target.i18n) return;
+    target.i18n = JSON.stringify(i18n);
+    await this.settingRepository.save(target);
+  }
 
   /**
    *

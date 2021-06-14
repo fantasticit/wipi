@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import cls from 'classnames';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import Router, { useRouter } from 'next/router';
 import { SearchOutlined } from '@ant-design/icons';
 import { getDocumentScrollTop } from '@/utils';
 import { useToggle } from '@/hooks/useToggle';
 import { Search } from '@/components/Search';
 import { Theme } from '@/components/Theme';
+import { Locales } from '@/components/Locales';
 import style from './index.module.scss';
 
 const NAV_LINKS = [
   {
     path: '/',
-    label: '文章',
+    locale: 'article',
   },
   {
     path: '/archives',
-    label: '归档',
+    locale: 'archives',
   },
   {
     path: '/knowledge',
-    label: '知识小册',
+    locale: 'knowledgeBooks',
   },
 ];
 
 export const Header = ({ setting, categories, tags, pages }) => {
+  const t = useTranslations();
   const router = useRouter();
   const { asPath, pathname } = router;
   const [affix, setAffix] = useToggle(false);
@@ -68,7 +71,7 @@ export const Header = ({ setting, categories, tags, pages }) => {
     <li className={cls({ [style.active]: asPath === nav.path })}>
       <Link href={nav.path}>
         <a>
-          <span>{nav.label}</span>
+          <span>{t(nav.locale)}</span>
         </a>
       </Link>
     </li>
@@ -135,6 +138,9 @@ export const Header = ({ setting, categories, tags, pages }) => {
               </li>
               <li className={style.toolWrapper}>
                 <Theme />
+              </li>
+              <li className={style.toolWrapper}>
+                <Locales />
               </li>
             </ul>
             <Search tags={tags} visible={showSearch} onClose={toggleSearch} />

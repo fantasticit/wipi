@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Spin } from 'antd';
 import cls from 'classnames';
+import { useTranslations } from 'next-intl';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { ArticleProvider } from '@/providers/article';
 import { ListTrail } from '@/components/Animation/Trail';
@@ -20,6 +21,7 @@ export const ArticleRecommend: React.FC<IProps> = ({
   articleId = null,
   needTitle = true,
 }) => {
+  const t = useTranslations();
   const [getRecommend, loading] = useAsyncLoading(ArticleProvider.getRecommend);
   const [articles, setArticles] = useState([]);
 
@@ -33,7 +35,7 @@ export const ArticleRecommend: React.FC<IProps> = ({
     <div className={cls(style.wrapper, mode === 'inline' && style.inline)}>
       {needTitle && (
         <div className={style.title}>
-          <span>推荐文章</span>
+          <span>{t('recommendToReading')}</span>
         </div>
       )}
       <Spin spinning={loading}>
@@ -42,7 +44,7 @@ export const ArticleRecommend: React.FC<IProps> = ({
             loading ? (
               <div style={{ height: 32 }}></div>
             ) : (
-              <div className={'empty'}>暂无推荐</div>
+              <div className={'empty'}>{t('empty')}</div>
             )
           ) : (
             <ul className={style.inlineWrapper}>

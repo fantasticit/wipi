@@ -1,5 +1,4 @@
 import React, { useCallback, useRef } from 'react';
-import { Tooltip } from 'antd';
 import { CopyOutlined, CheckOutlined } from '@ant-design/icons';
 import copy from 'copy-to-clipboard';
 import { useToggle } from '@/hooks/useToggle';
@@ -23,14 +22,12 @@ export const Copy: React.FC<Props> = ({ text }) => {
   }, [text, copied, toggleCopied]);
 
   return (
-    <Tooltip title={copied ? '复制成功' : '复制'}>
-      <span className={styles.wrapper}>
-        {!copied ? (
-          <CopyOutlined onClick={onClick} />
-        ) : (
-          <CheckOutlined style={{ color: 'var(--primary-color)' }} />
-        )}
-      </span>
-    </Tooltip>
+    <span className={styles.wrapper}>
+      {!copied ? (
+        <CopyOutlined onClick={onClick} />
+      ) : (
+        <CheckOutlined style={{ color: 'var(--primary-color)' }} />
+      )}
+    </span>
   );
 };

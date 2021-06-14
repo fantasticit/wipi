@@ -132,6 +132,7 @@ interface ISearch {
 }
 
 interface ISetting {
+  i18n?: string;
   systemUrl?: string; // 系统地址
   systemTitle?: string; // 系统标题
   systemLogo?: string; // 系统 Logo

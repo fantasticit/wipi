@@ -9,6 +9,7 @@ import { SEOSetting } from '@/components/Setting/SEOSetting';
 import { AnalyticsSetting } from '@/components/Setting/AnalyticsSetting';
 import { OSSSetting } from '@/components/Setting/OSSSetting';
 import { SMTPSetting } from '@/components/Setting/SMTPSetting';
+import { LocaleSetting } from '@/components/Setting/LocaleSetting';
 
 interface IProps {
   type: string;
@@ -25,6 +26,10 @@ const Setting: NextPage<IProps> = ({ type: defaultType }) => {
     {
       label: '系统设置',
       content: <SystemSetting setting={setting} />,
+    },
+    {
+      label: '国际化',
+      content: <LocaleSetting setting={setting} />,
     },
     {
       label: 'SEO 设置',

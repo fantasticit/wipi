@@ -1,18 +1,20 @@
 import React from 'react';
 import cls from 'classnames';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { ListTrail } from '@/components/Animation/Trail';
 import style from './index.module.scss';
 
 export const Categories = ({ categories = [] }) => {
   const router = useRouter();
+  const t = useTranslations();
   const { category: routerCategory } = router.query;
 
   return (
     <div className={style.wrapper}>
       <div className={style.title}>
-        <span>文章分类</span>
+        <span>{t('categoryTitle')}</span>
       </div>
       <ul>
         <ListTrail
@@ -35,7 +37,9 @@ export const Categories = ({ categories = [] }) => {
               <Link href="/[category]" as={`/category/` + category.value} shallow={false}>
                 <a>
                   <span>{category.label}</span>
-                  <span>共 {category.articleCount} 篇文章</span>
+                  <span>
+                    {t('total')} {category.articleCount} {t('articleCountTemplate')}
+                  </span>
                 </a>
               </Link>
             );

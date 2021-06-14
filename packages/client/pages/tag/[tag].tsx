@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { NextPage } from 'next';
+import { useTranslations } from 'next-intl';
 import InfiniteScroll from 'react-infinite-scroller';
 import { ArticleProvider } from '@/providers/article';
 import { TagProvider } from '@/providers/tag';
@@ -21,6 +22,7 @@ interface IProps {
 const pageSize = 12;
 
 const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, tag }) => {
+  const t = useTranslations();
   const { setting, tags, categories } = useContext(GlobalContext);
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
@@ -50,10 +52,10 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, tag }) 
           <>
             <div className={style.tagOrCategoryDetail}>
               <p>
-                与 <span>{tag.label}</span> 标签有关的文章
+                {t('yu')} <span>{tag.label}</span> {t('tagRelativeArticles')}
               </p>
               <p>
-                共搜索到 <span>{total}</span> 篇
+                {t('totalSearch')} <span>{total}</span> {t('piece')}
               </p>
             </div>
             <Tags tags={tags} />
@@ -65,7 +67,7 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, tag }) 
                   hasMore={page * pageSize < total}
                   loader={
                     <div className={'loading'} key={0}>
-                      正在获取文章...
+                      {t('gettingArticle')}
                     </div>
                   }
                 >

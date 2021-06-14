@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useContext } from 'react';
 import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GlobalContext } from '@/context/global';
@@ -23,6 +24,7 @@ interface IHomeProps {
 const pageSize = 12;
 
 export const CategoryMenu = ({ categories }) => {
+  const t = useTranslations();
   const router = useRouter();
   const { asPath } = router;
 
@@ -30,7 +32,7 @@ export const CategoryMenu = ({ categories }) => {
     <>
       {[
         {
-          label: '所有',
+          label: t('all'),
           path: '/',
         },
         ...categories,
@@ -66,6 +68,7 @@ const Home: NextPage<IHomeProps> = ({
   recommendedArticles = [],
   total = 0,
 }) => {
+  const t = useTranslations();
   const { setting, tags, categories } = useContext(GlobalContext);
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
@@ -101,7 +104,7 @@ const Home: NextPage<IHomeProps> = ({
                 hasMore={page * pageSize < total}
                 loader={
                   <div className={'loading'} key={0}>
-                    正在获取文章...
+                    {t('gettingArticle')}
                   </div>
                 }
               >

@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Button, Pagination } from 'antd';
+import { useTranslations } from 'next-intl';
 import { CommentProvider } from '@/providers/comment';
 import { usePagination } from '@/hooks/usePagination';
 import { useToggle } from '@/hooks/useToggle';
@@ -16,22 +17,27 @@ export const COMMENT_DOM_ID = `js-comment-id`;
 
 export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
   const ref = useRef(null);
+  const t = useTranslations();
   const [firstLoad, setFirstLoad] = useToggle(true);
-  const { data: comments, total, loading, page, pageSize, setPage } = usePagination<IComment>(
-    (params) => CommentProvider.getArticleComments(articleId, params),
-    {
-      pageSize: 6,
-      after: ({ page }) => {
-        if (page === 1 && firstLoad) {
-          setFirstLoad(false);
-          return;
-        }
-        Promise.resolve().then(() => {
-          ref.current.scrollIntoView({ behavior: 'smooth' });
-        });
-      },
-    }
-  );
+  const {
+    data: comments,
+    total,
+    loading,
+    page,
+    pageSize,
+    setPage,
+  } = usePagination<IComment>((params) => CommentProvider.getArticleComments(articleId, params), {
+    pageSize: 6,
+    after: ({ page }) => {
+      if (page === 1 && firstLoad) {
+        setFirstLoad(false);
+        return;
+      }
+      Promise.resolve().then(() => {
+        ref.current.scrollIntoView({ behavior: 'smooth' });
+      });
+    },
+  });
 
   return (
     <div id={COMMENT_DOM_ID} ref={ref}>
@@ -51,7 +57,7 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
             />
           ) : loading ? (
             <Button type="primary" loading={true}>
-              加载中
+              {t('loading')}
             </Button>
           ) : null}
         </div>

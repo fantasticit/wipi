@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { Breadcrumb, Button } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
 import { KnowledgeProvider } from '@/providers/knowledge';
@@ -18,6 +19,7 @@ interface IProps {
 }
 
 const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
+  const t = useTranslations();
   const chapters = (book && book.children) || [];
 
   const start = useCallback(() => {
@@ -46,7 +48,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
           <Breadcrumb>
             <Breadcrumb.Item>
               <Link href="/knowledge">
-                <a>知识小册</a>
+                <a>{t('knowledgeBooks')}</a>
               </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>{book.title}</Breadcrumb.Item>
@@ -72,7 +74,9 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
                       <p className={style.title}>{book.title}</p>
                       <p className={style.desc}>{book.summary}</p>
                       <p className={style.meta}>
-                        <span>{book.views} 次阅读</span>
+                        <span>
+                          {book.views} {t('readingCount')}
+                        </span>
                         <span className={style.seperator}>·</span>
                         <span className={style.pullRight}>
                           <LocaleTime date={book.publishAt} />
@@ -80,7 +84,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
                       </p>
                       <div className={style.btnWrap}>
                         <Button type="primary" onClick={start} disabled={!chapters.length}>
-                          开始阅读
+                          {t('startReading')}
                         </Button>
                       </div>
                     </div>
@@ -116,7 +120,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
                     />
                   </ul>
                 ) : (
-                  <div className={'empty'}>敬请期待</div>
+                  <div className={'empty'}>{t('pleaseWait')}</div>
                 )}
               </main>
             </section>
@@ -124,7 +128,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
         }
         rightNode={
           <div className={cls('sticky', style.tocWrapper)}>
-            <header>其他知识笔记</header>
+            <header>{t('otherKnowledges')}</header>
             <main>
               <KnowledgeList knowledges={otherBooks} />
             </main>

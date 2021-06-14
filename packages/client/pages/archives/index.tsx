@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { ArticleProvider } from '@/providers/article';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
@@ -57,6 +58,7 @@ const resolveArticlesCount = (articles) => {
 
 const Archives: NextPage<IProps> = ({ articles }) => {
   const { categories } = useContext(GlobalContext);
+  const t = useTranslations();
 
   return (
     <DoubleColumnLayout
@@ -64,10 +66,10 @@ const Archives: NextPage<IProps> = ({ articles }) => {
         <div className={style.content}>
           <div className={style.summary}>
             <p>
-              <span>归档</span>
+              <span>{t('archives')}</span>
             </p>
             <p>
-              共计 <span>{resolveArticlesCount(articles)}</span> 篇
+              {t('total')} <span>{resolveArticlesCount(articles)}</span> {t('piece')}
             </p>
           </div>
           {Object.keys(articles)

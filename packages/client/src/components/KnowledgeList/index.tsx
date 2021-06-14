@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { Row, Col, Card, Tooltip, Divider } from 'antd';
-import { HeartOutlined, EyeOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { useTranslations } from 'next-intl';
+import { Divider } from 'antd';
+import { EyeOutlined, ShareAltOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
@@ -13,6 +14,7 @@ interface IProps {
 }
 
 export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
+  const t = useTranslations();
   return (
     <div className={style.wrapper}>
       {knowledges && knowledges.length ? (
@@ -61,7 +63,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
                           >
                             <span>
                               <ShareAltOutlined />
-                              <span className={style.number}>分享</span>
+                              <span className={style.number}>{t('share')}</span>
                             </span>
                           </Share>
                         </div>
@@ -74,7 +76,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
           );
         })
       ) : (
-        <div className={'empty'}>暂无数据</div>
+        <div className={'empty'}>{t('empty')}</div>
       )}
     </div>
   );

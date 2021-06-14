@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import cls from 'classnames';
+import { useTranslations } from 'next-intl';
 import { Button, Input, message } from 'antd';
 import { CommentProvider } from '@/providers/comment';
 import { useToggle } from '@/hooks/useToggle';
@@ -27,14 +28,15 @@ export const CommentEditor: React.FC<Props> = ({
   onClose,
   small,
 }) => {
+  const t = useTranslations('commentNamespace');
   const [addComment, loading] = useAsyncLoading(CommentProvider.addComment);
   const [needSetInfo, toggleNeedSetInfo] = useToggle(false);
   const [user, setUser] = useState<IUser | null>(null);
   const [content, setContent] = useState('');
   const hasValidUser = useMemo(() => isValidUser(user), [user]);
   const textareaPlaceholder = useMemo(
-    () => (replyComment ? `回复${replyComment.name}` : '请输入评论内容（支持 Markerdown）'),
-    [replyComment]
+    () => (replyComment ? `${t('reply')} ${replyComment.name}` : t('replyPlaceholder')),
+    [t, replyComment]
   );
   const textareaSize = useMemo(
     () => (small ? { minRows: 4, maxRows: 8 } : { minRows: 6, maxRows: 12 }),
@@ -49,7 +51,7 @@ export const CommentEditor: React.FC<Props> = ({
           fill="currentColor"
         ></path>
       </svg>
-      <span>表情</span>
+      <span>{t('emoji')}</span>
     </span>
   );
 
@@ -99,11 +101,11 @@ export const CommentEditor: React.FC<Props> = ({
     }
 
     addComment(data).then(() => {
-      message.success('评论成功，已提交审核');
+      message.success(t('commentSuccess'));
       setContent('');
       onOk && onOk();
     });
-  }, [hostId, parentComment, replyComment, onOk, user, content, toggleNeedSetInfo, addComment]);
+  }, [t, hostId, parentComment, replyComment, onOk, user, content, toggleNeedSetInfo, addComment]);
 
   useEffect(() => {
     const userInfo = window.localStorage.getItem('user');
@@ -125,7 +127,7 @@ export const CommentEditor: React.FC<Props> = ({
       <div className={styles.textareaWrapper}>
         {!hasValidUser && <div className={styles.mask} onClick={toggleNeedSetInfo}></div>}
         <TextArea
-          placeholder={textareaPlaceholder}
+          placeholder={textareaPlaceholder as string}
           autoSize={textareaSize}
           value={content}
           onChange={onInput}
@@ -140,7 +142,7 @@ export const CommentEditor: React.FC<Props> = ({
         <div>
           {onClose && (
             <Button onClick={onClose} style={{ marginRight: 16 }} size={btnSize}>
-              收起
+              {t('close')}
             </Button>
           )}
           <Button
@@ -150,7 +152,7 @@ export const CommentEditor: React.FC<Props> = ({
             disabled={!content}
             size={btnSize}
           >
-            发布
+            {t('publish')}
           </Button>
         </div>
       </footer>

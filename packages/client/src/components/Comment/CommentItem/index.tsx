@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import cls from 'classnames';
 import { Avatar } from 'antd';
+import { useTranslations } from 'next-intl';
 import { MessageOutlined } from '@ant-design/icons';
 import { ConditionTransition } from '@/components/Animation/Transition';
 import { Opacity } from '@/components/Animation/Opacity';
@@ -17,6 +18,7 @@ type Props = {
 };
 
 export const CommentItem: React.FC<Props> = ({ comment, parentComment, isChild = false }) => {
+  const t = useTranslations('commentNamespace');
   const [editorVisible, toggleEditorVisible] = useToggle(false);
   const avatarSize = useMemo(() => (isChild ? 24 : 32), [isChild]);
   const paddingHorizontal = useMemo(() => avatarSize + 8, [avatarSize]);
@@ -37,7 +39,7 @@ export const CommentItem: React.FC<Props> = ({ comment, parentComment, isChild =
           <strong>{comment.name}</strong>
           {comment.replyUserName ? (
             <>
-              <span style={{ margin: '0 8px' }}>回复</span>
+              <span style={{ margin: '0 8px' }}>{t('reply')}</span>
               <strong className={styles.replyUser}>{comment.replyUserName}</strong>
             </>
           ) : null}
@@ -57,7 +59,7 @@ export const CommentItem: React.FC<Props> = ({ comment, parentComment, isChild =
           <LocaleTime date={comment.createAt} timeago></LocaleTime>
           <span className={styles.reply} onClick={toggleEditorVisible}>
             <MessageOutlined style={{ marginRight: 4 }} />
-            回复
+            {t('reply')}
           </span>
         </div>
         <ConditionTransition

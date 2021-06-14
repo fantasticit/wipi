@@ -3,6 +3,7 @@ import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { Breadcrumb } from 'antd';
+import { useTranslations } from 'next-intl';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { KnowledgeProvider } from '@/providers/knowledge';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
@@ -21,6 +22,7 @@ interface IProps {
 }
 
 const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
+  const t = useTranslations();
   const chapters = book.children || [];
   const tocs = chapter.toc ? JSON.parse(chapter.toc) : [];
   const idx = chapters.findIndex((t) => t.id === chapter.id);
@@ -60,7 +62,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
   }, [chapter, id]);
 
   if (!chapter) {
-    return <p>未知章节内容</p>;
+    return <p>{t('unknownKnowledgeChapter')}</p>;
   }
 
   return (
@@ -72,7 +74,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
               <Breadcrumb>
                 <Breadcrumb.Item>
                   <Link href="/knowledge">
-                    <a>知识小册</a>
+                    <a>{t('knowledgeBooks')}</a>
                   </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
@@ -90,25 +92,27 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                     <h1 className={style.title}>{chapter.title}</h1>
                     <p className={style.desc}>
                       <span>
-                        发布于
+                        {t('publishAt')}
                         <LocaleTime date={chapter.publishAt} />
                       </span>
                       <span> • </span>
-                      <span>阅读量 {chapter.views}</span>
+                      <span>
+                        {t('readings')} {chapter.views}
+                      </span>
                     </p>
                   </div>
                   <div>
                     <MarkdownReader content={chapter.html || chapter.content} />
                   </div>
                   <div className={style.copyrightInfo}>
-                    发布时间：
-                    <LocaleTime date={chapter.publishAt} /> | 版权信息：
+                    {t('publishAt')}
+                    <LocaleTime date={chapter.publishAt} /> | {t('copyrightInfo')}：
                     <a
                       href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      非商用-署名-自由转载
+                      {t('copyrightContent')}
                     </a>
                   </div>
                   <div className={style.navigation}>
@@ -146,7 +150,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                 </article>
                 {book.isCommentable ? (
                   <div className={style.commentWrap}>
-                    <p className={style.title}>评论</p>
+                    <p className={style.title}>{t('comment')}</p>
                     <Comment key={chapter.id} hostId={chapter.id} />
                   </div>
                 ) : null}

@@ -1,5 +1,6 @@
 import React, { useContext, useMemo, useRef, useEffect } from 'react';
-import { Modal, Tooltip, message } from 'antd';
+import { Modal, message } from 'antd';
+import { useTranslations } from 'next-intl';
 import { PosterProvider } from '@/providers/poster';
 import { GlobalContext } from '@/context/global';
 import style from './index.module.scss';
@@ -16,6 +17,7 @@ export interface ShareProps {
 
 export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children }) => {
   const ref = useRef(null);
+  const t = useTranslations('shareNamespace');
   const { setting } = useContext(GlobalContext);
   const systemUrl = setting.systemUrl || '';
   const [loading, toggleLoading] = useToggle(false);
@@ -40,7 +42,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
     toggleLoading();
     const node = ref.current;
     const target = node.firstChild;
-    const hide = message.loading('海报生成中，请耐心等待...', 0);
+    const hide = message.loading(t('createingPoster'), 0);
     try {
       const ret = await PosterProvider.createPoster({
         name: title,
@@ -49,10 +51,10 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
         height: target.offsetHeight,
         pageUrl: location.pathname,
       });
-      message.success('分享海报制作完成。');
+      message.success(t('createdPosterSuccess'));
       download(ret);
     } catch (e) {
-      message.error('保存图片失败，请手动截图');
+      message.error(t('createdPosterError'));
     } finally {
       toggleLoading();
       hide();
@@ -78,7 +80,6 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
                 objectFit: 'cover',
               }}
               src={cover}
-              alt={'内容封面'}
             />
           )}
           <div
@@ -136,7 +137,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
                 color: 'rgba(0, 0, 0, 0.85)',
               }}
             >
-              识别二维码查看文章
+              {t('qrcode')}
             </p>
             <p
               style={{
@@ -146,7 +147,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
                 fontSize: '0.9em',
               }}
             >
-              原文分享自{' '}
+              {t('shareFrom')}{' '}
               <a
                 style={{
                   color: '#ff0064',
@@ -184,7 +185,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
   return (
     <>
       <Modal
-        title="分享海报"
+        title={t('title')}
         width={400}
         visible={visible}
         bodyStyle={{

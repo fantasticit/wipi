@@ -35,6 +35,10 @@ const config = (() => {
 
 const nextConfig = {
   assetPrefix: isProd ? (config && config['CLIENT_ASSET_PREFIX']) || '/' : '/',
+  i18n: {
+    locales: ['zh', 'en'],
+    defaultLocale: 'zh',
+  },
   webpack: (config) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
     config.plugins.push(
