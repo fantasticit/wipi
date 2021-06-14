@@ -7,8 +7,8 @@ import { uniqueid } from './uniqueid.util';
 const tmpdir = path.join(os.tmpdir(), '/poster/');
 
 export async function createImage({ html, width, height, ratio, ext = 'png' }) {
-  width = Math.ceil(width + 16);
-  height = Math.ceil(height + Math.ceil(height / width) * 16);
+  width = Math.ceil(width);
+  height = Math.ceil(height);
   const browser = await puppeteer.launch({
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -24,8 +24,8 @@ export async function createImage({ html, width, height, ratio, ext = 'png' }) {
   const filepath = path.join(tmpdir, `${uniqueid()}.png`);
   await page.screenshot({
     path: filepath,
-    fullPage: false,
+    fullPage: true,
   });
-  browser.close();
+  await browser.close();
   return { filepath, buffer: fs.createReadStream(filepath), size: fs.statSync(filepath).size };
 }

@@ -84,6 +84,7 @@ class MyApp extends App<IGlobalContext, unknown> {
       <GlobalContext.Provider
         value={{
           ...contextValue,
+          locale,
           locales,
           changeLocale: this.changeLocale,
         }}

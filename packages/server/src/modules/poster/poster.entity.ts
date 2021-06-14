@@ -20,7 +20,7 @@ export class Poster {
   pageUrl: string; // 生产海报的页面路径
 
   @ApiProperty()
-  @Column()
+  @Column({ type: 'text', default: null })
   imgUrl: string; // 海报源文件上传到 oss 的下载链接
 
   @ApiProperty()

@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface IGlobalContext {
   setting: ISetting;
+  locale: string;
   locales: Array<string>;
   pages: IPage[];
   categories: ICategory[];
@@ -11,6 +12,7 @@ export interface IGlobalContext {
 
 export const GlobalContext = React.createContext<IGlobalContext>({
   setting: {},
+  locale: '',
   locales: [],
   pages: [],
   categories: [],

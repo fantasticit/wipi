@@ -16,12 +16,12 @@ export interface ShareProps {
 }
 
 export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children }) => {
-  const ref = useRef(null);
   const t = useTranslations('shareNamespace');
-  const { setting } = useContext(GlobalContext);
+  const ref = useRef(null);
+  const { setting, locale } = useContext(GlobalContext);
   const systemUrl = setting.systemUrl || '';
   const [loading, toggleLoading] = useToggle(false);
-  const [visible, toggleVisible] = useToggle(false);
+  const [visible, toggleVisible] = useToggle(true);
   const fullUrl = useMemo(() => urllib.resolve(systemUrl, url), [systemUrl, url]);
   const qrcode = useMemo(
     () =>
@@ -45,9 +45,9 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
     const hide = message.loading(t('createingPoster'), 0);
     try {
       const ret = await PosterProvider.createPoster({
-        name: title,
+        name: `${locale}-${title}`,
         html: node.innerHTML,
-        width: target.offsetWidth,
+        width: target.offsetWidth + 16,
         height: target.offsetHeight,
         pageUrl: location.pathname,
       });
@@ -68,6 +68,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
         style={{
           width: 375,
           background: '#fff',
+          overflow: 'hidden',
         }}
         ref={ref}
       >
@@ -191,7 +192,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
         bodyStyle={{
           display: 'flex',
           justifyContent: 'center',
-          overflow: 'auto',
+          overflowX: 'hidden',
         }}
         onCancel={(e) => {
           e.preventDefault();
