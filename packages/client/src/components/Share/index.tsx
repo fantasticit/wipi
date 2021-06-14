@@ -21,7 +21,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
   const { setting, locale } = useContext(GlobalContext);
   const systemUrl = setting.systemUrl || '';
   const [loading, toggleLoading] = useToggle(false);
-  const [visible, toggleVisible] = useToggle(true);
+  const [visible, toggleVisible] = useToggle(false);
   const fullUrl = useMemo(() => urllib.resolve(systemUrl, url), [systemUrl, url]);
   const qrcode = useMemo(
     () =>
