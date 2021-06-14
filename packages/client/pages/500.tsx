@@ -1,7 +1,9 @@
 import { Result, Button } from 'antd';
 import Router from 'next/router';
+import { useTranslations } from 'next-intl';
 
 const Page = () => {
+  const t = useTranslations();
   return (
     <div
       style={{
@@ -15,10 +17,10 @@ const Page = () => {
       <Result
         status="500"
         title="500"
-        subTitle="服务器顶不住了"
+        subTitle={t('serverNotAvaliable')}
         extra={
           <Button type="primary" onClick={() => Router.replace('/')}>
-            回首页
+            {t('backHome')}
           </Button>
         }
       />
