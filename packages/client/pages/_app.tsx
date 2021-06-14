@@ -1,7 +1,7 @@
 import React from 'react';
 import App from 'next/app';
 import Router from 'next/router';
-import { NextIntlProvider } from 'next-intl';
+import { IntlMessages, NextIntlProvider } from 'next-intl';
 import { IGlobalContext, GlobalContext } from '@/context/global';
 import { SettingProvider } from '@/providers/setting';
 import { PageProvider } from '@/providers/page';
@@ -57,19 +57,8 @@ class MyApp extends App<IGlobalContext, unknown> {
     };
   };
 
-  setI18n = async () => {
-    const res = await SettingProvider.getSetting();
-    const i18n = (() => {
-      try {
-        return res.i18n && typeof res.i18n === 'object' ? res.i18n : JSON.parse(res.i18n as string);
-      } catch (e) {
-        return {};
-      }
-    })();
-    this.setState({ i18n, locale: Router.locale, locales: Object.keys(i18n) });
-  };
-
   changeLocale = (key) => {
+    window.localStorage.setItem('locale', key);
     this.setState({ locale: key });
   };
 
@@ -84,12 +73,13 @@ class MyApp extends App<IGlobalContext, unknown> {
       <GlobalContext.Provider
         value={{
           ...contextValue,
+          i18n,
           locale,
           locales,
           changeLocale: this.changeLocale,
         }}
       >
-        <NextIntlProvider messages={message} locale={locale}>
+        <NextIntlProvider messages={message as IntlMessages} locale={locale}>
           <FixAntdStyleTransition />
           <ViewStatistics />
           <Analytics />

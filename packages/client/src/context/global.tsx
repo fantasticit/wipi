@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface IGlobalContext {
   setting: ISetting;
+  i18n: Record<string, unknown>;
   locale: string;
   locales: Array<string>;
   pages: IPage[];
@@ -12,6 +13,7 @@ export interface IGlobalContext {
 
 export const GlobalContext = React.createContext<IGlobalContext>({
   setting: {},
+  i18n: {},
   locale: '',
   locales: [],
   pages: [],

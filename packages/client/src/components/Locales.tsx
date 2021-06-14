@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Dropdown, Menu } from 'antd';
 import { useTranslations } from 'next-intl';
 import { GlobalContext } from '@/context/global';
 
 export function Locales() {
   const t = useTranslations();
-  const { locales = [], changeLocale } = useContext(GlobalContext);
+  const { i18n, locales = [], changeLocale } = useContext(GlobalContext);
+
   const menu = (
     <Menu>
       {locales.map((locale) => {
@@ -17,6 +18,14 @@ export function Locales() {
       })}
     </Menu>
   );
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const local = window.localStorage.getItem('locale');
+    if (local && i18n[local]) {
+      changeLocale(local);
+    }
+  }, [i18n]);
 
   return (
     <Dropdown overlay={menu}>
