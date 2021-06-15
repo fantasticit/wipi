@@ -68,7 +68,7 @@ export const Header = ({ setting, categories, tags, pages }) => {
   }, []);
 
   const navMenu = NAV_LINKS.map((nav) => (
-    <li className={cls({ [style.active]: asPath === nav.path })}>
+    <li key={nav.path} className={cls({ [style.active]: asPath === nav.path })}>
       <Link href={nav.path}>
         <a>
           <span>{t(nav.locale)}</span>
