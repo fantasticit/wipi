@@ -34,13 +34,13 @@
   "all": "所有",
   "readingCountTemplate": "次阅读",
   "articleCountTemplate": "篇文章",
-  "share": "分析",
+  "share": "分享",
   "empty": "暂无数据",
   "categoryTitle": "文章分类",
   "commentNamespace": {
     "reply": "回复",
     "emoji": "表情",
-    "replyPlaceholder": "请输入评论内容（支持 Markerdown）",
+    "replyPlaceholder": "请输入评论内容（支持 Markdown）",
     "publish": "发布",
     "close": "收起",
     "commentSuccess": "评论成功，已提交审核"
