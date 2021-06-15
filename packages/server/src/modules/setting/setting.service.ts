@@ -13,11 +13,13 @@ export class SettingService {
     this.initI18n();
   }
 
+  /**
+   * 初始化时加载 i18n 配置
+   */
   async initI18n() {
-    const old = await this.settingRepository.find();
-    if (!old || !old[0]) return;
-    const target = old && old[0];
-    if (target.i18n) return;
+    const items = await this.settingRepository.find();
+    const target = items && items[0] || {};
+    if (target && target.i18n) return;
     target.i18n = JSON.stringify(i18n);
     await this.settingRepository.save(target);
   }
