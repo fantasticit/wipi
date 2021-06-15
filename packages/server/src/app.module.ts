@@ -1,5 +1,3 @@
-import * as fs from 'fs-extra';
-import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -45,23 +43,11 @@ import { SearchModule } from './modules/search/search.module';
 import { Poster } from './modules/poster/poster.entity';
 import { PosterModule } from './modules/poster/poster.module';
 // 配置文件
-
-const isProd = process.env.NODE_ENV === 'production';
-const env = path.resolve(__dirname, '../../../.env');
-const prodenv = path.resolve(__dirname, '../../../.env.prod');
-let envFilePath = env;
-
-if (!fs.existsSync(env)) {
-  console.warn('can not locate .env file in ' + path.resolve(__dirname, '../../../'));
-}
-
-if (isProd && fs.existsSync(prodenv)) {
-  envFilePath = prodenv;
-}
+const { envfile } = require('../../../config');
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: [envFilePath] }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: [envfile] }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

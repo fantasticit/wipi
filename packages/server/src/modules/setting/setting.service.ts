@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import * as merge from 'deepmerge';
 import { Setting } from './setting.entity';
 import { UNPROTECTED_KEYS, i18n } from './setting.constant';
 
@@ -18,9 +19,13 @@ export class SettingService {
    */
   async initI18n() {
     const items = await this.settingRepository.find();
-    const target = items && items[0] || {};
-    if (target && target.i18n) return;
-    target.i18n = JSON.stringify(i18n);
+    const target = (items && items[0]) || ({} as Setting);
+    let data = {};
+    try {
+      data = JSON.parse(target.i18n);
+    } catch (e) {}
+    merge({}, i18n, data);
+    target.i18n = JSON.stringify(data);
     await this.settingRepository.save(target);
   }
 

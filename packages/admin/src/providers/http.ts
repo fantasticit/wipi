@@ -3,10 +3,7 @@ import { message } from 'antd';
 import { toLogin } from '@/utils/login';
 
 export const httpProvider = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:4000/api'
-      : 'https://api.blog.wipi.tech/api',
+  baseURL: process.env.SERVER_API_URL,
   timeout: 60000,
 });
 

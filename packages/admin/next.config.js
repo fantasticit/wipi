@@ -8,33 +8,18 @@ const withImages = require('next-images');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const lessToJS = require('less-vars-to-js');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
+const isProd = process.env.NODE_ENV === 'production';
+const { config } = require('../../config');
 const withAntd = require('./next-antd.config');
-
 const antdVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './src/theme/antd.less'), 'utf8')
 );
 
-if (typeof require !== 'undefined') {
-  require.extensions['.less'] = (file) => {};
-}
-
-const isProd = process.env.NODE_ENV === 'production';
-const config = (() => {
-  const env = path.resolve(__dirname, '../../.env');
-  const prodenv = path.resolve(__dirname, '../../.env.prod');
-
-  try {
-    if (isProd && fs.existsSync(prodenv)) {
-      return dotenv.parse(fs.readFileSync(prodenv));
-    }
-    if (fs.existsSync(env)) {
-      return dotenv.parse(fs.readFileSync(env));
-    }
-  } catch (e) {}
-})();
-
 const nextConfig = {
-  assetPrefix: isProd ? (config && config['ADMIN_ASSET_PREFIX']) || '/' : '/',
+  assetPrefix: isProd ? config.ADMIN_ASSET_PREFIX || '/' : '/',
+  env: {
+    SERVER_API_URL: config.SERVER_API_URL || 'http://localhost:4000/api',
+  },
   webpack: (config) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
     config.plugins.push(
