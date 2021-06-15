@@ -48,13 +48,14 @@ Wipi 是一个面向个人的开源的集成文章发表、页面创建、知识
 首先安装 `MySQL`，推荐使用 docker 进行安装。
 
 ```bash
+docker image pull mysql:5.7
 docker run -d --restart=always --name wipi -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7
 ```
 
 然后在 `MySQL` 中创建数据库。
 
 ```bash
-docker container exec -it wipi  bash;
+docker container exec -it wipi bash;
 mysql -u root -p;
 CREATE DATABASE  `wipi` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
