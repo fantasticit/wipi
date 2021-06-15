@@ -40,7 +40,7 @@
   "commentNamespace": {
     "reply": "Reply",
     "emoji": "Emoji",
-    "replyPlaceholder": "Please enter the content of the comment (Markerdown is supported)",
+    "replyPlaceholder": "Please enter the content of the comment (Markdown is supported)",
     "publish": "Send",
     "close": "Close",
     "commentSuccess": "The comment is successful and has been submitted for review"
