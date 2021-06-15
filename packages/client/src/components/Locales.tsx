@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { Dropdown, Menu } from 'antd';
+import { useRouter } from 'next/router';
 import { useTranslations } from 'next-intl';
 import { GlobalContext } from '@/context/global';
 
 export function Locales() {
   const t = useTranslations();
+  const { locale: defaultLocale } = useRouter();
   const { i18n, locales = [], changeLocale } = useContext(GlobalContext);
 
   const menu = (
@@ -20,12 +22,12 @@ export function Locales() {
   );
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || defaultLocale) return;
     const local = window.localStorage.getItem('locale');
     if (local && i18n[local]) {
       changeLocale(local);
     }
-  }, [i18n]);
+  }, [i18n, defaultLocale]);
 
   return (
     <Dropdown overlay={menu}>
