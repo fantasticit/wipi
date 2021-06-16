@@ -1,7 +1,8 @@
 import React from 'react';
 import App from 'next/app';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 import { IntlMessages, NextIntlProvider } from 'next-intl';
+import { safeJsonParse } from '@/utils/json';
 import { IGlobalContext, GlobalContext } from '@/context/global';
 import { SettingProvider } from '@/providers/setting';
 import { PageProvider } from '@/providers/page';
@@ -37,15 +38,7 @@ class MyApp extends App<IGlobalContext, unknown> {
       CategoryProvider.getCategory({ articleStatus: 'publish' }),
       PageProvider.getAllPublisedPages(),
     ]);
-    const i18n = (() => {
-      try {
-        return setting.i18n && typeof setting.i18n === 'object'
-          ? setting.i18n
-          : JSON.parse(setting.i18n as string);
-      } catch (e) {
-        return {};
-      }
-    })();
+    const i18n = safeJsonParse(setting.i18n);
     return {
       ...appProps,
       setting,
@@ -63,7 +56,6 @@ class MyApp extends App<IGlobalContext, unknown> {
   };
 
   render() {
-    // @ts-ignore
     const { Component, pageProps, i18n, locales, router, ...contextValue } = this.props;
     const locale = this.state.locale || router.locale;
     const { needLayoutFooter = true } = pageProps;
