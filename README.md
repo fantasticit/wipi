@@ -103,6 +103,7 @@ yarn dev
 ```bash
 CLIENT_ASSET_PREFIX=/ # client 打包前缀地址（类似 webpack publicPath 配置）
 ADMIN_ASSET_PREFIX=/ # admin 打包前缀地址
+SERVER_API_URL=http://localhost:4000/api # 接口地址
 
 ADMIN_USER=admin # 默认管理员账户
 ADMIN_PASSWD=admin # 默认管理员密码
