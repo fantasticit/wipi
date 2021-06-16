@@ -43,11 +43,11 @@ import { SearchModule } from './modules/search/search.module';
 import { Poster } from './modules/poster/poster.entity';
 import { PosterModule } from './modules/poster/poster.module';
 // 配置文件
-const { envfile } = require('../../../config');
+const { file: envFilePath } = require('../../../config/env');
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: [envfile] }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: [envFilePath] }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
