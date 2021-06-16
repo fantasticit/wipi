@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const dotenv = require('dotenv');
 const withPlugins = require('next-compose-plugins');
 const withCss = require('@zeit/next-css');
 const withSass = require('@zeit/next-sass');
@@ -8,17 +7,16 @@ const withImages = require('next-images');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const lessToJS = require('less-vars-to-js');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const isProd = process.env.NODE_ENV === 'production';
-const { config } = require('../../config');
+const { config } = require('../../config/env');
 const withAntd = require('./next-antd.config');
 const antdVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './src/theme/antd.less'), 'utf8')
 );
 
 const nextConfig = {
-  assetPrefix: isProd ? config.ADMIN_ASSET_PREFIX || '/' : '/',
+  assetPrefix: config.ADMIN_ASSET_PREFIX,
   env: {
-    SERVER_API_URL: config.SERVER_API_URL || 'http://localhost:4000/api',
+    SERVER_API_URL: config.SERVER_API_URL,
   },
   webpack: (config) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());

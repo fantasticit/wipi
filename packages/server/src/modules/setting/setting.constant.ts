@@ -1,8 +1,6 @@
-import * as fs from 'fs-extra';
-import * as path from 'path';
-const config = require('../../../../../config');
+const { messages } = require('../../../../../config/i18n');
 
-export const i18n = config.i18n;
+export const i18n = messages;
 
 export const UNPROTECTED_KEYS = [
   'i18n',

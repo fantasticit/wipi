@@ -1,21 +1,20 @@
 const fs = require('fs');
 const path = require('path');
-const dotenv = require('dotenv');
 const withPlugins = require('next-compose-plugins');
 const withCss = require('@zeit/next-css');
 const withSass = require('@zeit/next-sass');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const lessToJS = require('less-vars-to-js');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const { locales, defaultLocale, config } = require('../../config');
+const { config } = require('../../config/env');
+const { locales, defaultLocale } = require('../../config/i18n');
 const withAntd = require('./next-antd.config');
 const antdVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './src/theme/antd.less'), 'utf8')
 );
-const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
-  assetPrefix: isProd ? config.CLIENT_ASSET_PREFIX || '/' : '/',
+  assetPrefix: config.CLIENT_ASSET_PREFIX,
   i18n: {
     locales,
     defaultLocale,

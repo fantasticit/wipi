@@ -23,9 +23,10 @@ export class SettingService {
     let data = {};
     try {
       data = JSON.parse(target.i18n);
-    } catch (e) {}
-    merge({}, i18n, data);
-    target.i18n = JSON.stringify(data);
+    } catch (e) {
+      data = {};
+    }
+    target.i18n = JSON.stringify(merge({}, i18n, data));
     await this.settingRepository.save(target);
   }
 
