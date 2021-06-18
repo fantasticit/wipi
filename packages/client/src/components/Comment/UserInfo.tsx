@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Form, Button, Input } from 'antd';
+import { useTranslations } from 'next-intl';
 
 const emailRegexp = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
 
@@ -18,9 +19,11 @@ export interface UserInfoProps {
 }
 
 export const UserInfo: React.FC<UserInfoProps> = ({ visible, onCancel, onOk }) => {
+  const t = useTranslations('commentNamespace');
+
   const validateEmail = (_, value, callback) => {
     if (value && !emailRegexp.test(value)) {
-      callback('输入合法邮箱地址，以便在收到回复时邮件通知');
+      callback(t('userInfoEmailValidMsg'));
     } else {
       callback();
     }
@@ -32,24 +35,23 @@ export const UserInfo: React.FC<UserInfoProps> = ({ visible, onCancel, onOk }) =
 
   return (
     <Modal
-      title="请设置您的信息"
+      title={t('userInfoTitle')}
+      okText={t('userInfoConfirm')}
+      cancelText={t('userInfoCancel')}
       visible={visible}
-      cancelText={'取消'}
-      okText={'设置'}
       footer={null}
       onCancel={onCancel}
       transitionName={''}
       maskTransitionName={''}
     >
       <Form name="user-info" onFinish={submit}>
-        <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入您的称呼' }]}>
+        <Form.Item label={t('userInfoName')} name="name">
           <Input />
         </Form.Item>
         <Form.Item
-          label="邮箱"
+          label={t('userInfoEmail')}
           name="email"
           rules={[
-            { required: true, message: '输入合法邮箱地址，以便在收到回复时邮件通知' },
             {
               validator: validateEmail,
             },
@@ -59,10 +61,10 @@ export const UserInfo: React.FC<UserInfoProps> = ({ visible, onCancel, onOk }) =
         </Form.Item>
         <Form.Item style={{ textAlign: 'right', marginBottom: 0 }}>
           <Button onClick={onCancel} style={{ marginRight: 16 }}>
-            取消
+            {t('userInfoCancel')}
           </Button>
           <Button type="primary" htmlType="submit">
-            设置
+            {t('userInfoConfirm')}
           </Button>
         </Form.Item>
       </Form>

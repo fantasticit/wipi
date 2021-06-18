@@ -43,7 +43,13 @@
     "replyPlaceholder": "Please enter the content of the comment (Markdown is supported)",
     "publish": "Send",
     "close": "Close",
-    "commentSuccess": "The comment is successful and has been submitted for review"
+    "commentSuccess": "The comment is successful and has been submitted for review",
+    "userInfoTitle": "Please set your information",
+    "userInfoName": "Username",
+    "userInfoEmail": "Email",
+    "userInfoEmailValidMsg": "Please enter correct email",
+    "userInfoConfirm": "Save",
+    "userInfoCancel": "Cancel"
   },
   "loading": "Loading",
   "copySuccess": "Copy successfully",

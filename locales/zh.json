@@ -43,7 +43,13 @@
     "replyPlaceholder": "请输入评论内容（支持 Markdown）",
     "publish": "发布",
     "close": "收起",
-    "commentSuccess": "评论成功，已提交审核"
+    "commentSuccess": "评论成功，已提交审核",
+    "userInfoTitle": "请设置你的信息",
+    "userInfoName": "名称",
+    "userInfoEmail": "邮箱",
+    "userInfoEmailValidMsg": "输入合法邮箱地址，以便在收到回复时邮件通知",
+    "userInfoConfirm": "设置",
+    "userInfoCancel": "取消"
   },
   "loading": "加载中",
   "copySuccess": "复制成功",
