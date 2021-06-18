@@ -46,8 +46,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
                           </div>
                         </LazyLoad>
                       )}
-
-                      <div>
+                      <div className={style.contentWrapper}>
                         <div className={style.desc}>{knowledge.summary}</div>
                         <div className={style.meta}>
                           <span>

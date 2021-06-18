@@ -61,22 +61,27 @@
     padding: 12px 0;
 
     .coverWrapper {
+      position: relative;
       flex: 0 0 auto;
-      width: 40%;
-      max-width: 280px;
-      max-height: 120px;
+      width: 190px;
+      max-height: 150px;
+      min-height: 100px;
       border-radius: var(--border-radius);
       margin-right: 1rem;
       overflow: hidden;
 
       img {
-        border-top-right-radius: var(--border-radius);
-        border-top-left-radius: var(--border-radius);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 100%;
+        width: 100%;
+        transform: translate3d(-50%, -50%, 0);
         object-fit: cover;
       }
     }
 
-    > div {
+    .contentWrapper {
       display: flex;
       flex-direction: column;
       justify-content: space-between;

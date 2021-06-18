@@ -60,7 +60,7 @@ export const ArticleList: React.FC<IProps> = ({
                         </LazyLoad>
                       )}
 
-                      <div>
+                      <div className={style.contentWrapper}>
                         <div className={style.desc}>{article.summary}</div>
                         <div className={style.meta}>
                           <span>
