@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { SearchProvider } from '@/providers/search';
-import { Opacity } from '@/components/Animation/Opacity';
+import { Spring } from '@/components/Animation/Spring';
 import { ListTrail } from '@/components/Animation/Trail';
 import styles from './index.module.scss';
 
@@ -69,7 +69,7 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Opacity from={{ y: 20 }} to={{ y: 0 }}>
+      <Spring from={{ y: 20 }} to={{ y: 0 }}>
         <div className="container">
           <header>
             <span className={styles.title}>{t('searchArticle')}</span>
@@ -119,7 +119,7 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
             </ul>
           </section>
         </div>
-      </Opacity>
+      </Spring>
     </div>
   );
 };
