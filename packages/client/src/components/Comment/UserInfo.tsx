@@ -45,13 +45,18 @@ export const UserInfo: React.FC<UserInfoProps> = ({ visible, onCancel, onOk }) =
       maskTransitionName={''}
     >
       <Form name="user-info" onFinish={submit}>
-        <Form.Item label={t('userInfoName')} name="name">
+        <Form.Item
+          label={t('userInfoName')}
+          name="name"
+          rules={[{ required: true, message: t('userInfoNameValidMsg') as string }]}
+        >
           <Input />
         </Form.Item>
         <Form.Item
           label={t('userInfoEmail')}
           name="email"
           rules={[
+            { required: true, message: t('userInfoEmailValidMsg') as string },
             {
               validator: validateEmail,
             },

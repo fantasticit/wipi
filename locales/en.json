@@ -46,6 +46,7 @@
     "commentSuccess": "The comment is successful and has been submitted for review",
     "userInfoTitle": "Please set your information",
     "userInfoName": "Username",
+    "userInfoNameValidMsg": "Please tell me your name",
     "userInfoEmail": "Email",
     "userInfoEmailValidMsg": "Please enter correct email",
     "userInfoConfirm": "Save",
