@@ -97,7 +97,6 @@ export const Header = ({ setting, categories, tags, pages }) => {
 
   return (
     <header className={cls(style.header)}>
-      <div className={style.mask}></div>
       <div
         className={cls(
           style.wrapper,
