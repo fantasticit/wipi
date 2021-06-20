@@ -26,9 +26,9 @@ export const parseUserAgent = (userAgent) => {
 
   return {
     data: {
-      browser: joinMsg(ua, keys.slice(0, 1)),
-      engine: joinMsg(ua, keys.slice(2, 3)),
-      os: joinMsg(ua, keys.slice(4, 5)),
+      browser: joinMsg(ua, keys.slice(0, 2)),
+      engine: joinMsg(ua, keys.slice(2, 4)),
+      os: joinMsg(ua, keys.slice(4, 6)),
       device: joinMsg(ua, keys.slice(6)),
     },
     text: joinMsg(ua, keys),
