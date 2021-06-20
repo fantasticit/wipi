@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { useCallback, useEffect, useMemo } from 'react';
 import cls from 'classnames';
 import { Avatar } from 'antd';
@@ -17,7 +18,7 @@ type Props = {
   isChild: boolean;
 };
 
-export const CommentItem: React.FC<Props> = ({ comment, parentComment, isChild = false }) => {
+export function CommentItem({ comment, parentComment, isChild = false }: Props) {
   const t = useTranslations('commentNamespace');
   const [editorVisible, toggleEditorVisible] = useToggle(false);
   const avatarSize = useMemo(() => (isChild ? 24 : 32), [isChild]);
@@ -56,7 +57,7 @@ export const CommentItem: React.FC<Props> = ({ comment, parentComment, isChild =
               {' · '}
             </span>
           ) : null}
-          <LocaleTime date={comment.createAt} timeago></LocaleTime>
+          <LocaleTime date={comment.createAt} timeago={true}></LocaleTime>
           <span className={styles.reply} onClick={toggleEditorVisible}>
             <MessageOutlined style={{ marginRight: 4 }} />
             {t('reply')}
@@ -72,7 +73,7 @@ export const CommentItem: React.FC<Props> = ({ comment, parentComment, isChild =
         >
           <div className={styles.editorWrapper}>
             <CommentEditor
-              small
+              small={true}
               hostId={comment.hostId}
               parentComment={parentComment}
               replyComment={comment}
@@ -89,9 +90,9 @@ export const CommentItem: React.FC<Props> = ({ comment, parentComment, isChild =
       </footer>
     </div>
   );
-};
+}
 
-export const Comments = ({ comments, parentComment = null, isChild = false }) => {
+export function Comments({ comments, parentComment = null, isChild = false }) {
   return (
     <>
       {comments.map((comment) => {
@@ -106,4 +107,4 @@ export const Comments = ({ comments, parentComment = null, isChild = false }) =>
       })}
     </>
   );
-};
+}

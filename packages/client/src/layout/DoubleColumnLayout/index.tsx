@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import cls from 'classnames';
 import { ShareProps, Share } from '@/components/Share';
 import { CommentIcon } from '@/components/Comment/CommentIcon';

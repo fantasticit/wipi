@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { Alert, Drawer, Card, List, Button } from 'antd';
 import Viewer from 'viewerjs';
-import { copy } from '@/utils';
+import { copy } from '@/utils/copy';
 import { FileProvider } from '@/providers/file';
 import { Upload } from '@/components/Upload';
 import { usePagination } from '@/hooks/usePagination';
@@ -50,9 +50,12 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
   onChange,
 }) => {
   const ref = useRef();
-  const { loading, data: files, refresh, ...resetPagination } = usePagination<IFile>(
-    FileProvider.getFiles
-  );
+  const {
+    loading,
+    data: files,
+    refresh,
+    ...resetPagination
+  } = usePagination<IFile>(FileProvider.getFiles);
 
   const previewImage = useCallback((e) => {
     e.stopPropagation();
@@ -72,6 +75,28 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
     [isCopy, onChange, closeAfterClick, onClose]
   );
 
+  const renderList = useCallback(
+    (data) => {
+      const renderItem = (file: IFile) => (
+        <List.Item key={file.id}>
+          <Card
+            hoverable={true}
+            cover={
+              <div className={style.preview} onClick={previewImage}>
+                <img alt={file.originalname} src={file.url} />
+              </div>
+            }
+            onClick={() => clickImage(file)}
+          >
+            <Meta title={file.originalname} />
+          </Card>
+        </List.Item>
+      );
+      return <List className={style.imgs} grid={GRID} dataSource={data} renderItem={renderItem} />;
+    },
+    [clickImage, previewImage]
+  );
+
   return (
     <Drawer
       width={786}
@@ -86,7 +111,6 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
           <Alert message="点击卡片复制链接，点击图片查看大图" type="info" />
         </div>
       )}
-
       <div ref={ref}>
         <PaginationTable
           loading={loading}
@@ -99,28 +123,7 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
               <Button>上传文件</Button>
             </Upload>
           }
-          customDataTable={(data) => (
-            <List
-              className={style.imgs}
-              grid={GRID}
-              dataSource={data}
-              renderItem={(file: IFile) => (
-                <List.Item key={file.id}>
-                  <Card
-                    hoverable={true}
-                    cover={
-                      <div className={style.preview} onClick={previewImage}>
-                        <img alt={file.originalname} src={file.url} />
-                      </div>
-                    }
-                    onClick={() => clickImage(file)}
-                  >
-                    <Meta title={file.originalname} />
-                  </Card>
-                </List.Item>
-              )}
-            />
-          )}
+          customDataTable={renderList}
         />
       </div>
     </Drawer>

@@ -17,7 +17,7 @@ interface IHomeProps {
 const pageSize = 12;
 
 const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => {
-  const { tags, categories } = useContext(GlobalContext);
+  const { categories } = useContext(GlobalContext);
   const t = useTranslations();
   const [page, setPage] = useState(1);
   const [books, setBooks] = useState<IKnowledge[]>(defaultBooks);

@@ -1,0 +1,12 @@
+:global {
+  .copy-code-btn {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    color: hsla(0, 0%, 54.9%, 0.8);
+    transition: color 0.1s;
+  }
+}

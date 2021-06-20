@@ -152,6 +152,8 @@ interface ISetting {
   ossHttps?: boolean; //  阿里云 oss 是否开启 https
   ossBucket?: string; //  阿里云 bucket
 
+  oss?: string; // oss 上传配置
+
   smtpHost?: string; //   SMTP 地址
   smtpPort?: number; //  SMTP 端口
   smtpUser?: string; //  SMTP 用户

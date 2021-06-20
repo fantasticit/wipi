@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Button, Tabs, Modal, Input, message } from 'antd';
 import { WarningOutlined } from '@ant-design/icons';
 import { SettingProvider } from '@/providers/setting';
-import { Editor } from './Editor';
+import { JsonEditor } from '@/components/JsonEditor';
 import { useForceUpdate } from '@/hooks/useForceUpdate';
 
 export const LocaleSetting = ({ setting }) => {
   const forceUpdate = useForceUpdate();
-  const [i18n, setI18n] = useState<object>({});
+  const [i18n, setI18n] = useState({});
   const locales = i18n && typeof i18n === 'object' ? Object.keys(i18n) : [];
 
   useEffect(() => {
@@ -25,9 +25,13 @@ export const LocaleSetting = ({ setting }) => {
     (key, action) => {
       const add = () => {
         let locale = '';
+        const onChange = function (e) {
+          locale = e.target.value;
+        };
         Modal.confirm({
           title: '请输入语言名称（英文）',
-          icon: <Input onChange={(e) => (locale = e.target.value)} />,
+          // eslint-disable-next-line react/jsx-no-bind
+          icon: <Input onChange={onChange} />,
           onOk() {
             setI18n((json) => {
               json[locale] = {};
@@ -68,24 +72,20 @@ export const LocaleSetting = ({ setting }) => {
     [forceUpdate]
   );
 
-  const onChange = useCallback(
-    (locale) => {
-      return (value) => {
-        setI18n((json) => {
-          json[locale] = value;
-          return json;
-        });
-      };
-    },
-    [i18n]
-  );
+  const onChange = useCallback((locale) => {
+    return (value) => {
+      setI18n((json) => {
+        json[locale] = value;
+        return json;
+      });
+    };
+  }, []);
 
   const save = useCallback(() => {
     const data = {
       i18n: JSON.stringify(i18n),
     };
-    SettingProvider.updateSetting(data).then((res) => {
-      // setSetting(res);
+    SettingProvider.updateSetting(data).then(() => {
       message.success('保存成功');
     });
   }, [i18n]);
@@ -95,7 +95,7 @@ export const LocaleSetting = ({ setting }) => {
       <Tabs type="editable-card" onEdit={onEdit}>
         {locales.map((locale) => (
           <Tabs.TabPane tab={locale} key={locale}>
-            <Editor value={JSON.stringify(i18n[locale], null, 2)} onChange={onChange(locale)} />
+            <JsonEditor value={JSON.stringify(i18n[locale], null, 2)} onChange={onChange(locale)} />
           </Tabs.TabPane>
         ))}
       </Tabs>

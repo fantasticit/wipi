@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { NextPage } from 'next';
 import { Badge, Popconfirm, Button, message } from 'antd';
 import { AdminLayout } from '@/layout/AdminLayout';
@@ -102,8 +102,7 @@ const Search: NextPage = () => {
           columns={(resetSelectedRows) => [...COMMON_COLUMNS, actionColumn(resetSelectedRows)]}
           refresh={refresh}
           {...resetPagination}
-          showSelection
-          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
+          renderLeftNode={({ hasSelected, selectedRowKeys, resetSelectedRows }) =>
             hasSelected ? (
               <Popconfirm
                 title="确认删除？"
@@ -111,7 +110,7 @@ const Search: NextPage = () => {
                 okText="确认"
                 cancelText="取消"
               >
-                <Button disabled={!hasSelected} loading={deleteLoading} danger>
+                <Button disabled={!hasSelected} loading={deleteLoading} danger={true}>
                   删除
                 </Button>
               </Popconfirm>

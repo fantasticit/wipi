@@ -44,7 +44,7 @@ export const Upload = ({
               <InboxOutlined />
             </p>
             <p className="ant-upload-text">点击选择文件或将文件拖拽到此处</p>
-            <p className="ant-upload-hint">文件将上传到 阿里云 OSS, 如未配置请先配置</p>
+            <p className="ant-upload-hint">文件将上传到 OSS, 如未配置请先配置</p>
           </>
         )}
       </Wrap>

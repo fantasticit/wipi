@@ -18,13 +18,8 @@ export class SMTPService {
    * @param SMTP
    */
   async create(data: Partial<SMTP>): Promise<SMTP> {
-    const {
-      smtpHost,
-      smtpPort,
-      smtpUser,
-      smtpPass,
-      smtpFromUser,
-    } = await this.settingService.findAll(true);
+    const setting = await this.settingService.findAll(true);
+    const { smtpHost, smtpPort, smtpUser, smtpPass, smtpFromUser } = setting;
     Object.assign(data, {
       from: smtpFromUser,
     });
@@ -48,7 +43,7 @@ export class SMTPService {
     const query = this.smtpRepository.createQueryBuilder('smtp').orderBy('smtp.createAt', 'DESC');
 
     if (typeof queryParams === 'object') {
-      const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+      const { page = 1, pageSize = 12, ...otherParams } = queryParams;
       query.skip((+page - 1) * +pageSize);
       query.take(+pageSize);
 

@@ -2,7 +2,7 @@ import React, { useCallback, useState, useContext, useEffect } from 'react';
 import { Form } from '@ant-design/compatible';
 import { FormComponentProps } from '@ant-design/compatible/es/form';
 import { Row, Col, Button, Input } from 'antd';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 import { Svg } from '@/assets/LoginSvg';
@@ -35,7 +35,7 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
               globalContext.getSetting();
               Router.push((Router.query.redirect as string) || '/');
             })
-            .catch((e) => setLoading(false));
+            .catch(() => setLoading(false));
         }
       });
     },

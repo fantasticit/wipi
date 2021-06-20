@@ -8,7 +8,7 @@ import { File } from './File';
 export const toolbar = [
   {
     label: '标题',
-    content: ({ editor }) => (
+    content: () => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path fillRule="evenodd" fill="currentColor" d="M15 13H9v6H7V5h2v6h6V5h2v14h-2v-6z"></path>
       </svg>
@@ -19,7 +19,7 @@ export const toolbar = [
   },
   {
     label: '加粗',
-    content: ({ editor }) => (
+    content: () => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path
           fill="currentColor"
@@ -34,7 +34,7 @@ export const toolbar = [
   },
   {
     label: '斜体',
-    content: ({ editor }) => (
+    content: () => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path
           fill="currentColor"
@@ -49,7 +49,7 @@ export const toolbar = [
   },
   {
     label: '行内代码',
-    content: ({ editor }) => (
+    content: () => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path
           fillRule="evenodd"
@@ -64,7 +64,7 @@ export const toolbar = [
   },
   {
     label: '删除线',
-    content: ({ editor }) => (
+    content: () => (
       <svg viewBox="64 64 896 896" width="0.9em" height="0.9em">
         <path
           fill="currentColor"
@@ -79,7 +79,7 @@ export const toolbar = [
   },
   {
     label: '列表',
-    content: ({ editor }) => (
+    content: () => (
       <svg viewBox="0 0 24 24" width="1em" height="1em">
         <path
           fill="currentColor"
@@ -95,26 +95,36 @@ export const toolbar = [
   {
     label: '表情',
     content: ({ editor }) => <Emoji editor={editor} />,
-    getAction: () => () => {},
+    getAction: () => () => {
+      return undefined;
+    },
   },
   {
     label: '上传图片',
     content: ({ editor }) => <Image editor={editor} />,
-    getAction: () => () => {},
+    getAction: () => () => {
+      return undefined;
+    },
   },
   {
     label: '上传视频',
     content: ({ editor }) => <Video editor={editor} />,
-    getAction: () => () => {},
+    getAction: () => () => {
+      return undefined;
+    },
   },
   {
     label: '嵌入链接',
     content: ({ editor }) => <Iframe editor={editor} />,
-    getAction: () => () => {},
+    getAction: () => () => {
+      return undefined;
+    },
   },
   {
     label: '文件库',
     content: ({ editor }) => <File editor={editor} />,
-    getAction: () => () => {},
+    getAction: () => () => {
+      return undefined;
+    },
   },
 ];

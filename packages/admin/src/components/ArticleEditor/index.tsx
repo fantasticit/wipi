@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import cls from 'classnames';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 import { CloseOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Button, Input, message, PageHeader, Modal, Popconfirm, Dropdown, Menu } from 'antd';
 import { Helmet } from 'react-helmet';
@@ -198,20 +198,21 @@ export const ArticleEditor: React.FC<IProps> = ({
               发布
             </Button>,
             <Dropdown
+              key="more"
               overlay={
                 <Menu>
-                  <Menu.Item disabled={isCreate} key="preview" onClick={preview}>
+                  <Menu.Item key="view" disabled={isCreate} onClick={preview}>
                     查看
                   </Menu.Item>
                   <Menu.Item key="setting" onClick={openSetting}>
                     设置
                   </Menu.Item>
-                  <Menu.Divider />
+                  <Menu.Divider key="divide-1" />
                   <Menu.Item key="draft" onClick={saveDraft}>
                     保存草稿
                   </Menu.Item>
-                  <Menu.Divider />
-                  <Menu.Item disabled={isCreate} key="delete" onClick={deleteArticle}>
+                  <Menu.Divider key="divide-2" />
+                  <Menu.Item key="delete" disabled={isCreate} onClick={deleteArticle}>
                     删除
                   </Menu.Item>
                 </Menu>

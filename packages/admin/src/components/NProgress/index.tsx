@@ -1,6 +1,6 @@
 import React from 'react';
 import _NProgress from 'nprogress';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 
 interface IProps {
   showAfterMs: number;

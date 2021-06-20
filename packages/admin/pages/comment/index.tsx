@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
-import { NextPage } from 'next';
 import { Select, Button, Popconfirm, message } from 'antd';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { CommentProvider } from '@/providers/comment';
@@ -97,15 +96,13 @@ const COMMON_COLUMNS = [
   },
 ];
 
-interface IProps {
-  comments: IComment[];
-  total: number;
-}
-
-const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
-  const { loading, data: comments, refresh, ...resetPagination } = usePagination<IComment>(
-    CommentProvider.getComments
-  );
+const Comment = () => {
+  const {
+    loading,
+    data: comments,
+    refresh,
+    ...resetPagination
+  } = usePagination<IComment>(CommentProvider.getComments);
   const [updateApi, updateLoading] = useAsyncLoading(CommentProvider.updateComment);
   const [deleteApi, deleteLoading] = useAsyncLoading(CommentProvider.deleteComment);
 
@@ -195,7 +192,6 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
         ]}
         refresh={refresh}
         {...resetPagination}
-        showSelection
         renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
           hasSelected ? (
             <>
@@ -219,7 +215,7 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
                 okText="确认"
                 cancelText="取消"
               >
-                <Button disabled={!hasSelected} loading={deleteLoading} danger>
+                <Button disabled={!hasSelected} loading={deleteLoading} danger={true}>
                   删除
                 </Button>
               </Popconfirm>
@@ -231,11 +227,6 @@ const Comment: NextPage<IProps> = ({ comments: defaultComments = [] }) => {
       />
     </AdminLayout>
   );
-};
-
-Comment.getInitialProps = async () => {
-  const [comments] = await Promise.all([CommentProvider.getComments({ page: 1, pageSize: 12 })]);
-  return { comments: comments[0], total: comments[1] };
 };
 
 export default Comment;

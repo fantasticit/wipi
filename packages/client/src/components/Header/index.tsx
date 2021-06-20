@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import cls from 'classnames';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import Router, { useRouter } from 'next/router';
+import { default as Router, useRouter } from 'next/router';
 import { SearchOutlined } from '@ant-design/icons';
 import { getDocumentScrollTop } from '@/utils';
 import { useToggle } from '@/hooks/useToggle';
@@ -26,10 +26,10 @@ const NAV_LINKS = [
   },
 ];
 
-export const Header = ({ setting, categories, tags, pages }) => {
+export const Header = ({ setting, tags, pages }) => {
   const t = useTranslations();
   const router = useRouter();
-  const { asPath, pathname } = router;
+  const { asPath } = router;
   const [affix, setAffix] = useToggle(false);
   const [affixVisible, setAffixVisible] = useToggle(false);
   const [visible, setVisible] = useToggle(false);
@@ -47,7 +47,7 @@ export const Header = ({ setting, categories, tags, pages }) => {
     return () => {
       Router.events.off('routeChangeStart', close);
     };
-  }, [visible]);
+  }, [setVisible, visible]);
 
   useEffect(() => {
     let beforeY = 0;
@@ -65,7 +65,7 @@ export const Header = ({ setting, categories, tags, pages }) => {
     return () => {
       document.removeEventListener('scroll', handler);
     };
-  }, []);
+  }, [setAffix, setAffixVisible]);
 
   const navMenu = NAV_LINKS.map((nav) => (
     <li key={nav.path} className={cls({ [style.active]: asPath === nav.path })}>

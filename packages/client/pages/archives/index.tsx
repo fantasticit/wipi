@@ -76,11 +76,15 @@ const Archives: NextPage<IProps> = ({ articles }) => {
             .sort((a, b) => +b - +a)
             .map((year) => {
               return (
-                <div className={style.list}>
+                <div className={style.list} key={year}>
                   <h2>{year}</h2>
                   {Object.keys(articles[year]).map((month) => {
                     return (
-                      <ArchiveItem key={year} month={month} articles={articles[year][month]} />
+                      <ArchiveItem
+                        key={year + '-' + month}
+                        month={month}
+                        articles={articles[year][month]}
+                      />
                     );
                   })}
                 </div>

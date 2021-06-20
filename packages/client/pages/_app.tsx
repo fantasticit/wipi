@@ -30,9 +30,12 @@ class MyApp extends App<IGlobalContext, unknown> {
     locale: '',
   };
 
-  static getInitialProps = async (ctx) => {
-    const [appProps, setting, tags, categories, pages] = await Promise.all([
-      App.getInitialProps(ctx),
+  static getInitialProps = async ({ Component, ctx }) => {
+    const getPagePropsPromise = Component.getInitialProps
+      ? Component.getInitialProps(ctx)
+      : Promise.resolve({});
+    const [pageProps, setting, tags, categories, pages] = await Promise.all([
+      getPagePropsPromise,
       SettingProvider.getSetting(),
       TagProvider.getTags({ articleStatus: 'publish' }),
       CategoryProvider.getCategory({ articleStatus: 'publish' }),
@@ -40,7 +43,7 @@ class MyApp extends App<IGlobalContext, unknown> {
     ]);
     const i18n = safeJsonParse(setting.i18n);
     return {
-      ...appProps,
+      pageProps,
       setting,
       tags,
       categories,

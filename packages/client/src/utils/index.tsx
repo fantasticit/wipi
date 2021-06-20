@@ -1,5 +1,3 @@
-import { message } from 'antd';
-
 const colors = ['#52c41a', '#f5222d', '#1890ff', '#faad14', '#ff0064', '#722ed1'];
 
 export const getRandomColor = (() => {

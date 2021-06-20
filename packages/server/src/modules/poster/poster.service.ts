@@ -1,20 +1,24 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import * as path from 'path';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as path from 'path';
 import { dateFormat } from '../../utils/date.util';
 import { createImage } from '../../utils/puppeteer.util';
-import { putFile, deleteFile } from '../../utils/oss.util';
+import { Oss } from '../../utils/oss.util';
 import { SettingService } from '../setting/setting.service';
 import { Poster } from './poster.entity';
 
 @Injectable()
 export class PosterService {
+  private oss: Oss;
+
   constructor(
     @InjectRepository(Poster)
     private readonly repository: Repository<Poster>,
     private readonly settingService: SettingService
-  ) {}
+  ) {
+    this.oss = new Oss(this.settingService);
+  }
 
   async createPoster({
     pageUrl,
@@ -25,7 +29,9 @@ export class PosterService {
   }): Promise<{ url: string; name: string }> {
     // 海报已生成
     const ret = await this.repository.findOne({ name });
-    if (ret) return { url: ret.imgUrl, name: ret.name };
+    if (ret) {
+      return { url: ret.imgUrl, name: ret.name };
+    }
 
     const uploadPath = path.join(
       'poster',
@@ -33,7 +39,7 @@ export class PosterService {
       `${pageUrl}/${name}.png`
     );
     const { size, buffer } = await createImage({ width, height, html, ratio: 2 });
-    const url = await putFile(this.settingService, uploadPath, buffer);
+    const url = await this.oss.putFile(uploadPath, buffer);
     const data = await this.repository.create({
       name,
       size,
@@ -51,7 +57,7 @@ export class PosterService {
     const query = this.repository.createQueryBuilder('poster').orderBy('poster.createAt', 'DESC');
 
     if (typeof queryParams === 'object') {
-      const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+      const { page = 1, pageSize = 12, ...otherParams } = queryParams;
       query.skip((+page - 1) * +pageSize);
       query.take(+pageSize);
 
@@ -73,7 +79,7 @@ export class PosterService {
    */
   async deleteById(id) {
     const target = await this.repository.findOne(id);
-    await deleteFile(this.settingService, target.imgUrl);
+    await this.oss.deleteFile(target.imgUrl);
     return this.repository.remove(target);
   }
 }

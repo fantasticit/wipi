@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { NextPage } from 'next';
 import Link from 'next/link';
 import { DeleteOutlined, EditOutlined, PlusOutlined, SettingOutlined } from '@ant-design/icons';
 import { Icon as LegacyIcon } from '@ant-design/compatible';
@@ -12,11 +11,6 @@ import { KnowledgeSettingDrawer } from '@/components/KnowledgeSettingDrawer';
 import { usePagination } from '@/hooks/usePagination';
 import { PaginationTable } from '@/components/PaginationTable';
 import style from './index.module.scss';
-
-interface IProps {
-  books: IKnowledge[];
-  total: number;
-}
 
 const GRID = {
   gutter: 16,
@@ -53,7 +47,7 @@ const SEARCH_FIELDS = [
   },
 ];
 
-const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
+const Page = () => {
   const [visible, toggleVisible] = useToggle(false);
   const [selectedBook, setSelectedBook] = useState<IKnowledge | null>(null);
   const {
@@ -62,8 +56,8 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
     refresh,
     ...resetPagination
   } = usePagination<IKnowledge>(KnowledgeProvider.getKnowledges);
-  const [updateBookApi, updateLoading] = useAsyncLoading(KnowledgeProvider.updateKnowledge);
-  const [deleteKnowledgeApi, deleteLoading] = useAsyncLoading(KnowledgeProvider.deleteKnowledge);
+  const [updateBookApi] = useAsyncLoading(KnowledgeProvider.updateKnowledge);
+  const [deleteKnowledgeApi] = useAsyncLoading(KnowledgeProvider.deleteKnowledge);
 
   const editBook = useCallback(
     (book) => {
@@ -107,12 +101,12 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
           style={{ width: '100%' }}
           cover={<img className={style.cover} alt={book.title} src={book.cover} />}
           actions={[
-            <Link href={`/knowledge/editor/[id]`} as={`/knowledge/editor/` + book.id}>
+            <Link key="edit" href={`/knowledge/editor/[id]`} as={`/knowledge/editor/` + book.id}>
               <a>
                 <EditOutlined key="edit" />
               </a>
             </Link>,
-            <Tooltip title={book.status === 'draft' ? '发布线上' : '设为草稿'}>
+            <Tooltip key="status" title={book.status === 'draft' ? '发布线上' : '设为草稿'}>
               <LegacyIcon
                 onClick={() => toggleBookStatus(book)}
                 type={book.status === 'draft' ? 'cloud-upload' : 'cloud-download'}
@@ -120,6 +114,7 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
             </Tooltip>,
             <SettingOutlined key="setting" onClick={() => editBook(book)} />,
             <Popconfirm
+              key="delete"
               title="确认删除？"
               okText="确认"
               cancelText="取消"
@@ -162,11 +157,6 @@ const Page: NextPage<IProps> = ({ books: defaultBooks, total }) => {
       />
     </AdminLayout>
   );
-};
-
-Page.getInitialProps = async () => {
-  const [books, total] = await KnowledgeProvider.getKnowledges();
-  return { books, total };
 };
 
 export default Page;

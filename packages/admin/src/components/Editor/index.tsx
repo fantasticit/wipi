@@ -21,6 +21,7 @@ const CACHE_KEY = 'MONACO_CONTENT_STORAGE';
 let timer;
 
 export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onChange }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editorRef = useRef<any>();
   const editorContainerRef = useRef<HTMLDivElement>();
   const [innerValue, setInnerValue] = useState(defaultValue);
@@ -105,8 +106,12 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
   }, []);
 
   useEffect(() => {
-    if (!editorRef.current || !editorContainerRef.current) return;
-    if (!two && mode === 'preview') return;
+    if (!editorRef.current || !editorContainerRef.current) {
+      return;
+    }
+    if (!two && mode === 'preview') {
+      return;
+    }
     editorRef.current.layout(editorContainerRef.current.getBoundingClientRect());
   }, [two, mode, tocVisible]);
 
@@ -116,7 +121,11 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
         <div>
           {toolbar.map((tool) => {
             return (
-              <span className={style.toolWrap} onClick={tool.getAction(editorRef.current)}>
+              <span
+                key={tool.label}
+                className={style.toolWrap}
+                onClick={tool.getAction(editorRef.current)}
+              >
                 <Tooltip title={tool.label}>
                   <tool.content editor={editorRef.current} />
                 </Tooltip>

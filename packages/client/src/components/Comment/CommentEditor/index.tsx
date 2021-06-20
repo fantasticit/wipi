@@ -57,7 +57,9 @@ export const CommentEditor: React.FC<Props> = ({
 
   const storeUser = useCallback(
     (user) => {
-      if (!isValidUser(user)) return;
+      if (!isValidUser(user)) {
+        return;
+      }
       window.localStorage.setItem('user', JSON.stringify(user));
       setUser(user);
       toggleNeedSetInfo(false);
@@ -67,7 +69,9 @@ export const CommentEditor: React.FC<Props> = ({
 
   const onInput = useCallback(
     (e) => {
-      if (!hasValidUser) return;
+      if (!hasValidUser) {
+        return;
+      }
       setContent(e.target.value);
     },
     [hasValidUser]
@@ -75,7 +79,9 @@ export const CommentEditor: React.FC<Props> = ({
 
   const addEmoji = useCallback(
     (emoji) => {
-      if (!hasValidUser) return;
+      if (!hasValidUser) {
+        return;
+      }
       setContent(`${content}${emoji}`);
     },
     [content, hasValidUser]
@@ -105,14 +111,16 @@ export const CommentEditor: React.FC<Props> = ({
       setContent('');
       onOk && onOk();
     });
-  }, [t, hostId, parentComment, replyComment, onOk, user, content, toggleNeedSetInfo, addComment]);
+  }, [t, hostId, parentComment, replyComment, onOk, user, content, addComment]);
 
   useEffect(() => {
     const userInfo = window.localStorage.getItem('user');
     try {
       const user = JSON.parse(userInfo) as IUser;
       setUser(user);
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }, []);
 
   return (

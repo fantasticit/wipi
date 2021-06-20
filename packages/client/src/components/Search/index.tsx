@@ -17,7 +17,7 @@ interface IProps {
   onClose: (arg: boolean) => void;
 }
 
-export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
+export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
   const ref = useRef(null);
   const t = useTranslations();
   const [searchArticles, loading] = useAsyncLoading(SearchProvider.searchArticles);
@@ -65,7 +65,9 @@ export const Search: React.FC<IProps> = ({ visible = true, tags, onClose }) => {
     document.body.style.width = 'calc(100% - 6px)';
   }, [visible]);
 
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
 
   return (
     <div className={styles.wrapper}>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useRef, useState, useEffect } from 'react';
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow';
 import dateFormat from 'date-fns/format';
@@ -41,7 +42,7 @@ const getTimeago = (date) => {
 };
 
 export const LocaleTime: React.FC<Props> = ({ date, timeago, format = 'yyyy-MM-dd HH:mm:ss' }) => {
-  const [_, setMinutesMounted] = useState(0); // eslint-disable-line no-unused-vars
+  const [, setMinutesMounted] = useState(0); // eslint-disable-line no-unused-vars
   const callback = useRef<() => void>();
 
   useEffect(() => {

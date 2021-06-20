@@ -1,6 +1,6 @@
 import React from 'react';
 import App from 'next/app';
-import { ConfigProvider, message } from 'antd';
+import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import { toLogin } from '@/utils/login';
 import { UserProvider } from '@/providers/user';

@@ -28,8 +28,6 @@ const _Search: React.FC<IProps> = ({
   onSearch,
 }) => {
   const getFields = () => {
-    const count = 6;
-
     const { getFieldDecorator } = form;
     const children = [];
     for (const field of fields) {

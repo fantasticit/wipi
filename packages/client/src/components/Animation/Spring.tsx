@@ -20,17 +20,20 @@ export const Spring: React.FC<SpringProps> = ({
     ...from,
     config: { mass: 10, tension: 400, friction: 40, precision: 0.00001, clamp: true },
   }));
-  const onViewportChange = useCallback((visible) => {
-    if (visible) {
-      animation.start(to);
-    }
-  }, []);
+  const onViewportChange = useCallback(
+    (visible) => {
+      if (visible) {
+        animation.start(to);
+      }
+    },
+    [animation, to]
+  );
 
   useEffect(() => {
     if (elementInViewport(ref.current)) {
       animation.start(to);
     }
-  }, []);
+  }, [animation, to]);
 
   return (
     <VisibilitySensor onChange={onViewportChange}>

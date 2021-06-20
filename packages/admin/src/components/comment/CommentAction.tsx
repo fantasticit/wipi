@@ -54,7 +54,7 @@ export const CommentAction = ({ comment, refresh }) => {
           setReplyContent('');
           refresh();
         })
-        .catch((_) => notify());
+        .catch(() => notify());
     };
 
     if (!email) {

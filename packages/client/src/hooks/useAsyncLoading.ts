@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 
-type PromiseAction = (...args: any[]) => Promise<any>;
+type PromiseAction = (...args: unknown[]) => Promise<unknown>;
 
 export function useAsyncLoading<A extends PromiseAction>(action: A, wait = 200): [A, boolean] {
   const timerRef = useRef(null);

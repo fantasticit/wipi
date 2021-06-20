@@ -17,7 +17,7 @@ export const Theme = () => {
       toggleDark(isSystemDark);
     }
     setMounted(true);
-  }, []);
+  }, [toggleDark]);
 
   useEffect(() => {
     if (!mounted) {

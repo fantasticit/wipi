@@ -55,9 +55,12 @@ const TIME_COLUMN = {
 
 const Mail: NextPage = () => {
   const setting = useSetting();
-  const { loading, data: mails, refresh, ...resetPagination } = usePagination<IMail>(
-    MailProvider.getMails
-  );
+  const {
+    loading,
+    data: mails,
+    refresh,
+    ...resetPagination
+  } = usePagination<IMail>(MailProvider.getMails);
   const [deleteApi, deleteLoading] = useAsyncLoading(MailProvider.deleteMail);
   const [selectedMail, setSelectedMail] = useState(null);
   const isSmtpSettingFullfilled = useMemo(() => {
@@ -152,8 +155,7 @@ const Mail: NextPage = () => {
           ]}
           refresh={refresh}
           {...resetPagination}
-          showSelection
-          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
+          renderLeftNode={({ hasSelected, selectedRowKeys, resetSelectedRows }) =>
             hasSelected ? (
               <Popconfirm
                 title="确认删除？"
@@ -161,7 +163,7 @@ const Mail: NextPage = () => {
                 okText="确认"
                 cancelText="取消"
               >
-                <Button disabled={!hasSelected} loading={deleteLoading} danger>
+                <Button disabled={!hasSelected} loading={deleteLoading} danger={true}>
                   删除
                 </Button>
               </Popconfirm>

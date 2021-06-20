@@ -104,12 +104,12 @@ export const menus = [
 ];
 
 const flattenMenus = menus
-  .filter((m: any) => !m.ignore)
-  .reduce((c, menu: any) => {
-    return [...c, menu, ...(menu.children || []).filter((m: any) => !m.ignore)];
+  .filter((m) => !m.ignore)
+  .reduce((c, menu) => {
+    return [...c, menu, ...(menu.children || []).filter((m) => !m.ignore)];
   }, []);
 
-export const findActiveMenu = (pathname): [any, any[]] => {
+export const findActiveMenu = (pathname) => {
   const idx = flattenMenus.findIndex((menu) => menu.path === pathname);
   if (idx < 0) {
     return [null, []];

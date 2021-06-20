@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useAsyncLoading } from './useAsyncLoading';
 
-type PromiseAction<T> = (...args: any[]) => Promise<[Array<T>, number]>;
+type PromiseAction<T> = (...args: unknown[]) => Promise<[Array<T>, number]>;
 
-interface ReturnProps<T> {
+export interface ReturnProps<T> {
   loading: boolean;
   data: Array<T>;
   total: number;
@@ -30,14 +30,12 @@ export const usePagination = <T>(fetch: PromiseAction<T>, options?: Options<T>):
     pageSize: defaultPageSize,
     params: defaultParams,
     after,
-  } = Object.assign(
-    {
-      page: 1,
-      pageSize: 12,
-      params: {},
-    },
-    options || {}
-  );
+  } = {
+    page: 1,
+    pageSize: 12,
+    params: {},
+    ...(options || {}),
+  };
   const [api, loading] = useAsyncLoading(fetch);
   const [page, setPage] = useState(defaultPage);
   const [pageSize, setPageSize] = useState(defaultPageSize);
@@ -61,15 +59,18 @@ export const usePagination = <T>(fetch: PromiseAction<T>, options?: Options<T>):
     [api, callAfter]
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const refresh = useCallback(() => query({ page, pageSize, ...params }), [page, pageSize, params]);
+
   const reset = useCallback(() => {
     setPage(defaultPage);
     setPageSize(defaultPageSize);
     setParams(defaultParams);
-  }, []);
+  }, [defaultPage, defaultPageSize, defaultParams]);
 
   useEffect(() => {
     query({ page, pageSize, ...params });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pageSize, params]);
 
   return {

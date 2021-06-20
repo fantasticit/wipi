@@ -126,7 +126,7 @@ const TagPage: NextPage<ITagProps> = ({ tags: defaultTags = [] }) => {
                     okText="确认"
                     cancelText="取消"
                   >
-                    <Button danger>删除</Button>
+                    <Button danger={true}>删除</Button>
                   </Popconfirm>
                 </>
               )}

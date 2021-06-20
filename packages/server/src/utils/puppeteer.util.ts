@@ -9,6 +9,7 @@ const tmpdir = path.join(os.tmpdir(), '/poster/');
 export async function createImage({ html, width, height, ratio, ext = 'png' }) {
   width = Math.ceil(width);
   height = Math.ceil(height);
+  const filepath = path.join(tmpdir, `${uniqueid()}.${ext}`);
   const browser = await puppeteer.launch({
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -21,7 +22,6 @@ export async function createImage({ html, width, height, ratio, ext = 'png' }) {
   });
   await page.setContent(html);
   fs.ensureDir(tmpdir);
-  const filepath = path.join(tmpdir, `${uniqueid()}.png`);
   await page.screenshot({
     path: filepath,
     fullPage: true,

@@ -156,7 +156,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [], comments: defaultComments =
           renderItem={(comment) => (
             <List.Item
               key={comment.id}
-              actions={[<CommentAction comment={comment} refresh={getComments} />]}
+              actions={[<CommentAction key="action" comment={comment} refresh={getComments} />]}
             >
               <span>{comment.name}</span> 在 <CommentArticle comment={comment} /> 评论{' '}
               <CommentContent comment={comment} />

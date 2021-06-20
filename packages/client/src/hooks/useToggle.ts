@@ -5,7 +5,7 @@ export function useToggle(initialValue): [boolean, (arg?: unknown | null) => voi
 
   const toggle = useCallback((arg = null) => {
     if (arg !== null && typeof arg === 'boolean') {
-      setValue(arg)
+      setValue(arg);
     } else {
       setValue((v) => !v);
     }

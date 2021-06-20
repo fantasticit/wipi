@@ -19,7 +19,7 @@ function ifTruePushArray(bool, array, dataArray) {
   });
 }
 
-function getSize(filename) {
+function getSize() {
   return 0;
 }
 

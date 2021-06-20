@@ -160,8 +160,7 @@ const Page: NextPage = () => {
           columns={[...COMMON_COLUMNS, actionColumn]}
           refresh={refresh}
           {...resetPagination}
-          showSelection
-          renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
+          renderLeftNode={({ hasSelected, selectedRows }) =>
             hasSelected ? (
               <>
                 <Button

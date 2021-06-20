@@ -2,7 +2,8 @@ import React, { useState, useCallback, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { Row, Col, Drawer, Button, message, Card, List, Popconfirm, Alert, Typography } from 'antd';
 import Viewer from 'viewerjs';
-import { copy, formatFileSize } from '@/utils';
+import { formatFileSize } from '@/utils';
+import { copy } from '@/utils/copy';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { useSetting } from '@/hooks/useSetting';
 import { PosterProvider } from '@/providers/poster';
@@ -15,7 +16,7 @@ import { PaginationTable } from '@/components/PaginationTable';
 import style from './index.module.scss';
 
 const { Meta } = Card;
-const { Paragraph, Text } = Typography;
+const { Paragraph } = Typography;
 
 const drawerFooterStyle: React.CSSProperties = {
   position: 'absolute',
@@ -65,15 +66,7 @@ const Poster = () => {
     PosterProvider.getPosters
   );
   const [deleteApi, deleteLoading] = useAsyncLoading(PosterProvider.deletePoster);
-  const isOSSSettingFullFiled = useMemo(
-    () =>
-      setting &&
-      setting.ossRegion &&
-      setting.ossAccessKeyId &&
-      setting.ossAccessKeySecret &&
-      setting.ossBucket,
-    [setting]
-  );
+  const isOSSSettingFullFiled = useMemo(() => setting && setting.oss, [setting]);
 
   const deleteAction = useCallback(
     (ids, resetSelectedRows = null) => {
@@ -91,6 +84,48 @@ const Poster = () => {
       };
     },
     [deleteApi, toggleVisible, refresh]
+  );
+
+  const renderList = useCallback(
+    (data) => {
+      const onClick = (item) => () => {
+        setCurrent(item);
+        toggleVisible();
+        Promise.resolve().then(() => {
+          if (!viewer) {
+            viewer = new Viewer(ref.current, { inline: false });
+          } else {
+            viewer.update();
+          }
+        });
+      };
+
+      const renderItem = (item: IPoster) => (
+        <List.Item key={item.id}>
+          <Card
+            hoverable={true}
+            cover={
+              <div className={style.preview}>
+                <img alt={item.name} src={item.imgUrl} />
+              </div>
+            }
+            onClick={onClick(item)}
+          >
+            <Meta
+              title={item.name}
+              description={
+                <>
+                  上传于
+                  <LocaleTime date={item.createAt} />
+                </>
+              }
+            />
+          </Card>
+        </List.Item>
+      );
+      return <List className={style.imgs} grid={GRID} dataSource={data} renderItem={renderItem} />;
+    },
+    [toggleVisible]
   );
 
   return (
@@ -120,55 +155,15 @@ const Poster = () => {
           data={data}
           refresh={refresh}
           {...resetPagination}
-          showSelection
           searchFields={SEARCH_FIELDS}
-          customDataTable={(data) => (
-            <List
-              className={style.imgs}
-              grid={GRID}
-              dataSource={data}
-              renderItem={(item: IPoster) => (
-                <List.Item key={item.id}>
-                  <Card
-                    hoverable={true}
-                    cover={
-                      <div className={style.preview}>
-                        <img alt={item.name} src={item.imgUrl} />
-                      </div>
-                    }
-                    onClick={() => {
-                      setCurrent(item);
-                      toggleVisible();
-                      Promise.resolve().then(() => {
-                        if (!viewer) {
-                          viewer = new Viewer(ref.current, { inline: false });
-                        } else {
-                          viewer.update();
-                        }
-                      });
-                    }}
-                  >
-                    <Meta
-                      title={item.name}
-                      description={
-                        <>
-                          上传于
-                          <LocaleTime date={item.createAt} />
-                        </>
-                      }
-                    />
-                  </Card>
-                </List.Item>
-              )}
-            />
-          )}
+          customDataTable={renderList}
         />
         <Drawer
           width={640}
           placement="right"
           title={'文件信息'}
           closable={true}
-          onClose={() => toggleVisible()}
+          onClose={toggleVisible}
           visible={visible}
         >
           <div ref={ref} className={style.previewContainer}>
@@ -222,7 +217,7 @@ const Poster = () => {
               style={{
                 marginRight: 8,
               }}
-              onClick={() => toggleVisible()}
+              onClick={toggleVisible}
             >
               关闭
             </Button>
@@ -233,7 +228,7 @@ const Poster = () => {
               okText="确认"
               cancelText="取消"
             >
-              <Button danger loading={deleteLoading}>
+              <Button danger={true} loading={deleteLoading}>
                 删除
               </Button>
             </Popconfirm>

@@ -12,10 +12,13 @@ export const Copy: React.FC<Props> = ({ text }) => {
   const timerRef = useRef<NodeJS.Timeout>();
   const [copied, toggleCopied] = useToggle(false);
   const onClick = useCallback(() => {
-    if (copied) return;
+    if (copied) {
+      return;
+    }
     copy(text);
     toggleCopied();
     timerRef.current = setTimeout(toggleCopied, 1500);
+    // eslint-disable-next-line consistent-return
     return () => {
       clearTimeout(timerRef.current);
     };

@@ -1,19 +1,23 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { dateFormat } from '../../utils/date.util';
 import { uniqueid } from '../../utils/uniqueid.util';
-import { putFile, deleteFile } from '../../utils/oss.util';
+import { Oss } from '../../utils/oss.util';
 import { SettingService } from '../setting/setting.service';
 import { File } from './file.entity';
 
 @Injectable()
 export class FileService {
+  private oss: Oss;
+
   constructor(
     @InjectRepository(File)
     private readonly fileRepository: Repository<File>,
     private readonly settingService: SettingService
-  ) {}
+  ) {
+    this.oss = new Oss(this.settingService);
+  }
 
   /**
    * 上传文件
@@ -25,7 +29,7 @@ export class FileService {
       +unique === 1
         ? `/${dateFormat(new Date(), 'yyyy-MM-dd')}/${uniqueid()}/${originalname}`
         : `/${dateFormat(new Date(), 'yyyy-MM-dd')}/${originalname}`;
-    const url = await putFile(this.settingService, filename, buffer);
+    const url = await this.oss.putFile(filename, buffer);
     const newFile = await this.fileRepository.create({
       originalname,
       filename,
@@ -44,7 +48,7 @@ export class FileService {
     const query = this.fileRepository.createQueryBuilder('file').orderBy('file.createAt', 'DESC');
 
     if (typeof queryParams === 'object') {
-      const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+      const { page = 1, pageSize = 12, ...otherParams } = queryParams;
       query.skip((+page - 1) * +pageSize);
       query.take(+pageSize);
 
@@ -78,7 +82,7 @@ export class FileService {
    */
   async deleteById(id) {
     const target = await this.fileRepository.findOne(id);
-    await deleteFile(this.settingService, target.filename);
+    await this.oss.deleteFile(target.filename);
     return this.fileRepository.remove(target);
   }
 }

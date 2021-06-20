@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useContext, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { NextPage } from 'next';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Modal, Form, Input, message } from 'antd';

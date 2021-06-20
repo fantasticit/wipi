@@ -37,7 +37,8 @@ export class SearchService {
     }
 
     const newData = await this.searchRepository.create({ type, keyword });
-    return await this.searchRepository.save(newData);
+    const d = await this.searchRepository.save(newData);
+    return d;
   }
 
   /**
@@ -49,7 +50,7 @@ export class SearchService {
       .orderBy('search.updateAt', 'DESC');
 
     if (typeof queryParams === 'object') {
-      const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+      const { page = 1, pageSize = 12, ...otherParams } = queryParams;
       query.skip((+page - 1) * +pageSize);
       query.take(+pageSize);
 

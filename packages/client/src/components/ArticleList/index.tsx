@@ -15,11 +15,7 @@ interface IProps {
   asRecommend?: boolean;
 }
 
-export const ArticleList: React.FC<IProps> = ({
-  articles = [],
-  coverHeight = 168,
-  asRecommend = false,
-}) => {
+export const ArticleList: React.FC<IProps> = ({ articles = [] }) => {
   const t = useTranslations();
 
   return (
@@ -27,7 +23,7 @@ export const ArticleList: React.FC<IProps> = ({
       {articles && articles.length ? (
         articles.map((article) => {
           return (
-            <div className={style.articleItem}>
+            <div key={article.id} className={style.articleItem}>
               <Opacity>
                 <Link
                   key={article.id}

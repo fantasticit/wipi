@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import cls from 'classnames';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 import { Helmet } from 'react-helmet';
 import { resolveUrl } from '@/utils';
 import { useToggle } from '@/hooks/useToggle';
@@ -188,6 +188,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
               发布
             </Button>,
             <Dropdown
+              key="more"
               overlay={
                 <Menu>
                   <Menu.Item disabled={isCreate} key="preview" onClick={preview}>

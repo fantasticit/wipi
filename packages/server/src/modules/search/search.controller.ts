@@ -1,8 +1,7 @@
 import { Controller, Get, Delete, Param, UseGuards, Query } from '@nestjs/common';
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, Roles } from '../auth/roles.guard';
-// import { client } from './elasticsearch.client';
 import { SearchService } from './search.service';
 
 @ApiTags('Search')

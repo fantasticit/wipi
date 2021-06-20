@@ -17,7 +17,7 @@ export const AnalyticsSetting = ({ setting }) => {
       baiduAnalyticsId,
       googleAnalyticsId,
     };
-    SettingProvider.updateSetting(data).then((res) => {
+    SettingProvider.updateSetting(data).then(() => {
       message.success('保存成功');
     });
   };

@@ -1,90 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Form } from '@ant-design/compatible';
-import { Input, Button, Switch, message } from 'antd';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
+import { Alert, Button, message } from 'antd';
+import { safeJsonParse } from '@/utils/json';
 import { SettingProvider } from '@/providers/setting';
+import { JsonEditor } from '@/components/JsonEditor';
 
 export const OSSSetting = ({ setting }) => {
-  const [visible, setVisible] = useState(false);
-  const [mode, setMode] = useState('logo');
-  const [ossRegion, setOssRegion] = useState(null);
-  const [ossAccessKeyId, setOssAccessKeyId] = useState(null);
-  const [ossAccessKeySecret, setOssAccessKeySecret] = useState(null);
-  const [ossBucket, setOssBucket] = useState(null);
-  const [ossHttps, setOssHttps] = useState(false);
+  const [oss, setOss] = useState({});
 
   useEffect(() => {
-    setOssRegion((setting && setting.ossRegion) || null);
-    setOssAccessKeyId((setting && setting.ossAccessKeyId) || null);
-    setOssAccessKeySecret((setting && setting.ossAccessKeySecret) || null);
-    setOssBucket((setting && setting.ossBucket) || null);
-    setOssHttps((setting && setting.ossHttps) || false);
-  }, [setting]);
+    setOss(safeJsonParse(setting.oss));
+  }, [setting.oss]);
 
-  const save = () => {
+  const save = useCallback(() => {
     const data = {
-      ossRegion,
-      ossAccessKeyId,
-      ossAccessKeySecret,
-      ossBucket,
-      ossHttps,
+      oss: JSON.stringify(oss),
     };
-    SettingProvider.updateSetting(data).then((res) => {
+    SettingProvider.updateSetting(data).then(() => {
       message.success('保存成功');
     });
-  };
+  }, [oss]);
 
   return (
     <Form layout="vertical">
-      <Form.Item label="Region">
-        <Input
-          placeholder="请输入正确的阿里 oss region"
-          value={ossRegion}
-          onChange={(e) => {
-            setOssRegion(e.target.value);
-          }}
-        />
-      </Form.Item>
-      <Form.Item label="AccessKeyId">
-        <Input
-          placeholder="请输入正确的阿里 oss accessKeyId"
-          value={ossAccessKeyId}
-          onChange={(e) => {
-            setOssAccessKeyId(e.target.value);
-          }}
-        />
-      </Form.Item>
-      <Form.Item label="AccessKeySecret">
-        <Input
-          placeholder="请输入正确的阿里 oss accessKeySecret"
-          value={ossAccessKeySecret}
-          onChange={(e) => {
-            setOssAccessKeySecret(e.target.value);
-          }}
-        />
-      </Form.Item>
-      <Form.Item label="Bucket">
-        <Input
-          placeholder="请输入正确的阿里 oss Bucket"
-          value={ossBucket}
-          onChange={(e) => {
-            setOssBucket(e.target.value);
-          }}
-        />
-      </Form.Item>
-      <Form.Item label="HTTPS">
-        <Switch checked={ossHttps} onChange={setOssHttps} />
-      </Form.Item>
-      <FileSelectDrawer
-        visible={visible}
-        closeAfterClick={true}
-        onClose={() => setVisible(false)}
-        onChange={(url) => {
-          if (mode === 'logo') {
-            setOssAccessKeyId(url);
-          } else {
-            setOssAccessKeySecret(url);
-          }
+      <Alert
+        message="说明"
+        description={`请在编辑器中输入您的 oss 配置，并添加 type 字段区分 \r\n {"type":"aliyun","accessKeyId":"","accessKeySecret":"","bucket":"","https":true,"region":""}`}
+        type="info"
+        showIcon={true}
+        style={{ marginBottom: '1rem' }}
+      />
+      <JsonEditor
+        value={JSON.stringify(oss, null, 2)}
+        onChange={setOss}
+        style={{
+          height: '400px',
+          overflow: 'hidden',
+          border: '1px solid var(--border-color)',
+          marginBottom: 24,
         }}
       />
       <Button type="primary" onClick={save}>

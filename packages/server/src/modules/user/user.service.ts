@@ -152,6 +152,7 @@ export class UserService {
     const newUser = await this.userRepository.merge(existUser, {
       password: hashNewPassword,
     });
-    return this.userRepository.save(newUser);
+    const d = await this.userRepository.save(newUser);
+    return d;
   }
 }

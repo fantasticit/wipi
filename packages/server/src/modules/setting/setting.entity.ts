@@ -59,23 +59,7 @@ export class Setting {
 
   @ApiProperty()
   @Column({ type: 'text', default: null })
-  ossRegion: string; // 阿里云 region
-
-  @ApiProperty()
-  @Column({ type: 'text', default: null })
-  ossAccessKeyId: string; // 阿里云 accessKeyId
-
-  @ApiProperty()
-  @Column({ type: 'text', default: null })
-  ossAccessKeySecret: string; // 阿里云  accessKeySecret
-
-  @ApiProperty()
-  @Column({ type: 'boolean', default: false })
-  ossHttps: boolean; // 阿里云 oss 是否开启 https
-
-  @ApiProperty()
-  @Column({ type: 'text', default: null })
-  ossBucket: string; // 阿里云 bucket
+  oss: string; // OSS 上传配置
 
   @ApiProperty()
   @Column({ type: 'text', default: null })

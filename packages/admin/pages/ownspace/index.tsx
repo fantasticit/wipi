@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { NextPage } from 'next';
 import { Form } from '@ant-design/compatible';
 import { Row, Col, List, Typography, Card, Avatar, Input, Button, Tabs, message } from 'antd';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { ArticleProvider } from '@/providers/article';
@@ -82,7 +82,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
             style={{ backgroundColor: '#fff' }}
             header={'系统概览'}
             dataSource={data}
-            bordered
+            bordered={true}
             renderItem={(item) => (
               <List.Item>
                 <Typography.Text>{item}</Typography.Text>

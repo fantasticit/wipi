@@ -3,9 +3,9 @@ import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { CopyrightOutlined, GithubOutlined } from '@ant-design/icons';
 import { Layout, Breadcrumb, Row, Col, Menu } from 'antd';
 import Link from 'next/link';
+import { default as Router, useRouter } from 'next/router';
 import cls from 'classnames';
 import { useSetting } from '@/hooks/useSetting';
-import Router, { useRouter } from 'next/router';
 import { UserInfo } from '@/components/UserInfo';
 import { GlobalContext } from '@/context/global';
 import { ResourceCreate } from './ResourceCreate';
@@ -43,11 +43,11 @@ export const AdminLayout: React.FC<{ headerAppender?: React.ReactNode }> = ({
   const MenuContent = (
     <Menu theme="dark" mode="inline" defaultSelectedKeys={[activeMenu && activeMenu.path]}>
       {menus
-        .filter((m: any) => !m.ignore)
+        .filter((m) => !m.ignore)
         .map((menu) => {
           return menu.children ? (
             <SubMenu key={menu.title} icon={<LegacyIcon type={menu.icon} />} title={menu.title}>
-              {menu.children.filter((m: any) => !m.ignore).map(renderMenuItem)}
+              {menu.children.filter((m) => !m.ignore).map(renderMenuItem)}
             </SubMenu>
           ) : (
             renderMenuItem(menu)

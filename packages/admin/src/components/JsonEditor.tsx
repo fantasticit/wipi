@@ -1,31 +1,29 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Spin } from 'antd';
+import { safeJsonParse } from '@/utils/json';
 
-let monaco = null;
+const DEFAULT_STYLE = {
+  height: '600px',
+  overflow: 'hidden',
+  border: '1px solid var(--border-color)',
+  marginBottom: 24,
+};
 
-export const Editor = ({ value, onChange }) => {
+export const JsonEditor = ({ value, onChange, style = DEFAULT_STYLE }) => {
   const container = useRef(null);
   const editorRef = useRef(null);
   const [mounted, setMounted] = useState(false);
 
-  const spyChange = useCallback(() => {
-    editorRef.current.onDidChangeModelContent(() => {
-      const content = editorRef.current.getValue();
-      try {
-        const t = JSON.parse(content);
-        onChange(t);
-      } catch (e) {}
-    });
-  }, [onChange]);
-
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
     editorRef.current.setValue(value);
   }, [mounted, value]);
 
   useEffect(() => {
     Promise.all([import('monaco-editor/esm/vs/editor/editor.api.js')]).then((res) => {
-      monaco = res[0];
+      const monaco = res[0];
       const editor = monaco.editor.create(container.current, {
         language: 'json',
         automaticLayout: true,
@@ -40,25 +38,20 @@ export const Editor = ({ value, onChange }) => {
         },
       });
       editorRef.current = editor;
-      spyChange();
+      editor.onDidChangeModelContent(() => {
+        const content = editor.getValue();
+        onChange(safeJsonParse(content));
+      });
       setMounted(true);
     });
     return () => {
       setMounted(false);
       editorRef.current && editorRef.current.dispose();
     };
-  }, []);
+  }, [onChange]);
 
   return (
-    <div
-      ref={container}
-      style={{
-        height: '600px',
-        overflow: 'hidden',
-        border: '1px solid var(--border-color)',
-        marginBottom: 24,
-      }}
-    >
+    <div ref={container} style={style}>
       {mounted ? null : <Spin tip="编辑器努力加载中..." spinning={true}></Spin>}
     </div>
   );

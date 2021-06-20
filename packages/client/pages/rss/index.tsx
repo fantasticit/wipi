@@ -1,4 +1,3 @@
-import React from 'react';
 import { NextPage } from 'next';
 import RSS from '@/rss/index.js';
 import { ArticleProvider } from '@/providers/article';

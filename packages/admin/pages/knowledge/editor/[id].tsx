@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { NextPage } from 'next';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 import cls from 'classnames';
 import {
   CloseOutlined,
@@ -160,6 +160,7 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
       }
       return KnowledgeProvider.createChapters([{ ...chapter, parentId: id }]);
     });
+    // eslint-disable-next-line consistent-return
     return Promise.all(promises as Array<Promise<IKnowledge>>).then((res) => {
       const data = res.flat(Infinity);
       setLoading(false);

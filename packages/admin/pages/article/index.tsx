@@ -77,7 +77,7 @@ const COMMON_COLUMNS = [
     width: 200,
     render: (tags) => (
       <span>
-        {tags.map((tag, idx) => {
+        {tags.map((tag) => {
           return (
             <Tag color={getRandomColor(tag.label)} key={tag.label}>
               {tag.label}
@@ -271,7 +271,6 @@ const Article: NextPage = () => {
           ]}
           {...resetPagination}
           refresh={refresh}
-          showSelection
           renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
             hasSelected ? (
               <>
@@ -309,7 +308,7 @@ const Article: NextPage = () => {
                   okText="确认"
                   cancelText="取消"
                 >
-                  <Button disabled={!hasSelected} loading={deleteLoading} danger>
+                  <Button disabled={!hasSelected} loading={deleteLoading} danger={true}>
                     删除
                   </Button>
                 </Popconfirm>

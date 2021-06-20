@@ -26,7 +26,7 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(@Body() user) {
-    return await this.authService.login(user);
+    await this.authService.login(user);
   }
 
   @Post('admin')

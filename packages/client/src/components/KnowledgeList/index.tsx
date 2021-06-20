@@ -20,7 +20,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [] }) => {
       {knowledges && knowledges.length ? (
         knowledges.map((knowledge) => {
           return (
-            <div className={style.articleItem}>
+            <div key={knowledge.id} className={style.articleItem}>
               <Opacity>
                 <Link
                   key={knowledge.id}

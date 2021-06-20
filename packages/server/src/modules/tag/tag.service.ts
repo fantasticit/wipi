@@ -50,8 +50,6 @@ export class TagService {
     });
 
     return data;
-
-    // return this.tagRepository.find({ order: { createAt: 'ASC' } });
   }
 
   /**

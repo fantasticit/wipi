@@ -1,51 +1,45 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { SettingService } from '../modules/setting/setting.service';
-const OSS = require('ali-oss');
+import { OssClient } from './oss/oss-client';
+import { AliyunOssClient } from './oss/aliyun-oss-client';
 
-export async function putFile(
-  settingService: SettingService,
-  filepath: string,
-  buffer: ReadableStream
-) {
-  const {
-    ossRegion,
-    ossAccessKeyId,
-    ossBucket,
-    ossAccessKeySecret,
-    ossHttps,
-  } = await settingService.findAll(true);
-  if (!ossRegion || !ossAccessKeyId || !ossBucket || !ossAccessKeySecret) {
-    throw new HttpException('OSS 配置不完善，无法进行操作', HttpStatus.BAD_REQUEST);
+export class Oss {
+  settingService: SettingService;
+  config: Record<string, unknown>;
+  ossClient: OssClient;
+
+  constructor(settingService: SettingService) {
+    this.settingService = settingService;
   }
-  const client = new OSS({
-    region: ossRegion,
-    accessKeyId: ossAccessKeyId,
-    accessKeySecret: ossAccessKeySecret,
-    bucket: ossBucket,
-    secure: ossHttps,
-  });
-  const { url } = await client.put(filepath, buffer);
-  return url;
-}
 
-export async function deleteFile(settingService: SettingService, url: string) {
-  const {
-    ossRegion,
-    ossAccessKeyId,
-    ossBucket,
-    ossAccessKeySecret,
-    ossHttps,
-  } = await settingService.findAll(true);
-  if (!ossRegion || !ossAccessKeyId || !ossBucket || !ossAccessKeySecret) {
-    throw new HttpException('OSS 配置不完善，无法进行操作', HttpStatus.BAD_REQUEST);
+  private async getConfig() {
+    const data = await this.settingService.findAll(true);
+    const config = JSON.parse(data.oss);
+    if (!config) {
+      throw new HttpException('OSS 配置不完善，无法进行操作', HttpStatus.BAD_REQUEST);
+    }
+    return config as Record<string, unknown>;
   }
-  const client = new OSS({
-    region: ossRegion,
-    accessKeyId: ossAccessKeyId,
-    accessKeySecret: ossAccessKeySecret,
-    bucket: ossBucket,
-    secure: ossHttps,
-  });
 
-  await client.delete(url);
+  private async getOssClient() {
+    const config = await this.getConfig();
+    const type = String(config.type).toLowerCase();
+
+    switch (type) {
+      case 'aliyun':
+      default:
+        return new AliyunOssClient(config);
+    }
+  }
+
+  async putFile(filepath: string, buffer: ReadableStream) {
+    const client = await this.getOssClient();
+    const url = await client.putFile(filepath, buffer);
+    return url;
+  }
+
+  async deleteFile(url: string) {
+    const client = await this.getOssClient();
+    await client.deleteFile(url);
+  }
 }

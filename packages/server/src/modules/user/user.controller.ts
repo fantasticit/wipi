@@ -48,7 +48,8 @@ export class UserController {
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
   async register(@Body() user: Partial<User>): Promise<User> {
-    return await this.userService.createUser(user);
+    const d = await this.userService.createUser(user);
+    return d;
   }
 
   async checkPermission(req, user) {
@@ -85,7 +86,8 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   async update(@Request() req, @Body() user: Partial<User>): Promise<User> {
     await this.checkPermission(req, user);
-    return await this.userService.updateById(user.id, user);
+    const d = await this.userService.updateById(user.id, user);
+    return d;
   }
 
   /**
@@ -98,6 +100,7 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   async updatePassword(@Request() req, @Body() user: Partial<User>): Promise<User> {
     await this.checkPermission(req, user);
-    return await this.userService.updatePassword(user.id, user);
+    const d = await this.userService.updatePassword(user.id, user);
+    return d;
   }
 }

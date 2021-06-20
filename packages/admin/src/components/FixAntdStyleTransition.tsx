@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const id = 'fix-antd-stle-transition';
 
 export const FixAntdStyleTransition = () => {
   useEffect(() => {
     const el = document.querySelector(`#${id}`);
-    el.parentNode.removeChild(el);
+    el && el.parentNode.removeChild(el);
   }, []);
 
   return (

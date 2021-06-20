@@ -5,7 +5,7 @@ import { PosterProvider } from '@/providers/poster';
 import { GlobalContext } from '@/context/global';
 import style from './index.module.scss';
 import { useToggle } from '@/hooks/useToggle';
-import { download } from '@/utils';
+import { download, getDocumentScrollTop } from '@/utils';
 const urllib = require('url');
 const QRCode = require('qrcode-svg');
 export interface ShareProps {
@@ -166,11 +166,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
 
   useEffect(() => {
     const handler = () => {
-      let y =
-        document.documentElement.scrollTop ||
-        window.pageYOffset ||
-        window.scrollY ||
-        document.body.scrollTop;
+      const y = getDocumentScrollTop();
       if (visible && y > 50) {
         toggleVisible(false);
       }

@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Form, Icon as LegacyIcon } from '@ant-design/compatible';
+import { Form } from '@ant-design/compatible';
 import { Row, Col, Button, Input, Modal } from 'antd';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 import { FormComponentProps } from '@ant-design/compatible/es/form';
@@ -54,7 +53,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
                 maskTransitionName: '',
               });
             })
-            .catch((e) => setLoading(false));
+            .catch(() => setLoading(false));
         }
       });
     },

@@ -166,7 +166,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                 <ul>
                   {chapters.map((chapter) => {
                     return (
-                      <li id={`js-toc-item-wrapper-${chapter.id}`}>
+                      <li key={chapter.id} id={`js-toc-item-wrapper-${chapter.id}`}>
                         <Link as={`/knowledge/${pId}/${chapter.id}`} href={`/knowledge/[pId]/[id]`}>
                           <a className={cls(chapter.id === id && style.active)}>{chapter.title}</a>
                         </Link>

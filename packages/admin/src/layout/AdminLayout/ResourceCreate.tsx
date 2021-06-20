@@ -2,7 +2,7 @@ import React from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, Button } from 'antd';
 import Link from 'next/link';
-import Router from 'next/router';
+import { default as Router } from 'next/router';
 
 export const ResourceCreate = ({ collapsed = false }) => {
   const menu = (

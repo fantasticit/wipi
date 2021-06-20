@@ -122,7 +122,11 @@ const _MonacoEditor = (props, ref) => {
     }
 
     const editor = editorRef.current;
-    const clearRef = { current: () => {} };
+    const clearRef = {
+      current: () => {
+        return undefined;
+      },
+    };
     editor.onDidPaste((e) => {
       const pastePosition = e.range;
       const delta = [
@@ -147,7 +151,9 @@ const _MonacoEditor = (props, ref) => {
       const imgFiles = (Array.from(items) as [DataTransferItem])
         .filter((item) => item.type.match(IMG_REXEXP))
         .map((item) => item.getAsFile());
-      if (!imgFiles.length) return;
+      if (!imgFiles.length) {
+        return;
+      }
       const hide = message.loading('正在上传图片中', 0);
       const upload = (file) => {
         return FileProvider.uploadFile(file, 1).then(({ url }) => {

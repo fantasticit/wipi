@@ -238,7 +238,6 @@ const Page: NextPage = () => {
           ]}
           refresh={refresh}
           {...resetPagination}
-          showSelection
           renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>
             hasSelected ? (
               <>
@@ -262,7 +261,7 @@ const Page: NextPage = () => {
                   okText="确认"
                   cancelText="取消"
                 >
-                  <Button disabled={!hasSelected} loading={false} danger>
+                  <Button disabled={!hasSelected} loading={false} danger={true}>
                     删除
                   </Button>
                 </Popconfirm>

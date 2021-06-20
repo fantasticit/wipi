@@ -1,24 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { parseIp } from '../../utils/ip.util';
+import { parseUserAgent } from '../../utils/ua.util';
 import { View } from './view.entity';
-
-const ipSearcher = require('node-ip2region').create();
-const UAParser = require('ua-parser-js');
-
-const parseUserAgent = (userAgent) => {
-  const uaparser = new UAParser();
-  uaparser.setUA(userAgent);
-  const uaInfo = uaparser.getResult();
-  return {
-    browser: uaInfo.browser ? `${uaInfo.browser.name} ${uaInfo.browser.version}` : '',
-    engine: uaInfo.engine ? `${uaInfo.engine.name} ${uaInfo.engine.version}` : '',
-    os: uaInfo.os ? `${uaInfo.os.name} ${uaInfo.os.version}` : '',
-    device: uaInfo.device.vendor
-      ? uaInfo.device.vendor + ' ' + uaInfo.device.model + ' ' + uaInfo.device.type
-      : '未知设备',
-  };
-};
 
 @Injectable()
 export class ViewService {
@@ -43,12 +28,8 @@ export class ViewService {
       await this.viewRepository.save(newData);
       return newData;
     }
-    const uaInfo = parseUserAgent(userAgent);
-    const { region } = ipSearcher.btreeSearchSync(ip);
-    const address = region
-      .split('|')
-      .filter((d) => +d !== 0)
-      .join(' ');
+    const { data: uaInfo } = parseUserAgent(userAgent);
+    const address = parseIp(ip);
     const newData = await this.viewRepository.create({ ip, userAgent, url, address, ...uaInfo });
     await this.viewRepository.save(newData);
     return newData;
@@ -60,7 +41,7 @@ export class ViewService {
   async findAll(queryParams): Promise<[View[], number]> {
     const query = this.viewRepository.createQueryBuilder('view').orderBy('view.createAt', 'DESC');
     if (typeof queryParams === 'object') {
-      const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+      const { page = 1, pageSize = 12, ...otherParams } = queryParams;
       query.skip((+page - 1) * +pageSize);
       query.take(+pageSize);
 

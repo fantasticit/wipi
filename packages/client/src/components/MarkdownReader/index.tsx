@@ -44,6 +44,7 @@ export const MarkdownReader = ({ content }) => {
       });
     }, 0);
 
+    // eslint-disable-next-line consistent-return
     return () => {
       callbacks.forEach((cb) => cb());
     };
