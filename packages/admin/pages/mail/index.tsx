@@ -145,6 +145,7 @@ const Mail: NextPage = () => {
           </div>
         ) : null}
         <PaginationTable
+          showSelection={true}
           loading={loading}
           data={mails}
           columns={(resetSelectedRows) => [

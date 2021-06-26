@@ -155,6 +155,7 @@ const Page: NextPage = () => {
     <AdminLayout>
       <div className={style.wrapper}>
         <PaginationTable
+          showSelection={true}
           loading={loading}
           data={data}
           columns={[...COMMON_COLUMNS, actionColumn]}

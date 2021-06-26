@@ -165,6 +165,7 @@ const Views: NextPage = () => {
     <AdminLayout>
       <div className={style.wrapper}>
         <PaginationTable
+          showSelection={true}
           loading={loading}
           data={data}
           columns={(resetSelectedRows) => [...COMMON_COLUMNS, actionColumn(resetSelectedRows)]}

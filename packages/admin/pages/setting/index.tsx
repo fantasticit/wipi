@@ -28,11 +28,11 @@ const Setting: NextPage<IProps> = ({ type: defaultType }) => {
       content: <SystemSetting setting={setting} />,
     },
     {
-      label: '国际化',
+      label: '国际化设置',
       content: <LocaleSetting setting={setting} />,
     },
     {
-      label: 'SEO 设置',
+      label: 'SEO设置',
       content: <SEOSetting setting={setting} />,
     },
     {
@@ -40,11 +40,11 @@ const Setting: NextPage<IProps> = ({ type: defaultType }) => {
       content: <AnalyticsSetting setting={setting} />,
     },
     {
-      label: 'OSS 设置',
+      label: 'OSS设置',
       content: <OSSSetting setting={setting} />,
     },
     {
-      label: 'SMTP 服务',
+      label: 'SMTP服务',
       content: <SMTPSetting setting={setting} />,
     },
   ];

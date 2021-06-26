@@ -183,6 +183,7 @@ const Comment = () => {
   return (
     <AdminLayout>
       <PaginationTable
+        showSelection={true}
         loading={loading}
         data={comments}
         columns={(resetSelectedRows) => [
