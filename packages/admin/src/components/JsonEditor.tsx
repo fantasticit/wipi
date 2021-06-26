@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Spin } from 'antd';
-import { safeJsonParse } from '@/utils/json';
+import { Alert, Spin } from 'antd';
 
 const DEFAULT_STYLE = {
   height: '600px',
@@ -13,6 +12,7 @@ export const JsonEditor = ({ value, onChange, style = DEFAULT_STYLE }) => {
   const container = useRef(null);
   const editorRef = useRef(null);
   const [mounted, setMounted] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!mounted) {
@@ -40,7 +40,13 @@ export const JsonEditor = ({ value, onChange, style = DEFAULT_STYLE }) => {
       editorRef.current = editor;
       editor.onDidChangeModelContent(() => {
         const content = editor.getValue();
-        onChange(safeJsonParse(content));
+        try {
+          onChange(JSON.parse(content));
+          setError(null);
+        } catch (e) {
+          console.log(e);
+          setError(e);
+        }
       });
       setMounted(true);
     });
@@ -51,8 +57,18 @@ export const JsonEditor = ({ value, onChange, style = DEFAULT_STYLE }) => {
   }, [onChange]);
 
   return (
-    <div ref={container} style={style}>
-      {mounted ? null : <Spin tip="编辑器努力加载中..." spinning={true}></Spin>}
-    </div>
+    <>
+      <div ref={container} style={style}>
+        {mounted ? null : <Spin tip="编辑器努力加载中..." spinning={true}></Spin>}
+      </div>
+      {error ? (
+        <Alert
+          style={{ marginBottom: 24 }}
+          message="Json 格式化出错"
+          type="error"
+          showIcon={true}
+        />
+      ) : null}
+    </>
   );
 };
