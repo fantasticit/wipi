@@ -33,6 +33,10 @@
     header .title {
       color: var(--primary-color);
     }
+
+    main .contentWrapper .desc {
+      font-weight: 500;
+    }
   }
 
   header {
@@ -58,7 +62,7 @@
   main {
     display: flex;
     flex-wrap: nowrap;
-    padding: 12px 0;
+    padding-top: 12px;
 
     .coverWrapper {
       position: relative;
