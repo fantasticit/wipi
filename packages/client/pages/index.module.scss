@@ -40,6 +40,14 @@
   }
 }
 
+.crouselWrap {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  background: var(--bg-second);
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
 .leftWrap {
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);

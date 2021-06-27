@@ -90,28 +90,32 @@ const Home: NextPage<IHomeProps> = ({
 
   return (
     <div className={style.wrapper}>
-      <ArticleCarousel articles={recommendedArticles} />
       <DoubleColumnLayout
         leftNode={
-          <div className={style.leftWrap}>
-            <header>
-              <CategoryMenu categories={categories} />
-            </header>
-            <main>
-              <InfiniteScroll
-                pageStart={1}
-                loadMore={getArticles}
-                hasMore={page * pageSize < total}
-                loader={
-                  <div className={'loading'} key={0}>
-                    {t('gettingArticle')}
-                  </div>
-                }
-              >
-                <ArticleList articles={articles} />
-              </InfiniteScroll>
-            </main>
-          </div>
+          <>
+            <div className={style.crouselWrap}>
+              <ArticleCarousel articles={recommendedArticles} />
+            </div>
+            <div className={style.leftWrap}>
+              <header>
+                <CategoryMenu categories={categories} />
+              </header>
+              <main>
+                <InfiniteScroll
+                  pageStart={1}
+                  loadMore={getArticles}
+                  hasMore={page * pageSize < total}
+                  loader={
+                    <div className={'loading'} key={0}>
+                      {t('gettingArticle')}
+                    </div>
+                  }
+                >
+                  <ArticleList articles={articles} />
+                </InfiniteScroll>
+              </main>
+            </div>
+          </>
         }
         rightNode={
           <div className="sticky">

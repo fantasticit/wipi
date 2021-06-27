@@ -1,6 +1,7 @@
 .wrapper {
   background: var(--bg-second);
   box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
 
   > div {
     font-size: 0 !important;
@@ -31,7 +32,7 @@
       width: 100%;
       height: 100%;
       color: #ffffff;
-      background-color: rgba(0, 0, 0, .35);
+      background-color: rgba(0, 0, 0, 0.35);
       z-index: 1;
       font-size: 1rem;
 
