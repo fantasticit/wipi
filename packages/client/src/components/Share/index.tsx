@@ -189,6 +189,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
           display: 'flex',
           justifyContent: 'center',
           overflowX: 'hidden',
+          padding: '12px 0',
         }}
         onCancel={(e) => {
           e.preventDefault();

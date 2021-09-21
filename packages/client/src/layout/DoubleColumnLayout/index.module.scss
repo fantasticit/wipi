@@ -5,7 +5,6 @@
 
   > .fixed {
     position: fixed;
-    z-index: 10;
     top: 30vh;
     transform: translateX(-100%);
     padding-right: 10px;
@@ -23,13 +22,12 @@
 
   @media (max-width: 1024px) {
     > .fixed {
+      z-index: 10;
       top: 100%;
       bottom: 0;
       padding-right: 0;
       width: 100vw;
       height: 52px;
-      height: calc(52px + constant(safe-area-inset-bottom));
-      height: calc(52px + env(safe-area-inset-bottom));
       background-color: var(--bg-second);
       border-top: 1px solid var(--border-color);
       transform: translate(0, 0);
