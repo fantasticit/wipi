@@ -24,20 +24,20 @@ export const ArticleRecommend: React.FC<IProps> = ({
 }) => {
   const t = useTranslations();
   const [getRecommend, loading] = useAsyncLoading(ArticleProvider.getRecommend, 150, true);
-  const [fetched, toggleFetched] = useToggle(false);
+  const [fetched, setFetched] = useState('');
   const [articles, setArticles] = useState([]);
 
   const onViewportChange = useCallback(
     (visible) => {
-      if (fetched) return;
+      if (fetched === articleId) return;
       if (visible) {
-        toggleFetched();
         getRecommend(articleId).then((res) => {
           setArticles(res.slice(0, 6));
+          setFetched(articleId);
         });
       }
     },
-    [articleId, getRecommend, fetched, toggleFetched]
+    [articleId, getRecommend, fetched]
   );
 
   return (
