@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo, useEffect } from 'react';
 import { BackTop } from 'antd';
 import { GlobalContext } from '@/context/global';
+import { useToggle } from '@/hooks/useToggle';
 import { Seo } from '@/components/Seo';
 import { Header } from '@components/Header';
 import { Footer } from '@components/Footer';
@@ -15,25 +16,39 @@ interface Iprops {
 export const AppLayout: React.FC<Iprops> = ({ children, needFooter = true, hasBg }) => {
   const { setting, pages, tags } = useContext(GlobalContext);
   const { systemBg } = setting;
-  // const systemBg = '';
+  const [loaded, toggleLoaded] = useToggle(false);
+  const bg = useMemo(
+    () =>
+      `linear-gradient(to bottom, rgba(var(--rgb-bg-second), 0), rgba(var(--rgb-bg-second), 1)), url(${systemBg})`,
+    [systemBg]
+  );
+  const customBg = hasBg || (!!systemBg && loaded);
+
+  useEffect(() => {
+    if (!systemBg) return;
+    const img = document.createElement('img');
+    img.onload = () => {
+      toggleLoaded(true);
+    };
+    img.onerror = () => {
+      toggleLoaded(false);
+    };
+    img.src = systemBg;
+  }, [systemBg, toggleLoaded]);
 
   return (
     <div className={style.wrapper}>
       <Seo />
-      <Header setting={setting} tags={tags} pages={pages} hasBg={hasBg || !!systemBg} />
+      <Header setting={setting} tags={tags} pages={pages} hasBg={customBg} />
       <main
         className={style.main}
-        style={{ backgroundColor: hasBg || !!systemBg ? 'transparent' : 'var(--bg-body)' }}
+        style={{ backgroundColor: customBg ? 'transparent' : 'var(--bg-body)' }}
       >
         {children}
       </main>
-      {systemBg && !hasBg && (
-        <div className={style.bg}>
-          <img src={systemBg} alt="背景" />
-        </div>
-      )}
+      {systemBg && !hasBg && <div className={style.bg} style={{ backgroundImage: bg }}></div>}
       <BackTop />
-      {needFooter && <Footer setting={setting} />}
+      {needFooter && <Footer setting={setting} hasBg={customBg} />}
     </div>
   );
 };

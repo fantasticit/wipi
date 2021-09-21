@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import cls from 'classnames';
 import { Input } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import Link from 'next/link';
@@ -71,57 +72,56 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Spring from={{ y: 20 }} to={{ y: 0 }}>
-        <div className="container">
-          <header>
-            <span className={styles.title}>{t('searchArticle')}</span>
-            <span className={styles.btnWrapper} onClick={close}>
-              <CloseOutlined />
-              <span>esc</span>
-            </span>
-          </header>
+      <div className={styles.bg}></div>
+      <div className={cls('', styles.inner)}>
+        <header>
+          <span className={styles.title}>{t('searchArticle')}</span>
+          <span className={styles.btnWrapper} onClick={close}>
+            <CloseOutlined />
+            <span>esc</span>
+          </span>
+        </header>
 
-          <section>
-            <AntdSearch
-              ref={ref}
-              size="large"
-              loading={loading}
-              placeholder={t('searchArticlePlaceholder') as string}
-              onSearch={getArticles}
-              style={{ width: '100%' }}
+        <section>
+          <AntdSearch
+            ref={ref}
+            size="large"
+            loading={loading}
+            placeholder={t('searchArticlePlaceholder') as string}
+            onSearch={getArticles}
+            style={{ width: '100%' }}
+          />
+        </section>
+
+        <section className={styles.result}>
+          <ul>
+            <ListTrail
+              length={articles.length}
+              options={{
+                config: { mass: 1, tension: 180, friction: 12, clamp: true },
+                opacity: loading ? 0 : 1,
+                height: loading ? 0 : 48,
+                from: { opacity: 0, height: 0 },
+              }}
+              renderItem={(index) => {
+                const article = articles[index];
+                return (
+                  <Link
+                    key={article.id}
+                    href={`/article/[id]`}
+                    as={`/article/${article.id}`}
+                    scroll={false}
+                  >
+                    <a className={styles.item} onClick={close}>
+                      {article.title}
+                    </a>
+                  </Link>
+                );
+              }}
             />
-          </section>
-
-          <section>
-            <ul>
-              <ListTrail
-                length={articles.length}
-                options={{
-                  config: { mass: 1, tension: 180, friction: 12, clamp: true },
-                  opacity: loading ? 0 : 1,
-                  height: loading ? 0 : 48,
-                  from: { opacity: 0, height: 0 },
-                }}
-                renderItem={(index) => {
-                  const article = articles[index];
-                  return (
-                    <Link
-                      key={article.id}
-                      href={`/article/[id]`}
-                      as={`/article/${article.id}`}
-                      scroll={false}
-                    >
-                      <a className={styles.item} onClick={close}>
-                        {article.title}
-                      </a>
-                    </Link>
-                  );
-                }}
-              />
-            </ul>
-          </section>
-        </div>
-      </Spring>
+          </ul>
+        </section>
+      </div>
     </div>
   );
 };

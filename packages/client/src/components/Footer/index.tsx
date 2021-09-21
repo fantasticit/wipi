@@ -28,9 +28,9 @@ const RSS = () => {
   );
 };
 
-export const Footer = ({ setting, className = '' }) => {
+export const Footer = ({ setting, className = '', hasBg = false }) => {
   return (
-    <footer className={cls(style.footer, className)}>
+    <footer className={cls(style.footer, className, hasBg && style.hasBg)}>
       <ul className={style.icons}>
         <li>
           <a className={style.github} href="/rss" target="_blank">

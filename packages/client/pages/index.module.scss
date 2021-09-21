@@ -81,8 +81,8 @@
 }
 
 .footer {
-  color: var(--second-text-color);
-  padding: 0;
-  background: transparent;
-  border-top: 0;
+  color: var(--second-text-color) !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border-top: 0 !important;
 }

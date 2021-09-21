@@ -1,9 +1,16 @@
 .footer {
+  position: relative;
+  z-index: 1;
   padding: 20px 0;
   border-top: 1px solid var(--border-color);
   color: #c1bdbd;
   background: var(--bg-footer);
   text-align: center;
+
+  &.hasBg {
+    background: transparent;
+    color: var(--main-text-color);
+  }
 }
 
 ul.icons {
@@ -23,7 +30,7 @@ ul.icons {
     }
 
     &:hover {
-      color: var(--main-text-color);
+      color: var(--primary-color);
     }
   }
 }

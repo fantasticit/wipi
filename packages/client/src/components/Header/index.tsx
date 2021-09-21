@@ -108,13 +108,13 @@ export const Header = ({ setting, tags, pages, hasBg = false }) => {
   ));
 
   return (
-    <header className={cls(style.header, hasBg ? style.transparent : false)}>
+    <header className={cls(style.header, hasBg && !visible ? style.transparent : false)}>
       <div
         className={cls(
           style.wrapper,
           affix ? style.isFixed : false,
           affixVisible ? style.visible : false,
-          hasBg ? style.transparent : false
+          hasBg && !visible ? style.transparent : false
         )}
       >
         <div className={cls('container')}>

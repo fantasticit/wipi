@@ -34,8 +34,9 @@ const Page: NextPage<IProps> = ({ page }) => {
           </Helmet>
           <div
             style={{
-              backgroundColor: !setting.systemBg ? 'var(--bg-body)' : 'transparent',
+              backgroundColor: !setting.systemBg ? 'var(--bg-second)' : 'transparent',
               borderBottom: !setting.systemBg ? '1px solid var(--border-color)' : 0,
+              paddingTop: 21,
             }}
           >
             <div className="container">
