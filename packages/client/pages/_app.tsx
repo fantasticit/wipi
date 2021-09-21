@@ -22,7 +22,10 @@ import '@/theme/markdown.scss';
 Router.events.on('routeChangeComplete', () => {
   setTimeout(() => {
     if (document.documentElement.scrollTop > 0) {
-      window.scrollTo(0, 0);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
   }, 0);
 });
