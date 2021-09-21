@@ -180,7 +180,7 @@ const Article: NextPage<IProps> = ({ article }) => {
         <div className={style.recmmendArticles}>
           <p className={style.title}>{t('recommendToReading')}</p>
           <div className={style.articleContainer}>
-            <ArticleRecommend articleId={null} needTitle={false} />
+            <ArticleRecommend articleId={article.id} needTitle={false} />
           </div>
         </div>
         {/* E 推荐文章 */}
