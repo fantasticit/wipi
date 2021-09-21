@@ -23,12 +23,7 @@ export const ArticleList: React.FC<IProps> = ({ articles = [] }) => {
         articles.map((article) => {
           return (
             <div key={article.id} className={style.articleItem}>
-              <Link
-                key={article.id}
-                href={`/article/[pId]`}
-                as={`/article/${article.id}`}
-                scroll={false}
-              >
+              <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
                 <a aria-label={article.title}>
                   <header>
                     <div className={style.title}>{article.title}</div>
