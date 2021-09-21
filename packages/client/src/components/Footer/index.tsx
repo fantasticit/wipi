@@ -33,16 +33,23 @@ export const Footer = ({ setting, className = '', hasBg = false }) => {
     <footer className={cls(style.footer, className, hasBg && style.hasBg)}>
       <ul className={style.icons}>
         <li>
-          <a className={style.github} href="/rss" target="_blank">
+          <a
+            aria-label="rss"
+            className={style.github}
+            href="/rss"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <RSS />
           </a>
         </li>
         <li>
           <a
+            aria-label="Github"
             className={style.github}
             href="https://github.com/fantasticit/wipi"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <GithubOutlined />
           </a>

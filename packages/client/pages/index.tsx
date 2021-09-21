@@ -54,6 +54,7 @@ export const CategoryMenu = ({ categories }) => {
                   ? asPath === category.path
                   : asPath.replace('/category/', '') === category.value,
             })}
+            aria-label={category.label}
           >
             <span>{category.label}</span>
           </a>

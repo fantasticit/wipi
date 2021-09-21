@@ -112,7 +112,7 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
                     as={`/article/${article.id}`}
                     scroll={false}
                   >
-                    <a className={styles.item} onClick={close}>
+                    <a aria-label={article.title} className={styles.item} onClick={close}>
                       {article.title}
                     </a>
                   </Link>

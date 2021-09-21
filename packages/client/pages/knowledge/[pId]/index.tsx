@@ -51,7 +51,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
           <Breadcrumb>
             <Breadcrumb.Item>
               <Link href="/knowledge">
-                <a>{t('knowledgeBooks')}</a>
+                <a aria-label="knowledges books">{t('knowledgeBooks')}</a>
               </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>{book.title}</Breadcrumb.Item>
@@ -109,7 +109,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
                             as={`/knowledge/${pId}/${chapter.id}`}
                             href={`/knowledge/[pId]/[id]`}
                           >
-                            <a>
+                            <a aria-label={chapter.title}>
                               <span>{chapter.title}</span>
                               <span>
                                 <LocaleTime date={chapter.createAt} />

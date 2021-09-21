@@ -24,7 +24,7 @@ export const Tags = ({ tags = [], needTitle = true, style: cssStyle = {} }) => {
             className={cls(style.item, routerTag === tag.value ? style.active : false)}
           >
             <Link href={`/tag/[tag]`} as={`/tag/` + tag.value} scroll={false}>
-              <a>
+              <a aria-label={tag.label}>
                 {tag.label} [{tag.articleCount}]
               </a>
             </Link>

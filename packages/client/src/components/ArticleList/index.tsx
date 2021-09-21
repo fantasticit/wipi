@@ -29,7 +29,7 @@ export const ArticleList: React.FC<IProps> = ({ articles = [] }) => {
                 as={`/article/${article.id}`}
                 scroll={false}
               >
-                <a>
+                <a aria-label={article.title}>
                   <header>
                     <div className={style.title}>{article.title}</div>
                     <div className={style.info}>

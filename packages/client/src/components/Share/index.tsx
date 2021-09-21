@@ -154,6 +154,7 @@ export const Share: React.FC<ShareProps> = ({ cover, title, desc, url, children 
                   color: '#ff0064',
                 }}
                 href={fullUrl}
+                aria-label={setting.systemTitle}
               >
                 {setting.systemTitle}
               </a>

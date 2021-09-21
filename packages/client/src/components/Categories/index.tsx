@@ -17,11 +17,11 @@ export const Categories = ({ categories = [] }) => {
         <span>{t('categoryTitle')}</span>
       </div>
       <ul>
-        {categories.map(category => {
+        {categories.map((category) => {
           return (
             <li>
               <Link href="/category/[category]" as={`/category/` + category.value} shallow={false}>
-                <a>
+                <a aria-label={category.label}>
                   <span>{category.label}</span>
                   <span>
                     {t('total')} {category.articleCount} {t('articleCountTemplate')}

@@ -70,7 +70,7 @@ export const Header = ({ setting, tags, pages, hasBg = false }) => {
   const navMenu = NAV_LINKS.map((nav) => (
     <li key={nav.path} className={cls({ [style.active]: asPath === nav.path })}>
       <Link href={nav.path}>
-        <a>
+        <a aria-label={nav.locale}>
           <span>{t(nav.locale)}</span>
         </a>
       </Link>
@@ -102,7 +102,7 @@ export const Header = ({ setting, tags, pages, hasBg = false }) => {
       }}
     >
       <Link href={'/page/[id]'} as={`/page/${menu.path}`} scroll={false}>
-        <a>{menu.name}</a>
+        <a aria-label={menu.name}>{menu.name}</a>
       </Link>
     </li>
   ));
@@ -121,13 +121,13 @@ export const Header = ({ setting, tags, pages, hasBg = false }) => {
           <div className={style.logo}>
             {/^http/.test(setting.systemLogo) ? (
               <Link href="/" scroll={false}>
-                <a>
-                  <img src={setting.systemLogo} alt="" />
+                <a aria-label="home">
+                  <img src={setting.systemLogo} alt="logo" />
                 </a>
               </Link>
             ) : (
               <Link href="/" scroll={false}>
-                <a dangerouslySetInnerHTML={{ __html: setting.systemLogo }}></a>
+                <a aria-label="home" dangerouslySetInnerHTML={{ __html: setting.systemLogo }}></a>
               </Link>
             )}
           </div>

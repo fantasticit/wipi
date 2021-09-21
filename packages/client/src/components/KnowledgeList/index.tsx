@@ -28,7 +28,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [], small = false
                 as={`/knowledge/${knowledge.id}`}
                 scroll={false}
               >
-                <a>
+                <a aria-label={knowledge.title}>
                   <header>
                     <div className={style.title}>{knowledge.title}</div>
                     <div className={style.info}>

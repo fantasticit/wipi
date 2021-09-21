@@ -79,7 +79,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
                   <Link as={`/knowledge/${pId}`} href="/knowledge/[pId]">
-                    <a>{book.title}</a>
+                    <a aria-label={book.title}>{book.title}</a>
                   </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{chapter.title}</Breadcrumb.Item>
@@ -124,7 +124,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                         }}
                       >
                         <Link href={`/knowledge/[pId]/[id]`} as={`/knowledge/${pId}/${prev.id}`}>
-                          <a>
+                          <a aria-label={prev.title}>
                             <LeftOutlined />
                             <span>{prev.title}</span>
                           </a>
@@ -139,7 +139,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                         }}
                       >
                         <Link href={`/knowledge/[pId]/[id]`} as={`/knowledge/${pId}/${next.id}`}>
-                          <a>
+                          <a aria-label={next.title}>
                             <span>{next.title}</span>
                             <RightOutlined />
                           </a>
@@ -168,7 +168,12 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                     return (
                       <li key={chapter.id} id={`js-toc-item-wrapper-${chapter.id}`}>
                         <Link as={`/knowledge/${pId}/${chapter.id}`} href={`/knowledge/[pId]/[id]`}>
-                          <a className={cls(chapter.id === id && style.active)}>{chapter.title}</a>
+                          <a
+                            aria-label={chapter.title}
+                            className={cls(chapter.id === id && style.active)}
+                          >
+                            {chapter.title}
+                          </a>
                         </Link>
                       </li>
                     );
