@@ -10,9 +10,10 @@ export const Theme = () => {
   useEffect(() => {
     const isSystemDark =
       window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    toggleDark(isSystemDark);
+    const isLastDark = window.localStorage.getItem('dark') === '1';
+    toggleDark(isSystemDark !== isLastDark ? isSystemDark : isLastDark);
     setMounted(true);
-  }, [toggleDark]);
+  }, []);
 
   useEffect(() => {
     if (!mounted) {
@@ -23,6 +24,7 @@ export const Theme = () => {
     } else {
       document.body.classList.remove('dark');
     }
+    window.localStorage.setItem('dark', dark ? '1' : '-1');
   }, [mounted, dark]);
 
   return (
