@@ -15,6 +15,7 @@ const HEIGHT = 32;
 
 export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> = ({
   tocs = [],
+  maxHeight,
 }) => {
   const t = useTranslations();
   const ref = useRef<HTMLDivElement>();
@@ -53,14 +54,18 @@ export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> =
     <div className={style.wrapper}>
       <header>{t('toc')}</header>
       <main>
-        <div ref={ref}>
+        <div
+          ref={ref}
+          style={{
+            maxHeight: typeof maxHeight === 'string' ? maxHeight : maxHeight + 'px',
+          }}
+        >
           <div>
             <ListTrail
               length={tocs.length}
               options={{
-                opacity: 1,
                 height: 32,
-                from: { opacity: 0, height: 0 },
+                from: { height: 32 },
               }}
               element={'div'}
               renderItem={(idx) => {

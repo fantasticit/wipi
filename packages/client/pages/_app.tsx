@@ -21,7 +21,9 @@ import '@/theme/markdown.scss';
 
 Router.events.on('routeChangeComplete', () => {
   setTimeout(() => {
-    window.scrollTo(0, 0);
+    if (document.documentElement.scrollTop > 0) {
+      window.scrollTo(0, 0);
+    }
   }, 0);
 });
 

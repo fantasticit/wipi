@@ -46,7 +46,7 @@
   margin: 0 auto;
 
   .title {
-    margin-bottom: 30px;
+    margin-bottom: 16px;
     color: var(--main-text-color);
     font-weight: 500;
     font-size: 16px;
@@ -56,8 +56,9 @@
   }
 
   .commentContainer {
-    border-radius: 4px;
-    margin-bottom: 35px;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    margin-bottom: 16px;
   }
 }
 
@@ -67,7 +68,7 @@
   margin: 0 auto;
 
   p.title {
-    margin-bottom: 30px;
+    margin-bottom: 16px;
     color: var(--main-text-color);
     font-weight: 500;
     font-size: 16px;
@@ -77,6 +78,9 @@
   }
 
   .articleContainer {
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+
     > div {
       background-color: transparent !important;
       box-shadow: none !important;

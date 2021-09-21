@@ -17,9 +17,9 @@
 
   .metaInfoWrap {
     text-align: center;
-      
+
     .title {
-      margin: .67em 0 0;
+      margin: 0.67em 0 0;
       color: inherit;
       font-weight: 700;
       font-size: 2.5rem;
@@ -86,11 +86,6 @@
 }
 
 .commentWrap {
-  &.isBg {
-    box-shadow: var(--box-shadow);
-    background: var(--bg-second);
-  }
-
   .title {
     margin: 1rem 0;
     color: var(--main-text-color);
@@ -98,14 +93,39 @@
     font-size: 16px;
     line-height: 22px;
     text-align: center;
-    letter-spacing: .06em;
+    letter-spacing: 0.06em;
   }
 
-  > header {
+  > div {
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+  }
+}
+
+.recmmendArticles {
+  p.title {
+    margin-top: 16px;
+    margin-bottom: 16px;
     color: var(--main-text-color);
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
     line-height: 22px;
-    margin-bottom: 12px;
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  .articleContainer {
+    box-shadow: var(--box-shadow);
+
+    > div {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .articleContainer {
+      box-shadow: none;
+    }
   }
 }

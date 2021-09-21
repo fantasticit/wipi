@@ -9,6 +9,8 @@ import { ListTrail } from '@/components/Animation/Trail';
 import { LocaleTime } from '@/components/LocaleTime';
 import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { Categories } from '@components/Categories';
+import { Footer } from '@components/Footer';
+import indexStyle from '../index.module.scss';
 import style from './index.module.scss';
 
 interface IProps {
@@ -57,7 +59,7 @@ const resolveArticlesCount = (articles) => {
 };
 
 const Archives: NextPage<IProps> = ({ articles }) => {
-  const { categories } = useContext(GlobalContext);
+  const { categories, setting } = useContext(GlobalContext);
   const t = useTranslations();
 
   return (
@@ -96,6 +98,7 @@ const Archives: NextPage<IProps> = ({ articles }) => {
         <div className="sticky">
           <ArticleRecommend mode="inline" />
           <Categories categories={categories} />
+          <Footer className={indexStyle.footer} setting={setting} />
         </div>
       }
     />
@@ -105,7 +108,7 @@ const Archives: NextPage<IProps> = ({ articles }) => {
 // 服务端预取数据
 Archives.getInitialProps = async () => {
   const articles = await ArticleProvider.getArchives();
-  return { articles };
+  return { articles, needLayoutFooter: false };
 };
 
 export default Archives;

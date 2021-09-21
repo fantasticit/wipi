@@ -121,10 +121,10 @@ const Home: NextPage<IHomeProps> = ({
           <div className="sticky">
             <ArticleRecommend mode="inline" />
             <Tags tags={tags} />
+            <Footer className={style.footer} setting={setting} />
           </div>
         }
       />
-      <Footer setting={setting} />
     </div>
   );
 };

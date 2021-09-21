@@ -77,6 +77,18 @@ export const Header = ({ setting, tags, pages }) => {
     </li>
   ));
 
+  useEffect(() => {
+    window.postMessage(
+      {
+        id: 'header-state',
+        isFixedVisible: affix && affixVisible,
+        height: '64px',
+        isFxied: affix,
+      },
+      location.origin
+    );
+  }, [affix, affixVisible]);
+
   const pageMenu = pages.map((menu) => (
     <li
       key={menu.label}

@@ -23,7 +23,7 @@
   > footer {
     display: flex;
     justify-content: space-between;
-    padding-top: 1rem;
+    padding-top: 8px;
 
     :global {
       .ant-btn-primary[disabled] {

@@ -39,7 +39,7 @@ export const CommentEditor: React.FC<Props> = ({
     [t, replyComment]
   );
   const textareaSize = useMemo(
-    () => (small ? { minRows: 4, maxRows: 8 } : { minRows: 6, maxRows: 12 }),
+    () => (small ? { minRows: 3, maxRows: 6 } : { minRows: 4, maxRows: 8 }),
     [small]
   );
   const btnSize = useMemo(() => (small ? 'small' : 'middle'), [small]);

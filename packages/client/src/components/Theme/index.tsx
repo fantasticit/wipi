@@ -8,14 +8,9 @@ export const Theme = () => {
   const [dark, toggleDark] = useToggle(false);
 
   useEffect(() => {
-    const dark = window.localStorage.getItem('dark');
-    if (dark) {
-      toggleDark(dark === '1');
-    } else {
-      const isSystemDark =
-        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      toggleDark(isSystemDark);
-    }
+    const isSystemDark =
+      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    toggleDark(isSystemDark);
     setMounted(true);
   }, [toggleDark]);
 
@@ -28,7 +23,6 @@ export const Theme = () => {
     } else {
       document.body.classList.remove('dark');
     }
-    window.localStorage.setItem('dark', dark ? '1' : '-1');
   }, [mounted, dark]);
 
   return (

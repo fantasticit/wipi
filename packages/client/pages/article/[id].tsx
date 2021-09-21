@@ -175,15 +175,25 @@ const Article: NextPage<IProps> = ({ article }) => {
           </div>
         )}
         {/* E 文章评论 */}
+
+        {/* S 推荐文章 */}
+        <div className={style.recmmendArticles}>
+          <p className={style.title}>{t('recommendToReading')}</p>
+          <div className={style.articleContainer}>
+            <ArticleRecommend articleId={null} needTitle={false} />
+          </div>
+        </div>
+        {/* E 推荐文章 */}
       </ImageViewer>
     </>
   );
 
   const Aside = (
-    <div className={'sticky'}>
-      <ArticleRecommend articleId={article.id} mode="inline" />
-      {tocs && tocs.length ? <Toc key={article.id} tocs={tocs} maxHeight={'80vh'} /> : null}
-    </div>
+    <>
+      <div className={'sticky'}>
+        {tocs && tocs.length ? <Toc key={article.id} tocs={tocs} maxHeight={'80vh'} /> : null}
+      </div>
+    </>
   );
 
   return (

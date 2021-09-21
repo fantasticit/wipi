@@ -1,61 +1,81 @@
 .commentItem {
-  background-color: var(--bg-second);
-
   &.isParent {
-    padding: 16px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-top: 1rem;
-  }
+    padding: 0 16px;
+    background-color: var(--bg-second);
 
-  &.isChild {
-    padding: 16px 0;
-
-    &:not(:first-of-type) {
-      padding-top: 0;
+    > div {
+      padding: 16px 0;
+      border-top: 1px solid var(--border-color);
     }
 
     &:last-of-type {
-      padding-bottom: 0;
-    }
-  }
-
-  > header {
-    display: flex;
-    align-items: center;
-
-    .name {
-      color: var(--main-text-color);
-      padding: 0 8px;
-    }
-  }
-
-  > main {
-    font-size: 0.9rem;
-  }
-
-  > footer {
-    font-size: 0.8rem;
-
-    .meta {
-      color: var(--disable-text-color);
-    }
-
-    .reply {
-      cursor: pointer;
-      margin-left: 8px;
-
-      &:hover {
-        color: var(--primary-color);
+      > div {
+        padding-bottom: 0;
       }
+    }
+  }
 
-      i {
-        margin-right: 4px;
+  &.isChild {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+
+    &.isLast {
+      border-bottom-width: 0;
+    }
+  }
+
+  > div {
+    > header {
+      display: flex;
+      align-items: center;
+
+      .name {
+        color: var(--main-text-color);
+        padding: 0 8px;
       }
     }
 
-    .editorWrapper {
-      padding-top: 16px;
+    > main {
+      font-size: 0.9rem;
     }
+
+    > footer {
+      font-size: 0.8rem;
+
+      .meta {
+        color: var(--disable-text-color);
+      }
+
+      .reply {
+        cursor: pointer;
+        margin-left: 8px;
+
+        &:hover {
+          color: var(--primary-color);
+        }
+
+        i {
+          margin-right: 4px;
+        }
+      }
+
+      .editorWrapper {
+        padding-top: 16px;
+      }
+    }
+  }
+}
+
+.childWrapper {
+  margin-top: 8px;
+  padding: 4px 12px 12px;
+  background-color: var(--bg-body);
+
+  .showMore {
+    color: var(--second-text-color);
+    padding-top: 12px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    cursor: pointer;
   }
 }

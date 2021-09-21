@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import cls from 'classnames';
 import { Avatar } from 'antd';
 import { useTranslations } from 'next-intl';
-import { MessageOutlined } from '@ant-design/icons';
+import { MessageOutlined, UpOutlined, DownOutlined } from '@ant-design/icons';
 import { ConditionTransition } from '@/components/Animation/Transition';
 import { Opacity } from '@/components/Animation/Opacity';
 import { LocaleTime } from '@/components/LocaleTime';
@@ -16,13 +16,15 @@ type Props = {
   comment: IComment;
   parentComment?: IComment;
   isChild: boolean;
+  isLast: Boolean;
 };
 
-export function CommentItem({ comment, parentComment, isChild = false }: Props) {
+export function CommentItem({ comment, parentComment, isChild = false, isLast = false }: Props) {
   const t = useTranslations('commentNamespace');
   const [editorVisible, toggleEditorVisible] = useToggle(false);
-  const avatarSize = useMemo(() => (isChild ? 24 : 32), [isChild]);
-  const paddingHorizontal = useMemo(() => avatarSize + 8, [avatarSize]);
+  const [showMore, toggleMore] = useToggle(false);
+  const avatarSize = useMemo(() => (isChild ? 16 : 24), [isChild]);
+  const paddingHorizontal = useMemo(() => avatarSize + 4, [avatarSize]);
 
   return (
     <div
@@ -30,81 +32,103 @@ export function CommentItem({ comment, parentComment, isChild = false }: Props) 
         [styles.commentItem]: true,
         [styles.isParent]: !isChild,
         [styles.isChild]: isChild,
+        [styles.isLast]: isLast,
       })}
     >
-      <header>
-        <Avatar size={avatarSize} style={{ backgroundColor: getRandomColor(comment.name) }}>
-          {('' + comment.name).charAt(0).toUpperCase()}
-        </Avatar>
-        <span className={styles.name}>
-          <strong>{comment.name}</strong>
-          {comment.replyUserName ? (
-            <>
-              <span style={{ margin: '0 8px' }}>{t('reply')}</span>
-              <strong className={styles.replyUser}>{comment.replyUserName}</strong>
-            </>
-          ) : null}
-        </span>
-      </header>
-      <main style={{ padding: `12px 0 12px ${paddingHorizontal}px` }}>
-        <div dangerouslySetInnerHTML={{ __html: comment.html || comment.content }} />
-      </main>
-      <footer style={{ paddingLeft: `${paddingHorizontal}px` }}>
-        <div className={styles.meta}>
-          {comment.userAgent ? (
-            <span>
-              {comment.userAgent}
-              {' · '}
-            </span>
-          ) : null}
-          <LocaleTime date={comment.createAt} timeago={true}></LocaleTime>
-          <span className={styles.reply} onClick={toggleEditorVisible}>
-            <MessageOutlined style={{ marginRight: 4 }} />
-            {t('reply')}
+      <div>
+        <header>
+          <Avatar size={avatarSize} style={{ backgroundColor: getRandomColor(comment.name) }}>
+            {('' + comment.name).charAt(0).toUpperCase()}
+          </Avatar>
+          <span className={styles.name}>
+            <strong>{comment.name}</strong>
+            {comment.replyUserName ? (
+              <>
+                <span style={{ margin: '0 8px' }}>{t('reply')}</span>
+                <strong className={styles.replyUser}>{comment.replyUserName}</strong>
+              </>
+            ) : null}
           </span>
-        </div>
-        <ConditionTransition
-          visible={editorVisible}
-          options={{
-            from: { opacity: 0, height: 0 },
-            enter: { opacity: 1, height: 155 },
-            leave: { opacity: 0, height: 0 },
-          }}
-        >
-          <div className={styles.editorWrapper}>
-            <CommentEditor
-              small={true}
-              hostId={comment.hostId}
-              parentComment={parentComment}
-              replyComment={comment}
-              onOk={toggleEditorVisible}
-              onClose={toggleEditorVisible}
-            />
+        </header>
+        <main style={{ padding: `8px 0 8px ${paddingHorizontal}px` }}>
+          <div dangerouslySetInnerHTML={{ __html: comment.html || comment.content }} />
+        </main>
+        <footer style={{ paddingLeft: `${paddingHorizontal}px` }}>
+          <div className={styles.meta}>
+            {comment.userAgent ? (
+              <span>
+                {comment.userAgent}
+                {' · '}
+              </span>
+            ) : null}
+            <LocaleTime date={comment.createAt} timeago={true}></LocaleTime>
+            <span className={styles.reply} onClick={toggleEditorVisible}>
+              <MessageOutlined style={{ marginRight: 4 }} />
+              {t('reply')}
+            </span>
           </div>
-        </ConditionTransition>
-        {comment.children && (
-          <div>
-            <Comments comments={comment.children} parentComment={comment} isChild={true} />
-          </div>
-        )}
-      </footer>
+          <ConditionTransition
+            visible={editorVisible}
+            options={{
+              from: { opacity: 0, height: 0 },
+              enter: { opacity: 1, height: 155 },
+              leave: { opacity: 0, height: 0 },
+            }}
+          >
+            <div className={styles.editorWrapper}>
+              <CommentEditor
+                small={true}
+                hostId={comment.hostId}
+                parentComment={parentComment}
+                replyComment={comment}
+                onOk={toggleEditorVisible}
+                onClose={toggleEditorVisible}
+              />
+            </div>
+          </ConditionTransition>
+          {comment.children && comment.children.length ? (
+            <div className={styles.childWrapper}>
+              <Comments
+                comments={comment.children.slice(0, showMore ? comment.children.length : 2)}
+                parentComment={comment}
+                isChild={true}
+              />
+              {comment.children.length > 2 ? (
+                <div className={styles.showMore} onClick={toggleMore}>
+                  {showMore ? (
+                    <>
+                      收起 <UpOutlined />
+                    </>
+                  ) : (
+                    <>
+                      查看更多 <DownOutlined />
+                    </>
+                  )}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+        </footer>
+      </div>
     </div>
   );
 }
 
 export function Comments({ comments, parentComment = null, isChild = false }) {
   return (
-    <>
-      {comments.map((comment) => {
+    <div>
+      {comments.map((comment, index) => {
         const component = (
           <CommentItem
+            key={comment.id}
             comment={comment}
             parentComment={parentComment || comment}
             isChild={isChild}
+            isLast={index === comments.length - 1}
           />
         );
         return isChild ? <Opacity>{component}</Opacity> : component;
       })}
-    </>
+    </div>
   );
 }

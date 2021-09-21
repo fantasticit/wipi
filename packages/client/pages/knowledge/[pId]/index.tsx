@@ -1,15 +1,17 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Breadcrumb, Button } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
+import { GlobalContext } from '@/context/global';
 import { KnowledgeProvider } from '@/providers/knowledge';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ListTrail } from '@/components/Animation/Trail';
 import { LocaleTime } from '@/components/LocaleTime';
 import { KnowledgeList } from '@/components/KnowledgeList';
+import { Footer } from '@components/Footer';
 import style from './index.module.scss';
 
 interface IProps {
@@ -19,6 +21,7 @@ interface IProps {
 }
 
 const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
+  const { setting } = useContext(GlobalContext);
   const t = useTranslations();
   const chapters = (book && book.children) || [];
 
@@ -130,8 +133,9 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
           <div className={cls('sticky', style.tocWrapper)}>
             <header>{t('otherKnowledges')}</header>
             <main>
-              <KnowledgeList knowledges={otherBooks} />
+              <KnowledgeList small={true} knowledges={otherBooks} />
             </main>
+            <Footer className={style.footer} setting={setting} />
           </div>
         }
         isRightNodeMobileHidden={false}
@@ -150,7 +154,12 @@ Page.getInitialProps = async (ctx) => {
       status: 'publish',
     }),
   ]);
-  return { pId, book, otherBooks: allBooks.filter((b) => b.id !== book.id) };
+  return {
+    pId,
+    book,
+    otherBooks: allBooks.filter((b) => b.id !== book.id),
+    needLayoutFooter: false,
+  };
 };
 
 export default Page;

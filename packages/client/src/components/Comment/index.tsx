@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { CommentProvider } from '@/providers/comment';
 import { usePagination } from '@/hooks/usePagination';
 import { useToggle } from '@/hooks/useToggle';
-import { Opacity } from '@/components/Animation/Opacity';
 import { CommentEditor } from './CommentEditor';
 import { Comments } from './CommentItem';
 import styles from './index.module.scss';
@@ -45,23 +44,25 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
         <CommentEditor hostId={articleId} parentComment={null} replyComment={null} />
       </div>
       <Comments comments={comments} />
-      <Opacity>
-        <div className={styles.pagination} style={{ padding: loading || total > 0 ? '16px 0' : 0 }}>
-          {!loading && total > 0 ? (
-            <Pagination
-              size="small"
-              current={page}
-              pageSize={pageSize}
-              total={total}
-              onChange={setPage}
-            />
-          ) : loading ? (
-            <Button type="primary" loading={true}>
-              {t('loading')}
-            </Button>
-          ) : null}
-        </div>
-      </Opacity>
+      <div
+        className={styles.pagination}
+        style={{ padding: loading || total > pageSize ? '16px 0' : '16px 0 0' }}
+      >
+        {!loading && total > 0 ? (
+          <Pagination
+            size="small"
+            current={page}
+            pageSize={pageSize}
+            total={total}
+            onChange={setPage}
+            hideOnSinglePage={true}
+          />
+        ) : loading ? (
+          <Button type="primary" loading={true}>
+            {t('loading')}
+          </Button>
+        ) : null}
+      </div>
     </div>
   );
 };

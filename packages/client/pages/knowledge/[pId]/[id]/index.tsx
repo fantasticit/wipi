@@ -159,7 +159,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
           </>
         }
         rightNode={
-          <div className={'sticky'} style={{ marginTop: 37 }}>
+          <div className={'sticky'} style={{ marginTop: 37 }} data-margin-top={37}>
             <div className={cls(style.infoWrapper, style.isBg)}>
               <header>{book.title}</header>
               <main>

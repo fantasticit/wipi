@@ -1,16 +1,11 @@
 .editorWrapper {
   padding: 16px;
-  border-radius: var(--border-radius);
   background-color: var(--bg-second);
-  box-shadow: var(--box-shadow);
 }
 
 .pagination {
-  margin-top: 16px;
   color: var(--second-text-color);
   background-color: var(--bg-second);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
   text-align: center;
 
   :global {

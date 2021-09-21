@@ -8,6 +8,8 @@ import { KnowledgeProvider } from '@/providers/knowledge';
 import { KnowledgeList } from '@components/KnowledgeList';
 import { Categories } from '@components/Categories';
 import { ArticleRecommend } from '@/components/ArticleRecommend';
+import { Footer } from '@components/Footer';
+import indexStyle from '../index.module.scss';
 
 interface IHomeProps {
   books: IKnowledge[];
@@ -17,7 +19,7 @@ interface IHomeProps {
 const pageSize = 12;
 
 const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => {
-  const { categories } = useContext(GlobalContext);
+  const { categories, setting } = useContext(GlobalContext);
   const t = useTranslations();
   const [page, setPage] = useState(1);
   const [books, setBooks] = useState<IKnowledge[]>(defaultBooks);
@@ -57,6 +59,7 @@ const Page: NextPage<IHomeProps> = ({ books: defaultBooks = [], total = 0 }) => 
         <div className={'sticky'}>
           <ArticleRecommend mode="inline" />
           <Categories categories={categories} />
+          <Footer className={indexStyle.footer} setting={setting} />
         </div>
       }
     />
@@ -73,6 +76,7 @@ Page.getInitialProps = async () => {
   return {
     books,
     total,
+    needLayoutFooter: false,
   };
 };
 

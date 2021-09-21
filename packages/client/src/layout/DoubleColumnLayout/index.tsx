@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import cls from 'classnames';
 import { ShareProps, Share } from '@/components/Share';
 import { CommentIcon } from '@/components/Comment/CommentIcon';
@@ -32,6 +32,7 @@ export const DoubleColumnLayout: React.FC<IProps> = ({
   showComment = false,
   shareProps,
 }) => {
+  const $aside = useRef<HTMLElement>();
   const [showWidge, toggleWidge] = useToggle(true);
 
   useEffect(() => {
@@ -50,6 +51,23 @@ export const DoubleColumnLayout: React.FC<IProps> = ({
       document.removeEventListener('scroll', handler);
     };
   }, [toggleWidge]);
+
+  useEffect(() => {
+    const handler = (evt) => {
+      const { id, isFxied, isFixedVisible, height } = evt.data;
+      if (id !== 'header-state') return;
+      const el = $aside.current.querySelector('.sticky') as HTMLElement;
+      if (!el) return;
+      el.style.position = isFxied ? 'fixed' : 'sticky';
+      el.style.marginTop = isFxied ? '0' : el.dataset.marginTop + 'px';
+      el.style.transform = `translateY(${isFixedVisible ? height : 0})`;
+    };
+    window.addEventListener('message', handler);
+
+    return () => {
+      window.removeEventListener('message', handler);
+    };
+  }, []);
 
   return (
     <div className={cls(style.outerWrap)} style={{ minHeight, background }}>
@@ -85,6 +103,7 @@ export const DoubleColumnLayout: React.FC<IProps> = ({
 
           <section className={cls(style.left, leftClassName)}>{leftNode}</section>
           <aside
+            ref={$aside}
             className={cls(
               style.right,
               rightClassName,

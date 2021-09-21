@@ -81,10 +81,10 @@ const Home: NextPage<IProps> = ({ articles: defaultArticles = [], total, tag }) 
           <div className="sticky">
             <ArticleRecommend mode="inline" />
             <Categories categories={categories} />
+            <Footer className={style.footer} setting={setting} />
           </div>
         }
       />
-      <Footer setting={setting} />
     </div>
   );
 };

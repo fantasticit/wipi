@@ -73,9 +73,18 @@
   }
 
   > main {
+    margin-bottom: 4rem;
+
     > div > div {
       border-radius: 0 0 var(--border-radius) var(--border-radius) !important;
       box-shadow: none !important;
     }
   }
+}
+
+.footer {
+  color: var(--second-text-color);
+  padding: 0;
+  background: transparent;
+  border-top: 0;
 }

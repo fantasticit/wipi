@@ -17,23 +17,9 @@ export const Categories = ({ categories = [] }) => {
         <span>{t('categoryTitle')}</span>
       </div>
       <ul>
-        <ListTrail
-          length={categories.length}
-          options={{
-            opacity: 1,
-            height: 37,
-            x: 0,
-            from: { opacity: 0, height: 0, x: -20 },
-          }}
-          setItemContainerProps={(index) => ({
-            className: cls(
-              style.tagItem,
-              routerCategory === categories[index].value ? style.active : false
-            ),
-          })}
-          renderItem={(index) => {
-            const category = categories[index];
-            return (
+        {categories.map(category => {
+          return (
+            <li>
               <Link href="/category/[category]" as={`/category/` + category.value} shallow={false}>
                 <a>
                   <span>{category.label}</span>
@@ -42,9 +28,9 @@ export const Categories = ({ categories = [] }) => {
                   </span>
                 </a>
               </Link>
-            );
-          }}
-        />
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

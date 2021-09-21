@@ -74,14 +74,20 @@
     flex: 1;
     width: calc(100% - 20rem - 1rem);
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
   }
 
   > .right {
-    width: 20rem;
+    width: 18rem;
     margin-left: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+
+    :global {
+      .sticky {
+        width: 18rem;
+      }
+    }
   }
 
   @media (max-width: 768px) {
