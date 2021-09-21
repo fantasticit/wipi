@@ -3,6 +3,7 @@ const path = require('path');
 const withPlugins = require('next-compose-plugins');
 const withCss = require('@zeit/next-css');
 const withSass = require('@zeit/next-sass');
+const withOffline = require('next-offline');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const lessToJS = require('less-vars-to-js');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
@@ -37,6 +38,31 @@ const nextConfig = {
 
 module.exports = withPlugins(
   [
+    [
+      withOffline,
+      {
+        workboxOpts: {
+          runtimeCaching: [
+            {
+              urlPattern: /.(png|jpg|jpeg|svg|webp)$/,
+              handler: 'CacheFirst',
+            },
+            {
+              urlPattern: /api/,
+              handler: 'NetworkFirst',
+              options: {
+                cacheableResponse: {
+                  statuses: [0, 200],
+                  headers: {
+                    'x-sw': 'true',
+                  },
+                },
+              },
+            },
+          ],
+        },
+      },
+    ],
     [withCss],
     [
       withSass,
