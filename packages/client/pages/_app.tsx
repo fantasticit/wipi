@@ -63,7 +63,7 @@ class MyApp extends App<IGlobalContext, unknown> {
   render() {
     const { Component, pageProps, i18n, locales, router, ...contextValue } = this.props;
     const locale = this.state.locale || router.locale;
-    const { needLayoutFooter = true } = pageProps;
+    const { needLayoutFooter = true, hasBg = false } = pageProps;
     const message = i18n[locale] || {};
 
     return (
@@ -80,7 +80,7 @@ class MyApp extends App<IGlobalContext, unknown> {
           <FixAntdStyleTransition />
           <ViewStatistics />
           <Analytics />
-          <AppLayout needFooter={needLayoutFooter}>
+          <AppLayout needFooter={needLayoutFooter} hasBg={hasBg}>
             <NProgress color={'#ff0064'} />
             <Component {...pageProps} />
           </AppLayout>

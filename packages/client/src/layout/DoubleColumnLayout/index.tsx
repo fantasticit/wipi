@@ -14,7 +14,6 @@ interface IProps {
   rightClassName?: null | string;
   isRightNodeMobileHidden?: boolean;
   minHeight?: string | number;
-  background?: string;
   likesProps?: LikesProps;
   showComment?: boolean;
   shareProps?: ShareProps;
@@ -27,7 +26,6 @@ export const DoubleColumnLayout: React.FC<IProps> = ({
   rightClassName = null,
   isRightNodeMobileHidden = true,
   minHeight = '100vh',
-  background = 'var(--bg-body)',
   likesProps,
   showComment = false,
   shareProps,
@@ -70,7 +68,7 @@ export const DoubleColumnLayout: React.FC<IProps> = ({
   }, []);
 
   return (
-    <div className={cls(style.outerWrap)} style={{ minHeight, background }}>
+    <div className={cls(style.outerWrap)} style={{ minHeight }}>
       <div className={cls('container')}>
         <div className={style.wrap}>
           {(likesProps || showComment || shareProps) && (

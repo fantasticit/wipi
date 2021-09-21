@@ -32,14 +32,21 @@ const Page: NextPage<IProps> = ({ page }) => {
           <Helmet>
             <title>{page.name + ' | ' + setting.systemTitle}</title>
           </Helmet>
-          <div className="container">
-            {page.cover && (
-              <div className={style.coverWrapper}>
-                <img src={page.cover} alt={t('articleCover') as string} />
+          <div
+            style={{
+              backgroundColor: !setting.systemBg ? 'var(--bg-second)' : 'transparent',
+              borderBottom: !setting.systemBg ? '1px solid var(--border-color)' : 0,
+            }}
+          >
+            <div className="container">
+              {page.cover && (
+                <div className={style.coverWrapper}>
+                  <img src={page.cover} alt={t('articleCover') as string} />
+                </div>
+              )}
+              <div className={style.content}>
+                <MarkdownReader content={page.html} />
               </div>
-            )}
-            <div className={style.content}>
-              <MarkdownReader content={page.html} />
             </div>
           </div>
           <div className={style.commentAndArticleWrapper}>

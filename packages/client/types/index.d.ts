@@ -135,6 +135,7 @@ interface ISetting {
   i18n?: string;
   systemUrl?: string; // 系统地址
   systemTitle?: string; // 系统标题
+  systemBg?: string; // 全局背景
   systemLogo?: string; // 系统 Logo
   systemFavicon?: string; // 系统 favicon
   systemFooterInfo?: string; // 系统页脚信息

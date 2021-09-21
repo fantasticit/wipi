@@ -6,6 +6,10 @@ $height: 64px;
   height: $height;
   transition: all 0.3s ease-in-out;
   background: var(--bg-body);
+
+  &.transparent {
+    background: transparent;
+  }
 }
 
 .wrapper {
@@ -15,6 +19,11 @@ $height: 64px;
   height: $height;
   background-color: var(--bg);
   border-bottom: 1px solid var(--border-color);
+
+  &.transparent {
+    background: transparent;
+    border-bottom-width: 0;
+  }
 
   &.boxShadow {
     box-shadow: var(--box-shadow);
@@ -27,6 +36,8 @@ $height: 64px;
     right: 0;
     transition: all 0.2s;
     transform: translateY(-64px);
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--border-color);
 
     &.visible {
       transform: translateZ(0);

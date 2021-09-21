@@ -60,7 +60,6 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
       </div>
       <DoubleColumnLayout
         minHeight={'0px'}
-        background={'none'}
         leftNode={
           <div className={style.content}>
             <section className={cls(style.tocWrapper)}>
@@ -159,6 +158,7 @@ Page.getInitialProps = async (ctx) => {
     book,
     otherBooks: allBooks.filter((b) => b.id !== book.id),
     needLayoutFooter: false,
+    hasBg: true,
   };
 };
 

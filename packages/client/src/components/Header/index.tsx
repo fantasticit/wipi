@@ -26,7 +26,7 @@ const NAV_LINKS = [
   },
 ];
 
-export const Header = ({ setting, tags, pages }) => {
+export const Header = ({ setting, tags, pages, hasBg = false }) => {
   const t = useTranslations();
   const router = useRouter();
   const { asPath } = router;
@@ -108,12 +108,13 @@ export const Header = ({ setting, tags, pages }) => {
   ));
 
   return (
-    <header className={cls(style.header)}>
+    <header className={cls(style.header, hasBg ? style.transparent : false)}>
       <div
         className={cls(
           style.wrapper,
           affix ? style.isFixed : false,
-          affixVisible ? style.visible : false
+          affixVisible ? style.visible : false,
+          hasBg ? style.transparent : false
         )}
       >
         <div className={cls('container')}>
