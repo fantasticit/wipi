@@ -31,6 +31,10 @@ export class Setting {
 
   @ApiProperty()
   @Column({ type: 'text', default: null })
+  systemBg: string; // 全局背景
+
+  @ApiProperty()
+  @Column({ type: 'text', default: null })
   systemFavicon: string; // 系统 favicon
 
   @ApiProperty()
