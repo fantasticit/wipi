@@ -122,7 +122,7 @@ export const Header = ({ setting, tags, pages, hasBg = false }) => {
             {/^http/.test(setting.systemLogo) ? (
               <Link href="/" scroll={false}>
                 <a aria-label="home">
-                  <img src={setting.systemLogo} alt="logo" />
+                  <img width="100%" height="36" src={setting.systemLogo} alt="logo" />
                 </a>
               </Link>
             ) : (

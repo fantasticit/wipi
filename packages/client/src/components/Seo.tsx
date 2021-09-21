@@ -10,7 +10,7 @@ export const Seo = () => {
       <title>{setting.systemTitle}</title>
       <meta
         name="viewport"
-        content="width=device-width,initial-scale=1.0,viewport-fit=cover,user-scalable=no"
+        content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1"
       />
       <meta name="keyword" content={setting.seoKeyword} />
       <meta name="description" content={setting.seoDesc} />
