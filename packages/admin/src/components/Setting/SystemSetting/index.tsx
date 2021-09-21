@@ -10,6 +10,7 @@ export const SystemSetting = ({ setting }) => {
   const [mode, setMode] = useState('logo');
   const [systemUrl, setSystemUrl] = useState(null);
   const [systemTitle, setSystemTitle] = useState(null);
+  const [systemBg, setSystemBg] = useState(null);
   const [systemLogo, setSystemLogo] = useState(null);
   const [systemFavicon, setSystemFavicon] = useState(null);
   const [systemFooterInfo, setSystemFooterInfo] = useState(null);
@@ -18,6 +19,7 @@ export const SystemSetting = ({ setting }) => {
   useEffect(() => {
     setSystemUrl((setting && setting.systemUrl) || null);
     setSystemTitle((setting && setting.systemTitle) || null);
+    setSystemBg((setting && setting.systemBg) || null);
     setSystemLogo((setting && setting.systemLogo) || null);
     setSystemFavicon((setting && setting.systemFavicon) || null);
     setSystemFooterInfo((setting && setting.systemFooterInfo) || null);
@@ -28,6 +30,7 @@ export const SystemSetting = ({ setting }) => {
     const data = {
       systemUrl,
       systemTitle,
+      systemBg,
       systemLogo,
       systemFavicon,
       systemFooterInfo,
@@ -64,6 +67,23 @@ export const SystemSetting = ({ setting }) => {
           value={systemTitle}
           onChange={(e) => {
             setSystemTitle(e.target.value);
+          }}
+        />
+      </Form.Item>
+      <Form.Item label="全局背景">
+        <Input
+          placeholder="请输入全局背景链接或选择文件"
+          addonAfter={
+            <FileImageOutlined
+              onClick={() => {
+                setMode('bg');
+                setVisible(true);
+              }}
+            />
+          }
+          value={systemBg}
+          onChange={(e) => {
+            setSystemBg(e.target.value);
           }}
         />
       </Form.Item>
@@ -118,6 +138,8 @@ export const SystemSetting = ({ setting }) => {
         onChange={(url) => {
           if (mode === 'logo') {
             setSystemLogo(url);
+          } else if (mode === 'bg') {
+            setSystemBg(url);
           } else {
             setSystemFavicon(url);
           }
