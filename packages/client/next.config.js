@@ -23,7 +23,7 @@ const nextConfig = {
   env: {
     SERVER_API_URL: config.SERVER_API_URL || 'http://localhost:4000/api',
   },
-  webpack: (config) => {
+  webpack: (config, { dev, isServer }) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
     config.plugins.push(
       new FilterWarningsPlugin({
@@ -32,6 +32,15 @@ const nextConfig = {
     );
     config.node = config.node || {};
     config.node.fs = 'empty';
+
+    if (!dev && !isServer) {
+      Object.assign(config.resolve.alias, {
+        'react': 'preact/compat',
+        'react-dom/test-utils': 'preact/test-utils',
+        'react-dom': 'preact/compat',
+      });
+    }
+
     return config;
   },
 };
