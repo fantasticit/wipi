@@ -84,7 +84,7 @@ class MyApp extends App<IGlobalContext, unknown> {
           <ViewStatistics />
           <Analytics />
           <AppLayout needFooter={needLayoutFooter} hasBg={hasBg}>
-            <NProgress color={'#ff0064'} />
+            <NProgress />
             <Component {...pageProps} />
           </AppLayout>
         </NextIntlProvider>

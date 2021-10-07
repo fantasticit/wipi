@@ -1,125 +1,48 @@
-import React from 'react';
-import _NProgress from 'nprogress';
-import { default as Router } from 'next/router';
+import * as NP from 'nprogress';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-interface IProps {
-  showAfterMs: number;
-  color: string;
-  spinner: boolean;
-  options?: Record<string, unknown>;
-}
+export function NProgress() {
+  const router = useRouter();
 
-export class NProgress extends React.Component<IProps> {
-  static defaultProps = {
-    color: '#2299DD',
-    showAfterMs: 300,
-    spinner: true,
-  };
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
 
-  timer = null;
+    const start = () => {
+      timeout = setTimeout(NP.start, 100);
+    };
 
-  routeChangeStart = () => {
-    const { showAfterMs } = this.props;
-    clearTimeout(this.timer);
-    this.timer = setTimeout(_NProgress.start, showAfterMs);
-  };
+    const done = () => {
+      clearTimeout(timeout);
+      NP.done();
+    };
 
-  routeChangeEnd = () => {
-    clearTimeout(this.timer);
-    _NProgress.done();
-  };
+    router.events.on('routeChangeStart', start);
+    router.events.on('routeChangeComplete', done);
+    router.events.on('routeChangeError', done);
 
-  componentDidMount() {
-    const { options } = this.props;
+    return () => {
+      router.events.off('routeChangeStart', start);
+      router.events.off('routeChangeComplete', done);
+      router.events.off('routeChangeError', done);
+    };
+  }, []);
 
-    if (options) {
-      _NProgress.configure(options);
-    }
+  return (
+    <style jsx={true} global={true}>{`
+      #nprogress {
+        pointer-events: none;
+      }
 
-    Router.events.on('routeChangeStart', this.routeChangeStart);
-    Router.events.on('routeChangeComplete', this.routeChangeEnd);
-    Router.events.on('routeChangeError', this.routeChangeEnd);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-    Router.events.off('routeChangeStart', this.routeChangeStart);
-    Router.events.off('routeChangeComplete', this.routeChangeEnd);
-    Router.events.off('routeChangeError', this.routeChangeEnd);
-  }
-
-  render() {
-    const { color, spinner } = this.props;
-
-    return (
-      <style jsx={true} global={true}>{`
-        #nprogress {
-          pointer-events: none;
-        }
-        #nprogress .bar {
-          background: ${color};
-          position: fixed;
-          z-index: 1031;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-        }
-        #nprogress .peg {
-          display: block;
-          position: absolute;
-          right: 0px;
-          width: 100px;
-          height: 100%;
-          box-shadow: 0 0 10px ${color}, 0 0 5px ${color};
-          opacity: 1;
-          -webkit-transform: rotate(3deg) translate(0px, -4px);
-          -ms-transform: rotate(3deg) translate(0px, -4px);
-          transform: rotate(3deg) translate(0px, -4px);
-        }
-        #nprogress .spinner {
-          display: ${spinner ? 'block' : 'none'};
-          position: fixed;
-          z-index: 1031;
-          top: 15px;
-          right: 15px;
-        }
-        #nprogress .spinner-icon {
-          width: 18px;
-          height: 18px;
-          box-sizing: border-box;
-          border: solid 2px transparent;
-          border-top-color: ${color};
-          border-left-color: ${color};
-          border-radius: 50%;
-          -webkit-animation: nprogresss-spinner 400ms linear infinite;
-          animation: nprogress-spinner 400ms linear infinite;
-        }
-        .nprogress-custom-parent {
-          overflow: hidden;
-          position: relative;
-        }
-        .nprogress-custom-parent #nprogress .spinner,
-        .nprogress-custom-parent #nprogress .bar {
-          position: absolute;
-        }
-        @-webkit-keyframes nprogress-spinner {
-          0% {
-            -webkit-transform: rotate(0deg);
-          }
-          100% {
-            -webkit-transform: rotate(360deg);
-          }
-        }
-        @keyframes nprogress-spinner {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
-    );
-  }
+      #nprogress .bar {
+        background: var(--primary-color, #ff0064);
+        position: fixed;
+        z-index: 1031;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+      }
+    `}</style>
+  );
 }
