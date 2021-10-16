@@ -15,11 +15,15 @@ export class Comment {
 
   @ApiProperty()
   @Column()
-  name: string; // 联系方式
+  name: string;
 
   @ApiProperty()
   @Column()
   email: string; // 联系方式
+
+  @ApiProperty()
+  @Column()
+  avatar: string;
 
   @ApiProperty()
   @Column({ type: 'mediumtext', default: null, charset: 'utf8mb4' }) // 评论内容

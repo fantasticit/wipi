@@ -2,7 +2,9 @@ import {
   Controller,
   HttpStatus,
   HttpCode,
+  Get,
   Post,
+  Query,
   Body,
   UseInterceptors,
   ClassSerializerInterceptor,
@@ -35,5 +37,10 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   createBook() {
     return this.authService.checkAdmin();
+  }
+
+  @Post('github')
+  loginWithGithub(@Body('code') code) {
+    return this.authService.loginWithGithub(code);
   }
 }
