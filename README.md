@@ -112,6 +112,10 @@ DB_PORT=3306 # 数据库端口
 DB_USER=root # 数据库用户名
 DB_PASSWD=root # 数据库密码
 DB_DATABASE=wipi # 数据库名称
+
+# 关于 Github OAuth 可参考 https://www.ruanyifeng.com/blog/2019/04/github-oauth.html
+GITHUB_CLIENT_ID=0 # Github OAuth 登录 Id
+GITHUB_CLIENT_SECRET=0 # Github OAuth 登录 Secret
 ```
 
 ### 项目部署
