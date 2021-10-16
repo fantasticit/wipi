@@ -47,10 +47,11 @@
     "userInfoTitle": "Please set your information",
     "userInfoName": "Username",
     "userInfoNameValidMsg": "Please tell me your name",
-    "userInfoEmail": "Email",
-    "userInfoEmailValidMsg": "Please enter correct email",
-    "userInfoConfirm": "Save",
-    "userInfoCancel": "Cancel"
+    "userInfoPassword": "Password",
+    "userInfoPasswordValidMsg": "Please enter correct password",
+    "userInfoConfirm": "Login",
+    "userInfoCancel": "Cancel",
+    "logout": "Logout"
   },
   "loading": "Loading",
   "copySuccess": "Copy successfully",
