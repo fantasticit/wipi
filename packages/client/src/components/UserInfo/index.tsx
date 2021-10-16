@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useCallback } from 'react';
 import { Modal, Form, Button, Input, Avatar, Dropdown, Menu } from 'antd';
-import { GithubOutlined } from '@ant-design/icons';
+import { GithubOutlined, UserOutlined } from '@ant-design/icons';
 import { useTranslations } from 'next-intl';
 import Router from 'next/router';
 import { GlobalContext } from '@/context/global';
@@ -45,18 +45,25 @@ export const UserInfo: React.FC<{
     );
   }, []);
 
-  const trigger = hidden ? null : user ? (
+  const trigger = hidden ? (
+    user && user.avatar ? (
+      <Avatar size={28} src={user.avatar}></Avatar>
+    ) : (
+      <Avatar size={28} icon={<UserOutlined />}></Avatar>
+    )
+  ) : user ? (
     <Dropdown
       overlay={
         <Menu>
+          <Menu.Item>{user.name}</Menu.Item>
           <Menu.Item onClick={removeUser}>{t('logout')}</Menu.Item>
         </Menu>
       }
     >
       {user.avatar ? (
-        <Avatar size={24} src={user.avatar}></Avatar>
+        <Avatar size={28} src={user.avatar}></Avatar>
       ) : (
-        <Avatar size={24}>{user.name.charAt(0)}</Avatar>
+        <Avatar size={28}>{user.name.charAt(0)}</Avatar>
       )}
     </Dropdown>
   ) : (

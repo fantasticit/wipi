@@ -23,7 +23,7 @@ export function CommentItem({ comment, parentComment, isChild = false, isLast = 
   const t = useTranslations('commentNamespace');
   const [editorVisible, toggleEditorVisible] = useToggle(false);
   const [showMore, toggleMore] = useToggle(false);
-  const avatarSize = useMemo(() => (isChild ? 16 : 24), [isChild]);
+  const avatarSize = useMemo(() => (isChild ? 20 : 28), [isChild]);
   const paddingHorizontal = useMemo(() => avatarSize + 4, [avatarSize]);
 
   return (

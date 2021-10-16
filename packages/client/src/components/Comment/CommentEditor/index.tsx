@@ -104,22 +104,24 @@ export const CommentEditor: React.FC<Props> = ({
 
   return (
     <div className={cls(styles.wrapper)}>
-      <UserInfo
-        {...{
-          defaultVisible: needSetInfo,
-          onCancel: toggleNeedSetInfo,
-          hidden: true,
-        }}
-      />
-      <div className={styles.textareaWrapper}>
-        {!hasValidUser && <div className={styles.mask} onClick={toggleNeedSetInfo}></div>}
-        <TextArea
-          placeholder={textareaPlaceholder as string}
-          autoSize={textareaSize}
-          value={content}
-          onChange={onInput}
+      <main>
+        <UserInfo
+          {...{
+            defaultVisible: needSetInfo,
+            onCancel: toggleNeedSetInfo,
+            hidden: true,
+          }}
         />
-      </div>
+        <div className={styles.textareaWrapper}>
+          {!hasValidUser && <div className={styles.mask} onClick={toggleNeedSetInfo}></div>}
+          <TextArea
+            placeholder={textareaPlaceholder as string}
+            autoSize={textareaSize}
+            value={content}
+            onChange={onInput}
+          />
+        </div>
+      </main>
       <footer>
         {hasValidUser ? (
           <Emoji onClickEmoji={addEmoji}>{emojiTrigger}</Emoji>
