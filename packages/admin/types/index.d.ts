@@ -4,6 +4,7 @@ interface IUser {
   email: string;
   token: string;
   role: 'admin' | 'visitor';
+  type: string;
 }
 
 interface IFile {

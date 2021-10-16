@@ -32,6 +32,11 @@ const COMMON_COLUMNS = [
     },
   },
   {
+    title: '类型',
+    dataIndex: 'type',
+    key: 'type',
+  },
+  {
     title: '状态',
     dataIndex: 'status',
     key: 'status',
@@ -93,6 +98,11 @@ const SEARCH_FIELDS = [
         })}
       </Select>
     ),
+  },
+  {
+    label: '类型',
+    field: 'type',
+    msg: '请输入用户类型',
   },
 ];
 

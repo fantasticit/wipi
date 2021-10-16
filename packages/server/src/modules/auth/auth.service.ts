@@ -71,6 +71,7 @@ export class AuthService {
           avatar: result.data.avatar_url,
           email: result.data.email,
           password: result.data.email,
+          type: 'github',
         };
         await this.userService.createUser(user).catch((e) => {
           // 用户已存在

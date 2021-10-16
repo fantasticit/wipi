@@ -54,6 +54,10 @@ export class User {
   status: string; // 用户状态
 
   @ApiProperty()
+  @Column({ default: 'normal' })
+  type: string; // 用户类型
+
+  @ApiProperty()
   @CreateDateColumn({
     type: 'datetime',
     comment: '创建时间',
