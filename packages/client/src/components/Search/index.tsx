@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { SearchProvider } from '@/providers/search';
-import { Spring } from '@/components/Animation/Spring';
 import { ListTrail } from '@/components/Animation/Trail';
 import styles from './index.module.scss';
 
@@ -37,8 +36,7 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
         return;
       }
       searchArticles(keyword).then((res) => {
-        const ret = res.filter((r) => r.status === 'publish' && !r.needPassword);
-        setArticles(ret);
+        setArticles(res.filter((t) => t.status === 'publish'));
       });
     },
     [searchArticles]
@@ -94,32 +92,36 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
         </section>
 
         <section className={styles.result}>
-          <ul>
-            <ListTrail
-              length={articles.length}
-              options={{
-                config: { mass: 1, tension: 180, friction: 12, clamp: true },
-                opacity: loading ? 0 : 1,
-                height: loading ? 0 : 48,
-                from: { opacity: 0, height: 0 },
-              }}
-              renderItem={(index) => {
-                const article = articles[index];
-                return (
-                  <Link
-                    key={article.id}
-                    href={`/article/[id]`}
-                    as={`/article/${article.id}`}
-                    scroll={false}
-                  >
-                    <a aria-label={article.title} className={styles.item} onClick={close}>
-                      {article.title}
-                    </a>
-                  </Link>
-                );
-              }}
-            />
-          </ul>
+          {articles.length ? (
+            <ul>
+              <ListTrail
+                length={articles.length}
+                options={{
+                  config: { mass: 1, tension: 180, friction: 12, clamp: true },
+                  opacity: loading ? 0 : 1,
+                  height: loading ? 0 : 48,
+                  from: { opacity: 0, height: 0 },
+                }}
+                renderItem={(index) => {
+                  const article = articles[index];
+                  return (
+                    <Link
+                      key={article.id}
+                      href={`/article/[id]`}
+                      as={`/article/${article.id}`}
+                      scroll={false}
+                    >
+                      <a aria-label={article.title} className={styles.item} onClick={close}>
+                        {article.title}
+                      </a>
+                    </Link>
+                  );
+                }}
+              />
+            </ul>
+          ) : (
+            <p className="empty">{t('empty')}</p>
+          )}
         </section>
       </div>
     </div>

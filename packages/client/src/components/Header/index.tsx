@@ -9,6 +9,7 @@ import { useToggle } from '@/hooks/useToggle';
 import { Search } from '@/components/Search';
 import { Theme } from '@/components/Theme';
 import { Locales } from '@/components/Locales';
+import { UserInfo } from '@/components/UserInfo';
 import style from './index.module.scss';
 
 const NAV_LINKS = [
@@ -145,6 +146,9 @@ export const Header = ({ setting, tags, pages, hasBg = false }) => {
             <ul>
               {navMenu}
               {pageMenu}
+              <li className={style.toolWrapper}>
+                <UserInfo />
+              </li>
               <li className={style.toolWrapper}>
                 <SearchOutlined style={{ cursor: 'pointer' }} onClick={toggleSearch} />
               </li>

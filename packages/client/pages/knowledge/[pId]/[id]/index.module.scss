@@ -1,13 +1,14 @@
 .wrapper {
   height: 100%;
-  padding: 1rem  0;
+  padding: 1rem 0;
   background-color: var(--bg-body);
 }
 
 .breadcrump {
   margin-bottom: 16px;
 
-  a, span {
+  a,
+  span {
     color: var(--second-text-color) !important;
   }
 }
@@ -21,7 +22,7 @@
 
     .meta {
       text-align: center;
-  
+
       .title {
         color: inherit;
         font-weight: 700;
@@ -30,7 +31,7 @@
         line-height: 1.5;
         text-align: center;
       }
-  
+
       .desc {
         margin-bottom: 1.2em;
         color: inherit;
@@ -38,7 +39,7 @@
         text-align: center;
       }
     }
-  
+
     .copyrightInfo {
       color: #655e5e;
       font-size: 12px;
@@ -52,7 +53,7 @@
       justify-content: space-between;
       width: 100%;
       position: relative;
-      border-top: 1px solid rgba(0,0,0,.07);
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
       padding: 20px 0 20px;
       margin-top: 20px;
 
@@ -74,9 +75,9 @@
         > a {
           display: flex;
           align-items: center;
-          padding: 1rem .5rem;
+          padding: 1rem 0.5rem;
           overflow: hidden;
-          
+
           span {
             display: inline-block;
             overflow: hidden;
@@ -97,11 +98,9 @@
   }
 
   .commentWrap {
-    &.isBg {
-      box-shadow: var(--box-shadow);
-      background: var(--bg-second);
-    }
-  
+    box-shadow: var(--box-shadow);
+    background: var(--bg-second);
+
     .title {
       margin: 1rem 0;
       color: var(--main-text-color);
@@ -109,9 +108,9 @@
       font-size: 16px;
       line-height: 22px;
       text-align: center;
-      letter-spacing: .06em;
+      letter-spacing: 0.06em;
     }
-  
+
     > header {
       color: var(--main-text-color);
       font-weight: 600;
@@ -119,17 +118,17 @@
       line-height: 22px;
       margin-bottom: 12px;
     }
-  }  
+  }
 }
 
 .infoWrapper {
-  padding: .8rem 0;
+  padding: 0.8rem 0;
   border-radius: var(--border-radius);
-  
+
   &.isBg {
     background: var(--bg-second);
-    padding: .8rem;
-    
+    padding: 0.8rem;
+
     > main {
       max-height: 200px;
       overflow: auto;
@@ -165,7 +164,7 @@
 
           font-size: 14px;
           line-height: 20px;
-        
+
           padding-left: 12px;
           padding-right: 16px;
 

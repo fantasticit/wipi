@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useContext } from 'react';
 import cls from 'classnames';
 import { useTranslations } from 'next-intl';
 import { Button, Input, message } from 'antd';
+import { GlobalContext } from '@/context/global';
 import { CommentProvider } from '@/providers/comment';
 import { useToggle } from '@/hooks/useToggle';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
-import { IUser, isValidUser, UserInfo, UserInfoProps } from '../UserInfo';
+import { isValidUser, UserInfo } from '@/components/UserInfo';
 import { Emoji } from './Emoji';
 import styles from './index.module.scss';
 
@@ -29,9 +30,9 @@ export const CommentEditor: React.FC<Props> = ({
   small,
 }) => {
   const t = useTranslations('commentNamespace');
+  const { user } = useContext(GlobalContext);
   const [addComment, loading] = useAsyncLoading(CommentProvider.addComment);
   const [needSetInfo, toggleNeedSetInfo] = useToggle(false);
-  const [user, setUser] = useState<IUser | null>(null);
   const [content, setContent] = useState('');
   const hasValidUser = useMemo(() => isValidUser(user), [user]);
   const textareaPlaceholder = useMemo(
@@ -53,18 +54,6 @@ export const CommentEditor: React.FC<Props> = ({
       </svg>
       <span>{t('emoji')}</span>
     </span>
-  );
-
-  const storeUser = useCallback(
-    (user) => {
-      if (!isValidUser(user)) {
-        return;
-      }
-      window.localStorage.setItem('user', JSON.stringify(user));
-      setUser(user);
-      toggleNeedSetInfo(false);
-    },
-    [toggleNeedSetInfo]
   );
 
   const onInput = useCallback(
@@ -113,24 +102,14 @@ export const CommentEditor: React.FC<Props> = ({
     });
   }, [t, hostId, parentComment, replyComment, onOk, user, content, addComment]);
 
-  useEffect(() => {
-    const userInfo = window.localStorage.getItem('user');
-    try {
-      const user = JSON.parse(userInfo) as IUser;
-      setUser(user);
-    } catch (err) {
-      //
-    }
-  }, []);
-
   return (
     <div className={cls(styles.wrapper)}>
       <UserInfo
-        {...({
-          visible: needSetInfo,
+        {...{
+          defaultVisible: needSetInfo,
           onCancel: toggleNeedSetInfo,
-          onOk: storeUser,
-        } as UserInfoProps)}
+          hidden: true,
+        }}
       />
       <div className={styles.textareaWrapper}>
         {!hasValidUser && <div className={styles.mask} onClick={toggleNeedSetInfo}></div>}

@@ -89,6 +89,7 @@ interface IComment {
   id: string;
   name: string;
   email: string;
+  avatar: string;
   content: string;
   html: string;
   pass: boolean;

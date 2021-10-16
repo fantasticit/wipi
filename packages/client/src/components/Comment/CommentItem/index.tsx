@@ -37,9 +37,13 @@ export function CommentItem({ comment, parentComment, isChild = false, isLast = 
     >
       <div>
         <header>
-          <Avatar size={avatarSize} style={{ backgroundColor: getRandomColor(comment.name) }}>
-            {('' + comment.name).charAt(0).toUpperCase()}
-          </Avatar>
+          {comment.avatar ? (
+            <Avatar size={avatarSize} src={comment.avatar}></Avatar>
+          ) : (
+            <Avatar size={avatarSize} style={{ backgroundColor: getRandomColor(comment.name) }}>
+              {('' + comment.name).charAt(0).toUpperCase()}
+            </Avatar>
+          )}
           <span className={styles.name}>
             <strong>{comment.name}</strong>
             {comment.replyUserName ? (

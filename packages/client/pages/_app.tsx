@@ -33,6 +33,7 @@ Router.events.on('routeChangeComplete', () => {
 class MyApp extends App<IGlobalContext, unknown> {
   state = {
     locale: '',
+    user: null,
   };
 
   static getInitialProps = async ({ Component, ctx }) => {
@@ -63,6 +64,23 @@ class MyApp extends App<IGlobalContext, unknown> {
     this.setState({ locale: key });
   };
 
+  setUser = (user) => {
+    window.localStorage.setItem('user', JSON.stringify(user));
+    this.setState({ user });
+  };
+
+  removeUser = () => {
+    window.localStorage.setItem('user', '');
+    this.setState({ user: null });
+  };
+
+  componentDidMount() {
+    const userStr = window.localStorage.getItem('user');
+    if (userStr) {
+      this.setState({ user: safeJsonParse(userStr) });
+    }
+  }
+
   render() {
     const { Component, pageProps, i18n, locales, router, ...contextValue } = this.props;
     const locale = this.state.locale || router.locale;
@@ -77,6 +95,9 @@ class MyApp extends App<IGlobalContext, unknown> {
           locale,
           locales,
           changeLocale: this.changeLocale,
+          user: this.state.user,
+          setUser: this.setUser,
+          removeUser: this.removeUser,
         }}
       >
         <NextIntlProvider messages={message as IntlMessages} locale={locale}>

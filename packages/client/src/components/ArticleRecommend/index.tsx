@@ -1,8 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { Spin } from 'antd';
 import cls from 'classnames';
-import VisibilitySensor from 'react-visibility-sensor';
 import { useTranslations } from 'next-intl';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { useToggle } from '@/hooks/useToggle';
@@ -27,18 +26,13 @@ export const ArticleRecommend: React.FC<IProps> = ({
   const [fetched, setFetched] = useState('');
   const [articles, setArticles] = useState([]);
 
-  const onViewportChange = useCallback(
-    (visible) => {
-      if (fetched === articleId) return;
-      if (visible) {
-        getRecommend(articleId).then((res) => {
-          setArticles(res.slice(0, 6));
-          setFetched(articleId);
-        });
-      }
-    },
-    [articleId, getRecommend, fetched]
-  );
+  useEffect(() => {
+    if (fetched === articleId) return;
+    getRecommend(articleId).then((res) => {
+      setArticles(res.slice(0, 6));
+      setFetched(articleId);
+    });
+  }, [articleId, getRecommend, fetched]);
 
   return (
     <div className={cls(style.wrapper, mode === 'inline' && style.inline)}>
@@ -47,41 +41,40 @@ export const ArticleRecommend: React.FC<IProps> = ({
           <span>{t('recommendToReading')}</span>
         </div>
       )}
-      <VisibilitySensor onChange={onViewportChange}>
-        <Spin spinning={loading}>
-          {loading ? (
-            <div style={{ height: 150, backgroundColor: 'var(--bg-second)' }}></div>
-          ) : mode === 'inline' ? (
-            articles.length <= 0 ? (
-              loading ? (
-                <div style={{ height: 32 }}></div>
-              ) : (
-                <div className={'empty'}>{t('empty')}</div>
-              )
+
+      <Spin spinning={loading}>
+        {loading ? (
+          <div style={{ height: 150, backgroundColor: 'var(--bg-second)' }}></div>
+        ) : mode === 'inline' ? (
+          articles.length <= 0 ? (
+            loading ? (
+              <div style={{ height: 32 }}></div>
             ) : (
-              <ul className={style.inlineWrapper}>
-                {articles.map((article) => {
-                  return (
-                    <li>
-                      <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
-                        <a>
-                          <span>{article.title}</span>
-                          {' · '}
-                          <span>
-                            <LocaleTime date={article.publishAt} timeago={true} />
-                          </span>
-                        </a>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
+              <div className={'empty'}>{t('empty')}</div>
             )
           ) : (
-            <ArticleList articles={articles || []} coverHeight={110} asRecommend={true} />
-          )}
-        </Spin>
-      </VisibilitySensor>
+            <ul className={style.inlineWrapper}>
+              {articles.map((article) => {
+                return (
+                  <li>
+                    <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
+                      <a>
+                        <span>{article.title}</span>
+                        {' · '}
+                        <span>
+                          <LocaleTime date={article.publishAt} timeago={true} />
+                        </span>
+                      </a>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )
+        ) : (
+          <ArticleList articles={articles || []} coverHeight={110} asRecommend={true} />
+        )}
+      </Spin>
     </div>
   );
 };

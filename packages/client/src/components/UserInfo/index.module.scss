@@ -1,0 +1,15 @@
+.other {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+
+  .icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #f4f8fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}

@@ -9,6 +9,9 @@ export interface IGlobalContext {
   categories: ICategory[];
   tags: ITag[];
   changeLocale: (arg: string) => void;
+  user: IUser;
+  setUser: (arg: IUser) => void;
+  removeUser: () => void;
 }
 
 export const GlobalContext = React.createContext<IGlobalContext>({
@@ -20,4 +23,7 @@ export const GlobalContext = React.createContext<IGlobalContext>({
   categories: [],
   tags: [],
   changeLocale: () => {},
+  user: null,
+  setUser: () => {},
+  removeUser: () => {},
 });

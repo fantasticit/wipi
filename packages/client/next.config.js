@@ -22,6 +22,7 @@ const nextConfig = {
   },
   env: {
     SERVER_API_URL: config.SERVER_API_URL || 'http://localhost:4000/api',
+    GITHUB_CLIENT_ID: config.GITHUB_CLIENT_ID,
   },
   webpack: (config, { dev, isServer }) => {
     config.resolve.plugins.push(new TsconfigPathsPlugin());
