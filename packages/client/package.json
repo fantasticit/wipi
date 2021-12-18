@@ -12,7 +12,7 @@
     "pm2": "pm2 start npm --name client -- start"
   },
   "dependencies": {
-    "antd": "4",
+    "antd": "^4.17.3",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "copy-to-clipboard": "^3.3.1",
