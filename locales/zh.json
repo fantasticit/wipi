@@ -68,5 +68,6 @@
     "shareFrom": " 原文分享自"
   },
   "tagTitle": "文章标签",
-  "toc": "目录"
+  "toc": "目录",
+  "logingWithGithub": "Github 授权登录中，请稍等......"
 }

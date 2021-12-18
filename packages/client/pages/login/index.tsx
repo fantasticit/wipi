@@ -30,7 +30,7 @@ const Page: NextPage<IProps> = ({ code, from }: IProps) => {
 
   return (
     <div id="js-page-wrapper" className={style.container}>
-      <Spin size="large" tip={t('loading') as string} />
+      <Spin size="large" tip={t('logingWithGithub') as string} />
     </div>
   );
 };
