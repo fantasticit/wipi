@@ -79,7 +79,9 @@ export const CommentEditor: React.FC<Props> = ({
   const submit = useCallback(() => {
     const data = {
       hostId,
-      ...user,
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
       content,
       url: window.location.pathname,
     };
