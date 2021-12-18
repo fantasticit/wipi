@@ -30,7 +30,7 @@
     "@nestjs/swagger": "^4.7.15",
     "@nestjs/typeorm": "^6.2.0",
     "ali-oss": "^6.5.1",
-    "axios": "^0.23.0",
+    "axios": "^0.21.2",
     "bcryptjs": "^2.4.3",
     "better-sqlite3": "^7.4.3",
     "body-parser": "^1.19.0",
