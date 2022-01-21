@@ -45,7 +45,7 @@
     "helmet": "^3.21.2",
     "highlight.js": "^9.18.0",
     "lodash": "^4.17.21",
-    "log4js": "^6.1.0",
+    "log4js": "^6.4.0",
     "marked": "^0.8.0",
     "mysql": "^2.18.0",
     "node-ip2region": "^1.0.2",
