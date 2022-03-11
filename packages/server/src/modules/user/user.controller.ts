@@ -25,7 +25,6 @@ import { User } from './user.entity';
 export class UserController {
   constructor(
     private readonly userService: UserService,
-
     private readonly jwtService: JwtService
   ) {}
 
@@ -86,7 +85,7 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   async update(@Request() req, @Body() user: Partial<User>): Promise<User> {
     await this.checkPermission(req, user);
-    const d = await this.userService.updateById(user.id, user);
+    const d = await this.userService.updateById(req.user, user.id, user);
     return d;
   }
 

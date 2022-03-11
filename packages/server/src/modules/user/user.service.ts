@@ -116,7 +116,17 @@ export class UserService {
    * 更新指定用户
    * @param id
    */
-  async updateById(id, user): Promise<User> {
+  async updateById(currentUser, id, user): Promise<User> {
+    if (user.role === 'admin') {
+      if (!currentUser || currentUser.role !== 'admin') {
+        throw new HttpException(
+          '您无权操作',
+          // tslint:disable-next-line: trailing-comma
+          HttpStatus.FORBIDDEN
+        );
+      }
+    }
+
     const oldUser = await this.userRepository.findOne(id);
     delete user.password;
 
