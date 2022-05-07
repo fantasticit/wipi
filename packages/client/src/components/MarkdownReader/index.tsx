@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import hljs from 'highlight.js';
 import { useTranslations } from 'next-intl';
 import { copy } from '@/utils/copy';
-import './index.module.scss';
+import styles from './index.module.scss';
 
 export const MarkdownReader = ({ content }) => {
   const ref = useRef<HTMLDivElement>();
@@ -31,7 +31,7 @@ export const MarkdownReader = ({ content }) => {
       const blocks = ref.current.querySelectorAll('pre code');
       blocks.forEach((block: HTMLElement) => {
         const span = document.createElement('span');
-        span.classList.add('copy-code-btn');
+        span.classList.add(styles.copyCodeBtn);
         span.innerText = t('copy') as string;
         span.onclick = () => copy(block.innerText, t);
         block.parentNode.insertBefore(span, block);

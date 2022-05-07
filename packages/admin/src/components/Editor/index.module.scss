@@ -5,16 +5,15 @@
   user-select: none;
 
   > header {
+    display: flex;
     height: 40px;
+    padding: 0 16px;
+    font-size: 12px;
     background: #fff;
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
-
-    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
-    font-size: 12px;
 
     > div {
       display: flex;
@@ -37,12 +36,12 @@
 
     .toolWrap {
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
       height: 100%;
       padding: 4px 8px;
-      cursor: pointer;
       font-size: 16px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
     }
 
     .modeWrapper {
@@ -63,9 +62,9 @@
   }
 
   > main {
-    flex: 1;
-    height: calc(100% - 40px);
     display: flex;
+    height: calc(100% - 40px);
+    flex: 1;
     justify-content: space-between;
     flex-wrap: nowrap;
 
@@ -77,9 +76,9 @@
     }
 
     .tocWrapper {
-      border-left: 1px solid var(--border-color);
-      height: 100%;
       display: flex;
+      height: 100%;
+      border-left: 1px solid var(--border-color);
       flex-direction: column;
 
       header {

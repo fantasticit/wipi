@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import hljs from 'highlight.js';
 import { copy } from '@/utils/copy';
-import './index.module.scss';
+import styles from './index.module.scss';
 
 export const MarkdownReader = ({ content }) => {
   const ref = useRef<HTMLDivElement>();
@@ -29,7 +29,7 @@ export const MarkdownReader = ({ content }) => {
       const blocks = ref.current.querySelectorAll('pre code');
       blocks.forEach((block: HTMLElement) => {
         const span = document.createElement('span');
-        span.classList.add('copy-code-btn');
+        span.classList.add(styles.copyCodeBtn);
         span.innerText = '复制';
         span.onclick = () => copy(block.innerText);
         block.parentNode.insertBefore(span, block);

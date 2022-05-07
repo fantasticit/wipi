@@ -33,13 +33,7 @@ export const Footer = ({ setting, className = '', hasBg = false }) => {
     <footer className={cls(style.footer, className, hasBg && style.hasBg)}>
       <ul className={style.icons}>
         <li>
-          <a
-            aria-label="rss"
-            className={style.github}
-            href="/rss"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a aria-label="rss" className={style.github} href="/rss" target="_blank" rel="noopener noreferrer">
             <RSS />
           </a>
         </li>

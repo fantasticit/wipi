@@ -105,12 +105,7 @@ export const Search: React.FC<IProps> = ({ visible = true, onClose }) => {
                 renderItem={(index) => {
                   const article = articles[index];
                   return (
-                    <Link
-                      key={article.id}
-                      href={`/article/[id]`}
-                      as={`/article/${article.id}`}
-                      scroll={false}
-                    >
+                    <Link key={article.id} href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
                       <a aria-label={article.title} className={styles.item} onClick={close}>
                         {article.title}
                       </a>

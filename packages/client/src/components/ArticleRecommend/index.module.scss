@@ -1,19 +1,19 @@
 .wrapper {
   margin-bottom: 1.3rem;
-  line-height: 1.29;
   overflow: hidden;
+  line-height: 1.29;
 
   &.inline {
-    border-radius: var(--border-radius);
     background-color: var(--bg-second);
+    border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
   }
 
   .title {
     padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--main-text-color);
     font-weight: bold;
+    color: var(--main-text-color);
+    border-bottom: 1px solid var(--border-color);
   }
 
   ul.inlineWrapper {
@@ -32,9 +32,9 @@
       }
 
       a {
+        overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        overflow: hidden;
 
         span:first-of-type {
           color: var(--main-text-color);
@@ -67,11 +67,11 @@
   position: relative;
   width: 100%;
   padding: 0;
-  border-radius: 5px;
   margin-right: 14px;
-  background: var(--bg-second);
-  box-shadow: var(--box-shadow);
   overflow: hidden;
+  background: var(--bg-second);
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
   transition: transform 0.3s;
 
   &:hover {
@@ -83,30 +83,30 @@
     height: 123px;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    -o-object-fit: cover;
+    object-fit: cover;
     object-fit: cover;
   }
 
   .title {
     min-width: 225px;
     padding: 12px;
-    border: 0;
     margin-bottom: 0;
-    color: var(--main-text-color);
     overflow: hidden;
-    font-weight: 600;
     font-size: 16px;
+    font-weight: 600;
     line-height: 22px;
+    color: var(--main-text-color);
     text-overflow: ellipsis;
     white-space: nowrap;
+    border: 0;
     font-synthesis: style;
   }
 
   .meta {
     width: 100%;
     padding: 0 12px 12px;
-    color: #8590a6;
     font-size: 14px;
     line-height: 20px;
+    color: #8590a6;
   }
 }

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useCallback } from 'react';
-import { Modal, Form, Button, Input, Avatar, Dropdown, Menu } from 'antd';
+import { Modal, Form, Button, Input, Avatar, Dropdown, Menu, Alert, message } from 'antd';
 import { GithubOutlined, UserOutlined } from '@ant-design/icons';
 import { useTranslations } from 'next-intl';
 import Router from 'next/router';
 import { GlobalContext } from '@/context/global';
 import { useToggle } from '@/hooks/useToggle';
-import styles from './index.module.scss';
 import { UserProvider } from '@/providers/user';
+import styles from './index.module.scss';
 
 const emailRegexp = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
 
@@ -15,15 +15,15 @@ export type IUser = {
   email: string;
 };
 
-export const isValidUser = (user: IUser): user is IUser =>
-  user && user.name && emailRegexp.test(user.email);
+export const isValidUser = (user: IUser): user is IUser => user && user.name && emailRegexp.test(user.email);
 
 export const UserInfo: React.FC<{
   defaultVisible?: boolean;
   hidden?: boolean;
+  tip?: string;
   onOk?: (arg: IUser) => void;
   onCancel?: () => void;
-}> = ({ defaultVisible = false, hidden = false, onOk = () => {}, onCancel = () => {} }) => {
+}> = ({ defaultVisible = false, hidden = false, tip, onOk = () => {}, onCancel = () => {} }) => {
   const t = useTranslations('commentNamespace');
   const { user, setUser, removeUser } = useContext(GlobalContext);
   const [visible, toggleVisible] = useToggle(defaultVisible);
@@ -36,7 +36,7 @@ export const UserInfo: React.FC<{
         toggleVisible(false);
       });
     },
-    [toggleVisible]
+    [toggleVisible, onOk, setUser]
   );
 
   const loginWithGithub = useCallback(() => {
@@ -60,11 +60,7 @@ export const UserInfo: React.FC<{
         </Menu>
       }
     >
-      {user.avatar ? (
-        <Avatar size={28} src={user.avatar}></Avatar>
-      ) : (
-        <Avatar size={28}>{user.name.charAt(0)}</Avatar>
-      )}
+      {user.avatar ? <Avatar size={28} src={user.avatar}></Avatar> : <Avatar size={28}>{user.name.charAt(0)}</Avatar>}
     </Dropdown>
   ) : (
     <Button onClick={toggleVisible} size="middle">
@@ -74,7 +70,7 @@ export const UserInfo: React.FC<{
 
   useEffect(() => {
     toggleVisible(defaultVisible);
-  }, [defaultVisible]);
+  }, [defaultVisible, toggleVisible]);
 
   return (
     <>
@@ -94,16 +90,10 @@ export const UserInfo: React.FC<{
         width="26.5em"
       >
         <Form name="user-info" onFinish={submit}>
-          <Form.Item
-            name="name"
-            rules={[{ required: true, message: t('userInfoNameValidMsg') as string }]}
-          >
+          <Form.Item name="name" rules={[{ required: true, message: t('userInfoNameValidMsg') as string }]}>
             <Input placeholder={t('userInfoName') as string} />
           </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: t('userInfoPasswordValidMsg') as string }]}
-          >
+          <Form.Item name="password" rules={[{ required: true, message: t('userInfoPasswordValidMsg') as string }]}>
             <Input placeholder={t('userInfoPassword') as string} />
           </Form.Item>
           <Form.Item style={{ textAlign: 'right', marginBottom: 0 }}>
@@ -116,6 +106,7 @@ export const UserInfo: React.FC<{
           <div className={styles.icon} onClick={loginWithGithub}>
             <GithubOutlined />
           </div>
+          <Alert style={{ marginBottom: 24 }} message={tip} type="info" showIcon={true} />
         </div>
       </Modal>
     </>

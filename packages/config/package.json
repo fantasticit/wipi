@@ -1,0 +1,24 @@
+{
+  "name": "@wipi/config",
+  "version": "1.0.0",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
+    }
+  },
+  "sideEffects": false,
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --declaration"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}

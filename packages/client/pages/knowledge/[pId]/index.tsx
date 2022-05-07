@@ -105,10 +105,7 @@ const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
                         const chapter = chapters[idx];
 
                         return (
-                          <Link
-                            as={`/knowledge/${pId}/${chapter.id}`}
-                            href={`/knowledge/[pId]/[id]`}
-                          >
+                          <Link as={`/knowledge/${pId}/${chapter.id}`} href={`/knowledge/[pId]/[id]`}>
                             <a aria-label={chapter.title}>
                               <span>{chapter.title}</span>
                               <span>

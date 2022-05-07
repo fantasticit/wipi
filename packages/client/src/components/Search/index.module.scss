@@ -5,27 +5,27 @@
   z-index: 1;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
   overflow: hidden;
+  background: rgb(0 0 0 / 50%);
+  backdrop-filter: blur(10px);
 }
 
 .inner {
-  display: flex;
-  flex-direction: column;
   position: fixed;
   top: 10vh;
   left: 50%;
-  transform: translate(-50%, 0%);
   z-index: 100;
+  display: flex;
   width: 768px;
   max-height: 70vh;
   padding: 1rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  background: var(--bg);
-  opacity: 1;
   overflow: hidden;
+  background: var(--bg);
+  border-radius: var(--border-radius);
+  opacity: 1;
+  transform: translate(-50%, 0%);
+  flex-direction: column;
+  box-shadow: var(--box-shadow);
 
   header {
     display: flex;

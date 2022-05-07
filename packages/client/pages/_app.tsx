@@ -13,11 +13,10 @@ import { NProgress } from '@components/NProgress';
 import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
 import { ViewStatistics } from '@/components/ViewStatistics';
 import { Analytics } from '@/components/Analytics';
+import 'antd/dist/antd.less';
 import 'highlight.js/styles/atom-one-light.css';
 import 'viewerjs/dist/viewer.css';
-import '@/theme/antd.less';
-import '@/theme/reset.scss';
-import '@/theme/markdown.scss';
+import '@/theme/index.scss';
 
 Router.events.on('routeChangeComplete', () => {
   setTimeout(() => {
@@ -37,9 +36,7 @@ class MyApp extends App<IGlobalContext, unknown> {
   };
 
   static getInitialProps = async ({ Component, ctx }) => {
-    const getPagePropsPromise = Component.getInitialProps
-      ? Component.getInitialProps(ctx)
-      : Promise.resolve({});
+    const getPagePropsPromise = Component.getInitialProps ? Component.getInitialProps(ctx) : Promise.resolve({});
     const [pageProps, setting, tags, categories, pages] = await Promise.all([
       getPagePropsPromise,
       SettingProvider.getSetting(),

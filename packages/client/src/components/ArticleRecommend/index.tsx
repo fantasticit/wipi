@@ -16,11 +16,7 @@ interface IProps {
   needTitle?: boolean;
 }
 
-export const ArticleRecommend: React.FC<IProps> = ({
-  mode = 'vertical',
-  articleId = null,
-  needTitle = true,
-}) => {
+export const ArticleRecommend: React.FC<IProps> = ({ mode = 'vertical', articleId = null, needTitle = true }) => {
   const t = useTranslations();
   const [getRecommend, loading] = useAsyncLoading(ArticleProvider.getRecommend, 150, true);
   const [fetched, setFetched] = useState('');
@@ -56,7 +52,7 @@ export const ArticleRecommend: React.FC<IProps> = ({
             <ul className={style.inlineWrapper}>
               {articles.map((article) => {
                 return (
-                  <li>
+                  <li key={article.id}>
                     <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
                       <a>
                         <span>{article.title}</span>

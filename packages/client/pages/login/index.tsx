@@ -26,7 +26,7 @@ const Page: NextPage<IProps> = ({ code, from }: IProps) => {
       .catch((e) => {
         Router.replace('/');
       });
-  }, [code, from]);
+  }, [code, from, setUser]);
 
   return (
     <div id="js-page-wrapper" className={style.container}>

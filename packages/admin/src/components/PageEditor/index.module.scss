@@ -1,12 +1,12 @@
 .wrapper {
   .operation {
+    z-index: 1000;
     display: flex;
+    height: 56px;
+    line-height: 56px;
+    background: #fff;
     justify-content: flex-end;
     align-items: center;
-    height: 56px;
-    background: #ffffff;
-    line-height: 56px;
-    z-index: 1000;
 
     button + button {
       margin-left: 16px;
@@ -34,15 +34,14 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-
   height: 100vh;
   background-color: #f4f5f5;
 
   .header {
-    height: 64px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
     z-index: 1000;
+    height: 64px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
 
     > div {
       height: 100%;

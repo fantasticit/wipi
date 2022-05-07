@@ -11,7 +11,7 @@ const style = {
   textAlign: 'center',
 } as React.CSSProperties;
 
-const Error404 = () => {
+export const Error404 = () => {
   const t = useTranslations();
 
   return (

@@ -63,12 +63,7 @@ const COMMON_COLUMNS = [
     key: 'count',
     width: 120,
     render: (views) => (
-      <Badge
-        count={views}
-        showZero={true}
-        overflowCount={Infinity}
-        style={{ backgroundColor: '#52c41a' }}
-      />
+      <Badge count={views} showZero={true} overflowCount={Infinity} style={{ backgroundColor: '#52c41a' }} />
     ),
   },
   {
@@ -123,9 +118,7 @@ const SEARCH_FIELDS = [
 ];
 
 const Views: NextPage = () => {
-  const { loading, data, refresh, ...resetPagination } = usePagination<IView>(
-    ViewProvider.getViews
-  );
+  const { loading, data, refresh, ...resetPagination } = usePagination<IView>(ViewProvider.getViews);
   const [deleteApi, deleteLoading] = useAsyncLoading(ViewProvider.deleteView);
   const deleteAction = useCallback(
     (ids, resetSelectedRows = null) => {

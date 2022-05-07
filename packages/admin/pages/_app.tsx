@@ -11,12 +11,10 @@ import { Seo } from '@components/Seo';
 import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
 import { ViewStatistics } from '@/components/ViewStatistics';
 import { Analytics } from '@/components/Analytics';
-import '@ant-design/compatible/assets/index.css';
+import 'antd/dist/antd.less';
 import 'highlight.js/styles/atom-one-light.css';
 import 'viewerjs/dist/viewer.css';
-import '@/theme/antd.less';
-import '@/theme/reset.scss';
-import '@/theme/markdown.scss';
+import '@/theme/index.scss';
 
 class MyApp extends App {
   state: Omit<IGlobalContext, 'setUser' | 'getSetting' | 'toggleCollapse'> = {

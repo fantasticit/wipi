@@ -20,18 +20,18 @@
 
     .title {
       margin: 0.67em 0 0;
-      color: inherit;
-      font-weight: 700;
       font-size: 2.5rem;
+      font-weight: 700;
       line-height: 1rem;
       line-height: 1.5;
+      color: inherit;
       text-align: center;
     }
 
     .desc {
       margin-bottom: 1.2em;
-      color: inherit;
       font-style: italic;
+      color: inherit;
       text-align: center;
     }
   }
@@ -45,16 +45,16 @@
   }
 
   .copyrightInfo {
-    color: #655e5e;
+    margin-bottom: 21px;
     font-size: 12px;
     line-height: 22px;
+    color: #655e5e;
     text-align: center;
-    margin-bottom: 21px;
   }
 
   .tagsWrap {
-    font-size: 12px;
     margin: 0 -8px;
+    font-size: 12px;
 
     .tagWrapper {
       display: inline-block;
@@ -63,18 +63,18 @@
 
     .tag {
       display: inline-flex;
-      align-items: center;
       padding: 0 8px;
+      margin-top: 0.5rem;
+      font-size: 14px;
+      color: var(--second-text-color);
+      text-decoration: none;
+      background-color: var(--bg-second);
       border: 1px solid var(--border-color);
       border-radius: 2px;
-      color: var(--second-text-color);
-      background-color: var(--bg-second);
-      font-size: 14px;
-      text-decoration: none;
-      margin-top: 0.5rem;
+      align-items: center;
 
       &:hover {
-        color: #ffffff;
+        color: #fff;
         background-color: var(--primary-color);
       }
 
@@ -88,12 +88,12 @@
 .commentWrap {
   .title {
     margin: 1rem 0;
-    color: var(--main-text-color);
-    font-weight: 500;
     font-size: 16px;
+    font-weight: 500;
     line-height: 22px;
-    text-align: center;
     letter-spacing: 0.06em;
+    color: var(--main-text-color);
+    text-align: center;
   }
 
   > div {
@@ -106,12 +106,12 @@
   p.title {
     margin-top: 16px;
     margin-bottom: 16px;
-    color: var(--main-text-color);
-    font-weight: 500;
     font-size: 16px;
+    font-weight: 500;
     line-height: 22px;
-    text-align: center;
     letter-spacing: 0.06em;
+    color: var(--main-text-color);
+    text-align: center;
   }
 
   .articleContainer {

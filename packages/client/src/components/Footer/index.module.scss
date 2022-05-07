@@ -1,14 +1,14 @@
 .footer {
   position: relative;
   padding: 20px 0;
-  border-top: 1px solid var(--border-color);
   color: #c1bdbd;
-  background: var(--bg-footer);
   text-align: center;
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border-color);
 
   &.hasBg {
-    background: transparent;
     color: var(--main-text-color);
+    background: transparent;
   }
 }
 
@@ -19,10 +19,10 @@ ul.icons {
 
   li {
     display: inline-block;
-    border-radius: 50%;
     margin: 0 5px;
     font-size: 24px;
     text-align: center;
+    border-radius: 50%;
 
     &:first-of-type {
       margin-top: 1px;

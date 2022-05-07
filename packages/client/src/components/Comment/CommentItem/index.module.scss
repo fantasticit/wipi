@@ -30,8 +30,8 @@
       align-items: center;
 
       .name {
-        color: var(--main-text-color);
         padding: 0 8px;
+        color: var(--main-text-color);
       }
     }
 
@@ -47,8 +47,8 @@
       }
 
       .reply {
-        cursor: pointer;
         margin-left: 8px;
+        cursor: pointer;
 
         &:hover {
           color: var(--primary-color);
@@ -67,15 +67,15 @@
 }
 
 .childWrapper {
-  margin-top: 8px;
   padding: 4px 12px 12px;
+  margin-top: 8px;
   background-color: var(--bg-body);
 
   .showMore {
-    color: var(--second-text-color);
     padding-top: 12px;
+    color: var(--second-text-color);
     text-align: center;
-    border-top: 1px solid var(--border-color);
     cursor: pointer;
+    border-top: 1px solid var(--border-color);
   }
 }

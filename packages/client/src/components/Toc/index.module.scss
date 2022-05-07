@@ -1,9 +1,9 @@
 .wrapper {
   > header {
-    color: var(--main-text-color);
+    margin-bottom: 12px;
     font-weight: 600;
     line-height: 22px;
-    margin-bottom: 12px;
+    color: var(--main-text-color);
   }
 
   > main {
@@ -16,13 +16,13 @@
         position: relative;
 
         &::before {
-          content: '';
           position: absolute;
           top: 0;
-          left: 2px;
           bottom: 0;
+          left: 2px;
           width: 2px;
           background-color: var(--border-color);
+          content: '';
           opacity: 0.5;
         }
       }
@@ -34,9 +34,9 @@
   position: relative;
   z-index: 10;
   padding: 4px 0 4px 12px;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 
   &:hover,
   &.active {
@@ -44,29 +44,28 @@
   }
 
   &::before {
-    content: '';
     position: absolute;
     top: 50%;
     left: var(--dot-left);
-    margin-top: -2px;
     width: var(--dot-width);
     height: var(--dot-width);
-    background-color: currentColor;
+    margin-top: -2px;
+    background-color: currentcolor;
     border-radius: 50%;
+    content: '';
   }
 }
 
 .indicator {
   position: absolute;
   left: -4px;
-  border-radius: var(--border-radius);
-  background: var(--bg-code);
-  opacity: 0.5;
-
   width: 100%;
   height: 32px;
   padding: 4px 0 4px 12px;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  background: var(--bg-code);
+  border-radius: var(--border-radius);
+  opacity: 0.5;
 }

@@ -6,14 +6,13 @@
   overflow: hidden;
 
   > aside {
+    display: flex;
     width: 240px;
     padding: 12px 0;
+    overflow: hidden;
     background: var(--bg-body);
     user-select: none;
-
-    display: flex;
     flex-direction: column;
-    overflow: hidden;
 
     > header {
       padding: 0 12px;
@@ -44,55 +43,10 @@
   }
 }
 
-:global {
-  .knowledge-chapter-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 216px;
-    padding: 12px 8px;
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    background: var(--bg-code);
-
-    > span:nth-of-type(2) {
-      flex: 1;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      margin-left: 8px;
-    }
-
-    i {
-      opacity: 0;
-    }
-
-    + .knowledge-chapter-item {
-      margin-top: 0.5rem;
-    }
-
-    &:hover,
-    &:focus {
-      i {
-        opacity: 1;
-      }
-    }
-
-    &:hover {
-      background-color: var(--bg-code);
-    }
-
-    &.active {
-      color: #fff;
-      background: var(--primary-color);
-    }
-  }
-}
-
 .helper {
   position: absolute;
-  left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  left: 50%;
   font-size: 1.1em;
+  transform: translate(-50%, -50%);
 }

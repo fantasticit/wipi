@@ -1,20 +1,20 @@
 .wrapper {
-  height: 100%;
   display: flex;
+  height: 100%;
   flex-direction: column;
 }
 
 .tagOrCategoryDetail {
   padding: 16px 0;
   margin-bottom: 1rem;
-  background: var(--bg-second);
   text-align: center;
+  background: var(--bg-second);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
 
   i {
-    color: var(--disable-text-color);
     font-size: 2.5rem;
+    color: var(--disable-text-color);
   }
 
   p {
@@ -24,26 +24,26 @@
       margin-top: 0.5rem;
 
       span {
-        color: var(--primary-color);
         font-size: 1.5rem;
+        color: var(--primary-color);
       }
     }
 
     &:last-of-type {
       span {
-        color: var(--primary-color);
         font-size: 1.1rem;
+        color: var(--primary-color);
       }
     }
   }
 }
 
 .crouselWrap {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background: var(--bg-second);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  background: var(--bg-second);
-  margin-bottom: 1rem;
-  padding: 0.5rem;
 }
 
 .leftWrap {
@@ -81,8 +81,8 @@
 }
 
 .footer {
-  color: var(--second-text-color) !important;
   padding: 0 !important;
+  color: var(--second-text-color) !important;
   background: transparent !important;
   border-top: 0 !important;
 }

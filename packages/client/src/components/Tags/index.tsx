@@ -19,10 +19,7 @@ export const Tags = ({ tags = [], needTitle = true, style: cssStyle = {} }) => {
       )}
       <ul>
         {tags.map((tag) => (
-          <li
-            key={tag.id}
-            className={cls(style.item, routerTag === tag.value ? style.active : false)}
-          >
+          <li key={tag.id} className={cls(style.item, routerTag === tag.value ? style.active : false)}>
             <Link href={`/tag/[tag]`} as={`/tag/` + tag.value} scroll={false}>
               <a aria-label={tag.label}>
                 {tag.label} [{tag.articleCount}]

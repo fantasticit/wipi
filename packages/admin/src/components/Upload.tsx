@@ -3,13 +3,7 @@ import { InboxOutlined } from '@ant-design/icons';
 import { Spin, Upload as AntdUpload, message } from 'antd';
 import { FileProvider } from '@/providers/file';
 
-export const Upload = ({
-  onChange = null,
-  onOK = null,
-  style = {},
-  useDragger = true,
-  children = null,
-}) => {
+export const Upload = ({ onChange = null, onOK = null, style = {}, useDragger = true, children = null }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const uploadProps = {

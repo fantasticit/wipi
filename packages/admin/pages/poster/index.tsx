@@ -62,9 +62,7 @@ const Poster = () => {
   const setting = useSetting();
   const [visible, toggleVisible] = useToggle(false);
   const [current, setCurrent] = useState<IPoster | null>(null);
-  const { loading, data, refresh, ...resetPagination } = usePagination<IPoster>(
-    PosterProvider.getPosters
-  );
+  const { loading, data, refresh, ...resetPagination } = usePagination<IPoster>(PosterProvider.getPosters);
   const [deleteApi, deleteLoading] = useAsyncLoading(PosterProvider.deletePoster);
   const isOSSSettingFullFiled = useMemo(() => setting && setting.oss, [setting]);
 
@@ -179,10 +177,7 @@ const Poster = () => {
               <DescriptionItem title="制作页面" content={current && current.pageUrl} />
             </Col>
             <Col span={12}>
-              <DescriptionItem
-                title="文件大小"
-                content={formatFileSize((current && current.size) || 0)}
-              />
+              <DescriptionItem title="文件大小" content={formatFileSize((current && current.size) || 0)} />
             </Col>
           </Row>
           <Row>

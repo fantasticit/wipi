@@ -26,11 +26,7 @@ export const Copy: React.FC<Props> = ({ text }) => {
 
   return (
     <span className={styles.wrapper}>
-      {!copied ? (
-        <CopyOutlined onClick={onClick} />
-      ) : (
-        <CheckOutlined style={{ color: 'var(--primary-color)' }} />
-      )}
+      {!copied ? <CopyOutlined onClick={onClick} /> : <CheckOutlined style={{ color: 'var(--primary-color)' }} />}
     </span>
   );
 };

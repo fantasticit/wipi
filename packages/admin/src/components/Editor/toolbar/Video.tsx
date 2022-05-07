@@ -1,9 +1,8 @@
 import React from 'react';
 import { Upload, message, Tooltip } from 'antd';
 import { FileProvider } from '@/providers/file';
-import { monaco } from '../MonacoEditor';
 
-export const Video = ({ editor }) => {
+export const Video = ({ editor, monaco }) => {
   const uploadProps = {
     name: 'file',
     multiple: false,

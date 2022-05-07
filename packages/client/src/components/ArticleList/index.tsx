@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { HeartOutlined, EyeOutlined, ShareAltOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import { LocaleTime } from '@/components/LocaleTime';
-import { Share } from '@/components/Share';
 import style from './index.module.scss';
 
 interface IProps {
@@ -53,18 +52,6 @@ export const ArticleList: React.FC<IProps> = ({ articles = [] }) => {
                           <EyeOutlined />
                           <span className={style.number}>{article.views}</span>
                         </span>
-                        <span className={style.seperator}>·</span>
-                        <Share
-                          cover={article.cover}
-                          title={article.title}
-                          desc={article.summary}
-                          url={`/article/${article.id}`}
-                        >
-                          <span>
-                            <ShareAltOutlined />
-                            <span className={style.number}>{t('share')}</span>
-                          </span>
-                        </Share>
                       </div>
                     </div>
 

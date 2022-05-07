@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Button, Tabs, Modal, Input, message } from 'antd';
 import { WarningOutlined } from '@ant-design/icons';
 import { SettingProvider } from '@/providers/setting';
 import { JsonEditor } from '@/components/JsonEditor';
 import { useForceUpdate } from '@/hooks/useForceUpdate';
+import { safeJsonParse } from '@/utils/json';
 
 export const LocaleSetting = ({ setting }) => {
   const forceUpdate = useForceUpdate();
   const [i18n, setI18n] = useState({});
-  const locales = i18n && typeof i18n === 'object' ? Object.keys(i18n) : [];
+  const locales = useMemo(() => (i18n && typeof i18n === 'object' ? Object.keys(i18n) : []), [i18n]);
 
   useEffect(() => {
     try {
       if (setting.i18n) {
         const json = JSON.parse(setting.i18n);
+        Object.keys(json).forEach((key) => {
+          json[key] = safeJsonParse(json[key]);
+        });
         setI18n(json);
       }
     } catch (e) {
@@ -74,6 +78,7 @@ export const LocaleSetting = ({ setting }) => {
 
   const onChange = useCallback((locale) => {
     return (value) => {
+      if (!value) return;
       setI18n((json) => {
         json[locale] = value;
         return json;
@@ -95,7 +100,7 @@ export const LocaleSetting = ({ setting }) => {
       <Tabs type="editable-card" onEdit={onEdit}>
         {locales.map((locale) => (
           <Tabs.TabPane tab={locale} key={locale}>
-            <JsonEditor value={JSON.stringify(i18n[locale], null, 2)} onChange={onChange(locale)} />
+            <JsonEditor value={i18n[locale]} onChange={onChange(locale)} />
           </Tabs.TabPane>
         ))}
       </Tabs>

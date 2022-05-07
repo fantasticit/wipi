@@ -90,9 +90,9 @@ export const Header = ({ setting, tags, pages, hasBg = false }) => {
     );
   }, [affix, affixVisible]);
 
-  const pageMenu = pages.map((menu) => (
+  const pageMenu = pages.map((menu, index) => (
     <li
-      key={menu.label}
+      key={`${index}-${menu.label}`}
       className={cls({
         [style.active]: asPath.replace('/page/', '') === menu.path,
       })}

@@ -13,12 +13,12 @@
 
   .upv {
     position: relative;
-    padding: 16px 16px;
+    padding: 16px;
+    color: #333;
+    background: #fafafa;
+    border-radius: 0 0 4px 4px;
     border-top: 1px solid #e8e8e8;
     border-bottom: 1px solid #e8e8e8;
-    border-radius: 0 0 4px 4px;
-    color: #333333;
-    background: #fafafa;
   }
 
   @media (max-width: 567px) {

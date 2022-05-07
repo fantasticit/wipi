@@ -149,12 +149,7 @@ const Page = () => {
           <List className={style.imgs} grid={GRID} dataSource={data} renderItem={renderBook} />
         )}
       />
-      <KnowledgeSettingDrawer
-        visible={visible}
-        toggleVisible={toggleVisible}
-        book={selectedBook}
-        onOk={refresh}
-      />
+      <KnowledgeSettingDrawer visible={visible} toggleVisible={toggleVisible} book={selectedBook} onOk={refresh} />
     </AdminLayout>
   );
 };

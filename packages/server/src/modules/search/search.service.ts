@@ -45,9 +45,7 @@ export class SearchService {
    * 获取所有搜索记录
    */
   async findAll(queryParams): Promise<[Search[], number]> {
-    const query = this.searchRepository
-      .createQueryBuilder('search')
-      .orderBy('search.updateAt', 'DESC');
+    const query = this.searchRepository.createQueryBuilder('search').orderBy('search.updateAt', 'DESC');
 
     if (typeof queryParams === 'object') {
       const { page = 1, pageSize = 12, ...otherParams } = queryParams;
@@ -56,9 +54,7 @@ export class SearchService {
 
       if (otherParams) {
         Object.keys(otherParams).forEach((key) => {
-          query
-            .andWhere(`search.${key} LIKE :${key}`)
-            .setParameter(`${key}`, `%${otherParams[key]}%`);
+          query.andWhere(`search.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
         });
       }
     }

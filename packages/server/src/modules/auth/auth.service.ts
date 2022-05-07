@@ -81,10 +81,7 @@ export class AuthService {
         // TODO: 向用户发送信息
         return res;
       } else {
-        throw new HttpException(
-          '未获取到您的公开邮件地址，无法使用Github登录',
-          HttpStatus.BAD_REQUEST
-        );
+        throw new HttpException('未获取到您的公开邮件地址，无法使用Github登录', HttpStatus.BAD_REQUEST);
       }
     } catch (e) {
       throw new HttpException(e.message || e, HttpStatus.BAD_REQUEST);

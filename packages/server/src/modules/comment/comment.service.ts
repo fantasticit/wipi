@@ -27,10 +27,7 @@ export class CommentService {
    * 创建评论
    * @param comment
    */
-  async create(
-    userAgent,
-    comment: Partial<Comment> & { reply?: string; createByAdmin?: boolean }
-  ): Promise<Comment> {
+  async create(userAgent, comment: Partial<Comment> & { reply?: string; createByAdmin?: boolean }): Promise<Comment> {
     const { hostId, name, email, content, createByAdmin = false } = comment;
 
     if (!hostId || !name || !email || !content) {
@@ -79,9 +76,7 @@ export class CommentService {
    * 额外添加文章信息
    */
   async findAll(queryParams): Promise<[Comment[], number]> {
-    const query = this.commentRepository
-      .createQueryBuilder('comment')
-      .orderBy('comment.createAt', 'DESC');
+    const query = this.commentRepository.createQueryBuilder('comment').orderBy('comment.createAt', 'DESC');
 
     if (typeof queryParams === 'object') {
       const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
@@ -95,9 +90,7 @@ export class CommentService {
 
       if (otherParams) {
         Object.keys(otherParams).forEach((key) => {
-          query
-            .andWhere(`comment.${key} LIKE :${key}`)
-            .setParameter(`${key}`, `%${otherParams[key]}%`);
+          query.andWhere(`comment.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
         });
       }
     }

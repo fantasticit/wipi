@@ -54,9 +54,7 @@ export class FileService {
 
       if (otherParams) {
         Object.keys(otherParams).forEach((key) => {
-          query
-            .andWhere(`file.${key} LIKE :${key}`)
-            .setParameter(`${key}`, `%${otherParams[key]}%`);
+          query.andWhere(`file.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
         });
       }
     }

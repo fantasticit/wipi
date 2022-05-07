@@ -67,12 +67,7 @@ const File: NextPage = () => {
   const setting = useSetting();
   const [visible, toggleVisible] = useToggle(false);
   const [currentFile, setCurrentFile] = useState<IFile | null>(null);
-  const {
-    loading,
-    data: files,
-    refresh,
-    ...resetPagination
-  } = usePagination<IFile>(FileProvider.getFiles);
+  const { loading, data: files, refresh, ...resetPagination } = usePagination<IFile>(FileProvider.getFiles);
   const [deleteApi, deleteLoading] = useAsyncLoading(FileProvider.deleteFile);
   const isOSSSettingFullFiled = useMemo(() => setting && setting.oss, [setting]);
 
@@ -177,10 +172,7 @@ const File: NextPage = () => {
           visible={visible}
         >
           <div ref={ref} className={style.previewContainer}>
-            <img
-              alt={currentFile && currentFile.originalname}
-              src={currentFile && currentFile.url}
-            />
+            <img alt={currentFile && currentFile.originalname} src={currentFile && currentFile.url} />
           </div>
           <Row>
             <Col span={24}>
@@ -197,10 +189,7 @@ const File: NextPage = () => {
               <DescriptionItem title="文件类型" content={currentFile && currentFile.type} />
             </Col>
             <Col span={12}>
-              <DescriptionItem
-                title="文件大小"
-                content={formatFileSize((currentFile && currentFile.size) || 0)}
-              />
+              <DescriptionItem title="文件大小" content={formatFileSize((currentFile && currentFile.size) || 0)} />
             </Col>
           </Row>
           <Row>

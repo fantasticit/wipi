@@ -1,6 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { message } from 'antd';
-import Router from 'next/router';
 
 export const httpProvider = axios.create({
   baseURL: process.env.SERVER_API_URL,
@@ -18,8 +17,15 @@ httpProvider.interceptors.request.use(
 );
 
 httpProvider.interceptors.response.use(
-  (data) => {
-    if (data.status && +data.status === 200 && data.data.status === 'error') {
+  (
+    data: AxiosResponse<{
+      statusCode: number;
+      success: boolean;
+      msg: string | null;
+      data: unknown;
+    }>
+  ) => {
+    if (data.status && +data.status === 200 && !data.data.success) {
       typeof window !== 'undefined' && message.error({ message: data.data.msg });
       return null;
     }
@@ -45,9 +51,7 @@ httpProvider.interceptors.response.use(
 
         default:
           typeof window !== 'undefined' &&
-            message.error(
-              (err.response && err.response.data && err.response.data.msg) || '未知错误!'
-            );
+            message.error((err.response && err.response.data && err.response.data.msg) || '未知错误!');
       }
     }
 

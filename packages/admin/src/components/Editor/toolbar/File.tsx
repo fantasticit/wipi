@@ -2,9 +2,8 @@ import React, { useCallback } from 'react';
 import { Tooltip } from 'antd';
 import { useToggle } from '@/hooks/useToggle';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { monaco } from '../MonacoEditor';
 
-export const File = ({ editor }) => {
+export const File = ({ editor, monaco }) => {
   const [fileDrawerVisible, toggleFileDrawerVisible] = useToggle(false);
   const insert = useCallback(
     (img) => {
@@ -17,7 +16,7 @@ export const File = ({ editor }) => {
         },
       ]);
     },
-    [editor]
+    [editor, monaco]
   );
 
   return (

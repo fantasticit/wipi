@@ -1,5 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Alert, Spin } from 'antd';
+import deepEqual from 'deep-equal';
+import { safeJsonParse } from '@/utils/json';
+import Editor from '@monaco-editor/react';
 
 const DEFAULT_STYLE = {
   height: '600px',
@@ -7,6 +10,20 @@ const DEFAULT_STYLE = {
   border: '1px solid var(--border-color)',
   marginBottom: 24,
 };
+
+const MonacoEditorOptions = {
+  language: 'json',
+  automaticLayout: true,
+  theme: 'vs',
+  scrollBeyondLastLine: false,
+  scrollbar: {
+    useShadows: false,
+    vertical: 'visible',
+    horizontal: 'visible',
+    verticalScrollbarSize: 6,
+    horizontalScrollbarSize: 6,
+  },
+} as any;
 
 export const JsonEditor = ({ value, onChange, style = DEFAULT_STYLE }) => {
   const container = useRef(null);
@@ -18,56 +35,49 @@ export const JsonEditor = ({ value, onChange, style = DEFAULT_STYLE }) => {
     if (!mounted) {
       return;
     }
-    editorRef.current.setValue(value);
+    if (!value) return;
+    editorRef.current.setValue(JSON.stringify(value, null, 2));
   }, [mounted, value]);
 
-  useEffect(() => {
-    Promise.all([import('monaco-editor/esm/vs/editor/editor.api.js')]).then((res) => {
-      const monaco = res[0];
-      const editor = monaco.editor.create(container.current, {
-        language: 'json',
-        automaticLayout: true,
-        theme: 'vs',
-        scrollBeyondLastLine: false,
-        scrollbar: {
-          useShadows: false,
-          vertical: 'visible',
-          horizontal: 'visible',
-          verticalScrollbarSize: 6,
-          horizontalScrollbarSize: 6,
-        },
-      });
-      editorRef.current = editor;
-      editor.onDidChangeModelContent(() => {
-        const content = editor.getValue();
-        try {
-          onChange(JSON.parse(content));
-          setError(null);
-        } catch (e) {
-          console.log(e);
-          setError(e);
+  const onMount = useCallback((editor) => {
+    editorRef.current = editor;
+    setMounted(true);
+  }, []);
+
+  const handleChange = useCallback(
+    (text) => {
+      if (!text) return;
+      try {
+        const json = safeJsonParse(text);
+
+        if (typeof json === 'object') {
+          if (!deepEqual(json, value)) {
+            onChange(json);
+            console.log('json', value, json);
+          }
         }
-      });
-      setMounted(true);
-    });
-    return () => {
-      setMounted(false);
-      editorRef.current && editorRef.current.dispose();
-    };
-  }, [onChange]);
+      } catch (e) {
+        setError(e);
+      }
+    },
+    [value, onChange]
+  );
 
   return (
     <>
       <div ref={container} style={style}>
-        {mounted ? null : <Spin tip="编辑器努力加载中..." spinning={true}></Spin>}
+        <Editor
+          height="100%"
+          defaultValue="{}"
+          language="json"
+          options={MonacoEditorOptions}
+          loading={<Spin tip="编辑器努力加载中..." spinning={true}></Spin>}
+          onMount={onMount}
+          onChange={handleChange}
+        />
       </div>
       {error ? (
-        <Alert
-          style={{ marginBottom: 24 }}
-          message="Json 格式化出错"
-          type="error"
-          showIcon={true}
-        />
+        <Alert style={{ marginBottom: 24 }} message="Json 格式化出错，请继续编辑" type="error" showIcon={true} />
       ) : null}
     </>
   );

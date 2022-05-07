@@ -36,13 +36,7 @@ export const Likes: React.FC<LikesProps> = ({ defaultCount, id, api }) => {
   return (
     <Badge size="small" count={count} style={{ backgroundColor: 'var(--primary-color)' }}>
       <div className={cls(style.wrap, likes.includes(id) && style.active)} onClick={like}>
-        <svg
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          width="1em"
-          height="1em"
-        >
+        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em">
           <path
             d="M859.8 191.2c-80.8-84.2-212-84.2-292.8 0L512 248.2l-55-57.2c-81-84.2-212-84.2-292.8 0-91 94.6-91 248.2 0 342.8L512 896l347.8-362C950.8 439.4 950.8 285.8 859.8 191.2z"
             fill="currentColor"

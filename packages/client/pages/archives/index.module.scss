@@ -5,13 +5,13 @@
 
 .summary {
   padding: 16px 0;
-  border-bottom: 1px solid var(--border-color);
-  background-color: var(--bg-second);
   text-align: center;
+  background-color: var(--bg-second);
+  border-bottom: 1px solid var(--border-color);
 
   i {
-    color: var(--disable-text-color);
     font-size: 2.5rem;
+    color: var(--disable-text-color);
   }
 
   p {
@@ -21,15 +21,15 @@
       margin-top: 0.5rem;
 
       span {
-        color: var(--primary-color);
         font-size: 1.5rem;
+        color: var(--primary-color);
       }
     }
 
     &:last-of-type {
       span {
-        color: var(--primary-color);
         font-size: 1.1rem;
+        color: var(--primary-color);
       }
     }
   }
@@ -43,8 +43,8 @@
   }
 
   h2 {
-    color: var(--main-text-color);
     font-size: 1.5rem;
+    color: var(--main-text-color);
   }
 
   .item {
@@ -77,9 +77,9 @@
         left: -1rem;
         width: 6px;
         height: 6px;
-        border-radius: 50%;
         margin-left: -4px;
         background: var(--disable-text-color);
+        border-radius: 50%;
         content: ' ';
       }
 
@@ -98,14 +98,14 @@
     }
 
     .title {
-      color: var(--main-text-color);
       overflow: hidden;
-      font-weight: 600;
       font-size: 1rem;
+      font-weight: 600;
       line-height: 1.4;
+      color: var(--main-text-color);
+      text-align: left;
       text-overflow: ellipsis;
       white-space: nowrap;
-      text-align: left;
     }
 
     h3 {
@@ -115,8 +115,8 @@
     .meta {
       padding-right: 1em;
       margin: 0;
-      color: var(--second-text-color);
       font-size: 0.8rem;
+      color: var(--second-text-color);
     }
   }
 }

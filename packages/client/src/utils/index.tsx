@@ -57,12 +57,7 @@ export function elementInViewport(el) {
   );
 }
 export function getDocumentScrollTop() {
-  return (
-    document.documentElement.scrollTop ||
-    window.pageYOffset ||
-    window.scrollY ||
-    document.body.scrollTop
-  );
+  return document.documentElement.scrollTop || window.pageYOffset || window.scrollY || document.body.scrollTop;
 }
 
 export function download({ name, url }) {

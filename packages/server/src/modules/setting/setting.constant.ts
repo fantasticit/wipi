@@ -1,4 +1,4 @@
-const { messages } = require('../../../../../config/i18n');
+import { messages } from '@wipi/config';
 
 export const i18n = messages;
 

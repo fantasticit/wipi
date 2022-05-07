@@ -46,9 +46,7 @@ export class PageService {
       }
       if (otherParams) {
         Object.keys(otherParams).forEach((key) => {
-          query
-            .andWhere(`page.${key} LIKE :${key}`)
-            .setParameter(`${key}`, `%${otherParams[key]}%`);
+          query.andWhere(`page.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
         });
       }
     }

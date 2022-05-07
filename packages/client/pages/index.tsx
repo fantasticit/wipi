@@ -50,9 +50,7 @@ export const CategoryMenu = ({ categories }) => {
           <a
             className={cls({
               [style.active]:
-                index === 0
-                  ? asPath === category.path
-                  : asPath.replace('/category/', '') === category.value,
+                index === 0 ? asPath === category.path : asPath.replace('/category/', '') === category.value,
             })}
             aria-label={category.label}
           >
@@ -64,11 +62,7 @@ export const CategoryMenu = ({ categories }) => {
   );
 };
 
-const Home: NextPage<IHomeProps> = ({
-  articles: defaultArticles = [],
-  recommendedArticles = [],
-  total = 0,
-}) => {
+const Home: NextPage<IHomeProps> = ({ articles: defaultArticles = [], recommendedArticles = [], total = 0 }) => {
   const t = useTranslations();
   const { setting, tags, categories } = useContext(GlobalContext);
   const [page, setPage] = useState(1);
@@ -94,9 +88,11 @@ const Home: NextPage<IHomeProps> = ({
       <DoubleColumnLayout
         leftNode={
           <>
-            <div className={style.crouselWrap}>
-              <ArticleCarousel articles={recommendedArticles} />
-            </div>
+            {recommendedArticles && recommendedArticles.length ? (
+              <div className={style.crouselWrap}>
+                <ArticleCarousel articles={recommendedArticles} />
+              </div>
+            ) : null}
             <div className={style.leftWrap}>
               <header>
                 <CategoryMenu categories={categories} />

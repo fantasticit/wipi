@@ -13,20 +13,17 @@ export class UserService {
   ) {
     const name = this.configService.get('ADMIN_USER', 'admin');
     const password = this.configService.get('ADMIN_PASSWD', 'admin');
+
     this.createUser({ name, password, role: 'admin' })
-      .then((_) => {
-        console.log();
-        console.log(
-          `管理员账户创建成功，用户名：${name}，密码：${password}，请及时登录系统修改默认密码`
-        );
-        console.log();
+      .then(() => {
+        console.log(`[wipi] 管理员账户创建成功，用户名：${name}，密码：${password}，请及时登录系统修改默认密码`);
       })
-      .catch((_) => {
-        console.log();
-        console.log(
-          `管理员账户已经存在，用户名：${name}，密码：${password}，请及时登录系统修改默认密码`
-        );
-        console.log();
+      .catch(async (err) => {
+        const existAdminUser = await this.userRepository.findOne({ where: { name } });
+        const isDefaultPasswd = User.comparePassword(password, existAdminUser.password);
+        if (isDefaultPasswd) {
+          console.log(`[wipi] 管理员账户已经存在，用户名：${name}，密码：${password}，请及时登录系统修改默认密码`);
+        }
       });
   }
 
@@ -45,9 +42,7 @@ export class UserService {
 
       if (otherParams) {
         Object.keys(otherParams).forEach((key) => {
-          query
-            .andWhere(`user.${key} LIKE :${key}`)
-            .setParameter(`${key}`, `%${otherParams[key]}%`);
+          query.andWhere(`user.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
         });
       }
     }

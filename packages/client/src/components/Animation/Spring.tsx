@@ -9,12 +9,7 @@ export interface SpringProps {
   to?: Record<string, number>;
 }
 
-export const Spring: React.FC<SpringProps> = ({
-  containerProps = {},
-  from = {},
-  to = {},
-  children,
-}) => {
+export const Spring: React.FC<SpringProps> = ({ containerProps = {}, from = {}, to = {}, children }) => {
   const ref = useRef();
   const [styles, animation] = useSpring(() => ({
     ...from,

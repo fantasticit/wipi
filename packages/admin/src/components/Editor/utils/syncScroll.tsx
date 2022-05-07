@@ -26,10 +26,7 @@ export const removeScrollListener = (target: string, callback) => {
   }
 };
 
-export const registerScollListener = (
-  self: string,
-  callback: (...args) => { top: number; left: number }
-) => {
+export const registerScollListener = (self: string, callback: (...args) => { top: number; left: number }) => {
   return (...args) => {
     const tmp = ignore[self];
 

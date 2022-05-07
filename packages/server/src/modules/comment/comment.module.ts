@@ -10,14 +10,7 @@ import { CommentController } from './comment.controller';
 import { Comment } from './comment.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Comment]),
-    AuthModule,
-    ArticleModule,
-    SettingModule,
-    SMTPModule,
-    UserModule,
-  ],
+  imports: [TypeOrmModule.forFeature([Comment]), AuthModule, ArticleModule, SettingModule, SMTPModule, UserModule],
   providers: [CommentService],
   controllers: [CommentController],
 })

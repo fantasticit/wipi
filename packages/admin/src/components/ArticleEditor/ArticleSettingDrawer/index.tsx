@@ -70,14 +70,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({ article, visible, onClo
   };
 
   return (
-    <Drawer
-      width={480}
-      placement="right"
-      title={'文章设置'}
-      closable={true}
-      onClose={onClose}
-      visible={visible}
-    >
+    <Drawer width={480} placement="right" title={'文章设置'} closable={true} onClose={onClose} visible={visible}>
       <FormItem
         label="文章摘要"
         content={

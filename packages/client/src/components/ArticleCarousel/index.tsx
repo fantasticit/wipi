@@ -20,10 +20,7 @@ export const ArticleCarousel: React.FC<IProps> = ({ articles = [] }) => {
           .map((article) => {
             return (
               <div key={article.id}>
-                <div
-                  className={style.articleItem}
-                  style={{ backgroundImage: `url(${article.cover})` }}
-                >
+                <div className={style.articleItem} style={{ backgroundImage: `url(${article.cover})` }}>
                   <Link href={`/article/[id]`} as={`/article/${article.id}`} scroll={false}>
                     <a aria-label={article.title}>
                       <div className={style.info}>

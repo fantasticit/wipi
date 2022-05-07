@@ -1,14 +1,8 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { NextPage } from 'next';
 import { default as Router } from 'next/router';
 import cls from 'classnames';
-import {
-  CloseOutlined,
-  DeleteOutlined,
-  PlusOutlined,
-  MenuOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
+import { CloseOutlined, DeleteOutlined, PlusOutlined, MenuOutlined, SettingOutlined } from '@ant-design/icons';
 import { Avatar, Divider, Input, Button, Popconfirm, Popover, message } from 'antd';
 import { SortableHandle, SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
@@ -41,7 +35,7 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
   const [newTitle, setNewTitle] = useState('');
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [chapters, setChapters] = useState<Array<Partial<IKnowledge>>>(knowledge.children || []);
-  const currentChapter = chapters[currentIndex] || null;
+  const currentChapter = useMemo(() => chapters[currentIndex] || null, [chapters, currentIndex]);
 
   const deleteKnowledge = useCallback(
     (idx) => {
@@ -74,12 +68,7 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
     >
       <DragHandle />
       <span>{chapters[idx].title}</span>
-      <Popconfirm
-        title="确认删除?"
-        onConfirm={() => deleteKnowledge(idx)}
-        okText="确定"
-        cancelText="取消"
-      >
+      <Popconfirm title="确认删除?" onConfirm={() => deleteKnowledge(idx)} okText="确定" cancelText="取消">
         <DeleteOutlined onClick={(e) => e.stopPropagation()} />
       </Popconfirm>
     </div>
@@ -208,12 +197,7 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
             <Popover
               content={
                 <div style={{ display: 'flex' }}>
-                  <Input
-                    autoFocus={true}
-                    width={240}
-                    value={newTitle}
-                    onChange={(e) => setNewTitle(e.target.value)}
-                  />
+                  <Input autoFocus={true} width={240} value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
                   <Button style={{ marginLeft: 8 }} type="primary" onClick={createNewKnowledge}>
                     新建
                   </Button>
@@ -232,21 +216,13 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
           <Divider style={{ margin: '16px 0' }} />
         </header>
         <main ref={$container}>
-          <SortableList
-            items={chapters}
-            onSortEnd={onSortEnd}
-            useDragHandle={true}
-            lockAxis={'y'}
-          />
+          <SortableList items={chapters} onSortEnd={onSortEnd} useDragHandle={true} lockAxis={'y'} />
         </main>
       </aside>
 
       <main>
         {currentChapter ? (
-          <Editor
-            defaultValue={(currentChapter && currentChapter.content) || ''}
-            onChange={patchKnowledge}
-          />
+          <Editor defaultValue={(currentChapter && currentChapter.content) || ''} onChange={patchKnowledge} />
         ) : (
           <div className={styles.helper}>请新建章节（或者选择章节进行编辑）</div>
         )}

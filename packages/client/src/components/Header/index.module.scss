@@ -32,11 +32,11 @@ $height: 64px;
   &.isFixed {
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
-    transition: all 0.2s;
-    transform: translateY(-64px);
+    left: 0;
     background-color: var(--bg);
+    transform: translateY(-64px);
+    transition: all 0.2s;
     border-bottom: 1px solid var(--border-color);
 
     &.visible {
@@ -52,12 +52,12 @@ $height: 64px;
 
   .logo {
     display: inline-flex;
-    align-items: center;
     height: $height;
     margin-right: 4rem;
-    color: var(--main-text-color);
     line-height: $height;
+    color: var(--main-text-color);
     text-align: left;
+    align-items: center;
 
     a {
       display: flex;
@@ -78,8 +78,8 @@ $height: 64px;
     .stick {
       width: 25px;
       height: 4px;
-      border-radius: var(--border-radius);
       background-color: var(--primary-color);
+      border-radius: var(--border-radius);
       opacity: 1;
       transition: all 250ms ease-in-out 0s;
 
@@ -107,11 +107,11 @@ $height: 64px;
 
   nav {
     display: flex;
+    font-size: 16px;
+    color: var(--main-text-color);
     flex: 1;
     justify-content: space-between;
     align-items: center;
-    color: var(--main-text-color);
-    font-size: 16px;
 
     > ul {
       position: relative;
@@ -121,8 +121,8 @@ $height: 64px;
         display: inline-flex;
         padding: 0;
         padding: 0 12px;
-        vertical-align: middle;
         line-height: 64px;
+        vertical-align: middle;
 
         &.toolWrapper {
           font-size: 24px;
@@ -148,10 +148,10 @@ $height: 64px;
 
       .toolWrapper {
         display: flex;
+        float: right;
+        height: 64px;
         justify-content: center;
         align-items: center;
-        height: 64px;
-        float: right;
       }
 
       @media (max-width: 768px) {
@@ -164,8 +164,8 @@ $height: 64px;
         }
 
         .toolWrapper {
-          height: 48px;
           float: none;
+          height: 48px;
         }
       }
     }
@@ -176,14 +176,14 @@ $height: 64px;
       position: absolute;
       top: 100%;
       left: 0;
+      z-index: 100;
       width: 100vw;
       max-height: 0;
       padding: 0 15px;
       margin-left: 0;
-      background-color: var(--bg);
       overflow: hidden;
+      background-color: var(--bg);
       transition: max-height 0.25s;
-      z-index: 100;
 
       &.active {
         max-height: 100vh;

@@ -1,73 +1,78 @@
 {
-  "name": "root",
+  "name": "wipi",
   "private": true,
-  "npmClient": "yarn",
-  "usingWorkspances": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "nohoist": [
-      "**/*",
-      "**/**"
-    ]
-  },
+  "author": "fantasticit",
   "scripts": {
-    "dev": "concurrently \"yarn:dev:*\"",
-    "dev:server": "yarn --cwd packages/server dev",
-    "dev:admin": "yarn --cwd packages/admin dev",
-    "dev:client": "yarn --cwd packages/client dev",
-    "build": "yarn build:server && yarn build:admin && yarn build:client",
-    "build:server": "yarn --cwd packages/server build",
-    "build:admin": "yarn --cwd packages/admin build",
-    "build:client": "yarn --cwd packages/client build",
-    "start": "concurrently \"yarn:start:*\"",
-    "start:server": "yarn --cwd packages/server start",
-    "start:admin": "yarn --cwd packages/admin start",
-    "start:client": "yarn --cwd packages/client start",
-    "pm2": "concurrently \"yarn:pm2:*\"",
-    "pm2:server": "yarn --cwd packages/server pm2",
-    "pm2:admin": "yarn --cwd packages/admin pm2",
-    "pm2:client": "yarn --cwd packages/client pm2",
-    "precommit": "npm run lint && npm run format",
-    "lint": "eslint . -c ./.eslintrc.js --fix --quiet 'packages/**/*.{ts,tsx,js,jsx}'",
-    "format": "npm run format:md && npm run format:json && npm run format:source",
-    "format:md": "prettier --parser markdown --write './**/*.md'",
-    "format:json": "prettier --parser json --write './**/*.json'",
-    "format:source": "prettier --write './**/*.{js,ts}'"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^12.1.1",
-    "@commitlint/config-conventional": "^12.1.1",
-    "@fantasticit/code-lint": "^0.0.8",
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
-    "commitizen": "^4.2.3",
-    "concurrently": "^6.2.0",
-    "cz-customizable": "^6.3.0",
-    "eslint": "^7.24.0",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-import-resolver-typescript": "^2.4.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.3.5",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.23.2",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^6.0.0",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1",
-    "stylelint": "^13.12.0",
-    "stylelint-config-standard": "^21.0.0",
-    "stylelint-order": "^4.1.0",
-    "typescript": "^4.2.4"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-customizable"
-    }
+    "clean": "npx rimraf ./node_modules ./packages/**/node_modules",
+    "dev": "concurrently 'pnpm:dev:*'",
+    "dev:server": "pnpm run --dir packages/server dev",
+    "dev:client": "pnpm run --dir packages/client dev",
+    "dev:admin": "pnpm run --dir packages/admin dev",
+    "build": "pnpm build:server && pnpm build:client && pnpm build:admin",
+    "build:dep": "pnpm build:constants && pnpm build:domains && pnpm build:config",
+    "build:config": "pnpm run --dir packages/config build",
+    "build:server": "pnpm run --dir packages/server build",
+    "build:client": "pnpm run --dir packages/client build",
+    "build:admin": "pnpm run --dir packages/admin build",
+    "start": "concurrently 'pnpm:start:*'",
+    "start:server": "pnpm run --dir packages/server start",
+    "start:client": "pnpm run --dir packages/client start",
+    "start:admin": "pnpm run --dir packages/admin start",
+    "pm2": "pnpm run pm2:server && pnpm run pm2:client && pnpm run pm2:admin",
+    "pm2:server": "pnpm run --dir packages/server pm2",
+    "pm2:client": "pnpm run --dir packages/client pm2",
+    "pm2:admin": "pnpm run --dir packages/admin pm2",
+    "lint": "concurrently 'pnpm:lint:*'",
+    "lint:client": "eslint  --fix './packages/client/**/*.{ts,tsx,js,jsx}' -c '.eslintrc.client.js'",
+    "lint:admin": "eslint  --fix './packages/admin/**/*.{ts,tsx,js,jsx}' -c '.eslintrc.admin.js'",
+    "lint:server": "eslint  --fix './packages/server/src/*.{ts,js}' -c '.eslintrc.server.js'",
+    "format": "concurrently 'pnpm:format:*'",
+    "format:ts": "prettier --write --parser typescript 'packages/**/*.{ts,tsx,js,jsx}'",
+    "prepare": "husky install",
+    "precommit": "lint-staged"
   },
   "dependencies": {
-    "dotenv": "^10.0.0",
-    "fs-extra": "^10.0.0"
+    "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
+    "fs-extra": "^10.0.0",
+    "rimraf": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.5.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.3.2",
+    "stylelint": "^14.6.1",
+    "stylelint-config-css-modules": "^4.1.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-prettier": "^2.0.0",
+    "typescript": "^4.5.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,.css,.scss}": "prettier --write",
+    "./packages/client/**/*.{ts,tsx,js,jsx}": [
+      "eslint --fix -c '.eslintrc.client.js'"
+    ],
+    "./packages/admin/**/*.{ts,tsx,js,jsx}": [
+      "eslint --fix -c '.eslintrc.admin.js'"
+    ],
+    "./packages/server/src/*.{ts,js}": [
+      "eslint --fix -c '.eslintrc.server.js'"
+    ]
   }
 }

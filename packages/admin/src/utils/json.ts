@@ -1,6 +1,8 @@
 export function safeJsonParse(value) {
   try {
-    if (value && typeof value === 'object') {
+    if (!value) return {};
+
+    if (typeof value === 'object') {
       return value;
     }
 

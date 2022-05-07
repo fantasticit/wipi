@@ -10,12 +10,7 @@ export const CommentArticle = ({ comment }) => {
   const href = resolveUrl(setting.systemUrl, link);
 
   return (
-    <Popover
-      title={'页面预览'}
-      content={<iframe src={href} />}
-      placement={'right'}
-      mouseEnterDelay={0.5}
-    >
+    <Popover title={'页面预览'} content={<iframe src={href} />} placement={'right'} mouseEnterDelay={0.5}>
       <a href={href} className={style.link} target="_blank" rel="noreferrer">
         文章
       </a>

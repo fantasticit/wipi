@@ -37,10 +37,7 @@ const transformTags = (article) => {
   }
 };
 
-export const ArticleEditor: React.FC<IProps> = ({
-  id: defaultId,
-  article: defaultArticle = { title: '' },
-}) => {
+export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaultArticle = { title: '' } }) => {
   const isCreate = !defaultId; // 一开始是否是新建
   const setting = useSetting();
   const [id, setId] = useState(defaultId);
@@ -103,9 +100,7 @@ export const ArticleEditor: React.FC<IProps> = ({
         .then(() => {
           transformCategory(data);
           transformTags(data);
-          const promise = !isCreate
-            ? ArticleProvider.updateArticle(id, data)
-            : ArticleProvider.addArticle(data);
+          const promise = !isCreate ? ArticleProvider.updateArticle(id, data) : ArticleProvider.addArticle(data);
           promise.then((res) => {
             setId(res.id);
             message.success(res.status === 'draft' ? '文章已保存为草稿' : '文章已发布');

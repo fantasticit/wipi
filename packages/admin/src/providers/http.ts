@@ -56,10 +56,7 @@ httpProvider.interceptors.response.use(
           break;
 
         default:
-          isClient &&
-            message.error(
-              (err.response && err.response.data && err.response.data.msg) || '未知错误!'
-            );
+          isClient && message.error((err.response && err.response.data && err.response.data.msg) || '未知错误!');
       }
     }
 

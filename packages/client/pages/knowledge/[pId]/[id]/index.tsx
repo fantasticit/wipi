@@ -168,10 +168,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
                     return (
                       <li key={chapter.id} id={`js-toc-item-wrapper-${chapter.id}`}>
                         <Link as={`/knowledge/${pId}/${chapter.id}`} href={`/knowledge/[pId]/[id]`}>
-                          <a
-                            aria-label={chapter.title}
-                            className={cls(chapter.id === id && style.active)}
-                          >
+                          <a aria-label={chapter.title} className={cls(chapter.id === id && style.active)}>
                             {chapter.title}
                           </a>
                         </Link>
@@ -191,16 +188,9 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
         likesProps={{
           defaultCount: chapter.likes,
           id: chapter.id,
-          api: (id, type) =>
-            KnowledgeProvider.updateKnowledgeLikes(id, type).then((res) => res.likes),
+          api: (id, type) => KnowledgeProvider.updateKnowledgeLikes(id, type).then((res) => res.likes),
         }}
         showComment={book.isCommentable}
-        shareProps={{
-          cover: book.cover,
-          title: book.title,
-          desc: chapter.title,
-          url: `/knowledge/${pId}/${id}`,
-        }}
       />
     </>
   );
@@ -208,10 +198,7 @@ const Page: NextPage<IProps> = ({ pId, id, book, chapter }) => {
 
 Page.getInitialProps = async (ctx) => {
   const { pId, id } = ctx.query;
-  const [book, chapter] = await Promise.all([
-    KnowledgeProvider.getKnowledge(pId),
-    KnowledgeProvider.getKnowledge(id),
-  ]);
+  const [book, chapter] = await Promise.all([KnowledgeProvider.getKnowledge(pId), KnowledgeProvider.getKnowledge(id)]);
   return { pId, book, id, chapter } as {
     pId: string;
     book: IKnowledge;

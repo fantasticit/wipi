@@ -44,18 +44,18 @@
 
   .title {
     margin-bottom: 16px;
-    color: var(--main-text-color);
-    font-weight: 500;
     font-size: 16px;
+    font-weight: 500;
     line-height: 22px;
-    text-align: center;
     letter-spacing: 0.06em;
+    color: var(--main-text-color);
+    text-align: center;
   }
 
   .commentContainer {
-    box-shadow: var(--box-shadow);
-    border-radius: var(--border-radius);
     margin-bottom: 16px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
   }
 }
 
@@ -66,12 +66,12 @@
 
   p.title {
     margin-bottom: 16px;
-    color: var(--main-text-color);
-    font-weight: 500;
     font-size: 16px;
+    font-weight: 500;
     line-height: 22px;
-    text-align: center;
     letter-spacing: 0.06em;
+    color: var(--main-text-color);
+    text-align: center;
   }
 
   .articleContainer {

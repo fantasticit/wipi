@@ -26,13 +26,7 @@ export const usePagination = ({
   return [{ page, pageSize }, updatePagination];
 };
 
-export const Pagination: React.FC<IProps> = ({
-  total,
-  onChange,
-  page,
-  pageSize,
-  hideOnSinglePage = false,
-}) => {
+export const Pagination: React.FC<IProps> = ({ total, onChange, page, pageSize, hideOnSinglePage = false }) => {
   return (
     <div className={style.wrapper}>
       {total > 0 ? (

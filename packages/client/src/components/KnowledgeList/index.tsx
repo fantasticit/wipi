@@ -6,7 +6,6 @@ import { EyeOutlined, ShareAltOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import cls from 'classnames';
 import { LocaleTime } from '@/components/LocaleTime';
-import { Share } from '@/components/Share';
 import style from './index.module.scss';
 
 interface IProps {
@@ -22,12 +21,7 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [], small = false
         knowledges.map((knowledge) => {
           return (
             <div key={knowledge.id} className={cls(style.articleItem, small && style.small)}>
-              <Link
-                key={knowledge.id}
-                href={`/knowledge/[pId]`}
-                as={`/knowledge/${knowledge.id}`}
-                scroll={false}
-              >
+              <Link key={knowledge.id} href={`/knowledge/[pId]`} as={`/knowledge/${knowledge.id}`} scroll={false}>
                 <a aria-label={knowledge.title}>
                   <header>
                     <div className={style.title}>{knowledge.title}</div>
@@ -46,18 +40,6 @@ export const KnowledgeList: React.FC<IProps> = ({ knowledges = [], small = false
                           <EyeOutlined />
                           <span className={style.number}>{knowledge.views}</span>
                         </span>
-                        <span className={style.seperator}>·</span>
-                        <Share
-                          cover={knowledge.cover}
-                          title={knowledge.title}
-                          desc={knowledge.summary}
-                          url={`/knowledge/${knowledge.id}`}
-                        >
-                          <span>
-                            <ShareAltOutlined />
-                            <span className={style.number}>{t('share')}</span>
-                          </span>
-                        </Share>
                       </div>
                     </div>
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Form } from '@ant-design/compatible';
 import { Alert, Button, message } from 'antd';
-import { safeJsonParse } from '@/utils/json';
 import { SettingProvider } from '@/providers/setting';
 import { JsonEditor } from '@/components/JsonEditor';
+import { safeJsonParse } from '@/utils/json';
 
 export const OSSSetting = ({ setting }) => {
   const [oss, setOss] = useState({});
@@ -11,6 +11,10 @@ export const OSSSetting = ({ setting }) => {
   useEffect(() => {
     setOss(safeJsonParse(setting.oss));
   }, [setting.oss]);
+
+  const onChange = useCallback((value) => {
+    setOss(value);
+  }, []);
 
   const save = useCallback(() => {
     const data = {
@@ -31,8 +35,8 @@ export const OSSSetting = ({ setting }) => {
         style={{ marginBottom: '1rem' }}
       />
       <JsonEditor
-        value={JSON.stringify(oss, null, 2)}
-        onChange={setOss}
+        value={oss}
+        onChange={onChange}
         style={{
           height: '400px',
           overflow: 'hidden',

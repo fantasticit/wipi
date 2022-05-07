@@ -81,13 +81,7 @@ const Archives: NextPage<IProps> = ({ articles }) => {
                 <div className={style.list} key={year}>
                   <h2>{year}</h2>
                   {Object.keys(articles[year]).map((month) => {
-                    return (
-                      <ArchiveItem
-                        key={year + '-' + month}
-                        month={month}
-                        articles={articles[year][month]}
-                      />
-                    );
+                    return <ArchiveItem key={year + '-' + month} month={month} articles={articles[year][month]} />;
                   })}
                 </div>
               );

@@ -1,15 +1,14 @@
 .wrap {
+  display: flex;
   width: 32px;
   height: 32px;
   font-size: 22px;
-  border-radius: 50%;
+  color: var(--disable-text-color);
   cursor: pointer;
-  display: flex;
+  background: var(--bg-second);
+  border-radius: 50%;
   justify-content: center;
   align-items: center;
-
-  background: var(--bg-second);
-  color: var(--disable-text-color);
 
   &:hover,
   &.active {

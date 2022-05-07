@@ -3,13 +3,13 @@
   font-size: 1.2rem;
 
   .icon {
+    display: flex;
     width: 45px;
     height: 45px;
-    border-radius: 50%;
+    cursor: pointer;
     background-color: #f4f8fb;
-    display: flex;
+    border-radius: 50%;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
   }
 }

@@ -9,9 +9,7 @@ interface IToc {
   text: string;
 }
 
-export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> = ({
-  tocs = [],
-}) => {
+export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> = ({ tocs = [] }) => {
   const goto = useCallback((toc) => {
     try {
       const el = document.getElementById(toc.id);

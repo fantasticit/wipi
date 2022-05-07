@@ -1,180 +1,253 @@
-@import './var.scss';
+* {
+  transition:
+    background-color 0.2s ease-in-out,
+    margin 0.2s ease-in-out,
+    opacity 0.2s ease-in-out,
+    filter 0.2s ease-in-out,
+    visibility 0.2s ease-in-out,
+    transform 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
+}
 
-:global {
-  * {
-    transition: background-color 0.2s ease-in-out, margin 0.2s ease-in-out, opacity 0.2s ease-in-out,
-      filter 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 0;
+  transition: all 0.2s;
+}
+
+*:hover {
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-bg);
   }
+}
 
-  ::-webkit-scrollbar-track {
-    border-radius: 0;
-    background: transparent;
-  }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
 
-  ::-webkit-scrollbar-thumb {
-    border-radius: 0;
-    background-color: transparent;
-    transition: all 0.2s;
-  }
+html {
+  text-size-adjust: 100% !important;
+  touch-action: manipulation;
+}
 
-  *:hover {
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--scrollbar-bg);
-    }
-  }
+body {
+  overflow-x: hidden;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Helvetica Neue',
+    'PingFang SC',
+    'Microsoft YaHei',
+    'Source Han Sans SC',
+    'Noto Sans CJK SC',
+    'WenQuanYi Micro Hei',
+    sans-serif;
+  line-height: 1.75em;
+  color: var(--main-text-color);
+  background-color: var(--bg);
+}
 
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background: transparent;
-  }
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 
-  html {
-    text-size-adjust: 100% !important;
-    touch-action: manipulation;
-  }
+p {
+  margin: 0;
+  list-style: none;
+}
 
-  body {
-    color: var(--main-text-color);
-    background-color: var(--bg);
-    overflow-x: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei,
-      Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
-    line-height: 1.75em;
-  }
+a {
+  color: inherit;
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  p {
-    list-style: none;
-    margin: 0;
-  }
-
-  a {
+  &:hover {
     color: inherit;
+  }
+}
 
-    &:hover {
-      color: inherit;
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  height: 450px;
+  margin: 1rem 0;
+  overflow: hidden;
+  clear: both;
+  border: 0;
+}
+
+.ant-menu-item-selected {
+  color: var(--primary-color) !important;
+  background: transparent !important;
+
+  .ant-menu-title-content {
+    color: inherit !important;
+
+    a {
+      display: block;
     }
-  }
 
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  iframe {
-    display: block;
-    width: 100%;
-    height: 450px;
-    border: 0;
-    overflow: hidden;
-    clear: both;
-    margin: 1rem 0;
-  }
-
-  .ant-menu-item-selected {
-    color: var(--primary-color) !important;
-    background: transparent !important;
-
-    .ant-menu-title-content {
+    a,
+    span {
       color: inherit !important;
+    }
+  }
+}
 
-      a {
-        display: block;
-      }
+.ant-breadcrumb,
+.ant-breadcrumb a {
+  color: rgb(0 0 0 / 45%) !important;
+}
 
-      a,
-      span {
-        color: inherit !important;
-      }
+.ant-breadcrumb-separator {
+  color: rgb(0 0 0 / 45%) !important;
+}
+
+.ant-breadcrumb > span:last-child a {
+  color: rgb(0 0 0 / 65%) !important;
+}
+
+.ant-comment {
+  padding: 0 16px 0 4px;
+  background-color: #fff;
+
+  + .ant-comment {
+    margin-top: 8px;
+  }
+
+  .ant-comment-inner {
+    border-bottom: 1px solid #f6f6f6;
+  }
+}
+
+.ant-anchor-wrapper {
+  background-color: transparent !important;
+}
+
+.ant-upload.ant-upload-drag {
+  background: #fff !important;
+}
+
+.ant-drawer-wrapper-body {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 53px;
+
+  > .ant-drawer-body {
+    flex: 1;
+    overflow: auto;
+  }
+}
+
+.sticky {
+  position: sticky;
+  top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.loading {
+  padding: 2rem 0 1rem;
+  text-align: center;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+
+  + .form-item {
+    margin-top: 16px;
+  }
+
+  > label {
+    padding-right: 16px;
+  }
+
+  > div {
+    flex: 1;
+  }
+}
+
+.ant-legacy-form-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .ant-legacy-form-item-label {
+    min-width: 80px;
+    padding-right: 16px;
+  }
+
+  .ant-legacy-form-item-control-wrapper {
+    flex: 1;
+  }
+}
+
+.ant-card-meta-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty {
+  width: 100%;
+  height: 60px;
+  font-size: 14px;
+  line-height: 60px;
+  color: var(--second-text-color);
+  text-align: center;
+}
+
+.knowledge-chapter-item {
+  display: flex;
+  width: 216px;
+  padding: 12px 8px;
+  cursor: pointer;
+  background: var(--bg-code);
+  border-radius: var(--border-radius);
+  justify-content: space-between;
+  align-items: center;
+
+  > span:nth-of-type(2) {
+    margin-left: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+  }
+
+  i {
+    opacity: 0;
+  }
+
+  + .knowledge-chapter-item {
+    margin-top: 0.5rem;
+  }
+
+  &:hover,
+  &:focus {
+    i {
+      opacity: 1;
     }
   }
 
-  .ant-breadcrumb,
-  .ant-breadcrumb a {
-    color: rgba(0, 0, 0, 0.45) !important;
+  &:hover {
+    background-color: var(--bg-code);
   }
 
-  .ant-breadcrumb-separator {
-    color: rgba(0, 0, 0, 0.45) !important;
-  }
-
-  .ant-breadcrumb > span:last-child a {
-    color: rgba(0, 0, 0, 0.65) !important;
-  }
-
-  .ant-comment {
-    padding: 0 16px 0 4px;
-    background-color: #ffffff;
-
-    + .ant-comment {
-      margin-top: 8px;
-    }
-
-    .ant-comment-inner {
-      border-bottom: 1px solid #f6f6f6;
-    }
-  }
-
-  .ant-anchor-wrapper {
-    background-color: transparent !important;
-  }
-
-  .ant-upload.ant-upload-drag {
-    background: #ffffff !important;
-  }
-
-  .ant-drawer-wrapper-body {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 53px;
-
-    > .ant-drawer-body {
-      flex: 1;
-      overflow: auto;
-    }
-  }
-
-  .sticky {
-    position: sticky;
-    top: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .loading {
-    padding: 2rem 0 1rem;
-    text-align: center;
-  }
-
-  .form-item {
-    display: flex;
-    align-items: center;
-
-    + .form-item {
-      margin-top: 16px;
-    }
-
-    > label {
-      padding-right: 16px;
-    }
-
-    > div {
-      flex: 1;
-    }
-  }
-
-  .empty {
-    width: 100%;
-    height: 60px;
-    color: var(--second-text-color);
-    font-size: 14px;
-    line-height: 60px;
-    text-align: center;
+  &.active {
+    color: #fff;
+    background: var(--primary-color);
   }
 }

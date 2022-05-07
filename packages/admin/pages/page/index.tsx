@@ -34,12 +34,7 @@ const columns = [
     dataIndex: 'views',
     key: 'views',
     render: (views) => (
-      <Badge
-        count={views}
-        showZero={true}
-        overflowCount={Infinity}
-        style={{ backgroundColor: '#52c41a' }}
-      />
+      <Badge count={views} showZero={true} overflowCount={Infinity} style={{ backgroundColor: '#52c41a' }} />
     ),
   },
   {
@@ -91,12 +86,7 @@ const SEARCH_FIELDS = [
 
 const Page: NextPage = () => {
   const setting = useSetting();
-  const {
-    loading: listLoading,
-    data,
-    refresh,
-    ...resetPagination
-  } = usePagination<IPage>(PageProvider.getPages);
+  const { loading: listLoading, data, refresh, ...resetPagination } = usePagination<IPage>(PageProvider.getPages);
   const [modalVisible, toggleModalVisible] = useToggle(false);
   const [views, setViews] = useState<IView[]>([]);
   const [updateApi, updateLoading] = useAsyncLoading(PageProvider.updatePage);
@@ -110,9 +100,7 @@ const Page: NextPage = () => {
       }
       return () =>
         Promise.all(
-          articles.map((article) =>
-            updateApi(article.id, { [key]: value !== null ? value : !article[key] })
-          )
+          articles.map((article) => updateApi(article.id, { [key]: value !== null ? value : !article[key] }))
         ).then(() => {
           message.success('操作成功');
           refresh();
@@ -157,11 +145,7 @@ const Page: NextPage = () => {
     dataIndex: 'name',
     key: 'name',
     render: (text, record) => (
-      <a
-        href={resolveUrl(setting.systemUrl || '', `/page/${record.path}`)}
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={resolveUrl(setting.systemUrl || '', `/page/${record.path}`)} target="_blank" rel="noreferrer">
         {text}
       </a>
     ),
@@ -232,11 +216,7 @@ const Page: NextPage = () => {
           showSelection={true}
           loading={listLoading}
           data={data}
-          columns={(resetSelectedRows) => [
-            titleColumn,
-            ...columns,
-            actionColumn(resetSelectedRows),
-          ]}
+          columns={(resetSelectedRows) => [titleColumn, ...columns, actionColumn(resetSelectedRows)]}
           refresh={refresh}
           {...resetPagination}
           renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>

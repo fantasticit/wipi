@@ -33,10 +33,7 @@ const getTimeago = (date) => {
     locale: locales.zh,
   });
 
-  content = content
-    .replace('about', '')
-    .replace('less than a minute ago', 'just now')
-    .replace('minute', 'min');
+  content = content.replace('about', '').replace('less than a minute ago', 'just now').replace('minute', 'min');
 
   return content;
 };

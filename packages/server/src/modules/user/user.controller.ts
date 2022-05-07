@@ -23,10 +23,7 @@ import { User } from './user.entity';
 @Controller('user')
 @UseGuards(RolesGuard)
 export class UserController {
-  constructor(
-    private readonly userService: UserService,
-    private readonly jwtService: JwtService
-  ) {}
+  constructor(private readonly userService: UserService, private readonly jwtService: JwtService) {}
 
   @ApiResponse({ status: 200, description: '获取用户列表', type: [User] })
   @ApiResponse({ status: 403, description: '无权获取用户列表' })

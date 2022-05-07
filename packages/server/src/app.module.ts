@@ -39,11 +39,8 @@ import { View } from './modules/view/view.entity';
 // 搜索模块
 import { Search } from './modules/search/search.entity';
 import { SearchModule } from './modules/search/search.module';
-// 海报模块
-import { Poster } from './modules/poster/poster.entity';
-import { PosterModule } from './modules/poster/poster.module';
 // 配置文件
-const { file: envFilePath } = require('../../../config/env');
+import { file as envFilePath } from '@wipi/config';
 
 @Module({
   imports: [
@@ -53,21 +50,7 @@ const { file: envFilePath } = require('../../../config/env');
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'mysql',
-        entities: [
-          User,
-          File,
-          Knowledge,
-          Article,
-          Category,
-          Tag,
-          Comment,
-          Setting,
-          SMTP,
-          Page,
-          View,
-          Search,
-          Poster,
-        ],
+        entities: [User, File, Knowledge, Article, Category, Tag, Comment, Setting, SMTP, Page, View, Search],
         host: configService.get('DB_HOST', '0.0.0.0'),
         port: configService.get<number>('DB_PORT', 3306),
         username: configService.get('DB_USER', 'root'),
@@ -91,7 +74,6 @@ const { file: envFilePath } = require('../../../config/env');
     PageModule,
     ViewModule,
     SearchModule,
-    PosterModule,
   ],
   controllers: [],
   providers: [],

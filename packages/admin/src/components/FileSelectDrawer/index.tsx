@@ -50,12 +50,7 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
   onChange,
 }) => {
   const ref = useRef();
-  const {
-    loading,
-    data: files,
-    refresh,
-    ...resetPagination
-  } = usePagination<IFile>(FileProvider.getFiles);
+  const { loading, data: files, refresh, ...resetPagination } = usePagination<IFile>(FileProvider.getFiles);
 
   const previewImage = useCallback((e) => {
     e.stopPropagation();
@@ -98,14 +93,7 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
   );
 
   return (
-    <Drawer
-      width={786}
-      placement="right"
-      title={'文件选择'}
-      closable={true}
-      onClose={onClose}
-      visible={visible}
-    >
+    <Drawer width={786} placement="right" title={'文件选择'} closable={true} onClose={onClose} visible={visible}>
       {isCopy && (
         <div style={{ marginBottom: 16 }}>
           <Alert message="点击卡片复制链接，点击图片查看大图" type="info" />

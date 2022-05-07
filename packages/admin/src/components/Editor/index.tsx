@@ -25,6 +25,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
   const editorRef = useRef<any>();
   const editorContainerRef = useRef<HTMLDivElement>();
   const [innerValue, setInnerValue] = useState(defaultValue);
+  const [mounted, setMounted] = useState(false);
   const [mode, setMode] = useState<'preview' | 'edit'>('edit');
   const [two, setTwo] = useState(true);
   const [saveState, setSaveState] = useState(false);
@@ -60,6 +61,10 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
     [toggleSaveState]
   );
 
+  const onMount = useCallback(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     const html = makeHtml(innerValue);
     const tocs = makeToc(html);
@@ -76,7 +81,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
     const listener = (evt) => {
       const handle = (value) => {
         setInnerValue(value);
-        editorRef.current && editorRef.current.setValue(value);
+        editorRef.current && editorRef.current.editor.setValue(value);
       };
       if (evt.data.id !== 'editor-mounted') {
         return;
@@ -106,32 +111,30 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
     if (!editorRef.current || !editorContainerRef.current) {
       return;
     }
     if (!two && mode === 'preview') {
       return;
     }
-    editorRef.current.layout(editorContainerRef.current.getBoundingClientRect());
-  }, [two, mode, tocVisible]);
+    editorRef.current.editor.layout(editorContainerRef.current.getBoundingClientRect());
+  }, [mounted, two, mode, tocVisible]);
 
   return (
     <div className={cls(style.wrapper)}>
       <header>
         <div>
-          {toolbar.map((tool) => {
-            return (
-              <span
-                key={tool.label}
-                className={style.toolWrap}
-                onClick={tool.getAction(editorRef.current)}
-              >
-                <Tooltip title={tool.label}>
-                  <tool.content editor={editorRef.current} />
-                </Tooltip>
-              </span>
-            );
-          })}
+          {mounted &&
+            toolbar.map((tool) => {
+              return (
+                <span key={tool.label} className={style.toolWrap}>
+                  <Tooltip title={tool.label}>
+                    <tool.content editor={editorRef.current.editor} monaco={editorRef.current.monaco} />
+                  </Tooltip>
+                </span>
+              );
+            })}
           <span style={{ opacity: saveState ? 1 : 0 }}>已保存到本地</span>
         </div>
         <div>
@@ -160,6 +163,7 @@ export const Editor: React.FC<IProps> = ({ defaultValue = DEFAULT_MARKDOWN, onCh
             defaultValue={defaultValue}
             onChange={setInnerValue}
             onSave={saveCache}
+            onMount={onMount}
           />
         </div>
         <div style={{ width: two ? halfWidth : mode === 'edit' ? 0 : fullWidth }}>

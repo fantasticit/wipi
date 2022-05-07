@@ -1,16 +1,16 @@
 .wrapper {
-  border-radius: var(--border-radius);
   margin-bottom: 1.3rem;
-  background-color: var(--bg-second);
-  box-shadow: var(--box-shadow);
-  line-height: 1.29;
   overflow: hidden;
+  line-height: 1.29;
+  background-color: var(--bg-second);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 
   .title {
     padding: 1rem 1.3rem;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--main-text-color);
     font-weight: bold;
+    color: var(--main-text-color);
+    border-bottom: 1px solid var(--border-color);
   }
 
   ul {
@@ -19,9 +19,9 @@
 
   li {
     padding: 8px 7px;
-    border-radius: var(--border-radius);
-    color: var(--second-text-color);
     line-height: 1.5em;
+    color: var(--second-text-color);
+    border-radius: var(--border-radius);
     transition: all ease-in-out 0.2s;
 
     a {
@@ -43,7 +43,7 @@
     }
 
     &.active {
-      color: #ffffff;
+      color: #fff;
       background-color: var(--primary-color);
 
       a > span:first-of-type {

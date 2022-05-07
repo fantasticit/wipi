@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react';
 import { Tooltip, Popover } from 'antd';
-import { monaco } from '../MonacoEditor';
 import { emojis } from './emojis';
 
-export const Emoji = ({ editor }) => {
+export const Emoji = ({ editor, monaco }) => {
   const insert = useCallback(
     (key) => {
       const result = emojis[key];
@@ -15,15 +14,13 @@ export const Emoji = ({ editor }) => {
         },
       ]);
     },
-    [editor]
+    [editor, monaco]
   );
 
   return (
     <Popover
       content={
-        <ul
-          style={{ width: 300, height: 300, overflow: 'auto', display: 'flex', flexWrap: 'wrap' }}
-        >
+        <ul style={{ width: 300, height: 300, overflow: 'auto', display: 'flex', flexWrap: 'wrap' }}>
           {Object.keys(emojis).map((key) => {
             return (
               <li

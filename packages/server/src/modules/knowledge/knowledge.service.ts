@@ -37,9 +37,7 @@ export class KnowledgeService {
    * 新建知识章节
    * @param knowledge
    */
-  async createKnowledgeChapter(
-    knowledges: Partial<Knowledge> | Array<Partial<Knowledge>>
-  ): Promise<Array<Knowledge>> {
+  async createKnowledgeChapter(knowledges: Partial<Knowledge> | Array<Partial<Knowledge>>): Promise<Array<Knowledge>> {
     if (!Array.isArray(knowledges)) {
       knowledges = [knowledges];
     }
@@ -85,8 +83,7 @@ export class KnowledgeService {
     const newData = {
       ...data,
       views: oldData.views,
-      publishAt:
-        oldData.status === 'draft' && status === 'publish' ? dateFormat() : oldData.publishAt,
+      publishAt: oldData.status === 'draft' && status === 'publish' ? dateFormat() : oldData.publishAt,
     };
     const result = await this.repository.merge(oldData, newData);
     await this.repository.save(result);
@@ -137,9 +134,7 @@ export class KnowledgeService {
     }
     if (otherParams) {
       Object.keys(otherParams).forEach((key) => {
-        query
-          .andWhere(`knowledge.${key} LIKE :${key}`)
-          .setParameter(`${key}`, `%${otherParams[key]}%`);
+        query.andWhere(`knowledge.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
       });
     }
     const [data, total] = await query.getManyAndCount();

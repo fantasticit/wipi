@@ -24,18 +24,7 @@ export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, on
       toggleVisible();
       onOk(res);
     });
-  }, [
-    title,
-    summary,
-    isCommentable,
-    cover,
-    isUpdate,
-    updateBookApi,
-    createBookApi,
-    book,
-    toggleVisible,
-    onOk,
-  ]);
+  }, [title, summary, isCommentable, cover, isUpdate, updateBookApi, createBookApi, book, toggleVisible, onOk]);
 
   useEffect(() => {
     setTitle((book && book.title) || '');
@@ -45,12 +34,7 @@ export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, on
   }, [book]);
 
   return (
-    <Drawer
-      title={isUpdate ? '更新知识库' : '新建知识库'}
-      width={600}
-      visible={visible}
-      onClose={toggleVisible}
-    >
+    <Drawer title={isUpdate ? '更新知识库' : '新建知识库'} width={600} visible={visible} onClose={toggleVisible}>
       <div className="form-item">
         <label htmlFor="title">名称</label>
         <div>
@@ -91,11 +75,7 @@ export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, on
             选择文件
           </Button>
           {cover && (
-            <Button
-              style={{ marginTop: 12, marginLeft: 12 }}
-              danger={true}
-              onClick={() => setCover('')}
-            >
+            <Button style={{ marginTop: 12, marginLeft: 12 }} danger={true} onClick={() => setCover('')}>
               移除
             </Button>
           )}

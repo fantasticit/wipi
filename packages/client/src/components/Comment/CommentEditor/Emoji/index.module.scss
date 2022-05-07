@@ -1,28 +1,27 @@
 .wrapper {
   display: flex;
-  flex-wrap: wrap;
+  display: flex;
   width: 390px;
   height: 240px;
   overflow: auto;
-  display: flex;
+  flex-wrap: wrap;
   flex-wrap: wrap;
 
   li {
     position: relative;
+    display: flex;
     width: 32px;
     height: 32px;
-    display: flex;
+    font-size: 18px;
+    cursor: pointer;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
   }
 }
 
 .text {
   display: flex;
   align-items: center;
-
   color: var(--disable-text-color);
   cursor: pointer;
 

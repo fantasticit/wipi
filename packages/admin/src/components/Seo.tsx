@@ -16,10 +16,7 @@ export const Seo: React.FC = () => {
       <meta name="keyword" content={setting.seoKeyword} />
       <meta name="description" content={setting.seoDesc} />
       <link rel="shortcut icon" href={setting.systemFavicon} />
-      <link
-        href="//fonts.googleapis.com/css?family=Nunito:400,400i,700,700i&amp;display=swap"
-        rel="stylesheet"
-      ></link>
+      <link href="//fonts.googleapis.com/css?family=Nunito:400,400i,700,700i&amp;display=swap" rel="stylesheet"></link>
     </Helmet>
   );
 };

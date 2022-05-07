@@ -15,10 +15,7 @@ import style from './index.module.scss';
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
-export const AdminLayout: React.FC<{ headerAppender?: React.ReactNode }> = ({
-  headerAppender,
-  children,
-}) => {
+export const AdminLayout: React.FC<{ headerAppender?: React.ReactNode }> = ({ headerAppender, children }) => {
   const { collapsed, toggleCollapse } = useContext(GlobalContext);
   const setting = useSetting();
   const router = useRouter();
@@ -72,20 +69,11 @@ export const AdminLayout: React.FC<{ headerAppender?: React.ReactNode }> = ({
         <header>
           <Row>
             <Col span={12}>
-              <LegacyIcon
-                className="trigger"
-                type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={toggleCollapse}
-              />
+              <LegacyIcon className="trigger" type={collapsed ? 'menu-unfold' : 'menu-fold'} onClick={toggleCollapse} />
             </Col>
             <Col span={12} style={{ textAlign: 'right' }}>
               <div className={style.info}>
-                <a
-                  className={style.github}
-                  href="https://github.com/fantasticit/wipi"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a className={style.github} href="https://github.com/fantasticit/wipi" target="_blank" rel="noreferrer">
                   <GithubOutlined />
                 </a>
                 <UserInfo />

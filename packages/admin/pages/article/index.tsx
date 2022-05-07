@@ -93,12 +93,7 @@ const COMMON_COLUMNS = [
     key: 'views',
     width: 120,
     render: (views) => (
-      <Badge
-        count={views}
-        showZero={true}
-        overflowCount={Infinity}
-        style={{ backgroundColor: '#52c41a' }}
-      />
+      <Badge count={views} showZero={true} overflowCount={Infinity} style={{ backgroundColor: '#52c41a' }} />
     ),
   },
   {
@@ -107,12 +102,7 @@ const COMMON_COLUMNS = [
     key: 'likes',
     width: 120,
     render: (val) => (
-      <Badge
-        count={val}
-        showZero={true}
-        overflowCount={Infinity}
-        style={{ backgroundColor: '#eb2f96' }}
-      />
+      <Badge count={val} showZero={true} overflowCount={Infinity} style={{ backgroundColor: '#eb2f96' }} />
     ),
   },
   {
@@ -146,9 +136,7 @@ const Article: NextPage = () => {
       }
       return () =>
         Promise.all(
-          articles.map((article) =>
-            updateApi(article.id, { [key]: value !== null ? value : !article[key] })
-          )
+          articles.map((article) => updateApi(article.id, { [key]: value !== null ? value : !article[key] }))
         ).then(() => {
           message.success('操作成功');
           refresh();
@@ -195,11 +183,7 @@ const Article: NextPage = () => {
     fixed: 'left',
     width: 200,
     render: (text, record) => (
-      <a
-        href={resolveUrl(setting.systemUrl, `/article/${record.id}`)}
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={resolveUrl(setting.systemUrl, `/article/${record.id}`)} target="_blank" rel="noreferrer">
         {text}
       </a>
     ),
@@ -265,11 +249,7 @@ const Article: NextPage = () => {
           showSelection={true}
           loading={listLoading}
           data={articles}
-          columns={(resetSelectedRows) => [
-            titleColumn,
-            ...COMMON_COLUMNS,
-            actionColumn(resetSelectedRows),
-          ]}
+          columns={(resetSelectedRows) => [titleColumn, ...COMMON_COLUMNS, actionColumn(resetSelectedRows)]}
           {...resetPagination}
           refresh={refresh}
           renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>

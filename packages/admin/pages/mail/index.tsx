@@ -55,12 +55,7 @@ const TIME_COLUMN = {
 
 const Mail: NextPage = () => {
   const setting = useSetting();
-  const {
-    loading,
-    data: mails,
-    refresh,
-    ...resetPagination
-  } = usePagination<IMail>(MailProvider.getMails);
+  const { loading, data: mails, refresh, ...resetPagination } = usePagination<IMail>(MailProvider.getMails);
   const [deleteApi, deleteLoading] = useAsyncLoading(MailProvider.deleteMail);
   const [selectedMail, setSelectedMail] = useState(null);
   const isSmtpSettingFullfilled = useMemo(() => {

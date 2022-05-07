@@ -1,15 +1,15 @@
 .wrapper {
-  border-radius: var(--border-radius);
   margin-bottom: 1.3rem;
-  background-color: var(--bg-second);
-  box-shadow: var(--box-shadow);
   line-height: 1.29;
+  background-color: var(--bg-second);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 
   .title {
     padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--main-text-color);
     font-weight: bold;
+    color: var(--main-text-color);
+    border-bottom: 1px solid var(--border-color);
   }
 
   ul {
@@ -19,22 +19,22 @@
   li {
     display: inline-block;
     padding: 2px 7px;
+    margin: 0 7px 7px 0;
+    line-height: 1.5em;
+    color: var(--second-text-color);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    margin: 0 7px 7px 0;
-    color: var(--second-text-color);
-    line-height: 1.5em;
     transition: all ease-in-out 0.2s;
 
     &:hover {
-      border: 1px solid var(--primary-color);
       color: var(--primary-color);
+      border: 1px solid var(--primary-color);
     }
 
     &.active {
-      border: 1px solid var(--primary-color);
-      color: #ffffff;
+      color: #fff;
       background-color: var(--primary-color);
+      border: 1px solid var(--primary-color);
     }
   }
 }

@@ -20,13 +20,7 @@ interface IProps extends FormComponentProps {
   onReset?: (arg) => void;
 }
 
-const _Search: React.FC<IProps> = ({
-  form,
-  fields = [],
-  showLabel = true,
-  padding = 12,
-  onSearch,
-}) => {
+const _Search: React.FC<IProps> = ({ form, fields = [], showLabel = true, padding = 12, onSearch }) => {
   const getFields = () => {
     const { getFieldDecorator } = form;
     const children = [];
@@ -47,13 +41,7 @@ const _Search: React.FC<IProps> = ({
           >
             {getFieldDecorator(field.field, {
               rules: field.rules,
-            })(
-              field.children ? (
-                field.children
-              ) : (
-                <Input width={'100%'} placeholder={field.msg || 'placeholder'} />
-              )
-            )}
+            })(field.children ? field.children : <Input width={'100%'} placeholder={field.msg || 'placeholder'} />)}
           </Form.Item>
         </Col>
       );

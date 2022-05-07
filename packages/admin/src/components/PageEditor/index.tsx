@@ -5,18 +5,7 @@ import { Helmet } from 'react-helmet';
 import { resolveUrl } from '@/utils';
 import { useToggle } from '@/hooks/useToggle';
 import { CloseOutlined, EllipsisOutlined, FileImageOutlined } from '@ant-design/icons';
-import {
-  Button,
-  Input,
-  InputNumber,
-  message,
-  PageHeader,
-  Drawer,
-  Dropdown,
-  Menu,
-  Modal,
-  Popconfirm,
-} from 'antd';
+import { Button, Input, InputNumber, message, PageHeader, Drawer, Dropdown, Menu, Modal, Popconfirm } from 'antd';
 import { Editor as CodeEditor } from '@components/Editor';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { PageProvider } from '@/providers/page';
@@ -223,12 +212,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
           }}
         />
       </main>
-      <Drawer
-        title={'页面属性'}
-        width={480}
-        visible={pageDrawerVisible}
-        onClose={togglePageDrawerVisible}
-      >
+      <Drawer title={'页面属性'} width={480} visible={pageDrawerVisible} onClose={togglePageDrawerVisible}>
         <FormItem
           label="封面"
           content={
@@ -242,18 +226,9 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
         />
         <FormItem
           label="路径"
-          content={
-            <Input
-              placeholder="请配置页面路径"
-              defaultValue={page.path}
-              onChange={patchPage('path')}
-            />
-          }
+          content={<Input placeholder="请配置页面路径" defaultValue={page.path} onChange={patchPage('path')} />}
         />
-        <FormItem
-          label="顺序"
-          content={<InputNumber defaultValue={page.order || 0} onChange={patchPage('order')} />}
-        />
+        <FormItem label="顺序" content={<InputNumber defaultValue={page.order || 0} onChange={patchPage('order')} />} />
         <div style={drawerFooterStyle}>
           <Button type="primary" onClick={togglePageDrawerVisible}>
             确认

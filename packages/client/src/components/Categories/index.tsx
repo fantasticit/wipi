@@ -19,7 +19,7 @@ export const Categories = ({ categories = [] }) => {
       <ul>
         {categories.map((category) => {
           return (
-            <li>
+            <li key={category.value}>
               <Link href="/category/[category]" as={`/category/` + category.value} shallow={false}>
                 <a aria-label={category.label}>
                   <span>{category.label}</span>

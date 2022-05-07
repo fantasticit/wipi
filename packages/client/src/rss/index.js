@@ -77,10 +77,7 @@ function generateXML(data) {
     });
     ifTruePush(item.url, item_values, { link: item.url });
     ifTruePush(item.link || item.guid || item.title, item_values, {
-      guid: [
-        { _attr: { isPermaLink: !item.guid && !!item.url } },
-        item.guid || item.url || item.title,
-      ],
+      guid: [{ _attr: { isPermaLink: !item.guid && !!item.url } }, item.guid || item.url || item.title],
     });
 
     item.categories.forEach(function (category) {

@@ -6,8 +6,8 @@
   > .fixed {
     position: fixed;
     top: 30vh;
-    transform: translateX(-100%);
     padding-right: 10px;
+    transform: translateX(-100%);
 
     .widgetWrapper {
       display: flex;
@@ -22,18 +22,17 @@
 
   @media (max-width: 1024px) {
     > .fixed {
-      z-index: 10;
       top: 100%;
       bottom: 0;
-      padding-right: 0;
+      z-index: 10;
+      display: flex;
       width: 100vw;
       height: 52px;
+      padding-right: 0;
       background-color: var(--bg-second);
-      border-top: 1px solid var(--border-color);
       transform: translate(0, 0);
+      border-top: 1px solid var(--border-color);
       transition: all 0.2s;
-
-      display: flex;
       flex-wrap: nowrap;
 
       &.active {
@@ -77,9 +76,9 @@
 
   > .right {
     width: 18rem;
-    margin-left: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    margin-left: 1rem;
 
     :global {
       .sticky {
@@ -102,8 +101,8 @@
       margin-left: 0;
 
       &.isRightNodeMobileHidden {
-        width: 0;
         display: none;
+        width: 0;
       }
     }
   }

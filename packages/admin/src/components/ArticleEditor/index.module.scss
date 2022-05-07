@@ -1,14 +1,13 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-
   height: 100vh;
   background-color: #f4f5f5;
 
   .header {
-    height: 64px;
-    background-color: #ffffff;
     z-index: 1000;
+    height: 64px;
+    background-color: #fff;
 
     > div {
       height: 100%;

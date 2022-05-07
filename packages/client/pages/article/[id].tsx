@@ -86,15 +86,10 @@ const Article: NextPage<IProps> = ({ article }) => {
         <article id="js-article-wrapper" className={style.articleWrap}>
           {/* S 文章 Seo 信息 */}
           {setting.systemUrl && (
-            <meta
-              itemProp="url"
-              content={url.resolve(setting.systemUrl, `/article/${article.id}`)}
-            />
+            <meta itemProp="url" content={url.resolve(setting.systemUrl, `/article/${article.id}`)} />
           )}
           <meta itemProp="headline" content={article.title} />
-          {article.tags && (
-            <meta itemProp="keywords" content={article.tags.map((tag) => tag.label).join(' ')} />
-          )}
+          {article.tags && <meta itemProp="keywords" content={article.tags.map((tag) => tag.label).join(' ')} />}
           <meta itemProp="dataPublished" content={article.publishAt} />
           {article.cover && <meta itemProp="image" content={article.cover} />}
           {/* E 文章 Seo 信息 */}
@@ -133,11 +128,7 @@ const Article: NextPage<IProps> = ({ article }) => {
             <div className={style.copyrightInfo}>
               {t('publishAt')}
               <LocaleTime date={article.publishAt} /> | {t('copyrightInfo')}：
-              <a
-                href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh" target="_blank" rel="noreferrer">
                 {t('copyrightContent')}
               </a>
             </div>
@@ -206,16 +197,6 @@ const Article: NextPage<IProps> = ({ article }) => {
         api: (id, type) => ArticleProvider.updateArticleLikes(id, type).then((res) => res.likes),
       }}
       showComment={article.isCommentable}
-      shareProps={
-        shouldCheckPassWord
-          ? null
-          : {
-              cover: article.cover,
-              title: article.title,
-              desc: article.summary,
-              url: `/article/${article.id}`,
-            }
-      }
     />
   );
 };

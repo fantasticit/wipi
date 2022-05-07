@@ -1,6 +1,6 @@
 .listItem {
   padding: 16px 12px;
-  background: #ffffff;
+  background: #fff;
 }
 
 .comments {
@@ -24,7 +24,7 @@
 
     i {
       margin-left: 4px;
-      font-size: .8em;
+      font-size: 0.8em;
     }
   }
 }
@@ -32,8 +32,8 @@
 .recentArticleItem {
   display: inline-block;
   width: 100%;
-  border-radius: 4px;
   color: inherit;
+  border-radius: 4px;
 
   img {
     display: inline-block;

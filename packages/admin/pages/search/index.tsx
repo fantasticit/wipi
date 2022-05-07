@@ -20,12 +20,7 @@ const COMMON_COLUMNS = [
     dataIndex: 'count',
     key: 'count',
     render: (views) => (
-      <Badge
-        count={views}
-        showZero={true}
-        overflowCount={Infinity}
-        style={{ backgroundColor: '#52c41a' }}
-      />
+      <Badge count={views} showZero={true} overflowCount={Infinity} style={{ backgroundColor: '#52c41a' }} />
     ),
   },
   {
@@ -55,9 +50,7 @@ const SEARCH_FIELDS = [
 ];
 
 const Search: NextPage = () => {
-  const { loading, data, refresh, ...resetPagination } = usePagination<ISearch>(
-    SearchProvider.getRecords
-  );
+  const { loading, data, refresh, ...resetPagination } = usePagination<ISearch>(SearchProvider.getRecords);
   const [deleteApi, deleteLoading] = useAsyncLoading(SearchProvider.deleteRecord);
 
   const deleteAction = useCallback(

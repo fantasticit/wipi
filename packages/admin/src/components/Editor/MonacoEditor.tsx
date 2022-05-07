@@ -1,25 +1,33 @@
-import React, {
-  forwardRef,
-  useRef,
-  useEffect,
-  useState,
-  useCallback,
-  useImperativeHandle,
-} from 'react';
+import React, { forwardRef, useRef, useEffect, useState, useCallback, useImperativeHandle } from 'react';
 import { Spin, message } from 'antd';
 import { FileProvider } from '@/providers/file';
-import {
-  registerScollListener,
-  subjectScrollListener,
-  removeScrollListener,
-} from './utils/syncScroll';
+import { registerScollListener, subjectScrollListener, removeScrollListener } from './utils/syncScroll';
+import Editor from '@monaco-editor/react';
 
-export let monaco = null;
 const IMG_REXEXP = /^image\/(png|jpg|jpeg|gif)$/i;
 
+const MonacoEditorOptions = {
+  language: 'markdown',
+  automaticLayout: true,
+  wordWrap: 'on',
+  theme: 'vs',
+  minimap: {
+    enabled: false,
+  },
+  scrollBeyondLastLine: false,
+  scrollbar: {
+    useShadows: false,
+    vertical: 'visible',
+    horizontal: 'visible',
+    verticalScrollbarSize: 6,
+    horizontalScrollbarSize: 6,
+  },
+} as any;
+
 const _MonacoEditor = (props, ref) => {
-  const { defaultValue, onChange, onSave } = props;
+  const { defaultValue, onMount, onChange, onSave } = props;
   const container = useRef(null);
+  const monacoRef = useRef(null);
   const editorRef = useRef(null);
   const [mounted, setMounted] = useState(false);
 
@@ -47,7 +55,7 @@ const _MonacoEditor = (props, ref) => {
 
   const registerSave = useCallback(() => {
     // eslint-disable-next-line no-bitwise
-    editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
+    editorRef.current.addCommand(monacoRef.current.KeyMod.CtrlCmd | monacoRef.current.KeyCode.KEY_S, () => {
       onSave(editorRef.current.getValue());
     });
   }, [onSave]);
@@ -61,46 +69,24 @@ const _MonacoEditor = (props, ref) => {
     );
   }, []);
 
-  useImperativeHandle(ref, () => editorRef.current, [mounted]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    Promise.all([
-      import('monaco-editor/esm/vs/editor/editor.api.js'),
-      import('monaco-markdown'),
-    ]).then((res) => {
-      monaco = res[0];
-      const MonacoMarkdown = res[1];
-      const editor = monaco.editor.create(container.current, {
-        language: 'markdown',
-        automaticLayout: true,
-        wordWrap: 'on',
-        theme: 'vs',
-        minimap: {
-          enabled: false,
-        },
-        scrollBeyondLastLine: false,
-        scrollbar: {
-          useShadows: false,
-          vertical: 'visible',
-          horizontal: 'visible',
-          verticalScrollbarSize: 6,
-          horizontalScrollbarSize: 6,
-        },
-      });
+  const handleEditorDidMount = useCallback(
+    (editor, monaco) => {
+      monacoRef.current = monaco;
       editorRef.current = editor;
-      const extension = new MonacoMarkdown.MonacoMarkdownExtension();
-      extension.activate(editor);
       registerScroll();
       registerChange();
       registerSave();
       notifyMounted();
       setMounted(true);
-    });
-    return () => {
-      setMounted(false);
-      editorRef.current && editorRef.current.dispose();
-    };
-  }, [registerScroll, registerChange, registerSave, notifyMounted]);
+      onMount && onMount();
+    },
+    [onMount, registerScroll, registerChange, registerSave, notifyMounted]
+  );
+
+  useImperativeHandle(ref, () => ({
+    editor: editorRef.current,
+    monoca: monacoRef.current,
+  }));
 
   useEffect(() => {
     if (!mounted) {
@@ -117,6 +103,13 @@ const _MonacoEditor = (props, ref) => {
   }, [mounted]);
 
   useEffect(() => {
+    if (!mounted || !editorRef.current) {
+      return;
+    }
+    editorRef.current.setValue(defaultValue);
+  }, [mounted, defaultValue]);
+
+  useEffect(() => {
     if (!mounted) {
       return undefined;
     }
@@ -131,7 +124,7 @@ const _MonacoEditor = (props, ref) => {
       const pastePosition = e.range;
       const delta = [
         {
-          range: new monaco.Range(
+          range: new monacoRef.current.Range(
             pastePosition.startLineNumber,
             pastePosition.startColumn,
             pastePosition.endLineNumber,
@@ -159,7 +152,7 @@ const _MonacoEditor = (props, ref) => {
         return FileProvider.uploadFile(file, 1).then(({ url }) => {
           const delta = [
             {
-              range: new monaco.Range(
+              range: new monacoRef.current.Range(
                 selection.endLineNumber,
                 selection.endColumn,
                 selection.endLineNumber,
@@ -185,16 +178,16 @@ const _MonacoEditor = (props, ref) => {
     };
   }, [mounted]);
 
-  useEffect(() => {
-    if (!mounted || !editorRef.current) {
-      return;
-    }
-    editorRef.current.setValue(defaultValue);
-  }, [mounted, defaultValue]);
-
   return (
     <div ref={container} style={{ height: '100%', overflow: 'hidden' }}>
-      {mounted ? null : <Spin tip="编辑器努力加载中..." spinning={true}></Spin>}
+      <Editor
+        height="100%"
+        defaultValue={defaultValue}
+        options={MonacoEditorOptions}
+        loading={<Spin tip="编辑器努力加载中..." spinning={true}></Spin>}
+        onMount={handleEditorDidMount}
+        onChange={onChange}
+      />
     </div>
   );
 };

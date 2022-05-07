@@ -18,8 +18,7 @@ export const AppLayout: React.FC<Iprops> = ({ children, needFooter = true, hasBg
   const { systemBg } = setting;
   const [loaded, toggleLoaded] = useToggle(false);
   const bg = useMemo(
-    () =>
-      `linear-gradient(to bottom, rgba(var(--rgb-bg-second), 0), rgba(var(--rgb-bg-second), 1)), url(${systemBg})`,
+    () => `linear-gradient(to bottom, rgba(var(--rgb-bg-second), 0), rgba(var(--rgb-bg-second), 1)), url(${systemBg})`,
     [systemBg]
   );
   const customBg = hasBg || (!!systemBg && loaded);
@@ -40,10 +39,7 @@ export const AppLayout: React.FC<Iprops> = ({ children, needFooter = true, hasBg
     <div className={style.wrapper}>
       <Seo />
       <Header setting={setting} tags={tags} pages={pages} hasBg={customBg} />
-      <main
-        className={style.main}
-        style={{ backgroundColor: customBg ? 'transparent' : 'var(--bg-body)' }}
-      >
+      <main className={style.main} style={{ backgroundColor: customBg ? 'transparent' : 'var(--bg-body)' }}>
         {children}
       </main>
       {systemBg && !hasBg && <div className={style.bg} style={{ backgroundImage: bg }}></div>}

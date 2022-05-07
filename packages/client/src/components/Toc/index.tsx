@@ -13,10 +13,7 @@ interface IToc {
 
 const HEIGHT = 32;
 
-export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> = ({
-  tocs = [],
-  maxHeight,
-}) => {
+export const Toc: React.FC<{ tocs: Array<IToc>; maxHeight?: string | number }> = ({ tocs = [], maxHeight }) => {
   const t = useTranslations();
   const ref = useRef<HTMLDivElement>();
   const [active, setActive] = useState(0);

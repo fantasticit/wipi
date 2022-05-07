@@ -10,8 +10,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest();
 
     const url = request.originalUrl; // 请求路由
-    const status =
-      exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
+    const status = exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
     const msg = exception.message.message || exception.message; // 错误信息
     const errorResponse = {
       statusCode: status,

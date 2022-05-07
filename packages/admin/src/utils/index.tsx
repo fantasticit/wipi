@@ -62,9 +62,7 @@ export function resolveUrl(baseURL, relativeURL) {
     baseURL = '/';
   }
 
-  return relativeURL
-    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
-    : baseURL;
+  return relativeURL ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL;
 }
 
 export const isOdd = (v) => v % 2 !== 0;

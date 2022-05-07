@@ -107,9 +107,7 @@ const SEARCH_FIELDS = [
 ];
 
 const Page: NextPage = () => {
-  const { loading, data, refresh, ...resetPagination } = usePagination<IUser>(
-    UserProvider.getUsers
-  );
+  const { loading, data, refresh, ...resetPagination } = usePagination<IUser>(UserProvider.getUsers);
   const [updateApi, updateLoading] = useAsyncLoading(UserProvider.update);
 
   const updateAction = useCallback(
@@ -118,12 +116,12 @@ const Page: NextPage = () => {
         users = [users];
       }
       return () =>
-        Promise.all(
-          users.map((user) => updateApi({ ...user, [key]: value !== null ? value : !user[key] }))
-        ).then(() => {
-          message.success('操作成功');
-          refresh();
-        });
+        Promise.all(users.map((user) => updateApi({ ...user, [key]: value !== null ? value : !user[key] }))).then(
+          () => {
+            message.success('操作成功');
+            refresh();
+          }
+        );
     },
     [updateApi, refresh]
   );
@@ -195,10 +193,7 @@ const Page: NextPage = () => {
                 >
                   解除授权
                 </Button>
-                <Button
-                  disabled={!hasSelected}
-                  onClick={updateAction(selectedRows, 'role', 'admin')}
-                >
+                <Button disabled={!hasSelected} onClick={updateAction(selectedRows, 'role', 'admin')}>
                   授权
                 </Button>
               </>

@@ -34,9 +34,7 @@ export class CategoryService {
    */
   async findAll(queryParams): Promise<Category[]> {
     const { articleStatus } = queryParams;
-    const qb = this.categoryRepository
-      .createQueryBuilder('category')
-      .orderBy('category.createAt', 'ASC');
+    const qb = this.categoryRepository.createQueryBuilder('category').orderBy('category.createAt', 'ASC');
 
     if (articleStatus) {
       qb.leftJoinAndSelect('category.articles', 'articles', 'articles.status=:status', {

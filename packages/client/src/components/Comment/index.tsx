@@ -44,10 +44,7 @@ export const Comment: React.FC<IProps> = ({ hostId: articleId }) => {
         <CommentEditor hostId={articleId} parentComment={null} replyComment={null} />
       </div>
       <Comments comments={comments} />
-      <div
-        className={styles.pagination}
-        style={{ padding: loading || total > pageSize ? '16px 0' : '16px 0 0' }}
-      >
+      <div className={styles.pagination} style={{ padding: loading || total > pageSize ? '16px 0' : '16px 0 0' }}>
         {!loading && total > 0 ? (
           <Pagination
             size="small"

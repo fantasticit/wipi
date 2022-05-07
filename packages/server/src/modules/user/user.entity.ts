@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BeforeInsert,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BeforeInsert } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcryptjs';
@@ -17,7 +10,7 @@ export class User {
    * @param password0 加密前密码
    * @param password1 加密后密码
    */
-  static async comparePassword(password0, password1) {
+  static comparePassword(password0, password1) {
     return bcrypt.compareSync(password0, password1);
   }
 

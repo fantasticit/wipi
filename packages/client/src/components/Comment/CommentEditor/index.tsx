@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback, useContext } from 'react';
+import React, { useState, useMemo, useCallback, useContext } from 'react';
 import cls from 'classnames';
 import { useTranslations } from 'next-intl';
 import { Button, Input, message } from 'antd';
@@ -21,14 +21,7 @@ interface Props {
   small?: boolean;
 }
 
-export const CommentEditor: React.FC<Props> = ({
-  hostId,
-  parentComment,
-  replyComment,
-  onOk,
-  onClose,
-  small,
-}) => {
+export const CommentEditor: React.FC<Props> = ({ hostId, parentComment, replyComment, onOk, onClose, small }) => {
   const t = useTranslations('commentNamespace');
   const { user } = useContext(GlobalContext);
   const [addComment, loading] = useAsyncLoading(CommentProvider.addComment);
@@ -39,10 +32,7 @@ export const CommentEditor: React.FC<Props> = ({
     () => (replyComment ? `${t('reply')} ${replyComment.name}` : t('replyPlaceholder')),
     [t, replyComment]
   );
-  const textareaSize = useMemo(
-    () => (small ? { minRows: 3, maxRows: 6 } : { minRows: 4, maxRows: 8 }),
-    [small]
-  );
+  const textareaSize = useMemo(() => (small ? { minRows: 3, maxRows: 6 } : { minRows: 4, maxRows: 8 }), [small]);
   const btnSize = useMemo(() => (small ? 'small' : 'middle'), [small]);
   const emojiTrigger = (
     <span className={styles.emojiTrigger}>
@@ -112,6 +102,7 @@ export const CommentEditor: React.FC<Props> = ({
             defaultVisible: needSetInfo,
             onCancel: toggleNeedSetInfo,
             hidden: true,
+            tip: '请登录信息完善的账户（包含邮箱），否则无法进行评论，如需账号，可前往后台系统进行注册',
           }}
         />
         <div className={styles.textareaWrapper}>
@@ -136,13 +127,7 @@ export const CommentEditor: React.FC<Props> = ({
               {t('close')}
             </Button>
           )}
-          <Button
-            loading={loading}
-            onClick={submit}
-            type="primary"
-            disabled={!content}
-            size={btnSize}
-          >
+          <Button loading={loading} onClick={submit} type="primary" disabled={!content} size={btnSize}>
             {t('publish')}
           </Button>
         </div>

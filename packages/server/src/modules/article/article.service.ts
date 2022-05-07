@@ -73,9 +73,7 @@ export class ArticleService {
 
     if (otherParams) {
       Object.keys(otherParams).forEach((key) => {
-        query
-          .andWhere(`article.${key} LIKE :${key}`)
-          .setParameter(`${key}`, `%${otherParams[key]}%`);
+        query.andWhere(`article.${key} LIKE :${key}`).setParameter(`${key}`, `%${otherParams[key]}%`);
       });
     }
 
@@ -271,8 +269,7 @@ export class ArticleService {
       views: oldArticle.views,
       category: existCategory,
       needPassword: !!article.password,
-      publishAt:
-        oldArticle.status === 'draft' && status === 'publish' ? dateFormat() : oldArticle.publishAt,
+      publishAt: oldArticle.status === 'draft' && status === 'publish' ? dateFormat() : oldArticle.publishAt,
     };
 
     if (tags) {

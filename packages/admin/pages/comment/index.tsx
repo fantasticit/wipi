@@ -97,12 +97,7 @@ const COMMON_COLUMNS = [
 ];
 
 const Comment = () => {
-  const {
-    loading,
-    data: comments,
-    refresh,
-    ...resetPagination
-  } = usePagination<IComment>(CommentProvider.getComments);
+  const { loading, data: comments, refresh, ...resetPagination } = usePagination<IComment>(CommentProvider.getComments);
   const [updateApi, updateLoading] = useAsyncLoading(CommentProvider.updateComment);
   const [deleteApi, deleteLoading] = useAsyncLoading(CommentProvider.deleteComment);
 
@@ -113,9 +108,7 @@ const Comment = () => {
       }
       return () =>
         Promise.all(
-          articles.map((article) =>
-            updateApi(article.id, { [key]: value !== null ? value : !article[key] })
-          )
+          articles.map((article) => updateApi(article.id, { [key]: value !== null ? value : !article[key] }))
         ).then(() => {
           message.success('操作成功');
           refresh();
@@ -186,11 +179,7 @@ const Comment = () => {
         showSelection={true}
         loading={loading}
         data={comments}
-        columns={(resetSelectedRows) => [
-          ...COMMON_COLUMNS,
-          parentCommentColumn,
-          actionColumn(resetSelectedRows),
-        ]}
+        columns={(resetSelectedRows) => [...COMMON_COLUMNS, parentCommentColumn, actionColumn(resetSelectedRows)]}
         refresh={refresh}
         {...resetPagination}
         renderLeftNode={({ hasSelected, selectedRowKeys, selectedRows, resetSelectedRows }) =>

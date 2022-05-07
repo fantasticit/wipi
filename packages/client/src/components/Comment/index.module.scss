@@ -5,8 +5,8 @@
 
 .pagination {
   color: var(--second-text-color);
-  background-color: var(--bg-second);
   text-align: center;
+  background-color: var(--bg-second);
 
   :global {
     .ant-pagination {
