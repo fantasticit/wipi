@@ -70,7 +70,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
     const data = { ...user, oldPassword, newPassword: newPassword2 };
     UserProvider.updatePassword(data).then(() => {
       message.success('密码已更新，请重新登录');
-      Router.replace('/admin/login?redirect=/ownspace');
+      Router.replace('login?redirect=/ownspace');
     });
   };
 
