@@ -1,4 +1,7 @@
+/* eslint-env es6 */
+const { config } = require('@wipi/config');
+
 module.exports = {
-  siteUrl: 'https://blog.wipi.tech',
+  siteUrl: config.CLIENT_SITE_URL,
   generateRobotsTxt: true,
 };
