@@ -1,20 +1,5 @@
 # Wipi
 
-## 分支介绍
-
-本分支为重构分支，会进行整体结构的重构，同时也会切到 pnpm 进行管理，为了开发需要，需要做以下准备。
-
-```shell
-# 全局安装 pnpm
-npm i -g pnpm
-
-# 安装依赖
-pnpm install
-
-# 本地启动
-pnpm run dev
-```
-
 ## 简介
 
 Wipi 是一个面向个人的开源的集成文章发表、页面创建、知识小册等功能的 CMS 系统。涉及到的技术如下：
@@ -27,9 +12,8 @@ Wipi 是一个面向个人的开源的集成文章发表、页面创建、知识
 ## 链接
 
 - [Github 源码](https://github.com/fantasticit/wipi)
-- [前台页面](https://blog.wipi.tech/)
-- [管理系统](https://admin.blog.wipi.tech/)：支持访客注册
-- [接口文档](https://api.blog.wipi.tech/api/)
+- [前台页面](https://blog.codingit.cn/)
+- [管理系统](https://admin.blog.codingit.cn/)：支持访客注册
 
 ## 功能点
 
@@ -86,13 +70,16 @@ git clone --depth=1 https://github.com/fantasticit/wipi.git your-project-name
 然后，安装项目依赖。
 
 ```bash
-yarn
+# 全局安装 pnpm
+npm i -g pnpm
+
+pnpm install
 ```
 
 - 启动项目
 
 ```bash
-yarn dev
+pnpm run dev
 ```
 
 前台页面地址：`http://localhost:3001`。
@@ -116,18 +103,36 @@ yarn dev
 默认加载 `.env` 文件，生产环境会尝试加载 `.env.prod` 文件。
 
 ```bash
-CLIENT_ASSET_PREFIX=/ # client 打包前缀地址（类似 webpack publicPath 配置）
-ADMIN_ASSET_PREFIX=/ # admin 打包前缀地址
-SERVER_API_URL=http://localhost:3003/api # 接口地址
+# 客户端运行端口
+CLIENT_PORT=3001
+# 客户端站点地址（假设部署到 https://xx.com, 就将 CLIENT_SITE_URL 设置为 https://xx.com）
+CLIENT_SITE_URL=http://localhost:3001
+# 客户端资源地址（假设部署到 https://xx.com，就将 CLIENT_ASSET_PREFIX 设置为 https://xx.com，如果将资源上传到 cdn ，那就改为 cdn 地址）
+CLIENT_ASSET_PREFIX=/
 
-ADMIN_USER=admin # 默认管理员账户
-ADMIN_PASSWD=admin # 默认管理员密码
-DB_HOST=127.0.0.1 # 数据库地址
-DB_PORT=3306 # 数据库端口
-DB_USER=root # 数据库用户名
-DB_PASSWD=root # 数据库密码
-DB_DATABASE=wipi # 数据库名称
+# 管理后台运行端口
+ADMIN_PORT=3002
+# 管理后台资源地址（假设部署到 https://xx.com，就将 CLIENT_ASSET_PREFIX 设置为 https://xx.com，如果将资源上传到 cdn ，那就改为 cdn 地址）
+ADMIN_ASSET_PREFIX=/
 
+# 服务端运行端口
+SERVER_PORT=3003
+# 服务端完整访问路径
+SERVER_API_URL=http://localhost:3003/api
+# 服务端接口前缀（假设将希望通过 http://xx:com/api 来访问，那就设置为 /api；如果 http://xx:com，那就设置为 / ）
+SERVER_API_PREFIX=/api
+# 默认管理员账户名
+ADMIN_USER=admin
+# 默认管理员账密码
+ADMIN_PASSWD=admin
+# 以下为数据库配置，请先创建好表
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWD=root
+DB_DATABASE=wipi
+
+# Github 第三方登录配置
 # 关于 Github OAuth 可参考 https://www.ruanyifeng.com/blog/2019/04/github-oauth.html
 GITHUB_CLIENT_ID=0 # Github OAuth 登录 Id
 GITHUB_CLIENT_SECRET=0 # Github OAuth 登录 Secret
@@ -146,9 +151,9 @@ npm config set registry http://registry.npmjs.org
 
 npm i -g pm2 @nestjs/cli yarn
 
-yarn
-yarn run build
-yarn run pm2
+pnpm install
+pnpm run build
+pnpm run pm2
 
 pm2 startup
 pm2 save
