@@ -8,7 +8,7 @@
     "dev:server": "pnpm run --dir packages/server dev",
     "dev:client": "pnpm run --dir packages/client dev",
     "dev:admin": "pnpm run --dir packages/admin dev",
-    "build": "pnpm buld:build:config && pnpm build:server && pnpm build:client && pnpm build:admin",
+    "build": "pnpm buld:config && pnpm build:server && pnpm build:client && pnpm build:admin",
     "build:config": "pnpm run --dir packages/config build",
     "build:server": "pnpm run --dir packages/server build",
     "build:client": "pnpm run --dir packages/client build",
