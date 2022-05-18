@@ -3,7 +3,7 @@ import { Editor as MDEditor } from '@components/Editor';
 import { Button, Dropdown, Input, Menu, message, Modal, PageHeader, Popconfirm } from 'antd';
 import cls from 'classnames';
 import { default as Router } from 'next/router';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { useSetting } from '@/hooks/useSetting';
@@ -13,6 +13,7 @@ import { resolveUrl } from '@/utils';
 
 import { ArticleSettingDrawer } from './ArticleSettingDrawer';
 import style from './index.module.scss';
+
 interface IProps {
   id?: string | number;
   article?: IArticle;
@@ -41,6 +42,7 @@ const transformTags = (article) => {
 
 export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaultArticle = { title: '' } }) => {
   const isCreate = !defaultId; // 一开始是否是新建
+  const hasSavedRef = useRef(false);
   const setting = useSetting();
   const [id, setId] = useState(defaultId);
   const [article, setArticle] = useState<Partial<IArticle>>(defaultArticle);
@@ -98,13 +100,14 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
   const saveOrPublish = useCallback(
     (patch = {}) => {
       const data = { ...article, ...patch };
-      check()
+      return check()
         .then(() => {
           transformCategory(data);
           transformTags(data);
           const promise = !isCreate ? ArticleProvider.updateArticle(id, data) : ArticleProvider.addArticle(data);
           promise.then((res) => {
             setId(res.id);
+            hasSavedRef.current = true;
             message.success(res.status === 'draft' ? '文章已保存为草稿' : '文章已发布');
           });
         })
@@ -116,16 +119,20 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
   );
 
   const saveDraft = useCallback(() => {
-    saveOrPublish({ status: 'draft' });
+    return saveOrPublish({ status: 'draft' });
   }, [saveOrPublish]);
 
   const publish = useCallback(() => {
-    saveOrPublish({ status: 'publish' });
+    return saveOrPublish({ status: 'publish' });
   }, [saveOrPublish]);
 
   // 预览文章
   const preview = useCallback(() => {
     if (id) {
+      if (!setting.systemUrl) {
+        message.error('尚未配置前台地址，无法正确构建预览地址');
+        return;
+      }
       window.open(resolveUrl(setting.systemUrl, '/article/' + id));
     } else {
       message.warn('请先保存');
@@ -159,6 +166,35 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
     }
   }, [id, isCreate]);
 
+  useEffect(() => {
+    const handler = () => {
+      if (hasSavedRef.current) return;
+      Modal.confirm({
+        title: '确认关闭？如果有内容变更，请先保存!',
+        onOk: () => {
+          saveDraft().then(() => {
+            Router.push('/article');
+          });
+        },
+        onCancel: () => Router.push('/article'),
+        transitionName: '',
+        maskTransitionName: '',
+      });
+      hasSavedRef.current = true;
+      // ignore-me
+      const newErr = new Error('请完成操作后关闭页面');
+      throw newErr;
+    };
+
+    window.addEventListener('beforeunload', handler);
+    Router.events.on('beforeHistoryChange', handler);
+
+    return () => {
+      window.removeEventListener('beforeunload', handler);
+      Router.events.off('beforeHistoryChange', handler);
+    };
+  }, [saveDraft]);
+
   return (
     <div className={style.wrapper}>
       <Helmet>
@@ -166,18 +202,7 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
       </Helmet>
       <header className={style.header}>
         <PageHeader
-          backIcon={
-            <Popconfirm
-              title="确认关闭？如果有内容变更，请先保存。"
-              onConfirm={() => Router.push('/article')}
-              onCancel={() => null}
-              okText="确认"
-              cancelText="取消"
-              placement="rightBottom"
-            >
-              <Button size="small" icon={<CloseOutlined />} />
-            </Popconfirm>
-          }
+          backIcon={<Button size="small" icon={<CloseOutlined />} onClick={() => Router.push('/article')} />}
           style={{
             borderBottom: '1px solid rgb(235, 237, 240)',
           }}

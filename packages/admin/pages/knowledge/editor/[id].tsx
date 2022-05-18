@@ -1,10 +1,10 @@
 import { CloseOutlined, DeleteOutlined, MenuOutlined, PlusOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Button, Divider, Input, message, Popconfirm, Popover } from 'antd';
+import { Avatar, Button, Divider, Input, message, Modal, Popconfirm, Popover } from 'antd';
 import arrayMove from 'array-move';
 import cls from 'classnames';
 import { NextPage } from 'next';
 import { default as Router } from 'next/router';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 
 import { Editor } from '@/components/Editor';
@@ -30,6 +30,7 @@ interface IProps {
 const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
   const forceUpdate = useForceUpdate();
   const $container = useRef<HTMLElement>();
+  const hasSavedRef = useRef(false);
   const [loading, setLoading] = useState(false);
   const [popVisible, togglePopVisible] = useToggle(false);
   const [settingVisible, toggleSettingVisible] = useToggle(false);
@@ -158,25 +159,45 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
       setChapters(data);
       forceUpdate();
       message.success('已保存');
+      hasSavedRef.current = true;
     });
   }, [id, chapters, forceUpdate]);
+
+  useEffect(() => {
+    const handler = () => {
+      if (hasSavedRef.current) return;
+      Modal.confirm({
+        title: '确认关闭？如果有内容变更，请先保存!',
+        onOk: () => {
+          save().then(() => {
+            Router.push('/knowledge');
+          });
+        },
+        onCancel: () => Router.push('/knowledge'),
+        transitionName: '',
+        maskTransitionName: '',
+      });
+      hasSavedRef.current = true;
+      // ignore-me
+      const newErr = new Error('请完成操作后关闭页面');
+      throw newErr;
+    };
+
+    window.addEventListener('beforeunload', handler);
+    Router.events.on('beforeHistoryChange', handler);
+
+    return () => {
+      window.removeEventListener('beforeunload', handler);
+      Router.events.off('beforeHistoryChange', handler);
+    };
+  }, [save]);
 
   return (
     <div className={styles.wrapper}>
       <aside>
         <header>
           <div>
-            <Popconfirm
-              title="确认关闭？如果有内容变更，请先保存。"
-              onConfirm={() => Router.push('/knowledge')}
-              onCancel={() => null}
-              okText="确认"
-              cancelText="取消"
-              placement="rightBottom"
-              okButtonProps={{ loading }}
-            >
-              <CloseOutlined />
-            </Popconfirm>
+            <CloseOutlined onClick={() => Router.push('/knowledge')} />
             <div>
               <Avatar shape="square" src={knowledge.cover} />
               <span style={{ marginLeft: 8 }}>{knowledge.title}</span>
