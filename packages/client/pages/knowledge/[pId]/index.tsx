@@ -5,7 +5,7 @@ import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 
 import { ListTrail } from '@/components/Animation/Trail';
 import { KnowledgeList } from '@/components/KnowledgeList';
@@ -25,21 +25,24 @@ interface IProps {
 const Page: NextPage<IProps> = ({ pId, book, otherBooks = [] }) => {
   const { setting } = useContext(GlobalContext);
   const t = useTranslations();
-  const chapters = (book && book.children) || [];
+  const chapters = useMemo(() => (book && book.children) || [], [book]);
+  const bg = useMemo(
+    () =>
+      `linear-gradient(to bottom, rgba(var(--rgb-bg-second), 0), rgba(var(--rgb-bg-second), 1)), url(${book.cover})`,
+    [book.cover]
+  );
 
   const start = useCallback(() => {
     const chapter = chapters[0];
     window.open(`/knowledge/${pId}/${chapter.id}`);
-  }, [pId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [chapters, pId]);
 
   if (!book) {
     return null;
   }
 
-  const bg = `linear-gradient(to bottom, rgba(var(--rgb-bg-second), 0), rgba(var(--rgb-bg-second), 1)), url(${book.cover})`;
-
   return (
-    <div className={style.wrapper}>
+    <div className={style.wrapper} style={{ backgroundColor: book.cover ? 'transparent' : 'var(--bg-body)' }}>
       {book.cover && (
         <div
           className={style.bg}
