@@ -53,7 +53,6 @@ export const JsonEditor = ({ value, onChange, style = DEFAULT_STYLE }) => {
         if (typeof json === 'object') {
           if (!deepEqual(json, value)) {
             onChange(json);
-            console.log('json', value, json);
           }
         }
       } catch (e) {

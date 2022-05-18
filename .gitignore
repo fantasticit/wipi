@@ -10,11 +10,8 @@ test-results
 .npmrc
 tsconfig.tsbuildinfo
 
-.env
+.env.prod
 *.local
 *.cache
 *error.log
 *debug.log
-
-packages/config/yaml/dev.yaml
-packages/config/yaml/prod.yaml

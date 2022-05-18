@@ -69,5 +69,6 @@
   },
   "tagTitle": "Tags",
   "toc": "Toc",
-  "logingWithGithub": "Login With Github, Please wait..."
+  "logingWithGithub": "Login With Github, Please wait...",
+  "useGithubToLogin": "Login with Github account"
 }

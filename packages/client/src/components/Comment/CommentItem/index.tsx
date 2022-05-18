@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import cls from 'classnames';
 import { Avatar } from 'antd';
 import { useTranslations } from 'next-intl';
@@ -124,14 +124,18 @@ export function Comments({ comments, parentComment = null, isChild = false }) {
       {comments.map((comment, index) => {
         const component = (
           <CommentItem
-            key={comment.id}
+            key={`${(parentComment && parentComment.id) || 'root'}-${comment.id}`}
             comment={comment}
             parentComment={parentComment || comment}
             isChild={isChild}
             isLast={index === comments.length - 1}
           />
         );
-        return isChild ? <Opacity>{component}</Opacity> : component;
+        return isChild ? (
+          <Opacity key={`${(parentComment && parentComment.id) || 'root'}-${comment.id}`}>{component}</Opacity>
+        ) : (
+          component
+        );
       })}
     </div>
   );

@@ -3,13 +3,16 @@ import { Button, Tabs, Modal, Input, message } from 'antd';
 import { WarningOutlined } from '@ant-design/icons';
 import { SettingProvider } from '@/providers/setting';
 import { JsonEditor } from '@/components/JsonEditor';
-import { useForceUpdate } from '@/hooks/useForceUpdate';
 import { safeJsonParse } from '@/utils/json';
 
 export const LocaleSetting = ({ setting }) => {
-  const forceUpdate = useForceUpdate();
+  const [v, forceUpdate] = useState(0);
   const [i18n, setI18n] = useState({});
-  const locales = useMemo(() => (i18n && typeof i18n === 'object' ? Object.keys(i18n) : []), [i18n]);
+  const locales = useMemo(
+    () => (i18n && typeof i18n === 'object' ? Object.keys(i18n) : []),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [v, i18n]
+  );
 
   useEffect(() => {
     try {
@@ -25,56 +28,53 @@ export const LocaleSetting = ({ setting }) => {
     }
   }, [setting.i18n]);
 
-  const onEdit = useCallback(
-    (key, action) => {
-      const add = () => {
-        let locale = '';
-        const onChange = function (e) {
-          locale = e.target.value;
-        };
-        Modal.confirm({
-          title: '请输入语言名称（英文）',
-          // eslint-disable-next-line react/jsx-no-bind
-          icon: <Input onChange={onChange} />,
-          onOk() {
-            setI18n((json) => {
-              json[locale] = {};
-              return json;
-            });
-            forceUpdate();
-          },
-          okText: '确认',
-          cancelText: '取消',
-          transitionName: '',
-          maskTransitionName: '',
-        });
+  const onEdit = useCallback((key, action) => {
+    const add = () => {
+      let locale = '';
+      const onChange = function (e) {
+        locale = e.target.value;
       };
-      const remove = () => {
-        Modal.confirm({
-          title: '确认删除',
-          icon: <WarningOutlined />,
-          onOk() {
-            setI18n((json) => {
-              delete json[key];
-              return json;
-            });
-            forceUpdate();
-          },
-          okText: '确认',
-          cancelText: '取消',
-          transitionName: '',
-          maskTransitionName: '',
-        });
-      };
+      Modal.confirm({
+        title: '请输入语言名称（英文）',
+        // eslint-disable-next-line react/jsx-no-bind
+        icon: <Input onChange={onChange} />,
+        onOk() {
+          setI18n((json) => {
+            json[locale] = {};
+            return json;
+          });
+          forceUpdate((v) => v + 1);
+        },
+        okText: '确认',
+        cancelText: '取消',
+        transitionName: '',
+        maskTransitionName: '',
+      });
+    };
+    const remove = () => {
+      Modal.confirm({
+        title: '确认删除',
+        icon: <WarningOutlined />,
+        onOk() {
+          setI18n((json) => {
+            delete json[key];
+            return json;
+          });
+          forceUpdate((v) => v + 1);
+        },
+        okText: '确认',
+        cancelText: '取消',
+        transitionName: '',
+        maskTransitionName: '',
+      });
+    };
 
-      if (action === 'add') {
-        add();
-      } else {
-        remove();
-      }
-    },
-    [forceUpdate]
-  );
+    if (action === 'add') {
+      add();
+    } else {
+      remove();
+    }
+  }, []);
 
   const onChange = useCallback((locale) => {
     return (value) => {

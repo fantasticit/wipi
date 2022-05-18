@@ -1,16 +1,23 @@
-import axios, { AxiosResponse } from 'axios';
 import { message } from 'antd';
+import axios, { AxiosResponse } from 'axios';
 
 export const httpProvider = axios.create({
   baseURL: process.env.SERVER_API_URL,
   timeout: 60000,
 });
 
+const isBrowser = typeof window !== 'undefined';
+
 httpProvider.interceptors.request.use(
   (config) => {
+    if (isBrowser) {
+      const token = window.localStorage.getItem('token');
+      if (config && config.headers && token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
     return config;
   },
-
   () => {
     throw new Error('发起请求出错');
   }
@@ -25,18 +32,12 @@ httpProvider.interceptors.response.use(
       data: unknown;
     }>
   ) => {
-    if (data.status && +data.status === 200 && !data.data.success) {
-      typeof window !== 'undefined' && message.error({ message: data.data.msg });
-      return null;
-    }
-
     const res = data.data;
 
     if (!res.success) {
       message.error(res.msg);
       return null;
     }
-
     return res.data;
   },
   (err) => {
@@ -44,15 +45,20 @@ httpProvider.interceptors.response.use(
       const status = err.response.status;
 
       switch (status) {
-        case 504:
+        case 400:
         case 404:
-          typeof window !== 'undefined' && message.error('服务器异常');
+        case 504:
+          isBrowser && message.error((err.response && err.response.data && err.response.data.msg) || '服务器异常');
           break;
 
         default:
-          typeof window !== 'undefined' &&
-            message.error((err.response && err.response.data && err.response.data.msg) || '未知错误!');
+          isBrowser && message.error((err.response && err.response.data && err.response.data.msg) || '未知错误!');
+          break;
       }
+      return Promise.reject({
+        statusCode: err.response.status,
+        message: err.response.data.msg,
+      });
     }
 
     return Promise.reject(err);

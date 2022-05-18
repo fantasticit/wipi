@@ -56,11 +56,6 @@ export const menus = [
     icon: 'book',
   },
   {
-    title: '海报管理',
-    path: '/poster',
-    icon: 'star',
-  },
-  {
     icon: 'message',
     title: '评论管理',
     path: '/comment',

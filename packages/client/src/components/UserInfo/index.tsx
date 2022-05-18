@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useCallback } from 'react';
-import { Modal, Form, Button, Input, Avatar, Dropdown, Menu, Alert, message } from 'antd';
+import { Modal, Form, Button, Input, Avatar, Dropdown, Menu, Alert, Tooltip } from 'antd';
 import { GithubOutlined, UserOutlined } from '@ant-design/icons';
 import { useTranslations } from 'next-intl';
 import Router from 'next/router';
@@ -24,6 +24,7 @@ export const UserInfo: React.FC<{
   onOk?: (arg: IUser) => void;
   onCancel?: () => void;
 }> = ({ defaultVisible = false, hidden = false, tip, onOk = () => {}, onCancel = () => {} }) => {
+  const tRoot = useTranslations();
   const t = useTranslations('commentNamespace');
   const { user, setUser, removeUser } = useContext(GlobalContext);
   const [visible, toggleVisible] = useToggle(defaultVisible);
@@ -104,9 +105,11 @@ export const UserInfo: React.FC<{
         </Form>
         <div className={styles.other}>
           <div className={styles.icon} onClick={loginWithGithub}>
-            <GithubOutlined />
+            <Tooltip title={tRoot('useGithubToLogin')}>
+              <GithubOutlined />
+            </Tooltip>
           </div>
-          <Alert style={{ marginBottom: 24 }} message={tip} type="info" showIcon={true} />
+          {tip && <Alert style={{ marginBottom: 24 }} message={tip} type="info" showIcon={true} />}
         </div>
       </Modal>
     </>
