@@ -104,7 +104,6 @@ export const CommentEditor: React.FC<Props> = ({ hostId, parentComment, replyCom
             defaultVisible: needSetInfo,
             onCancel: toggleNeedSetInfo,
             hidden: true,
-            tip: '请登录信息完善的账户（包含邮箱），否则无法进行评论，如需账号，可前往后台系统进行注册',
           }}
         />
         <div className={styles.textareaWrapper}>

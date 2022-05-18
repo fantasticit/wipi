@@ -70,5 +70,6 @@
   "tagTitle": "Tags",
   "toc": "Toc",
   "logingWithGithub": "Login With Github, Please wait...",
-  "useGithubToLogin": "Login with Github account"
+  "useGithubToLogin": "Login with Github account",
+  "loginTipMessage": "Please login, otherwise you will not be able to comment. If you need an account, you can go to the admin system to register"
 }

@@ -70,5 +70,6 @@
   "tagTitle": "文章标签",
   "toc": "目录",
   "logingWithGithub": "Github 授权登录中，请稍等......",
-  "useGithubToLogin": "使用 Github 账号登录"
+  "useGithubToLogin": "使用 Github 账号登录",
+  "loginTipMessage": "请登录账号，否则无法进行评论，如需账号，可前往后台系统进行注册"
 }

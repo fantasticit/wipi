@@ -22,10 +22,9 @@ export const isValidUser = (user: IUser): user is IUser => user && user.name && 
 export const UserInfo: React.FC<{
   defaultVisible?: boolean;
   hidden?: boolean;
-  tip?: string;
   onOk?: (arg: IUser) => void;
   onCancel?: () => void;
-}> = ({ defaultVisible = false, hidden = false, tip, onOk = () => {}, onCancel = () => {} }) => {
+}> = ({ defaultVisible = false, hidden = false, onOk = () => {}, onCancel = () => {} }) => {
   const tRoot = useTranslations();
   const t = useTranslations('commentNamespace');
   const { user, setUser, removeUser } = useContext(GlobalContext);
@@ -111,7 +110,7 @@ export const UserInfo: React.FC<{
               <GithubOutlined />
             </Tooltip>
           </div>
-          {tip && <Alert style={{ marginBottom: 24 }} message={tip} type="info" showIcon={true} />}
+          <Alert style={{ marginTop: 16 }} message={<p>{tRoot('loginTipMessage')}</p>} type="info" showIcon={true} />
         </div>
       </Modal>
     </>
