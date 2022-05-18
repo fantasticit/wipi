@@ -1,6 +1,7 @@
-import React from 'react';
-import cls from 'classnames';
 import Icon, { GithubOutlined } from '@ant-design/icons';
+import cls from 'classnames';
+import React from 'react';
+
 import style from './index.module.scss';
 
 const RSS = () => {

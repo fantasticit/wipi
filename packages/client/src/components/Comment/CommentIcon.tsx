@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
+
 import { COMMENT_DOM_ID } from '@/components/Comment';
+
 import styles from './CommentIcon.module.scss';
 
 export const CommentIcon = () => {

@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from 'react';
 import { Dropdown, Menu } from 'antd';
 import { useRouter } from 'next/router';
 import { useTranslations } from 'next-intl';
+import React, { useContext, useEffect } from 'react';
+
 import { GlobalContext } from '@/context/global';
 
 export function Locales() {

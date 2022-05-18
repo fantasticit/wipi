@@ -1,15 +1,17 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import { CloseOutlined, EllipsisOutlined, FileImageOutlined } from '@ant-design/icons';
+import { Editor as CodeEditor } from '@components/Editor';
+import { Button, Drawer, Dropdown, Input, InputNumber, Menu, message, Modal, PageHeader, Popconfirm } from 'antd';
 import cls from 'classnames';
 import { default as Router } from 'next/router';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { resolveUrl } from '@/utils';
-import { useToggle } from '@/hooks/useToggle';
-import { CloseOutlined, EllipsisOutlined, FileImageOutlined } from '@ant-design/icons';
-import { Button, Input, InputNumber, message, PageHeader, Drawer, Dropdown, Menu, Modal, Popconfirm } from 'antd';
-import { Editor as CodeEditor } from '@components/Editor';
+
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { PageProvider } from '@/providers/page';
 import { useSetting } from '@/hooks/useSetting';
+import { useToggle } from '@/hooks/useToggle';
+import { PageProvider } from '@/providers/page';
+import { resolveUrl } from '@/utils';
+
 import style from './index.module.scss';
 
 interface IProps {

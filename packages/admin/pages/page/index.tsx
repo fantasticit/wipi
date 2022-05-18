@@ -1,19 +1,21 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { PlusOutlined } from '@ant-design/icons';
+import { Badge, Button, Divider, message, Modal, Popconfirm, Select, Spin } from 'antd';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { PlusOutlined } from '@ant-design/icons';
-import { Modal, Divider, Badge, Popconfirm, Spin, Select, Button, message } from 'antd';
-import { resolveUrl } from '@/utils';
-import { useSetting } from '@/hooks/useSetting';
-import { useToggle } from '@/hooks/useToggle';
+import React, { useCallback, useEffect, useState } from 'react';
+
+import { LocaleTime } from '@/components/LocaleTime';
+import { PaginationTable } from '@/components/PaginationTable';
+import { ViewChart } from '@/components/ViewChart';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { usePagination } from '@/hooks/usePagination';
-import { PaginationTable } from '@/components/PaginationTable';
+import { useSetting } from '@/hooks/useSetting';
+import { useToggle } from '@/hooks/useToggle';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { PageProvider } from '@/providers/page';
 import { ViewProvider } from '@/providers/view';
-import { LocaleTime } from '@/components/LocaleTime';
-import { ViewChart } from '@/components/ViewChart';
+import { resolveUrl } from '@/utils';
+
 import style from './index.module.scss';
 
 let updateLoadingMessage = null;

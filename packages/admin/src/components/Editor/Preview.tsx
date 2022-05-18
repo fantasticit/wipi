@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+
 import { MarkdownReader } from '@/components/MarkdownReader';
+
 import { makeHtml } from './utils/markdown';
-import { registerScollListener, subjectScrollListener, removeScrollListener } from './utils/syncScroll';
+import { registerScollListener, removeScrollListener, subjectScrollListener } from './utils/syncScroll';
 
 export const Preview = ({ value }) => {
   const ref = useRef<HTMLDivElement>();

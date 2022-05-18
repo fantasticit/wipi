@@ -1,7 +1,8 @@
-import { JwtService } from '@nestjs/jwt';
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 import axios from 'axios';
+
 import { User } from '../user/user.entity';
 import { UserService } from '../user/user.service';
 
@@ -73,7 +74,7 @@ export class AuthService {
           password: result.data.email,
           type: 'github',
         };
-        await this.userService.createUser(user).catch((e) => {
+        await this.userService.createUser(user).catch(() => {
           // 用户已存在
         });
         const res = await this.login(user);

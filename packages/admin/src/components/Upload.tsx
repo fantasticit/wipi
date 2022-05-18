@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
 import { InboxOutlined } from '@ant-design/icons';
-import { Spin, Upload as AntdUpload, message } from 'antd';
+import { message, Spin, Upload as AntdUpload } from 'antd';
+import React, { useState } from 'react';
+
 import { FileProvider } from '@/providers/file';
 
 export const Upload = ({ onChange = null, onOK = null, style = {}, useDragger = true, children = null }) => {

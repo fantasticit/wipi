@@ -1,16 +1,17 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
-  ManyToMany,
+  Entity,
   JoinTable,
+  ManyToMany,
   ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
-import { Tag } from '../tag/tag.entity';
+
 import { Category } from '../category/category.entity';
+import { Tag } from '../tag/tag.entity';
 
 @Entity()
 export class Article {

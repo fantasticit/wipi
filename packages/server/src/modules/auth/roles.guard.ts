@@ -1,6 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable, SetMetadata } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { Reflector } from '@nestjs/core';
+import { JwtService } from '@nestjs/jwt';
+
 import { User } from '../user/user.entity';
 
 export const Roles = (...roles: string[]) => SetMetadata('roles', roles);

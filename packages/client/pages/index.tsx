@@ -1,18 +1,20 @@
-import React, { useState, useCallback, useEffect, useContext } from 'react';
+import { ArticleCarousel } from '@components/ArticleCarousel';
+import { ArticleList } from '@components/ArticleList';
+import { Footer } from '@components/Footer';
+import { Tags } from '@components/Tags';
 import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
+import { useTranslations } from 'next-intl';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
+
+import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
 import { ArticleProvider } from '@/providers/article';
-import { ArticleList } from '@components/ArticleList';
-import { ArticleCarousel } from '@components/ArticleCarousel';
-import { ArticleRecommend } from '@/components/ArticleRecommend';
-import { Tags } from '@components/Tags';
-import { Footer } from '@components/Footer';
+
 import style from './index.module.scss';
 
 interface IHomeProps {

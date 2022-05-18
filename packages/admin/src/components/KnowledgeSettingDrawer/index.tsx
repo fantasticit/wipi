@@ -1,10 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { Input, Button, Switch, message, Drawer } from 'antd';
-import { useToggle } from '@/hooks/useToggle';
-import { useAsyncLoading } from '@/hooks/useAsyncLoading';
-import { KnowledgeProvider } from '@/providers/knowledge';
+import { Button, Drawer, Input, message, Switch } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { Upload } from '@/components/Upload';
+import { useAsyncLoading } from '@/hooks/useAsyncLoading';
+import { useToggle } from '@/hooks/useToggle';
+import { KnowledgeProvider } from '@/providers/knowledge';
 
 export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, onOk }) => {
   const isUpdate = book !== null;

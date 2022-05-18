@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
 import { Tooltip } from 'antd';
-import { useToggle } from '@/hooks/useToggle';
+import React, { useCallback } from 'react';
+
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
+import { useToggle } from '@/hooks/useToggle';
 
 export const File = ({ editor, monaco }) => {
   const [fileDrawerVisible, toggleFileDrawerVisible] = useToggle(false);

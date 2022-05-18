@@ -1,7 +1,9 @@
-import React from 'react';
 import { Popover } from 'antd';
-import { resolveUrl } from '@/utils';
+import React from 'react';
+
 import { useSetting } from '@/hooks/useSetting';
+import { resolveUrl } from '@/utils';
+
 import style from './index.module.scss';
 
 export const CommentArticle = ({ comment }) => {

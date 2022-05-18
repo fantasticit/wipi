@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Patch, Delete, Param, Query, Body, UseGuards, Request } from '@nestjs/common';
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Request, UseGuards } from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { CommentService } from './comment.service';
+import { Roles, RolesGuard } from '../auth/roles.guard';
 import { Comment } from './comment.entity';
+import { CommentService } from './comment.service';
 
 @ApiTags('Comment')
 @Controller('comment')

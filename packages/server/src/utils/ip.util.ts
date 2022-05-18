@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const ipSearcher = require('node-ip2region').create();
 
 export function getClientIP(req) {

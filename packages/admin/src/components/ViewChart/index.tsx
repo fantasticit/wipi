@@ -1,7 +1,8 @@
-import React from 'react';
+import dateFormat from 'date-fns/format';
 import echarts from 'echarts';
 import ReactEcharts from 'echarts-for-react';
-import dateFormat from 'date-fns/format';
+import React from 'react';
+
 import { groupBy } from '@/utils';
 
 interface IProps {

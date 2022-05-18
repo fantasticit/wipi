@@ -1,6 +1,7 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { dateFormat } from '../../utils/date.util';
 import { Page } from './page.entity';
 
@@ -16,7 +17,7 @@ export class PageService {
    * @param page
    */
   async create(page: Partial<Page>): Promise<Page> {
-    const { name, path } = page;
+    const { path } = page;
     const exist = await this.pageRepository.findOne({ where: { path } });
 
     if (exist) {
@@ -89,7 +90,7 @@ export class PageService {
    */
   async updateById(id, page: Partial<Page>): Promise<Page> {
     const old = await this.pageRepository.findOne(id);
-    const { content, status } = page;
+    const { status } = page;
 
     const newPage = {
       ...page,

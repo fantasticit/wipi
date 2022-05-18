@@ -1,7 +1,8 @@
-import React from 'react';
 import { NextPage } from 'next';
-import { ArticleProvider } from '@/providers/article';
+import React from 'react';
+
 import { ArticleEditor } from '@/components/ArticleEditor';
+import { ArticleProvider } from '@/providers/article';
 
 interface IProps {
   id: string | number;

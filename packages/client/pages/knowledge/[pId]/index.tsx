@@ -1,17 +1,19 @@
-import React, { useCallback, useContext } from 'react';
+import { RightOutlined } from '@ant-design/icons';
+import { Footer } from '@components/Footer';
+import { Breadcrumb, Button } from 'antd';
 import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { Breadcrumb, Button } from 'antd';
-import { RightOutlined } from '@ant-design/icons';
-import { GlobalContext } from '@/context/global';
-import { KnowledgeProvider } from '@/providers/knowledge';
-import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
+import React, { useCallback, useContext } from 'react';
+
 import { ListTrail } from '@/components/Animation/Trail';
-import { LocaleTime } from '@/components/LocaleTime';
 import { KnowledgeList } from '@/components/KnowledgeList';
-import { Footer } from '@components/Footer';
+import { LocaleTime } from '@/components/LocaleTime';
+import { GlobalContext } from '@/context/global';
+import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
+import { KnowledgeProvider } from '@/providers/knowledge';
+
 import style from './index.module.scss';
 
 interface IProps {

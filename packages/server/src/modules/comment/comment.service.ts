@@ -1,15 +1,17 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+import { marked } from '../../utils/markdown.util';
 import { parseUserAgent } from '../../utils/ua.util';
-import { SMTPService } from '../smtp/smtp.service';
 import { ArticleService } from '../article/article.service';
 import { SettingService } from '../setting/setting.service';
+import { SMTPService } from '../smtp/smtp.service';
 import { UserService } from '../user/user.service';
-import { marked } from '../../utils/markdown.util';
 import { Comment } from './comment.entity';
 import { getNewCommentHTML, getReplyCommentHTML } from './html';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const url = require('url');
 
 @Injectable()
@@ -154,7 +156,7 @@ export class CommentService {
     const newData = await this.commentRepository.merge(old, data);
 
     if (newData.pass) {
-      const { replyUserName, replyUserEmail, hostId, url: link } = newData;
+      const { replyUserName, replyUserEmail, url: link } = newData;
       const isReply = replyUserName && replyUserEmail;
       if (isReply) {
         // 发送通知邮件

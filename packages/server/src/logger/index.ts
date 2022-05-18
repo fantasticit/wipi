@@ -1,5 +1,5 @@
-import * as log4js from 'log4js';
 import * as fs from 'fs-extra';
+import * as log4js from 'log4js';
 import { join } from 'path';
 
 const LOG_DIR_NAME = '../../logs';

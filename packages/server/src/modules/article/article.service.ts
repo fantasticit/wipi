@@ -1,12 +1,14 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { dateFormat } from '../../utils/date.util';
-import { TagService } from '../tag/tag.service';
 import { CategoryService } from '../category/category.service';
+import { TagService } from '../tag/tag.service';
 import { Article } from './article.entity';
 import { extractProtectedArticle } from './article.util';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const Segment = require('segment');
 const segment = new Segment();
 segment.useDefault();

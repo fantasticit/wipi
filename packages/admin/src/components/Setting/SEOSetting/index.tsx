@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import { Form } from '@ant-design/compatible';
-import { Input, Button, message } from 'antd';
+import { Button, Input, message } from 'antd';
+import React, { useEffect, useState } from 'react';
+
 import { SettingProvider } from '@/providers/setting';
 
 export const SEOSetting = ({ setting }) => {

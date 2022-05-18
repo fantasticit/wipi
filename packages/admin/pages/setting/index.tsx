@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import { Tabs } from 'antd';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Tabs } from 'antd';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { useSetting } from '@/hooks/useSetting';
-import { SystemSetting } from '@/components/Setting/SystemSetting';
-import { SEOSetting } from '@/components/Setting/SEOSetting';
+import React, { useState } from 'react';
+
 import { AnalyticsSetting } from '@/components/Setting/AnalyticsSetting';
-import { OSSSetting } from '@/components/Setting/OSSSetting';
-import { SMTPSetting } from '@/components/Setting/SMTPSetting';
 import { LocaleSetting } from '@/components/Setting/LocaleSetting';
+import { OSSSetting } from '@/components/Setting/OSSSetting';
+import { SEOSetting } from '@/components/Setting/SEOSetting';
+import { SMTPSetting } from '@/components/Setting/SMTPSetting';
+import { SystemSetting } from '@/components/Setting/SystemSetting';
+import { useSetting } from '@/hooks/useSetting';
+import { AdminLayout } from '@/layout/AdminLayout';
 
 interface IProps {
   type: string;

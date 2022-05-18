@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import { Form } from '@ant-design/compatible';
 import { Alert, Button, message } from 'antd';
-import { SettingProvider } from '@/providers/setting';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { JsonEditor } from '@/components/JsonEditor';
+import { SettingProvider } from '@/providers/setting';
 import { safeJsonParse } from '@/utils/json';
 
 export const OSSSetting = ({ setting }) => {

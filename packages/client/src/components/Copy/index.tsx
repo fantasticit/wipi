@@ -1,7 +1,9 @@
-import React, { useCallback, useRef } from 'react';
-import { CopyOutlined, CheckOutlined } from '@ant-design/icons';
+import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
 import copy from 'copy-to-clipboard';
+import React, { useCallback, useRef } from 'react';
+
 import { useToggle } from '@/hooks/useToggle';
+
 import styles from './index.module.scss';
 
 interface Props {

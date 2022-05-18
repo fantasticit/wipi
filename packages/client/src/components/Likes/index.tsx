@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import { Badge } from 'antd';
 import cls from 'classnames';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import style from './index.module.scss';
 
 export interface LikesProps {

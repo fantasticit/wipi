@@ -1,5 +1,6 @@
-import React from 'react';
 import { Popover } from 'antd';
+import React from 'react';
+
 import { emojis } from './emojis';
 import styles from './index.module.scss';
 

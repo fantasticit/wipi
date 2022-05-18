@@ -1,22 +1,24 @@
-import React from 'react';
-import App from 'next/app';
-import { default as Router } from 'next/router';
-import { IntlMessages, NextIntlProvider } from 'next-intl';
-import { safeJsonParse } from '@/utils/json';
-import { IGlobalContext, GlobalContext } from '@/context/global';
-import { SettingProvider } from '@/providers/setting';
-import { PageProvider } from '@/providers/page';
-import { CategoryProvider } from '@/providers/category';
-import { TagProvider } from '@/providers/tag';
-import { AppLayout } from '@/layout/AppLayout';
-import { NProgress } from '@components/NProgress';
-import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
-import { ViewStatistics } from '@/components/ViewStatistics';
-import { Analytics } from '@/components/Analytics';
 import 'antd/dist/antd.less';
 import 'highlight.js/styles/atom-one-light.css';
 import 'viewerjs/dist/viewer.css';
 import '@/theme/index.scss';
+
+import { NProgress } from '@components/NProgress';
+import App from 'next/app';
+import { default as Router } from 'next/router';
+import { IntlMessages, NextIntlProvider } from 'next-intl';
+import React from 'react';
+
+import { Analytics } from '@/components/Analytics';
+import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
+import { ViewStatistics } from '@/components/ViewStatistics';
+import { GlobalContext, IGlobalContext } from '@/context/global';
+import { AppLayout } from '@/layout/AppLayout';
+import { CategoryProvider } from '@/providers/category';
+import { PageProvider } from '@/providers/page';
+import { SettingProvider } from '@/providers/setting';
+import { TagProvider } from '@/providers/tag';
+import { safeJsonParse } from '@/utils/json';
 
 Router.events.on('routeChangeComplete', () => {
   setTimeout(() => {

@@ -1,5 +1,6 @@
-import { httpProvider } from './http';
 import * as Showdown from 'showdown';
+
+import { httpProvider } from './http';
 
 const converter = new Showdown.Converter({
   tables: true,

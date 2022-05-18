@@ -1,13 +1,15 @@
-import React, { useCallback, useState, useContext, useEffect } from 'react';
 import { Form } from '@ant-design/compatible';
 import { FormComponentProps } from '@ant-design/compatible/es/form';
-import { Row, Col, Button, Input } from 'antd';
-import { default as Router } from 'next/router';
+import { Button, Col, Input, Row } from 'antd';
 import Link from 'next/link';
+import { default as Router } from 'next/router';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+
 import { Svg } from '@/assets/LoginSvg';
-import { UserProvider } from '@/providers/user';
 import { GlobalContext } from '@/context/global';
+import { UserProvider } from '@/providers/user';
+
 import style from './index.module.scss';
 
 type ILoginProps = FormComponentProps;

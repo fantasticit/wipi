@@ -1,5 +1,5 @@
-import * as NP from 'nprogress';
 import { useRouter } from 'next/router';
+import * as NP from 'nprogress';
 import { useEffect } from 'react';
 
 export function NProgress() {

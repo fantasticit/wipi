@@ -1,5 +1,6 @@
-import React from 'react';
 import { NextPage } from 'next';
+import React from 'react';
+
 import { ArticleEditor } from '@/components/ArticleEditor';
 
 const Editor: NextPage = () => {

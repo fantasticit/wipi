@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import cls from 'classnames';
+import React, { useEffect, useState } from 'react';
+
 import { useToggle } from '@/hooks/useToggle';
+
 import styles from './index.module.scss';
 
 export const Theme = () => {

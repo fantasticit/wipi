@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { useSpring, animated } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 import VisibilitySensor from 'react-visibility-sensor';
+
 import { elementInViewport } from '@/utils';
 
 export interface SpringProps {

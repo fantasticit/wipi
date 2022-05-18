@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
 import { Button, Pagination } from 'antd';
 import { useTranslations } from 'next-intl';
-import { CommentProvider } from '@/providers/comment';
+import React, { useRef } from 'react';
+
 import { usePagination } from '@/hooks/usePagination';
 import { useToggle } from '@/hooks/useToggle';
+import { CommentProvider } from '@/providers/comment';
+
 import { CommentEditor } from './CommentEditor';
 import { Comments } from './CommentItem';
 import styles from './index.module.scss';

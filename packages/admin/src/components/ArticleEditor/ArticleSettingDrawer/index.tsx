@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useReducer } from 'react';
-import { Drawer, Button, Input, Switch, Select } from 'antd';
+import { Button, Drawer, Input, Select, Switch } from 'antd';
+import React, { useEffect, useReducer, useState } from 'react';
+
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { CategoryProvider } from '@/providers/category';
 import { TagProvider } from '@/providers/tag';
+
 import style from './index.module.scss';
 
 interface IProps {

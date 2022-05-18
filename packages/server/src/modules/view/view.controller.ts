@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Delete, Param, Query, UseGuards, Body, Request } from '@nestjs/common';
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Post, Query, Request, UseGuards } from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { getClientIP } from '../../utils/ip.util';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { ViewService } from './view.service';
+import { Roles, RolesGuard } from '../auth/roles.guard';
 import { View } from './view.entity';
+import { ViewService } from './view.service';
 
 @ApiTags('View')
 @Controller('view')

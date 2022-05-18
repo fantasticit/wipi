@@ -1,10 +1,12 @@
-import React, { useContext, useMemo, useEffect } from 'react';
+import { Footer } from '@components/Footer';
+import { Header } from '@components/Header';
 import { BackTop } from 'antd';
+import React, { useContext, useEffect, useMemo } from 'react';
+
+import { Seo } from '@/components/Seo';
 import { GlobalContext } from '@/context/global';
 import { useToggle } from '@/hooks/useToggle';
-import { Seo } from '@/components/Seo';
-import { Header } from '@components/Header';
-import { Footer } from '@components/Footer';
+
 import style from './index.module.scss';
 
 interface Iprops {

@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { Emoji } from './Emoji';
+import { File } from './File';
 import { Iframe } from './Iframe';
 import { Image } from './Image';
 import { Video } from './Video';
-import { File } from './File';
 
 export const toolbar = [
   {

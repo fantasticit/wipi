@@ -1,5 +1,5 @@
+import { Button, Popover } from 'antd';
 import React from 'react';
-import { Popover, Button } from 'antd';
 
 export const CommentHTML = ({ comment }) => {
   return (

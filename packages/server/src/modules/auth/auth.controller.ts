@@ -1,19 +1,18 @@
 import {
-  Controller,
-  HttpStatus,
-  HttpCode,
-  Get,
-  Post,
-  Query,
   Body,
-  UseInterceptors,
   ClassSerializerInterceptor,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+
 import { AuthService } from './auth.service';
-import { Roles } from './roles.guard';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { Roles } from './roles.guard';
 
 @ApiTags('Auth')
 @Controller('auth')

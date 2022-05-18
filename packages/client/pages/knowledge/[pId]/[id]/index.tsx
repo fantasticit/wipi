@@ -1,17 +1,19 @@
-import React, { useEffect, useMemo } from 'react';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { Breadcrumb } from 'antd';
 import cls from 'classnames';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { Breadcrumb } from 'antd';
 import { useTranslations } from 'next-intl';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { KnowledgeProvider } from '@/providers/knowledge';
-import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
-import { LocaleTime } from '@/components/LocaleTime';
+import React, { useEffect, useMemo } from 'react';
+
+import { Comment } from '@/components/Comment';
 import { ImageViewer } from '@/components/ImageViewer';
+import { LocaleTime } from '@/components/LocaleTime';
 import { MarkdownReader } from '@/components/MarkdownReader';
 import { Toc } from '@/components/Toc';
-import { Comment } from '@/components/Comment';
+import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
+import { KnowledgeProvider } from '@/providers/knowledge';
+
 import style from './index.module.scss';
 
 interface IProps {

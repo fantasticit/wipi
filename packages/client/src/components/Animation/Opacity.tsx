@@ -1,5 +1,6 @@
 import React from 'react';
-import { SpringProps, Spring } from './Spring';
+
+import { Spring, SpringProps } from './Spring';
 
 export const Opacity: React.FC<SpringProps> = (props) => {
   const { from = {}, to = {}, ...rest } = props;

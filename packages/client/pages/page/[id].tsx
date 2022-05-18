@@ -1,14 +1,16 @@
-import React, { useEffect, useContext } from 'react';
 import { NextPage } from 'next';
-import { Helmet } from 'react-helmet';
 import { useTranslations } from 'next-intl';
+import React, { useContext, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+
+import { ArticleRecommend } from '@/components/ArticleRecommend';
+import { Comment } from '@/components/Comment';
+import { ImageViewer } from '@/components/ImageViewer';
+import { MarkdownReader } from '@/components/MarkdownReader';
 import { GlobalContext } from '@/context/global';
 import { PageProvider } from '@/providers/page';
-import { ImageViewer } from '@/components/ImageViewer';
-import { Comment } from '@/components/Comment';
-import { MarkdownReader } from '@/components/MarkdownReader';
+
 import style from './index.module.scss';
-import { ArticleRecommend } from '@/components/ArticleRecommend';
 
 interface IProps {
   page: IPage;

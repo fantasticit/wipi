@@ -1,20 +1,22 @@
-import React from 'react';
-import App from 'next/app';
-import { ConfigProvider } from 'antd';
-import zhCN from 'antd/lib/locale/zh_CN';
-import { toLogin } from '@/utils/login';
-import { UserProvider } from '@/providers/user';
-import { SettingProvider } from '@/providers/setting';
-import { IGlobalContext, GlobalContext } from '@/context/global';
-import { NProgress } from '@components/NProgress';
-import { Seo } from '@components/Seo';
-import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
-import { ViewStatistics } from '@/components/ViewStatistics';
-import { Analytics } from '@/components/Analytics';
 import 'antd/dist/antd.less';
 import 'highlight.js/styles/atom-one-light.css';
 import 'viewerjs/dist/viewer.css';
 import '@/theme/index.scss';
+
+import { NProgress } from '@components/NProgress';
+import { Seo } from '@components/Seo';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN';
+import App from 'next/app';
+import React from 'react';
+
+import { Analytics } from '@/components/Analytics';
+import { FixAntdStyleTransition } from '@/components/FixAntdStyleTransition';
+import { ViewStatistics } from '@/components/ViewStatistics';
+import { GlobalContext, IGlobalContext } from '@/context/global';
+import { SettingProvider } from '@/providers/setting';
+import { UserProvider } from '@/providers/user';
+import { toLogin } from '@/utils/login';
 
 class MyApp extends App {
   state: Omit<IGlobalContext, 'setUser' | 'getSetting' | 'toggleCollapse'> = {

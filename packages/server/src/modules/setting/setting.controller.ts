@@ -1,12 +1,13 @@
-import { Controller, Post, Body, Request, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, Request, UseGuards } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
-import { SettingService } from './setting.service';
-import { Setting } from './setting.entity';
-import { UserService } from '../user/user.service';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
+import { Roles, RolesGuard } from '../auth/roles.guard';
 import { User } from '../user/user.entity';
+import { UserService } from '../user/user.service';
+import { Setting } from './setting.entity';
+import { SettingService } from './setting.service';
 
 @ApiTags('Setting')
 @Controller('setting')

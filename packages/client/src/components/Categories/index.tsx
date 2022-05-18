@@ -1,9 +1,11 @@
-import React from 'react';
 import cls from 'classnames';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+
 import { ListTrail } from '@/components/Animation/Trail';
+
 import style from './index.module.scss';
 
 export const Categories = ({ categories = [] }) => {

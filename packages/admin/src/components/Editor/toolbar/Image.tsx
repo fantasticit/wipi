@@ -1,5 +1,6 @@
+import { message, Tooltip, Upload } from 'antd';
 import React from 'react';
-import { Upload, message, Tooltip } from 'antd';
+
 import { FileProvider } from '@/providers/file';
 
 export const Image = ({ editor, monaco }) => {

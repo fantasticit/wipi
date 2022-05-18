@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
+import { Categories } from '@components/Categories';
+import { Footer } from '@components/Footer';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { ArticleProvider } from '@/providers/article';
+import React, { useContext } from 'react';
+
+import { ListTrail } from '@/components/Animation/Trail';
+import { ArticleRecommend } from '@/components/ArticleRecommend';
+import { LocaleTime } from '@/components/LocaleTime';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
-import { ListTrail } from '@/components/Animation/Trail';
-import { LocaleTime } from '@/components/LocaleTime';
-import { ArticleRecommend } from '@/components/ArticleRecommend';
-import { Categories } from '@components/Categories';
-import { Footer } from '@components/Footer';
+import { ArticleProvider } from '@/providers/article';
+
 import indexStyle from '../index.module.scss';
 import style from './index.module.scss';
 

@@ -1,5 +1,6 @@
-import axios from 'axios';
 import { message } from 'antd';
+import axios from 'axios';
+
 import { toLogin } from '@/utils/login';
 
 export const httpProvider = axios.create({

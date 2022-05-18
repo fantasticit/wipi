@@ -1,18 +1,20 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { CloseOutlined, DeleteOutlined, MenuOutlined, PlusOutlined, SettingOutlined } from '@ant-design/icons';
+import { Avatar, Button, Divider, Input, message, Popconfirm, Popover } from 'antd';
+import arrayMove from 'array-move';
+import cls from 'classnames';
 import { NextPage } from 'next';
 import { default as Router } from 'next/router';
-import cls from 'classnames';
-import { CloseOutlined, DeleteOutlined, PlusOutlined, MenuOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Divider, Input, Button, Popconfirm, Popover, message } from 'antd';
-import { SortableHandle, SortableContainer, SortableElement } from 'react-sortable-hoc';
-import arrayMove from 'array-move';
-import { KnowledgeProvider } from '@/providers/knowledge';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
+
 import { Editor } from '@/components/Editor';
 import { KnowledgeSettingDrawer } from '@/components/KnowledgeSettingDrawer';
 import { useForceUpdate } from '@/hooks/useForceUpdate';
 import { useToggle } from '@/hooks/useToggle';
-import styles from './index.module.scss';
+import { KnowledgeProvider } from '@/providers/knowledge';
 import { scrollToBottom } from '@/utils';
+
+import styles from './index.module.scss';
 
 const DragHandle = SortableHandle(() => (
   <span style={{ cursor: 'move' }}>

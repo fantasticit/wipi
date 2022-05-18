@@ -1,15 +1,17 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import Link from 'next/link';
-import { DeleteOutlined, EditOutlined, PlusOutlined, SettingOutlined } from '@ant-design/icons';
 import { Icon as LegacyIcon } from '@ant-design/compatible';
-import { Card, Button, List, Tooltip, Select, Popconfirm } from 'antd';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { useToggle } from '@/hooks/useToggle';
-import { useAsyncLoading } from '@/hooks/useAsyncLoading';
-import { KnowledgeProvider } from '@/providers/knowledge';
+import { DeleteOutlined, EditOutlined, PlusOutlined, SettingOutlined } from '@ant-design/icons';
+import { Button, Card, List, Popconfirm, Select, Tooltip } from 'antd';
+import Link from 'next/link';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { KnowledgeSettingDrawer } from '@/components/KnowledgeSettingDrawer';
-import { usePagination } from '@/hooks/usePagination';
 import { PaginationTable } from '@/components/PaginationTable';
+import { useAsyncLoading } from '@/hooks/useAsyncLoading';
+import { usePagination } from '@/hooks/usePagination';
+import { useToggle } from '@/hooks/useToggle';
+import { AdminLayout } from '@/layout/AdminLayout';
+import { KnowledgeProvider } from '@/providers/knowledge';
+
 import style from './index.module.scss';
 
 const GRID = {

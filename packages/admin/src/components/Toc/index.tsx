@@ -1,6 +1,8 @@
-import React, { useCallback } from 'react';
 import cls from 'classnames';
+import React, { useCallback } from 'react';
+
 import { isOdd } from '@/utils';
+
 import style from './index.module.scss';
 
 interface IToc {

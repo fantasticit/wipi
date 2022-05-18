@@ -1,11 +1,13 @@
-import React, { useContext, useEffect, useCallback } from 'react';
-import { Modal, Form, Button, Input, Avatar, Dropdown, Menu, Alert, Tooltip } from 'antd';
 import { GithubOutlined, UserOutlined } from '@ant-design/icons';
-import { useTranslations } from 'next-intl';
+import { Alert, Avatar, Button, Dropdown, Form, Input, Menu, Modal, Tooltip } from 'antd';
 import Router from 'next/router';
+import { useTranslations } from 'next-intl';
+import React, { useCallback, useContext, useEffect } from 'react';
+
 import { GlobalContext } from '@/context/global';
 import { useToggle } from '@/hooks/useToggle';
 import { UserProvider } from '@/providers/user';
+
 import styles from './index.module.scss';
 
 const emailRegexp = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;

@@ -1,16 +1,18 @@
-import React, { useContext } from 'react';
 import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { CopyrightOutlined, GithubOutlined } from '@ant-design/icons';
-import { Layout, Breadcrumb, Row, Col, Menu } from 'antd';
+import { Breadcrumb, Col, Layout, Menu, Row } from 'antd';
+import cls from 'classnames';
 import Link from 'next/link';
 import { default as Router, useRouter } from 'next/router';
-import cls from 'classnames';
-import { useSetting } from '@/hooks/useSetting';
+import React, { useContext } from 'react';
+
 import { UserInfo } from '@/components/UserInfo';
 import { GlobalContext } from '@/context/global';
-import { ResourceCreate } from './ResourceCreate';
-import { menus, findActiveMenu } from './menus';
+import { useSetting } from '@/hooks/useSetting';
+
 import style from './index.module.scss';
+import { findActiveMenu, menus } from './menus';
+import { ResourceCreate } from './ResourceCreate';
 
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;

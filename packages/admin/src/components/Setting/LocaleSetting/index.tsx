@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Button, Tabs, Modal, Input, message } from 'antd';
 import { WarningOutlined } from '@ant-design/icons';
-import { SettingProvider } from '@/providers/setting';
+import { Button, Input, message, Modal, Tabs } from 'antd';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
 import { JsonEditor } from '@/components/JsonEditor';
+import { SettingProvider } from '@/providers/setting';
 import { safeJsonParse } from '@/utils/json';
 
 export const LocaleSetting = ({ setting }) => {

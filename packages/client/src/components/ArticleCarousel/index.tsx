@@ -1,8 +1,10 @@
-import React from 'react';
 import { Carousel } from 'antd';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import React from 'react';
+
 import { LocaleTime } from '@/components/LocaleTime';
+
 import style from './index.module.scss';
 
 interface IProps {

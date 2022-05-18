@@ -1,8 +1,10 @@
-import React, { forwardRef, useRef, useEffect, useState, useCallback, useImperativeHandle } from 'react';
-import { Spin, message } from 'antd';
-import { FileProvider } from '@/providers/file';
-import { registerScollListener, subjectScrollListener, removeScrollListener } from './utils/syncScroll';
 import Editor from '@monaco-editor/react';
+import { message, Spin } from 'antd';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+
+import { FileProvider } from '@/providers/file';
+
+import { registerScollListener, removeScrollListener, subjectScrollListener } from './utils/syncScroll';
 
 const IMG_REXEXP = /^image\/(png|jpg|jpeg|gif)$/i;
 

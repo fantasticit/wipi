@@ -1,15 +1,17 @@
-import React, { useState, useCallback, useEffect, useContext } from 'react';
+import { ArticleList } from '@components/ArticleList';
+import { Footer } from '@components/Footer';
+import { Tags } from '@components/Tags';
 import { NextPage } from 'next';
 import { useTranslations } from 'next-intl';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import { ArticleProvider } from '@/providers/article';
-import { CategoryProvider } from '@/providers/category';
+
+import { ArticleRecommend } from '@/components/ArticleRecommend';
 import { GlobalContext } from '@/context/global';
 import { DoubleColumnLayout } from '@/layout/DoubleColumnLayout';
-import { Footer } from '@components/Footer';
-import { ArticleList } from '@components/ArticleList';
-import { ArticleRecommend } from '@/components/ArticleRecommend';
-import { Tags } from '@components/Tags';
+import { ArticleProvider } from '@/providers/article';
+import { CategoryProvider } from '@/providers/category';
+
 import { CategoryMenu } from '../index';
 import style from '../index.module.scss';
 

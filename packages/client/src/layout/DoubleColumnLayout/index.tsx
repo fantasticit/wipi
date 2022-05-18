@@ -1,9 +1,11 @@
-import React, { useEffect, useRef } from 'react';
 import cls from 'classnames';
+import React, { useEffect, useRef } from 'react';
+
 import { CommentIcon } from '@/components/Comment/CommentIcon';
-import { LikesProps, Likes } from '@/components/Likes';
+import { Likes, LikesProps } from '@/components/Likes';
 import { useToggle } from '@/hooks/useToggle';
 import { getDocumentScrollTop } from '@/utils';
+
 import style from './index.module.scss';
 
 interface IProps {

@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from 'react';
 import { Pagination as APagination } from 'antd';
+import React, { useCallback, useState } from 'react';
+
 import style from './index.module.scss';
 
 interface IProps {

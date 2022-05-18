@@ -1,14 +1,16 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import { CloseOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { Editor as MDEditor } from '@components/Editor';
+import { Button, Dropdown, Input, Menu, message, Modal, PageHeader, Popconfirm } from 'antd';
 import cls from 'classnames';
 import { default as Router } from 'next/router';
-import { CloseOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { Button, Input, message, PageHeader, Modal, Popconfirm, Dropdown, Menu } from 'antd';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { resolveUrl } from '@/utils';
+
 import { useSetting } from '@/hooks/useSetting';
 import { useToggle } from '@/hooks/useToggle';
-import { Editor as MDEditor } from '@components/Editor';
 import { ArticleProvider } from '@/providers/article';
+import { resolveUrl } from '@/utils';
+
 import { ArticleSettingDrawer } from './ArticleSettingDrawer';
 import style from './index.module.scss';
 interface IProps {

@@ -1,16 +1,18 @@
-import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
-import cls from 'classnames';
 import { CloseOutlined } from '@ant-design/icons';
-import { Tooltip, Divider } from 'antd';
+import { Divider, Tooltip } from 'antd';
+import cls from 'classnames';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import { useToggle } from '@/hooks/useToggle';
+
+import { Toc } from '../Toc';
 import { DEFAULT_MARKDOWN } from './DefaultMarkdown';
-import { toolbar } from './toolbar';
+import style from './index.module.scss';
 import { MonacoEditor } from './MonacoEditor';
 import { Preview } from './Preview';
-import { confirm } from './utils/modal';
+import { toolbar } from './toolbar';
 import { makeHtml, makeToc } from './utils/markdown';
-import style from './index.module.scss';
-import { Toc } from '../Toc';
+import { confirm } from './utils/modal';
 
 interface IProps {
   defaultValue?: string;

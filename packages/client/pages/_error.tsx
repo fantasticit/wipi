@@ -1,7 +1,7 @@
-import React from 'react';
+import { Button, Result } from 'antd';
 import { default as Router } from 'next/router';
 import { useTranslations } from 'next-intl';
-import { Result, Button } from 'antd';
+import React from 'react';
 
 const style = {
   display: 'flex',

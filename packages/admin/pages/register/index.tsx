@@ -1,12 +1,14 @@
-import React, { useCallback, useState } from 'react';
 import { Form } from '@ant-design/compatible';
-import { Row, Col, Button, Input, Modal } from 'antd';
-import { default as Router } from 'next/router';
-import Link from 'next/link';
-import { Helmet } from 'react-helmet';
 import { FormComponentProps } from '@ant-design/compatible/es/form';
-import { UserProvider } from '@/providers/user';
+import { Button, Col, Input, Modal, Row } from 'antd';
+import Link from 'next/link';
+import { default as Router } from 'next/router';
+import React, { useCallback, useState } from 'react';
+import { Helmet } from 'react-helmet';
+
 import { Svg } from '@/assets/RegisterSvg';
+import { UserProvider } from '@/providers/user';
+
 import style from './index.module.scss';
 
 type IProps = FormComponentProps;

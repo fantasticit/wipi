@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
+import { SearchOutlined } from '@ant-design/icons';
 import cls from 'classnames';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { default as Router, useRouter } from 'next/router';
-import { SearchOutlined } from '@ant-design/icons';
-import { getDocumentScrollTop } from '@/utils';
-import { useToggle } from '@/hooks/useToggle';
+import { useTranslations } from 'next-intl';
+import React, { useEffect } from 'react';
+
+import { Locales } from '@/components/Locales';
 import { Search } from '@/components/Search';
 import { Theme } from '@/components/Theme';
-import { Locales } from '@/components/Locales';
 import { UserInfo } from '@/components/UserInfo';
+import { useToggle } from '@/hooks/useToggle';
+import { getDocumentScrollTop } from '@/utils';
+
 import style from './index.module.scss';
 
 const NAV_LINKS = [

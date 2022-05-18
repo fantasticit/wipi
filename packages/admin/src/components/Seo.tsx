@@ -1,7 +1,8 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { Helmet } from 'react-helmet';
+
 import { useSetting } from '@/hooks/useSetting';
-import { useRouter } from 'next/router';
 import { findActiveMenu } from '@/layout/AdminLayout/menus';
 
 export const Seo: React.FC = () => {

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { ViewProvider } from '@/providers/view';
 
 let lastUrl;

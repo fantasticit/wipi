@@ -1,5 +1,6 @@
+import { Popover, Tooltip } from 'antd';
 import React, { useCallback } from 'react';
-import { Tooltip, Popover } from 'antd';
+
 import { emojis } from './emojis';
 
 export const Emoji = ({ editor, monaco }) => {

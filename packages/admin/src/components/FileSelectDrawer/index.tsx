@@ -1,11 +1,13 @@
+import { Alert, Button, Card, Drawer, List } from 'antd';
 import React, { useCallback, useRef } from 'react';
-import { Alert, Drawer, Card, List, Button } from 'antd';
 import Viewer from 'viewerjs';
-import { copy } from '@/utils/copy';
-import { FileProvider } from '@/providers/file';
+
+import { PaginationTable } from '@/components/PaginationTable';
 import { Upload } from '@/components/Upload';
 import { usePagination } from '@/hooks/usePagination';
-import { PaginationTable } from '@/components/PaginationTable';
+import { FileProvider } from '@/providers/file';
+import { copy } from '@/utils/copy';
+
 import style from './index.module.scss';
 
 const { Meta } = Card;

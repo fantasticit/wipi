@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Editor from '@monaco-editor/react';
 import { Alert, Spin } from 'antd';
 import deepEqual from 'deep-equal';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
 import { safeJsonParse } from '@/utils/json';
-import Editor from '@monaco-editor/react';
 
 const DEFAULT_STYLE = {
   height: '600px',

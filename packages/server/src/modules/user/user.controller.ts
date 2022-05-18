@@ -1,23 +1,24 @@
 import {
+  Body,
+  ClassSerializerInterceptor,
   Controller,
   Get,
-  HttpStatus,
   HttpCode,
+  HttpException,
+  HttpStatus,
   Post,
   Query,
-  Body,
   Request,
   UseGuards,
   UseInterceptors,
-  HttpException,
-  ClassSerializerInterceptor,
 } from '@nestjs/common';
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { UserService } from './user.service';
+import { Roles, RolesGuard } from '../auth/roles.guard';
 import { User } from './user.entity';
+import { UserService } from './user.service';
 
 @ApiTags('User')
 @Controller('user')

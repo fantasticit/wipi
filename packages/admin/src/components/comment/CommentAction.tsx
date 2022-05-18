@@ -1,8 +1,10 @@
-import React, { useState, useCallback } from 'react';
-import { Divider, Popconfirm, Modal, Input, message, notification } from 'antd';
+import { Divider, Input, message, Modal, notification, Popconfirm } from 'antd';
+import React, { useCallback, useState } from 'react';
+
+import { useSetting } from '@/hooks/useSetting';
 import { CommentProvider } from '@/providers/comment';
 import { SettingProvider } from '@/providers/setting';
-import { useSetting } from '@/hooks/useSetting';
+
 import style from './index.module.scss';
 
 export const CommentAction = ({ comment, refresh }) => {

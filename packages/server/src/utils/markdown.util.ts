@@ -1,5 +1,5 @@
-import * as Marked from 'marked';
 import * as hljs from 'highlight.js';
+import * as Marked from 'marked';
 
 const renderer = new Marked.Renderer();
 

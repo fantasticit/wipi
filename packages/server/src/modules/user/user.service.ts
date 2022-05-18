@@ -1,7 +1,8 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { User } from './user.entity';
 
 @Injectable()
@@ -18,7 +19,7 @@ export class UserService {
       .then(() => {
         console.log(`[wipi] 管理员账户创建成功，用户名：${name}，密码：${password}，请及时登录系统修改默认密码`);
       })
-      .catch(async (err) => {
+      .catch(async () => {
         const existAdminUser = await this.userRepository.findOne({ where: { name } });
         const isDefaultPasswd = User.comparePassword(password, existAdminUser.password);
         if (isDefaultPasswd) {

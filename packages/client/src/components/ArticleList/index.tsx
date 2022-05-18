@@ -1,10 +1,12 @@
-import React from 'react';
-import Link from 'next/link';
+import { EyeOutlined, HeartOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { Divider } from 'antd';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { HeartOutlined, EyeOutlined, ShareAltOutlined } from '@ant-design/icons';
+import React from 'react';
 import LazyLoad from 'react-lazyload';
+
 import { LocaleTime } from '@/components/LocaleTime';
+
 import style from './index.module.scss';
 
 interface IProps {

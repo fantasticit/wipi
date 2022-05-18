@@ -1,8 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
 import cls from 'classnames';
 import { useTranslations } from 'next-intl';
-import { isOdd, elementInViewport } from '@/utils';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
 import { ListTrail } from '@/components/Animation/Trail';
+import { elementInViewport, isOdd } from '@/utils';
+
 import style from './index.module.scss';
 
 interface IToc {

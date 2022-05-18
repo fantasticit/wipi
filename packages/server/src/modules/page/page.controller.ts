@@ -1,19 +1,20 @@
 import {
-  Controller,
-  Get,
-  HttpStatus,
-  HttpCode,
-  Post,
-  Delete,
-  Patch,
-  Param,
-  Query,
   Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
+import { Roles, RolesGuard } from '../auth/roles.guard';
 import { Page } from './page.entity';
 import { PageService } from './page.service';
 

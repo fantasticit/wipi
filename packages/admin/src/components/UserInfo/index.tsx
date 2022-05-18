@@ -1,7 +1,8 @@
-import React from 'react';
-import Link from 'next/link';
 import { UserOutlined } from '@ant-design/icons';
-import { Menu, Dropdown, Avatar } from 'antd';
+import { Avatar, Dropdown, Menu } from 'antd';
+import Link from 'next/link';
+import React from 'react';
+
 import { useUser } from '@/hooks/useUser';
 
 const menus = [

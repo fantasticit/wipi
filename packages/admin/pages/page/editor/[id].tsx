@@ -1,7 +1,8 @@
-import React from 'react';
 import { NextPage } from 'next';
-import { PageProvider } from '@/providers/page';
+import React from 'react';
+
 import { PageEditor } from '@/components/PageEditor';
+import { PageProvider } from '@/providers/page';
 
 interface IProps {
   id: string | number;

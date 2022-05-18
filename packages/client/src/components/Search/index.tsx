@@ -1,12 +1,14 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
-import cls from 'classnames';
-import { Input } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
+import cls from 'classnames';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
+import { ListTrail } from '@/components/Animation/Trail';
 import { useAsyncLoading } from '@/hooks/useAsyncLoading';
 import { SearchProvider } from '@/providers/search';
-import { ListTrail } from '@/components/Animation/Trail';
+
 import styles from './index.module.scss';
 
 const { Search: AntdSearch } = Input;

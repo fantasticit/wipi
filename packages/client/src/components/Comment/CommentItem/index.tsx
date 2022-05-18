@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useMemo } from 'react';
-import cls from 'classnames';
+import { DownOutlined, MessageOutlined, UpOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
+import cls from 'classnames';
 import { useTranslations } from 'next-intl';
-import { MessageOutlined, UpOutlined, DownOutlined } from '@ant-design/icons';
-import { ConditionTransition } from '@/components/Animation/Transition';
+import React, { useMemo } from 'react';
+
 import { Opacity } from '@/components/Animation/Opacity';
+import { ConditionTransition } from '@/components/Animation/Transition';
 import { LocaleTime } from '@/components/LocaleTime';
-import { getRandomColor } from '@/utils';
 import { useToggle } from '@/hooks/useToggle';
+import { getRandomColor } from '@/utils';
+
 import { CommentEditor } from '../CommentEditor';
 import styles from './index.module.scss';
 

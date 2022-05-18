@@ -1,6 +1,8 @@
-import React, { useRef, useEffect } from 'react';
 import hljs from 'highlight.js';
+import React, { useEffect, useRef } from 'react';
+
 import { copy } from '@/utils/copy';
+
 import styles from './index.module.scss';
 
 export const MarkdownReader = ({ content }) => {

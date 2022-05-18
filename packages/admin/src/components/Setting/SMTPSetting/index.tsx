@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import { Form } from '@ant-design/compatible';
-import { Input, Button, message } from 'antd';
+import { Button, Input, message } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { SettingProvider } from '@/providers/setting';
 import { SMTPProvider } from '@/providers/smtp';
 

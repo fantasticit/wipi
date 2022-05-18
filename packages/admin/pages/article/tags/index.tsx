@@ -1,10 +1,12 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { NextPage } from 'next';
 import { Form } from '@ant-design/compatible';
-import { Row, Col, Card, Button, Input, Popconfirm, message } from 'antd';
+import { Button, Card, Col, Input, message, Popconfirm, Row } from 'antd';
 import cls from 'classnames';
+import { NextPage } from 'next';
+import React, { useCallback, useMemo, useState } from 'react';
+
 import { AdminLayout } from '@/layout/AdminLayout';
 import { TagProvider } from '@/providers/tag';
+
 import style from './index.module.scss';
 
 interface ITagProps {

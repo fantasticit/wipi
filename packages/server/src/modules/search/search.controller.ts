@@ -1,7 +1,8 @@
-import { Controller, Get, Delete, Param, UseGuards, Query } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
+import { Roles, RolesGuard } from '../auth/roles.guard';
 import { SearchService } from './search.service';
 
 @ApiTags('Search')

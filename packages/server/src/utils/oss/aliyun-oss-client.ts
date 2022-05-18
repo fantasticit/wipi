@@ -1,4 +1,5 @@
 import * as AliyunOSS from 'ali-oss';
+
 import { OssClient } from './oss-client';
 
 export class AliyunOssClient extends OssClient {

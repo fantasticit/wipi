@@ -1,9 +1,10 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { SettingService } from '../setting/setting.service';
-import { SMTP } from './smtp.entity';
 import { sendEmail } from './mail.util';
+import { SMTP } from './smtp.entity';
 
 @Injectable()
 export class SMTPService {

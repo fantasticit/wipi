@@ -1,10 +1,12 @@
-import React, { useEffect, useContext } from 'react';
-import { NextPage } from 'next';
 import { Spin } from 'antd';
-import { useTranslations } from 'next-intl';
+import { NextPage } from 'next';
 import Router from 'next/router';
+import { useTranslations } from 'next-intl';
+import React, { useContext, useEffect } from 'react';
+
 import { GlobalContext } from '@/context/global';
 import { UserProvider } from '@/providers/user';
+
 import style from './index.module.scss';
 
 interface IProps {

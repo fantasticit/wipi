@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { FileImageOutlined } from '@ant-design/icons';
 import { Form } from '@ant-design/compatible';
-import { Input, Button, message } from 'antd';
+import { FileImageOutlined } from '@ant-design/icons';
+import { Button, Input, message } from 'antd';
+import React, { useEffect, useState } from 'react';
+
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { SettingProvider } from '@/providers/setting';
 

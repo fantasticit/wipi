@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
+
 import { GlobalContext } from '@/context/global';
 
 export const Seo = () => {
