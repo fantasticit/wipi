@@ -18,7 +18,10 @@ export class Category {
   value: string;
 
   @ApiProperty()
-  @OneToMany(() => Article, (article) => article.category)
+  @OneToMany(
+    () => Article,
+    (article) => article.category
+  )
   articles: Array<Article>;
 
   @ApiProperty()

@@ -17,7 +17,10 @@ export class Tag {
   value: string;
 
   @ApiProperty()
-  @ManyToMany(() => Article, (article) => article.tags)
+  @ManyToMany(
+    () => Article,
+    (article) => article.tags
+  )
   articles: Array<Article>;
 
   @ApiProperty()

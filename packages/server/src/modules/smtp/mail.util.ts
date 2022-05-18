@@ -19,7 +19,7 @@ export const sendEmail = (message, { host, port, user, pass }) => {
   });
 
   return new Promise((resolve, reject) => {
-    transport.sendMail(message, function (err, info) {
+    transport.sendMail(message, function(err, info) {
       if (err) {
         console.log('发送邮件失败', err);
         reject(err);
