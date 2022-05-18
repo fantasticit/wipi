@@ -3,30 +3,6 @@
     filter 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border-radius: 0;
-  border-radius: 0.5rem;
-  transition: all 0.2s;
-}
-
-*:hover {
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-bg);
-  }
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background: transparent;
-}
-
 html {
   text-size-adjust: 100% !important;
   touch-action: manipulation;

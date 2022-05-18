@@ -281,12 +281,12 @@ $languages: ts js typescript javascript html css php go sql json bash less scss 
   }
 
   table {
-    display: inline-block;
-    font-size: 13px;
-    max-width: 100%;
-    overflow: auto;
-    border: 1px solid var(--border-color);
+    width: 100%;
+    margin-top: 1em;
+    border-radius: 4px;
     border-collapse: collapse;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
 
     thead {
       background-color: var(--bg-code);
@@ -296,10 +296,14 @@ $languages: ts js typescript javascript html css php go sql json bash less scss 
       background-color: var(--bg-code);
     }
 
-    th,
-    td {
+    td,
+    th {
+      position: relative;
+      min-width: 100px;
       padding: 4px 8px;
-      line-height: 24px;
+      text-align: left;
+      vertical-align: top;
+      border: 1px solid var(--border-color);
     }
   }
 
