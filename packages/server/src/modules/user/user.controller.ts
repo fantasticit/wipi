@@ -70,6 +70,8 @@ export class UserController {
     if (exist.id !== user.id && exist.role !== 'admin') {
       throw new HttpException('无权处理', HttpStatus.FORBIDDEN);
     }
+
+    req.user = tokenUser;
   }
 
   /**
