@@ -1,12 +1,6 @@
 * {
-  transition:
-    background-color 0.2s ease-in-out,
-    margin 0.2s ease-in-out,
-    opacity 0.2s ease-in-out,
-    filter 0.2s ease-in-out,
-    visibility 0.2s ease-in-out,
-    transform 0.2s ease-in-out,
-    border-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, margin 0.2s ease-in-out, opacity 0.2s ease-in-out,
+    filter 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
 ::-webkit-scrollbar-track {
@@ -40,16 +34,8 @@ html {
 
 body {
   overflow-x: hidden;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    'Helvetica Neue',
-    'PingFang SC',
-    'Microsoft YaHei',
-    'Source Han Sans SC',
-    'Noto Sans CJK SC',
-    'WenQuanYi Micro Hei',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei',
+    'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;
   line-height: 1.75em;
   color: var(--main-text-color);
   background-color: var(--bg);
@@ -150,4 +136,18 @@ iframe {
 
 .ant-back-top {
   bottom: 60px !important;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--primary-color, #ff0064);
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
 }

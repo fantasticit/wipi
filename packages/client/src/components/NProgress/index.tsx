@@ -29,21 +29,5 @@ export function NProgress() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <style jsx={true} global={true}>{`
-      #nprogress {
-        pointer-events: none;
-      }
-
-      #nprogress .bar {
-        background: var(--primary-color, #ff0064);
-        position: fixed;
-        z-index: 1031;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-      }
-    `}</style>
-  );
+  return null;
 }
