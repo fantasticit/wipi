@@ -1,20 +1,19 @@
 "use strict";
 var _a;
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.config = exports.file = void 0;
-const fs = require("fs-extra");
-const path = require("path");
-const dotenv = require('dotenv');
-const isProd = process.env.NODE_ENV === 'production';
+var fs = require("fs-extra");
+var path = require("path");
+var dotenv = require('dotenv');
+var isProd = process.env.NODE_ENV === 'production';
 function parseEnv() {
-    const localenv = path.resolve(__dirname, '../../../.env');
-    const prodenv = path.resolve(__dirname, '../../../.env.prod');
+    var localenv = path.resolve(__dirname, '../../../.env');
+    var prodenv = path.resolve(__dirname, '../../../.env.prod');
     if (!fs.existsSync(localenv) && !fs.existsSync(prodenv)) {
-        throw new Error(`Can not locate any .env file in ${__dirname}`);
+        throw new Error("Can not locate any .env file in ".concat(__dirname));
     }
-    const file = isProd && fs.existsSync(prodenv) ? prodenv : localenv;
-    const config = dotenv.parse(fs.readFileSync(file));
-    return { file, config };
+    var file = isProd && fs.existsSync(prodenv) ? prodenv : localenv;
+    var config = dotenv.parse(fs.readFileSync(file));
+    return { file: file, config: config };
 }
-_a = parseEnv(), exports.file = _a.file, exports.config = _a.config;
-//# sourceMappingURL=env.js.map
+exports.file = (_a = parseEnv(), _a.file), exports.config = _a.config;

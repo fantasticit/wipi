@@ -12,7 +12,7 @@
   "sideEffects": false,
   "license": "MIT",
   "scripts": {
-    "build": "tsc --declaration"
+    "build": "tsc src/*.ts --outDir lib --skipLibCheck --declaration"
   },
   "files": [
     "lib",
