@@ -70,7 +70,7 @@ export const KnowledgeSettingDrawer = ({ visible, toggleVisible, book = null, on
           >
             {cover ? <img src={cover} alt="avatar" style={{ width: '100%' }} /> : null}
           </Upload>
-          <Input value={cover} style={{ marginTop: 12 }}></Input>
+          <Input value={cover} onChange={(e) => setCover(e.target.value)} style={{ marginTop: 12 }}></Input>
           <Button style={{ marginTop: 12 }} onClick={toggleFileVisible}>
             选择文件
           </Button>
