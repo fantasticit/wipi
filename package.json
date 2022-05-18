@@ -8,8 +8,7 @@
     "dev:server": "pnpm run --dir packages/server dev",
     "dev:client": "pnpm run --dir packages/client dev",
     "dev:admin": "pnpm run --dir packages/admin dev",
-    "build": "pnpm build:server && pnpm build:client && pnpm build:admin",
-    "build:dep": "pnpm build:constants && pnpm build:domains && pnpm build:config",
+    "build": "pnpm buld:build:config && pnpm build:server && pnpm build:client && pnpm build:admin",
     "build:config": "pnpm run --dir packages/config build",
     "build:server": "pnpm run --dir packages/server build",
     "build:client": "pnpm run --dir packages/client build",
@@ -27,7 +26,7 @@
     "lint:admin": "eslint --fix './packages/admin/**/*.{ts,tsx,js,jsx}'",
     "lint:server": "eslint --fix './packages/server/src/**/*.{ts,js}'",
     "format": "concurrently 'pnpm:format:*'",
-    "format:ts": "prettier --write --parser typescript 'packages/**/*.{ts,tsx,js,jsx}'",
+    "format:js": "prettier --write --parser typescript 'packages/**/*.{ts,tsx,js,jsx}'",
     "prepare": "husky install",
     "precommit": "lint-staged"
   },
@@ -44,13 +43,6 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.4.1",
     "prettier": "^2.3.2",
-    "stylelint": "^14.6.1",
-    "stylelint-config-css-modules": "^4.1.0",
-    "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^25.0.0",
-    "stylelint-config-standard-scss": "^3.0.0",
-    "stylelint-order": "^5.0.0",
-    "stylelint-prettier": "^2.0.0",
     "typescript": "^4.5.5"
   },
   "lint-staged": {
