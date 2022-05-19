@@ -1,6 +1,6 @@
 import { CloseOutlined, EllipsisOutlined, FileImageOutlined } from '@ant-design/icons';
 import { Editor as CodeEditor } from '@components/Editor';
-import { Button, Drawer, Dropdown, Input, InputNumber, Menu, message, Modal, PageHeader, Popconfirm } from 'antd';
+import { Button, Drawer, Dropdown, Input, InputNumber, Menu, message, Modal, PageHeader } from 'antd';
 import cls from 'classnames';
 import { default as Router } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
