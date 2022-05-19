@@ -16,3 +16,5 @@ tsconfig.tsbuildinfo
 *error.log
 *debug.log
 *.conf
+
+scripts/update.sh
