@@ -1,8 +1,8 @@
-/* eslint-env es6 */
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const withPlugins = require('next-compose-plugins');
 const withLess = require('next-with-less');
+const withOffline = require('next-offline');
 const { config } = require('@wipi/config');
 const antdVariablesFilePath = path.resolve(__dirname, './antd-custom.less');
 
@@ -28,6 +28,31 @@ module.exports = withPlugins(
       {
         lessLoaderOptions: {
           additionalData: (content) => `${content}\n\n@import '${antdVariablesFilePath}';`,
+        },
+      },
+    ],
+    [
+      withOffline,
+      {
+        workboxOpts: {
+          runtimeCaching: [
+            {
+              urlPattern: /.(png|jpg|jpeg|svg|webp)$/,
+              handler: 'CacheFirst',
+            },
+            {
+              urlPattern: /api/,
+              handler: 'NetworkFirst',
+              options: {
+                cacheableResponse: {
+                  statuses: [0, 200],
+                  headers: {
+                    'x-sw': 'true',
+                  },
+                },
+              },
+            },
+          ],
         },
       },
     ],
