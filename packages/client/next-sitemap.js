@@ -1,4 +1,3 @@
-/* eslint-env es6 */
 const { config } = require('@wipi/config');
 
 module.exports = {

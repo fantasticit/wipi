@@ -1,4 +1,3 @@
-/* eslint-env es6 */
 const { config } = require('@wipi/config');
 const cli = require('next/dist/cli/next-start');
 

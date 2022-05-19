@@ -1,4 +1,3 @@
-/* eslint-env es6 */
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const withPlugins = require('next-compose-plugins');
