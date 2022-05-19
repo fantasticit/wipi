@@ -163,41 +163,48 @@ const Page: NextPage<IProps> = ({ id, knowledge: defaultKnowledge }) => {
     });
   }, [id, chapters, forceUpdate]);
 
-  useEffect(() => {
-    const handler = () => {
-      if (hasSavedRef.current) return;
-      Modal.confirm({
-        title: '确认关闭？如果有内容变更，请先保存!',
-        onOk: () => {
-          save().then(() => {
-            Router.push('/knowledge');
-          });
-        },
-        onCancel: () => Router.push('/knowledge'),
-        transitionName: '',
-        maskTransitionName: '',
-      });
-      hasSavedRef.current = true;
-      // ignore-me
-      const newErr = new Error('请完成操作后关闭页面');
-      throw newErr;
-    };
+  const goback = useCallback(() => {
+    if (hasSavedRef.current) {
+      Router.push('/knowledge');
+      return;
+    }
+    hasSavedRef.current = true;
+    Modal.confirm({
+      title: '确认关闭？如果有内容变更，请先保存!',
+      onOk: () => {
+        save().then(() => {
+          Router.push('/knowledge');
+        });
+      },
+      onCancel: () => {
+        window.removeEventListener('beforeunload', goback);
+        Router.events.off('routeChangeStart', goback);
+        Router.push('/knowledge');
+      },
+      transitionName: '',
+      maskTransitionName: '',
+    });
+    // ignore-me
+    const newErr = new Error('请完成操作后关闭页面');
+    throw newErr;
+  }, [save]);
 
-    window.addEventListener('beforeunload', handler);
-    Router.events.on('routeChangeStart', handler);
+  useEffect(() => {
+    window.addEventListener('beforeunload', goback);
+    Router.events.on('routeChangeStart', goback);
 
     return () => {
-      window.removeEventListener('beforeunload', handler);
-      Router.events.off('routeChangeStart', handler);
+      window.removeEventListener('beforeunload', goback);
+      Router.events.off('routeChangeStart', goback);
     };
-  }, [save]);
+  }, [goback]);
 
   return (
     <div className={styles.wrapper}>
       <aside>
         <header>
           <div>
-            <CloseOutlined onClick={() => Router.push('/knowledge')} />
+            <CloseOutlined onClick={goback} />
             <div>
               <Avatar shape="square" src={knowledge.cover} />
               <span style={{ marginLeft: 8 }}>{knowledge.title}</span>

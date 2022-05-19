@@ -105,7 +105,7 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
           transformCategory(data);
           transformTags(data);
           const promise = !isCreate ? ArticleProvider.updateArticle(id, data) : ArticleProvider.addArticle(data);
-          promise.then((res) => {
+          return promise.then((res) => {
             setId(res.id);
             hasSavedRef.current = true;
             message.success(res.status === 'draft' ? '文章已保存为草稿' : '文章已发布');
@@ -113,6 +113,7 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
         })
         .catch((err) => {
           message.warn(err.message);
+          return Promise.reject(err);
         });
     },
     [article, isCreate, check, id]
@@ -160,6 +161,32 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
     });
   }, [id]);
 
+  const goback = useCallback(() => {
+    if (hasSavedRef.current) {
+      Router.push('/article');
+      return;
+    }
+    hasSavedRef.current = true;
+    Modal.confirm({
+      title: '确认关闭？如果有内容变更，请先保存!',
+      onOk: () => {
+        saveDraft().then(() => {
+          Router.push('/article');
+        });
+      },
+      onCancel: () => {
+        window.removeEventListener('beforeunload', goback);
+        Router.events.off('routeChangeStart', goback);
+        Router.push('/article');
+      },
+      transitionName: '',
+      maskTransitionName: '',
+    });
+    // ignore-me
+    const newErr = new Error('请完成操作后关闭页面');
+    throw newErr;
+  }, [saveDraft]);
+
   useEffect(() => {
     if (isCreate && id) {
       Router.replace('/article/editor/' + id);
@@ -167,33 +194,14 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
   }, [id, isCreate]);
 
   useEffect(() => {
-    const handler = () => {
-      if (hasSavedRef.current) return;
-      Modal.confirm({
-        title: '确认关闭？如果有内容变更，请先保存!',
-        onOk: () => {
-          saveDraft().then(() => {
-            Router.push('/article');
-          });
-        },
-        onCancel: () => Router.push('/article'),
-        transitionName: '',
-        maskTransitionName: '',
-      });
-      hasSavedRef.current = true;
-      // ignore-me
-      const newErr = new Error('请完成操作后关闭页面');
-      throw newErr;
-    };
-
-    window.addEventListener('beforeunload', handler);
-    Router.events.on('routeChangeStart', handler);
+    window.addEventListener('beforeunload', goback);
+    Router.events.on('routeChangeStart', goback);
 
     return () => {
-      window.removeEventListener('beforeunload', handler);
-      Router.events.off('routeChangeStart', handler);
+      window.removeEventListener('beforeunload', goback);
+      Router.events.off('routeChangeStart', goback);
     };
-  }, [saveDraft]);
+  }, [goback]);
 
   return (
     <div className={style.wrapper}>
@@ -202,11 +210,11 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
       </Helmet>
       <header className={style.header}>
         <PageHeader
-          backIcon={<Button size="small" icon={<CloseOutlined />} onClick={() => Router.push('/article')} />}
+          backIcon={<Button size="small" icon={<CloseOutlined />} />}
           style={{
             borderBottom: '1px solid rgb(235, 237, 240)',
           }}
-          onBack={() => null}
+          onBack={goback}
           title={
             <Input
               style={{ width: 300 }}
