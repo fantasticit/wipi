@@ -3,7 +3,7 @@ import { Editor as CodeEditor } from '@components/Editor';
 import { Button, Drawer, Dropdown, Input, InputNumber, Menu, message, Modal, PageHeader, Popconfirm } from 'antd';
 import cls from 'classnames';
 import { default as Router } from 'next/router';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
@@ -43,6 +43,7 @@ const drawerFooterStyle: React.CSSProperties = {
 export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage = {} }) => {
   const setting = useSetting();
   const isCreate = !defaultId; // 一开始是否是新建
+  const hasSavedRef = useRef(false);
   const [id, setId] = useState(defaultId);
   const [page, setPage] = useState<Partial<IPage>>(defaultPage);
   const [pageDrawerVisible, togglePageDrawerVisible] = useToggle(false);
@@ -71,7 +72,8 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     }
     page.status = 'draft';
     const promise = id ? PageProvider.updatePage(id, page) : PageProvider.addPage(page);
-    promise.then((res) => {
+    return promise.then((res) => {
+      hasSavedRef.current = true;
       setId(res.id);
       message.success('页面已保存为草稿');
     });
@@ -96,11 +98,13 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     page.status = 'publish';
     if (id) {
       PageProvider.updatePage(id, page).then((res) => {
+        hasSavedRef.current = true;
         setId(res.id);
         message.success('页面已更新');
       });
     } else {
       PageProvider.addPage(page).then((res) => {
+        hasSavedRef.current = true;
         setId(res.id);
         message.success('页面已发布');
       });
@@ -121,6 +125,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     }
     const handle = () => {
       PageProvider.deletePage(id).then(() => {
+        hasSavedRef.current = true;
         message.success('页面删除成功');
         Router.push('/page');
       });
@@ -135,6 +140,42 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
       maskTransitionName: '',
     });
   }, [id]);
+
+  const goback = useCallback(() => {
+    if (hasSavedRef.current) {
+      Router.push('/page');
+      return;
+    }
+    hasSavedRef.current = true;
+    Modal.confirm({
+      title: '确认关闭？如果有内容变更，请先保存!',
+      onOk: () => {
+        save().then(() => {
+          Router.push('/page');
+        });
+      },
+      onCancel: () => {
+        window.removeEventListener('beforeunload', goback);
+        Router.events.off('routeChangeStart', goback);
+        Router.push('/page');
+      },
+      transitionName: '',
+      maskTransitionName: '',
+    });
+    // ignore-me
+    const newErr = new Error('请完成操作后关闭页面');
+    throw newErr;
+  }, [save]);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', goback);
+    Router.events.on('routeChangeStart', goback);
+
+    return () => {
+      window.removeEventListener('beforeunload', goback);
+      Router.events.off('routeChangeStart', goback);
+    };
+  }, [goback]);
 
   useEffect(() => {
     if (isCreate && id) {
@@ -153,19 +194,8 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
             borderBottom: '1px solid rgb(235, 237, 240)',
             background: '#fff',
           }}
-          backIcon={
-            <Popconfirm
-              title="确认关闭？如果有内容变更，请先保存。"
-              onConfirm={() => Router.push('/page')}
-              onCancel={() => null}
-              okText="确认"
-              cancelText="取消"
-              placement="rightBottom"
-            >
-              <Button size="small" icon={<CloseOutlined />} />
-            </Popconfirm>
-          }
-          onBack={() => null}
+          backIcon={<Button size="small" icon={<CloseOutlined />} />}
+          onBack={goback}
           title={
             <Input
               style={{ width: 300 }}
