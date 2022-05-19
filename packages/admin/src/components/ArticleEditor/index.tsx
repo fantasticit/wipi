@@ -187,11 +187,11 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
     };
 
     window.addEventListener('beforeunload', handler);
-    Router.events.on('beforeHistoryChange', handler);
+    Router.events.on('routeChangeStart', handler);
 
     return () => {
       window.removeEventListener('beforeunload', handler);
-      Router.events.off('beforeHistoryChange', handler);
+      Router.events.off('routeChangeStart', handler);
     };
   }, [saveDraft]);
 
