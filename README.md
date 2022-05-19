@@ -149,7 +149,7 @@ npm -v
 
 npm config set registry http://registry.npmjs.org
 
-npm i -g pm2 @nestjs/cli yarn
+npm i -g pm2 @nestjs/cli pnpm
 
 pnpm install
 pnpm run build
