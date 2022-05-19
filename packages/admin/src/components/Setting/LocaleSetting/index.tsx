@@ -101,7 +101,7 @@ export const LocaleSetting = ({ setting }) => {
       <Tabs type="editable-card" onEdit={onEdit}>
         {locales.map((locale) => (
           <Tabs.TabPane tab={locale} key={locale}>
-            <JsonEditor value={i18n[locale]} onChange={onChange(locale)} />
+            <JsonEditor key={locale} value={i18n[locale]} onChange={onChange(locale)} />
           </Tabs.TabPane>
         ))}
       </Tabs>
