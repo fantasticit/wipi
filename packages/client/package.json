@@ -7,7 +7,7 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "dev": "node dev-server.js",
-    "start": "node prod-server.js",
+    "start": "cross-env NODE_ENV=production node prod-server.js",
     "pm2": "pm2 start npm --name @wipi/client -- start"
   },
   "dependencies": {
@@ -46,6 +46,7 @@
     "@types/react-infinite-scroller": "^1.2.3",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
+    "cross-env": "^7.0.3",
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0",
     "eslint-config-prettier": "^8.5.0",

@@ -6,9 +6,39 @@
 
 在服务端首次部署时使用，依赖 `nodejs`、`pnpm` 和 `pm2`。
 
+```shell
+#! /bin/bash
+
+cd /apps/wipi
+git checkout main
+git pull
+
+pnpm install
+pnpm run build
+pnpm run pm2
+
+pm2 startup
+pm2 save
+```
+
 ## `update.sh`
 
 项目更新时使用，配合 `webhook` 实现自动化部署。
+
+```shell
+#! /bin/bash
+
+cd /apps/wipi
+git checkout refactor/pnpm
+git pull
+
+pnpm install
+pnpm run build
+
+pm2 reload @wipi/server
+pm2 reload @wipi/client
+pm2 reload @wipi/admin
+```
 
 ## 自动化部署
 

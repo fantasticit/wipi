@@ -38,6 +38,7 @@ importers:
       axios: ^0.19.2
       classnames: ^2.2.6
       copy-to-clipboard: ^3.3.1
+      cross-env: ^7.0.3
       date-fns: ^2.17.0
       deep-equal: ^2.0.5
       echarts: ^4.6.0
@@ -107,6 +108,7 @@ importers:
       '@types/react': 17.0.42
       '@typescript-eslint/eslint-plugin': 5.21.0_295694aac5de040aa99b390a73269a19
       '@typescript-eslint/parser': 5.21.0_eslint@8.15.0+typescript@4.6.2
+      cross-env: 7.0.3
       eslint: 8.15.0
       eslint-config-prettier: 8.5.0_eslint@8.15.0
       eslint-plugin-import: 2.26.0_eslint@8.15.0
@@ -133,6 +135,7 @@ importers:
       axios: ^0.23.0
       classnames: ^2.3.1
       copy-to-clipboard: ^3.3.1
+      cross-env: ^7.0.3
       date-fns: ^2.17.0
       eslint: 8.11.0
       eslint-config-next: 12.1.0
@@ -203,6 +206,7 @@ importers:
       '@types/react-infinite-scroller': 1.2.3
       '@typescript-eslint/eslint-plugin': 5.21.0_4a8d76f33faaa8f34374f37836bd57c7
       '@typescript-eslint/parser': 5.21.0_eslint@8.11.0+typescript@4.6.2
+      cross-env: 7.0.3
       eslint: 8.11.0
       eslint-config-next: 12.1.0_3ac81353fe98918efb885c3e6be622c2
       eslint-config-prettier: 8.5.0_eslint@8.11.0
@@ -4791,7 +4795,6 @@ packages:
     hasBin: true
     dependencies:
       cross-spawn: 7.0.3
-    dev: false
 
   /cross-spawn/6.0.5:
     resolution: {integrity: sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==}
