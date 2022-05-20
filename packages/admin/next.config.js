@@ -2,7 +2,7 @@ const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const withPlugins = require('next-compose-plugins');
 const withLess = require('next-with-less');
-const withOffline = require('next-offline');
+const withPWA = require('next-pwa');
 const { config } = require('@wipi/config');
 const antdVariablesFilePath = path.resolve(__dirname, './antd-custom.less');
 
@@ -24,35 +24,20 @@ const nextConfig = {
 module.exports = withPlugins(
   [
     [
-      withLess,
+      withPWA,
       {
-        lessLoaderOptions: {
-          additionalData: (content) => `${content}\n\n@import '${antdVariablesFilePath}';`,
+        pwa: {
+          disable: process.env.NODE_ENV !== 'production',
+          dest: '.next',
+          sw: 'service-worker.js',
         },
       },
     ],
     [
-      withOffline,
+      withLess,
       {
-        workboxOpts: {
-          runtimeCaching: [
-            {
-              urlPattern: /.(png|jpg|jpeg|svg|webp)$/,
-              handler: 'CacheFirst',
-            },
-            {
-              urlPattern: /api/,
-              handler: 'NetworkFirst',
-              options: {
-                cacheableResponse: {
-                  statuses: [0, 200],
-                  headers: {
-                    'x-sw': 'true',
-                  },
-                },
-              },
-            },
-          ],
+        lessLoaderOptions: {
+          additionalData: (content) => `${content}\n\n@import '${antdVariablesFilePath}';`,
         },
       },
     ],
