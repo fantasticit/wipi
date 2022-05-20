@@ -24,7 +24,7 @@
     "next": "12.1.0",
     "next-compose-plugins": "^2.2.1",
     "next-intl": "^1.5.1",
-    "next-offline": "^5.0.5",
+    "next-pwa": "^5.5.2",
     "next-sitemap": "^1.6.102",
     "next-with-less": "^2.0.5",
     "nprogress": "^0.2.0",
