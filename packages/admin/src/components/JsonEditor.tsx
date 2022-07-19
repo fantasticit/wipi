@@ -37,6 +37,7 @@ export const JsonEditor = ({ value, onChange, style = DEFAULT_STYLE }) => {
       return;
     }
     if (!value) return;
+    if (deepEqual(value, safeJsonParse(editorRef.current.getValue()))) return;
     editorRef.current.setValue(JSON.stringify(value, null, 2));
   }, [mounted, value]);
 
