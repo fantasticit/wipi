@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet';
 import { FileSelectDrawer } from '@/components/FileSelectDrawer';
 import { useSetting } from '@/hooks/useSetting';
 import { useToggle } from '@/hooks/useToggle';
+import { useWarningOnExit } from '@/hooks/useWarningOnExit';
 import { PageProvider } from '@/providers/page';
 import { resolveUrl } from '@/utils';
 
@@ -43,11 +44,11 @@ const drawerFooterStyle: React.CSSProperties = {
 export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage = {} }) => {
   const setting = useSetting();
   const isCreate = !defaultId; // 一开始是否是新建
-  const hasSavedRef = useRef(false);
   const [id, setId] = useState(defaultId);
   const [page, setPage] = useState<Partial<IPage>>(defaultPage);
   const [pageDrawerVisible, togglePageDrawerVisible] = useToggle(false);
   const [fileDrawerVisible, toggleFileDrawerVisible] = useToggle(false);
+  const [hasSaved, toggleHasSaved] = useToggle(false);
 
   const patchPage = useMemo(
     () => (key) => (value) => {
@@ -73,11 +74,11 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     page.status = 'draft';
     const promise = id ? PageProvider.updatePage(id, page) : PageProvider.addPage(page);
     return promise.then((res) => {
-      hasSavedRef.current = true;
+      toggleHasSaved(true);
       setId(res.id);
       message.success('页面已保存为草稿');
     });
-  }, [page, id]);
+  }, [page, id, toggleHasSaved]);
 
   const publish = useCallback(() => {
     let canPublish = true;
@@ -98,18 +99,18 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     page.status = 'publish';
     if (id) {
       PageProvider.updatePage(id, page).then((res) => {
-        hasSavedRef.current = true;
+        toggleHasSaved(true);
         setId(res.id);
         message.success('页面已更新');
       });
     } else {
       PageProvider.addPage(page).then((res) => {
-        hasSavedRef.current = true;
+        toggleHasSaved(true);
         setId(res.id);
         message.success('页面已发布');
       });
     }
-  }, [page, id, togglePageDrawerVisible]);
+  }, [page, id, togglePageDrawerVisible, toggleHasSaved]);
 
   const preview = useCallback(() => {
     if (id) {
@@ -125,7 +126,7 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
     }
     const handle = () => {
       PageProvider.deletePage(id).then(() => {
-        hasSavedRef.current = true;
+        toggleHasSaved(true);
         message.success('页面删除成功');
         Router.push('/page');
       });
@@ -139,49 +140,19 @@ export const PageEditor: React.FC<IProps> = ({ id: defaultId, page: defaultPage 
       transitionName: '',
       maskTransitionName: '',
     });
-  }, [id]);
+  }, [id, toggleHasSaved]);
 
   const goback = useCallback(() => {
-    if (hasSavedRef.current) {
-      Router.push('/page');
-      return;
-    }
-    hasSavedRef.current = true;
-    Modal.confirm({
-      title: '确认关闭？如果有内容变更，请先保存!',
-      onOk: () => {
-        save().then(() => {
-          Router.push('/page');
-        });
-      },
-      onCancel: () => {
-        window.removeEventListener('beforeunload', goback);
-        Router.events.off('routeChangeStart', goback);
-        Router.push('/page');
-      },
-      transitionName: '',
-      maskTransitionName: '',
-    });
-    // ignore-me
-    const newErr = new Error('请完成操作后关闭页面');
-    throw newErr;
-  }, [save]);
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', goback);
-    Router.events.on('routeChangeStart', goback);
-
-    return () => {
-      window.removeEventListener('beforeunload', goback);
-      Router.events.off('routeChangeStart', goback);
-    };
-  }, [goback]);
+    Router.push('/page');
+  }, []);
 
   useEffect(() => {
     if (isCreate && id) {
       Router.replace('/page/editor/' + id);
     }
   }, [isCreate, id]);
+
+  useWarningOnExit(!hasSaved, () => window.confirm('确认关闭？如果有内容变更，请先保存!'));
 
   return (
     <div className={style.wrapper}>

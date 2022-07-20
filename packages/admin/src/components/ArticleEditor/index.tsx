@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet';
 
 import { useSetting } from '@/hooks/useSetting';
 import { useToggle } from '@/hooks/useToggle';
+import { useWarningOnExit } from '@/hooks/useWarningOnExit';
 import { ArticleProvider } from '@/providers/article';
 import { resolveUrl } from '@/utils';
 
@@ -42,11 +43,11 @@ const transformTags = (article) => {
 
 export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaultArticle = { title: '' } }) => {
   const isCreate = !defaultId; // 一开始是否是新建
-  const hasSavedRef = useRef(false);
   const setting = useSetting();
   const [id, setId] = useState(defaultId);
   const [article, setArticle] = useState<Partial<IArticle>>(defaultArticle);
   const [settingDrawerVisible, toggleSettingDrawerVisible] = useToggle(false);
+  const [hasSaved, toggleHasSaved] = useToggle(false);
 
   const patchArticle = useMemo(
     () => (key) => (value) => {
@@ -107,7 +108,7 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
           const promise = !isCreate ? ArticleProvider.updateArticle(id, data) : ArticleProvider.addArticle(data);
           return promise.then((res) => {
             setId(res.id);
-            hasSavedRef.current = true;
+            toggleHasSaved(true);
             message.success(res.status === 'draft' ? '文章已保存为草稿' : '文章已发布');
           });
         })
@@ -116,7 +117,7 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
           return Promise.reject(err);
         });
     },
-    [article, isCreate, check, id]
+    [article, isCreate, check, id, toggleHasSaved]
   );
 
   const saveDraft = useCallback(() => {
@@ -146,6 +147,7 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
     }
     const handle = () => {
       ArticleProvider.deleteArticle(id).then(() => {
+        toggleHasSaved(true);
         message.success('文章删除成功');
         Router.push('/article');
       });
@@ -159,33 +161,11 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
       transitionName: '',
       maskTransitionName: '',
     });
-  }, [id]);
+  }, [id, toggleHasSaved]);
 
   const goback = useCallback(() => {
-    if (hasSavedRef.current) {
-      Router.push('/article');
-      return;
-    }
-    hasSavedRef.current = true;
-    Modal.confirm({
-      title: '确认关闭？如果有内容变更，请先保存!',
-      onOk: () => {
-        saveDraft().then(() => {
-          Router.push('/article');
-        });
-      },
-      onCancel: () => {
-        window.removeEventListener('beforeunload', goback);
-        Router.events.off('routeChangeStart', goback);
-        Router.push('/article');
-      },
-      transitionName: '',
-      maskTransitionName: '',
-    });
-    // ignore-me
-    const newErr = new Error('请完成操作后关闭页面');
-    throw newErr;
-  }, [saveDraft]);
+    Router.push('/article');
+  }, []);
 
   useEffect(() => {
     if (isCreate && id) {
@@ -193,15 +173,7 @@ export const ArticleEditor: React.FC<IProps> = ({ id: defaultId, article: defaul
     }
   }, [id, isCreate]);
 
-  useEffect(() => {
-    window.addEventListener('beforeunload', goback);
-    Router.events.on('routeChangeStart', goback);
-
-    return () => {
-      window.removeEventListener('beforeunload', goback);
-      Router.events.off('routeChangeStart', goback);
-    };
-  }, [goback]);
+  useWarningOnExit(!hasSaved, () => window.confirm('确认关闭？如果有内容变更，请先保存!'));
 
   return (
     <div className={style.wrapper}>
