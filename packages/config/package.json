@@ -20,5 +20,8 @@
   ],
   "dependencies": {
     "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.6"
   }
 }
