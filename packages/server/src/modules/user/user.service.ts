@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 
 import { User } from './user.entity';
 
@@ -26,6 +26,10 @@ export class UserService {
           console.log(`[wipi] 管理员账户已经存在，用户名：${name}，密码：${password}，请及时登录系统修改默认密码`);
         }
       });
+  }
+
+  async findByConditions(conditions: Partial<User>) {
+    return await this.userRepository.findOne(conditions);
   }
 
   async findAll(queryParams): Promise<[User[], number]> {
@@ -96,6 +100,29 @@ export class UserService {
         HttpStatus.BAD_REQUEST
       );
     }
+
+    delete existUser.password;
+
+    return existUser;
+  }
+
+  /**
+   * 无密码登录
+   * @param user
+   */
+  async loginWithoutPasswd(user: Partial<User>): Promise<User> {
+    const { name } = user;
+    const existUser = await this.userRepository.findOne({ where: { name } });
+
+    if (existUser.status === 'locked') {
+      throw new HttpException(
+        '用户已锁定，无法登录',
+        // tslint:disable-next-line: trailing-comma
+        HttpStatus.BAD_REQUEST
+      );
+    }
+
+    delete existUser.password;
 
     return existUser;
   }

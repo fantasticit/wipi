@@ -1,7 +1,9 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
+import { SettingModule } from '../setting/setting.module';
+import { SMTPModule } from '../smtp/smtp.module';
 import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -14,7 +16,13 @@ const jwtModule = JwtModule.register({
 });
 
 @Module({
-  imports: [UserModule, passModule, jwtModule],
+  imports: [
+    forwardRef(() => UserModule),
+    passModule,
+    jwtModule,
+    forwardRef(() => SettingModule),
+    forwardRef(() => SMTPModule),
+  ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
   exports: [passModule, jwtModule],

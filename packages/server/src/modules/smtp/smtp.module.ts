@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from '../auth/auth.module';
@@ -8,7 +8,7 @@ import { SMTP } from './smtp.entity';
 import { SMTPService } from './smtp.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SMTP]), SettingModule, AuthModule],
+  imports: [TypeOrmModule.forFeature([SMTP]), forwardRef(() => SettingModule), forwardRef(() => AuthModule)],
   exports: [SMTPService],
   controllers: [SMTPController],
   providers: [SMTPService],
