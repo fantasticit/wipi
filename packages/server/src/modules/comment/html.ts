@@ -82,14 +82,7 @@ export const getNewCommentHTML = ({
                                   valign="top"
                                   width="50%"
                                 >
-                                  <img
-                                    alt="${systemTitle}"
-                                    src="${systemLogo || systemFavicon}"
-                                    style="border:0 none; height:30px; max-height:30px; max-width:auto; width:auto;"
-                                    border="0"
-                                    width="auto"
-                                    height="30"
-                                  />
+                                  <span>${systemTitle}</span>
                                 </td>
                               </tr>
                             </tbody>
