@@ -75,12 +75,12 @@ const _Register: React.FC<IProps> = ({ form }) => {
           <div style={{ width: '100%' }}>
             <h2>访客注册</h2>
             <Form layout="horizontal" onSubmit={submit}>
-              <Form.Item hasFeedback={true} label="账户">
+              <Form.Item label="账户">
                 {getFieldDecorator('name', {
                   rules: [{ required: true, message: '请输入用户名！' }],
                 })(<Input autoComplete={'off'} placeholder="请输入用户名" />)}
               </Form.Item>
-              <Form.Item hasFeedback={true} label="密码">
+              <Form.Item label="密码">
                 {getFieldDecorator('password', {
                   rules: [
                     { required: true, message: '请输入密码！' },
@@ -91,7 +91,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
                   ],
                 })(<Input autoComplete={'off'} type="password" placeholder="请输入密码" />)}
               </Form.Item>
-              <Form.Item hasFeedback={true} label="确认">
+              <Form.Item label="确认">
                 {getFieldDecorator('confirm', {
                   rules: [
                     { required: true, message: '请再次输入密码！' },
