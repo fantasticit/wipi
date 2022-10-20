@@ -87,7 +87,7 @@ const _MonacoEditor = (props, ref) => {
 
   useImperativeHandle(ref, () => ({
     editor: editorRef.current,
-    monoca: monacoRef.current,
+    monaco: monacoRef.current,
   }));
 
   useEffect(() => {
