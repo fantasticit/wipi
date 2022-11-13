@@ -3,7 +3,6 @@
   height: 100%;
   flex-direction: column;
 }
-
 .tagOrCategoryDetail {
   padding: 16px 0;
   margin-bottom: 1rem;
@@ -11,24 +10,19 @@
   background: var(--bg-second);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-
   i {
     font-size: 2.5rem;
     color: var(--disable-text-color);
   }
-
   p {
     margin-bottom: 0;
-
     &:first-of-type {
       margin-top: 0.5rem;
-
       span {
         font-size: 1.5rem;
         color: var(--primary-color);
       }
     }
-
     &:last-of-type {
       span {
         font-size: 1.1rem;
@@ -37,7 +31,6 @@
     }
   }
 }
-
 .crouselWrap {
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -45,41 +38,25 @@
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
 }
-
 .leftWrap {
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-
   > header {
-    padding: 1rem;
     background: var(--bg-second);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
     border-bottom: 1px solid var(--border-color);
-
-    a {
-      padding: 0 12px;
-
-      &:first-of-type {
-        padding-left: 0;
-      }
-
-      &:hover,
-      &.active {
-        color: var(--primary-color);
-      }
+    > ul{
+      padding: 0.5rem;
     }
   }
-
   > main {
     margin-bottom: 4rem;
-
     > div > div {
       border-radius: 0 0 var(--border-radius) var(--border-radius) !important;
       box-shadow: none !important;
     }
   }
 }
-
 .footer {
   padding: 0 !important;
   color: var(--second-text-color) !important;
