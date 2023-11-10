@@ -30,7 +30,7 @@
     "@nestjs/typeorm": "^6.2.0",
     "@wipi/config": "workspace:^1.0.0",
     "ali-oss": "^6.5.1",
-    "axios": "^0.23.0",
+    "axios": "^1.6.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "class-transformer": "^0.2.3",
