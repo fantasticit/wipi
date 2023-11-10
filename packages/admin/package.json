@@ -16,7 +16,7 @@
     "@wipi/config": "workspace:^1.0.0",
     "antd": "^4.19.3",
     "array-move": "^3.0.1",
-    "axios": "^0.19.2",
+    "axios": "^1.6.0",
     "classnames": "^2.2.6",
     "copy-to-clipboard": "^3.3.1",
     "date-fns": "^2.17.0",
